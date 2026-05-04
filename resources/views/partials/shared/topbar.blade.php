@@ -1,6 +1,6 @@
 {{-- lagi maintenance --}}
 
-{{-- <header class="bg-white border-b px-6 py-3 flex justify-between items-center">
+<header class="bg-white border-b px-6 py-3 flex justify-between items-center">
 
     <!-- LEFT -->
     <h2 class="font-semibold text-gray-700">
@@ -23,4 +23,4 @@
 
     </div>
 
-</header> --}}
+</header>

@@ -26,7 +26,8 @@ return new class extends Migration
             $table->decimal('final_score', 5, 2)->nullable();
             $table->string('grade_letter')->nullable();
 
-            $table->enum('status', ['draft', 'published'])->default('draft');
+            // $table->enum('status', ['draft', 'published'])->default('draft');
+            $table->enum('status', ['draft', 'published', 'final'])->default('draft');
 
             $table->unique(
                 ['student_id', 'teaching_assignment_id', 'semester', 'academic_year_id'],
