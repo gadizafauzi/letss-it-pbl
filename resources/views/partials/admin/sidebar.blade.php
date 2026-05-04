@@ -1,6 +1,6 @@
 {{-- lagi maintenance --}}
 
-{{-- <aside class="w-64 bg-slate-900 text-slate-300 min-h-screen flex flex-col">
+<aside class="w-64 bg-slate-900 text-slate-300 min-h-screen flex flex-col">
 
     <!-- LOGO -->
     <div class="h-16 flex items-center px-6 border-b border-slate-800">
@@ -48,4 +48,4 @@
 
     </nav>
 
-</aside> --}}
+</aside>
