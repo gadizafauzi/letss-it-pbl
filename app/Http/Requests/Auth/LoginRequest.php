@@ -24,6 +24,7 @@ class LoginRequest extends FormRequest
         return [
             'login' => ['required', 'string'],
             'password' => ['required', 'string'],
+            'role' => ['required', 'in:admin,teacher,student'],
         ];
     }
 
@@ -31,13 +32,14 @@ class LoginRequest extends FormRequest
     {
         $login = $this->input('login');
         $password = $this->input('password');
+        $role = $this->input('role');
 
         $user = $this->findUser($login);
 
-        // ❌ login gagal
+        // ❌ gagal login (dibuat general biar aman)
         if (!$user || !Hash::check($password, $user->password)) {
             throw ValidationException::withMessages([
-                'login' => 'Login atau password salah',
+                'login' => 'Login gagal, periksa kembali data anda',
             ]);
         }
 
@@ -48,6 +50,13 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        // ❌ role tidak sesuai tab
+        if ($user->role !== $role) {
+            throw ValidationException::withMessages([
+                'login' => 'Role tidak sesuai dengan pilihan login',
+            ]);
+        }
+
         // ✅ login sukses
         Auth::login($user);
         $this->session()->regenerate();
@@ -55,20 +64,22 @@ class LoginRequest extends FormRequest
 
     private function findUser(string $login)
     {
-        // admin (username)
-        $user = User::where('username', $login)->first();
-        if ($user) return $user;
+        // admin
+        if ($user = User::where('username', $login)->first()) {
+            return $user;
+        }
 
-        // teacher (NIP)
-        $teacher = Teacher::where('nip', $login)->first();
-        if ($teacher) return $teacher->user;
+        // guru
+        if ($teacher = Teacher::where('nip', $login)->first()) {
+            return $teacher->user;
+        }
 
-        // student (NIS / NISN)
-        $student = Student::where('nis', $login)
+        // siswa
+        if ($student = Student::where('nis', $login)
             ->orWhere('nisn', $login)
-            ->first();
-
-        if ($student) return $student->user;
+            ->first()) {
+            return $student->user;
+        }
 
         return null;
     }

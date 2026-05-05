@@ -2,39 +2,15 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController ;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
-
-
-// Route::middleware(['auth'])->group(function () {
-
-//     Route::get('/admin/dashboard', function () {
-//         return view('admin.dashboard');
-//     })->name('admin.dashboard');
-
-//     Route::get('/teacher/dashboard', function () {
-//         return view('teacher.dashboard');
-//     })->name('teacher.dashboard');
-
-//     Route::get('/student/dashboard', function () {
-//         return view('student.dashboard');
-//     })->name('student.dashboard');
-
-// });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', fn() => view('admin.dashboard'))
@@ -61,7 +37,12 @@ Route::post('/login', [AuthController::class, 'login']);
 // logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Route::get('/admin/dashboard', fn() => view('admin.dashboard'))->name('admin.dashboard');
-// Route::get('/teacher/dashboard', fn() => view('teacher.dashboard'))->name('teacher.dashboard');
-// Route::get('/student/dashboard', fn() => view('student.dashboard'))->name('student.dashboard');
+
+
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
 
