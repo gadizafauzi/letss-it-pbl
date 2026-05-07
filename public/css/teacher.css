@@ -1,0 +1,418 @@
+/* ═══════════════════════════════════════
+   dashboard.css  –  SIT Shared Dashboard
+   (Dipakai bersama: Guru & Siswa)
+   ═══════════════════════════════════════ */
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: #f1f5f9;
+    margin: 0;
+}
+
+/* ══════════════════════════════
+   SIDEBAR
+══════════════════════════════ */
+.sidebar {
+    width: 190px;
+    min-width: 190px;
+    background: #fff;
+    border-right: 1px solid #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+/* ── Nav items ── */
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #64748b;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    margin-bottom: 2px;
+}
+.nav-item:hover {
+    background: #f1f5f9;
+    color: #1e293b;
+}
+.nav-item:hover svg {
+    stroke: #475569;
+}
+.nav-item.active {
+    background: #eff6ff;
+    color: #3b82f6;
+}
+.nav-item.active svg {
+    stroke: #3b82f6;
+}
+.nav-item svg {
+    stroke: #94a3b8;
+    transition: stroke 0.15s;
+    flex-shrink: 0;
+}
+
+/* ── Logout button ── */
+.logout-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #ef4444;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-align: left;
+}
+.logout-btn:hover {
+    background: #fef2f2;
+}
+.logout-btn svg {
+    stroke: #ef4444;
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.main-header {
+    background: #fff;
+    border-bottom: 1px solid #f1f5f9;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.header-logout-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s;
+}
+.header-logout-btn:hover {
+    color: #ef4444;
+    background: #fef2f2;
+}
+.header-logout-btn svg {
+    stroke: currentColor;
+}
+
+/* ══════════════════════════════
+   STAT CARDS
+══════════════════════════════ */
+.stat-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+.stat-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+    transform: translateY(-2px);
+}
+.stat-card-label {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+.stat-card-value {
+    font-size: 30px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+}
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.stat-icon svg { stroke: #fff; }
+
+.stat-icon-blue   { background: #3b82f6; box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+.stat-icon-purple { background: #8b5cf6; box-shadow: 0 4px 12px rgba(139,92,246,0.3); }
+.stat-icon-green  { background: #10b981; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+.stat-icon-orange { background: #f59e0b; box-shadow: 0 4px 12px rgba(245,158,11,0.3); }
+
+/* ══════════════════════════════
+   RINGKASAN CARD
+══════════════════════════════ */
+.summary-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+}
+.summary-card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #374151;
+    margin-bottom: 16px;
+}
+.summary-items {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    flex-wrap: wrap;
+}
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.summary-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.summary-icon-blue   { background: #dbeafe; }
+.summary-icon-blue svg { stroke: #3b82f6; }
+.summary-icon-green  { background: #d1fae5; }
+.summary-icon-green svg { stroke: #10b981; }
+.summary-icon-violet { background: #ede9fe; }
+.summary-icon-violet svg { stroke: #7c3aed; }
+
+.summary-item-label {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-bottom: 2px;
+}
+.summary-item-value {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* ══════════════════════════════
+   TABLE
+══════════════════════════════ */
+.table-card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+}
+.table-card-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f1f5f9;
+}
+.table-card-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #374151;
+}
+.table-badge {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #2563eb;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 3px 12px;
+    border-radius: 999px;
+}
+
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #94a3b8;
+    padding: 11px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid #f1f5f9;
+    white-space: nowrap;
+}
+.data-table td {
+    padding: 13px 20px;
+    font-size: 13.5px;
+    color: #475569;
+    border-bottom: 1px solid #f8fafc;
+}
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr { transition: background 0.1s; }
+.data-table tbody tr:hover td { background: #fafbff; }
+
+/* ── Grade badges ── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+}
+.badge-A { background: #dcfce7; color: #16a34a; }
+.badge-B { background: #dbeafe; color: #2563eb; }
+.badge-C { background: #fef9c3; color: #ca8a04; }
+.badge-D { background: #fee2e2; color: #dc2626; }
+
+/* ══════════════════════════════
+   BADGE GURU (Wali Kelas & Status)
+══════════════════════════════ */
+.badge-wali {
+    display: inline-flex;
+    align-items: center;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #7c3aed;
+    background: #ede9fe;
+    border: 1px solid #ddd6fe;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.badge-status-aktif {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a34a;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    padding: 3px 12px;
+    border-radius: 999px;
+}
+
+.badge-status-nonaktif {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #dc2626;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    padding: 3px 12px;
+    border-radius: 999px;
+}
+
+/* ══════════════════════════════
+   MODAL LOGOUT
+══════════════════════════════ */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px);
+    cursor: pointer;
+}
+.modal-box {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    width: 320px;
+    max-width: 90vw;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+    text-align: center;
+    animation: popIn 0.2s ease;
+}
+.modal-icon {
+    width: 52px;
+    height: 52px;
+    background: #fee2e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+}
+.modal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+.modal-desc {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 22px;
+}
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+.btn-cancel {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1.5px solid #e2e8f0;
+    background: #fff;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-cancel:hover { background: #f8fafc; }
+.btn-logout {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #ef4444;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.btn-logout:hover { background: #dc2626; }
+
+/* ══════════════════════════════
+   ANIMATIONS
+══════════════════════════════ */
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.92) translateY(12px); }
+    to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
