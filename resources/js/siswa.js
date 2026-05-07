@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmLogout    = document.getElementById('confirmLogout');
     const modalBackdrop    = document.getElementById('modalBackdrop');
 
-    // Ambil CSRF token dari meta tag
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
 
     function openLogoutModal() {
