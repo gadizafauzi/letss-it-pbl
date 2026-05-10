@@ -6,7 +6,8 @@
     <title>Login</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script> --}}
 
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,8 +43,12 @@
 
             <div class="input-group">
                 <i class="fa fa-lock icon-left"></i>
+
                 <input type="password" name="password" id="password" placeholder="Password">
-                <i class="fa fa-eye icon-right" id="togglePassword"></i>
+
+                <span id="togglePassword" class="icon-right">
+                    <i class="fa-solid fa-eye"></i>
+                </span>
             </div>
 
             <button class="submit" id="loginBtn">
