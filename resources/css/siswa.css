@@ -24,7 +24,6 @@ body {
     overflow: hidden;
 }
 
-/* Ikon nav */
 .nav-icon svg {
     transition: stroke 0.2s ease, transform 0.2s ease;
     flex-shrink: 0;
@@ -158,8 +157,6 @@ body {
     color: #1e3a8a;
 }
 
-   PREDIKAT BADGES
-   ============================================= */
 .predikat-badge {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }

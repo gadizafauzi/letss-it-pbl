@@ -15,84 +15,127 @@
 
     {{-- SIDEBAR --}}
     <aside class="sidebar w-52 bg-white flex flex-col shadow-md z-10 flex-shrink-0" id="sidebar">
-
-        <div class="flex items-center gap-3 px-5 py-5 border-b border-gray-100">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422A12.083 12.083 0 0121 13c0 4.97-4.03 9-9 9s-9-4.03-9-9c0-.857.117-1.687.34-2.47L12 14z"/>
-                </svg>
-            </div>
-            <div>
-                <p class="font-bold text-gray-800 text-sm leading-tight">SIT</p>
-                <p class="text-xs text-gray-400">Siswa</p>
-            </div>
-        </div>
-
         <nav class="flex-1 px-3 py-4 space-y-1">
+
             <a href="{{ route('student.dashboard') }}"
-                class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all
-                    {{ request()->routeIs('student.dashboard')
-                        ? 'bg-blue-500 text-white [&_svg]:stroke-white'
-                        : 'text-gray-600 hover:bg-gray-100 [&_svg]:stroke-gray-600' }}">
+                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all
+                {{ request()->routeIs('student.dashboard')
+                        ? 'bg-blue-500 text-white shadow-md [&_svg]:stroke-white'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-blue-500 [&_svg]:stroke-gray-600 hover:[&_svg]:stroke-blue-500'
+                }}">
 
-                        <span class="nav-icon">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-                                <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-                                <rect x="3" y="14" width="7" height="7" rx="1.5"/>
-                                <rect x="14" y="14" width="7" height="7" rx="1.5"/>
-                            </svg>
-                        </span>
+                <svg class="w-5 h-5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    viewBox="0 0 24 24">
 
-                        Dashboard
+                    <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+                </svg>
+
+                <span>Dashboard</span>
             </a>
 
-            <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">
-                <span class="nav-icon">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                <a href="#"
+                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all
+                    text-gray-600 hover:bg-gray-100 hover:text-blue-500
+                    [&_svg]:stroke-gray-600 hover:[&_svg]:stroke-blue-500">
+
+                    <svg class="w-5 h-5 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        viewBox="0 0 24 24">
+
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+                        <path d="M9 5a2 2 0 002 2h2a2 2 0 002-2"/>
+                        <path d="M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        <path d="M12 12h3"/>
+                        <path d="M12 16h3"/>
+                        <path d="M9 12h.01"/>
+                        <path d="M9 16h.01"/>
                     </svg>
-                </span>
-                Nilai
+
+                <span>Nilai</span>
+             </a>
+
+            <a href="#"
+                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all
+                text-gray-600 hover:bg-gray-100 hover:text-blue-500
+                [&_svg]:stroke-gray-600 hover:[&_svg]:stroke-blue-500">
+
+                <svg class="w-5 h-5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    viewBox="0 0 24 24">
+
+                    <path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2"/>
+                    <path d="M9 13h10a2 2 0 012 2v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4a2 2 0 012-2z"/>
+                    <circle cx="17" cy="15" r="1"/>
+                </svg>
+
+             <span>Tagihan</span>
             </a>
 
-            <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">
-                <span class="nav-icon">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                </span>
-                Tagihan
+            <a href="#"
+                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all
+                text-gray-600 hover:bg-gray-100 hover:text-blue-500
+                [&_svg]:stroke-gray-600 hover:[&_svg]:stroke-blue-500">
+
+                <svg class="w-5 h-5 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    viewBox="0 0 24 24">
+
+                    <path d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804"/>
+                    <path d="M15 10a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+
+              <span>Profil</span>
             </a>
 
-            <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">
-                <span class="nav-icon">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                </span>
-                Profil
-            </a>
         </nav>
-         <div class="px-3 pb-5 border-t border-gray-100 pt-3 flex justify-center">
-                    <button type="button" onclick="bukaModalLogout()"
-                    class="logout-btn inline-flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all
+         <!-- Logout -->
+        <div class="px-3 pb-5 border-t border-gray-100 pt-3 flex justify-center">
+
+            <button type="button"
+                    onclick="bukaModalLogout()"
+                    class="inline-flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all
                     bg-red-500 text-white hover:bg-red-600 [&_svg]:stroke-white mx-auto">
 
-            <span class="nav-icon">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                </svg>
-            </span>
+                <span>
+                    <svg class="w-5 h-5"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         viewBox="0 0 24 24">
 
-            Keluar
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                </span>
+
+                Keluar
             </button>
         </div>
+
     </aside>
 
-{{-- MAIN --}}
     <div class="flex-1 flex flex-col overflow-hidden">
 
         <header class="bg-white shadow-sm px-8 py-4 flex items-center justify-between flex-shrink-0">
@@ -206,22 +249,19 @@
     </div>
 </div>
 
-{{-- MODAL KONFIRMASI LOGOUT --}}
 <div id="modalLogout" style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center;">
-    {{-- Backdrop blur --}}
+
     <div onclick="tutupModalLogout()" style="position:absolute; inset:0; background:rgba(0,0,0,0.45); backdrop-filter:blur(3px);"></div>
 
-    {{-- Box modal --}}
     <div style="position:relative; background:#fff; border-radius:16px; padding:32px 28px; width:340px; max-width:90vw; box-shadow:0 20px 60px rgba(0,0,0,0.2); text-align:center; animation:popIn .2s ease;">
 
-        {{-- Icon --}}
         <div style="width:56px; height:56px; background:#fee2e2; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
             <svg width="28" height="28" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
             </svg>
         </div>
 
-        <h3 style="font-size:16px; font-weight:700; color:#1e293b; margin-bottom:8px;">Konfirmasi Logout</h3>
+        <h3 style="font-size:16px; font-weight:700; color:#1e293b; margin-bottom:8px;">Konfirmasi Keluar</h3>
         <p style="font-size:14px; color:#64748b; margin-bottom:24px;">Apakah Anda yakin ingin keluar dari sistem?</p>
 
         <div style="display:flex; gap:12px;">
@@ -231,7 +271,7 @@
             </button>
             <button onclick="lakukanLogout()"
                 style="flex:1; padding:10px; border-radius:10px; border:none; background:#ef4444; color:#fff; font-size:14px; font-weight:600; cursor:pointer; transition:background .15s;">
-                Logout
+                Keluar
             </button>
         </div>
     </div>
@@ -268,12 +308,10 @@ function lakukanLogout() {
     form.submit();
 }
 
-// Tutup modal jika tekan Escape
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') tutupModalLogout();
 });
 
-// Counter animasi
 document.addEventListener('DOMContentLoaded', function() {
     function counter(el, target, dec, ms) {
         if (!el) return;
