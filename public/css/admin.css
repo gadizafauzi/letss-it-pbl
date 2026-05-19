@@ -1,0 +1,414 @@
+/* ========================================
+   SIDEBAR
+======================================== */
+
+.sidebar{
+    width:290px;
+
+    background:#ffffff;
+    border-right:1px solid #e2e8f0;
+
+    transition:all .3s ease;
+}
+
+/* TITLE */
+
+.sidebar-title{
+    font-size:11px;
+    font-weight:800;
+
+    text-transform:uppercase;
+    letter-spacing:.08em;
+
+    color:#94a3b8;
+
+    margin-bottom:14px;
+    padding-left:14px;
+}
+
+/* MENU */
+
+.sidebar-link{
+    height:50px;
+
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:0 16px;
+
+    border-radius:16px;
+
+    color:#475569;
+
+    font-size:15px;
+    font-weight:600;
+
+    transition:all .25s ease;
+}
+
+/* ICON */
+
+.sidebar-icon{
+    width:20px;
+    height:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.sidebar-icon svg{
+    width:20px;
+    height:20px;
+
+    stroke-width:2.2;
+}
+
+/* DEFAULT ICON */
+
+.sidebar-link svg{
+    stroke:#64748b;
+    transition:all .25s ease;
+}
+
+/* HOVER */
+
+.sidebar-link:hover{
+    background:#ecfdf5;
+    color:#10b981;
+
+    transform:translateX(4px);
+
+    box-shadow:
+        0 4px 14px rgba(16,185,129,.08);
+}
+
+.sidebar-link:hover svg{
+    stroke:#10b981;
+}
+
+/* ACTIVE */
+
+.active-sidebar{
+    background:#10b981;
+
+    color:white !important;
+
+    box-shadow:
+        0 10px 20px rgba(16,185,129,.18);
+}
+
+.active-sidebar svg{
+    stroke:white !important;
+}
+
+/* ACTIVE HOVER */
+
+.active-sidebar:hover{
+    background:#059669;
+
+    color:white !important;
+
+    transform:translateX(4px);
+}
+
+.active-sidebar:hover svg{
+    stroke:white !important;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header{
+    background:#ffffff;
+    border-bottom:1px solid #e2e8f0;
+}
+
+/* SEARCH */
+
+.search-box{
+    width:280px;
+    height:46px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+
+    padding:0 16px;
+
+    transition:all .2s ease;
+}
+
+.search-box:focus-within{
+    background:white;
+    border-color:#bfdbfe;
+}
+
+/* ========================================
+   CARD
+======================================== */
+
+.dashboard-card{
+    background:white;
+
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+
+    padding:26px;
+
+    transition:all .2s ease;
+}
+
+.dashboard-card:hover{
+    border-color:#dbeafe;
+
+    box-shadow:
+        0 8px 24px rgba(37,99,235,.06);
+}
+
+/* TITLE */
+
+.card-title{
+    font-size:13px;
+    font-weight:600;
+
+    color:#94a3b8;
+}
+
+/* VALUE */
+
+.card-value{
+    margin-top:12px;
+
+    font-size:40px;
+    font-weight:800;
+
+    line-height:1;
+    letter-spacing:-0.03em;
+
+    color:#0f172a;
+}
+
+/* GROWTH */
+
+.card-growth{
+    display:inline-block;
+
+    margin-top:12px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+/* ========================================
+   BOX
+======================================== */
+
+.modern-box{
+    background:white;
+
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+
+    padding:26px;
+
+    transition:all .2s ease;
+}
+
+.modern-box:hover{
+    box-shadow:
+        0 6px 18px rgba(15,23,42,.04);
+}
+
+/* TITLE */
+
+.box-title{
+    font-size:18px;
+    font-weight:700;
+
+    color:#0f172a;
+}
+
+.box-subtitle{
+    margin-top:4px;
+
+    font-size:13px;
+
+    color:#94a3b8;
+}
+
+/* ========================================
+   ACTIVITY
+======================================== */
+
+.activity-item{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+}
+
+.activity-dot{
+    width:10px;
+    height:10px;
+
+    margin-top:7px;
+
+    border-radius:999px;
+
+    flex-shrink:0;
+}
+
+.activity-dot.blue{
+    background:#3b82f6;
+}
+
+.activity-dot.emerald{
+    background:#10b981;
+}
+
+.activity-dot.orange{
+    background:#f59e0b;
+}
+
+.activity-title{
+    font-size:14px;
+    font-weight:600;
+
+    color:#0f172a;
+}
+
+.activity-time{
+    font-size:12px;
+    color:#94a3b8;
+}
+
+/* ========================================
+   QUICK MENU
+======================================== */
+
+.quick-menu-card{
+    height:130px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:14px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+
+    transition:all .2s ease;
+}
+
+.quick-menu-card:hover{
+    background:white;
+
+    border-color:#dbeafe;
+
+    box-shadow:
+        0 6px 18px rgba(37,99,235,.05);
+}
+
+.quick-menu-card svg{
+    width:28px;
+    height:28px;
+
+    color:#10b981;
+
+    stroke-width:2.2;
+}
+
+.quick-menu-card p{
+    font-size:14px;
+    font-weight:600;
+
+    color:#334155;
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+======================================== */
+
+nav::-webkit-scrollbar{
+    width:4px;
+}
+
+nav::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:999px;
+}
+
+nav::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+/* ========================================
+   SIDEBAR COLLAPSE
+======================================== */
+
+.sidebar-collapse{
+    width:90px !important;
+}
+
+/* HIDE TEXT */
+
+.sidebar-collapse .sidebar-title,
+.sidebar-collapse .sidebar-text,
+.sidebar-collapse .logo-text,
+.sidebar-collapse .logout-text{
+    display:none;
+}
+
+/* CENTER ICON */
+
+.sidebar-collapse .sidebar-link{
+    justify-content:center;
+    padding:0;
+}
+
+.sidebar-collapse .sidebar-icon{
+    margin:0;
+}
+
+/* LOGOUT BUTTON */
+
+.sidebar-collapse .logout-btn{
+    justify-content:center;
+    padding:0;
+}
+
+/* NAV SPACING */
+
+.sidebar-collapse nav{
+    padding-left:12px;
+    padding-right:12px;
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media(max-width:1024px){
+
+    .sidebar{
+        left:-290px;
+    }
+
+    .sidebar.show{
+        left:0;
+    }
+
+    .search-box{
+        display:none;
+    }
+
+}
