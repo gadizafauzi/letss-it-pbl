@@ -12,24 +12,45 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('classes', function (Blueprint $table) {
+
             $table->id();
 
-            $table->string('class_name');
-            $table->string('room')->nullable();
-            $table->enum('level', ['sd', 'smp']);
+            /**
+             * UNIT
+             * SD / SMP
+             */
+            $table->foreignId('unit_id')
+                ->constrained('units')
+                ->cascadeOnDelete();
 
+            /**
+             * NAMA KELAS
+             * contoh:
+             * 1A
+             * 2B
+             * VII A
+             */
+            $table->string('class_name');
+
+            /**
+             * WALI KELAS
+             */
             $table->foreignId('homeroom_teacher_id')
                 ->nullable()
                 ->constrained('teachers')
                 ->nullOnDelete();
 
-            $table->foreignId('academic_year_id')
-                ->constrained('academic_years')
-                ->cascadeOnDelete();
-
-            $table->unique(['class_name', 'academic_year_id']);
-
             $table->timestamps();
+
+            /**
+             * UNIQUE
+             * tidak boleh ada kelas sama
+             * dalam 1 unit
+             */
+            $table->unique([
+                'unit_id',
+                'class_name'
+            ]);
         });
     }
 
