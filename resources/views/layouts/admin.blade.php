@@ -17,8 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     {{-- ICON --}}
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -37,8 +36,13 @@
 <body class="bg-slate-50 text-slate-800 overflow-hidden">
 
     {{-- OVERLAY --}}
-    <div id="sidebarOverlay"
-        class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden md:hidden">
+    {{-- <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden md:hidden">
+    </div> --}}
+
+    {{-- <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/40 z-40 lg:hidden">
+    </div> --}}
+
+    <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm lg:hidden">
     </div>
 
     <div class="flex h-screen overflow-hidden">
@@ -47,16 +51,13 @@
         @include('components.admin.sidebar')
 
         {{-- MAIN --}}
-        <div class="flex-1 flex flex-col overflow-hidden">
+        <div id="mainContent" class="flex-1 flex flex-col overflow-hidden transition-all duration-300">
 
             {{-- HEADER --}}
-            @include('components.shared.header', [
-                'title' => $headerTitle ?? 'Dashboard',
-                'subtitle' => $headerSubtitle ?? 'Selamat datang kembali'
-            ])
+            @include('components.shared.header')
 
             {{-- CONTENT --}}
-            <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+            <main class="flex-1 overflow-y-auto p-4 sm:p-5 lg:p-8">
                 @yield('content')
             </main>
 

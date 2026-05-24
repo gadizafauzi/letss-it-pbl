@@ -1,32 +1,29 @@
             {{-- HEADER --}}
             <header
-                class="h-20 bg-white border-b border-slate-200 shadow-sm pl-6 pr-6 lg:pl-8 lg:pr-12 flex items-center justify-between">
+                class="relative z-40 h-16 lg:h-20 bg-white border-b border-slate-200 shadow-sm px-4 lg:px-8 flex items-center justify-between">
 
+                {{-- LEFT --}}
                 <div class="flex items-center gap-4">
 
-                    {{-- TOGGLE --}}
+                    {{-- MOBILE TOGGLE --}}
+                    <button id="menuToggle"
+                        class="lg:hidden p-1 text-slate-500 hover:text-emerald-600 transition-all duration-300">
+
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+
+                    </button>
+
+                    {{-- DESKTOP TOGGLE --}}
                     <button id="desktopToggle"
-                        class="w-10 h-10 rounded-xl border border-slate-200 flex items-center justify-center transition-all duration-300 hover:bg-emerald-50 hover:border-emerald-100 hover:text-emerald-600">
+                        class="hidden lg:flex p-1 text-slate-500 hover:text-emerald-600 transition-all duration-300">
 
                         <i data-lucide="menu" class="w-5 h-5"></i>
 
                     </button>
 
-                    {{-- TITLE --}}
-                    <div>
-
-                        <h2 class="text-[22px] font-extrabold tracking-tight text-slate-800 leading-none">
-                            Dashboard
-                        </h2>
-
-                        <p class="text-sm text-slate-500 mt-1 font-medium">
-                            Selamat datang kembali
-                        </p>
-
-                    </div>
-
                 </div>
 
+                {{-- RIGHT --}}
                 <div class="flex items-center gap-5">
 
                     {{-- DATE --}}

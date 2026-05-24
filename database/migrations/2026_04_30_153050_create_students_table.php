@@ -12,26 +12,62 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
+
             $table->id();
 
-            $table->foreignId('user_id')->unique()->constrained()->cascadeOnDelete();
+            // LOGIN RELATION
+            $table->foreignId('user_id')
+                ->unique()
+                ->constrained()
+                ->cascadeOnDelete();
 
-            $table->foreignId('class_id')
+            // UNIT RELATION
+            $table->foreignId('unit_id')
                 ->nullable()
-                ->constrained('classes')
+                ->constrained()
                 ->nullOnDelete();
 
-            $table->string('nis')->unique();
-            $table->string('nisn')->unique();
+            // SCHOOL DATA
+            $table->string('nis')->nullable()->unique();
+
+            $table->string('nisn')->nullable()->unique();
+
+            // PERSONAL DATA
             $table->string('full_name');
 
-            $table->string('birth_place')->nullable();
-            $table->date('birth_date')->nullable();
-            $table->string('parent_name')->nullable();
+            $table->enum('gender', ['L', 'P'])->nullable();
 
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('birth_place')->nullable();
+
+            $table->date('birth_date')->nullable();
+
+            $table->string('hobby')->nullable();
+
+            $table->string('phone')->nullable();
+
+            $table->text('address')->nullable();
+
+            // FAMILY DATA
+            $table->string('father_name')->nullable();
+
+            $table->string('mother_name')->nullable();
+
+            $table->string('parent_phone')->nullable();
+
+            // PHOTO
+            $table->string('photo')->nullable();
+
+            // STATUS
+            $table->enum('status', [
+                'active',
+                'inactive',
+                'graduated',
+                'transfer',
+                'dropout'
+            ])->default('active');
 
             $table->timestamps();
+
         });
     }
 

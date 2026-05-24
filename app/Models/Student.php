@@ -3,35 +3,54 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\StudentClass;
+use App\Models\Unit;
+use App\Models\User;
+
 
 class Student extends Model
 {
     protected $fillable = [
-        'user_id', 'class_id',
-        'nis', 'nisn', 'full_name',
-        'birth_place', 'birth_date',
-        'parent_name', 'status',
-        'religion', 'gender', 'address_origin', 'address_domicile', 'region', 'phone',
-        'nik', 'no_kk', 'previous_education', 'marital_status', 'insurance',
-        'program_study', 'department', 'education_level', 'entry_path', 'registration_status', 'photo',
-        'father_name', 'mother_name', 'parent_job', 'parent_phone',
-        'is_kip_kuliah', 'gpa_history'
+
+        'user_id',
+        'unit_id',
+
+        'nis',
+        'nisn',
+
+        'full_name',
+        'gender',
+
+        'birth_place',
+        'birth_date',
+
+        'hobby',
+        'phone',
+        'address',
+
+        'father_name',
+        'mother_name',
+        'parent_phone',
+
+        'photo',
+
+        'status',
     ];
 
-    protected $casts = [
-        'is_kip_kuliah' => 'boolean',
-        'gpa_history' => 'array',
-        'birth_date' => 'date',
-    ];
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function class()
+    public function unit()
     {
-        return $this->belongsTo(SchoolClass::class, 'class_id');
+        return $this->belongsTo(Unit::class);
     }
 
     public function studentClasses()
@@ -39,13 +58,11 @@ class Student extends Model
         return $this->hasMany(StudentClass::class);
     }
 
-    public function grades()
+    public function currentClass()
     {
-        return $this->hasMany(Grade::class);
-    }
-
-    public function invoices()
-    {
-        return $this->hasMany(Invoice::class);
+        return $this->hasOne(StudentClass::class)
+            ->whereHas('academicYear', function ($q) {
+                $q->where('status', 'active');
+            });
     }
 }

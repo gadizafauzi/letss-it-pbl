@@ -5,205 +5,234 @@
 lucide.createIcons();
 
 /* ========================================
-   SIDEBAR MOBILE
+   ELEMENT
 ======================================== */
 
-const sidebar = document.getElementById('sidebar');
-const menuToggle = document.getElementById('menuToggle');
-const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebar = document.getElementById("sidebar");
 
-if(menuToggle){
+const menuToggle = document.getElementById("menuToggle");
 
-    menuToggle.addEventListener('click', () => {
+const desktopToggle = document.getElementById("desktopToggle");
 
-        sidebar.classList.toggle('show');
+const sidebarOverlay = document.getElementById("sidebarOverlay");
 
-        sidebarOverlay.classList.toggle('hidden');
+const sidebarLinks = document.querySelectorAll(".sidebar-link");
 
+/* ========================================
+   MOBILE TOGGLE
+======================================== */
+
+if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("expand");
+
+        sidebarOverlay.classList.toggle("hidden");
     });
-
-}
-
-if(sidebarOverlay){
-
-    sidebarOverlay.addEventListener('click', () => {
-
-        sidebar.classList.remove('show');
-
-        sidebarOverlay.classList.add('hidden');
-
-    });
-
 }
 
 /* ========================================
-   ACTIVE MENU
+   DESKTOP TOGGLE
 ======================================== */
 
-const sidebarLinks = document.querySelectorAll('.sidebar-link');
+if (desktopToggle) {
+    desktopToggle.addEventListener("click", () => {
+        // REMOVE HOVER STATE
+        sidebar.classList.remove("sidebar-hover");
 
-sidebarLinks.forEach(link => {
+        // TOGGLE COLLAPSE
+        sidebar.classList.toggle("sidebar-collapse");
+    });
+}
 
-    link.addEventListener('click', () => {
+/* ========================================
+   DESKTOP HOVER SIDEBAR
+======================================== */
 
-        sidebarLinks.forEach(item => {
-            item.classList.remove('active-sidebar');
-        });
-
-        link.classList.add('active-sidebar');
-
+if (sidebar) {
+    // HOVER MASUK
+    sidebar.addEventListener("mouseenter", () => {
+        // DESKTOP ONLY
+        if (window.innerWidth >= 1024) {
+            // HANYA SAAT COLLAPSE
+            if (sidebar.classList.contains("sidebar-collapse")) {
+                sidebar.classList.add("sidebar-hover");
+            }
+        }
     });
 
+    // HOVER KELUAR
+    sidebar.addEventListener("mouseleave", () => {
+        if (window.innerWidth >= 1024) {
+            sidebar.classList.remove("sidebar-hover");
+        }
+    });
+}
+
+/* ========================================
+   CLICK ICON MENU -> EXPAND SIDEBAR
+======================================== */
+
+sidebarLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+        // MOBILE
+        if (window.innerWidth < 1024) {
+            // SIDEBAR MINI
+            if (!sidebar.classList.contains("expand")) {
+                e.preventDefault();
+
+                sidebar.classList.add("expand");
+
+                sidebarOverlay.classList.remove("hidden");
+
+                return;
+            }
+        }
+
+        // ACTIVE MENU
+        sidebarLinks.forEach((item) => {
+            item.classList.remove("active-sidebar");
+        });
+
+        link.classList.add("active-sidebar");
+    });
+});
+
+/* ========================================
+   CLOSE SIDEBAR OUTSIDE
+======================================== */
+
+if (sidebarOverlay) {
+    sidebarOverlay.addEventListener("click", () => {
+        sidebar.classList.remove("expand");
+
+        sidebarOverlay.classList.add("hidden");
+    });
+}
+
+/* ========================================
+   ESC CLOSE
+======================================== */
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        // CLOSE SIDEBAR
+        sidebar.classList.remove("expand");
+
+        sidebarOverlay.classList.add("hidden");
+
+        // CLOSE MODAL
+        if (logoutModal) {
+            logoutModal.classList.remove("flex");
+
+            logoutModal.classList.add("hidden");
+        }
+    }
 });
 
 /* ========================================
    LOGOUT MODAL
 ======================================== */
 
-const logoutBtn = document.getElementById('sidebarLogoutBtn');
+const logoutBtn = document.getElementById("sidebarLogoutBtn");
 
-const logoutModal = document.getElementById('logoutModal');
+const logoutModal = document.getElementById("logoutModal");
 
-const cancelLogout = document.getElementById('cancelLogout');
+const cancelLogout = document.getElementById("cancelLogout");
 
-const confirmLogout = document.getElementById('confirmLogout');
+const confirmLogout = document.getElementById("confirmLogout");
 
-if(logoutBtn){
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        logoutModal.classList.remove("hidden");
 
-    logoutBtn.addEventListener('click', () => {
-
-        logoutModal.classList.remove('hidden');
-
-        logoutModal.classList.add('flex');
-
+        logoutModal.classList.add("flex");
     });
-
 }
 
-if(cancelLogout){
+if (cancelLogout) {
+    cancelLogout.addEventListener("click", () => {
+        logoutModal.classList.remove("flex");
 
-    cancelLogout.addEventListener('click', () => {
-
-        logoutModal.classList.remove('flex');
-
-        logoutModal.classList.add('hidden');
-
+        logoutModal.classList.add("hidden");
     });
-
 }
 
-/* ========================================
-   CLOSE MODAL OUTSIDE
-======================================== */
+if (logoutModal) {
+    logoutModal.addEventListener("click", (e) => {
+        if (e.target === logoutModal) {
+            logoutModal.classList.remove("flex");
 
-if(logoutModal){
-
-    logoutModal.addEventListener('click', (e) => {
-
-        if(e.target === logoutModal){
-
-            logoutModal.classList.remove('flex');
-
-            logoutModal.classList.add('hidden');
-
+            logoutModal.classList.add("hidden");
         }
-
     });
-
 }
 
 /* ========================================
    CONFIRM LOGOUT
 ======================================== */
 
-if(confirmLogout){
-
-    confirmLogout.addEventListener('click', () => {
-
+if (confirmLogout) {
+    confirmLogout.addEventListener("click", () => {
         const logoutUrl = document
             .querySelector('meta[name="logout-url"]')
-            .getAttribute('content');
+            .getAttribute("content");
 
         window.location.href = logoutUrl;
-
     });
-
 }
 
 /* ========================================
    CARD HOVER EFFECT
 ======================================== */
 
-const cards = document.querySelectorAll('.dashboard-card');
+const cards = document.querySelectorAll(".dashboard-card");
 
-cards.forEach(card => {
-
-    card.addEventListener('mousemove', (e) => {
-
+cards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
 
         const x = e.clientX - rect.left;
+
         const y = e.clientY - rect.top;
 
-        card.style.background =
-            `radial-gradient(circle at ${x}px ${y}px,
+        card.style.background = `radial-gradient(circle at ${x}px ${y}px,
             rgba(59,130,246,.08),
             white 45%)`;
-
     });
 
-    card.addEventListener('mouseleave', () => {
-
-        card.style.background = 'white';
-
+    card.addEventListener("mouseleave", () => {
+        card.style.background = "white";
     });
-
 });
 
 /* ========================================
    QUICK MENU EFFECT
 ======================================== */
 
-const quickCards = document.querySelectorAll('.quick-menu-card');
+const quickCards = document.querySelectorAll(".quick-menu-card");
 
-quickCards.forEach(card => {
-
-    card.addEventListener('mouseenter', () => {
-
-        card.style.transition = '.3s';
-
+quickCards.forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+        card.style.transition = ".3s";
     });
-
 });
 
 /* ========================================
-   ESC CLOSE MODAL
+   SAVE SIDEBAR SCROLL
 ======================================== */
 
-document.addEventListener('keydown', (e) => {
+const sidebarNav = document.querySelector("nav");
 
-    if(e.key === 'Escape'){
+if (sidebarNav) {
+    // RESTORE
+    const savedScroll = localStorage.getItem("sidebar-scroll");
 
-        logoutModal.classList.remove('flex');
-
-        logoutModal.classList.add('hidden');
-
+    if (savedScroll !== null) {
+        sidebarNav.scrollTop = savedScroll;
     }
 
-});
-
-/* ========================================
-   DESKTOP SIDEBAR COLLAPSE
-======================================== */
-
-const desktopToggle = document.getElementById('desktopToggle');
-
-if(desktopToggle){
-
-    desktopToggle.addEventListener('click', () => {
-
-        sidebar.classList.toggle('sidebar-collapse');
-
+    // SAVE
+    sidebarNav.addEventListener("scroll", () => {
+        localStorage.setItem("sidebar-scroll", sidebarNav.scrollTop);
     });
-
 }
