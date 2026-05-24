@@ -1,8 +1,7 @@
             {{-- HEADER --}}
             <header
-                class="h-20 bg-white border-b border-slate-200 shadow-sm px-6 lg:px-8 flex items-center justify-between">
+                class="h-20 bg-white border-b border-slate-200 shadow-sm pl-6 pr-6 lg:pl-8 lg:pr-12 flex items-center justify-between">
 
-                {{-- LEFT --}}
                 <div class="flex items-center gap-4">
 
                     {{-- TOGGLE --}}
@@ -28,7 +27,6 @@
 
                 </div>
 
-                {{-- RIGHT --}}
                 <div class="flex items-center gap-5">
 
                     {{-- DATE --}}
