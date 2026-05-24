@@ -12,8 +12,13 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        // ADMIN
-        $admin = User::create([
+        /*
+        |--------------------------------------------------------------------------
+        | ADMIN
+        |--------------------------------------------------------------------------
+        */
+
+        User::create([
             'name' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@mail.com',
@@ -22,36 +27,47 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
 
-        // TEACHER
-        $teacherUser = User::create([
+        /*
+        |--------------------------------------------------------------------------
+        | TEACHER 1 - WALI KELAS
+        |--------------------------------------------------------------------------
+        */
+
+        $teacherUser1 = User::create([
             'name' => 'Guru 1',
             'username' => 'guru1',
+            'email' => 'guru1@mail.com',
             'password' => Hash::make('12345678'),
             'role' => 'teacher',
             'status' => 'active',
         ]);
 
-        Teacher::create([
-            'user_id' => $teacherUser->id,
+        $teacher1 = Teacher::create([
+            'user_id' => $teacherUser1->id,
             'nip' => '1987654321',
             'full_name' => 'Guru 1',
             'status' => 'active',
         ]);
 
-        // STUDENT
-        $studentUser = User::create([
-            'name' => 'Siswa 1',
-            'username' => 'siswa1',
+        /*
+        |--------------------------------------------------------------------------
+        | TEACHER 2 - GURU BIASA
+        |--------------------------------------------------------------------------
+        */
+
+        $teacherUser2 = User::create([
+            'name' => 'Guru 2',
+            'username' => 'guru2',
+            'email' => 'guru2@mail.com',
             'password' => Hash::make('12345678'),
-            'role' => 'student',
+            'role' => 'teacher',
             'status' => 'active',
         ]);
 
-        Student::create([
-            'user_id' => $studentUser->id,
-            'nis' => '12345',
-            'nisn' => '9876543210',
-            'full_name' => 'Siswa 1',
+        $teacher2 = Teacher::create([
+            'user_id' => $teacherUser2->id,
+            'nip' => '1987654322',
+            'full_name' => 'Guru 2',
             'status' => 'active',
         ]);
     }
