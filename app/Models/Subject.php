@@ -4,14 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Unit;
+
 class Subject extends Model
 {
     protected $fillable = [
-        'subject_name','category','kkm','is_sd','is_smp'
+
+        'unit_id',
+
+        'subject_code',
+        'subject_name',
     ];
 
-    public function teachingAssignments()
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    public function unit()
     {
-        return $this->hasMany(TeachingAssignment::class);
+        return $this->belongsTo(Unit::class);
     }
 }

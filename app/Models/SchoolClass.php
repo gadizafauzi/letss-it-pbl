@@ -4,35 +4,56 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Unit;
+use App\Models\Teacher;
+use App\Models\StudentClass;
+
+
 class SchoolClass extends Model
 {
     protected $table = 'classes';
 
     protected $fillable = [
+
+        'unit_id',
         'class_name',
-        'room',
-        'level',
         'homeroom_teacher_id',
-        'academic_year_id'
+
     ];
 
-    public function teacher()
+    /**
+     * =========================================================
+     * RELATION UNIT
+     * =========================================================
+     */
+    public function unit()
     {
-        return $this->belongsTo(Teacher::class, 'homeroom_teacher_id');
+        return $this->belongsTo(Unit::class);
     }
 
-    public function academicYear()
+    /**
+     * =========================================================
+     * RELATION WALI KELAS
+     * =========================================================
+     */
+    public function homeroomTeacher()
     {
-        return $this->belongsTo(AcademicYear::class);
+        return $this->belongsTo(
+            Teacher::class,
+            'homeroom_teacher_id'
+        );
     }
 
-    public function students()
-    {
-        return $this->hasMany(Student::class, 'class_id');
-    }
-
+    /**
+     * =========================================================
+     * RELATION STUDENT CLASS
+     * =========================================================
+     */
     public function studentClasses()
     {
-        return $this->hasMany(StudentClass::class, 'class_id');
+        return $this->hasMany(
+            StudentClass::class,
+            'class_id'
+        );
     }
 }
