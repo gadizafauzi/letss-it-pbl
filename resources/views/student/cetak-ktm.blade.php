@@ -20,8 +20,11 @@
             }
             .print-card {
                 box-shadow: none !important;
-                border: 1px solid #cbd5e1 !important;
                 margin: 0 !important;
+                border: none !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
             }
         }
     </style>
@@ -35,64 +38,48 @@
     </div>
 
     <!-- Kartu Pelajar Card -->
-    <div class="print-card w-[480px] h-[300px] bg-gradient-to-br from-emerald-500 via-indigo-600 to-purple-700 text-white rounded-3xl p-6 relative shadow-2xl flex flex-col justify-between overflow-hidden border border-indigo-400">
+    <div class="print-card w-[480px] h-[300px] text-slate-800 rounded-3xl p-6 relative shadow-2xl overflow-hidden border border-slate-200" style="background-image: url('{{ asset('images/ktm.jpeg') }}'); background-size: cover; background-position: center;">
         
-        <!-- Logo & Header -->
-        <div class="flex items-center gap-3 border-b border-white/20 pb-3">
-            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center p-1 shrink-0 shadow-md">
-                <div class="w-full h-full bg-indigo-100 rounded text-indigo-500 flex items-center justify-center font-bold text-xs">SD</div>
-            </div>
-            <div>
-                <h3 class="text-xs font-bold uppercase tracking-wider leading-tight">Kartu Tanda Pelajar</h3>
-                <h2 class="text-sm font-extrabold uppercase leading-none mt-0.5">Sekolah Dasar Negeri</h2>
-            </div>
-        </div>
-
         <!-- Card Body -->
-        <div class="flex justify-between items-center mt-3">
+        <div class="flex justify-between items-start mt-[80px] px-2">
             <!-- Left Info -->
-            <div class="space-y-2 max-w-[280px]">
+            <div class="space-y-3 max-w-[280px]">
                 <div>
-                    <span class="text-[10px] text-indigo-200 uppercase font-semibold block leading-none">Nama Lengkap</span>
-                    <span class="text-base font-extrabold block leading-tight truncate">{{ $student->full_name }}</span>
+                    <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Nama Lengkap</span>
+                    <span class="text-base font-extrabold block leading-tight truncate text-white drop-shadow-md">{{ $student->full_name }}</span>
                 </div>
                 <div class="flex gap-6">
                     <div>
-                        <span class="text-[10px] text-indigo-200 uppercase font-semibold block leading-none">Kelas</span>
-                        <span class="text-sm font-bold block leading-none mt-1">{{ $student->class->class_name ?? '-' }}</span>
+                        <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Kelas</span>
+                        <span class="text-sm font-bold block leading-none mt-1 text-white drop-shadow-md">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
                     </div>
                     <div>
-                        <span class="text-[10px] text-indigo-200 uppercase font-semibold block leading-none">Gender</span>
-                        <span class="text-sm font-bold block leading-none mt-1">{{ $student->gender ?? '-' }}</span>
+                        <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Gender</span>
+                        <span class="text-sm font-bold block leading-none mt-1 text-white drop-shadow-md">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
                     </div>
                 </div>
                 <div class="flex gap-6">
                     <div>
-                        <span class="text-[10px] text-indigo-200 uppercase font-semibold block leading-none">NISN</span>
-                        <span class="text-xs font-semibold block leading-tight text-slate-100 truncate mt-1">{{ $student->nisn ?? '-' }}</span>
+                        <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">NISN</span>
+                        <span class="text-xs font-bold block leading-tight truncate mt-1 text-white drop-shadow-md">{{ $student->nisn ?? '-' }}</span>
                     </div>
                     <div>
-                        <span class="text-[10px] text-indigo-200 uppercase font-semibold block leading-none">Tanggal Lahir</span>
-                        <span class="text-xs font-semibold block leading-tight text-slate-100 truncate mt-1">{{ $student->birth_date ? $student->birth_date->format('d/m/Y') : '-' }}</span>
+                        <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Tanggal Lahir</span>
+                        <span class="text-xs font-bold block leading-tight truncate mt-1 text-white drop-shadow-md">{{ $student->birth_date ? \Carbon\Carbon::parse($student->birth_date)->format('d/m/Y') : '-' }}</span>
                     </div>
                 </div>
             </div>
 
             <!-- Photo -->
-            <div class="w-24 h-32 bg-white/20 border-2 border-white/40 rounded-2xl overflow-hidden shrink-0 shadow-lg relative flex items-center justify-center">
+            <div class="w-[96px] h-[128px] rounded-2xl overflow-hidden shrink-0 flex items-center justify-center mt-3 mr-1">
                 @if($student->photo)
                     <img src="{{ asset('storage/photos/' . $student->photo) }}" alt="Photo" class="object-cover w-full h-full">
                 @else
-                    <div class="text-white text-3xl font-extrabold opacity-60">
+                    <div class="text-slate-400 text-3xl font-extrabold opacity-60">
                         {{ strtoupper(substr($student->full_name, 0, 1)) }}
                     </div>
                 @endif
             </div>
-        </div>
-
-        <!-- Footer link -->
-        <div class="text-[9px] text-white/50 mt-2 text-right border-t border-white/10 pt-2 font-mono">
-            SD Negeri
         </div>
     </div>
 

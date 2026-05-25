@@ -40,7 +40,7 @@
                 Total Siswa
             </p>
             <h2 class="text-2xl font-extrabold text-slate-900">
-                {{ $class ? $class->students->count() : 0 }}
+                {{ $students ? $students->count() : 0 }}
             </h2>
         </div>
     </div>

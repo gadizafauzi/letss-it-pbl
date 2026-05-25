@@ -31,18 +31,18 @@
             </thead>
 
             <tbody class="divide-y divide-slate-100">
-                @forelse ($class->students as $index => $student)
+                @forelse ($class->studentClasses as $index => $studentClass)
                     <tr>
                         <td class="px-6 py-4">{{ $index + 1 }}</td>
                         <td class="px-6 py-4 font-semibold text-slate-700">
-                            {{ $student->full_name }}
+                            {{ $studentClass->student->full_name }}
                         </td>
                         <td class="px-6 py-4 text-slate-600">
-                            {{ $student->nis }}
+                            {{ $studentClass->student->nis }}
                         </td>
                         <td class="px-6 py-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $student->status === 'active' ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600' }}">
-                                {{ $student->status === 'active' ? 'Aktif' : 'Tidak Aktif' }}
+                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $studentClass->student->status === 'active' ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600' }}">
+                                {{ $studentClass->student->status === 'active' ? 'Aktif' : 'Tidak Aktif' }}
                             </span>
                         </td>
                     </tr>

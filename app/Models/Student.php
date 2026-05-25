@@ -65,4 +65,9 @@ class Student extends Model
                 $q->where('status', 'active');
             });
     }
+
+    public function grades()
+    {
+        return $this->hasMany(\App\Models\Grade::class);
+    }
 }

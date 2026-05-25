@@ -66,7 +66,7 @@
                 </a>
 
                 <a href="{{ route('teacher.input-nilai') }}"
-                    class="teacher-sidebar-link {{ request()->routeIs('teacher.input-nilai') || request()->routeIs('teacher.input-nilai.assignment') ? 'teacher-active-sidebar' : '' }}">
+                    class="teacher-sidebar-link {{ request()->routeIs('teacher.input-nilai') ? 'teacher-active-sidebar' : '' }}">
 
                     <span class="teacher-sidebar-icon">
                         <i data-lucide="clipboard-check"></i>

@@ -34,7 +34,7 @@
                 <option value="">Pilih Kelas - Mapel</option>
                 @foreach ($assignments as $assignment)
                     <option value="{{ $assignment->id }}" {{ $assignmentId == $assignment->id ? 'selected' : '' }}>
-                        {{ $assignment->class->class_name }} - {{ $assignment->subject->subject_name }}
+                        {{ $assignment->schoolClass->class_name }} - {{ $assignment->subject->subject_name }}
                     </option>
                 @endforeach
             </select>
@@ -65,7 +65,7 @@
 
         <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
             <h2 class="box-title">
-                Input Nilai - {{ $selectedAssignment ? $selectedAssignment->class->class_name . ' (' . $selectedAssignment->subject->subject_name . ')' : '-' }}
+                Input Nilai - {{ $selectedAssignment ? $selectedAssignment->schoolClass->class_name . ' (' . $selectedAssignment->subject->subject_name . ')' : '-' }}
             </h2>
 
             @if($selectedAssignment && $students->isNotEmpty())

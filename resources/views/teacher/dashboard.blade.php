@@ -155,7 +155,7 @@
                     <tr>
                         <td class="px-6 py-4">{{ $index + 1 }}</td>
                         <td class="px-6 py-4 font-bold text-slate-700">
-                            {{ $assignment->class->class_name ?? 'N/A' }}
+                            {{ $assignment->schoolClass->class_name ?? 'N/A' }}
 
                             @if($homeroomClass && $homeroomClass->id == $assignment->class_id)
                                 <span class="ml-2 text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full font-normal">

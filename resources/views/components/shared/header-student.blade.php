@@ -19,20 +19,23 @@
 
     <div class="flex items-center gap-3 shrink-0 pl-4">
 
+        @php
+            $studentHeader = \App\Models\Student::where('user_id', auth()->id())->first();
+        @endphp
         <div class="hidden sm:flex flex-col items-end justify-center leading-tight h-11">
             <p class="text-sm font-bold text-slate-800 whitespace-nowrap">
-                Siswa 1
+                {{ $studentHeader->full_name ?? auth()->user()->name ?? 'Siswa' }}
             </p>
 
             <p class="text-xs text-slate-400 mt-1 whitespace-nowrap">
-                NIS: 123456
+                NIS: {{ $studentHeader->nis ?? '-' }}
             </p>
         </div>
 
         <div class="relative w-11 h-11 min-w-[44px] flex items-center justify-center overflow-visible">
 
             <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-emerald-200">
-                {{ strtoupper(substr(auth()->user()->name ?? 'S', 0, 1)) }}
+                {{ strtoupper(substr($studentHeader->full_name ?? auth()->user()->name ?? 'S', 0, 1)) }}
             </div>
 
             <span class="absolute -bottom-[2px] -right-[2px] w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full">

@@ -13,7 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         $student = Student::where('user_id', auth()->id())
-            ->with(['class.academicYear'])
+            ->with(['currentClass.schoolClass', 'currentClass.academicYear'])
             ->firstOrFail();
 
         $activeYear = AcademicYear::where('status', 'active')->first();
@@ -27,18 +27,13 @@ class DashboardController extends Controller
             ->where('status', 'paid')
             ->sum('amount');
 
-        // KIP Kuliah overrides unpaid bills
-        if ($student->is_kip_kuliah) {
-            $tagihanSaatIni = 0;
-        }
-
         return view('student.dashboard', compact('student', 'activeYear', 'tagihanSaatIni', 'totalTerbayar'));
     }
 
     public function cetakKtm()
     {
         $student = Student::where('user_id', auth()->id())
-            ->with(['class'])
+            ->with(['currentClass.schoolClass'])
             ->firstOrFail();
 
         return view('student.cetak-ktm', compact('student'));

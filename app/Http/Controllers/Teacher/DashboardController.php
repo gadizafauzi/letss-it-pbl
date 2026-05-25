@@ -14,22 +14,27 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $teacher = Teacher::where('user_id', auth()->id())->firstOrFail();
+        $teacher = Teacher::with('position')->where('user_id', auth()->id())->firstOrFail();
         $activeYear = AcademicYear::where('status', 'active')->first();
 
-        // cek apakah guru jadi wali kelas di tahun ajaran aktif
-        $homeroomClass = SchoolClass::where(
-            'homeroom_teacher_id',
-            $teacher->id
-        )->where('academic_year_id', $activeYear?->id)->first();
+        // cek apakah guru memiliki jabatan Wali Kelas dan ditugaskan di suatu kelas
+        $homeroomClass = null;
+        if ($teacher->position && stripos($teacher->position->name, 'Wali') !== false) {
+            $homeroomClass = SchoolClass::where(
+                'homeroom_teacher_id',
+                $teacher->id
+            )->first();
+        }
 
         // Hitung statistik wali kelas jika ada
         $totalWaliStudents = 0;
         $classAverage = '-';
         if ($homeroomClass) {
-            $totalWaliStudents = Student::where('class_id', $homeroomClass->id)->count();
-
-            $classStudentIds = Student::where('class_id', $homeroomClass->id)->pluck('id');
+            $classStudentIds = \App\Models\StudentClass::where('class_id', $homeroomClass->id)
+                ->where('academic_year_id', $activeYear?->id)
+                ->pluck('student_id');
+                
+            $totalWaliStudents = $classStudentIds->count();
             $averageScore = Grade::whereIn('student_id', $classStudentIds)
                 ->where('academic_year_id', $activeYear?->id)
                 ->avg('final_score');
@@ -40,12 +45,14 @@ class DashboardController extends Controller
         // Ambil semua kelas yang diajar oleh guru di tahun ajaran aktif
         $assignments = TeachingAssignment::where('teacher_id', $teacher->id)
             ->where('academic_year_id', $activeYear?->id)
-            ->with(['class', 'subject'])
+            ->with(['schoolClass', 'subject'])
             ->get();
 
         foreach ($assignments as $assignment) {
-            if ($assignment->class) {
-                $assignment->student_count = Student::where('class_id', $assignment->class_id)->count();
+            if ($assignment->schoolClass) {
+                $assignment->student_count = \App\Models\StudentClass::where('class_id', $assignment->class_id)
+                    ->where('academic_year_id', $activeYear?->id)
+                    ->count();
             } else {
                 $assignment->student_count = 0;
             }
@@ -55,10 +62,12 @@ class DashboardController extends Controller
 
         // Hitung total siswa yang diajar (lintas kelas)
         $classIds = $assignments->pluck('class_id')->unique();
-        $totalSiswaDiajar = Student::whereIn('class_id', $classIds)->count();
+        $totalSiswaDiajar = \App\Models\StudentClass::whereIn('class_id', $classIds)
+            ->where('academic_year_id', $activeYear?->id)
+            ->count();
 
-        // Hitung total mapel yang diajar
-        $totalMapelDiajar = $assignments->pluck('subject_id')->unique()->count();
+        // Hitung total mapel yang diajar (sesuai jumlah penugasan)
+        $totalMapelDiajar = $assignments->count();
 
         // Hitung rata-rata nilai mapel yang diajar
         $assignmentIds = $assignments->pluck('id');
