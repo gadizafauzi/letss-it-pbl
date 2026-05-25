@@ -6,6 +6,16 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
+// Controllers Student
+use App\Http\Controllers\Student\DashboardController as StudentDashboard;
+use App\Http\Controllers\Student\TagihanController;
+use App\Http\Controllers\Student\NilaiController;
+use App\Http\Controllers\Student\ProfileController as StudentProfile;
+
+// Controllers Teacher
+use App\Http\Controllers\Teacher\DashboardController as TeacherDashboard;
+use App\Http\Controllers\Teacher\KelasController as TeacherKelas;
+
 // Controllers Admin
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\GuruController;
@@ -121,16 +131,31 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // TEACHER
 // =============================================
 Route::middleware(['auth', 'role:teacher'])->group(function () {
-    Route::get('/teacher/dashboard', fn() => view('teacher.dashboard'))
-        ->name('teacher.dashboard');
+    Route::get('/teacher/dashboard', [TeacherDashboard::class, 'index'])->name('teacher.dashboard');
+    
+    // Wali Kelas Routes
+    Route::get('/teacher/wali-data-siswa', [TeacherKelas::class, 'waliDataSiswa'])->name('teacher.wali-data-siswa');
+    Route::get('/teacher/wali-rekap-nilai', [TeacherKelas::class, 'waliRekapNilai'])->name('teacher.wali-rekap-nilai');
+    Route::get('/teacher/data-siswa/{classId}', [TeacherKelas::class, 'dataSiswa'])->name('teacher.data-siswa');
+    
+    // Guru Mapel Routes
+    Route::get('/teacher/kelas-saya', [TeacherKelas::class, 'kelasSaya'])->name('teacher.kelas-saya');
+    Route::get('/teacher/input-nilai/{teachingId?}', [TeacherKelas::class, 'inputNilai'])->name('teacher.input-nilai');
+    Route::post('/teacher/input-nilai', [TeacherKelas::class, 'storeNilai'])->name('teacher.input-nilai.store');
+    
+    Route::get('/teacher/profil', [TeacherKelas::class, 'profil'])->name('teacher.profil');
 });
 
 // =============================================
 // STUDENT
 // =============================================
 Route::middleware(['auth', 'role:student'])->group(function () {
-    Route::get('/student/dashboard', fn() => view('student.dashboard'))
-        ->name('student.dashboard');
+    Route::get('/student/dashboard', [StudentDashboard::class, 'index'])->name('student.dashboard');
+    Route::get('/student/tagihan', [TagihanController::class, 'index'])->name('student.tagihan');
+    Route::get('/student/nilai', [NilaiController::class, 'index'])->name('student.nilai');
+    Route::get('/student/profil', [StudentProfile::class, 'index'])->name('student.profil');
+    Route::match(['put', 'post'], '/student/profil', [StudentProfile::class, 'update'])->name('student.profil.update');
+    Route::get('/student/cetak-ktm', [StudentProfile::class, 'cetakKtm'])->name('student.cetak-ktm');
 });
 
 // =============================================

@@ -39,8 +39,8 @@
             <p class="text-sm font-semibold text-slate-400 mb-1">
                 Total Siswa
             </p>
-            <h2 class="text-2xl font-extrabold text-slate-900 counter" data-target="{{ $class ? $class->students->count() : 0 }}">
-                {{ $class ? $class->students->count() : 0 }}
+            <h2 class="text-2xl font-extrabold text-slate-900 counter" data-target="{{ $students ? $students->count() : 0 }}">
+                {{ $students ? $students->count() : 0 }}
             </h2>
         </div>
     </div>
@@ -55,7 +55,7 @@
                 Tahun Ajaran
             </p>
             <h2 class="text-xl font-extrabold text-slate-900">
-                {{ $class?->academicYear?->year ?? '-' }}
+                {{ $activeYear?->year ?? '-' }}
             </h2>
         </div>
     </div>
@@ -70,7 +70,7 @@
                 Semester
             </p>
             <h2 class="text-2xl font-extrabold text-slate-900">
-                {{ $class?->academicYear?->active_semester === 'odd' ? 'Ganjil' : 'Genap' }}
+                {{ $activeYear?->active_semester === 'odd' ? 'Ganjil' : 'Genap' }}
             </h2>
         </div>
     </div>

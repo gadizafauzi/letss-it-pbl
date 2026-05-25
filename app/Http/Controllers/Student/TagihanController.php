@@ -18,8 +18,8 @@ class TagihanController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // KIP Kuliah overrides unpaid UKT bills
-        $isKip = $student->is_kip_kuliah;
+        // KIP Kuliah logic removed
+        $isKip = false;
 
         return view('student.tagihan', compact('student', 'invoices', 'isKip'));
     }

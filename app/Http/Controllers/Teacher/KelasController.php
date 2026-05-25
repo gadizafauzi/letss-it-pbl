@@ -20,7 +20,7 @@ class KelasController extends Controller
 
         $assignments = TeachingAssignment::where('teacher_id', $teacher->id)
             ->where('academic_year_id', $activeYear?->id)
-            ->with(['class.students', 'subject'])
+            ->with(['schoolClass.studentClasses', 'subject'])
             ->get();
 
         return view('teacher.kelas-saya', compact('assignments'));
@@ -28,7 +28,7 @@ class KelasController extends Controller
 
     public function dataSiswa($classId)
     {
-        $class = SchoolClass::with('students')->findOrFail($classId);
+        $class = SchoolClass::with('studentClasses.student')->findOrFail($classId);
 
         return view('teacher.data-siswa', compact('class'));
     }
@@ -41,7 +41,7 @@ class KelasController extends Controller
         // Ambil semua jadwal mengajar milik guru tersebut
         $assignments = TeachingAssignment::where('teacher_id', $teacher->id)
             ->where('academic_year_id', $activeYear?->id)
-            ->with(['class', 'subject', 'academicYear'])
+            ->with(['schoolClass', 'subject', 'academicYear'])
             ->get();
 
         $selectedAssignment = null;
@@ -57,8 +57,12 @@ class KelasController extends Controller
         }
 
         if ($selectedAssignment) {
+            $studentIds = \App\Models\StudentClass::where('class_id', $selectedAssignment->class_id)
+                ->where('academic_year_id', $activeYear?->id)
+                ->pluck('student_id');
+
             // Ambil daftar siswa kelas tersebut beserta nilainya khusus untuk mapel ini
-            $students = Student::where('class_id', $selectedAssignment->class_id)
+            $students = Student::whereIn('id', $studentIds)
                 ->with(['grades' => function ($query) use ($selectedAssignment) {
                     $query->where('teaching_assignment_id', $selectedAssignment->id);
                 }])
@@ -133,16 +137,24 @@ class KelasController extends Controller
 
     public function waliDataSiswa(Request $request)
     {
-        $teacher = Teacher::where('user_id', auth()->id())->firstOrFail();
+        $teacher = Teacher::with('position')->where('user_id', auth()->id())->firstOrFail();
         $activeYear = AcademicYear::where('status', 'active')->first();
-        $class = SchoolClass::where('homeroom_teacher_id', $teacher->id)
-            ->where('academic_year_id', $activeYear?->id)
-            ->with('academicYear')
-            ->first();
+        
+        $class = null;
+        if ($teacher->position && stripos($teacher->position->name, 'Wali') !== false) {
+            $class = SchoolClass::where('homeroom_teacher_id', $teacher->id)->first();
+        }
+
+        if (!$class) {
+            abort(403, 'Akses ditolak. Anda bukan Wali Kelas atau tidak memiliki kelas.');
+        }
 
         $students = collect();
         if ($class) {
-            $query = Student::where('class_id', $class->id);
+            $studentIds = \App\Models\StudentClass::where('class_id', $class->id)
+                ->where('academic_year_id', $activeYear?->id)
+                ->pluck('student_id');
+            $query = Student::whereIn('id', $studentIds);
 
             if ($request->filled('search')) {
                 $search = $request->input('search');
@@ -165,18 +177,24 @@ class KelasController extends Controller
         return view('teacher.wali-data-siswa', [
             'class' => $class,
             'students' => $students,
-            'homeroomClass' => $class
+            'homeroomClass' => $class,
+            'activeYear' => $activeYear
         ]);
     }
 
     public function waliRekapNilai(Request $request)
     {
-        $teacher = Teacher::where('user_id', auth()->id())->firstOrFail();
+        $teacher = Teacher::with('position')->where('user_id', auth()->id())->firstOrFail();
         $activeYear = AcademicYear::where('status', 'active')->first();
-        $class = SchoolClass::where('homeroom_teacher_id', $teacher->id)
-            ->where('academic_year_id', $activeYear?->id)
-            ->with('academicYear')
-            ->first();
+        
+        $class = null;
+        if ($teacher->position && stripos($teacher->position->name, 'Wali') !== false) {
+            $class = SchoolClass::where('homeroom_teacher_id', $teacher->id)->first();
+        }
+
+        if (!$class) {
+            abort(403, 'Akses ditolak. Anda bukan Wali Kelas atau tidak memiliki kelas.');
+        }
 
         $subjects = collect();
         $students = collect();
@@ -206,7 +224,10 @@ class KelasController extends Controller
             $targetAssignment = $assignments->where('subject_id', $selectedSubjectId)->first();
 
             if ($targetAssignment) {
-                $query = Student::where('class_id', $class->id)
+                $studentIds = \App\Models\StudentClass::where('class_id', $class->id)
+                    ->where('academic_year_id', $activeYear?->id)
+                    ->pluck('student_id');
+                $query = Student::whereIn('id', $studentIds)
                     ->with(['grades' => function ($q) use ($targetAssignment, $semester) {
                         $q->where('teaching_assignment_id', $targetAssignment->id)
                           ->where('semester', $semester);
@@ -256,19 +277,21 @@ class KelasController extends Controller
             'semester' => $semester,
             'students' => $students,
             'classAverage' => $classAverage,
-            'homeroomClass' => $class
+            'homeroomClass' => $class,
+            'activeYear' => $activeYear
         ]);
     }
 
     public function profil()
     {
-        $teacher = Teacher::where('user_id', auth()->id())->with('user')->firstOrFail();
+        $teacher = Teacher::with(['user', 'position'])->where('user_id', auth()->id())->firstOrFail();
         $activeYear = AcademicYear::where('status', 'active')->first();
 
         // Cari tahu apakah guru ini wali kelas
-        $homeroomClass = SchoolClass::where('homeroom_teacher_id', $teacher->id)
-            ->where('academic_year_id', $activeYear?->id)
-            ->first();
+        $homeroomClass = null;
+        if ($teacher->position && stripos($teacher->position->name, 'Wali') !== false) {
+            $homeroomClass = SchoolClass::where('homeroom_teacher_id', $teacher->id)->first();
+        }
 
         // Cari tahu mata pelajaran apa saja yang diampu guru ini
         $assignments = TeachingAssignment::where('teacher_id', $teacher->id)

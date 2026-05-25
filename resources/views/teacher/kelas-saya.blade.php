@@ -62,7 +62,7 @@
                     <tr class="hover:bg-slate-50 transition-all">
 
                         <td class="px-6 py-4 font-semibold text-slate-700">
-                            {{ $assignment->class->class_name }}
+                            {{ $assignment->schoolClass->class_name }}
                         </td>
 
                         <td class="px-6 py-4 text-slate-600">
@@ -70,7 +70,7 @@
                         </td>
 
                         <td class="px-6 py-4 text-slate-600">
-                            {{ $assignment->class->students->count() }} siswa
+                            {{ $assignment->schoolClass->studentClasses->count() }} siswa
                         </td>
 
                         <td class="px-6 py-4">
@@ -86,7 +86,7 @@
                             <div class="flex items-center gap-2">
 
                                 {{-- LIHAT SISWA --}}
-                                <a href="{{ route('teacher.data-siswa', $assignment->class->id) }}"
+                                <a href="{{ route('teacher.data-siswa', $assignment->schoolClass->id) }}"
                                     title="Lihat Siswa"
                                     class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-100 flex items-center justify-center transition-all duration-200">
 
@@ -95,7 +95,7 @@
                                 </a>
 
                                 {{-- INPUT NILAI --}}
-                                <a href="{{ route('teacher.input-nilai.assignment', $assignment->id) }}"
+                                <a href="{{ route('teacher.input-nilai', $assignment->id) }}"
                                     title="Input Nilai"
                                     class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 hover:bg-emerald-100 flex items-center justify-center transition-all duration-200">
 

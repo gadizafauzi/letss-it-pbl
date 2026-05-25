@@ -53,7 +53,7 @@
                 </div>
                 <div>
                     <span class="text-slate-400 font-semibold block mb-0.5 uppercase tracking-wide">Gender</span>
-                    <span class="font-bold text-slate-700 block leading-tight">{{ $student->gender ?? '-' }}</span>
+                    <span class="font-bold text-slate-700 block leading-tight">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
                 </div>
                 <div>
                     <span class="text-slate-400 font-semibold block mb-0.5 uppercase tracking-wide">Alamat</span>
@@ -100,13 +100,13 @@
                     <div class="py-2 border-b border-slate-50">
                         <span class="text-slate-400 text-xs font-semibold block uppercase">Informasi Kelahiran</span>
                         <span class="font-bold text-slate-700 block mt-1">
-                            {{ $student->birth_place ?? '-' }}, {{ $student->birth_date ? $student->birth_date->format('d F Y') : '-' }}
+                            {{ $student->birth_place ?? '-' }}, {{ $student->birth_date ? \Carbon\Carbon::parse($student->birth_date)->format('d F Y') : '-' }}
                         </span>
                     </div>
                     <div class="py-2 border-b border-slate-50">
                         <span class="text-slate-400 text-xs font-semibold block uppercase">Jenis Kelamin</span>
                         <span class="inline-block bg-rose-50 text-rose-600 border border-rose-100 px-3 py-1 rounded-full text-xs font-bold mt-1">
-                            {{ $student->gender ?? '-' }}
+                            {{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}
                         </span>
                     </div>
                     <div class="py-2 border-b border-slate-50 md:col-span-2">
@@ -137,7 +137,7 @@
                     </div>
                     <div class="py-2 border-b border-slate-50">
                         <span class="text-slate-400 text-xs font-semibold block uppercase">Kelas</span>
-                        <span class="font-bold text-slate-700 block mt-1">Kelas {{ $student->class->class_name ?? 'N/A' }}</span>
+                        <span class="font-bold text-slate-700 block mt-1">Kelas {{ $student->currentClass->schoolClass->class_name ?? 'N/A' }}</span>
                     </div>
                     <div class="py-2 border-b border-slate-50">
                         <span class="text-slate-400 text-xs font-semibold block uppercase">Status Registrasi</span>
@@ -184,6 +184,7 @@
 
         <form action="{{ route('student.profil.update') }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="space-y-4">
                 <div>
                     <label class="text-xs text-slate-400 font-bold uppercase block mb-1">Alamat Lengkap</label>

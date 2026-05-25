@@ -22,13 +22,15 @@ class AppServiceProvider extends ServiceProvider
             $homeroomClass = null;
 
             if (auth()->check() && auth()->user()->role === 'teacher') {
-                $teacher = Teacher::where('user_id', auth()->id())->first();
+                $teacher = Teacher::with('position')->where('user_id', auth()->id())->first();
 
                 if ($teacher) {
                     $activeYear = AcademicYear::where('status', 'active')->first();
-                    $homeroomClass = SchoolClass::where('homeroom_teacher_id', $teacher->id)
-                        ->where('academic_year_id', $activeYear?->id)
-                        ->first();
+                    
+                    if ($teacher->position && stripos($teacher->position->name, 'Wali') !== false) {
+                        $homeroomClass = SchoolClass::where('homeroom_teacher_id', $teacher->id)
+                            ->first();
+                    }
                 }
             }
 
