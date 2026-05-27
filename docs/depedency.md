@@ -1,4 +1,8 @@
+raw
+Dependency · MD
+
 # Dokumentasi Dependency/Package Laravel
+
 ## Proyek Sistem Akademik & Website Sekolah
 
 Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunakan pada proyek PBL Sistem Akademik & Website Sekolah. Penjelasan dependency dilakukan menggunakan pendekatan 5W+1H untuk menjelaskan fungsi, tujuan, pengguna, waktu penggunaan, lokasi implementasi, serta cara penggunaan package pada sistem.
@@ -6,7 +10,7 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 ---
 
 # 1. Spatie Laravel Permission
-
+ 
 | Komponen | Penjelasan |
 |---|---|
 | **What** | Package Laravel untuk manajemen role dan permission |
@@ -16,11 +20,19 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 | **Where** | Dashboard, middleware, dan manajemen akun |
 | **How** | Diinstall menggunakan Composer dan dikonfigurasi pada role pengguna |
 | **Referensi** | https://spatie.be/docs/laravel-permission |
-
+ 
+### Cara Instalasi
+ 
+```bash
+composer require spatie/laravel-permission
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+php artisan migrate
+```
+ 
 ---
-
+ 
 # 2. Laravel Excel
-
+ 
 | Komponen | Penjelasan |
 |---|---|
 | **What** | Package Laravel untuk import dan export file Excel |
@@ -30,11 +42,18 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 | **Where** | Modul siswa, nilai, absensi, dan laporan |
 | **How** | Menggunakan package Laravel Excel pada controller |
 | **Referensi** | https://laravel-excel.com |
-
+ 
+### Cara Instalasi
+ 
+```bash
+composer require maatwebsite/excel
+php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
+```
+ 
 ---
-
+ 
 # 3. Laravel DomPDF
-
+ 
 | Komponen | Penjelasan |
 |---|---|
 | **What** | Package Laravel untuk generate file PDF |
@@ -44,11 +63,18 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 | **Where** | Modul rapor dan laporan |
 | **How** | View Laravel dikonversi menjadi file PDF |
 | **Referensi** | https://github.com/barryvdh/laravel-dompdf |
-
+ 
+### Cara Instalasi
+ 
+```bash
+composer require barryvdh/laravel-dompdf
+php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"
+```
+ 
 ---
-
-# 4. Intervention Image
-
+ 
+<!-- # 4. Intervention Image
+ 
 | Komponen | Penjelasan |
 |---|---|
 | **What** | Package Laravel untuk manipulasi gambar |
@@ -58,11 +84,18 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 | **Where** | Profil pengguna, banner, dan berita sekolah |
 | **How** | Menggunakan library upload image Laravel |
 | **Referensi** | https://image.intervention.io |
-
+ 
+### Cara Instalasi
+ 
+```bash
+composer require intervention/image
+php artisan vendor:publish --provider="Intervention\Image\Laravel\ServiceProvider"
+```
+ 
 ---
-
+ 
 # 5. Laravel Debugbar
-
+ 
 | Komponen | Penjelasan |
 |---|---|
 | **What** | Package debugging Laravel |
@@ -72,11 +105,20 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 | **Where** | Seluruh sistem Laravel |
 | **How** | Menampilkan query database dan performa aplikasi |
 | **Referensi** | https://github.com/barryvdh/laravel-debugbar |
-
+ 
+### Cara Instalasi
+ 
+```bash
+composer require barryvdh/laravel-debugbar --dev
+php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
+```
+ 
+> **Catatan:** Gunakan flag `--dev` agar hanya aktif di environment development, tidak ikut terbawa ke production.
+ 
 ---
-
+ 
 # 6. SweetAlert2
-
+ 
 | Komponen | Penjelasan |
 |---|---|
 | **What** | Library alert modern berbasis JavaScript |
@@ -84,27 +126,49 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 | **Who** | Semua pengguna |
 | **When** | Saat proses CRUD data |
 | **Where** | Form dan dashboard sistem |
-| **How** | Diintegrasikan menggunakan JavaScript |
+| **How** | Diintegrasikan menggunakan CDN JavaScript |
 | **Referensi** | https://sweetalert2.github.io |
-
+ 
+### Cara Instalasi
+ 
+```bash
+npm install sweetalert2
+```
+ 
+> Atau gunakan CDN langsung di layout Blade:
+> ```html
+> <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+> ```
+ 
 ---
-
+ 
 # 7. CKEditor
-
+ 
 | Komponen | Penjelasan |
 |---|---|
-| **What** | Text editor berbasis web |
+| **What** | Text editor berbasis web (WYSIWYG) |
 | **Why** | Digunakan untuk membuat berita dan artikel sekolah |
 | **Who** | Admin |
 | **When** | Saat membuat atau mengedit konten |
 | **Where** | Modul berita dan pengumuman |
 | **How** | Diintegrasikan pada textarea menggunakan JavaScript |
 | **Referensi** | https://ckeditor.com |
-
+ 
+### Cara Instalasi
+ 
+```bash
+npm install @ckeditor/ckeditor5-build-classic
+```
+ 
+> Atau gunakan CDN langsung di layout Blade:
+> ```html
+> <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+> ```
+ 
 ---
-
+ 
 # 8. DataTables
-
+ 
 | Komponen | Penjelasan |
 |---|---|
 | **What** | Library tabel interaktif |
@@ -112,13 +176,20 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 | **Who** | Admin dan Guru |
 | **When** | Saat menampilkan data dalam jumlah besar |
 | **Where** | Data siswa, guru, kelas, dan nilai |
-| **How** | Menggunakan package Laravel DataTables atau CDN |
+| **How** | Menggunakan package Yajra Laravel DataTables |
 | **Referensi** | https://datatables.net |
-
+ 
+### Cara Instalasi
+ 
+```bash
+composer require yajra/laravel-datatables-oracle
+php artisan vendor:publish --tag=datatables
+```
+ 
 ---
-
+ 
 # 9. FilePond
-
+ 
 | Komponen | Penjelasan |
 |---|---|
 | **What** | Library upload file modern |
@@ -128,8 +199,20 @@ Dokumentasi ini berisi dependency/package Laravel yang kemungkinan akan digunaka
 | **Where** | Upload bukti pembayaran dan gambar |
 | **How** | Diintegrasikan menggunakan JavaScript dan Laravel backend |
 | **Referensi** | https://pqina.nl/filepond |
-
----
+ 
+### Cara Instalasi
+ 
+```bash
+npm install filepond filepond-plugin-image-preview filepond-plugin-file-validate-type
+```
+ 
+> Atau gunakan CDN langsung di layout Blade:
+> ```html
+> <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+> <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+> ```
+ 
+--- -->
 
 # Kesimpulan
 
