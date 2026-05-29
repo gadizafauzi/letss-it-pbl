@@ -191,7 +191,7 @@ Route::get('/unit/smp/profil', fn() => view('public.unit.smp.profil'));
 Route::get('/unit/smp/guru', fn() => view('public.unit.smp.guru'));
 Route::get('/unit/smp/ekskul', fn() => view('public.unit.smp.ekskul'));
 Route::get('/unit/smp/fasilitas', fn() => view('public.unit.smp.fasilitas'));
-Route::get('/unit/smp/prestasi', fn() => view('public.unit.smp.prestasi');
+Route::get('/unit/smp/prestasi', fn() => view('public.unit.smp.prestasi'));
 
 Route::get('/berita', fn() => view('public.berita.index'))->name('public.berita.index');
 Route::get('/berita/detail', fn() => view('public.berita.detail'))->name('public.berita.detail');
