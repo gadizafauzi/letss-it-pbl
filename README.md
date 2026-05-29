@@ -233,12 +233,12 @@ Password : 12345678
 
 ## student
 
-Nisn: 9876543210
+Nisn: SESUAI YANG DI DAFTARKAN DI ADMIN
 Password : 12345678
 
 ## Teacher
 
-Nip : 1987654321
+Nip :  SESUAI YANG DI DAFTARKAN DI ADMIN
 Password : 12345678
 
 
