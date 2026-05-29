@@ -31,31 +31,31 @@ body {
 }
 
 .nav-item:hover {
-    background-color: #eff6ff;
-    color: #2563eb;
+    background-color: #ecfdf5;
+    color: #059669;
 }
 
 .nav-item:hover .nav-icon svg {
-    stroke: #2563eb;
+    stroke: #059669;
     transform: scale(1.1);
 }
 
 .nav-item.active {
-    background-color: #dbeafe;
-    color: #1d4ed8;
+    background-color: #d1fae5;
+    color: #047857;
     font-weight: 700;
-    box-shadow: inset 3px 0 0 #3b82f6;
+    box-shadow: inset 3px 0 0 #10b981;
 }
 
 .nav-item.active .nav-icon svg {
-    stroke: #1d4ed8;
+    stroke: #047857;
 }
 
 .nav-item::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: #3b82f6;
+    background: #10b981;
     opacity: 0;
     border-radius: inherit;
     transform: scale(0.9);
@@ -83,17 +83,6 @@ body {
 
 .stat-card {
     border: 1px solid #f1f5f9;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    cursor: default;
-}
-
-.stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px -8px rgba(59, 130, 246, 0.18);
-}
-
-.stat-card:hover .stat-icon-wrap {
-    transform: rotate(-6deg) scale(1.08);
 }
 
 .stat-icon-wrap {
@@ -106,28 +95,28 @@ body {
 }
 
 .table-container:hover {
-    box-shadow: 0 8px 28px -6px rgba(59, 130, 246, 0.14);
+    box-shadow: 0 8px 28px -6px rgba(16, 185, 129, 0.14);
 }
 
 .table-header {
-    background: linear-gradient(135deg, #eff6ff 0%, #f8faff 100%);
-    border-bottom: 2px solid #bfdbfe;
+    background: linear-gradient(135deg, #ecfdf5 0%, #f8faff 100%);
+    border-bottom: 2px solid #a7f3d0;
 }
 
 .table-title-bar {
     width: 4px;
     height: 20px;
-    background: linear-gradient(180deg, #3b82f6, #6366f1);
+    background: linear-gradient(180deg, #10b981, #34d399);
     border-radius: 999px;
     flex-shrink: 0;
 }
 
 .table-thead {
-    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #3b82f6 100%);
+    background: linear-gradient(135deg, #047857 0%, #059669 60%, #10b981 100%);
 }
 
 .table-thead th {
-    color: #bfdbfe;
+    color: #a7f3d0;
     letter-spacing: 0.07em;
     padding-top: 14px;
     padding-bottom: 14px;
@@ -149,13 +138,13 @@ body {
 }
 
 .table-row:hover {
-    background-color: #eff6ff;
+    background-color: #ecfdf5;
     transform: translateX(3px);
-    box-shadow: -3px 0 0 #3b82f6;
+    box-shadow: -3px 0 0 #10b981;
 }
 
 .table-row:hover td {
-    color: #1e3a8a;
+    color: #064e3b;
 }
 
    PREDIKAT BADGES
@@ -170,7 +159,7 @@ body {
 }
 
 .predikat-a { background-color: #dcfce7; color: #15803d; }
-.predikat-b { background-color: #dbeafe; color: #1d4ed8; }
+.predikat-b { background-color: #d1fae5; color: #047857; }
 .predikat-c { background-color: #fef9c3; color: #a16207; }
 .predikat-d { background-color: #fee2e2; color: #b91c1c; }
 
@@ -208,12 +197,12 @@ header {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-.stat-card { animation: fadeSlideUp 0.4s ease both; }
+.stat-card { animation: fadeSlideUp 0.4s ease backwards; }
 .stat-card:nth-child(1) { animation-delay: 0.05s; }
 .stat-card:nth-child(2) { animation-delay: 0.13s; }
 .stat-card:nth-child(3) { animation-delay: 0.21s; }
 
-.table-row { animation: fadeSlideUp 0.35s ease both; }
+.table-row { animation: fadeSlideUp 0.35s ease backwards; }
 .table-row:nth-child(1) { animation-delay: 0.22s; }
 .table-row:nth-child(2) { animation-delay: 0.28s; }
 .table-row:nth-child(3) { animation-delay: 0.34s; }
@@ -233,21 +222,24 @@ header {
 
 .sidebar-overlay.show { display: block; }
 
-@media (max-width: 768px) {
-    #sidebar {
-        position: fixed;
-        left: -220px;
-        top: 0;
-        height: 100%;
-        z-index: 10;
-        transition: left 0.3s ease;
-    }
+.student-sidebar {
+    @apply w-64 bg-white flex flex-col shadow-md h-screen flex-shrink-0 z-[60] transition-all duration-300 transform fixed lg:static left-0 top-0 -translate-x-full lg:translate-x-0;
+}
 
-    #sidebar.open { left: 0; }
+.sidebar-collapse {
+    @apply lg:w-20;
+}
+
+.sidebar-collapse .nav-text {
+    @apply lg:hidden;
+}
+
+.student-sidebar.show {
+    @apply translate-x-0;
 }
 
 .nav-item.active {
-    background-color: #3b82f6 !important;
+    background-color: #10b981 !important;
     color: white !important;
 }
 

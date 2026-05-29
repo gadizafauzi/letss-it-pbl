@@ -1,295 +1,276 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Siswa - SIT</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
-</head>
-<body class="bg-gray-100 font-sans">
+@extends('layouts.student')
 
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
+@section('content')
+<div class="space-y-6">
 
-<div class="flex h-screen overflow-hidden">
-
-    {{-- SIDEBAR --}}
-    <aside class="sidebar w-52 bg-white flex flex-col shadow-md z-10 flex-shrink-0" id="sidebar">
-
-        <div class="flex items-center gap-3 px-5 py-5 border-b border-gray-100">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-md">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422A12.083 12.083 0 0121 13c0 4.97-4.03 9-9 9s-9-4.03-9-9c0-.857.117-1.687.34-2.47L12 14z"/>
-                </svg>
-            </div>
-            <div>
-                <p class="font-bold text-gray-800 text-sm leading-tight">SIT</p>
-                <p class="text-xs text-gray-400">Siswa</p>
-            </div>
-        </div>
-
-        <nav class="flex-1 px-3 py-4 space-y-1">
-            <a href="{{ route('student.dashboard') }}"
-                class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all
-                    {{ request()->routeIs('student.dashboard')
-                        ? 'bg-blue-500 text-white [&_svg]:stroke-white'
-                        : 'text-gray-600 hover:bg-gray-100 [&_svg]:stroke-gray-600' }}">
-
-                        <span class="nav-icon">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-                                <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-                                <rect x="3" y="14" width="7" height="7" rx="1.5"/>
-                                <rect x="14" y="14" width="7" height="7" rx="1.5"/>
-                            </svg>
-                        </span>
-
-                        Dashboard
-            </a>
-
-            <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">
-                <span class="nav-icon">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
-                    </svg>
-                </span>
-                Nilai
-            </a>
-
-            <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">
-                <span class="nav-icon">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                </span>
-                Tagihan
-            </a>
-
-            <a href="#" class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all">
-                <span class="nav-icon">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                </span>
-                Profil
-            </a>
-        </nav>
-         <div class="px-3 pb-5 border-t border-gray-100 pt-3 flex justify-center">
-                    <button type="button" onclick="bukaModalLogout()"
-                    class="logout-btn inline-flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all
-                    bg-red-500 text-white hover:bg-red-600 [&_svg]:stroke-white mx-auto">
-
-            <span class="nav-icon">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                </svg>
-            </span>
-
-            Keluar
-            </button>
-        </div>
-    </aside>
-
-{{-- MAIN --}}
-    <div class="flex-1 flex flex-col overflow-hidden">
-
-        <header class="bg-white shadow-sm px-8 py-4 flex items-center justify-between flex-shrink-0">
-            <div>
-                <h1 class="text-lg font-bold text-gray-800">Dashboard</h1>
-                <p class="text-xs text-gray-400 mt-0.5">Selamat datang di Sistem Informasi Akademik</p>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="text-right">
-                    <p class="text-sm font-semibold text-gray-700">{{ auth()->user()->name ?? 'Siswa' }}</p>
-                    <p class="text-xs text-gray-400">NIS: {{ auth()->user()->nis ?? '' }}</p>
-                </div>
-                <div class="w-8"></div>
-            </div>
-        </header>
-
-        <main class="flex-1 overflow-y-auto p-8">
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-                <div class="stat-card bg-white rounded-2xl p-6 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-xs text-gray-400 font-medium uppercase tracking-wide">Kelas yang Diikuti</p>
-                        <p class="text-4xl font-bold text-gray-800 mt-2" id="statKelas">8</p>
-                    </div>
-                    <div class="stat-icon-wrap w-14 h-14 rounded-xl bg-blue-500 flex items-center justify-center shadow-md shadow-blue-200">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="stat-card bg-white rounded-2xl p-6 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-xs text-gray-400 font-medium uppercase tracking-wide">Nilai Semester</p>
-                        <p class="text-4xl font-bold text-gray-800 mt-2" id="statNilai">85.5</p>
-                    </div>
-                    <div class="stat-icon-wrap w-14 h-14 rounded-xl bg-emerald-500 flex items-center justify-center shadow-md shadow-emerald-200">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="stat-card bg-white rounded-2xl p-6 shadow-sm flex items-center justify-between">
-                    <div>
-                        <p class="text-xs text-gray-400 font-medium uppercase tracking-wide">Kelas Saat Ini</p>
-                        <p class="text-4xl font-bold text-gray-800 mt-2">5A</p>
-                    </div>
-                    <div class="stat-icon-wrap w-14 h-14 rounded-xl bg-violet-500 flex items-center justify-center shadow-md shadow-violet-200">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-sm overflow-hidden table-container">
-                <div class="table-header px-6 py-5 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="table-title-bar"></div>
-                        <h2 class="text-base font-bold text-blue-700">Daftar Nilai Semester Genap 2025/2026</h2>
-                    </div>
-                    <span class="text-xs text-blue-500 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full font-semibold">
-                        7 Mata Pelajaran
-                    </span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="table-thead">
-                                <th class="px-6 py-3.5 text-left text-xs font-bold uppercase tracking-wide w-16">No</th>
-                                <th class="px-6 py-3.5 text-left text-xs font-bold uppercase tracking-wide">Mata Pelajaran</th>
-                                <th class="px-6 py-3.5 text-center text-xs font-bold uppercase tracking-wide w-24">UTS</th>
-                                <th class="px-6 py-3.5 text-center text-xs font-bold uppercase tracking-wide w-24">UAS</th>
-                                <th class="px-6 py-3.5 text-center text-xs font-bold uppercase tracking-wide w-28">Rata-rata</th>
-                                <th class="px-6 py-3.5 text-center text-xs font-bold uppercase tracking-wide w-28">Predikat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php
-                                $nilaiData = [
-                                    ['no'=>1,'mapel'=>'Bahasa Indonesia','uts'=>85,'uas'=>88,'rata'=>86.5,'predikat'=>'B'],
-                                    ['no'=>2,'mapel'=>'Matematika','uts'=>78,'uas'=>82,'rata'=>80,'predikat'=>'B'],
-                                    ['no'=>3,'mapel'=>'Bahasa Inggris','uts'=>90,'uas'=>92,'rata'=>91,'predikat'=>'A'],
-                                    ['no'=>4,'mapel'=>'IPA','uts'=>82,'uas'=>85,'rata'=>83.5,'predikat'=>'B'],
-                                    ['no'=>5,'mapel'=>'IPS','uts'=>88,'uas'=>90,'rata'=>89,'predikat'=>'A'],
-                                    ['no'=>6,'mapel'=>'Pendidikan Agama Islam','uts'=>95,'uas'=>95,'rata'=>95,'predikat'=>'A'],
-                                    ['no'=>7,'mapel'=>"Tahfidz Al-Qur'an",'uts'=>90,'uas'=>92,'rata'=>91,'predikat'=>'A'],
-                                ];
-                            @endphp
-                            @foreach($nilaiData as $item)
-                            <tr class="table-row">
-                                <td class="px-6 py-4 text-sm text-gray-400 font-medium">{{ $item['no'] }}</td>
-                                <td class="px-6 py-4 text-sm font-semibold text-gray-700">{{ $item['mapel'] }}</td>
-                                <td class="px-6 py-4 text-sm text-center text-gray-600">{{ $item['uts'] }}</td>
-                                <td class="px-6 py-4 text-sm text-center text-gray-600">{{ $item['uas'] }}</td>
-                                <td class="px-6 py-4 text-sm text-center font-bold text-gray-800">{{ $item['rata'] }}</td>
-                                <td class="px-6 py-4 text-center">
-                                    <span class="predikat-badge predikat-{{ strtolower($item['predikat']) }} inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold">
-                                        {{ $item['predikat'] }}
-                                    </span>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </main>
+    <!-- Top Cards: Kelas, Mapel, Rata-rata -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <x-student.stat-card 
+            title="Kelas Saat Ini" 
+            value="{{ $student->currentClass->schoolClass->class_name ?? '-' }}" 
+            icon="graduation-cap" 
+            color="emerald" 
+        />
+        <x-student.stat-card 
+            title="Jumlah Mapel" 
+            value="10" 
+            icon="backpack" 
+            color="indigo" 
+        />
+        <x-student.stat-card 
+            title="Rata-rata Nilai" 
+            value="85.5" 
+            icon="award" 
+            color="emerald" 
+        />
     </div>
-</div>
 
-{{-- MODAL KONFIRMASI LOGOUT --}}
-<div id="modalLogout" style="display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center;">
-    {{-- Backdrop blur --}}
-    <div onclick="tutupModalLogout()" style="position:absolute; inset:0; background:rgba(0,0,0,0.45); backdrop-filter:blur(3px);"></div>
+    <!-- Grid Atas: Biodata Akademik & Informasi Keuangan -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
 
-    {{-- Box modal --}}
-    <div style="position:relative; background:#fff; border-radius:16px; padding:32px 28px; width:340px; max-width:90vw; box-shadow:0 20px 60px rgba(0,0,0,0.2); text-align:center; animation:popIn .2s ease;">
+        <!-- BIODATA AKADEMIK -->
+        <div class="bg-white rounded-[24px] border border-slate-200/80 p-7 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between min-h-[250px]">
+            <div>
+                <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500">
+                        <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-800 text-base">Biodata Akademik</h3>
+                </div>
 
-        {{-- Icon --}}
-        <div style="width:56px; height:56px; background:#fee2e2; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
-            <svg width="28" height="28" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-            </svg>
+                <div class="space-y-3 font-sans mt-2">
+                    <div class="flex items-center justify-between py-1 border-b border-slate-50">
+                        <span class="text-slate-400 text-xs font-semibold uppercase">Nama</span>
+                        <span class="font-bold text-slate-700 text-sm">{{ $student->full_name }}</span>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-slate-50">
+                        <span class="text-slate-400 text-xs font-semibold uppercase">Kelas</span>
+                        <span class="font-bold text-slate-700 text-sm">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-slate-50">
+                        <span class="text-slate-400 text-xs font-semibold uppercase">Status Registrasi</span>
+                        <span class="font-bold text-emerald-600 text-sm">{{ $student->registration_status ?? 'Terdaftar' }}</span>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-slate-50">
+                        <span class="text-slate-400 text-xs font-semibold uppercase">NISN</span>
+                        <span class="font-bold text-slate-700 text-sm">{{ $student->nisn ?? '-' }}</span>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-slate-50">
+                        <span class="text-slate-400 text-xs font-semibold uppercase">NIS</span>
+                        <span class="font-bold text-slate-700 text-sm">{{ $student->nis ?? '-' }}</span>
+                    </div>
+                    <div class="flex items-center justify-between py-1">
+                        <span class="text-slate-400 text-xs font-semibold uppercase">Gender</span>
+                        <span class="font-bold text-slate-700 text-sm">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <h3 style="font-size:16px; font-weight:700; color:#1e293b; margin-bottom:8px;">Konfirmasi Logout</h3>
-        <p style="font-size:14px; color:#64748b; margin-bottom:24px;">Apakah Anda yakin ingin keluar dari sistem?</p>
+        <!-- INFORMASI KEUANGAN -->
+        <div class="bg-slate-900 text-white rounded-[24px] p-7 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between min-h-[250px] relative overflow-hidden">
+            <!-- Decorative circle backgrounds -->
+            <div class="absolute -right-16 -top-16 w-36 h-36 rounded-full bg-white/5 pointer-events-none"></div>
+            <div class="absolute -left-10 -bottom-10 w-28 h-28 rounded-full bg-white/5 pointer-events-none"></div>
 
-        <div style="display:flex; gap:12px;">
-            <button onclick="tutupModalLogout()"
-                style="flex:1; padding:10px; border-radius:10px; border:1.5px solid #e2e8f0; background:#fff; color:#475569; font-size:14px; font-weight:600; cursor:pointer; transition:background .15s;">
-                Batal
-            </button>
-            <button onclick="lakukanLogout()"
-                style="flex:1; padding:10px; border-radius:10px; border:none; background:#ef4444; color:#fff; font-size:14px; font-weight:600; cursor:pointer; transition:background .15s;">
-                Logout
-            </button>
+            <div>
+                <div class="flex items-center gap-3 border-b border-white/10 pb-4 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400">
+                        <i data-lucide="wallet" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-extrabold text-white text-base">Informasi Keuangan</h3>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                        <span class="text-slate-400 text-xs font-semibold uppercase block mb-1">Tagihan Saat Ini</span>
+                        <span class="text-lg font-black text-amber-400">Rp {{ number_format($tagihanSaatIni, 0, ',', '.') }}</span>
+                    </div>
+                    <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                        <span class="text-slate-400 text-xs font-semibold uppercase block mb-1">Total Terbayar</span>
+                        <span class="text-lg font-black text-emerald-400">Rp {{ number_format($totalTerbayar, 0, ',', '.') }}</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-6">
+                <a href="{{ route('student.tagihan') }}" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm h-12 rounded-2xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                    <span>Lihat Detail Tagihan</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
         </div>
+
     </div>
-</div>
 
-<style>
-@keyframes popIn {
-    from { opacity:0; transform:scale(0.92) translateY(12px); }
-    to   { opacity:1; transform:scale(1) translateY(0); }
-}
-</style>
+    <!-- Grid Bawah: Kartu Mahasiswa & Grafik IP -->
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+        <!-- KARTU PELAJAR -->
+        <div class="bg-white rounded-[24px] border border-slate-200/80 p-7 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500">
+                        <i data-lucide="contact-2" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-800 text-base">Kartu Pelajar</h3>
+                </div>
+                <a href="{{ route('student.cetak-ktm') }}" target="_blank" class="bg-rose-50 border border-rose-100 hover:bg-rose-100 text-rose-500 font-bold text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-2">
+                    <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                    <span>Cetak Kartu</span>
+                </a>
+            </div>
+
+            <!-- Card Graphic component -->
+            <!-- Card Graphic component -->
+            <div class="w-full max-w-[420px] mx-auto h-[260px] text-slate-800 rounded-3xl p-5 relative shadow-xl overflow-hidden border border-slate-200" style="background-image: url('{{ asset('images/ktm.jpeg') }}'); background-size: cover; background-position: center;">
+                
+                <!-- Card Content -->
+                <div class="flex justify-between items-start mt-[70px] px-2">
+                    <div class="space-y-3 max-w-[200px]">
+                        <div>
+                            <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Nama Lengkap</span>
+                            <span class="text-sm font-extrabold block leading-tight truncate text-white drop-shadow-md">{{ $student->full_name }}</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <div>
+                                <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Kelas</span>
+                                <span class="text-xs font-bold block leading-none mt-1 text-white drop-shadow-md">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
+                            </div>
+                            <div>
+                                <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Gender</span>
+                                <span class="text-xs font-bold block leading-none mt-1 text-white drop-shadow-md">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div>
+                                <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">NISN</span>
+                                <span class="text-xs font-bold block leading-tight truncate mt-1 text-white drop-shadow-md">{{ $student->nisn ?? '-' }}</span>
+                            </div>
+                            <div>
+                                <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Tanggal Lahir</span>
+                                <span class="text-xs font-bold block leading-tight truncate mt-1 text-white drop-shadow-md">{{ $student->birth_date ? \Carbon\Carbon::parse($student->birth_date)->format('d/m/Y') : '-' }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portrait frame -->
+                    <div class="w-[84px] h-[112px] rounded-2xl overflow-hidden shrink-0 flex items-center justify-center mt-2 mr-1">
+                        @if($student->photo)
+                            <img src="{{ asset('storage/photos/' . $student->photo) }}" alt="Photo" class="object-cover w-full h-full">
+                        @else
+                            <div class="text-slate-400 text-2xl font-bold opacity-60">
+                                {{ strtoupper(substr($student->full_name, 0, 1)) }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRAFIK RATA-RATA NILAI -->
+        <div class="bg-white rounded-[24px] border border-slate-200/80 p-7 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500">
+                    <i data-lucide="line-chart" class="w-5 h-5"></i>
+                </div>
+                <h3 class="font-extrabold text-slate-800 text-base">Grafik Rata-rata Nilai per Semester</h3>
+            </div>
+
+            <div class="relative h-[250px] w-full">
+                <canvas id="ipChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+</div>
 
 <script>
-function bukaModalLogout() {
-    var m = document.getElementById('modalLogout');
-    m.style.display = 'flex';
-}
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('ipChart').getContext('2d');
+        const ipChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6', 'Sem 7', 'Sem 8'],
+                datasets: [{
+                    label: 'Rata-rata Nilai',
+                    @php
+    $gpaHistory = $student->gpa_history ?? [0, 0, 0, 0, 0, 0, 0, 0];
+@endphp
 
-function tutupModalLogout() {
-    var m = document.getElementById('modalLogout');
-    m.style.display = 'none';
-}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('ipChart').getContext('2d');
 
-function lakukanLogout() {
-    var form    = document.createElement('form');
-    form.method = 'POST';
-    form.action = '/logout';
-    var csrf    = document.createElement('input');
-    csrf.type   = 'hidden';
-    csrf.name   = '_token';
-    csrf.value  = '{{ csrf_token() }}';
-    form.appendChild(csrf);
-    document.body.appendChild(form);
-    form.submit();
-}
-
-// Tutup modal jika tekan Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') tutupModalLogout();
-});
-
-// Counter animasi
-document.addEventListener('DOMContentLoaded', function() {
-    function counter(el, target, dec, ms) {
-        if (!el) return;
-        var s = performance.now();
-        function tick(now) {
-            var p = Math.min((now-s)/ms, 1);
-            var v = target*(1-Math.pow(1-p,4));
-            el.textContent = dec ? v.toFixed(dec) : Math.round(v);
-            if (p<1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-    }
-    counter(document.getElementById('statKelas'), 8, 0, 900);
-    counter(document.getElementById('statNilai'), 85.5, 1, 1200);
-});
+        const ipChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4', 'Sem 5', 'Sem 6', 'Sem 7', 'Sem 8'],
+                datasets: [{
+                    label: 'Rata-rata Nilai',
+                    data: @json($gpaHistory),
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.06)',
+                    tension: 0.35,
+                    fill: true,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#3b82f6',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: '#1e293b',
+                        titleColor: '#94a3b8',
+                        bodyColor: '#ffffff',
+                        padding: 12,
+                        cornerRadius: 12,
+                        bodyFont: {
+                            family: 'Plus Jakarta Sans',
+                            weight: 'bold'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 100,
+                        grid: {
+                            color: '#f1f5f9'
+                        },
+                        ticks: {
+                            stepSize: 10,
+                            font: {
+                                family: 'Plus Jakarta Sans'
+                            }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            font: {
+                                family: 'Plus Jakarta Sans'
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
 </script>
-
-</body>
-</html>
+@endsection

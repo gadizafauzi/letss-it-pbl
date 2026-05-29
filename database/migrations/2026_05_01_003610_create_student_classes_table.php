@@ -12,20 +12,42 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_classes', function (Blueprint $table) {
+
             $table->id();
 
-            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('class_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('academic_year_id')->constrained()->cascadeOnDelete();
+            /**
+             * SISWA
+             */
+            $table->foreignId('student_id')
+                ->constrained('students')
+                ->cascadeOnDelete();
 
-            $table->boolean('is_active')->default(true);
+            /**
+             * KELAS
+             */
+            $table->foreignId('class_id')
+                ->constrained('classes')
+                ->cascadeOnDelete();
 
-            $table->unique(
-                ['student_id', 'academic_year_id'],
-                'student_class_unique'
-            );
+            /**
+             * TAHUN AJARAN
+             */
+            $table->foreignId('academic_year_id')
+                ->constrained('academic_years')
+                ->cascadeOnDelete();
 
             $table->timestamps();
+
+            /**
+             * UNIQUE
+             * siswa tidak boleh
+             * punya 2 kelas
+             * di tahun ajaran sama
+             */
+            $table->unique([
+                'student_id',
+                'academic_year_id'
+            ]);
         });
     }
 

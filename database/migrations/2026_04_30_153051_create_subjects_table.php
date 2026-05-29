@@ -12,16 +12,41 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subjects', function (Blueprint $table) {
+
             $table->id();
 
-            $table->string('subject_name')->unique();
-            $table->string('category')->nullable();
-            $table->decimal('kkm', 5, 2); // wajib
+            /**
+             * UNIT
+             * SD / SMP
+             */
+            $table->foreignId('unit_id')
+                ->constrained('units')
+                ->cascadeOnDelete();
 
-            $table->boolean('is_sd')->default(false);
-            $table->boolean('is_smp')->default(false);
+            /**
+             * KODE MAPEL
+             * contoh:
+             * MPL001
+             */
+            $table->string('subject_code')
+                ->unique();
+
+            /**
+             * NAMA MAPEL
+             */
+            $table->string('subject_name');
 
             $table->timestamps();
+
+            /**
+             * UNIQUE
+             * nama mapel tidak boleh sama
+             * dalam 1 unit
+             */
+            $table->unique([
+                'unit_id',
+                'subject_name'
+            ]);
         });
     }
 

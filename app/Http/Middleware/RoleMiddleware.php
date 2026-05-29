@@ -12,12 +12,15 @@ class RoleMiddleware
     {
         $user = Auth::user();
 
-        // belum login
+        // Belum login – arahkan ke halaman login sesuai role
         if (!$user) {
-            return redirect('/login');
+            if ($role === 'admin') {
+                return redirect()->route('admin.login');
+            }
+            return redirect()->route('login');
         }
 
-        // tidak sesuai role
+        // Sudah login tapi role tidak sesuai
         if ($user->role !== $role) {
             abort(403, 'Akses ditolak');
         }

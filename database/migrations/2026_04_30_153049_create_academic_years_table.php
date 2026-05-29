@@ -16,7 +16,8 @@ return new class extends Migration
 
             $table->string('year')->unique();
             $table->enum('active_semester', ['odd', 'even']);
-            $table->enum('status', ['active', 'inactive']);
+            $table->enum('status', ['active', 'inactive'])
+                ->default('inactive');
 
             $table->date('start_odd');
             $table->date('end_odd');
