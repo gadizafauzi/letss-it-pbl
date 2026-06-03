@@ -5,8 +5,8 @@
 .sidebar {
     width: 290px;
 
-    background: #ffffff;
-    border-right: 1px solid #e2e8f0;
+    background: #1e2330;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
 
     transition: all 0.3s ease;
 }
@@ -20,7 +20,7 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
 
-    color: #94a3b8;
+    color: #475569;
 
     margin-bottom: 14px;
     padding-left: 14px;
@@ -39,7 +39,7 @@
 
     border-radius: 16px;
 
-    color: #475569;
+    color: #94a3b8;
 
     font-size: 15px;
     font-weight: 600;
@@ -78,44 +78,45 @@
 /* HOVER */
 
 .sidebar-link:hover {
-    background: #ecfdf5;
-    color: #10b981;
+    background: rgba(59, 130, 246, 0.12);
+    color: #93c5fd;
 
     transform: translateX(4px);
-
-    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.08);
 }
 
 .sidebar-link:hover svg {
-    stroke: #10b981;
+    stroke: #93c5fd;
 }
 
 /* ACTIVE */
 
 .active-sidebar {
-    background: #10b981;
+    background: rgba(59, 130, 246, 0.1);
 
-    color: white !important;
+    color: #93c5fd !important;
 
-    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.18);
+    border-left: 3px solid #3b82f6;
+    border-radius: 0 16px 16px 0;
+
+    box-shadow: none;
 }
 
 .active-sidebar svg {
-    stroke: white !important;
+    stroke: #93c5fd !important;
 }
 
 /* ACTIVE HOVER */
 
 .active-sidebar:hover {
-    background: #059669;
+    background: rgba(59, 130, 246, 0.15);
 
-    color: white !important;
+    color: #93c5fd !important;
 
     transform: translateX(4px);
 }
 
 .active-sidebar:hover svg {
-    stroke: white !important;
+    stroke: #93c5fd !important;
 }
 
 /* ========================================
@@ -265,7 +266,7 @@
 }
 
 .activity-dot.emerald {
-    background: #10b981;
+    background: #3b82f6;
 }
 
 .activity-dot.orange {
@@ -318,7 +319,7 @@
     width: 28px;
     height: 28px;
 
-    color: #10b981;
+    color: #3b82f6;
 
     stroke-width: 2.2;
 }
@@ -339,7 +340,7 @@ nav::-webkit-scrollbar {
 }
 
 nav::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #2d3748;
     border-radius: 999px;
 }
 
@@ -453,10 +454,6 @@ nav::-webkit-scrollbar-track {
    MOBILE
 ======================================== */
 
-/* ========================================
-   MOBILE
-======================================== */
-
 @media (max-width: 991px) {
     /* SIDEBAR MINI */
     .sidebar {
@@ -515,7 +512,7 @@ nav::-webkit-scrollbar-track {
 
         overflow-y: auto;
 
-        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.08);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
     }
 
     /* SHOW TEXT */
@@ -571,7 +568,6 @@ nav::-webkit-scrollbar-track {
 /* MOBILE MINI */
 
 @media (max-width: 991px) {
-
     .sidebar nav {
         display: flex;
         flex-direction: column;
@@ -587,5 +583,4 @@ nav::-webkit-scrollbar-track {
         flex-direction: column;
         gap: 10px !important;
     }
-
 }

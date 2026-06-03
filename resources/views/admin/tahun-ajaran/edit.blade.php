@@ -46,8 +46,8 @@
                             <input type="text" name="year" value="{{ old('year', $academicYear->year) }}"
                                 placeholder="Contoh: 2025/2026"
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400">
+                                focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400">
 
                             @error('year')
                                 <p class="text-xs text-red-500 mt-2">
@@ -64,8 +64,8 @@
 
                             <select name="active_semester"
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400">
+                                focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400">
 
                                 <option value="odd"
                                     {{ old('active_semester', $academicYear->active_semester) == 'odd' ? 'selected' : '' }}>
@@ -103,8 +103,8 @@
                                     <input type="date" name="start_odd"
                                         value="{{ old('start_odd', optional($academicYear->start_odd)->format('Y-m-d')) }}"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                        focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400">
+                                        focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400">
 
                                     @error('start_odd')
                                         <p class="text-xs text-red-500 mt-2">
@@ -121,8 +121,8 @@
                                     <input type="date" name="end_odd"
                                         value="{{ old('end_odd', optional($academicYear->end_odd)->format('Y-m-d')) }}"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                        focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400">
+                                        focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400">
 
                                     @error('end_odd')
                                         <p class="text-xs text-red-500 mt-2">
@@ -152,8 +152,8 @@
                                     <input type="date" name="start_even"
                                         value="{{ old('start_even', optional($academicYear->start_even)->format('Y-m-d')) }}"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                        focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400">
+                                        focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400">
 
                                     @error('start_even')
                                         <p class="text-xs text-red-500 mt-2">
@@ -170,8 +170,8 @@
                                     <input type="date" name="end_even"
                                         value="{{ old('end_even', optional($academicYear->end_even)->format('Y-m-d')) }}"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                        focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400">
+                                        focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400">
 
                                     @error('end_even')
                                         <p class="text-xs text-red-500 mt-2">
@@ -194,8 +194,8 @@
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-5 space-y-3 sticky top-6">
 
                         <button type="submit"
-                            class="w-full h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-600
-                            text-white font-semibold transition-all shadow-lg shadow-emerald-100">
+                            class="w-full h-12 rounded-2xl bg-blue-500 hover:bg-blue-600
+                            text-white font-semibold transition-all shadow-lg shadow-blue-100">
 
                             Update
 

@@ -1,226 +1,143 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="space-y-6">
+    <div class="space-y-5">
 
-        {{-- HEADER --}}
-        <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
-
-            <div>
-                <h1 class="text-[28px] font-bold text-slate-800">
-                    Data Guru
-                </h1>
+        {{-- PAGE HEADER --}}
+        <div class="relative overflow-hidden rounded-2xl px-7 py-6"
+            style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 55%, #60a5fa 100%);">
+            <div class="absolute -top-12 -right-12 w-44 h-44 bg-white/[.08] rounded-full"></div>
+            <div class="absolute -bottom-16 left-8 w-56 h-56 bg-white/[.05] rounded-full"></div>
+            <div class="relative z-10 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+                <div>
+                    <p class="text-[11px] font-semibold uppercase tracking-widest text-white/60 mb-1">
+                        Manajemen Akademik
+                    </p>
+                    <h1 class="text-[26px] font-extrabold text-white leading-tight">Data Guru</h1>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <a href="{{ route('admin.guru.import') }}"
+                        class="inline-flex items-center gap-1.5 h-[38px] px-4 rounded-[10px] text-xs font-semibold text-white
+                          bg-white/15 border border-white/30 hover:bg-white/25 hover:border-white/50 transition-all no-underline">
+                        <i data-lucide="upload" class="w-[14px] h-[14px]"></i>Import
+                    </a>
+                    <button type="button" onclick="openExportModal()"
+                        class="inline-flex items-center gap-1.5 h-[38px] px-4 rounded-[10px] text-xs font-semibold text-white
+                               bg-white/15 border border-white/30 hover:bg-white/25 hover:border-white/50 transition-all cursor-pointer">
+                        <i data-lucide="download" class="w-[14px] h-[14px]"></i>Export
+                    </button>
+                    <a href="{{ route('admin.guru.create') }}"
+                        class="inline-flex items-center gap-1.5 h-[38px] px-4 rounded-[10px] text-xs font-bold
+                          bg-white text-sky-500 hover:bg-sky-50 shadow-md hover:shadow-lg transition-all no-underline">
+                        <i data-lucide="plus" class="w-[14px] h-[14px]"></i>Tambah Guru
+                    </a>
+                </div>
             </div>
-
-            {{-- ACTION BUTTON --}}
-            <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 w-full xl:w-auto">
-
-                {{-- IMPORT --}}
-                <button
-                    class="h-11 px-5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 transition-all inline-flex items-center justify-center gap-2 text-sm font-semibold text-slate-700">
-
-                    <i data-lucide="upload" class="w-4 h-4"></i>
-                    Import
-
-                </button>
-
-                {{-- EXPORT --}}
-                <button
-                    class="h-11 px-5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 transition-all inline-flex items-center justify-center gap-2 text-sm font-semibold text-slate-700">
-
-                    <i data-lucide="download" class="w-4 h-4"></i>
-                    Export
-
-                </button>
-
-                {{-- TAMBAH --}}
-                <a href="{{ route('admin.guru.create') }}"
-                    class="h-11 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white transition-all inline-flex items-center justify-center gap-2 text-sm font-bold shadow-lg shadow-emerald-100">
-
-                    <i data-lucide="plus" class="w-4 h-4"></i>
-                    Tambah Guru
-
-                </a>
-
-            </div>
-
         </div>
 
-        {{-- CARD --}}
-        <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
-
-            {{-- FILTER --}}
-            <div class="p-5 border-b border-slate-100 bg-white">
-
-                <form method="GET">
-
-                    <div class="flex flex-col xl:flex-row xl:items-center gap-4">
-
-                        {{-- SEARCH --}}
-                        <div class="relative flex-1">
-
-                            <i data-lucide="search"
-                                class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-
-                            <input type="text" name="search" value="{{ request('search') }}"
-                                placeholder="Cari nama guru atau NIP..."
-                                class="w-full h-12 pl-12 pr-4 rounded-2xl border border-slate-200 bg-slate-50
-                                focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400 transition-all text-sm text-slate-700">
-
-                        </div>
-
-                        {{-- FILTER UNIT --}}
-                        <div class="w-full xl:w-[220px]">
-
-                            <select name="unit"
-                                class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400 transition-all text-sm text-slate-700">
-
-                                <option value="">
-                                    Semua Unit
-                                </option>
-
-                                @foreach ($units as $unit)
-                                    <option value="{{ $unit->id }}"
-                                        {{ request('unit') == $unit->id ? 'selected' : '' }}>
-
-                                        {{ $unit->unit_name }}
-
-                                    </option>
-                                @endforeach
-
-                            </select>
-
-                        </div>
-
-                        {{-- FILTER JABATAN --}}
-                        <div class="w-full xl:w-[220px]">
-
-                            <select name="position"
-                                class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400 transition-all text-sm text-slate-700">
-
-                                <option value="">
-                                    Semua Jabatan
-                                </option>
-
-                                @foreach ($positions as $position)
-                                    <option value="{{ $position->id }}"
-                                        {{ request('position') == $position->id ? 'selected' : '' }}>
-
-                                        {{ $position->name }}
-
-                                    </option>
-                                @endforeach
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-                </form>
-
+        {{-- SUCCESS --}}
+        @if (session('success'))
+            <div
+                class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium
+                    bg-sky-100 border border-sky-200 text-sky-700">
+                <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
+                {{ session('success') }}
             </div>
+        @endif
 
-            {{-- TABLE --}}
+        {{-- FILTER --}}
+        <div class="bg-white border border-sky-100 rounded-2xl px-5 py-4 shadow-sm">
+            <form id="filterForm" action="{{ route('admin.guru.index') }}" method="GET"
+                class="flex flex-wrap items-center gap-2.5">
+
+                {{-- Search --}}
+                <div class="relative flex-1 min-w-[200px]">
+                    <i data-lucide="search"
+                        class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                    <input id="searchInput" type="text" name="search" value="{{ request('search') }}"
+                        placeholder="Cari nama guru atau NIP..."
+                        class="w-full h-[42px] pl-9 pr-3 border-[1.5px] border-sky-100 rounded-[10px]
+                              bg-sky-50 text-[13px] text-slate-700 outline-none
+                              focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
+                </div>
+
+                {{-- Unit --}}
+                <select name="unit" onchange="this.form.submit()"
+                    class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                           bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
+                           focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
+                    <option value="">Semua Unit</option>
+                    @foreach ($units as $unit)
+                        <option value="{{ $unit->id }}" {{ request('unit') == $unit->id ? 'selected' : '' }}>
+                            {{ $unit->unit_name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                {{-- Jabatan --}}
+                <select name="position" onchange="this.form.submit()"
+                    class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                           bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
+                           focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
+                    <option value="">Semua Jabatan</option>
+                    @foreach ($positions as $position)
+                        <option value="{{ $position->id }}"
+                            {{ request('position') == $position->id ? 'selected' : '' }}>
+                            {{ $position->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+            </form>
+        </div>
+
+        {{-- TABLE --}}
+        <div class="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
-
-                <table class="w-full min-w-[1200px]">
-
-                    {{-- TABLE HEAD --}}
-                    <thead class="bg-slate-50 border-b border-slate-100">
-
-                        <tr>
-
-                            <th class="px-6 py-4 text-left text-[11px] font-bold uppercase text-slate-500">
-                                NO
-                            </th>
-
-                            <th class="px-6 py-4 text-left text-[11px] font-bold uppercase text-slate-500">
-                                NIP
-                            </th>
-
-                            <th class="px-6 py-4 text-left text-[11px] font-bold uppercase text-slate-500">
-                                Nama Guru
-                            </th>
-
-                            <th class="px-6 py-4 text-left text-[11px] font-bold uppercase text-slate-500">
-                                Unit
-                            </th>
-
-                            <th class="px-6 py-4 text-left text-[11px] font-bold uppercase text-slate-500">
-                                Jabatan
-                            </th>
-
-                            <th class="px-6 py-4 text-left text-[11px] font-bold uppercase text-slate-500">
-                                Status Kepegawaian
-                            </th>
-
-                            <th class="px-6 py-4 text-left text-[11px] font-bold uppercase text-slate-500">
-                                No. Telepon
-                            </th>
-
-                            <th class="px-6 py-4 text-center text-[11px] font-bold uppercase text-slate-500">
-                                Status
-                            </th>
-
-                            <th class="px-6 py-4 text-center text-[11px] font-bold uppercase text-slate-500">
+                <table class="w-full min-w-[1200px] border-collapse">
+                    <thead>
+                        <tr class="bg-sky-50 border-b-[1.5px] border-sky-100">
+                            @foreach (['No', 'NIP', 'Nama Guru', 'Unit', 'Jabatan', 'Status Kepegawaian', 'No. Telepon', 'Alamat', 'Status'] as $h)
+                                <th
+                                    class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 whitespace-nowrap">
+                                    {{ $h }}
+                                </th>
+                            @endforeach
+                            <th
+                                class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500">
                                 Aksi
                             </th>
-
                         </tr>
-
                     </thead>
-
-                    {{-- TABLE BODY --}}
-                    <tbody class="divide-y divide-slate-100">
-
+                    <tbody>
                         @forelse ($teachers as $teacher)
-                            <tr class="hover:bg-slate-50 transition-all">
-
-                                {{-- NO --}}
-                                <td class="px-6 py-5 text-sm font-semibold text-slate-700">
+                            @php
+                                $status = $teacher->status;
+                                $statusLabel = $status == 'active' ? 'Aktif' : 'Nonaktif';
+                                $statusCls = $status == 'active' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-500';
+                                $statusDot = $status == 'active' ? 'bg-sky-500' : 'bg-slate-400';
+                            @endphp
+                            <tr class="border-b border-sky-50 hover:bg-sky-50/50 transition-colors">
+                                <td class="px-4 py-3.5 text-xs text-slate-400 font-semibold">
                                     {{ $loop->iteration }}
                                 </td>
-
-                                {{-- NIP --}}
-                                <td class="px-6 py-5 text-sm font-semibold text-slate-700">
-                                    {{ $teacher->nip ?? '-' }}
+                                <td class="px-4 py-3.5">
+                                    <span
+                                        class="text-xs font-bold text-slate-800 bg-sky-50 px-2.5 py-1 rounded-lg inline-block">
+                                        {{ $teacher->nip ?? '-' }}
+                                    </span>
                                 </td>
-
-                                {{-- NAMA --}}
-                                <td class="px-6 py-5">
-
-                                    <div class="flex flex-col">
-
-                                        <span class="text-sm font-bold text-slate-800">
-                                            {{ $teacher->full_name }}
-                                        </span>
-
-                                        <span class="text-xs text-slate-400">
-                                            {{ $teacher->email ?? 'Tidak ada email' }}
-                                        </span>
-
-                                    </div>
-
+                                <td class="px-4 py-3.5">
+                                    <div class="text-[13px] font-bold text-slate-800">{{ $teacher->full_name }}</div>
+                                    <div class="text-[11px] text-slate-400">{{ $teacher->email ?? '' }}</div>
                                 </td>
-
-                                {{-- UNIT --}}
-                                <td class="px-6 py-5 text-sm text-slate-600">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
                                     {{ $teacher->unit->unit_name ?? '-' }}
                                 </td>
-
-                                {{-- JABATAN --}}
-                                <td class="px-6 py-5 text-sm text-slate-600">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
                                     {{ $teacher->position->name ?? '-' }}
                                 </td>
-
-                                {{-- STATUS KEPEGAWAIAN --}}
-                                <td class="px-6 py-5 text-sm text-slate-600">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
                                     @if ($teacher->employment_status == 'pegawai_tetap')
                                         Pegawai Tetap
                                     @elseif($teacher->employment_status == 'pegawai_tidak_tetap')
@@ -229,87 +146,181 @@
                                         -
                                     @endif
                                 </td>
-
-                                {{-- NO HP --}}
-                                <td class="px-6 py-5 text-sm text-slate-600">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
                                     {{ $teacher->phone ?? '-' }}
                                 </td>
-
-                                {{-- STATUS --}}
-                                <td class="px-6 py-5 text-sm text-center">
-
-                                    <span
-                                        class="px-3 py-1 text-xs font-semibold rounded-full
-                                        {{ $teacher->status == 'active' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700' }}">
-
-                                        {{ $teacher->status == 'active' ? 'Aktif' : 'Nonaktif' }}
-
+                                <td class="px-4 py-3.5 max-w-[150px]">
+                                    <span class="text-[13px] text-slate-500 block truncate">
+                                        {{ $teacher->address ?? '-' }}
                                     </span>
-
                                 </td>
-
-                                {{-- AKSI --}}
-                                <td class="px-6 py-5">
-
-                                    <div class="flex items-center justify-center gap-2">
-
-                                        {{-- DETAIL --}}
+                                <td class="px-4 py-3.5">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold {{ $statusCls }}">
+                                        <span class="w-1.5 h-1.5 rounded-full {{ $statusDot }} flex-shrink-0"></span>
+                                        {{ $statusLabel }}
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3.5">
+                                    <div class="flex justify-center gap-1.5">
                                         <a href="{{ route('admin.guru.show', $teacher->id) }}"
-                                            class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200
-                                            inline-flex items-center justify-center transition-all">
-
-                                            <i data-lucide="eye" class="w-4 h-4"></i>
-
+                                            class="w-[30px] h-[30px] rounded-lg bg-slate-100 text-slate-500
+                                              hover:bg-slate-200 hover:text-slate-700 transition-all
+                                              inline-flex items-center justify-content-center no-underline"
+                                            style="justify-content:center" title="Detail">
+                                            <i data-lucide="eye" class="w-[13px] h-[13px]"></i>
                                         </a>
-
-                                        {{-- EDIT --}}
                                         <a href="{{ route('admin.guru.edit', $teacher->id) }}"
-                                            class="w-9 h-9 rounded-xl bg-emerald-50 hover:bg-emerald-100
-                                            text-emerald-600 inline-flex items-center justify-center transition-all">
-
-                                            <i data-lucide="square-pen" class="w-4 h-4"></i>
-
+                                            class="w-[30px] h-[30px] rounded-lg bg-sky-100 text-sky-500
+                                              hover:bg-sky-500 hover:text-white transition-all
+                                              inline-flex items-center justify-content-center no-underline"
+                                            style="justify-content:center" title="Edit">
+                                            <i data-lucide="square-pen" class="w-[13px] h-[13px]"></i>
                                         </a>
-
-                                        {{-- DELETE --}}
                                         <form action="{{ route('admin.guru.destroy', $teacher->id) }}" method="POST"
-                                            onsubmit="return confirm('Hapus data guru ini?')">
-
+                                            onsubmit="return confirm('Hapus data guru ini?')" class="inline">
                                             @csrf
                                             @method('DELETE')
-
                                             <button type="submit"
-                                                class="w-9 h-9 rounded-xl bg-red-50 hover:bg-red-100
-                                                text-red-600 inline-flex items-center justify-center transition-all">
-
-                                                <i data-lucide="trash-2" class="w-4 h-4"></i>
-
+                                                class="w-[30px] h-[30px] rounded-lg bg-red-100 text-red-400
+                                                       hover:bg-red-500 hover:text-white transition-all
+                                                       inline-flex items-center justify-center cursor-pointer border-none"
+                                                title="Hapus">
+                                                <i data-lucide="trash-2" class="w-[13px] h-[13px]"></i>
                                             </button>
-
                                         </form>
-
                                     </div>
-
                                 </td>
-
                             </tr>
-
                         @empty
-
                             <tr>
-                                <td colspan="8" class="text-center py-10 text-slate-400">
-                                    Belum ada data guru
+                                <td colspan="10">
+                                    <div class="flex flex-col items-center justify-center py-16 text-center">
+                                        <div
+                                            class="w-14 h-14 bg-sky-50 rounded-2xl inline-flex items-center justify-center mb-4 text-sky-300">
+                                            <i data-lucide="users" class="w-7 h-7"></i>
+                                        </div>
+                                        <p class="text-[15px] font-bold text-slate-800 mb-1.5">Belum ada data guru</p>
+                                        <p class="text-[13px] text-slate-400">Data guru belum tersedia atau pencarian
+                                            tidak cocok.</p>
+                                    </div>
                                 </td>
                             </tr>
                         @endforelse
-
                     </tbody>
-
                 </table>
-
             </div>
-
         </div>
 
     </div>
+
+    {{-- MODAL EXPORT --}}
+    <div id="exportModal" onclick="closeExportModal()" class="fixed inset-0 z-50 flex items-center justify-center p-4"
+        style="background:rgba(15,23,42,0.45);backdrop-filter:blur(4px);display:none!important;">
+        <div onclick="event.stopPropagation()" class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+
+            <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100">
+                <span class="text-[17px] font-extrabold text-slate-800">Export Data Guru</span>
+                <button type="button" onclick="closeExportModal()"
+                    class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center
+                           hover:bg-red-100 hover:text-red-500 transition-all border-none cursor-pointer text-base">
+                    &#x2715;
+                </button>
+            </div>
+
+            <form action="{{ route('admin.guru.export') }}" method="GET">
+                <div class="px-6 py-5 flex flex-col gap-4">
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">
+                            Unit Sekolah
+                        </label>
+                        <select name="unit_id"
+                            class="w-full h-11 px-3.5 border-[1.5px] border-slate-200 rounded-xl bg-slate-50
+                                   text-[13px] text-slate-700 outline-none focus:border-sky-400 focus:bg-white
+                                   focus:ring-2 focus:ring-sky-100 transition-all">
+                            <option value="">Semua Unit</option>
+                            @foreach ($units as $unit)
+                                <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">
+                            Jabatan
+                        </label>
+                        <select name="position_id"
+                            class="w-full h-11 px-3.5 border-[1.5px] border-slate-200 rounded-xl bg-slate-50
+                                   text-[13px] text-slate-700 outline-none focus:border-sky-400 focus:bg-white
+                                   focus:ring-2 focus:ring-sky-100 transition-all">
+                            <option value="">Semua Jabatan</option>
+                            @foreach ($positions as $position)
+                                <option value="{{ $position->id }}">{{ $position->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">
+                            Status
+                        </label>
+                        <select name="status"
+                            class="w-full h-11 px-3.5 border-[1.5px] border-slate-200 rounded-xl bg-slate-50
+                                   text-[13px] text-slate-700 outline-none focus:border-sky-400 focus:bg-white
+                                   focus:ring-2 focus:ring-sky-100 transition-all">
+                            <option value="">Semua Status</option>
+                            <option value="active">Aktif</option>
+                            <option value="inactive">Tidak Aktif</option>
+                        </select>
+                    </div>
+
+                    <div class="flex gap-2.5 items-start bg-sky-50 border border-sky-100 rounded-xl px-4 py-3.5">
+                        <i data-lucide="info" class="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5"></i>
+                        <span class="text-[12px] text-slate-500">
+                            Data akan diexport dalam format <strong class="text-slate-700">CSV</strong>
+                            dan dapat dibuka menggunakan Microsoft Excel.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="px-6 pb-5 flex justify-end gap-2.5">
+                    <button type="button" onclick="closeExportModal()"
+                        class="h-10 px-5 border-[1.5px] border-slate-200 bg-white rounded-xl
+                               text-[13px] font-semibold text-slate-500 hover:bg-slate-50 transition-all cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit"
+                        class="h-10 px-5 bg-sky-500 hover:bg-sky-600 border-none rounded-xl
+                               text-[13px] font-bold text-white flex items-center gap-1.5 cursor-pointer
+                               shadow-sm hover:shadow-sky-200 hover:shadow-md transition-all">
+                        <i data-lucide="download" class="w-[14px] h-[14px]"></i>Export CSV
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openExportModal() {
+            document.getElementById('exportModal').style.cssText = 'display:flex!important;';
+        }
+
+        function closeExportModal() {
+            document.getElementById('exportModal').style.cssText = 'display:none!important;';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const filterForm = document.getElementById('filterForm');
+            let debounce;
+
+            if (searchInput && filterForm) {
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(debounce);
+                    debounce = setTimeout(() => filterForm.submit(), 500);
+                });
+            }
+        });
+    </script>
+
 @endsection

@@ -53,7 +53,39 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         return view('admin.dashboard', compact('totalSiswa', 'totalGuru', 'totalKelas'));
     })->name('admin.dashboard');
 
+    //tambahan 30 mei
+    Route::get('/admin/siswa/export', [SiswaController::class, 'export'])
+        ->name('admin.siswa.export');
+
+    Route::get('/admin/siswa/import', [SiswaController::class, 'importPage'])
+        ->name('admin.siswa.import');
+
+    Route::post('/admin/siswa/import', [SiswaController::class, 'import'])
+        ->name('admin.siswa.import.post');
+
+    Route::get('/admin/siswa/import/template', [SiswaController::class, 'importTemplate'])
+        ->name('admin.siswa.import.template');
+
+    Route::get('/admin/siswa/classes-by-unit/{unit}', [SiswaController::class, 'classesByUnit'])
+        ->name('admin.siswa.classes-by-unit');
+
     Route::resource('/admin/siswa', SiswaController::class)->names('admin.siswa');
+
+    //======
+    Route::resource('/admin/siswa', SiswaController::class)->names('admin.siswa');
+
+    Route::get('/admin/guru/export', [GuruController::class, 'export'])
+        ->name('admin.guru.export');
+
+    Route::get('/admin/guru/import', [GuruController::class, 'importPage'])
+        ->name('admin.guru.import');
+
+    Route::post('/admin/guru/import', [GuruController::class, 'import'])
+        ->name('admin.guru.import.post');
+
+    Route::get('/admin/guru/import/template', [GuruController::class, 'importTemplate'])
+        ->name('admin.guru.import.template');
+
     Route::resource('/admin/guru', GuruController::class)->names('admin.guru');
     Route::resource('/admin/kelas', KelasController::class)->names('admin.kelas');
     Route::resource('/admin/mapel', MapelController::class)->names('admin.mapel');
@@ -70,6 +102,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/pembayaran', fn() => view('admin.pembayaran.index'))
         ->name('admin.pembayaran.index');
+
 
     // CMS
     Route::get('/admin/beranda', fn() => view('admin.beranda.index'))->name('admin.beranda.index');

@@ -33,8 +33,8 @@
 
                             <select name="unit_id"
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400">
+                                focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400">
 
                                 <option value="">
                                     Pilih Unit
@@ -69,8 +69,8 @@
                             <input type="text" name="subject_code"
                                 value="{{ old('subject_code', $subject->subject_code) }}"
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400">
+                                focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400">
 
                             @error('subject_code')
                                 <p class="text-xs text-red-500 mt-2">
@@ -90,8 +90,8 @@
                             <input type="text" name="subject_name"
                                 value="{{ old('subject_name', $subject->subject_name) }}"
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400">
+                                focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400">
 
                             @error('subject_name')
                                 <p class="text-xs text-red-500 mt-2">
@@ -112,8 +112,8 @@
 
                         {{-- BUTTON UPDATE --}}
                         <button type="submit"
-                            class="w-full h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-600
-                            text-white font-bold shadow-lg shadow-emerald-100 transition-all">
+                            class="w-full h-12 rounded-2xl bg-blue-500 hover:bg-blue-600
+                            text-white font-bold shadow-lg shadow-blue-100 transition-all">
 
                             Simpan Perubahan
 

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 use App\Models\User;
 use App\Models\Teacher;
@@ -122,10 +124,19 @@ class GuruController extends Controller
          * UPLOAD FOTO
          */
         if ($request->hasFile('photo')) {
+            $manager = new ImageManager(new Driver());
+            $image = $manager->decode($request->file('photo'));
+            $image->cover(300, 300);
 
-            $validated['photo'] = $request
-                ->file('photo')
-                ->store('teachers', 'public');
+            $filename = time() . '_' . uniqid() . '.' . $request->file('photo')->getClientOriginalExtension();
+            $directory = storage_path('app/public/teachers');
+
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $image->save($directory . '/' . $filename);
+            $validated['photo'] = 'teachers/' . $filename;
         }
 
         /**
@@ -276,13 +287,22 @@ class GuruController extends Controller
              * HAPUS FOTO LAMA
              */
             if ($guru->photo) {
-
                 Storage::disk('public')->delete($guru->photo);
             }
 
-            $validated['photo'] = $request
-                ->file('photo')
-                ->store('teachers', 'public');
+            $manager = new ImageManager(new Driver());
+            $image = $manager->decode($request->file('photo'));
+            $image->cover(300, 300);
+
+            $filename = time() . '_' . uniqid() . '.' . $request->file('photo')->getClientOriginalExtension();
+            $directory = storage_path('app/public/teachers');
+
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755, true);
+            }
+
+            $image->save($directory . '/' . $filename);
+            $validated['photo'] = 'teachers/' . $filename;
         }
 
         /**
@@ -335,6 +355,219 @@ class GuruController extends Controller
         return redirect()
             ->route('admin.guru.index')
             ->with('success', 'Data guru berhasil diupdate');
+    }
+
+    /**
+     * EXPORT DATA GURU CSV
+     */
+    public function export(Request $request)
+    {
+        $query = Teacher::with(['unit', 'position']);
+
+        if ($request->filled('unit_id')) {
+            $query->where('unit_id', $request->unit_id);
+        }
+
+        if ($request->filled('position_id')) {
+            $query->where('position_id', $request->position_id);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $teachers = $query->get();
+
+        $unitName = 'SemuaUnit';
+
+        if ($request->filled('unit_id')) {
+            $unit     = Unit::find($request->unit_id);
+            $unitName = $unit?->unit_name ?? 'SemuaUnit';
+        }
+
+        $filename = 'Data_Guru_' . str_replace(' ', '_', $unitName) . '.csv';
+
+        return response()->streamDownload(function () use ($teachers) {
+
+            $file = fopen('php://output', 'w');
+
+            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+            fputcsv($file, [
+                'NIP',
+                'Nama Lengkap',
+                'Unit',
+                'Jabatan',
+                'Jenis Kelamin',
+                'Tempat Lahir',
+                'Tanggal Lahir',
+                'Pendidikan Terakhir',
+                'No Telepon',
+                'Alamat',
+                'Status Kepegawaian',
+                'Status',
+            ]);
+
+            foreach ($teachers as $teacher) {
+                fputcsv($file, [
+                    $teacher->nip,
+                    $teacher->full_name,
+                    $teacher->unit?->unit_name ?? '-',
+                    $teacher->position?->name ?? '-',
+                    $teacher->gender,
+                    $teacher->birth_place,
+                    $teacher->birth_date,
+                    $teacher->last_education,
+                    $teacher->phone,
+                    $teacher->address,
+                    $teacher->employment_status,
+                    $teacher->status,
+                ]);
+            }
+
+            fclose($file);
+        }, $filename, ['Content-Type' => 'text/csv; charset=UTF-8']);
+    }
+
+    /**
+     * HALAMAN IMPORT
+     */
+    public function importPage()
+    {
+        return view('admin.guru.import');
+    }
+
+    /**
+     * PROSES IMPORT CSV
+     */
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:csv,txt|max:2048',
+        ]);
+
+        $file   = $request->file('file');
+        $handle = fopen($file->getPathname(), 'r');
+
+        fgetcsv($handle); // skip header
+
+        $berhasil = 0;
+        $gagal    = 0;
+        $errors   = [];
+
+        while (($row = fgetcsv($handle)) !== false) {
+
+            if (empty(array_filter($row))) continue;
+
+            $nip  = trim($row[0] ?? '');
+            $nama = trim($row[1] ?? '');
+
+            if (!$nip || !$nama) {
+                $gagal++;
+                $errors[] = "Baris kosong dilewati (NIP: $nip)";
+                continue;
+            }
+
+            if (Teacher::where('nip', $nip)->exists()) {
+                $gagal++;
+                $errors[] = "NIP $nip sudah terdaftar, dilewati";
+                continue;
+            }
+
+            try {
+                $user = User::create([
+                    'name'     => $nama,
+                    'username' => $nip,
+                    'password' => Hash::make('12345678'),
+                    'role'     => 'teacher',
+                    'status'   => 'active',
+                ]);
+
+                // Cari unit berdasarkan nama
+                $unit = Unit::where('unit_name', trim($row[2] ?? ''))->first();
+
+                // Cari jabatan berdasarkan nama
+                $position = Position::where('name', trim($row[3] ?? ''))->first();
+
+                Teacher::create([
+                    'user_id'           => $user->id,
+                    'unit_id'           => $unit?->id ?? null,
+                    'position_id'       => $position?->id ?? null,
+                    'nip'               => $nip,
+                    'full_name'         => $nama,
+                    'gender'            => trim($row[4] ?? null) ?: null,
+                    'birth_place'       => trim($row[5] ?? null) ?: null,
+                    'birth_date'        => trim($row[6] ?? null) ?: null,
+                    'last_education'    => trim($row[7] ?? null) ?: null,
+                    'phone'             => trim($row[8] ?? null) ?: null,
+                    'address'           => trim($row[9] ?? null) ?: null,
+                    'employment_status' => trim($row[10] ?? null) ?: null,
+                    'status'            => trim($row[11] ?? 'active') ?: 'active',
+                ]);
+
+                $berhasil++;
+            } catch (\Exception $e) {
+                $gagal++;
+                $errors[] = "NIP $nip gagal: " . $e->getMessage();
+            }
+        }
+
+        fclose($handle);
+
+        $message = "Import selesai: $berhasil data berhasil";
+        if ($gagal > 0) $message .= ", $gagal data dilewati";
+
+        return redirect()
+            ->route('admin.guru.index')
+            ->with('success', $message)
+            ->with('import_errors', $errors);
+    }
+
+    /**
+     * DOWNLOAD TEMPLATE CSV GURU
+     */
+    public function importTemplate()
+    {
+        return response()->streamDownload(function () {
+
+            $file = fopen('php://output', 'w');
+
+            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+            fputcsv($file, [
+                'NIP',
+                'Nama Lengkap',
+                'Unit',
+                'Jabatan',
+                'Jenis Kelamin (male/female)',
+                'Tempat Lahir',
+                'Tanggal Lahir (YYYY-MM-DD)',
+                'Pendidikan Terakhir',
+                'No Telepon',
+                'Alamat',
+                'Status Kepegawaian (pegawai_tetap/pegawai_tidak_tetap)',
+                'Status (active/inactive)',
+            ]);
+
+            fputcsv($file, [
+                '198501012010011001',
+                'Nama Guru Contoh',
+                'SD',
+                'Guru Kelas',
+                'male',
+                'Pekanbaru',
+                '1985-01-01',
+                'S1',
+                '08123456789',
+                'Jl. Contoh No. 1',
+                'pegawai_tetap',
+                'active',
+            ]);
+
+            fclose($file);
+        }, 'Template_Import_Guru.csv', [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+        ]);
     }
 
     /**
