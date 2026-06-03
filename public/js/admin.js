@@ -10,6 +10,16 @@ lucide.createIcons();
 
 const sidebar = document.getElementById("sidebar");
 
+/* ========================================
+   RESTORE SIDEBAR STATE
+======================================== */
+
+if (sidebar && window.innerWidth >= 1024) {
+    if (localStorage.getItem("sidebar-collapsed") === "true") {
+        sidebar.classList.add("sidebar-collapse");
+    }
+}
+
 const menuToggle = document.getElementById("menuToggle");
 
 const desktopToggle = document.getElementById("desktopToggle");
@@ -41,6 +51,10 @@ if (desktopToggle) {
 
         // TOGGLE COLLAPSE
         sidebar.classList.toggle("sidebar-collapse");
+
+        // SAVE STATE
+        const isCollapsed = sidebar.classList.contains("sidebar-collapse");
+        localStorage.setItem("sidebar-collapsed", isCollapsed);
     });
 }
 
@@ -85,6 +99,13 @@ sidebarLinks.forEach((link) => {
                 sidebarOverlay.classList.remove("hidden");
 
                 return;
+            }
+        }
+
+        // DESKTOP — jika sedang hover expand, kembali ke icon only
+        if (window.innerWidth >= 1024) {
+            if (sidebar.classList.contains("sidebar-collapse")) {
+                sidebar.classList.remove("sidebar-hover");
             }
         }
 

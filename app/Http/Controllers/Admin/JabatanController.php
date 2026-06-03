@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 
 class JabatanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $jabatans = Position::withCount('teachers')->latest()->get();
+        $query = Position::withCount('teachers');
+
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $jabatans = $query->latest()->get();
 
         return view('admin.jabatan.index', compact('jabatans'));
     }

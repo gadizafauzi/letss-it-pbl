@@ -26,7 +26,9 @@
                                 Unit
                             </label>
 
-                            <select name="unit_id" class="w-full h-12 px-4 rounded-2xl border border-slate-200">
+                            <select name="unit_id" class="w-full h-12 px-4 rounded-2xl border border-slate-200
+                                focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400 text-sm text-slate-700">
 
                                 @foreach ($units as $unit)
                                     <option value="{{ $unit->id }}"
@@ -45,7 +47,9 @@
                             </label>
 
                             <input type="text" name="class_name" value="{{ old('class_name', $class->class_name) }}"
-                                class="w-full h-12 px-4 rounded-2xl border border-slate-200">
+                                class="w-full h-12 px-4 rounded-2xl border border-slate-200
+                                focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400 text-sm text-slate-700">
                         </div>
 
                         {{-- WALI --}}
@@ -54,7 +58,9 @@
                                 Wali Kelas
                             </label>
 
-                            <select name="homeroom_teacher_id" class="w-full h-12 px-4 rounded-2xl border border-slate-200">
+                            <select name="homeroom_teacher_id" class="w-full h-12 px-4 rounded-2xl border border-slate-200
+                                focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400 text-sm text-slate-700">
 
                                 <option value="">
                                     Pilih Wali Kelas
@@ -80,8 +86,8 @@
                     <div class="space-y-3">
 
                         <button type="submit"
-                            class="w-full h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-600
-                            text-white font-bold">
+                            class="w-full h-12 rounded-2xl bg-blue-500 hover:bg-blue-600
+                            text-white font-bold transition-all shadow-lg shadow-blue-100">
 
                             Update
 
@@ -89,7 +95,7 @@
 
                         <a href="{{ route('admin.kelas.index') }}"
                             class="w-full h-12 rounded-2xl bg-slate-100 hover:bg-slate-200
-                            text-slate-700 font-bold inline-flex items-center justify-center">
+                            text-slate-700 font-bold inline-flex items-center justify-center transition-all">
 
                             Batal
 
