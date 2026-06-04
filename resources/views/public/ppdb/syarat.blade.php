@@ -20,10 +20,12 @@
         <div class="w-full">
             <div class="text-center mb-14 fade-up"><span class="section-badge"><i data-lucide="clipboard-list" class="w-4 h-4"></i> Persyaratan</span><h2 class="section-title mx-auto">Syarat Pendaftaran</h2></div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @php $syaratData = [['icon'=>'baby','color'=>'pink','title'=>'TK','items'=>['Usia minimal 4 tahun','Fotokopi akta kelahiran','Fotokopi KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],['icon'=>'school','color'=>'emerald','title'=>'SD','items'=>['Usia minimal 6 tahun','Ijazah / surat keterangan TK','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],['icon'=>'graduation-cap','color'=>'blue','title'=>'SMP','items'=>['Ijazah / SKL SD','Rapor kelas 4, 5, 6','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']]]; @endphp
+                @php $syaratData = [['logo'=>asset('images/logo_tk.png'),'color'=>'sky','title'=>'TK','items'=>['Usia minimal 4 tahun','Fotokopi akta kelahiran','Fotokopi KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],['logo'=>asset('images/logo_sd.jpg'),'color'=>'amber','title'=>'SD','items'=>['Usia minimal 6 tahun','Ijazah / surat keterangan TK','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],['logo'=>asset('images/logo_smp.png'),'color'=>'indigo','title'=>'SMP','items'=>['Ijazah / SKL SD','Rapor kelas 4, 5, 6','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']]]; @endphp
                 @foreach($syaratData as $s)
                 <div class="feature-card fade-up">
-                    <div class="feature-icon bg-{{ $s['color'] }}-50 text-{{ $s['color'] }}-500"><i data-lucide="{{ $s['icon'] }}" class="w-6 h-6"></i></div>
+                    <div class="feature-icon bg-{{ $s['color'] }}-50 text-{{ $s['color'] }}-500 p-2.5 border border-{{ $s['color'] }}-100/50">
+                        <img src="{{ $s['logo'] }}" alt="Logo" class="w-full h-full object-contain drop-shadow-sm">
+                    </div>
                     <h3 class="text-lg font-bold text-slate-800 mb-4">{{ $s['title'] }} Islam Terpadu</h3>
                     <ul class="space-y-3 text-sm text-slate-500">
                         @foreach($s['items'] as $item)

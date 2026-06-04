@@ -9,7 +9,7 @@
     <div class="bg-white border-b border-slate-200 sticky top-[72px] z-30">
         <div class="w-full flex gap-2 overflow-x-auto py-3 public-subnav-container no-scrollbar">
             <a href="{{ route('public.unit.sd.profil') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Profil</a>
-            <a href="{{ route('public.unit.sd.guru') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-emerald-500 text-white">Guru</a>
+            <a href="{{ route('public.unit.sd.guru') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-amber-500 text-white">Guru</a>
             <a href="{{ route('public.unit.sd.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Ekstrakurikuler</a>
             <a href="{{ route('public.unit.sd.fasilitas') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Fasilitas</a>
             <a href="{{ route('public.unit.sd.prestasi') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Prestasi</a>
@@ -25,7 +25,7 @@
                 @php $guru = [['nama'=>'Ustadz Yusuf Hakim, S.Pd','mapel'=>'Kepala Unit SD'],['nama'=>'Ustadzah Laila, S.Pd','mapel'=>'Wali Kelas 1'],['nama'=>'Ustadz Faris, S.Pd','mapel'=>'Wali Kelas 2'],['nama'=>'Ustadzah Nisa, S.Pd','mapel'=>'Wali Kelas 3'],['nama'=>'Ustadz Hamzah, S.Pd','mapel'=>'Matematika'],['nama'=>'Ustadzah Salma, S.Pd','mapel'=>'Bahasa Inggris'],['nama'=>'Ustadz Khalid, S.Pd.I','mapel'=>'Tahfidz'],['nama'=>'Ustadzah Rania, S.Pd','mapel'=>'IPA']]; @endphp
                 @foreach($guru as $g)
                 <div class="feature-card text-center fade-up">
-                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-200 to-emerald-300 flex items-center justify-center mx-auto mb-3"><i data-lucide="user" class="w-7 h-7 text-emerald-500"></i></div>
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center mx-auto mb-3"><i data-lucide="user" class="w-7 h-7 text-amber-500"></i></div>
                     <h4 class="text-sm font-bold text-slate-800">{{ $g['nama'] }}</h4>
                     <p class="text-xs text-slate-400 mt-1">{{ $g['mapel'] }}</p>
                 </div>

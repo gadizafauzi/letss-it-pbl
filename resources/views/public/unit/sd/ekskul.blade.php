@@ -10,7 +10,7 @@
         <div class="w-full flex gap-2 overflow-x-auto py-3 public-subnav-container no-scrollbar">
             <a href="{{ route('public.unit.sd.profil') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Profil</a>
             <a href="{{ route('public.unit.sd.guru') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Guru</a>
-            <a href="{{ route('public.unit.sd.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-emerald-500 text-white">Ekstrakurikuler</a>
+            <a href="{{ route('public.unit.sd.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-amber-500 text-white">Ekstrakurikuler</a>
             <a href="{{ route('public.unit.sd.fasilitas') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Fasilitas</a>
             <a href="{{ route('public.unit.sd.prestasi') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Prestasi</a>
         </div>
@@ -25,7 +25,7 @@
                 @php $ekskul = [['icon'=>'swords','title'=>'Pencak Silat','desc'=>'Bela diri tradisional untuk melatih ketangkasan dan disiplin.'],['icon'=>'target','title'=>'Panahan','desc'=>'Sunnah Rasulullah yang melatih fokus dan konsentrasi.'],['icon'=>'cpu','title'=>'Robotika','desc'=>'Pengenalan teknologi dan pemrograman dasar.'],['icon'=>'languages','title'=>'English Club','desc'=>'Peningkatan kemampuan bahasa Inggris aktif.'],['icon'=>'book-marked','title'=>'Tahfidz Club','desc'=>'Pembinaan hafalan Al-Quran intensif.'],['icon'=>'volleyball','title'=>'Futsal','desc'=>'Olahraga tim yang membangun sportivitas.']]; @endphp
                 @foreach($ekskul as $e)
                 <div class="feature-card fade-up">
-                    <div class="feature-icon bg-emerald-50 text-emerald-500"><i data-lucide="{{ $e['icon'] }}" class="w-6 h-6"></i></div>
+                    <div class="feature-icon bg-amber-50 text-amber-500"><i data-lucide="{{ $e['icon'] }}" class="w-6 h-6"></i></div>
                     <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $e['title'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">{{ $e['desc'] }}</p>
                 </div>

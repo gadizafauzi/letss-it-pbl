@@ -92,4 +92,23 @@ document.addEventListener('DOMContentLoaded', function () {
         lucide.createIcons();
     }
 
+    /* ======= BACK TO TOP BUTTON ======= */
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.remove('translate-y-16', 'opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('translate-y-0', 'opacity-1', 'pointer-events-auto');
+            } else {
+                backToTopBtn.classList.remove('translate-y-0', 'opacity-1', 'pointer-events-auto');
+                backToTopBtn.classList.add('translate-y-16', 'opacity-0', 'pointer-events-none');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
 });
+
