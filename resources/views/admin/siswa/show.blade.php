@@ -29,7 +29,7 @@
             <div class="p-6 border-b border-slate-100">
                 <div class="flex items-start justify-between gap-4">
                     <div>
-                        <h2 class="text-xl font-bold text-slate-800">
+                        <h2 class="text-xl font-bold text-[var(--theme-primary)]">
                             {{ $student->full_name }}
                         </h2>
                         <p class="text-sm text-slate-600 mt-1">

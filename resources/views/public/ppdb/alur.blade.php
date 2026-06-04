@@ -28,7 +28,7 @@
                 <div class="timeline-item fade-up">
                     <div class="timeline-dot">{{ $step['no'] }}</div>
                     <div class="pt-1">
-                        <h3 class="text-lg font-bold text-slate-800 mb-1">{{ $step['judul'] }}</h3>
+                        <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-1">{{ $step['judul'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed">{{ $step['desc'] }}</p>
                     </div>
                 </div>

@@ -26,7 +26,7 @@
                 @foreach($guru as $g)
                 <div class="feature-card text-center fade-up">
                     <div class="w-16 h-16 rounded-full bg-gradient-to-br from-pink-200 to-pink-300 flex items-center justify-center mx-auto mb-3"><i data-lucide="user" class="w-7 h-7 text-pink-500"></i></div>
-                    <h4 class="text-sm font-bold text-slate-800">{{ $g['nama'] }}</h4>
+                    <h4 class="text-sm font-bold text-[var(--theme-primary)]">{{ $g['nama'] }}</h4>
                     <p class="text-xs text-slate-400 mt-1">{{ $g['mapel'] }}</p>
                 </div>
                 @endforeach

@@ -17,7 +17,7 @@
 
         {{-- PETUNJUK --}}
         <div class="p-6 border-b border-slate-100">
-            <h2 class="font-bold text-slate-800 mb-3">Petunjuk Singkat</h2>
+            <h2 class="font-bold text-[var(--theme-primary)] mb-3">Petunjuk Singkat</h2>
             <p class="text-sm text-slate-600 mb-4">
                 Penginputan data guru bisa dilakukan dengan mengcopy data dari file Ms. Excel.
                 Format file harus sesuai kebutuhan aplikasi.

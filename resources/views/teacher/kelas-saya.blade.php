@@ -2,26 +2,24 @@
 
 @section('content')
 
-<div class="mb-6">
-
-    <h1 class="text-2xl font-extrabold text-slate-900">
-        Kelas Saya
-    </h1>
-
-    <p class="text-sm text-slate-400 mt-1">
-        Daftar kelas yang Anda ampu
-    </p>
-
+{{-- HEADER CARD --}}
+<div class="rounded-[20px] p-4 md:p-6 relative overflow-hidden shadow-sm mb-6 bg-gradient-to-br from-[var(--theme-primary)] to-[var(--theme-accent)]">
+    <div class="absolute top-0 right-0 w-48 h-48 bg-white opacity-5 rounded-full blur-3xl -mr-12 -mt-12 pointer-events-none"></div>
+    <div class="absolute top-3 right-8 w-2.5 h-2.5 rounded-full opacity-35 pointer-events-none" style="background:#f472b6;"></div>
+    <div class="absolute bottom-3 right-20 w-2 h-2 rounded-full opacity-25 pointer-events-none" style="background:#fb7185;"></div>
+    <div class="relative z-10">
+        <h1 class="text-xl md:text-2xl font-extrabold text-white">Kelas Saya</h1>
+        <p class="text-blue-100 text-xs md:text-sm font-medium mt-1 opacity-90">Daftar kelas yang Anda ampu</p>
+    </div>
 </div>
 
-<div class="modern-box overflow-hidden p-0">
+<div class="bg-white rounded-[24px] shadow-sm border border-slate-200/80 overflow-hidden p-0">
 
-    <div class="px-6 py-5 border-b border-slate-100">
-
-        <h2 class="box-title">
+    <div class="px-5 md:px-6 py-4 md:py-5 border-b border-slate-100 flex items-center gap-3 bg-gradient-to-r from-[var(--theme-bg-light)] to-white">
+        <div class="w-1 bg-[var(--theme-accent)] h-5 rounded-full"></div>
+        <h2 class="font-extrabold text-[var(--theme-primary)] text-base">
             Daftar Kelas
         </h2>
-
     </div>
 
     <div class="overflow-x-auto">
@@ -70,7 +68,12 @@
                         </td>
 
                         <td class="px-6 py-4 text-slate-600">
-                            {{ $assignment->schoolClass->studentClasses->count() }} siswa
+                            @php
+                                $jumlahSiswa = \App\Models\StudentClass::where('class_id', $assignment->class_id)
+                                    ->whereHas('academicYear', fn($q) => $q->where('status', 'active'))
+                                    ->count();
+                            @endphp
+                            {{ $jumlahSiswa }} siswa
                         </td>
 
                         <td class="px-6 py-4">

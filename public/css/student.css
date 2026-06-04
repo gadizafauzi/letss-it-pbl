@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -8,10 +12,38 @@ body {
     color: #1e293b;
 }
 
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Hide scrollbar specifically inside sidebar nav */
+#sidebar nav::-webkit-scrollbar {
+    display: none;
+}
+#sidebar nav {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    overflow-y: auto;
+}
 
 .sidebar {
     border-right: 1px solid #f1f5f9;
@@ -147,21 +179,37 @@ body {
     color: #064e3b;
 }
 
-   PREDIKAT BADGES
- /*  ============================================= */
+PREDIKAT BADGES
+
+/*  ============================================= */
 .predikat-badge {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .predikat-badge:hover {
     transform: scale(1.18);
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
-.predikat-a { background-color: #dcfce7; color: #15803d; }
-.predikat-b { background-color: #d1fae5; color: #047857; }
-.predikat-c { background-color: #fef9c3; color: #a16207; }
-.predikat-d { background-color: #fee2e2; color: #b91c1c; }
+.predikat-a {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.predikat-b {
+    background-color: #d1fae5;
+    color: #047857;
+}
+
+.predikat-c {
+    background-color: #fef9c3;
+    color: #a16207;
+}
+
+.predikat-d {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
 
 
 header {
@@ -183,44 +231,99 @@ header {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px) scale(0.97); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.stat-card { animation: fadeSlideUp 0.4s ease backwards; }
-.stat-card:nth-child(1) { animation-delay: 0.05s; }
-.stat-card:nth-child(2) { animation-delay: 0.13s; }
-.stat-card:nth-child(3) { animation-delay: 0.21s; }
+.stat-card {
+    animation: fadeSlideUp 0.4s ease backwards;
+}
 
-.table-row { animation: fadeSlideUp 0.35s ease backwards; }
-.table-row:nth-child(1) { animation-delay: 0.22s; }
-.table-row:nth-child(2) { animation-delay: 0.28s; }
-.table-row:nth-child(3) { animation-delay: 0.34s; }
-.table-row:nth-child(4) { animation-delay: 0.40s; }
-.table-row:nth-child(5) { animation-delay: 0.46s; }
-.table-row:nth-child(6) { animation-delay: 0.52s; }
-.table-row:nth-child(7) { animation-delay: 0.58s; }
+.stat-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.stat-card:nth-child(2) {
+    animation-delay: 0.13s;
+}
+
+.stat-card:nth-child(3) {
+    animation-delay: 0.21s;
+}
+
+.table-row {
+    animation: fadeSlideUp 0.35s ease backwards;
+}
+
+.table-row:nth-child(1) {
+    animation-delay: 0.22s;
+}
+
+.table-row:nth-child(2) {
+    animation-delay: 0.28s;
+}
+
+.table-row:nth-child(3) {
+    animation-delay: 0.34s;
+}
+
+.table-row:nth-child(4) {
+    animation-delay: 0.40s;
+}
+
+.table-row:nth-child(5) {
+    animation-delay: 0.46s;
+}
+
+.table-row:nth-child(6) {
+    animation-delay: 0.52s;
+}
+
+.table-row:nth-child(7) {
+    animation-delay: 0.58s;
+}
 
 .sidebar-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     z-index: 9;
     backdrop-filter: blur(2px);
 }
 
-.sidebar-overlay.show { display: block; }
+.sidebar-overlay.show {
+    display: block;
+}
 
 .student-sidebar {
     @apply w-64 bg-white flex flex-col shadow-md h-screen flex-shrink-0 z-[60] transition-all duration-300 transform fixed lg:static left-0 top-0 -translate-x-full lg:translate-x-0;
@@ -245,4 +348,489 @@ header {
 
 .nav-item.active svg {
     stroke: white !important;
+}
+
+/* =============================================
+   STUDENT SIDEBAR BLUE THEME
+   ============================================= */
+
+/* 1. Sidebar Container — desktop: relative, full height, biru tua */
+#sidebar {
+    background-color: var(--theme-primary) !important;
+    border-right: none !important;
+    border-radius: 0 24px 24px 0 !important;
+    overflow: visible !important;
+    position: relative;          /* Desktop: part of normal flex flow */
+    height: 100vh;               /* Full height */
+    flex-shrink: 0;
+}
+
+/* Pseudo-element pembungkus biru tua agar rounded hanya di sisi kanan */
+#sidebar .student-sidebar-bg {
+    display: none;
+}
+
+/* 2. Light Blue Strip for Icons */
+#sidebar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 64px;
+    background-color: var(--theme-accent) !important;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    z-index: 0;
+}
+
+/* Ensure content is above strip */
+#sidebar > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 3. Logo Area — hapus garis pemisah, logo tetap kiri, teks dirapikan */
+#sidebar .h-20 {
+    padding-left: 8px !important;
+    padding-right: 16px !important;
+    border-bottom: none !important;       /* Hapus garis putih pemisah */
+    border-color: transparent !important;
+    justify-content: flex-start !important;
+}
+#sidebar .h-20 > div {
+    justify-content: flex-start !important;  /* Logo tetap kiri */
+    gap: 14px !important;
+}
+#sidebar .h-20 h1,
+#sidebar .h-20 p {
+    color: white !important;
+}
+#sidebar .h-20 h1 {
+    font-size: 13px !important;
+    text-align: center !important;
+    line-height: 1.3;
+}
+#sidebar .h-20 p {
+    font-size: 10.5px !important;
+    text-align: center !important;
+    opacity: 0.65;
+    margin-top: 2px;
+}
+
+/* 4. Nav Section — tanpa scrollbar */
+#sidebar nav {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow-y: auto !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+#sidebar nav::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* 5. Menu Titles */
+#sidebar .sidebar-title {
+    padding-left: 80px !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* 6. General Links */
+#sidebar .sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    margin-bottom: 4px;
+    box-shadow: none !important;
+    position: relative;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: visible !important;
+}
+#sidebar .sidebar-link:not(.active-sidebar):hover {
+    background: transparent !important;
+    transform: translateX(4px) !important;
+}
+
+/* Icon (Centered in light blue strip) */
+#sidebar .sidebar-icon {
+    width: 64px !important;
+    height: 50px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin: 0 !important;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s ease !important;
+}
+#sidebar .sidebar-icon svg {
+    stroke: rgba(255, 255, 255, 0.7) !important;
+    transition: stroke 0.2s ease !important;
+}
+#sidebar .sidebar-link:not(.active-sidebar):hover .sidebar-icon svg {
+    stroke: white !important;
+}
+#sidebar .sidebar-link:not(.active-sidebar):hover .sidebar-icon {
+    transform: scale(1.1) !important;
+}
+
+/* Text (In dark blue area) */
+#sidebar .sidebar-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    color: rgba(255, 255, 255, 0.7) !important;
+    position: relative;
+    z-index: 2;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease !important;
+}
+#sidebar .sidebar-link:not(.active-sidebar):hover .sidebar-text {
+    color: white !important;
+}
+
+/* =============================================
+   ACTIVE STATE — Pill menyatu ke konten area kanan
+   ============================================= */
+
+/* Remove default green active background */
+#sidebar .active-sidebar {
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Icon aktif: tetap putih (berada di atas strip biru muda) */
+#sidebar .active-sidebar .sidebar-icon svg {
+    stroke: var(--theme-icon-active) !important;
+    width: 20px;
+    height: 20px;
+}
+
+/* Teks aktif: biru tua, di atas background pill abu */
+#sidebar .active-sidebar .sidebar-text {
+    color: var(--theme-primary) !important;
+    font-weight: 700;
+}
+
+/* ==== PILL BACKGROUND ==== */
+#sidebar .active-sidebar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 76px;
+    right: 0;            /* Align perfectly with the right edge */
+    background-color: var(--theme-bg-workspace);
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    z-index: 1;
+}
+
+/* ==== CONCAVE notch KANAN ATAS ====
+     Lingkaran transparan di kanan atas menggunakan radial-gradient.
+     Teknik ini 100% aman dari masalah clipping 'overflow' karena tidak ada shadow yang keluar dari elemen.
+ ==== */
+#sidebar .active-sidebar .sidebar-text::before {
+    content: "";
+    position: absolute;
+    top: -24px;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle at 0 0, transparent 24px, var(--theme-bg-workspace) 24.5px);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* ==== CONCAVE notch KANAN BAWAH ====
+     Lingkaran transparan di kanan bawah menggunakan radial-gradient.
+ ==== */
+#sidebar .active-sidebar .sidebar-text::after {
+    content: "";
+    position: absolute;
+    bottom: -24px;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle at 0 100%, transparent 24px, var(--theme-bg-workspace) 24.5px);
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* ==== INDIKATOR AKTIF
+     Garis vertikal tipis di sisi kanan icon strip (bukan di area teks)
+     Berfungsi sebagai penanda aktif visual yang subtle
+ ==== */
+#sidebar .active-sidebar .sidebar-icon::before {
+    content: "";
+    position: absolute;
+    right: 0;            /* Di tepi kanan icon strip, tepat berbatasan dengan pill */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 24px;
+    background: var(--theme-icon-indicator);
+    border-radius: 3px;
+    z-index: 5;
+}
+
+/* ::after pada link aktif — tidak dipakai */
+#sidebar .active-sidebar::after {
+    display: none !important;
+}
+
+/* =============================================
+   COLLAPSED STATE (Desktop)
+   ============================================= */
+
+.sidebar-collapse #sidebar,
+#sidebar.sidebar-collapse {
+    width: 64px !important;
+    background-color: transparent !important;
+    border-radius: 0 !important;
+}
+
+.sidebar-collapse #sidebar .h-20,
+#sidebar.sidebar-collapse .h-20 {
+    border-color: transparent !important;
+}
+
+.sidebar-collapse #sidebar .sidebar-text,
+#sidebar.sidebar-collapse .sidebar-text,
+.sidebar-collapse #sidebar .sidebar-title,
+#sidebar.sidebar-collapse .sidebar-title,
+.sidebar-collapse #sidebar .h-20 h1,
+#sidebar.sidebar-collapse .h-20 h1,
+.sidebar-collapse #sidebar .h-20 p,
+#sidebar.sidebar-collapse .h-20 p,
+.sidebar-collapse #sidebar .logout-text,
+#sidebar.sidebar-collapse .logout-text {
+    display: none !important;
+}
+
+/* Sembunyikan pill background di collapsed */
+.sidebar-collapse #sidebar .active-sidebar::before,
+#sidebar.sidebar-collapse .active-sidebar::before {
+    display: none !important;
+}
+
+/* Sembunyikan concave corners di collapsed */
+.sidebar-collapse #sidebar .active-sidebar .sidebar-text::before,
+#sidebar.sidebar-collapse .active-sidebar .sidebar-text::before,
+.sidebar-collapse #sidebar .active-sidebar .sidebar-text::after,
+#sidebar.sidebar-collapse .active-sidebar .sidebar-text::after {
+    display: none !important;
+}
+
+/* Sembunyikan ::after di collapsed */
+.sidebar-collapse #sidebar .active-sidebar::after,
+#sidebar.sidebar-collapse .active-sidebar::after {
+    display: none !important;
+}
+
+/* Collapsed active: lingkaran putih di balik icon */
+.sidebar-collapse #sidebar .active-sidebar .sidebar-icon::before,
+#sidebar.sidebar-collapse .active-sidebar .sidebar-icon::before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    right: auto;       /* reset right dari fullscreen state */
+}
+
+/* Collapsed active: icon biru tua di atas lingkaran putih */
+.sidebar-collapse #sidebar .active-sidebar .sidebar-icon svg,
+#sidebar.sidebar-collapse .active-sidebar .sidebar-icon svg,
+.sidebar-collapse #sidebar .active-sidebar:hover .sidebar-icon svg,
+#sidebar.sidebar-collapse .active-sidebar:hover .sidebar-icon svg {
+    stroke: #3b5998 !important;
+}
+
+
+/* =============================================
+   MOBILE STATE (Max Width 1024px)
+   Default: hanya icon strip biru muda (64px) yang terlihat.
+   Panel biru tua + teks tersembunyi sampai hamburger ditekan.
+   ============================================= */
+@media (max-width: 1024px) {
+
+    /* Sidebar container: fixed, full height, hanya lebar icon strip */
+    #sidebar {
+        width: 64px !important;
+        background-color: transparent !important;   /* Biru tua tersembunyi */
+        border-radius: 0 !important;
+        transform: none !important;                 /* Selalu visible (tidak -translate-x-full) */
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        z-index: 50 !important;
+        transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    background-color 0.3s ease !important;
+        overflow: hidden !important;               /* Sembunyikan teks yang keluar */
+    }
+
+    /* Icon strip (#sidebar::before) tetap terlihat di mobile */
+    /* (tidak perlu override — sudah position:absolute di dalam sidebar) */
+
+    /* Sembunyikan header border */
+    #sidebar .h-20 {
+        border-color: transparent !important;
+    }
+
+    /* Sembunyikan semua teks saat sidebar tertutup */
+    #sidebar .sidebar-text,
+    #sidebar .sidebar-title,
+    #sidebar .h-20 h1,
+    #sidebar .h-20 p,
+    #sidebar .logout-text {
+        display: none !important;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    /* Sembunyikan pill aktif saat sidebar tertutup */
+    #sidebar .active-sidebar::before {
+        display: none !important;
+    }
+    #sidebar .active-sidebar .sidebar-text::before,
+    #sidebar .active-sidebar .sidebar-text::after {
+        display: none !important;
+    }
+    #sidebar .active-sidebar::after {
+        display: none !important;
+    }
+
+    /* Indikator aktif mobile: lingkaran putih di balik icon */
+    #sidebar .active-sidebar .sidebar-icon::before {
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 50%;
+        z-index: -1;
+        left: 50%;
+        top: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Icon aktif mobile: biru tua di atas lingkaran */
+    #sidebar .active-sidebar .sidebar-icon svg,
+    #sidebar .active-sidebar:hover .sidebar-icon svg {
+        stroke: #3b5998 !important;
+    }
+
+    /* ============================================
+       STATE: sidebar-mobile-open
+       Panel biru tua slide masuk di samping icon strip
+       ============================================ */
+    #sidebar.sidebar-mobile-open {
+        width: 290px !important;
+        background-color: #3b5998 !important;       /* Panel biru tua muncul */
+        border-radius: 0 24px 24px 0 !important;
+        overflow: visible !important;
+        z-index: 50 !important;
+    }
+
+    /* Tampilkan teks menu saat sidebar terbuka */
+    #sidebar.sidebar-mobile-open .sidebar-text,
+    #sidebar.sidebar-mobile-open .sidebar-title,
+    #sidebar.sidebar-mobile-open .h-20 h1,
+    #sidebar.sidebar-mobile-open .h-20 p,
+    #sidebar.sidebar-mobile-open .logout-text {
+        display: flex !important;
+        opacity: 1 !important;
+    }
+
+    /* sidebar-title bukan flex, override ke block */
+    #sidebar.sidebar-mobile-open .sidebar-title {
+        display: block !important;
+    }
+
+    /* Tampilkan logout text (span) */
+    #sidebar.sidebar-mobile-open .logout-text span {
+        display: inline !important;
+    }
+
+    /* Tampilkan pill aktif saat sidebar terbuka */
+    #sidebar.sidebar-mobile-open .active-sidebar::before {
+        display: block !important;
+    }
+    #sidebar.sidebar-mobile-open .active-sidebar .sidebar-text::before,
+    #sidebar.sidebar-mobile-open .active-sidebar .sidebar-text::after {
+        display: block !important;
+    }
+
+    /* Reset indikator icon saat sidebar terbuka — kembali ke garis putih vertikal */
+    #sidebar.sidebar-mobile-open .active-sidebar .sidebar-icon::before {
+        width: 3px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 3px;
+        left: auto;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        box-shadow: none;
+    }
+
+    /* Reset icon aktif ke putih saat sidebar terbuka */
+    #sidebar.sidebar-mobile-open .active-sidebar .sidebar-icon svg,
+    #sidebar.sidebar-mobile-open .active-sidebar:hover .sidebar-icon svg {
+        stroke: white !important;
+    }
+
+    /* Teks aktif: biru tua di atas pill putih */
+    #sidebar.sidebar-mobile-open .active-sidebar .sidebar-text {
+        color: #1e3a6e !important;
+    }
+}
+
+/* =============================================
+   OVERLAY MOBILE — menutupi konten (bukan sidebar)
+   Offset kiri 64px agar icon strip tetap terlihat
+   ============================================= */
+#sidebarOverlay {
+    left: 64px !important;    /* Mulai dari tepi kanan icon strip */
+}
+
+@media (min-width: 1025px) {
+    /* Desktop: reset overlay agar full width (untuk potensi penggunaan lain) */
+    #sidebarOverlay {
+        left: 0 !important;
+        display: none !important;
+    }
+}
+/* Main Content Offset */
+@media (max-width: 1024px) {
+    #mainContent {
+        margin-left: 64px;
+        width: calc(100% - 64px);
+        max-width: calc(100% - 64px);
+    }
 }

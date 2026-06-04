@@ -7,7 +7,7 @@
             <i data-lucide="log-out" class="text-red-500 w-7 h-7"></i>
         </div>
 
-        <h3 class="text-xl font-extrabold text-slate-800">
+        <h3 class="text-xl font-extrabold text-[var(--theme-primary)]">
             Keluar
         </h3>
 

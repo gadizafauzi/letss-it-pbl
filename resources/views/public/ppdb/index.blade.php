@@ -32,7 +32,7 @@
                     <div class="w-16 h-16 rounded-2xl bg-{{ $u['color'] }}-50 flex items-center justify-center mx-auto mb-4">
                         <i data-lucide="{{ $u['icon'] }}" class="w-7 h-7 text-{{ $u['color'] }}-500"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $u['title'] }}</h3>
+                    <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-2">{{ $u['title'] }}</h3>
                     <p class="text-sm text-slate-500">{{ $u['usia'] }}</p>
                     <p class="text-sm font-bold text-emerald-600 mt-2">Kuota: {{ $u['kuota'] }}</p>
                 </div>

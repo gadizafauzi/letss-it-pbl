@@ -32,7 +32,7 @@
 <body class="bg-slate-100 flex flex-col items-center justify-center min-h-screen p-6">
 
     <div class="no-print mb-6">
-        <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-2xl shadow-lg transition-all">
+        <button onclick="window.print()" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-2xl shadow-lg transition-all">
             Cetak Sekarang
         </button>
     </div>

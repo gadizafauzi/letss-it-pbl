@@ -17,7 +17,7 @@
                         <i data-lucide="{{ $k['icon'] }}" class="w-6 h-6 text-{{ $k['color'] }}-500"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-slate-800">{{ $k['title'] }}</h3>
+                        <h3 class="text-lg font-bold text-[var(--theme-primary)]">{{ $k['title'] }}</h3>
                         <p class="text-sm text-slate-400">{{ $k['count'] }} artikel</p>
                     </div>
                 </a>
