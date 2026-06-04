@@ -200,7 +200,7 @@ class KelasController extends Controller
         $students = collect();
         $selectedSubject = null;
         $classAverage = '-';
-        $semester = $request->input('semester', $class?->academicYear?->active_semester ?? 'even');
+        $semester = $request->input('semester', $activeYear?->active_semester ?? 'odd');
         $selectedSubjectId = $request->input('subject_id');
 
         if ($class) {

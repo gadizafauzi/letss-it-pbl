@@ -26,7 +26,7 @@
                 @foreach($ekskul as $e)
                 <div class="feature-card fade-up">
                     <div class="feature-icon bg-pink-50 text-pink-500"><i data-lucide="{{ $e['icon'] }}" class="w-6 h-6"></i></div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $e['title'] }}</h3>
+                    <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-2">{{ $e['title'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">{{ $e['desc'] }}</p>
                 </div>
                 @endforeach

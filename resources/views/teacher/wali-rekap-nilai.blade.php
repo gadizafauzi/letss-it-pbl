@@ -2,21 +2,22 @@
 
 @section('content')
 
-<div class="mb-6">
-    <h1 class="text-2xl font-extrabold text-slate-900">
-        Rekap Nilai
-    </h1>
-
-    <p class="text-sm text-slate-400 mt-1">
-        Rekap nilai siswa kelas wali
-    </p>
+{{-- HEADER CARD --}}
+<div class="rounded-[20px] p-4 md:p-6 relative overflow-hidden shadow-sm mb-6 bg-gradient-to-br from-[var(--theme-primary)] to-[var(--theme-accent)]">
+    <div class="absolute top-0 right-0 w-48 h-48 bg-white opacity-5 rounded-full blur-3xl -mr-12 -mt-12 pointer-events-none"></div>
+    <div class="absolute top-3 right-8 w-2.5 h-2.5 rounded-full opacity-35 pointer-events-none" style="background:#f472b6;"></div>
+    <div class="absolute bottom-3 right-20 w-2 h-2 rounded-full opacity-25 pointer-events-none" style="background:#fb7185;"></div>
+    <div class="relative z-10">
+        <h1 class="text-xl md:text-2xl font-extrabold text-white">Rekap Nilai Siswa</h1>
+        <p class="text-blue-100 text-xs md:text-sm font-medium mt-1 opacity-90">Pantau hasil belajar siswa kelas wali Anda</p>
+    </div>
 </div>
 
 {{-- CARD --}}
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
 
-    <div class="dashboard-card bg-white border border-slate-200 rounded-3xl px-6 py-5 flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+    <div class="bg-white border-2 border-emerald-100 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-emerald-300">
+        <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
             <i data-lucide="school" class="w-6 h-6"></i>
         </div>
 
@@ -30,8 +31,8 @@
         </div>
     </div>
 
-    <div class="dashboard-card bg-white border border-slate-200 rounded-3xl px-6 py-5 flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+    <div class="bg-white border-2 border-blue-100 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-blue-300">
+        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
             <i data-lucide="users" class="w-6 h-6"></i>
         </div>
 
@@ -45,8 +46,8 @@
         </div>
     </div>
 
-    <div class="dashboard-card bg-white border border-slate-200 rounded-3xl px-6 py-5 flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+    <div class="bg-white border-2 border-purple-100 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-purple-300">
+        <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
             <i data-lucide="book-open-check" class="w-6 h-6"></i>
         </div>
 
@@ -60,8 +61,8 @@
         </div>
     </div>
 
-    <div class="dashboard-card bg-white border border-slate-200 rounded-3xl px-6 py-5 flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center">
+    <div class="bg-white border-2 border-orange-100 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-orange-300">
+        <div class="w-14 h-14 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
             <i data-lucide="award" class="w-6 h-6"></i>
         </div>
 
@@ -77,8 +78,7 @@
 
 </div>
 
-{{-- FILTER --}}
-<form method="GET" action="{{ route('teacher.wali-rekap-nilai') }}" class="modern-box mb-6">
+<form method="GET" action="{{ route('teacher.wali-rekap-nilai') }}" class="bg-white rounded-[24px] shadow-sm border border-slate-200/80 mb-6 p-6">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
 
         <div>
@@ -86,7 +86,7 @@
                 Semester
             </label>
 
-            <select name="semester" onchange="this.form.submit()" class="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:outline-none">
+            <select name="semester" onchange="this.form.submit()" class="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]">
                 <option value="even" {{ $semester === 'even' ? 'selected' : '' }}>Genap</option>
                 <option value="odd" {{ $semester === 'odd' ? 'selected' : '' }}>Ganjil</option>
             </select>
@@ -97,7 +97,7 @@
                 Mata Pelajaran
             </label>
 
-            <select name="subject_id" onchange="this.form.submit()" class="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:outline-none">
+            <select name="subject_id" onchange="this.form.submit()" class="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]">
                 @forelse($subjects as $subj)
                     <option value="{{ $subj->id }}" {{ $selectedSubjectId == $subj->id ? 'selected' : '' }}>
                         {{ $subj->subject_name }}
@@ -113,7 +113,7 @@
                 Status
             </label>
 
-            <select name="status" onchange="this.form.submit()" class="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:outline-none">
+            <select name="status" onchange="this.form.submit()" class="w-full h-12 rounded-xl border border-slate-200 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]">
                 <option value="all" {{ request('status') === 'all' ? 'selected' : '' }}>Semua</option>
                 <option value="tuntas" {{ request('status') === 'tuntas' ? 'selected' : '' }}>Tuntas</option>
                 <option value="belum_tuntas" {{ request('status') === 'belum_tuntas' ? 'selected' : '' }}>Belum Tuntas</option>
@@ -127,7 +127,7 @@
 
             <div class="relative">
                 <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama siswa" class="w-full h-12 rounded-xl border border-slate-200 pl-11 pr-4 text-sm focus:outline-none">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari nama siswa" class="w-full h-12 rounded-xl border border-slate-200 pl-11 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]">
             </div>
         </div>
 
@@ -135,17 +135,20 @@
 </form>
 
 {{-- TABLE --}}
-<div class="modern-box overflow-hidden p-0">
+<div class="bg-white rounded-[24px] shadow-sm border border-slate-200/80 overflow-hidden p-0">
 
-    <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
-        <h2 class="box-title">
-            Rekap Nilai Siswa
-        </h2>
+    <div class="px-5 md:px-6 py-4 md:py-5 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-[var(--theme-bg-light)] to-white">
+        <div class="flex items-center gap-3">
+            <div class="w-1 bg-[var(--theme-accent)] h-5 rounded-full"></div>
+            <h2 class="font-extrabold text-[var(--theme-primary)] text-base">
+                Rekap Nilai Siswa
+            </h2>
+        </div>
 
         <button type="button"
-            class="h-10 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold inline-flex items-center gap-2 transition-all">
+            class="h-10 px-4 rounded-xl bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
             <i data-lucide="download" class="w-4 h-4"></i>
-            Export Nilai
+            Ekspor Nilai
         </button>
     </div>
 

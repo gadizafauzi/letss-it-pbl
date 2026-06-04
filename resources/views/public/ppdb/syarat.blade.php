@@ -24,7 +24,7 @@
                 @foreach($syaratData as $s)
                 <div class="feature-card fade-up">
                     <div class="feature-icon bg-{{ $s['color'] }}-50 text-{{ $s['color'] }}-500"><i data-lucide="{{ $s['icon'] }}" class="w-6 h-6"></i></div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-4">{{ $s['title'] }} Islam Terpadu</h3>
+                    <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-4">{{ $s['title'] }} Islam Terpadu</h3>
                     <ul class="space-y-3 text-sm text-slate-500">
                         @foreach($s['items'] as $item)
                         <li class="flex items-start gap-2"><i data-lucide="check-circle" class="w-4 h-4 text-{{ $s['color'] }}-500 mt-0.5 flex-shrink-0"></i> {{ $item }}</li>

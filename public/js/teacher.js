@@ -93,28 +93,50 @@ document.addEventListener('DOMContentLoaded', function () {
         const sidebar = document.getElementById('sidebar');
         const menuToggle = document.getElementById('desktopToggle');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const mainContent = document.getElementById('mainContent');
+
+        function initMobileContentOffset() {
+            if (!mainContent) return;
+            if (window.innerWidth <= 1024) {
+                mainContent.style.marginLeft = '64px';
+            } else {
+                mainContent.style.marginLeft = '';
+            }
+        }
+        initMobileContentOffset();
+        window.addEventListener('resize', initMobileContentOffset);
 
         if (menuToggle && sidebar) {
             menuToggle.addEventListener('click', function () {
-
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.toggle('show');
-
+                if (window.innerWidth <= 1024) {
+                    sidebar.classList.toggle('sidebar-mobile-open');
                     if (sidebarOverlay) {
                         sidebarOverlay.classList.toggle('hidden');
                     }
-
                 } else {
-                    sidebar.classList.toggle('teacher-sidebar-collapse');
+                    sidebar.classList.toggle('sidebar-collapse');
+                    const isCollapsed = sidebar.classList.contains('sidebar-collapse');
+                    localStorage.setItem('teacherSidebarCollapsed', isCollapsed);
                 }
-
             });
         }
 
         if (sidebarOverlay && sidebar) {
             sidebarOverlay.addEventListener('click', function () {
-                sidebar.classList.remove('show');
+                sidebar.classList.remove('sidebar-mobile-open');
                 sidebarOverlay.classList.add('hidden');
             });
         }
-        });
+
+        /* AUTO-SCROLL TO ACTIVE MENU */
+        const activeMenu = document.querySelector('.sidebar-menu .active-sidebar');
+        if (activeMenu) {
+            setTimeout(() => {
+                activeMenu.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'nearest'
+                });
+            }, 100);
+        }
+    });

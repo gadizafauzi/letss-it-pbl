@@ -1,19 +1,24 @@
-    <aside id="sidebar" class="sidebar fixed lg:relative z-50 lg:z-0 w-[290px] h-screen bg-white border-r border-slate-200 flex flex-col transition-all duration-300">
+    <aside id="sidebar" class="student-sidebar-panel z-50 w-[290px] flex flex-col transition-all duration-300">
+
+    @php
+        $studentSidebar = \App\Models\Student::with('unit')->where('user_id', auth()->id())->first();
+        $unitNameSidebar = strtolower($studentSidebar->unit->unit_name ?? 'smp');
+    @endphp
 
     {{-- LOGO --}}
-    <div class="h-20 border-b border-slate-100 flex items-center px-6 shrink-0">
-        <div class="flex items-center gap-4">
+    <div class="h-20 flex items-center px-6 shrink-0">
+        <div class="flex items-center gap-3 w-full">
 
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg shadow-emerald-200">
-                <i data-lucide="school" class="w-6 h-6 text-white"></i>
+            <div class="w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg shrink-0 overflow-hidden" style="box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--theme-primary) 10%, transparent); box-shadow: 0 4px 6px -4px color-mix(in srgb, var(--theme-primary) 10%, transparent);">
+                <img src="{{ $unitNameSidebar === 'sd' ? asset('images/logomq.jpg') : asset('images/smp.jpeg') }}" alt="Logo" class="w-full h-full object-cover">
             </div>
 
-            <div class="sidebar-text">
-                <h1 class="text-sm font-extrabold tracking-tight text-slate-800">
-                    SIT Mutiara Qur'an
+            <div class="logo-text flex-1 flex flex-col justify-center pr-4">
+                <h1 class="text-sm font-extrabold tracking-tight">
+                    {{ strtoupper($unitNameSidebar) }} Mutiara Qur'an
                 </h1>
 
-                <p class="text-xs text-slate-400 mt-0.5">
+                <p class="mt-0.5">
                     Student Panel
                 </p>
             </div>
@@ -104,19 +109,41 @@
     </nav>
 
     {{-- LOGOUT --}}
-    <div class="p-5 border-t border-slate-100 shrink-0">
+    <div class="mt-auto shrink-0 mb-4 border-t border-slate-100/10 pt-5">
 
         <button type="button" id="studentLogoutBtn"
-            class="logout-btn w-full h-12 rounded-2xl bg-red-500 hover:bg-red-600 transition-all duration-300 text-white font-semibold inline-flex items-center justify-center gap-3">
+            class="sidebar-link w-full group !mb-0 !bg-transparent !shadow-none">
 
-            <i data-lucide="log-out" class="w-5 h-5"></i>
-
-            <span class="sidebar-text">
-                Logout
+            <span class="sidebar-icon">
+                <i data-lucide="log-out"></i>
             </span>
+
+            <div class="flex-1 pr-5 pl-4 logout-text transition-opacity duration-300">
+                <div class="w-full h-11 rounded-xl bg-red-500 group-hover:bg-red-600 transition-all duration-300 text-white font-semibold flex items-center justify-center shadow-lg shadow-red-500/30">
+                    Logout
+                </div>
+            </div>
 
         </button>
 
     </div>
 
 </aside>
+
+{{-- Synchronous script to prevent FOUC (Flash of Unstyled Content) and Animations on page load --}}
+<script>
+    if (window.innerWidth > 1024 && localStorage.getItem('studentSidebarCollapsed') === 'true') {
+        const sidebar = document.getElementById('sidebar');
+        // Disable transition temporarily
+        sidebar.style.transition = 'none';
+        
+        sidebar.classList.add('sidebar-collapse');
+        
+        // Force browser repaint, then restore transitions
+        sidebar.offsetHeight; // trigger reflow
+        
+        requestAnimationFrame(() => {
+            sidebar.style.transition = '';
+        });
+    }
+</script>

@@ -1,20 +1,24 @@
-<aside id="sidebar" class="teacher-sidebar">
+<aside id="sidebar" class="teacher-sidebar-panel sidebar z-50 w-[290px] flex flex-col min-h-screen transition-all duration-300">
+
+    @php
+        $teacherSidebar = auth()->user()->teacher ?? null;
+        $unitNameSidebar = $teacherSidebar ? strtolower($teacherSidebar->unit->unit_name ?? 'smp') : 'smp';
+    @endphp
 
     {{-- LOGO --}}
-    <div class="h-20 border-b border-slate-100 flex items-center px-6 shrink-0">
-        <div class="flex items-center gap-4">
+    <div class="h-20 flex items-center px-6 shrink-0">
+        <div class="flex items-center gap-3 w-full">
 
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg shadow-emerald-200">
-                <i data-lucide="school-2" class="w-6 h-6 text-white"></i>
+            <div class="w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg shrink-0 overflow-hidden" style="box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--theme-primary) 10%, transparent); box-shadow: 0 4px 6px -4px color-mix(in srgb, var(--theme-primary) 10%, transparent);">
+                <img src="{{ $unitNameSidebar === 'sd' ? asset('images/logomq.jpg') : asset('images/smp.jpeg') }}" alt="Logo" class="w-full h-full object-cover">
             </div>
 
-            <div class="teacher-sidebar-text">
-                <h1 class="text-sm font-extrabold tracking-tight text-slate-800">
-                    SIT Mutiara Qur'an
+            <div class="logo-text flex-1 flex flex-col justify-center pr-4">
+                <h1 class="text-sm font-extrabold tracking-tight">
+                    {{ strtoupper($unitNameSidebar) }} Mutiara Qur'an
                 </h1>
-
-                <p class="text-xs text-slate-400 mt-0.5">
-                    Teacher Panel
+                <p class="mt-0.5">
+                    {{ isset($homeroomClass) && $homeroomClass ? 'Wali Kelas Panel' : 'Teacher Panel' }}
                 </p>
             </div>
 
@@ -22,22 +26,22 @@
     </div>
 
     {{-- MENU --}}
-    <nav class="flex-1 overflow-y-auto px-5 py-6 space-y-7">
+    <nav class="sidebar-menu flex-1 flex flex-col overflow-y-auto px-5 py-6 space-y-7">
 
         {{-- DASHBOARD --}}
         <div>
-            <p class="teacher-sidebar-title">
+            <p class="sidebar-title">
                 Dashboard
             </p>
 
             <a href="{{ route('teacher.dashboard') }}"
-                class="teacher-sidebar-link {{ request()->routeIs('teacher.dashboard') ? 'teacher-active-sidebar' : '' }}">
+                class="sidebar-link {{ request()->routeIs('teacher.dashboard') ? 'active-sidebar' : '' }}">
 
-                <span class="teacher-sidebar-icon">
+                <span class="sidebar-icon">
                     <i data-lucide="layout-dashboard"></i>
                 </span>
 
-                <span class="teacher-sidebar-text">
+                <span class="sidebar-text">
                     Dashboard
                 </span>
 
@@ -46,33 +50,33 @@
 
         {{-- AKADEMIK --}}
         <div>
-            <p class="teacher-sidebar-title">
+            <p class="sidebar-title">
                 Akademik
             </p>
 
             <div class="space-y-2">
 
                 <a href="{{ route('teacher.kelas-saya') }}"
-                    class="teacher-sidebar-link {{ request()->routeIs('teacher.kelas-saya') || request()->routeIs('teacher.data-siswa') ? 'teacher-active-sidebar' : '' }}">
+                    class="sidebar-link {{ request()->routeIs('teacher.kelas-saya') || request()->routeIs('teacher.data-siswa') ? 'active-sidebar' : '' }}">
 
-                    <span class="teacher-sidebar-icon">
+                    <span class="sidebar-icon">
                         <i data-lucide="book-open"></i>
                     </span>
 
-                    <span class="teacher-sidebar-text">
+                    <span class="sidebar-text">
                         Kelas Saya
                     </span>
 
                 </a>
 
                 <a href="{{ route('teacher.input-nilai') }}"
-                    class="teacher-sidebar-link {{ request()->routeIs('teacher.input-nilai') ? 'teacher-active-sidebar' : '' }}">
+                    class="sidebar-link {{ request()->routeIs('teacher.input-nilai') ? 'active-sidebar' : '' }}">
 
-                    <span class="teacher-sidebar-icon">
+                    <span class="sidebar-icon">
                         <i data-lucide="clipboard-check"></i>
                     </span>
 
-                    <span class="teacher-sidebar-text">
+                    <span class="sidebar-text">
                         Input Nilai
                     </span>
 
@@ -85,33 +89,33 @@
         @if(isset($homeroomClass) && $homeroomClass)
 
             <div>
-                <p class="teacher-sidebar-title">
+                <p class="sidebar-title">
                     Wali Kelas
                 </p>
 
                 <div class="space-y-2">
 
                     <a href="{{ route('teacher.wali-data-siswa') }}"
-                        class="teacher-sidebar-link {{ request()->routeIs('teacher.wali-data-siswa') ? 'teacher-active-sidebar' : '' }}">
+                        class="sidebar-link {{ request()->routeIs('teacher.wali-data-siswa') ? 'active-sidebar' : '' }}">
 
-                        <span class="teacher-sidebar-icon">
-                            <i data-lucide="school"></i>
+                        <span class="sidebar-icon">
+                            <i data-lucide="users"></i>
                         </span>
 
-                        <span class="teacher-sidebar-text">
-                            Data Kelas
+                        <span class="sidebar-text">
+                            Data Siswa Wali
                         </span>
 
                     </a>
 
                     <a href="{{ route('teacher.wali-rekap-nilai') }}"
-                        class="teacher-sidebar-link {{ request()->routeIs('teacher.wali-rekap-nilai') ? 'teacher-active-sidebar' : '' }}">
+                        class="sidebar-link {{ request()->routeIs('teacher.wali-rekap-nilai') ? 'active-sidebar' : '' }}">
 
-                        <span class="teacher-sidebar-icon">
+                        <span class="sidebar-icon">
                             <i data-lucide="bar-chart-3"></i>
                         </span>
 
-                        <span class="teacher-sidebar-text">
+                        <span class="sidebar-text">
                             Rekap Nilai
                         </span>
 
@@ -124,18 +128,18 @@
 
         {{-- AKUN --}}
         <div>
-            <p class="teacher-sidebar-title">
+            <p class="sidebar-title">
                 Akun
             </p>
 
             <a href="{{ route('teacher.profil') }}"
-                class="teacher-sidebar-link {{ request()->routeIs('teacher.profil') ? 'teacher-active-sidebar' : '' }}">
+                class="sidebar-link {{ request()->routeIs('teacher.profil') ? 'active-sidebar' : '' }}">
 
-                <span class="teacher-sidebar-icon">
-                    <i data-lucide="user-round"></i>
+                <span class="sidebar-icon">
+                    <i data-lucide="user"></i>
                 </span>
 
-                <span class="teacher-sidebar-text">
+                <span class="sidebar-text">
                     Profil
                 </span>
 
@@ -145,19 +149,41 @@
     </nav>
 
     {{-- LOGOUT --}}
-    <div class="p-5 border-t border-slate-100 shrink-0">
+    <div class="sidebar-logout mt-auto shrink-0 mb-4 border-t border-slate-100/10 pt-5">
 
         <button type="button" id="teacherLogoutBtn"
-            class="teacher-logout-btn w-full h-12 rounded-2xl bg-red-500 hover:bg-red-600 transition-all duration-300 text-white font-semibold inline-flex items-center justify-center gap-3">
+            class="sidebar-link w-full group !mb-0 !bg-transparent !shadow-none">
 
-            <i data-lucide="log-out" class="w-5 h-5"></i>
-
-            <span class="teacher-sidebar-text">
-                Logout
+            <span class="sidebar-icon">
+                <i data-lucide="log-out"></i>
             </span>
+
+            <div class="flex-1 pr-5 pl-4 logout-text transition-opacity duration-300">
+                <div class="w-full h-11 rounded-xl bg-red-500 group-hover:bg-red-600 transition-all duration-300 text-white font-semibold flex items-center justify-center shadow-lg shadow-red-500/30">
+                    Logout
+                </div>
+            </div>
 
         </button>
 
     </div>
 
 </aside>
+
+{{-- Synchronous script to prevent FOUC (Flash of Unstyled Content) and Animations on page load --}}
+<script>
+    if (window.innerWidth > 1024 && localStorage.getItem('teacherSidebarCollapsed') === 'true') {
+        const sidebar = document.getElementById('sidebar');
+        // Disable transition temporarily
+        sidebar.style.transition = 'none';
+        
+        sidebar.classList.add('sidebar-collapse');
+        
+        // Force browser repaint, then restore transitions
+        sidebar.offsetHeight; // trigger reflow
+        
+        requestAnimationFrame(() => {
+            sidebar.style.transition = '';
+        });
+    }
+</script>

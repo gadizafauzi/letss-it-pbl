@@ -32,7 +32,7 @@
             <div class="p-6 border-b border-slate-100">
                 <div class="flex items-start justify-between gap-4">
                     <div>
-                        <h2 class="text-xl font-bold text-slate-800">{{ $teacher->full_name ?? '-' }}</h2>
+                        <h2 class="text-xl font-bold text-[var(--theme-primary)]">{{ $teacher->full_name ?? '-' }}</h2>
                         <p class="text-sm text-slate-600 mt-1">
                             NIP: <span class="font-semibold">{{ $teacher->nip ?? '-' }}</span>
                             &nbsp;|&nbsp; Status:

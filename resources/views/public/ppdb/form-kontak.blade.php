@@ -27,19 +27,19 @@
                     <div class="space-y-6">
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center flex-shrink-0"><i data-lucide="map-pin" class="w-5 h-5 text-emerald-600"></i></div>
-                            <div><h4 class="font-bold text-slate-800 mb-1">Alamat</h4><p class="text-sm text-slate-500 leading-relaxed">Karasak Jorong Pasar Baru, Cupak,<br>Kecamatan Gunung Talang, Kabupaten Solok, Sumatera Barat</p></div>
+                            <div><h4 class="font-bold text-[var(--theme-primary)] mb-1">Alamat</h4><p class="text-sm text-slate-500 leading-relaxed">Karasak Jorong Pasar Baru, Cupak,<br>Kecamatan Gunung Talang, Kabupaten Solok, Sumatera Barat</p></div>
                         </div>
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center flex-shrink-0"><i data-lucide="phone" class="w-5 h-5 text-blue-600"></i></div>
-                            <div><h4 class="font-bold text-slate-800 mb-1">Telepon</h4><p class="text-sm text-slate-500">(022) 1234-5678</p><p class="text-sm text-slate-500">0812-3456-7890 (WhatsApp)</p></div>
+                            <div><h4 class="font-bold text-[var(--theme-primary)] mb-1">Telepon</h4><p class="text-sm text-slate-500">(022) 1234-5678</p><p class="text-sm text-slate-500">0812-3456-7890 (WhatsApp)</p></div>
                         </div>
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center flex-shrink-0"><i data-lucide="mail" class="w-5 h-5 text-amber-600"></i></div>
-                            <div><h4 class="font-bold text-slate-800 mb-1">Email</h4><p class="text-sm text-slate-500">info@sitmutiaraquran.sch.id</p></div>
+                            <div><h4 class="font-bold text-[var(--theme-primary)] mb-1">Email</h4><p class="text-sm text-slate-500">info@sitmutiaraquran.sch.id</p></div>
                         </div>
                         <div class="flex items-start gap-4">
                             <div class="w-12 h-12 rounded-2xl bg-violet-50 flex items-center justify-center flex-shrink-0"><i data-lucide="clock" class="w-5 h-5 text-violet-600"></i></div>
-                            <div><h4 class="font-bold text-slate-800 mb-1">Jam Operasional</h4><p class="text-sm text-slate-500">Senin — Jumat: 07.00 — 16.00 WIB</p><p class="text-sm text-slate-500">Sabtu: 08.00 — 12.00 WIB</p></div>
+                            <div><h4 class="font-bold text-[var(--theme-primary)] mb-1">Jam Operasional</h4><p class="text-sm text-slate-500">Senin — Jumat: 07.00 — 16.00 WIB</p><p class="text-sm text-slate-500">Sabtu: 08.00 — 12.00 WIB</p></div>
                         </div>
                     </div>
                     <div class="mt-8 rounded-2xl overflow-hidden border border-slate-200">

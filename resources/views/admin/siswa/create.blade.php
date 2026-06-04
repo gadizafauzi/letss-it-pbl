@@ -299,7 +299,7 @@
 
                     {{-- STATUS --}}
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
-                        <h3 class="text-base font-bold text-slate-800 mb-5">Status</h3>
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-5">Status</h3>
                         <div class="space-y-4">
                             <label class="flex items-center gap-3 text-sm text-slate-700">
                                 <input type="radio" name="status" value="inactive"
@@ -336,7 +336,7 @@
 
                     {{-- FOTO --}}
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
-                        <h3 class="text-base font-bold text-slate-800 mb-4">Foto</h3>
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-4">Foto</h3>
                         <div id="photo-preview-wrapper"
                             class="aspect-square rounded-3xl border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden">
                             <div class="text-center" id="photo-placeholder">

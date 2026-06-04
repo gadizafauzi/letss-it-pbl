@@ -42,7 +42,7 @@
                         <div class="timeline-dot">{{ substr($item['tahun'], -2) }}</div>
                         <div class="pt-1">
                             <p class="text-sm font-bold text-emerald-600 mb-1">{{ $item['tahun'] }}</p>
-                            <h3 class="text-lg font-bold text-slate-800 mb-1">{{ $item['judul'] }}</h3>
+                            <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-1">{{ $item['judul'] }}</h3>
                             <p class="text-sm text-slate-500 leading-relaxed">{{ $item['desc'] }}</p>
                         </div>
                     </div>

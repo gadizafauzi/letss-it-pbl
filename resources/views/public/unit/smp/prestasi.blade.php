@@ -23,7 +23,7 @@
                 @foreach($prestasi as $p)
                 <div class="feature-card fade-up">
                     <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">{{ $p['tahun'] }}</span>
-                    <h3 class="text-lg font-bold text-slate-800 mt-3 mb-2">{{ $p['judul'] }}</h3>
+                    <h3 class="text-lg font-bold text-[var(--theme-primary)] mt-3 mb-2">{{ $p['judul'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">{{ $p['desc'] }}</p>
                 </div>
                 @endforeach

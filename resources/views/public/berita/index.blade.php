@@ -30,7 +30,7 @@
                             <span class="text-xs font-bold text-{{ $berita['color'] }}-600 bg-{{ $berita['color'] }}-50 px-2.5 py-1 rounded-full">{{ $berita['kategori'] }}</span>
                             <span class="text-xs text-slate-400">{{ $berita['tanggal'] }}</span>
                         </div>
-                        <h3 class="text-base font-bold text-slate-800 mb-2 leading-snug">{{ $berita['judul'] }}</h3>
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-2 leading-snug">{{ $berita['judul'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $berita['excerpt'] }}</p>
                         <a href="{{ route('public.berita.detail') }}" class="inline-flex items-center gap-1 text-emerald-600 font-bold text-sm hover:underline mt-2">
                             Lihat Detail <i data-lucide="arrow-right" class="w-4 h-4"></i>

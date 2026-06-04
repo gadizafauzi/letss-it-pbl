@@ -35,7 +35,7 @@
                 @foreach($faqs as $i => $faq)
                 <div class="faq-item feature-card fade-up cursor-pointer" onclick="this.classList.toggle('faq-open')">
                     <div class="flex items-center justify-between gap-4">
-                        <h3 class="text-base font-bold text-slate-800">{{ $faq['q'] }}</h3>
+                        <h3 class="text-base font-bold text-[var(--theme-primary)]">{{ $faq['q'] }}</h3>
                         <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 flex-shrink-0 faq-chevron transition-transform duration-300"></i>
                     </div>
                     <div class="faq-answer mt-0 max-h-0 overflow-hidden transition-all duration-300">

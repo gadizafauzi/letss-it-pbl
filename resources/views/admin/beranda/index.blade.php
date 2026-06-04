@@ -61,7 +61,7 @@
 
                     <div>
 
-                        <h2 class="text-sm font-semibold text-slate-800">
+                        <h2 class="text-sm font-semibold text-[var(--theme-primary)]">
                             Hero Section
                         </h2>
 
@@ -202,7 +202,7 @@
 
                     <div>
 
-                        <h2 class="text-sm font-semibold text-slate-800">
+                        <h2 class="text-sm font-semibold text-[var(--theme-primary)]">
                             Tentang Singkat
                         </h2>
 

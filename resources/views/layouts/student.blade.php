@@ -20,17 +20,66 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
+    @php
+        $studentLayout = \App\Models\Student::with('unit')->where('user_id', auth()->id())->first();
+        $unitNameLayout = strtolower($studentLayout->unit->unit_name ?? 'smp');
+    @endphp
+
+    @if($unitNameLayout === 'sd')
+    <style>
+        :root {
+            --theme-primary: #5B3CC4;
+            --theme-primary-hover: #8B5CF6;
+            --theme-accent: #8B5CF6;
+            --theme-accent-hover: #8B5CF6;
+            --theme-bg-light: #F1ECFF;
+            --theme-bg-workspace: #F8F7FC;
+            --theme-border-light: #D8CCFF;
+            --theme-text-light: #4C1D95;
+            --theme-icon-active: #5B3CC4;
+            --theme-icon-indicator: #5B3CC4;
+            --theme-stat-hover: rgba(139, 92, 246, 0.14);
+            --theme-print-bg: #FEF3C7;
+            --theme-print-text: #A16207;
+            --theme-print-icon: #FACC15;
+            --theme-print-hover: #FDE68A;
+            --theme-logo-url: url('{{ asset("images/logomq.jpg") }}');
+        }
+    </style>
+    @else
+    <style>
+        :root {
+            --theme-primary: #3b5998;
+            --theme-primary-hover: #1e3a6e;
+            --theme-accent: #5c7cfa;
+            --theme-accent-hover: #3b5998;
+            --theme-bg-light: #eef4ff;
+            --theme-bg-workspace: #f1f5f9;
+            --theme-border-light: #c9d8ff;
+            --theme-text-light: #3b5998;
+            --theme-icon-active: #ffffff;
+            --theme-icon-indicator: rgba(255, 255, 255, 0.9);
+            --theme-stat-hover: rgba(92, 124, 250, 0.1);
+            --theme-print-bg: #fef2f2;
+            --theme-print-text: #ef4444;
+            --theme-print-icon: #ef4444;
+            --theme-print-hover: #fee2e2;
+            --theme-logo-url: url('{{ asset("images/smp.jpeg") }}');
+        }
+    </style>
+    @endif
 </head>
 
-<body class="bg-slate-100 text-slate-800 overflow-hidden">
+<body class="bg-[var(--theme-bg-workspace)] text-slate-800 overflow-hidden">
 
 <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
-<div class="flex h-screen overflow-hidden">
+<div class="flex h-[100dvh] w-full overflow-hidden max-w-full">
 
     @include('components.student.sidebar')
 
-    <div class="flex-1 flex flex-col overflow-hidden">
+    {{-- Konten utama: pada mobile diberi margin-left 64px agar icon strip tidak menutupi konten --}}
+    <div id="mainContent" class="flex-1 flex flex-col overflow-hidden">
 
         @include('components.shared.header-student')
 
@@ -96,12 +145,12 @@
 
                 card.style.background =
                     `radial-gradient(circle at ${x}px ${y}px,
-                    rgba(16,185,129,.08),
-                    white 45%)`; // using emerald color for student
+                    rgba(92, 124, 250, 0.12),
+                    white 45%)`; // using soft blue color
             });
 
             card.addEventListener('mouseleave', function () {
-                card.style.background = 'white';
+                card.style.background = '';
             });
         });
 
@@ -109,37 +158,68 @@
         const sidebar = document.getElementById('sidebar');
         const desktopToggle = document.getElementById('desktopToggle');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const mainContent = document.getElementById('mainContent');
+
+        // Fungsi menutup sidebar mobile
+        function closeMobileSidebar() {
+            sidebar.classList.remove('sidebar-mobile-open');
+            if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
+        }
+
+        // Fungsi membuka sidebar mobile
+        function openMobileSidebar() {
+            sidebar.classList.add('sidebar-mobile-open');
+            if (sidebarOverlay) sidebarOverlay.classList.remove('hidden');
+        }
 
         if (desktopToggle && sidebar) {
             desktopToggle.addEventListener('click', function () {
                 if (window.innerWidth <= 1024) {
-                    // Mobile & Tablet (Split Screen) behavior
-                    sidebar.classList.remove('sidebar-collapse');
-                    sidebar.classList.toggle('show');
-                    sidebarOverlay.classList.toggle('hidden');
+                    // Mobile: toggle panel biru tua (slide in/out di samping icon strip)
+                    if (sidebar.classList.contains('sidebar-mobile-open')) {
+                        closeMobileSidebar();
+                    } else {
+                        openMobileSidebar();
+                    }
                 } else {
-                    // Desktop behavior
+                    // Desktop: collapse/expand sidebar penuh
                     sidebar.classList.toggle('sidebar-collapse');
+                    if (sidebar.classList.contains('sidebar-collapse')) {
+                        localStorage.setItem('studentSidebarCollapsed', 'true');
+                    } else {
+                        localStorage.setItem('studentSidebarCollapsed', 'false');
+                    }
                 }
             });
         }
 
-        // Clean up classes on window resize
+        // Tutup sidebar mobile saat overlay ditekan
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', function () {
+                closeMobileSidebar();
+            });
+        }
+
+        // Tutup sidebar mobile dengan tombol Escape
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && window.innerWidth <= 1024) {
+                closeMobileSidebar();
+            }
+        });
+
+        // Reset saat resize window
         window.addEventListener('resize', function () {
             if (window.innerWidth > 1024) {
-                sidebar.classList.remove('show');
+                // Desktop: bersihkan state mobile
+                sidebar.classList.remove('sidebar-mobile-open');
                 if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
             } else {
+                // Mobile: bersihkan state desktop collapse
                 sidebar.classList.remove('sidebar-collapse');
             }
         });
 
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', function () {
-                sidebar.classList.remove('show');
-                sidebarOverlay.classList.add('hidden');
-            });
-        }
+
 
         // Logout Modal
         const logoutBtn = document.getElementById('studentLogoutBtn');

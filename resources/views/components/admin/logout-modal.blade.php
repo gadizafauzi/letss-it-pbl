@@ -10,7 +10,7 @@
 
             </div>
 
-            <h3 class="text-xl font-extrabold text-slate-800">
+            <h3 class="text-xl font-extrabold text-[var(--theme-primary)]">
                 Logout Sistem
             </h3>
 

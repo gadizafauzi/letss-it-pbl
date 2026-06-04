@@ -311,7 +311,7 @@
                     {{-- STATUS --}}
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
 
-                        <h3 class="text-base font-bold text-slate-800 mb-5">
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-5">
                             Status
                         </h3>
 
@@ -338,7 +338,7 @@
                     {{-- FOTO --}}
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
 
-                        <h3 class="text-base font-bold text-slate-800 mb-4">
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-4">
                             Foto
                         </h3>
 

@@ -65,7 +65,7 @@
                     <div class="feature-icon bg-emerald-50 text-emerald-600">
                         <i data-lucide="list-checks" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-800 mb-4">Misi</h3>
+                    <h3 class="text-xl font-bold text-[var(--theme-primary)] mb-4">Misi</h3>
                     <ul class="space-y-3">
                         @php
                             $misi = [

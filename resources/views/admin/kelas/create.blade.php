@@ -29,7 +29,7 @@
                         {{-- HEADER --}}
                         <div class="px-6 py-5 border-b border-slate-100">
 
-                            <h2 class="text-lg font-bold text-slate-800">
+                            <h2 class="text-lg font-bold text-[var(--theme-primary)]">
                                 Informasi Kelas
                             </h2>
 
@@ -147,7 +147,7 @@
                         {{-- ACTION CARD --}}
                         <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-5">
 
-                            <h3 class="text-base font-bold text-slate-800 mb-4">
+                            <h3 class="text-base font-bold text-[var(--theme-primary)] mb-4">
                                 Aksi
                             </h3>
 

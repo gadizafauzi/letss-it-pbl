@@ -32,7 +32,7 @@
     {{-- ACTIVITY --}}
     <div class="modern-box p-7">
 
-        <h3 class="text-xl font-semibold text-slate-800">
+        <h3 class="text-xl font-semibold text-[var(--theme-primary)]">
             Aktivitas Terbaru
         </h3>
 
