@@ -2,89 +2,135 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="space-y-6">
+    <div class="space-y-5">
 
-        <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
-            <h1 class="text-[28px] font-bold text-slate-800">Unit Pendidikan</h1>
-
-            <a href="{{ route('admin.unit.create') }}"
-                class="h-11 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white transition inline-flex items-center gap-2 text-sm font-bold shadow-lg shadow-emerald-100">
-                <i data-lucide="plus" class="w-4 h-4"></i>
-                Tambah Unit
-            </a>
+        {{-- PAGE HEADER --}}
+        <div class="relative overflow-hidden rounded-2xl px-7 py-6"
+            style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 55%, #60a5fa 100%);">
+            <div class="absolute -top-12 -right-12 w-44 h-44 bg-white/[.08] rounded-full"></div>
+            <div class="absolute -bottom-16 left-8 w-56 h-56 bg-white/[.05] rounded-full"></div>
+            <div class="relative z-10 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+                <div>
+                    <p class="text-[11px] font-semibold uppercase tracking-widest text-white/60 mb-1">
+                        Manajemen Akademik
+                    </p>
+                    <h1 class="text-[26px] font-extrabold text-white leading-tight">Unit Pendidikan</h1>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <a href="{{ route('admin.unit.create') }}"
+                        class="inline-flex items-center gap-1.5 h-[38px] px-4 rounded-[10px] text-xs font-bold
+                          bg-white text-sky-500 hover:bg-sky-50 shadow-md hover:shadow-lg transition-all no-underline">
+                        <i data-lucide="plus" class="w-[14px] h-[14px]"></i>Tambah Unit
+                    </a>
+                </div>
+            </div>
         </div>
 
+        {{-- SUCCESS --}}
         @if (session('success'))
-            <div class="px-5 py-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-sm text-emerald-700">
+            <div
+                class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium
+                    bg-sky-100 border border-sky-200 text-sky-700">
+                <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
                 {{ session('success') }}
             </div>
         @endif
 
-        <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+        {{-- FILTER --}}
+        <div class="bg-white border border-sky-100 rounded-2xl px-5 py-4 shadow-sm">
+            <form id="filterForm" action="{{ route('admin.unit.index') }}" method="GET"
+                class="flex flex-wrap items-center gap-2.5">
+
+                {{-- Search --}}
+                <div class="relative flex-1 min-w-[200px]">
+                    <i data-lucide="search"
+                        class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                    <input id="searchInput" type="text" name="search" value="{{ request('search') }}"
+                        placeholder="Cari nama unit..."
+                        class="w-full h-[42px] pl-9 pr-3 border-[1.5px] border-sky-100 rounded-[10px]
+                              bg-sky-50 text-[13px] text-slate-700 outline-none
+                              focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
+                </div>
+
+            </form>
+        </div>
+
+        {{-- TABLE --}}
+        <div class="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-slate-50 border-b">
-                        <tr>
-                            <th class="px-6 py-4 text-left text-xs font-bold uppercase text-slate-500">No</th>
-                            <th class="px-6 py-4 text-left text-xs font-bold uppercase text-slate-500">Nama Unit</th>
-                            <th class="px-6 py-4 text-left text-xs font-bold uppercase text-slate-500">Jumlah Siswa</th>
-                            <th class="px-6 py-4 text-left text-xs font-bold uppercase text-slate-500">Jumlah Guru</th>
-                            <th class="px-6 py-4 text-center text-xs font-bold uppercase text-slate-500">Aksi</th>
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-sky-50 border-b-[1.5px] border-sky-100">
+                            @foreach (['No', 'Nama Unit', 'Jumlah Siswa', 'Jumlah Guru'] as $h)
+                                <th
+                                    class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 whitespace-nowrap">
+                                    {{ $h }}
+                                </th>
+                            @endforeach
+                            <th
+                                class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500">
+                                Aksi
+                            </th>
                         </tr>
                     </thead>
-
-                    <tbody class="divide-y divide-slate-100">
+                    <tbody>
                         @forelse ($units as $unit)
-                            <tr class="hover:bg-slate-50 transition-all">
-
-                                <td class="px-6 py-5 text-sm text-slate-700">
+                            <tr class="border-b border-sky-50 hover:bg-sky-50/50 transition-colors">
+                                <td class="px-4 py-3.5 text-xs text-slate-400 font-semibold">
                                     {{ $loop->iteration }}
                                 </td>
-
-                                <td class="px-6 py-5">
-                                    <span class="font-semibold text-slate-800">{{ $unit->unit_name }}</span>
+                                <td class="px-4 py-3.5">
+                                    <div class="text-[13px] font-bold text-slate-800">{{ $unit->unit_name }}</div>
                                 </td>
-
-                                <td class="px-6 py-5">
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600">
+                                <td class="px-4 py-3.5">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-sky-100 text-sky-700">
                                         {{ $unit->students_count }} Siswa
                                     </span>
                                 </td>
-
-                                <td class="px-6 py-5">
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-50 text-cyan-600">
+                                <td class="px-4 py-3.5">
+                                    <span
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-sky-50 text-sky-600">
                                         {{ $unit->teachers_count }} Guru
                                     </span>
                                 </td>
-
-                                <td class="px-6 py-5">
-                                    <div class="flex justify-center gap-2">
-
+                                <td class="px-4 py-3.5">
+                                    <div class="flex justify-center gap-1.5">
                                         <a href="{{ route('admin.unit.edit', $unit->id) }}"
-                                            class="w-9 h-9 rounded-xl bg-emerald-50 hover:bg-emerald-100
-                                            flex items-center justify-center transition-all">
-                                            <i data-lucide="square-pen" class="w-4 h-4 text-emerald-600"></i>
+                                            class="w-[30px] h-[30px] rounded-lg bg-sky-100 text-sky-500
+                                              hover:bg-sky-500 hover:text-white transition-all
+                                              inline-flex items-center justify-content-center no-underline"
+                                            style="justify-content:center" title="Edit">
+                                            <i data-lucide="square-pen" class="w-[13px] h-[13px]"></i>
                                         </a>
-
                                         <form action="{{ route('admin.unit.destroy', $unit->id) }}" method="POST"
-                                            onsubmit="return confirm('Hapus unit ini? Data siswa dan guru yang terkait akan terpengaruh.')">
+                                            onsubmit="return confirm('Hapus unit ini? Data siswa dan guru yang terkait akan terpengaruh.')"
+                                            class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="w-9 h-9 rounded-xl bg-red-50 hover:bg-red-100
-                                                flex items-center justify-center transition-all">
-                                                <i data-lucide="trash-2" class="w-4 h-4 text-red-600"></i>
+                                                class="w-[30px] h-[30px] rounded-lg bg-red-100 text-red-400
+                                                       hover:bg-red-500 hover:text-white transition-all
+                                                       inline-flex items-center justify-center cursor-pointer border-none"
+                                                title="Hapus">
+                                                <i data-lucide="trash-2" class="w-[13px] h-[13px]"></i>
                                             </button>
                                         </form>
-
                                     </div>
                                 </td>
-
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center py-14 text-sm text-slate-400">
-                                    Belum ada data unit pendidikan
+                                <td colspan="5">
+                                    <div class="flex flex-col items-center justify-center py-16 text-center">
+                                        <div
+                                            class="w-14 h-14 bg-sky-50 rounded-2xl inline-flex items-center justify-center mb-4 text-sky-300">
+                                            <i data-lucide="building" class="w-7 h-7"></i>
+                                        </div>
+                                        <p class="text-[15px] font-bold text-slate-800 mb-1.5">Belum ada data unit pendidikan</p>
+                                        <p class="text-[13px] text-slate-400">Data unit pendidikan belum tersedia atau pencarian
+                                            tidak cocok.</p>
+                                    </div>
                                 </td>
                             </tr>
                         @endforelse
@@ -94,4 +140,20 @@
         </div>
 
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const filterForm = document.getElementById('filterForm');
+            let debounce;
+
+            if (searchInput && filterForm) {
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(debounce);
+                    debounce = setTimeout(() => filterForm.submit(), 500);
+                });
+            }
+        });
+    </script>
+
 @endsection

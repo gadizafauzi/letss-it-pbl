@@ -41,10 +41,23 @@ class MengajarController extends Controller
                         });
                 });
             })
+            ->when($request->academic_year_id, function ($query) use ($request) {
+                $query->where('academic_year_id', $request->academic_year_id);
+            })
+            ->when($request->class_id, function ($query) use ($request) {
+                $query->where('class_id', $request->class_id);
+            })
             ->latest()
-            ->paginate(10);
+            ->paginate(15);
 
-        return view('admin.mengajar.index', compact('teachingAssignments'));
+        $academicYears = AcademicYear::orderByDesc('id')->get();
+        $classes       = SchoolClass::orderBy('class_name')->get();
+
+        return view('admin.mengajar.index', compact(
+            'teachingAssignments',
+            'academicYears',
+            'classes'
+        ));
     }
 
     /**

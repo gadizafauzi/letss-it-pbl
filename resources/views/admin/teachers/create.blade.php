@@ -265,7 +265,7 @@
                 <div class="xl:col-span-3 space-y-6">
 
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
-                        <h3 class="text-base font-bold text-slate-800 mb-5">
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-5">
                             Password Default
                         </h3>
                         <p class="text-sm text-slate-600">

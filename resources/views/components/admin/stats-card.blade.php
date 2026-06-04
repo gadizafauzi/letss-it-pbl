@@ -1,8 +1,8 @@
 <div
     class="group bg-white border border-slate-200 rounded-3xl px-4 py-4 lg:px-6 lg:py-5 flex items-center
     transition-all duration-300 cursor-pointer
-    hover:-translate-y-1 hover:border-emerald-300
-    hover:shadow-[-8px_12px_25px_rgba(16,185,129,0.18)]">
+    hover:-translate-y-1 hover:border-blue-200
+    hover:shadow-[-8px_12px_25px_rgba(59,130,246,0.12)]">
 
     <div class="flex items-center gap-4">
 

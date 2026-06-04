@@ -29,7 +29,7 @@
                         {{-- HEADER --}}
                         <div class="px-6 py-5 border-b border-slate-100">
 
-                            <h2 class="text-lg font-bold text-slate-800">
+                            <h2 class="text-lg font-bold text-[var(--theme-primary)]">
                                 Informasi Kelas
                             </h2>
 
@@ -51,8 +51,8 @@
 
                                 <select name="unit_id"
                                     class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                    focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                    focus:border-emerald-400 text-sm text-slate-700">
+                                    focus:outline-none focus:ring-4 focus:ring-blue-100
+                                    focus:border-blue-400 text-sm text-slate-700">
 
                                     <option value="">
                                         Pilih Unit
@@ -87,8 +87,8 @@
                                 <input type="text" name="class_name" value="{{ old('class_name') }}"
                                     placeholder="Contoh: 1A / VII A"
                                     class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                    focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                    focus:border-emerald-400 text-sm text-slate-700">
+                                    focus:outline-none focus:ring-4 focus:ring-blue-100
+                                    focus:border-blue-400 text-sm text-slate-700">
 
                                 @error('class_name')
                                     <p class="text-sm text-red-500 mt-2">
@@ -107,8 +107,8 @@
 
                                 <select name="homeroom_teacher_id"
                                     class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                                    focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                    focus:border-emerald-400 text-sm text-slate-700">
+                                    focus:outline-none focus:ring-4 focus:ring-blue-100
+                                    focus:border-blue-400 text-sm text-slate-700">
 
                                     <option value="">
                                         Pilih Wali Kelas
@@ -147,7 +147,7 @@
                         {{-- ACTION CARD --}}
                         <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-5">
 
-                            <h3 class="text-base font-bold text-slate-800 mb-4">
+                            <h3 class="text-base font-bold text-[var(--theme-primary)] mb-4">
                                 Aksi
                             </h3>
 
@@ -155,9 +155,9 @@
 
                                 {{-- SAVE --}}
                                 <button type="submit"
-                                    class="w-full h-12 rounded-2xl bg-emerald-500
-                                    hover:bg-emerald-600 transition-all
-                                    text-white font-semibold shadow-lg shadow-emerald-100">
+                                    class="w-full h-12 rounded-2xl bg-blue-500
+                                    hover:bg-blue-600 transition-all
+                                    text-white font-semibold shadow-lg shadow-blue-100">
 
                                     Simpan
 
@@ -179,13 +179,13 @@
                         </div>
 
                         {{-- INFO CARD --}}
-                        <div class="bg-emerald-50 border border-emerald-100 rounded-3xl p-5">
+                        <div class="bg-blue-50 border border-blue-100 rounded-3xl p-5">
 
-                            <h3 class="text-sm font-bold text-emerald-700 mb-2">
+                            <h3 class="text-sm font-bold text-blue-700 mb-2">
                                 Informasi
                             </h3>
 
-                            <p class="text-sm text-emerald-600 leading-relaxed">
+                            <p class="text-sm text-blue-600 leading-relaxed">
                                 Pastikan nama kelas tidak duplikat dalam unit
                                 pendidikan yang sama.
                             </p>

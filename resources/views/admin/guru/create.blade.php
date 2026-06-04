@@ -30,12 +30,12 @@
                             <div class="flex flex-wrap gap-2">
 
                                 <button type="button" data-tab-target="tab-data-pribadi"
-                                    class="h-11 px-5 rounded-t-2xl border-b-2 border-emerald-500 text-emerald-600 bg-emerald-50 text-sm font-bold transition-all">
+                                    class="h-11 px-5 rounded-t-2xl border-b-2 border-blue-500 text-blue-600 bg-blue-50 text-sm font-bold transition-all">
                                     Data Pribadi
                                 </button>
 
                                 <button type="button" data-tab-target="tab-data-kepegawaian"
-                                    class="h-11 px-5 rounded-t-2xl text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 text-sm font-semibold transition-all">
+                                    class="h-11 px-5 rounded-t-2xl text-slate-500 hover:text-blue-600 hover:bg-blue-50 text-sm font-semibold transition-all">
                                     Data Kepegawaian
                                 </button>
 
@@ -60,8 +60,8 @@
                                     <input type="text" name="nip" value="{{ old('nip') }}"
                                         placeholder="Masukkan NIP"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
                                 </div>
 
                                 {{-- FULL NAME --}}
@@ -73,8 +73,8 @@
                                     <input type="text" name="full_name" value="{{ old('full_name') }}"
                                         placeholder="Nama lengkap"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
                                 </div>
 
                                 {{-- GENDER --}}
@@ -88,14 +88,14 @@
                                         <label class="flex items-center gap-2 text-sm text-slate-700">
                                             <input type="radio" name="gender" value="male"
                                                 {{ old('gender') == 'male' ? 'checked' : '' }}
-                                                class="text-emerald-500 focus:ring-emerald-200">
+                                                class="text-blue-500 focus:ring-blue-200">
                                             Laki-laki
                                         </label>
 
                                         <label class="flex items-center gap-2 text-sm text-slate-700">
                                             <input type="radio" name="gender" value="female"
                                                 {{ old('gender') == 'female' ? 'checked' : '' }}
-                                                class="text-emerald-500 focus:ring-emerald-200">
+                                                class="text-blue-500 focus:ring-blue-200">
                                             Perempuan
                                         </label>
 
@@ -111,8 +111,8 @@
                                     <input type="text" name="birth_place" value="{{ old('birth_place') }}"
                                         placeholder="Tempat lahir"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
                                 </div>
 
                                 {{-- BIRTH DATE --}}
@@ -123,8 +123,8 @@
 
                                     <input type="date" name="birth_date" value="{{ old('birth_date') }}"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
                                 </div>
 
                                 {{-- PHONE --}}
@@ -136,8 +136,8 @@
                                     <input type="text" name="phone" value="{{ old('phone') }}"
                                         placeholder="08xxxxxxxxxx"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
                                 </div>
 
                                 {{-- ADDRESS --}}
@@ -148,8 +148,8 @@
 
                                     <textarea rows="4" name="address" placeholder="Alamat tempat tinggal"
                                         class="w-full p-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm resize-none transition-all">{{ old('address') }}</textarea>
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm resize-none transition-all">{{ old('address') }}</textarea>
                                 </div>
 
                             </div>
@@ -167,8 +167,8 @@
 
                                     <select name="unit_id"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
 
                                         <option value="">
                                             Pilih Unit
@@ -192,8 +192,8 @@
 
                                     <select name="position_id"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
 
                                         <option value="">
                                             Pilih Jabatan
@@ -202,7 +202,7 @@
                                         @foreach ($positions as $position)
                                             <option value="{{ $position->id }}"
                                                 {{ old('position_id') == $position->id ? 'selected' : '' }}>
-                                                {{ $position->position_name }}
+                                                {{ $position->name }}
                                             </option>
                                         @endforeach
 
@@ -218,8 +218,8 @@
                                     <input type="text" name="last_education" value="{{ old('last_education') }}"
                                         placeholder="Contoh: S1 Pendidikan"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
                                 </div>
 
                                 {{-- EMPLOYMENT STATUS --}}
@@ -230,8 +230,8 @@
 
                                     <select name="employment_status"
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                        focus:border-emerald-400 text-sm transition-all">
+                                        focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                        focus:border-blue-400 text-sm transition-all">
 
                                         <option value="">
                                             Pilih Status Kepegawaian
@@ -311,7 +311,7 @@
                     {{-- STATUS --}}
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
 
-                        <h3 class="text-base font-bold text-slate-800 mb-5">
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-5">
                             Status
                         </h3>
 
@@ -320,14 +320,14 @@
                             <label class="flex items-center gap-3 text-sm text-slate-700">
                                 <input type="radio" name="status" value="active"
                                     {{ old('status', 'active') == 'active' ? 'checked' : '' }}
-                                    class="text-emerald-500 focus:ring-emerald-200">
+                                    class="text-blue-500 focus:ring-blue-200">
                                 Aktif
                             </label>
 
                             <label class="flex items-center gap-3 text-sm text-slate-700">
                                 <input type="radio" name="status" value="inactive"
                                     {{ old('status') == 'inactive' ? 'checked' : '' }}
-                                    class="text-emerald-500 focus:ring-emerald-200">
+                                    class="text-blue-500 focus:ring-blue-200">
                                 Tidak Aktif
                             </label>
 
@@ -338,7 +338,7 @@
                     {{-- FOTO --}}
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
 
-                        <h3 class="text-base font-bold text-slate-800 mb-4">
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-4">
                             Foto
                         </h3>
 
@@ -362,9 +362,9 @@
                             file:mr-4 file:py-2.5 file:px-4
                             file:rounded-xl file:border-0
                             file:text-sm file:font-semibold
-                            file:bg-emerald-50
-                            file:text-emerald-600
-                            hover:file:bg-emerald-100">
+                            file:bg-blue-50
+                            file:text-blue-600
+                            hover:file:bg-blue-100">
 
                     </div>
 
@@ -372,16 +372,16 @@
                     <div class="space-y-3">
 
                         <button type="submit"
-                            class="w-full h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-600
-                            text-white font-bold shadow-lg shadow-emerald-100 transition-all">
+                            class="w-full h-12 rounded-2xl bg-blue-500 hover:bg-blue-600
+                            text-white font-bold shadow-lg shadow-blue-100 transition-all">
 
                             Simpan
 
                         </button>
 
                         <a href="{{ route('admin.guru.index') }}"
-                            class="w-full h-12 rounded-2xl bg-cyan-500 hover:bg-cyan-600
-                            text-white font-bold inline-flex items-center justify-center transition-all">
+                            class="w-full h-12 rounded-2xl bg-slate-200 hover:bg-slate-300
+                            text-slate-700 font-bold inline-flex items-center justify-center transition-all">
 
                             Batal
 
@@ -412,16 +412,16 @@
 
                     btn.classList.remove(
                         'border-b-2',
-                        'border-emerald-500',
-                        'text-emerald-600',
-                        'bg-emerald-50',
+                        'border-blue-500',
+                        'text-blue-600',
+                        'bg-blue-50',
                         'font-bold'
                     );
 
                     btn.classList.add(
                         'text-slate-500',
-                        'hover:text-emerald-600',
-                        'hover:bg-emerald-50',
+                        'hover:text-blue-600',
+                        'hover:bg-blue-50',
                         'font-semibold'
                     );
 
@@ -429,16 +429,16 @@
 
                 tabButton.classList.remove(
                     'text-slate-500',
-                    'hover:text-emerald-600',
-                    'hover:bg-emerald-50',
+                    'hover:text-blue-600',
+                    'hover:bg-blue-50',
                     'font-semibold'
                 );
 
                 tabButton.classList.add(
                     'border-b-2',
-                    'border-emerald-500',
-                    'text-emerald-600',
-                    'bg-emerald-50',
+                    'border-blue-500',
+                    'text-blue-600',
+                    'bg-blue-50',
                     'font-bold'
                 );
 

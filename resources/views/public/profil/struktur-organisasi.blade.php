@@ -29,7 +29,7 @@
                     <div class="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-200">
                         <i data-lucide="user" class="w-10 h-10 text-white"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-800">Ustadz Ahmad Fauzi, S.Pd.I, M.Pd</h3>
+                    <h3 class="text-lg font-bold text-[var(--theme-primary)]">Ustadz Ahmad Fauzi, S.Pd.I, M.Pd</h3>
                     <p class="text-sm text-emerald-600 font-semibold mt-1">Kepala Sekolah</p>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         <div class="w-16 h-16 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center mx-auto mb-3">
                             <i data-lucide="user" class="w-7 h-7 text-slate-400"></i>
                         </div>
-                        <h4 class="text-sm font-bold text-slate-800 leading-snug">{{ $p['nama'] }}</h4>
+                        <h4 class="text-sm font-bold text-[var(--theme-primary)] leading-snug">{{ $p['nama'] }}</h4>
                         <p class="text-xs text-slate-400 font-semibold mt-1">{{ $p['jabatan'] }}</p>
                     </div>
                 @endforeach

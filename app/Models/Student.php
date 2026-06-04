@@ -17,6 +17,7 @@ class Student extends Model
 
         'nis',
         'nisn',
+        'nik',
 
         'full_name',
         'gender',

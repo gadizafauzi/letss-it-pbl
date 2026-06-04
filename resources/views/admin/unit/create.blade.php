@@ -28,8 +28,8 @@
                             <input type="text" name="unit_name" value="{{ old('unit_name') }}"
                                 placeholder="Contoh: SD Islam, SMP Terpadu..."
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
-                                focus:bg-white focus:outline-none focus:ring-4 focus:ring-emerald-100
-                                focus:border-emerald-400 text-sm transition-all
+                                focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
+                                focus:border-blue-400 text-sm transition-all
                                 @error('unit_name') border-red-400 @enderror">
 
                             @error('unit_name')
@@ -39,12 +39,12 @@
 
                         <div class="flex gap-3 pt-2">
                             <button type="submit"
-                                class="h-12 px-8 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold shadow-lg shadow-emerald-100 transition-all">
+                                class="h-12 px-8 rounded-2xl bg-blue-500 hover:bg-blue-600 text-white font-bold shadow-lg shadow-blue-100 transition-all">
                                 Simpan
                             </button>
 
                             <a href="{{ route('admin.unit.index') }}"
-                                class="h-12 px-8 rounded-2xl bg-cyan-500 hover:bg-cyan-600 text-white font-bold inline-flex items-center justify-center transition-all">
+                                class="h-12 px-8 rounded-2xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold inline-flex items-center justify-center transition-all">
                                 Batal
                             </a>
                         </div>

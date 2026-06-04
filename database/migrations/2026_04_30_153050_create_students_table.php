@@ -29,29 +29,21 @@ return new class extends Migration
 
             // SCHOOL DATA
             $table->string('nis')->nullable()->unique();
-
             $table->string('nisn')->nullable()->unique();
+            $table->string('nik', 16)->nullable()->unique();
 
             // PERSONAL DATA
             $table->string('full_name');
-
             $table->enum('gender', ['L', 'P'])->nullable();
-
             $table->string('birth_place')->nullable();
-
             $table->date('birth_date')->nullable();
-
             $table->string('hobby')->nullable();
-
             $table->string('phone')->nullable();
-
             $table->text('address')->nullable();
 
             // FAMILY DATA
             $table->string('father_name')->nullable();
-
             $table->string('mother_name')->nullable();
-
             $table->string('parent_phone')->nullable();
 
             // PHOTO

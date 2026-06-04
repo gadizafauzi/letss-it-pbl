@@ -37,7 +37,7 @@
                     <div class="w-16 h-16 rounded-2xl bg-{{ $u['color'] }}-50 flex items-center justify-center mx-auto mb-4 p-2.5 border border-{{ $u['color'] }}-100/50">
                         <img src="{{ $u['logo'] }}" alt="Logo" class="w-full h-full object-contain drop-shadow-sm">
                     </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $u['title'] }}</h3>
+                    <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-2">{{ $u['title'] }}</h3>
                     <p class="text-sm text-slate-500">{{ $u['usia'] }}</p>
                     <p class="text-sm font-bold text-{{ $u['color'] === 'sky' ? 'sky-600' : ($u['color'] === 'amber' ? 'amber-600' : 'indigo-600') }} mt-2">Kuota: {{ $u['kuota'] }}</p>
                 </div>

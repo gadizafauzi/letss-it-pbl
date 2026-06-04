@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\AcademicYear;
 use App\Models\Invoice;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -27,7 +28,25 @@ class DashboardController extends Controller
             ->where('status', 'paid')
             ->sum('amount');
 
-        return view('student.dashboard', compact('student', 'activeYear', 'tagihanSaatIni', 'totalTerbayar'));
+        // Hitung jumlah mata pelajaran dari nilai semester aktif
+        $jumlahMapel = Grade::where('student_id', $student->id)
+            ->where('academic_year_id', $activeYear?->id)
+            ->where('semester', $activeYear?->active_semester ?? 'odd')
+            ->count();
+
+        // Hitung rata-rata nilai akhir dari semester aktif
+        $rataRataNilai = Grade::where('student_id', $student->id)
+            ->where('academic_year_id', $activeYear?->id)
+            ->where('semester', $activeYear?->active_semester ?? 'odd')
+            ->whereNotNull('final_score')
+            ->avg('final_score');
+        $rataRataNilai = $rataRataNilai !== null ? round($rataRataNilai, 1) : '-';
+
+        return view('student.dashboard', compact(
+            'student', 'activeYear',
+            'tagihanSaatIni', 'totalTerbayar',
+            'jumlahMapel', 'rataRataNilai'
+        ));
     }
 
     public function cetakKtm()

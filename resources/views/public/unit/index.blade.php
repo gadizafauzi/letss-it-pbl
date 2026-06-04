@@ -35,7 +35,7 @@
                             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-{{ $unit['color'] }}-50 text-{{ $unit['color'] }}-600 text-xs font-bold mb-4">
                                 <img src="{{ $unit['logo'] }}" alt="Logo" class="w-4 h-4 object-contain rounded-full bg-white p-0.5"> {{ $unit['title'] }}
                             </div>
-                            <h2 class="text-2xl sm:text-3xl font-black text-slate-800 mb-4">{{ $unit['title'] }}</h2>
+                            <h2 class="text-2xl sm:text-3xl font-black text-[var(--theme-primary)] mb-4">{{ $unit['title'] }}</h2>
                             <p class="text-slate-500 leading-relaxed mb-6">{{ $unit['desc'] }}</p>
                             <div class="grid grid-cols-2 gap-4 mb-6">
                                 @foreach($unit['features'] as $f)

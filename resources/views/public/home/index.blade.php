@@ -286,7 +286,7 @@
                         <div class="feature-icon bg-{{ $item['bg'] }}-50 text-{{ $item['bg'] }}-600">
                             <i data-lucide="{{ $item['icon'] }}" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $item['title'] }}</h3>
+                        <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-2">{{ $item['title'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach
@@ -316,7 +316,7 @@
                         <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-{{ $unit['color'] }}-50 to-{{ $unit['color'] }}-100/80 flex items-center justify-center mx-auto mb-5 p-3.5 border border-{{ $unit['color'] }}-100/50">
                             <img src="{{ $unit['logo'] }}" alt="Logo {{ $unit['title'] }}" class="w-full h-full object-contain drop-shadow-sm hover:scale-105 transition-transform duration-300">
                         </div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-2">{{ $unit['title'] }}</h3>
+                        <h3 class="text-xl font-bold text-[var(--theme-primary)] mb-2">{{ $unit['title'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed mb-5">{{ $unit['desc'] }}</p>
                         <a href="{{ route($unit['route']) }}" class="text-{{ $unit['color'] === 'sky' ? 'sky-600' : ($unit['color'] === 'amber' ? 'amber-600' : 'indigo-600') }} text-sm font-bold hover:underline inline-flex items-center gap-1">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
                     </div>

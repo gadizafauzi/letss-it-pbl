@@ -1,22 +1,22 @@
 {{-- SIDEBAR --}}
 <aside id="sidebar"
-    class="sidebar fixed top-0 left-0 lg:relative z-50 lg:z-0 h-screen bg-white border-r border-slate-200 flex flex-col transition-all duration-300">
+    class="sidebar fixed top-0 left-0 lg:relative z-50 lg:z-0 h-screen flex flex-col transition-all duration-300">
 
     {{-- LOGO --}}
-    <div class="h-20 border-b border-slate-100 flex items-center justify-between px-4 lg:px-6">
+    <div class="h-20 border-b border-white/[0.06] flex items-center justify-between px-4 lg:px-6">
 
         <div class="flex items-center gap-3">
 
             <div
-                class="w-9 h-9 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center shadow-lg shadow-emerald-200">
+                class="w-9 h-9 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-900/40">
                 <i data-lucide="school-2" class="w-4 h-4 lg:w-6 lg:h-6 text-white"></i>
             </div>
 
             <div class="logo-text">
-                <h1 class="text-sm font-extrabold tracking-tight text-slate-800">
+                <h1 class="text-sm font-extrabold tracking-tight text-slate-100">
                     SIT Mutiara Qur'an
                 </h1>
-                <p class="text-xs text-slate-400 mt-0.5">
+                <p class="text-xs text-slate-500 mt-0.5">
                     Administrator Panel
                 </p>
             </div>
@@ -205,12 +205,12 @@
     </nav>
 
     {{-- FOOTER --}}
-    <div class="p-4 border-t border-slate-100">
+    <div class="p-4 border-t border-white/[0.06]">
 
         <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit"
-                class="logout-btn w-full h-12 rounded-2xl bg-red-500 hover:bg-red-600 transition-all duration-300 text-white font-semibold inline-flex items-center justify-center gap-3">
+                class="logout-btn w-full h-12 rounded-2xl bg-red-500/20 hover:bg-red-500/30 border border-red-500/25 transition-all duration-300 text-red-400 hover:text-red-300 font-semibold inline-flex items-center justify-center gap-3">
                 <i data-lucide="log-out"></i>
                 <span class="logout-text">Logout</span>
             </button>

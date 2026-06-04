@@ -29,8 +29,8 @@
 
                             <select id="unit_id" name="unit_id" required
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                            focus:outline-none focus:ring-4 focus:ring-emerald-100
-                            focus:border-emerald-400 text-sm text-slate-700">
+                            focus:outline-none focus:ring-4 focus:ring-blue-100
+                            focus:border-blue-400 text-sm text-slate-700">
 
                                 <option value="" disabled @selected(!old('unit_id'))>
                                     Pilih Unit
@@ -58,8 +58,8 @@
                             <input id="subject_code" type="text" name="subject_code" value="{{ old('subject_code') }}"
                                 required placeholder="Contoh: MPL001"
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                            focus:outline-none focus:ring-4 focus:ring-emerald-100
-                            focus:border-emerald-400 text-sm text-slate-700">
+                            focus:outline-none focus:ring-4 focus:ring-blue-100
+                            focus:border-blue-400 text-sm text-slate-700">
 
                             @error('subject_code')
                                 <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
@@ -75,8 +75,8 @@
                             <input id="subject_name" type="text" name="subject_name" value="{{ old('subject_name') }}"
                                 required placeholder="Contoh: Matematika"
                                 class="w-full h-12 px-4 rounded-2xl border border-slate-200
-                            focus:outline-none focus:ring-4 focus:ring-emerald-100
-                            focus:border-emerald-400 text-sm text-slate-700">
+                            focus:outline-none focus:ring-4 focus:ring-blue-100
+                            focus:border-blue-400 text-sm text-slate-700">
 
                             @error('subject_name')
                                 <p class="text-sm text-red-500 mt-2">{{ $message }}</p>
@@ -92,8 +92,8 @@
                     <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-5 space-y-3">
 
                         <button type="submit"
-                            class="w-full h-12 rounded-2xl bg-emerald-500 hover:bg-emerald-600
-                        text-white font-semibold shadow-lg shadow-emerald-100 transition-all">
+                            class="w-full h-12 rounded-2xl bg-blue-500 hover:bg-blue-600
+                        text-white font-semibold shadow-lg shadow-blue-100 transition-all">
 
                             Simpan
 

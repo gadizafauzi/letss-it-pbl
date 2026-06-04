@@ -8,9 +8,15 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $units = Unit::withCount(['students', 'teachers'])->latest()->get();
+        $query = Unit::withCount(['students', 'teachers']);
+
+        if ($request->filled('search')) {
+            $query->where('unit_name', 'like', '%' . $request->search . '%');
+        }
+
+        $units = $query->latest()->get();
 
         return view('admin.unit.index', compact('units'));
     }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Teacher;
 use App\Models\SchoolClass;
 use App\Models\AcademicYear;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Paginator::defaultView('pagination.custom');
+
         View::composer('components.teacher.sidebar', function ($view) {
 
             $homeroomClass = null;
@@ -26,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
 
                 if ($teacher) {
                     $activeYear = AcademicYear::where('status', 'active')->first();
-                    
+
                     if ($teacher->position && stripos($teacher->position->name, 'Wali') !== false) {
                         $homeroomClass = SchoolClass::where('homeroom_teacher_id', $teacher->id)
                             ->first();
