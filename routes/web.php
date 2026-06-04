@@ -318,17 +318,17 @@ Route::get('/berita/search', fn() => view('public.berita.search'))
 Route::get('/ppdb', fn() => view('public.ppdb.index'))
     ->name('public.ppdb.index');
 
-Route::get('/ppdb/alur', fn() => view('public.ppdb.alur'))
+Route::get('/ppdb/alur', fn() => redirect('/ppdb#alur'))
     ->name('public.ppdb.alur');
 
-Route::get('/ppdb/syarat', fn() => view('public.ppdb.syarat'))
+Route::get('/ppdb/syarat', fn() => redirect('/ppdb#syarat'))
     ->name('public.ppdb.syarat');
 
 Route::get('/ppdb/jadwal', fn() => view('public.ppdb.jadwal'))
     ->name('public.ppdb.jadwal');
 
-Route::get('/ppdb/faq', fn() => view('public.ppdb.faq'))
+Route::get('/ppdb/faq', fn() => redirect('/ppdb#faq'))
     ->name('public.ppdb.faq');
 
-Route::get('/ppdb/kontak', fn() => view('public.ppdb.form-kontak'))
+Route::get('/ppdb/kontak', fn() => redirect('/ppdb#kontak'))
     ->name('public.ppdb.form-kontak');

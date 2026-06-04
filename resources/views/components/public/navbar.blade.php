@@ -3,8 +3,7 @@
 
     {{-- LOGO --}}
     <a href="{{ route('public.home') }}" class="nav-logo">
-        <img src="{{ asset('images/logo.jpeg') }}" alt="Logo SIT Mutiara Quran">
-        <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT Indonesia">
+        <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT Indonesia" style="width:42px;height:42px;border-radius:12px;object-fit:contain;background:#fff;padding:3px;">
         <div class="nav-logo-text">
             <h1>SIT Mutiara Qur'an</h1>
             <p>Sekolah Islam Terpadu</p>

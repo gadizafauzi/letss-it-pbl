@@ -306,15 +306,16 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @php
                     $units = [
-                        ['logo' => asset('images/logo_tk.png'), 'color' => 'sky', 'title' => 'TK Islam Terpadu', 'desc' => 'Pembelajaran bermain sambil belajar yang bermakna dengan fokus pengenalan huruf hijaiyah, adab dasar, dan hafalan surah pendek.', 'route' => 'public.unit.tk.profil'],
-                        ['logo' => asset('images/logo_sd.jpg'), 'color' => 'amber', 'title' => 'SD Islam Terpadu', 'desc' => 'Pembentukan pondasi keilmuan akademis umum, penguatan hafalan Al-Qur\'an hingga 5 juz, pembiasaan ibadah mandiri, dan kemandirian.', 'route' => 'public.unit.sd.profil'],
-                        ['logo' => asset('images/logo_smp.png'), 'color' => 'indigo', 'title' => 'SMP Islam Terpadu', 'desc' => 'Pengembangan kemampuan analisis akademis, penguasaan literasi digital, hafalan Al-Qur\'an hingga 10 juz, dan pelatihan kepemimpinan.', 'route' => 'public.unit.smp.profil'],
+                        ['logo' => asset('images/tk.jpeg'),  'color' => 'sky',    'title' => 'TK Islam Terpadu',  'desc' => 'Pembelajaran bermain sambil belajar yang bermakna dengan fokus pengenalan huruf hijaiyah, adab dasar, dan hafalan surah pendek.', 'route' => 'public.unit.tk.profil'],
+                        ['logo' => asset('images/sd.jpeg'),  'color' => 'amber',  'title' => 'SD Islam Terpadu',  'desc' => 'Pembentukan pondasi keilmuan akademis umum, penguatan hafalan Al-Qur\'an hingga 5 juz, pembiasaan ibadah mandiri, dan kemandirian.', 'route' => 'public.unit.sd.profil'],
+                        ['logo' => asset('images/smp.jpeg'), 'color' => 'indigo', 'title' => 'SMP Islam Terpadu', 'desc' => 'Pengembangan kemampuan analisis akademis, penguasaan literasi digital, hafalan Al-Qur\'an hingga 10 juz, dan pelatihan kepemimpinan.', 'route' => 'public.unit.smp.profil'],
                     ];
                 @endphp
                 @foreach($units as $unit)
-                    <div class="feature-card text-center fade-up">
-                        <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-{{ $unit['color'] }}-50 to-{{ $unit['color'] }}-100/80 flex items-center justify-center mx-auto mb-5 p-3.5 border border-{{ $unit['color'] }}-100/50">
-                            <img src="{{ $unit['logo'] }}" alt="Logo {{ $unit['title'] }}" class="w-full h-full object-contain drop-shadow-sm hover:scale-105 transition-transform duration-300">
+                    <div class="feature-card text-center fade-up group">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-{{ $unit['color'] }}-50 to-{{ $unit['color'] }}-100/80 flex items-center justify-center mx-auto mb-5 border border-{{ $unit['color'] }}-100/50 overflow-hidden">
+                            <img src="{{ $unit['logo'] }}" alt="Logo {{ $unit['title'] }}"
+                                 class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300">
                         </div>
                         <h3 class="text-xl font-bold text-[var(--theme-primary)] mb-2">{{ $unit['title'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed mb-5">{{ $unit['desc'] }}</p>

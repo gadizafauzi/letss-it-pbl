@@ -6,8 +6,7 @@
         {{-- BRAND --}}
         <div class="footer-brand">
             <div class="flex items-center gap-3 mb-4">
-                <img src="{{ asset('images/logo.jpeg') }}" alt="Logo" class="w-10 h-10 rounded-xl object-cover">
-                <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT" class="w-10 h-10 rounded-xl object-cover bg-white p-0.5">
+                <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT" class="w-10 h-10 rounded-xl object-contain bg-white p-1">
                 <h3>SIT Mutiara Qur'an</h3>
             </div>
             <p class="mb-5 leading-relaxed text-sm text-slate-400">Mendidik generasi Qur'ani yang berakhlak mulia, cerdas, berprestasi, dan berdaya saing global dengan pendekatan kurikulum Islam Terpadu yang seimbang.</p>
@@ -55,7 +54,7 @@
                 Kabupaten Solok, Sumatera Barat
             </p>
             <p class="text-sm text-slate-400 leading-relaxed mb-2">
-                <i data-lucide="phone" class="w-4 h-4 text-emerald-500 inline mr-2"></i>(0755) 1234-5678
+                <i data-lucide="phone" class="w-4 h-4 text-emerald-500 inline mr-2"></i>+62 822-8620-4878
             </p>
             <p class="text-sm text-slate-400 leading-relaxed">
                 <i data-lucide="mail" class="w-4 h-4 text-emerald-500 inline mr-2"></i>info@sitmutiaraquran.sch.id

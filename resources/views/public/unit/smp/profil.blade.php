@@ -20,7 +20,7 @@
         <div class="w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-up">
                 <div>
-                    <span class="section-badge"><img src="{{ asset('images/logo_smp.png') }}" class="w-4 h-4 object-contain rounded-full bg-white p-0.5 inline mr-1"> SMP Islam Terpadu</span>
+                    <span class="section-badge"><img src="{{ asset('images/smp.jpeg') }}" class="w-4 h-4 object-contain rounded-full bg-white p-0.5 inline mr-1"> SMP Islam Terpadu</span>
                     <h2 class="section-title mb-4">Profil SMP Islam Terpadu</h2>
                     <p class="text-slate-500 leading-relaxed mb-4">SMP Islam Terpadu SIT Mutiara Qur'an mempersiapkan siswa untuk menjadi pribadi unggul yang siap menghadapi tantangan masa depan dengan bekal iman, ilmu, dan akhlak.</p>
                     <p class="text-slate-500 leading-relaxed mb-6">Dengan target hafalan minimal 10 juz, penguasaan bahasa Arab dan Inggris, serta program leadership, siswa dibekali kompetensi lengkap.</p>
@@ -33,9 +33,39 @@
                         @endforeach
                     </div>
                 </div>
-                <div>
-                    <div class="w-full aspect-[4/3] rounded-3xl bg-gradient-to-br from-indigo-50 to-indigo-100/60 border border-indigo-100/50 flex items-center justify-center p-8">
-                        <img src="{{ asset('images/logo_smp.png') }}" alt="Logo SMPIT Mutiara Qur'an" class="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-md hover:scale-105 transition-transform duration-300">
+                <div class="relative group py-6 px-2">
+                    {{-- Main logo frame --}}
+                    <div class="w-full rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50 via-white to-indigo-50/40 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:border-indigo-200" style="min-height: 300px; padding: clamp(24px,6%,56px);">
+                        <img src="{{ asset('images/smp.jpeg') }}" alt="Logo SMPIT Mutiara Qur'an"
+                             class="max-h-52 sm:max-h-64 w-auto object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-500">
+                    </div>
+
+                    {{-- Floating badge top-right: Target Hafalan --}}
+                    <div class="absolute top-2 -right-2 sm:right-0 bg-white rounded-2xl shadow-lg border border-indigo-100/80 px-3 py-2 flex items-center gap-2.5 animate-bounce z-10" style="animation-duration:4s;">
+                        <div class="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="book-open" class="w-3.5 h-3.5 text-indigo-500"></i>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none">Target Hafalan</p>
+                            <p class="text-xs font-black text-slate-800 mt-0.5">10 Juz</p>
+                        </div>
+                    </div>
+
+                    {{-- Floating badge bottom-left: Jenjang --}}
+                    <div class="absolute bottom-2 -left-2 sm:left-0 bg-white rounded-2xl shadow-lg border border-amber-100 px-3 py-2 flex items-center gap-2.5 animate-bounce z-10" style="animation-duration:5.5s;">
+                        <div class="w-7 h-7 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="graduation-cap" class="w-3.5 h-3.5 text-amber-500"></i>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none">Masuk dari</p>
+                            <p class="text-xs font-black text-slate-800 mt-0.5">Lulusan SD/MI</p>
+                        </div>
+                    </div>
+
+                    {{-- Pill akreditasi --}}
+                    <div class="absolute bottom-10 right-4 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1.5 border border-emerald-100 shadow-sm z-10">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500 flex-shrink-0"></i>
+                        <span class="text-[11px] font-bold text-slate-700">Terakreditasi A</span>
                     </div>
                 </div>
             </div>
