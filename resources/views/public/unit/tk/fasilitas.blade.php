@@ -11,7 +11,7 @@
             <a href="{{ route('public.unit.tk.profil') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Profil</a>
             <a href="{{ route('public.unit.tk.guru') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Guru</a>
             <a href="{{ route('public.unit.tk.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Ekstrakurikuler</a>
-            <a href="{{ route('public.unit.tk.fasilitas') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-emerald-500 text-white">Fasilitas</a>
+            <a href="{{ route('public.unit.tk.fasilitas') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-sky-500 text-white">Fasilitas</a>
             <a href="{{ route('public.unit.tk.prestasi') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Prestasi</a>
         </div>
     </div>
@@ -25,8 +25,8 @@
                 @php $fasilitas = [['icon'=>'home','title'=>'Ruang Kelas Ber-AC','desc'=>'Ruang kelas yang nyaman dan aman untuk anak usia dini.'],['icon'=>'trees','title'=>'Area Bermain Outdoor','desc'=>'Taman bermain luas dengan perlengkapan yang aman.'],['icon'=>'blocks','title'=>'Sentra Bermain Indoor','desc'=>'Area bermain dalam ruangan dengan mainan edukatif.'],['icon'=>'utensils','title'=>'Kantin Sehat','desc'=>'Menu makanan bergizi yang disiapkan khusus untuk anak-anak.'],['icon'=>'book','title'=>'Perpustakaan Mini','desc'=>'Koleksi buku cerita anak dan buku bergambar Islami.'],['icon'=>'shield-check','title'=>'CCTV & Keamanan','desc'=>'Sistem keamanan 24 jam untuk keselamatan anak-anak.']]; @endphp
                 @foreach($fasilitas as $f)
                 <div class="feature-card fade-up">
-                    <div class="feature-icon bg-pink-50 text-pink-500"><i data-lucide="{{ $f['icon'] }}" class="w-6 h-6"></i></div>
-                    <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-2">{{ $f['title'] }}</h3>
+                    <div class="feature-icon bg-sky-50 text-sky-500"><i data-lucide="{{ $f['icon'] }}" class="w-6 h-6"></i></div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $f['title'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">{{ $f['desc'] }}</p>
                 </div>
                 @endforeach

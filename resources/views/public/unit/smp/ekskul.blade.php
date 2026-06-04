@@ -10,7 +10,7 @@
         <div class="w-full flex gap-2 overflow-x-auto py-3 public-subnav-container no-scrollbar">
             <a href="{{ route('public.unit.smp.profil') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Profil</a>
             <a href="{{ route('public.unit.smp.guru') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Guru</a>
-            <a href="{{ route('public.unit.smp.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-emerald-500 text-white">Ekstrakurikuler</a>
+            <a href="{{ route('public.unit.smp.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-indigo-600 text-white">Ekstrakurikuler</a>
             <a href="{{ route('public.unit.smp.fasilitas') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Fasilitas</a>
             <a href="{{ route('public.unit.smp.prestasi') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Prestasi</a>
         </div>
@@ -22,8 +22,8 @@
                 @php $ekskul = [['icon'=>'swords','title'=>'Pencak Silat','desc'=>'Bela diri tradisional tingkat lanjut.'],['icon'=>'target','title'=>'Panahan','desc'=>'Latihan panahan sesuai sunnah Rasulullah.'],['icon'=>'cpu','title'=>'Coding & Robotika','desc'=>'Pemrograman dan robotika untuk masa depan.'],['icon'=>'pen-tool','title'=>'Jurnalistik','desc'=>'Penulisan berita dan majalah sekolah.'],['icon'=>'mic','title'=>'Public Speaking','desc'=>'Latihan pidato dan debat.'],['icon'=>'volleyball','title'=>'Olahraga','desc'=>'Futsal, basket, dan badminton.']]; @endphp
                 @foreach($ekskul as $e)
                 <div class="feature-card fade-up">
-                    <div class="feature-icon bg-blue-50 text-blue-500"><i data-lucide="{{ $e['icon'] }}" class="w-6 h-6"></i></div>
-                    <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-2">{{ $e['title'] }}</h3>
+                    <div class="feature-icon bg-indigo-50 text-indigo-600"><i data-lucide="{{ $e['icon'] }}" class="w-6 h-6"></i></div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $e['title'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">{{ $e['desc'] }}</p>
                 </div>
                 @endforeach

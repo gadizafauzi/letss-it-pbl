@@ -4,6 +4,7 @@
     {{-- LOGO --}}
     <a href="{{ route('public.home') }}" class="nav-logo">
         <img src="{{ asset('images/logo.jpeg') }}" alt="Logo SIT Mutiara Quran">
+        <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT Indonesia">
         <div class="nav-logo-text">
             <h1>SIT Mutiara Qur'an</h1>
             <p>Sekolah Islam Terpadu</p>
@@ -41,7 +42,6 @@
 
         <li><a href="{{ route('public.berita.index') }}" class="{{ request()->is('berita*') ? 'active' : '' }}">Berita</a></li>
         <li><a href="{{ route('public.ppdb.index') }}" class="{{ request()->is('ppdb*') ? 'active' : '' }}">PPDB</a></li>
-        <li><a href="{{ route('public.ppdb.form-kontak') }}" class="{{ request()->routeIs('public.ppdb.form-kontak') ? 'active' : '' }}">Kontak</a></li>
         <li><a href="{{ route('login') }}" class="nav-login-btn"><i data-lucide="log-in" class="w-4 h-4"></i> Login</a></li>
     </ul>
 
@@ -70,7 +70,6 @@
     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-1 px-4">Lainnya</p>
     <a href="{{ route('public.berita.index') }}"><i data-lucide="newspaper" class="w-5 h-5"></i> Berita</a>
     <a href="{{ route('public.ppdb.index') }}"><i data-lucide="file-text" class="w-5 h-5"></i> PPDB</a>
-    <a href="{{ route('public.ppdb.form-kontak') }}"><i data-lucide="phone" class="w-5 h-5"></i> Kontak</a>
 
     <a href="{{ route('login') }}" class="nav-login-btn mt-4 justify-center"><i data-lucide="log-in" class="w-5 h-5"></i> Login</a>
 </div>

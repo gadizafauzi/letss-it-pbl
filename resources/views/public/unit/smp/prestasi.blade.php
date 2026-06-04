@@ -12,7 +12,7 @@
             <a href="{{ route('public.unit.smp.guru') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Guru</a>
             <a href="{{ route('public.unit.smp.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Ekstrakurikuler</a>
             <a href="{{ route('public.unit.smp.fasilitas') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Fasilitas</a>
-            <a href="{{ route('public.unit.smp.prestasi') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-emerald-500 text-white">Prestasi</a>
+            <a href="{{ route('public.unit.smp.prestasi') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-indigo-600 text-white">Prestasi</a>
         </div>
     </div>
     <section class="public-section">
@@ -22,8 +22,8 @@
                 @php $prestasi = [['tahun'=>'2026','judul'=>'Juara 1 OSN Matematika','desc'=>'Juara 1 Olimpiade Sains Nasional bidang Matematika tingkat Kota.'],['tahun'=>'2025','judul'=>'Juara 1 Tahfidz 10 Juz','desc'=>'Juara 1 Musabaqah Hifdzil Quran 10 Juz tingkat Provinsi.'],['tahun'=>'2025','judul'=>'Juara 2 Debat B. Inggris','desc'=>'Juara 2 English Debate Competition tingkat Jawa Barat.'],['tahun'=>'2024','judul'=>'Juara 1 KIR','desc'=>'Juara 1 Karya Ilmiah Remaja tingkat Kota Bandung.'],['tahun'=>'2024','judul'=>'Juara 3 Pencak Silat','desc'=>'Juara 3 Kejuaraan Pencak Silat Pelajar tingkat Nasional.'],['tahun'=>'2023','judul'=>'Best School Award','desc'=>'Penghargaan Sekolah Islam Terpadu Terbaik dari JSIT Jabar.']]; @endphp
                 @foreach($prestasi as $p)
                 <div class="feature-card fade-up">
-                    <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">{{ $p['tahun'] }}</span>
-                    <h3 class="text-lg font-bold text-[var(--theme-primary)] mt-3 mb-2">{{ $p['judul'] }}</h3>
+                    <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full">{{ $p['tahun'] }}</span>
+                    <h3 class="text-lg font-bold text-slate-800 mt-3 mb-2">{{ $p['judul'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed">{{ $p['desc'] }}</p>
                 </div>
                 @endforeach

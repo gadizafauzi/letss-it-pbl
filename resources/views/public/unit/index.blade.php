@@ -19,11 +19,11 @@
         <div class="w-full">
             @php
                 $units = [
-                    ['icon' => 'baby', 'color' => 'pink', 'title' => 'TK Islam Terpadu', 'desc' => 'Pembelajaran usia dini yang menyenangkan dengan pendekatan bermain dan mengenal Al-Qur\'an sejak dini.', 'route' => 'public.unit.tk.profil',
+                    ['icon' => 'baby', 'color' => 'sky', 'title' => 'TK Islam Terpadu', 'desc' => 'Pembelajaran usia dini yang menyenangkan dengan pendekatan bermain dan mengenal Al-Qur\'an sejak dini.', 'route' => 'public.unit.tk.profil', 'logo' => asset('images/logo_tk.png'),
                      'features' => ['Iqra & Hijaiyah', 'Sentra Bermain', 'Hafalan Juz 30', 'Seni & Kreativitas']],
-                    ['icon' => 'school', 'color' => 'emerald', 'title' => 'SD Islam Terpadu', 'desc' => 'Pendidikan dasar 6 tahun yang memadukan kurikulum nasional dengan kurikulum keislaman.', 'route' => 'public.unit.sd.profil',
+                    ['icon' => 'school', 'color' => 'amber', 'title' => 'SD Islam Terpadu', 'desc' => 'Pendidikan dasar 6 tahun yang memadukan kurikulum nasional dengan kurikulum keislaman.', 'route' => 'public.unit.sd.profil', 'logo' => asset('images/logo_sd.jpg'),
                      'features' => ['Target 5 Juz', 'Matematika & Sains', 'Bahasa Arab & Inggris', 'Ekstrakurikuler']],
-                    ['icon' => 'graduation-cap', 'color' => 'blue', 'title' => 'SMP Islam Terpadu', 'desc' => 'Jenjang menengah pertama yang mempersiapkan siswa untuk menjadi pribadi unggul.', 'route' => 'public.unit.smp.profil',
+                    ['icon' => 'graduation-cap', 'color' => 'indigo', 'title' => 'SMP Islam Terpadu', 'desc' => 'Jenjang menengah pertama yang mempersiapkan siswa untuk menjadi pribadi unggul.', 'route' => 'public.unit.smp.profil', 'logo' => asset('images/logo_smp.png'),
                      'features' => ['Target 10 Juz', 'Lab IPA & Komputer', 'English & Arabic', 'Leadership Camp']],
                 ];
             @endphp
@@ -33,7 +33,7 @@
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center fade-up">
                         <div class="{{ $i % 2 === 1 ? 'order-2 lg:order-1' : '' }}">
                             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-{{ $unit['color'] }}-50 text-{{ $unit['color'] }}-600 text-xs font-bold mb-4">
-                                <i data-lucide="{{ $unit['icon'] }}" class="w-3.5 h-3.5"></i> {{ $unit['title'] }}
+                                <img src="{{ $unit['logo'] }}" alt="Logo" class="w-4 h-4 object-contain rounded-full bg-white p-0.5"> {{ $unit['title'] }}
                             </div>
                             <h2 class="text-2xl sm:text-3xl font-black text-[var(--theme-primary)] mb-4">{{ $unit['title'] }}</h2>
                             <p class="text-slate-500 leading-relaxed mb-6">{{ $unit['desc'] }}</p>
@@ -45,13 +45,13 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <a href="{{ route($unit['route']) }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 text-white font-bold text-sm hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-emerald-200">
+                            <a href="{{ route($unit['route']) }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-{{ $unit['color'] === 'sky' ? 'sky-500 hover:bg-sky-600 shadow-sky-200' : ($unit['color'] === 'amber' ? 'amber-500 hover:bg-amber-600 shadow-amber-200' : 'indigo-600 hover:bg-indigo-700 shadow-indigo-200') }} text-white font-bold text-sm hover:-translate-y-1 transition-all duration-300 shadow-lg">
                                 Lihat Detail <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </a>
                         </div>
                         <div class="{{ $i % 2 === 1 ? 'order-1 lg:order-2' : '' }}">
-                            <div class="w-full aspect-video rounded-3xl bg-gradient-to-br from-{{ $unit['color'] }}-100 to-{{ $unit['color'] }}-200 flex items-center justify-center">
-                                <i data-lucide="{{ $unit['icon'] }}" class="w-24 h-24 text-{{ $unit['color'] }}-300"></i>
+                            <div class="w-full aspect-video rounded-3xl bg-gradient-to-br from-{{ $unit['color'] }}-50 to-{{ $unit['color'] }}-100/60 border border-{{ $unit['color'] }}-100/50 flex items-center justify-center p-8">
+                                <img src="{{ $unit['logo'] }}" alt="Logo {{ $unit['title'] }}" class="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-md hover:scale-105 transition-transform duration-300">
                             </div>
                         </div>
                     </div>

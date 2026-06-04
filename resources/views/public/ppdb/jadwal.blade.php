@@ -4,43 +4,96 @@
         <div class="relative z-10 w-full">
             <div class="breadcrumb"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><a href="{{ route('public.ppdb.index') }}">PPDB</a><span>/</span><span class="current">Jadwal</span></div>
             <h1 class="text-3xl sm:text-4xl font-black text-white">Jadwal PPDB</h1>
+            <p class="text-emerald-200/70 mt-3 max-w-lg">Timeline lengkap penerimaan peserta didik baru SIT Mutiara Qur'an TA {{ date('Y') }}/{{ date('Y')+1 }}.</p>
         </div>
     </div>
+
+    {{-- SUB NAV (2 tab) --}}
     <div class="bg-white border-b border-slate-200 sticky top-[72px] z-30">
         <div class="w-full flex gap-2 overflow-x-auto py-3 public-subnav-container no-scrollbar">
-            <a href="{{ route('public.ppdb.index') }}" class="subnav-link">Informasi</a>
-            <a href="{{ route('public.ppdb.alur') }}" class="subnav-link">Alur</a>
-            <a href="{{ route('public.ppdb.syarat') }}" class="subnav-link">Syarat</a>
-            <a href="{{ route('public.ppdb.jadwal') }}" class="subnav-link active">Jadwal</a>
-            <a href="{{ route('public.ppdb.faq') }}" class="subnav-link">FAQ</a>
-            <a href="{{ route('public.ppdb.form-kontak') }}" class="subnav-link">Kontak</a>
+            <a href="{{ route('public.ppdb.index') }}" class="subnav-link {{ request()->routeIs('public.ppdb.index') ? 'active' : '' }}">Informasi</a>
+            <a href="{{ route('public.ppdb.jadwal') }}" class="subnav-link {{ request()->routeIs('public.ppdb.jadwal') ? 'active' : '' }}">Jadwal & Timeline</a>
         </div>
     </div>
+
     <section class="public-section">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-14 fade-up"><span class="section-badge"><i data-lucide="calendar-days" class="w-4 h-4"></i> Jadwal</span><h2 class="section-title mx-auto">Timeline PPDB</h2></div>
-            <div class="feature-card overflow-hidden fade-up">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead><tr class="bg-emerald-600 text-white"><th class="px-6 py-4 text-left font-bold">Kegiatan</th><th class="px-6 py-4 text-left font-bold">Tanggal</th><th class="px-6 py-4 text-center font-bold">Status</th></tr></thead>
-                        <tbody>
-                            @php $jadwal = [['kegiatan'=>'Pendaftaran Online','tanggal'=>'1 Maret — 30 Juni '.date('Y'),'status'=>'Dibuka'],['kegiatan'=>'Tes Seleksi Gelombang 1','tanggal'=>'5 — 6 April '.date('Y'),'status'=>'Selesai'],['kegiatan'=>'Tes Seleksi Gelombang 2','tanggal'=>'7 — 8 Juni '.date('Y'),'status'=>'Segera'],['kegiatan'=>'Pengumuman Hasil','tanggal'=>'15 Juni '.date('Y'),'status'=>'Menunggu'],['kegiatan'=>'Daftar Ulang','tanggal'=>'16 — 30 Juni '.date('Y'),'status'=>'Menunggu']]; @endphp
-                            @foreach($jadwal as $j)
-                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
-                                <td class="px-6 py-4 font-semibold text-slate-700">{{ $j['kegiatan'] }}</td>
-                                <td class="px-6 py-4 text-slate-500">{{ $j['tanggal'] }}</td>
-                                <td class="px-6 py-4 text-center">
-                                    @if($j['status']==='Dibuka')<span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">{{ $j['status'] }}</span>
-                                    @elseif($j['status']==='Selesai')<span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">{{ $j['status'] }}</span>
-                                    @elseif($j['status']==='Segera')<span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">{{ $j['status'] }}</span>
-                                    @else<span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-600">{{ $j['status'] }}</span>@endif
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+            <div class="text-center mb-16 fade-up">
+                <span class="section-badge"><i data-lucide="calendar-days" class="w-4 h-4"></i> Timeline PPDB</span>
+                <h2 class="section-title mx-auto">Timeline Pendaftaran</h2>
+                <p class="section-subtitle mx-auto text-center">Ikuti setiap tahap seleksi sesuai jadwal yang telah ditetapkan.</p>
             </div>
+
+            {{-- TIMELINE ALTERNATING --}}
+            @php
+                $jadwal = [
+                    [
+                        'tahun'   => date('Y'),
+                        'judul'   => 'Tahap Pendaftaran',
+                        'desc'    => 'Pendaftaran Tim dan Submit Proposal',
+                        'tanggal' => 'April — 13 Juni ' . date('Y'),
+                        'status'  => 'Dibuka',
+                    ],
+                    [
+                        'tahun'   => date('Y'),
+                        'judul'   => 'Babak Penyisihan I',
+                        'desc'    => 'Babak Penyisihan Pertama',
+                        'tanggal' => '26 — 27 Juni ' . date('Y'),
+                        'status'  => 'Segera',
+                    ],
+                    [
+                        'tahun'   => date('Y'),
+                        'judul'   => 'Babak Penyisihan II',
+                        'desc'    => 'Seleksi lanjutan untuk mencari finalis.',
+                        'tanggal' => '27 Juli — 8 Agustus ' . date('Y'),
+                        'status'  => 'Menunggu',
+                    ],
+                    [
+                        'tahun'   => date('Y'),
+                        'judul'   => 'Pengumuman Finalis',
+                        'desc'    => 'Tim yang lolos menuju tahap akhir.',
+                        'tanggal' => '10 Agustus ' . date('Y'),
+                        'status'  => 'Menunggu',
+                    ],
+                    [
+                        'tahun'   => date('Y'),
+                        'judul'   => 'Daftar Ulang',
+                        'desc'    => 'Lakukan pembayaran dan daftar ulang untuk mengamankan tempat.',
+                        'tanggal' => '16 — 30 Agustus ' . date('Y'),
+                        'status'  => 'Menunggu',
+                    ],
+                ];
+            @endphp
+
+            <div class="ppdb-timeline fade-up">
+                @foreach($jadwal as $j)
+                <div class="ppdb-timeline-item">
+                    {{-- DOT di tengah --}}
+                    <div class="ppdb-timeline-dot-wrapper">
+                        <div class="ppdb-timeline-dot">{{ date('Y') }}</div>
+                    </div>
+
+                    {{-- KONTEN kiri/kanan otomatis via CSS nth-child --}}
+                    <div class="ppdb-timeline-content">
+                        <span class="ppdb-timeline-date-badge">{{ strtoupper($j['tanggal']) }}</span>
+                        <h3>{{ $j['judul'] }}</h3>
+                        <p>{{ $j['desc'] }}</p>
+                        <div class="mt-3">
+                            @if($j['status'] === 'Dibuka')
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">🟢 {{ $j['status'] }}</span>
+                            @elseif($j['status'] === 'Selesai')
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">✓ {{ $j['status'] }}</span>
+                            @elseif($j['status'] === 'Segera')
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">⏳ {{ $j['status'] }}</span>
+                            @else
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-600">🔵 {{ $j['status'] }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
         </div>
     </section>
 @endsection
