@@ -6,18 +6,13 @@
             <h1 class="text-3xl sm:text-4xl font-black text-white">Guru SMP Islam Terpadu</h1>
         </div>
     </div>
-    <div class="bg-white border-b border-slate-200 sticky top-[72px] z-30">
-        <div class="w-full flex gap-2 overflow-x-auto py-3 public-subnav-container no-scrollbar">
-            <a href="{{ route('public.unit.smp.profil') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Profil</a>
-            <a href="{{ route('public.unit.smp.guru') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-indigo-600 text-white">Guru</a>
-            <a href="{{ route('public.unit.smp.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Ekstrakurikuler</a>
-            <a href="{{ route('public.unit.smp.fasilitas') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Fasilitas</a>
-            <a href="{{ route('public.unit.smp.prestasi') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Prestasi</a>
-        </div>
-    </div>
+    @include('components.public.unit-subnav', ['unit' => 'smp', 'active' => 'guru'])
     <section class="public-section">
         <div class="w-full">
-            <div class="text-center mb-14 fade-up"><span class="section-badge"><i data-lucide="users" class="w-4 h-4"></i> Tenaga Pendidik</span><h2 class="section-title mx-auto">Guru SMP Islam Terpadu</h2></div>
+            <div class="text-center mb-14 fade-up">
+                <span class="section-badge"><i data-lucide="users" class="w-4 h-4"></i> Tenaga Pendidik</span>
+                <h2 class="section-title mx-auto">Guru SMP Islam Terpadu</h2>
+            </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @php $guru = [['nama'=>'Ustadzah Khadijah, M.Pd','mapel'=>'Kepala Unit SMP'],['nama'=>'Ustadz Rahman, S.Pd','mapel'=>'Matematika'],['nama'=>'Ustadzah Diana, S.Pd','mapel'=>'B. Indonesia'],['nama'=>'Ustadz Irfan, S.Pd','mapel'=>'IPA'],['nama'=>'Ustadzah Maya, S.Pd','mapel'=>'B. Inggris'],['nama'=>'Ustadz Fadhil, S.Pd.I','mapel'=>'Tahfidz'],['nama'=>'Ustadzah Lina, S.Pd','mapel'=>'IPS'],['nama'=>'Ustadz Zaki, S.Kom','mapel'=>'TIK']]; @endphp
                 @foreach($guru as $g)
