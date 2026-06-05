@@ -27,9 +27,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 fade-up">
                 @php
                     $units = [
-                        ['logo' => asset('images/logo_tk.png'), 'color' => 'sky',    'title' => 'TK Islam Terpadu',  'usia' => 'Usia 4-6 tahun',  'kuota' => '60 siswa'],
-                        ['logo' => asset('images/logo_sd.jpg'), 'color' => 'amber',   'title' => 'SD Islam Terpadu',  'usia' => 'Usia 6-7 tahun',  'kuota' => '90 siswa'],
-                        ['logo' => asset('images/logo_smp.png'), 'color' => 'indigo',  'title' => 'SMP Islam Terpadu', 'usia' => 'Lulusan SD/MI',   'kuota' => '60 siswa'],
+                        ['logo' => asset('images/tk.jpeg'),  'color' => 'sky',    'title' => 'TK Islam Terpadu',  'usia' => 'Usia 4-6 tahun',  'kuota' => '60 siswa'],
+                        ['logo' => asset('images/sd.jpeg'),  'color' => 'amber',   'title' => 'SD Islam Terpadu',  'usia' => 'Usia 6-7 tahun',  'kuota' => '90 siswa'],
+                        ['logo' => asset('images/smp.jpeg'), 'color' => 'indigo',  'title' => 'SMP Islam Terpadu', 'usia' => 'Lulusan SD/MI',   'kuota' => '60 siswa'],
                     ];
                 @endphp
                 @foreach($units as $u)
@@ -50,7 +50,7 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== ALUR PENDAFTARAN ===== --}}
-    <section class="public-section py-16">
+    <section id="alur" class="public-section py-16">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-12 fade-up">
                 <span class="section-badge"><i data-lucide="route" class="w-4 h-4"></i> Alur Pendaftaran</span>
@@ -83,8 +83,8 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== SYARAT PENDAFTARAN ===== --}}
-    <section class="public-section py-16 bg-slate-50/50">
-        <div class="w-full">
+    <section id="syarat" class="public-section py-16 bg-slate-50/50">
+        <div class="w-full max-w-7xl mx-auto">
             <div class="text-center mb-12 fade-up">
                 <span class="section-badge"><i data-lucide="clipboard-list" class="w-4 h-4"></i> Persyaratan</span>
                 <h2 class="section-title mx-auto">Syarat Pendaftaran</h2>
@@ -92,9 +92,9 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @php
                     $syaratData = [
-                        ['logo' => asset('images/logo_tk.png'), 'color' => 'sky',    'title' => 'TK', 'items' => ['Usia minimal 4 tahun','Fotokopi akta kelahiran','Fotokopi KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],
-                        ['logo' => asset('images/logo_sd.jpg'), 'color' => 'amber',  'title' => 'SD', 'items' => ['Usia minimal 6 tahun','Ijazah / surat keterangan TK','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],
-                        ['logo' => asset('images/logo_smp.png'), 'color' => 'indigo', 'title' => 'SMP','items' => ['Ijazah / SKL SD','Rapor kelas 4, 5, 6','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],
+                        ['logo' => asset('images/tk.jpeg'),  'color' => 'sky',    'title' => 'TK', 'items' => ['Usia minimal 4 tahun','Fotokopi akta kelahiran','Fotokopi KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],
+                        ['logo' => asset('images/sd.jpeg'),  'color' => 'amber',  'title' => 'SD', 'items' => ['Usia minimal 6 tahun','Ijazah / surat keterangan TK','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],
+                        ['logo' => asset('images/smp.jpeg'), 'color' => 'indigo', 'title' => 'SMP','items' => ['Ijazah / SKL SD','Rapor kelas 4, 5, 6','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat']],
                     ];
                 @endphp
                 @foreach($syaratData as $s)
@@ -118,7 +118,7 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== FAQ ===== --}}
-    <section class="public-section py-16">
+    <section id="faq" class="public-section py-16">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-12 fade-up">
                 <span class="section-badge"><i data-lucide="help-circle" class="w-4 h-4"></i> FAQ</span>
@@ -152,10 +152,106 @@
             {{-- CTA --}}
             <div class="text-center mt-14 fade-up">
                 <p class="text-slate-500 mb-4">Masih ada pertanyaan? Hubungi kami langsung.</p>
-                <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold shadow-lg shadow-emerald-200 hover:-translate-y-1 transition-all duration-300">
+                <a href="https://wa.me/6282286204878" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold shadow-lg shadow-emerald-200 hover:-translate-y-1 transition-all duration-300">
                     <i data-lucide="message-circle" class="w-5 h-5"></i> Hubungi via WhatsApp
                 </a>
             </div>
         </div>
     </section>
+
+    {{-- DIVIDER --}}
+    <div class="w-full h-px bg-slate-100"></div>
+
+    {{-- ===== LOKASI SEKOLAH (MAPS) & HUBUNGI KAMI ===== --}}
+    <section id="kontak" class="public-section py-16 bg-slate-50/50">
+        <div class="w-full max-w-7xl mx-auto">
+            <div class="text-center mb-12 fade-up">
+                <span class="section-badge"><i data-lucide="phone" class="w-4 h-4"></i> Hubungi Kami</span>
+                <h2 class="section-title mx-auto">Kontak & Lokasi</h2>
+                <p class="section-subtitle mx-auto text-center">Kunjungi kami atau kirimkan pesan untuk pertanyaan seputar PPDB SIT Mutiara Qur'an.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+                {{-- INFO & MAPS --}}
+                <div class="lg:col-span-6 flex flex-col gap-6 fade-up">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="feature-card p-5 bg-white">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3">
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-800 mb-1">Alamat</h3>
+                            <p class="text-xs text-slate-500 leading-relaxed">
+                                Karasak, Jorong Pasar Baru,<br>Cupak, Gunung Talang, Solok
+                            </p>
+                        </div>
+                        <div class="feature-card p-5 bg-white">
+                            <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-3">
+                                <i data-lucide="phone" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-800 mb-1">Telepon / WA</h3>
+                            <p class="text-xs text-slate-500">+62 822-8620-4878</p>
+                        </div>
+                        <div class="feature-card p-5 bg-white">
+                            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-3">
+                                <i data-lucide="mail" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-800 mb-1">Email</h3>
+                            <p class="text-xs text-slate-500">info@sitmutiaraquran.sch.id</p>
+                        </div>
+                        <div class="feature-card p-5 bg-white">
+                            <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-3">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-sm font-bold text-slate-800 mb-1">Jam Layanan</h3>
+                            <p class="text-xs text-slate-500">Senin – Jum'at: 08.00 – 14.00 WIB</p>
+                        </div>
+                    </div>
+                    
+                    {{-- Google Maps Frame --}}
+                    <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-lg flex-1" style="min-height: 280px;">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31914.641419208794!2d100.598466!3d-0.8962703!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2b356b0a8eba63%3A0x771bff3cc34e0a68!2sSDIT%20MUTIARA%20QURAN!5e0!3m2!1sid!2sid!4v1780587530868!5m2!1sid!2sid"
+                            width="100%"
+                            height="100%"
+                            style="border:0; display:block;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Lokasi SIT Mutiara Qur'an Nagari Cupak">
+                        </iframe>
+                    </div>
+                </div>
+
+                {{-- FORMULIR KONTAK --}}
+                <div class="lg:col-span-6 bg-white p-8 rounded-3xl border border-slate-200/60 shadow-lg flex flex-col justify-between fade-up">
+                    <div>
+                        <span class="section-badge mb-4"><i data-lucide="send" class="w-4 h-4"></i> Kirim Pesan</span>
+                        <h3 class="text-xl font-extrabold text-slate-800 mb-6">Formulir Kontak</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Lengkap</label>
+                                <input type="text" class="contact-input" placeholder="Masukkan nama lengkap Anda">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Email</label>
+                                <input type="email" class="contact-input" placeholder="contoh@email.com">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Subjek</label>
+                                <input type="text" class="contact-input" placeholder="Perihal pesan Anda">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Pesan</label>
+                                <textarea class="contact-input" rows="4" placeholder="Tulis pesan Anda di sini..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-200 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                                <i data-lucide="send" class="w-4 h-4"></i> Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 @endsection
