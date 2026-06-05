@@ -142,10 +142,52 @@
                 </div>
                 @endforeach
             </div>
+        </div>
+    </section>
+
+    {{-- DIVIDER --}}
+    <div class="w-full h-px bg-slate-100"></div>
+
+    {{-- ===== BROSUR PPDB ===== --}}
+    <section id="brosur" class="public-section py-16 bg-white">
+        <div class="w-full max-w-7xl mx-auto">
+            <div class="text-center mb-12 fade-up">
+                <span class="section-badge"><i data-lucide="file-down" class="w-4 h-4"></i> Brosur PPDB</span>
+                <h2 class="section-title mx-auto">Download Brosur Lengkap</h2>
+                <p class="section-subtitle mx-auto text-center max-w-2xl">Unduh brosur resmi untuk melihat informasi lengkap mengenai jadwal pendaftaran, timeline, syarat, biaya pendidikan, program unggulan, fasilitas sekolah, dan informasi penting lainnya.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                @php
+                    $brosurs = [
+                        ['title' => 'Syarat PPDB TK/SD', 'desc' => 'Lihat persyaratan pendaftaran tingkat TK dan SD', 'file' => 'syarat-tksd.jpeg', 'delay' => '100ms'],
+                        ['title' => 'Biaya PPDB TK/SD', 'desc' => 'Lihat rincian biaya pendaftaran tingkat TK dan SD', 'file' => 'biaya-tksd.jpeg', 'delay' => '200ms'],
+                        ['title' => 'Syarat PPDB SMP', 'desc' => 'Lihat persyaratan pendaftaran tingkat SMP', 'file' => 'syarat-smp.jpeg', 'delay' => '300ms'],
+                        ['title' => 'Biaya PPDB SMP', 'desc' => 'Lihat rincian biaya pendaftaran tingkat SMP', 'file' => 'biaya-smp.jpeg', 'delay' => '400ms'],
+                    ];
+                @endphp
+                @foreach($brosurs as $brosur)
+                <div class="bg-white rounded-[20px] p-6 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 flex flex-col group fade-up" style="transition-delay: {{ $brosur['delay'] }};">
+                    <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                        <i data-lucide="file-text" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $brosur['title'] }}</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed mb-6 flex-grow">{{ $brosur['desc'] }}</p>
+                    <div class="flex flex-col xl:flex-row gap-2 mt-auto">
+                        <a href="{{ asset('images/' . $brosur['file']) }}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-100 text-emerald-600 font-bold text-xs hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                            <i data-lucide="eye" class="w-4 h-4"></i> Lihat
+                        </a>
+                        <a href="{{ asset('images/' . $brosur['file']) }}" download class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-200 hover:bg-emerald-600 transition-all duration-300">
+                            <i data-lucide="download" class="w-4 h-4"></i> Unduh
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
 
             {{-- CTA --}}
-            <div class="text-center mt-14 fade-up">
-                <p class="text-slate-500 mb-4">Masih ada pertanyaan? Hubungi kami langsung.</p>
+            <div class="text-center mt-16 pt-10 border-t border-slate-100 fade-up" style="transition-delay: 500ms;">
+                <p class="text-slate-500 mb-4">Masih ada pertanyaan atau butuh bantuan pendaftaran?</p>
                 <a href="https://wa.me/6282286204878" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold shadow-lg shadow-emerald-200 hover:-translate-y-1 transition-all duration-300">
                     <i data-lucide="message-circle" class="w-5 h-5"></i> Hubungi via WhatsApp
                 </a>
