@@ -8,13 +8,7 @@
         </div>
     </div>
 
-    {{-- SUB NAV (2 tab saja) --}}
-    <div class="bg-white border-b border-slate-200 sticky top-[72px] z-30">
-        <div class="w-full flex gap-2 overflow-x-auto py-3 public-subnav-container no-scrollbar">
-            <a href="{{ route('public.ppdb.index') }}" class="subnav-link {{ request()->routeIs('public.ppdb.index') ? 'active' : '' }}">Informasi</a>
-            <a href="{{ route('public.ppdb.jadwal') }}" class="subnav-link {{ request()->routeIs('public.ppdb.jadwal') ? 'active' : '' }}">Jadwal & Timeline</a>
-        </div>
-    </div>
+    @include('components.public.ppdb-subnav')
 
     {{-- ===== INFORMASI UNIT ===== --}}
     <section class="public-section pb-10">

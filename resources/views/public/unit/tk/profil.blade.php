@@ -4,26 +4,13 @@
 
     <div class="page-hero">
         <div class="relative z-10 w-full">
-            <div class="breadcrumb">
-                <a href="{{ route('public.home') }}">Beranda</a><span>/</span>
-                <a href="{{ route('public.unit.index') }}">Unit</a><span>/</span>
-                <span class="current">TK Islam Terpadu</span>
-            </div>
+            <div class="breadcrumb"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><a href="{{ route('public.unit.index') }}">Unit</a><span>/</span><span class="current">TK Islam Terpadu</span></div>
             <h1 class="text-3xl sm:text-4xl font-black text-white">TK Islam Terpadu</h1>
             <p class="text-emerald-200/70 mt-3 max-w-lg">Membentuk karakter islami sejak usia dini dengan pendekatan bermain sambil belajar.</p>
         </div>
     </div>
 
-    {{-- SUB NAV --}}
-    <div class="bg-white border-b border-slate-200 sticky top-[72px] z-30">
-        <div class="w-full flex gap-2 overflow-x-auto py-3 public-subnav-container no-scrollbar">
-            <a href="{{ route('public.unit.tk.profil') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap bg-sky-500 text-white">Profil</a>
-            <a href="{{ route('public.unit.tk.guru') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Guru</a>
-            <a href="{{ route('public.unit.tk.ekskul') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Ekstrakurikuler</a>
-            <a href="{{ route('public.unit.tk.fasilitas') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Fasilitas</a>
-            <a href="{{ route('public.unit.tk.prestasi') }}" class="px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-slate-500 hover:bg-slate-100">Prestasi</a>
-        </div>
-    </div>
+    @include('components.public.unit-subnav', ['unit' => 'tk', 'active' => 'profil'])
  
     <section class="public-section">
         <div class="w-full">
@@ -61,9 +48,9 @@
                     </div>
 
                     {{-- Floating badge bottom-left: Usia --}}
-                    <div class="absolute bottom-2 -left-2 sm:left-0 bg-white rounded-2xl shadow-lg border border-amber-100 px-3 py-2 flex items-center gap-2.5 animate-bounce z-10" style="animation-duration:5.5s;">
-                        <div class="w-7 h-7 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
-                            <i data-lucide="users" class="w-3.5 h-3.5 text-amber-500"></i>
+                    <div class="absolute bottom-2 -left-2 sm:left-0 bg-white rounded-2xl shadow-lg border border-sky-100 px-3 py-2 flex items-center gap-2.5 animate-bounce z-10" style="animation-duration:5.5s;">
+                        <div class="w-7 h-7 rounded-lg bg-sky-50 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="users" class="w-3.5 h-3.5 text-sky-500"></i>
                         </div>
                         <div>
                             <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none">Usia Masuk</p>
