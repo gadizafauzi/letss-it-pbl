@@ -31,7 +31,6 @@
                 <a href="{{ route('public.home') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Beranda</a>
                 <a href="{{ route('public.profil.visi-misi') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Visi & Misi</a>
                 <a href="{{ route('public.profil.sejarah') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Sejarah</a>
-                <a href="{{ route('public.unit.index') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Unit Pendidikan</a>
                 <a href="{{ route('public.berita.index') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Berita & Kegiatan</a>
             </div>
 

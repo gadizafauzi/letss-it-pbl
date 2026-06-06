@@ -19,8 +19,8 @@
 
                 {{-- Content Column --}}
                 <div class="lg:col-span-7 text-left">
-                    <span class="section-badge fade-up"><i data-lucide="quote" class="w-4 h-4"></i> Kata Sambutan</span>
-                    <h2 class="section-title text-left mb-6 fade-up title-anim" style="transition-delay: 200ms;">Membentuk Generasi Rabbanî yang Unggul & Berkarakter</h2>
+                    <span class="section-badge reveal reveal-sambutan-title" style="transition-delay: 50ms;"><i data-lucide="quote" class="w-4 h-4"></i> Kata Sambutan</span>
+                    <h2 class="section-title text-left mb-6 reveal reveal-sambutan-title" style="transition-delay: 200ms;">Membentuk Generasi Rabbanî yang Unggul & Berkarakter</h2>
                     <div class="space-y-4 text-slate-600 leading-relaxed text-sm sm:text-base">
                         <p class="font-bold text-slate-800 text-lg reveal reveal-up" style="transition-delay: 350ms;">Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
                         <p class="reveal reveal-up" style="transition-delay: 500ms;">

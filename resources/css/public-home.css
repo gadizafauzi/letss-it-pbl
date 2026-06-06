@@ -58,6 +58,33 @@
             transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+        /* CUSTOM ANIMATION FOR SAMBUTAN TITLE */
+        @keyframes titleSambutanIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(0) scale(1.03);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        body.js-reveal-ready .reveal-sambutan-title {
+            transform: translateY(30px) scale(0.96);
+            transition-duration: 0.85s;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.js-reveal-ready .reveal-sambutan-title.is-visible {
+            animation: titleSambutanIn 0.9s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            transition: none !important;
+        }
+
         @keyframes floatEffect {
             0%, 100% { transform: translateY(0) rotate(180deg); }
             50% { transform: translateY(-10px) rotate(180deg); }
