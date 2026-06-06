@@ -112,13 +112,23 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== FAQ ===== --}}
-    <section id="faq" class="public-section py-16">
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-12 fade-up">
-                <span class="section-badge"><i data-lucide="help-circle" class="w-4 h-4"></i> FAQ</span>
-                <h2 class="section-title mx-auto">Pertanyaan yang Sering Diajukan</h2>
+    <section id="faq" class="public-section py-20 bg-white relative overflow-hidden">
+        {{-- Dekorasi background --}}
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-emerald-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+        <div class="max-w-3xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <span class="section-badge faq-badge opacity-0 scale-90 transition-all duration-700 ease-out inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-600 font-bold text-sm mb-4">
+                    <i data-lucide="help-circle" class="w-4 h-4"></i> FAQ
+                </span>
+                <h2 class="section-title mx-auto faq-title opacity-0 scale-95 transition-all duration-700 delay-150 ease-out text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">Pertanyaan yang Sering Diajukan</h2>
+                <p class="section-subtitle mx-auto text-center text-slate-500 faq-subtitle opacity-0 translate-y-4 transition-all duration-700 delay-300 ease-out max-w-xl">
+                    Temukan jawaban untuk pertanyaan umum seputar Penerimaan Peserta Didik Baru (PPDB) SIT Mutiara Qur'an.
+                </p>
             </div>
-            <div class="space-y-4">
+
+            <div class="space-y-4 faq-container">
                 @php
                     $faqs = [
                         ['q' => 'Kapan pendaftaran PPDB dibuka?',                       'a' => 'Pendaftaran PPDB dibuka mulai bulan Maret hingga Juni setiap tahunnya. Untuk informasi terbaru, silakan cek halaman Jadwal & Timeline.'],
@@ -130,20 +140,142 @@
                         ['q' => 'Bagaimana cara mendaftar?',                            'a' => 'Anda bisa mendaftar secara online melalui website atau datang langsung ke sekolah. Lihat bagian Alur Pendaftaran di atas untuk detail langkah-langkahnya.'],
                     ];
                 @endphp
+
                 @foreach($faqs as $i => $faq)
-                <div class="faq-item feature-card fade-up cursor-pointer" onclick="this.classList.toggle('faq-open')">
-                    <div class="flex items-center justify-between gap-4">
-                        <h3 class="text-base font-bold text-slate-800">{{ $faq['q'] }}</h3>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 flex-shrink-0 faq-chevron transition-transform duration-300"></i>
-                    </div>
-                    <div class="faq-answer mt-0 max-h-0 overflow-hidden transition-all duration-300">
-                        <p class="text-sm text-slate-500 leading-relaxed pt-3">{{ $faq['a'] }}</p>
+                @php
+                    // Alternate slide directions: left, right, left, right
+                    $translateClass = $i % 2 === 0 ? '-translate-x-8' : 'translate-x-8';
+                    $delay = 400 + ($i * 120); // 0.12s increments
+                @endphp
+                <div class="faq-item-interactive bg-white border border-slate-200 rounded-2xl p-5 md:p-6 cursor-pointer opacity-0 {{ $translateClass }} transition-all duration-700 ease-out hover:-translate-y-1 hover:border-emerald-300 hover:bg-emerald-50/30 hover:shadow-lg hover:shadow-emerald-100/50 group" 
+                     style="transition-delay: {{ $delay }}ms;"
+                     onclick="toggleInteractiveFaq(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="w-8 h-8 rounded-full bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-100 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-colors faq-icon-box">
+                            <span class="text-sm font-bold">{{ $i + 1 }}</span>
+                        </div>
+                        <div class="flex-grow pt-1 w-full">
+                            <div class="flex items-center justify-between gap-4">
+                                <h3 class="text-base md:text-lg font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">{{ $faq['q'] }}</h3>
+                                <div class="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-100 transition-colors faq-chevron-wrapper">
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-transform duration-300 faq-chevron-icon"></i>
+                                </div>
+                            </div>
+                            <div class="faq-answer-interactive grid transition-all duration-300 ease-in-out opacity-0" style="grid-template-rows: 0fr;">
+                                <div class="overflow-hidden">
+                                    <p class="text-sm md:text-base text-slate-600 leading-relaxed pt-4 pb-1 pr-8 border-t border-slate-100 mt-4">
+                                        {{ $faq['a'] }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @endforeach
             </div>
         </div>
     </section>
+
+    <style>
+        /* Custom styles for FAQ interactive */
+        .faq-item-interactive.is-active {
+            border-color: #34d399; /* emerald-400 */
+            background-color: #f0fdf4; /* emerald-50 */
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981; /* Aksen hijau di kiri */
+        }
+        
+        .faq-item-interactive.is-active .faq-icon-box {
+            background-color: #10b981; /* emerald-500 */
+            color: white;
+            border-color: #10b981;
+        }
+
+        .faq-item-interactive.is-active h3 {
+            color: #047857; /* emerald-700 */
+        }
+
+        .faq-item-interactive.is-active .faq-chevron-wrapper {
+            background-color: #d1fae5; /* emerald-100 */
+        }
+        
+        .faq-item-interactive.is-active .faq-chevron-icon {
+            transform: rotate(180deg);
+            color: #059669; /* emerald-600 */
+        }
+
+        .faq-item-interactive.is-active .faq-answer-interactive {
+            grid-template-rows: 1fr !important;
+            opacity: 1;
+        }
+
+        /* Animation visible states */
+        .faq-badge.is-visible { opacity: 1; transform: scale(1); }
+        .faq-title.is-visible { opacity: 1; transform: scale(1); }
+        .faq-subtitle.is-visible { opacity: 1; transform: translateY(0); }
+        .faq-item-interactive.is-visible { opacity: 1; transform: translateX(0) translateY(0); }
+    </style>
+
+    <script>
+        // Toggle FAQ Accordion
+        function toggleInteractiveFaq(clickedItem) {
+            const isActive = clickedItem.classList.contains('is-active');
+            
+            // Auto close others
+            document.querySelectorAll('.faq-item-interactive').forEach(item => {
+                item.classList.remove('is-active');
+            });
+
+            // If it wasn't active before, open it
+            if (!isActive) {
+                clickedItem.classList.add('is-active');
+            }
+        }
+
+        // Intersection Observer for FAQ animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqSection = document.getElementById('faq');
+            if (!faqSection) return;
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const faqObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate badge
+                        const badge = entry.target.querySelector('.faq-badge');
+                        if(badge) badge.classList.add('is-visible');
+
+                        // Animate title
+                        const title = entry.target.querySelector('.faq-title');
+                        if(title) title.classList.add('is-visible');
+
+                        // Animate subtitle
+                        const subtitle = entry.target.querySelector('.faq-subtitle');
+                        if(subtitle) subtitle.classList.add('is-visible');
+
+                        // Animate items
+                        const items = entry.target.querySelectorAll('.faq-item-interactive');
+                        items.forEach(item => {
+                            item.classList.add('is-visible');
+                            // Reset transition delay after animation so hover effect is snappy
+                            setTimeout(() => {
+                                item.style.transitionDelay = '0ms';
+                            }, parseInt(item.style.transitionDelay) + 700);
+                        });
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            faqObserver.observe(faqSection);
+        });
+    </script>
 
     {{-- DIVIDER --}}
     <div class="w-full h-px bg-slate-100"></div>

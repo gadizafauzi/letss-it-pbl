@@ -25,13 +25,13 @@
         <div class="glow-emerald top-20 left-10"></div>
         <div class="glow-amber bottom-20 right-10"></div>
 
-        <div class="relative z-10 w-full px-4 sm:px-6 lg:px-8 pt-6 pb-20 sm:pt-8 sm:pb-28 lg:pt-10 lg:pb-36">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-6 pb-20 sm:pt-8 sm:pb-28 lg:pt-10 lg:pb-36">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center -translate-y-6 lg:-translate-y-16">
                 {{-- Left Text --}}
                 <div class="lg:col-span-7 max-w-3xl text-left">
 
                     {{-- Accreditation stamp --}}
-                    <div class="accreditation-stamp mb-6 hero-animate-left">
+                    <div class="accreditation-stamp mb-6 reveal reveal-left">
                         <i data-lucide="shield-check" class="w-6 h-6"></i>
                         <div class="accreditation-text">
                             <h5>Terakreditasi A</h5>
@@ -39,22 +39,22 @@
                         </div>
                     </div>
 
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-sm font-semibold mb-6 hero-animate-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-sm font-semibold mb-6 reveal reveal-right">
                         <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
                         Sekolah Islam Terpadu (JSIT)
                     </div>
 
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight hero-animate-2">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight reveal reveal-up">
                         Mendidik Generasi
                         <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-amber-300">Qur'ani</span>
                         yang Berakhlak Mulia & Berprestasi
                     </h1>
 
-                    <p class="mt-6 text-base sm:text-lg text-emerald-100/80 leading-relaxed max-w-xl hero-animate-3">
+                    <p class="mt-6 text-base sm:text-lg text-emerald-100/80 leading-relaxed max-w-xl reveal reveal-up">
                         SIT Mutiara Qur'an hadir di Nagari Cupak untuk membentuk generasi robbani yang mandiri, berkarakter mulia, cerdas akademis, serta mencintai Al-Qur'an.
                     </p>
 
-                    <div class="flex flex-wrap gap-4 mt-8 hero-animate-4">
+                    <div class="flex flex-wrap gap-4 mt-8 reveal reveal-up">
                         <a href="{{ route('public.ppdb.index') }}"
                             class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                             <i data-lucide="file-text" class="w-5 h-5"></i>
@@ -69,7 +69,7 @@
                 </div>
 
                 {{-- Right Visual representation --}}
-                <div class="lg:col-span-5 hidden lg:block fade-up">
+                <div class="lg:col-span-5 hidden lg:block reveal reveal-up">
                     <div class="relative">
                         {{-- Decorative float card --}}
                         <div class="absolute top-4 -left-4 z-20 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-emerald-100 shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 4s;">
@@ -116,10 +116,10 @@
                         <stop offset="100%" stop-color="#059669" />
                     </linearGradient>
                 </defs>
-                <!-- Back wave (Green/Teal Transparent) -->
-                <path class="anim-wave-back" d="M0,70 Q150,10 300,70 T600,70 Q750,10 900,70 T1200,70 V160 H0 Z" fill="url(#heroWaveGradient)" opacity="0.4"></path>
-                <!-- Middle wave (Soft Yellow Accent) -->
-                <path class="anim-wave-mid" d="M0,80 Q150,140 300,80 T600,80 Q750,140 900,80 T1200,80 V160 H0 Z" fill="#fbbf24" opacity="0.8"></path>
+                <!-- Back wave (Soft Yellow Accent) -->
+                <path class="anim-wave-back" d="M0,65 Q150,120 300,65 T600,65 Q750,120 900,65 T1200,65 V160 H0 Z" fill="#fbbf24" opacity="0.4"></path>
+                <!-- Middle wave (Green/Teal Transparent) -->
+                <path class="anim-wave-mid" d="M0,75 Q150,15 300,75 T600,75 Q750,15 900,75 T1200,75 V160 H0 Z" fill="url(#heroWaveGradient)" opacity="0.95"></path>
                 <!-- Front wave (Solid White) -->
                 <path class="anim-wave-front" d="M0,90 Q150,30 300,90 T600,90 Q750,30 900,90 T1200,90 V160 H0 Z" fill="#ffffff"></path>
             </svg>
@@ -129,11 +129,11 @@
 
     {{-- STATS --}}
     <section class="bg-white py-16 md:py-24 relative z-20">
-        <div class="w-full px-4 max-w-7xl mx-auto relative z-10">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 <!-- Card 1: Siswa Aktif (Amber) -->
-                <div class="bg-white rounded-[24px] p-8 shadow-lg shadow-slate-200/50 border border-slate-100 border-t-4 border-t-amber-400 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 group fade-up flex flex-col items-center text-center">
-                    <div class="w-20 h-20 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div class="bg-white rounded-[24px] p-8 shadow-lg shadow-slate-200/50 border border-slate-100 border-t-4 border-t-amber-400 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 hover:scale-[1.03] transition-all duration-300 group reveal reveal-stat flex flex-col items-center text-center" style="transition-delay: 0ms;">
+                    <div class="w-20 h-20 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 shadow-sm">
                         <i data-lucide="users" class="w-10 h-10"></i>
                     </div>
                     <p class="text-4xl md:text-5xl font-black text-slate-800 mb-2 tracking-tight stat-number" data-count="500" data-suffix="+">0</p>
@@ -141,8 +141,8 @@
                 </div>
                 
                 <!-- Card 2: Tenaga Pendidik (Emerald) -->
-                <div class="bg-white rounded-[24px] p-8 shadow-lg shadow-slate-200/50 border border-slate-100 border-t-4 border-t-emerald-500 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 group fade-up flex flex-col items-center text-center" style="transition-delay: 100ms;">
-                    <div class="w-20 h-20 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div class="bg-white rounded-[24px] p-8 shadow-lg shadow-slate-200/50 border border-slate-100 border-t-4 border-t-emerald-500 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 hover:scale-[1.03] transition-all duration-300 group reveal reveal-stat flex flex-col items-center text-center" style="transition-delay: 120ms;">
+                    <div class="w-20 h-20 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-sm">
                         <i data-lucide="graduation-cap" class="w-10 h-10"></i>
                     </div>
                     <p class="text-4xl md:text-5xl font-black text-slate-800 mb-2 tracking-tight stat-number" data-count="35" data-suffix="+">0</p>
@@ -150,8 +150,8 @@
                 </div>
 
                 <!-- Card 3: Rombel Kelas (Teal) -->
-                <div class="bg-white rounded-[24px] p-8 shadow-lg shadow-slate-200/50 border border-slate-100 border-t-4 border-t-teal-500 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 group fade-up flex flex-col items-center text-center" style="transition-delay: 200ms;">
-                    <div class="w-20 h-20 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div class="bg-white rounded-[24px] p-8 shadow-lg shadow-slate-200/50 border border-slate-100 border-t-4 border-t-teal-500 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 hover:scale-[1.03] transition-all duration-300 group reveal reveal-stat flex flex-col items-center text-center" style="transition-delay: 240ms;">
+                    <div class="w-20 h-20 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300 shadow-sm">
                         <i data-lucide="book-open" class="w-10 h-10"></i>
                     </div>
                     <p class="text-4xl md:text-5xl font-black text-slate-800 mb-2 tracking-tight stat-number" data-count="18">0</p>
@@ -159,8 +159,8 @@
                 </div>
 
                 <!-- Card 4: Tahun Berdiri (Amber) -->
-                <div class="bg-white rounded-[24px] p-8 shadow-lg shadow-slate-200/50 border border-slate-100 border-t-4 border-t-amber-400 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 group fade-up flex flex-col items-center text-center" style="transition-delay: 300ms;">
-                    <div class="w-20 h-20 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div class="bg-white rounded-[24px] p-8 shadow-lg shadow-slate-200/50 border border-slate-100 border-t-4 border-t-amber-400 hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 hover:scale-[1.03] transition-all duration-300 group reveal reveal-stat flex flex-col items-center text-center" style="transition-delay: 360ms;">
+                    <div class="w-20 h-20 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 shadow-sm">
                         <i data-lucide="building" class="w-10 h-10"></i>
                     </div>
                     <p class="text-4xl md:text-5xl font-black text-slate-800 mb-2 tracking-tight stat-number" data-count="15" data-suffix=" Tahun">0</p>
@@ -176,121 +176,98 @@
             100% { transform: translateX(-25%); }
         }
         .anim-wave-front {
-            animation: waveTranslateX 20s ease-in-out infinite alternate;
+            animation: waveTranslateX 8s ease-in-out infinite alternate;
         }
         .anim-wave-mid {
-            animation: waveTranslateX 12s ease-in-out infinite alternate;
+            animation: waveTranslateX 6s ease-in-out infinite alternate;
         }
         .anim-wave-back {
-            animation: waveTranslateX 10s ease-in-out infinite alternate;
+            animation: waveTranslateX 14s ease-in-out infinite alternate;
         }
 
-        @keyframes heroEntrance {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* ROBUST REVEAL ANIMATION SYSTEM */
+        body:not(.js-reveal-ready) .reveal {
+            opacity: 1 !important;
+            transform: none !important;
         }
 
-        @keyframes heroEntranceLeft {
-            0% {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes heroEntranceRight {
-            0% {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .hero-animate-left {
+        body.js-reveal-ready .reveal {
             opacity: 0;
-            animation: heroEntranceLeft 0.8s ease-out forwards;
-            animation-delay: 0s;
+            transition-duration: 0.9s; /* Slower and smooth exit */
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* Smooth ease */
+            transition-property: opacity, transform;
+            will-change: opacity, transform;
         }
 
-        .hero-animate-right {
-            opacity: 0;
-            animation: heroEntranceRight 0.8s ease-out forwards;
-            animation-delay: 0s;
+        body.js-reveal-ready .reveal-up { transform: translateY(40px); }
+        body.js-reveal-ready .reveal-left { transform: translateX(-40px); }
+        body.js-reveal-ready .reveal-right { transform: translateX(40px); }
+        body.js-reveal-ready .reveal-zoom { transform: scale(0.92); }
+        body.js-reveal-ready .reveal-fade { transform: none; }
+        body.js-reveal-ready .reveal-expand { transform: scaleX(0); transform-origin: center; }
+        body.js-reveal-ready .reveal-stat { transform: translateY(20px) scale(0.94); }
+        body.js-reveal-ready .reveal-photo { transform: translateX(-40px) scale(0.96); }
+        body.js-reveal-ready .reveal-pop { transform: scale(0.85); }
+        body.js-reveal-ready .reveal-bottom-left { transform: translate(-40px, 40px); }
+        body.js-reveal-ready .reveal-top { transform: translateY(-40px); }
+        body.js-reveal-ready .reveal-top-zoom { transform: translateY(-40px) scale(0.92); }
+        body.js-reveal-ready .reveal-bottom-right { transform: translate(40px, 40px); }
+        body.js-reveal-ready .reveal-carousel { transform: scale(0.96); }
+
+        body.js-reveal-ready .reveal.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+            transition-duration: 0.7s; /* Smooth bouncy entrance */
+            transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .hero-animate-2 {
-            opacity: 0;
-            animation: heroEntrance 0.8s ease-out forwards;
-            animation-delay: 0.4s;
+        body.js-reveal-ready .reveal-stat.is-visible {
+            transition-duration: 0.7s;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .hero-animate-3 {
-            opacity: 0;
-            animation: heroEntrance 0.8s ease-out forwards;
-            animation-delay: 0.8s;
+        body.js-reveal-ready .reveal-program.is-visible {
+            transition-duration: 0.85s;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .hero-animate-4 {
-            opacity: 0;
-            animation: heroEntrance 0.8s ease-out forwards;
-            animation-delay: 1.2s;
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0) rotate(180deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
         }
+        .animate-float { animation: floatEffect 4s ease-in-out infinite; }
 
-        @keyframes titleEntrance {
-            0% {
-                opacity: 0;
-                transform: translateY(20px) scale(0.92);
-            }
-            60% {
-                opacity: 1;
-                transform: translateY(0) scale(1.03);
-            }
-            80% {
-                transform: scale(0.99) rotate(0.5deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
+        @keyframes shine {
+            100% { left: 125%; }
         }
-        
-        .title-anim {
-            opacity: 0;
-            transform: translateY(20px) scale(0.92);
+        .shine-effect {
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            z-index: 20;
+            pointer-events: none;
         }
-        
-        .fade-up.title-anim.visible {
-            animation: titleEntrance 1s ease-out forwards;
-            transition: none;
+        .group:hover .shine-effect {
+            animation: shine 0.7s ease-out forwards;
         }
     </style>
 
     {{-- SAMBUTAN KEPALA SEKOLAH --}}
     <section class="public-section bg-white relative overflow-hidden islamic-pattern-bg">
         <div class="glow-emerald top-10 left-10"></div>
-        <div class="w-full max-w-7xl mx-auto relative z-10">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
                 {{-- Avatar Column --}}
-                <div class="lg:col-span-5 flex justify-center fade-up">
-                    <div class="sambutan-wrapper max-w-sm w-full">
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="sambutan-wrapper max-w-sm w-full reveal reveal-photo" style="transition-delay: 0ms;">
                         <div class="sambutan-avatar-container">
                             <div class="sambutan-avatar-bg"></div>
                             <div class="sambutan-image-frame relative overflow-hidden rounded-[24px] group transition-all duration-400 hover:shadow-[0_10px_40px_-10px_rgba(5,150,105,0.3)] bg-white">
                                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600" alt="Kepala Sekolah SIT Mutiara Qur'an" class="w-full h-96 object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.08]">
-                                <div class="sambutan-badge transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:bg-emerald-600 group-hover:text-white">Kepala Sekolah</div>
+                                <div class="sambutan-badge transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:bg-emerald-600 group-hover:text-white reveal reveal-pop" style="transition-property: all !important; transition-delay: 150ms;">Kepala Sekolah</div>
                             </div>
                         </div>
                     </div>
@@ -301,18 +278,19 @@
                     <span class="section-badge fade-up"><i data-lucide="quote" class="w-4 h-4"></i> Kata Sambutan</span>
                     <h2 class="section-title text-left mb-6 fade-up title-anim" style="transition-delay: 200ms;">Membentuk Generasi Rabbanî yang Unggul & Berkarakter</h2>
                     <div class="space-y-4 text-slate-600 leading-relaxed text-sm sm:text-base">
-                        <p class="font-bold text-slate-800 text-lg fade-up" style="transition-delay: 300ms;">Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
-                        <p class="fade-up" style="transition-delay: 500ms;">
+                        <p class="font-bold text-slate-800 text-lg reveal reveal-up" style="transition-delay: 350ms;">Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
+                        <p class="reveal reveal-up" style="transition-delay: 500ms;">
                             Segala puji bagi Allah SWT, Shalawat dan Salam senantiasa tercurah kepada Baginda Nabi Muhammad SAW. Selamat datang di portal resmi <strong>SIT Mutiara Qur'an Nagari Cupak</strong>.
                         </p>
-                        <p class="fade-up" style="transition-delay: 700ms;">
+                        <p class="reveal reveal-up" style="transition-delay: 650ms;">
                             Sebagai lembaga pendidikan Islam terpadu, kami berkomitmen untuk melahirkan generasi Qur'an yang seimbang secara spiritual, intelektual, dan moral. Kami meyakini bahwa setiap anak memiliki potensi terbaiknya, dan tugas kamilah di sekolah untuk menuntun serta mengasah potensi tersebut dengan berlandaskan nilai-nilai Al-Qur'an dan Sunnah.
                         </p>
-                        <p class="fade-up" style="transition-delay: 900ms;">
+                        <p class="reveal reveal-up" style="transition-delay: 800ms;">
                             Dengan dukungan asatidzah yang berkompeten, fasilitas yang kondusif, serta lingkungan yang islami, kami siap berkolaborasi erat dengan para orang tua untuk mendampingi tumbuh kembang putra-putri tercinta menjadi calon pemimpin umat masa depan yang berakhlak mulia.
                         </p>
                     </div>
-                    <div class="mt-8 border-t border-slate-100 pt-6 fade-up" style="transition-delay: 1100ms;">
+                    <div class="mt-8 pt-6 relative fade-up" style="transition-delay: 1100ms;">
+                        <div class="absolute top-0 left-0 h-[1px] bg-slate-200 w-full"></div>
                         <h4 class="text-base font-extrabold text-slate-800">Ustadz Ahmad Fauzi, S.Pd.I, M.Pd</h4>
                         <p class="text-xs font-semibold text-emerald-600 uppercase tracking-widest mt-1">Pimpinan & Kepala Sekolah SIT Mutiara Qur'an</p>
                     </div>
@@ -325,19 +303,20 @@
     {{-- PROGRAM UNGGULAN --}}
     <section class="public-section bg-slate-50 relative overflow-hidden">
         <div class="glow-amber bottom-10 right-10"></div>
-        <div class="w-full max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16 fade-up">
-                <span class="section-badge"><i data-lucide="sparkles" class="w-4 h-4"></i> Program Unggulan</span>
-                <h2 class="section-title mx-auto">Program Khusus Keislaman & Akademik</h2>
-                <p class="section-subtitle mx-auto text-center">Kurikulum keagamaan dan akademik yang dirancang secara matang untuk menyeimbangkan kecerdasan intelektual dan spiritual.</p>
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-16 flex flex-col items-center">
+                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="sparkles" class="w-4 h-4"></i> Program Unggulan</span>
+                <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Program Khusus Keislaman & Akademik</h2>
+                <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
+                <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Kurikulum keagamaan dan akademik yang dirancang secara matang untuk menyeimbangkan kecerdasan intelektual dan spiritual.</p>
             </div>
 
             {{-- Program Filter Tabs --}}
-            <div class="flex flex-wrap justify-center gap-3 mb-12 fade-up">
-                <button onclick="filterPrograms('all', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-emerald-600 text-white shadow-md shadow-emerald-200 transition-all duration-300 filter-btn">Semua Program</button>
-                <button onclick="filterPrograms('keislaman', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-300 filter-btn">Keislaman</button>
-                <button onclick="filterPrograms('akademik', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-300 filter-btn">Akademik & IT</button>
-                <button onclick="filterPrograms('karakter', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-300 filter-btn">Karakter & Pemimpin</button>
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button onclick="filterPrograms('all', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-emerald-600 text-white shadow-md shadow-emerald-200 transition-all duration-500 filter-btn reveal reveal-up" style="transition-delay: 300ms;">Semua Program</button>
+                <button onclick="filterPrograms('keislaman', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-500 filter-btn reveal reveal-up" style="transition-delay: 450ms;">Keislaman</button>
+                <button onclick="filterPrograms('akademik', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-500 filter-btn reveal reveal-up" style="transition-delay: 600ms;">Akademik & IT</button>
+                <button onclick="filterPrograms('karakter', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-500 filter-btn reveal reveal-up" style="transition-delay: 750ms;">Karakter & Pemimpin</button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -387,15 +366,53 @@
                         ]
                     ];
                 @endphp
-                @foreach($programs as $p)
-                    <div class="program-card fade-up program-item transition-all duration-300" data-category="{{ $p['category'] }}">
-                        <div class="program-icon-wrapper">
-                            <i data-lucide="{{ $p['icon'] }}" class="w-7 h-7"></i>
+                @php
+                    $animClasses = ['reveal-bottom-left', 'reveal-top', 'reveal-bottom-right', 'reveal-left', 'reveal-zoom', 'reveal-right'];
+                @endphp
+                @foreach($programs as $idx => $p)
+                    <div tabindex="0" class="bg-white rounded-2xl p-6 min-h-[320px] md:min-h-[340px] flex flex-col border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(52,211,153,0.25)] hover:scale-[1.03] hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group reveal reveal-program program-item {{ $animClasses[$idx % 6] }} focus:outline-none" data-category="{{ $p['category'] }}" style="transition-delay: {{ 120 + ($idx * 150) }}ms;">
+                        
+                        <!-- Top Accent Bar -->
+                        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-400 to-amber-400"></div>
+
+                        <!-- Shine Effect -->
+                        <div class="shine-effect"></div>
+
+                        <!-- Background Hover Glow -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-amber-50/50 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                        <!-- Default View (Icon + Title + Badge) -->
+                        <div class="relative z-10 flex flex-col h-full transform transition-transform duration-500 group-hover:-translate-y-4 focus:-translate-y-4 flex-grow">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/60 text-emerald-600 flex items-center justify-center mb-6 shadow-inner group-hover:-translate-y-1 group-hover:rotate-12 group-hover:scale-110 focus:-translate-y-1 focus:rotate-12 focus:scale-110 transition-transform duration-300">
+                                <i data-lucide="{{ $p['icon'] }}" class="w-7 h-7"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-4 group-hover:text-emerald-700 focus:text-emerald-700 transition-colors">{{ $p['title'] }}</h3>
+                            <div class="mt-auto">
+                                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-2 rounded-xl inline-block border border-emerald-100">
+                                    {{ $p['detail'] }}
+                                </span>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-slate-800 mb-3">{{ $p['title'] }}</h3>
-                        <p class="text-slate-500 text-sm leading-relaxed mb-6">{{ $p['desc'] }}</p>
-                        <div class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-2 rounded-xl inline-block">
-                            {{ $p['detail'] }}
+
+                        <!-- Mobile Hint Indicator -->
+                        <div class="absolute bottom-6 right-6 z-10 flex items-center gap-2 opacity-100 group-hover:opacity-0 focus:opacity-0 transition-opacity duration-300">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider md:hidden">Tap detail</span>
+                            <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 shadow-sm border border-slate-100 animate-pulse">
+                                <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+
+                        <!-- Overlay Detail View -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-emerald-900 to-emerald-800/95 p-6 md:p-8 flex flex-col justify-center overflow-y-auto translate-y-full group-hover:translate-y-0 focus:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] z-20 opacity-0 group-hover:opacity-100 focus:opacity-100 custom-scrollbar">
+                            
+                            <!-- Staggered Entry Elements -->
+                            <div class="text-amber-400 mb-4 transform translate-y-8 group-hover:translate-y-0 focus:translate-y-0 transition-transform duration-500 delay-100 flex-shrink-0">
+                                <i data-lucide="{{ $p['icon'] }}" class="w-10 h-10"></i>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-white mb-3 transform translate-y-8 group-hover:translate-y-0 focus:translate-y-0 transition-transform duration-500 delay-150 flex-shrink-0">{{ $p['title'] }}</h3>
+                            
+                            <p class="text-emerald-50 text-sm leading-relaxed transform translate-y-8 group-hover:translate-y-0 focus:translate-y-0 transition-transform duration-500 delay-200 mb-auto">{{ $p['desc'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -404,32 +421,60 @@
     </section>
 
     {{-- KEUNGGULAN TAMBAHAN --}}
-    <section class="public-section bg-white">
-        <div class="w-full max-w-7xl mx-auto">
-            <div class="text-center mb-14 fade-up">
-                <span class="section-badge"><i data-lucide="award" class="w-4 h-4"></i> Keunggulan Kami</span>
-                <h2 class="section-title mx-auto">Mengapa Memilih Mutiara Qur'an?</h2>
-                <p class="section-subtitle mx-auto text-center">Fasilitas yang modern dan lingkungan yang aman bersinergi melahirkan kenyamanan belajar penuh berkah.</p>
+    <section class="public-section relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-emerald-50/40">
+        <!-- Floating Particles / Decorative Shapes -->
+        <div class="absolute top-10 left-10 w-64 h-64 bg-emerald-200/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-10 w-72 h-72 bg-amber-200/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/3 w-40 h-40 bg-cyan-200/20 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <!-- Small animated particles -->
+        <div class="absolute bottom-1/4 left-10 w-4 h-4 bg-emerald-300 rounded-full opacity-40 pointer-events-none animate-ping" style="animation-duration: 3s;"></div>
+        <div class="absolute top-1/4 right-20 w-3 h-3 bg-amber-300 rounded-full opacity-50 pointer-events-none animate-pulse" style="animation-duration: 4s;"></div>
+        <div class="absolute bottom-10 left-1/2 w-5 h-5 bg-blue-300 rounded-full opacity-30 pointer-events-none animate-bounce" style="animation-duration: 5s;"></div>
+        
+        <!-- Added particles -->
+        <div class="absolute top-20 left-1/4 w-3 h-3 bg-teal-300 rounded-full opacity-40 pointer-events-none animate-ping" style="animation-duration: 4.5s; animation-delay: 1s;"></div>
+        <div class="absolute bottom-1/3 right-1/4 w-6 h-6 bg-rose-200 rounded-full opacity-30 pointer-events-none animate-bounce" style="animation-duration: 6s; animation-delay: 0.5s;"></div>
+        <div class="absolute top-1/2 right-10 w-4 h-4 bg-violet-300 rounded-full opacity-40 pointer-events-none animate-pulse" style="animation-duration: 3.5s; animation-delay: 1.5s;"></div>
+
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-16 flex flex-col items-center">
+                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="award" class="w-4 h-4"></i> Keunggulan Kami</span>
+                <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Mengapa Memilih Mutiara Qur'an?</h2>
+                <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
+                <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Fasilitas yang modern dan lingkungan yang aman bersinergi melahirkan kenyamanan belajar penuh berkah.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 @php
                     $keunggulan = [
-                        ['icon' => 'book-marked', 'bg' => 'amber', 'title' => 'Kurikulum Merdeka + JSIT', 'desc' => 'Mengintegrasikan kurikulum nasional Kurikulum Merdeka dengan kurikulum kekhasan JSIT.'],
-                        ['icon' => 'monitor', 'bg' => 'emerald', 'title' => 'Laboratorium Komputer', 'desc' => 'Fasilitas komputer modern penunjang praktikum TIK dan pemrograman dasar sejak usia dini.'],
-                        ['icon' => 'users-2', 'bg' => 'blue', 'title' => 'Tenaga Pendidik Berdedikasi', 'desc' => 'Asatidzah lulusan perguruan tinggi terkemuka, bersertifikat pendidik, dan hafizh/hafizhah.'],
-                        ['icon' => 'home', 'bg' => 'violet', 'title' => 'Fasilitas Kelas Kondusif', 'desc' => 'Ruang kelas yang ber-AC, proyektor LCD interaktif, serta lingkungan asri yang jauh dari kebisingan.'],
-                        ['icon' => 'shield-check', 'bg' => 'rose', 'title' => 'Lingkungan Aman & Ramah Anak', 'desc' => 'Keamanan terpadu 24 jam dengan sistem sekolah bebas bullying dan penuh kehangatan ukhuwah.'],
-                        ['icon' => 'activity', 'bg' => 'cyan', 'title' => 'Ekstrakurikuler Variatif', 'desc' => 'Panahan, berkuda, karate, robotik, seni kaligrafi, tilawah, sepak bola, dan pramuka.'],
+                        ['icon' => 'book-marked', 'bg' => 'amber', 'anim' => 'reveal-bottom-left', 'delay' => '150ms', 'title' => 'Kurikulum Merdeka + JSIT', 'desc' => 'Mengintegrasikan kurikulum nasional Kurikulum Merdeka dengan kurikulum kekhasan JSIT.'],
+                        ['icon' => 'monitor', 'bg' => 'emerald', 'anim' => 'reveal-top-zoom', 'delay' => '300ms', 'title' => 'Laboratorium Komputer', 'desc' => 'Fasilitas komputer modern penunjang praktikum TIK dan pemrograman dasar sejak dini.'],
+                        ['icon' => 'users-2', 'bg' => 'blue', 'anim' => 'reveal-bottom-right', 'delay' => '450ms', 'title' => 'Tenaga Pendidik Berdedikasi', 'desc' => 'Asatidzah lulusan perguruan tinggi terkemuka, bersertifikat pendidik, dan hafizh.'],
+                        ['icon' => 'home', 'bg' => 'violet', 'anim' => 'reveal-left', 'delay' => '600ms', 'title' => 'Fasilitas Kelas Kondusif', 'desc' => 'Ruang kelas ber-AC, proyektor LCD, serta lingkungan asri yang jauh dari kebisingan.'],
+                        ['icon' => 'shield-check', 'bg' => 'rose', 'anim' => 'reveal-zoom', 'delay' => '750ms', 'title' => 'Lingkungan Aman & Ramah', 'desc' => 'Keamanan terpadu 24 jam dengan sistem sekolah bebas bullying dan hangat.'],
+                        ['icon' => 'activity', 'bg' => 'cyan', 'anim' => 'reveal-right', 'delay' => '900ms', 'title' => 'Ekstrakurikuler Variatif', 'desc' => 'Panahan, berkuda, karate, robotik, seni kaligrafi, tilawah, sepak bola, dan pramuka.'],
                     ];
                 @endphp
                 @foreach($keunggulan as $item)
-                    <div class="feature-card fade-up">
-                        <div class="feature-icon bg-{{ $item['bg'] }}-50 text-{{ $item['bg'] }}-600">
-                            <i data-lucide="{{ $item['icon'] }}" class="w-6 h-6"></i>
+                    <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 hover:scale-[1.03] hover:border-{{ $item['bg'] }}-300 transition-all duration-300 relative overflow-hidden group reveal reveal-program {{ $item['anim'] }}" style="transition-delay: {{ $item['delay'] }};">
+                        
+                        <!-- Shine effect passing across the card -->
+                        <div class="shine-effect"></div>
+
+                        <!-- Top soft glow on hover -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-{{ $item['bg'] }}-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <!-- Background abstract glint -->
+                        <div class="absolute -right-6 -top-6 w-32 h-32 bg-gradient-to-br from-{{ $item['bg'] }}-100 to-white rounded-full opacity-40 group-hover:scale-[2.5] group-hover:opacity-70 transition-all duration-700 ease-out z-0 blur-2xl"></div>
+
+                        <div class="relative z-10">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-{{ $item['bg'] }}-50 to-{{ $item['bg'] }}-100/60 text-{{ $item['bg'] }}-600 flex items-center justify-center mb-6 shadow-inner group-hover:-translate-y-2 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="{{ $item['icon'] }}" class="w-7 h-7"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-{{ $item['bg'] }}-600 transition-colors duration-300">{{ $item['title'] }}</h3>
+                            <p class="text-sm text-slate-500 leading-relaxed">{{ $item['desc'] }}</p>
                         </div>
-                        <h3 class="text-lg font-bold text-[var(--theme-primary)] mb-2">{{ $item['title'] }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed">{{ $item['desc'] }}</p>
                     </div>
                 @endforeach
             </div>
@@ -437,31 +482,96 @@
     </section>
 
     {{-- UNIT PENDIDIKAN PREVIEW --}}
-    <section class="public-section bg-slate-50">
-        <div class="w-full max-w-7xl mx-auto">
-            <div class="text-center mb-14 fade-up">
-                <span class="section-badge"><i data-lucide="layers-3" class="w-4 h-4"></i> Unit Pendidikan</span>
-                <h2 class="section-title mx-auto">Jenjang Pendidikan Kami</h2>
-                <p class="section-subtitle mx-auto text-center">Menyediakan jenjang pendidikan berkesinambungan dari usia emas anak hingga pra-remaja.</p>
+    <section class="public-section bg-slate-50 relative overflow-hidden">
+        <!-- Floating background blobs -->
+        <div class="absolute top-10 right-10 w-64 h-64 bg-sky-200/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 left-10 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-16 flex flex-col items-center">
+                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="layers-3" class="w-4 h-4"></i> Unit Pendidikan</span>
+                <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Jenjang Pendidikan Kami</h2>
+                <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
+                <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Menyediakan jenjang pendidikan berkesinambungan dari usia emas anak hingga pra-remaja.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 lg:px-0">
                 @php
                     $units = [
-                        ['logo' => asset('images/tk.jpeg'),  'color' => 'sky',    'title' => 'TK Islam Terpadu',  'desc' => 'Pembelajaran bermain sambil belajar yang bermakna dengan fokus pengenalan huruf hijaiyah, adab dasar, dan hafalan surah pendek.', 'route' => 'public.unit.tk.index'],
-                        ['logo' => asset('images/sd.jpeg'),  'color' => 'amber',  'title' => 'SD Islam Terpadu',  'desc' => 'Pembentukan pondasi keilmuan akademis umum, penguatan hafalan Al-Qur\'an hingga 5 juz, pembiasaan ibadah mandiri, dan kemandirian.', 'route' => 'public.unit.sd.index'],
-                        ['logo' => asset('images/smp.jpeg'), 'color' => 'indigo', 'title' => 'SMP Islam Terpadu', 'desc' => 'Pengembangan kemampuan analisis akademis, penguasaan literasi digital, hafalan Al-Qur\'an hingga 10 juz, dan pelatihan kepemimpinan.', 'route' => 'public.unit.smp.index'],
+
+                        [
+                            'logo' => asset('images/tk.jpeg'),
+                            'title' => 'TK Islam Terpadu',
+                            'desc' => 'Pembelajaran bermain sambil belajar yang bermakna dengan fokus pengenalan huruf hijaiyah, adab dasar, dan hafalan surah pendek.',
+                            'route' => 'public.unit.tk.index',
+                            'anim' => 'anim-bottom-left',
+                            'delay' => '0ms',
+                            'borderHover' => 'hover:border-sky-300',
+                            'shadowHover' => 'group-hover:shadow-sky-200/50',
+                            'bgGlow' => 'from-sky-50/0 to-sky-100/60',
+                            'innerGlow' => 'bg-sky-100/50',
+                            'textHover' => 'group-hover:text-sky-700',
+                            'btnHover' => 'text-sky-600 group-hover:bg-sky-600 group-hover:text-white group-hover:shadow-sky-600/30',
+                        ],
+                        [
+                            'logo' => asset('images/sd.jpeg'),
+                            'title' => 'SD Islam Terpadu',
+                            'desc' => 'Pembentukan pondasi keilmuan akademis umum, penguatan hafalan Al-Qur\'an hingga 5 juz, pembiasaan ibadah mandiri, dan kemandirian.',
+                            'route' => 'public.unit.sd.index',
+                            'anim' => 'anim-zoom',
+                            'delay' => '150ms',
+                            'borderHover' => 'hover:border-amber-300',
+                            'shadowHover' => 'group-hover:shadow-amber-200/50',
+                            'bgGlow' => 'from-amber-50/0 to-amber-100/60',
+                            'innerGlow' => 'bg-amber-100/50',
+                            'textHover' => 'group-hover:text-amber-700',
+                            'btnHover' => 'text-amber-600 group-hover:bg-amber-500 group-hover:text-white group-hover:shadow-amber-500/30',
+                        ],
+                        [
+                            'logo' => asset('images/smp.jpeg'),
+                            'title' => 'SMP Islam Terpadu',
+                            'desc' => 'Pengembangan kemampuan analisis akademis, penguasaan literasi digital, hafalan Al-Qur\'an hingga 10 juz, dan pelatihan kepemimpinan.',
+                            'route' => 'public.unit.smp.index',
+                            'anim' => 'anim-bottom-right',
+                            'delay' => '300ms',
+                            'borderHover' => 'hover:border-indigo-300',
+                            'shadowHover' => 'group-hover:shadow-indigo-200/50',
+                            'bgGlow' => 'from-indigo-50/0 to-indigo-100/60',
+                            'innerGlow' => 'bg-indigo-100/50',
+                            'textHover' => 'group-hover:text-indigo-700',
+                            'btnHover' => 'text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-indigo-600/30',
+                        ],
+                        ],
                     ];
                 @endphp
                 @foreach($units as $unit)
-                    <div class="feature-card text-center fade-up group">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-{{ $unit['color'] }}-50 to-{{ $unit['color'] }}-100/80 flex items-center justify-center mx-auto mb-5 border border-{{ $unit['color'] }}-100/50 overflow-hidden">
-                            <img src="{{ $unit['logo'] }}" alt="Logo {{ $unit['title'] }}"
-                                 class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300">
+                    <div class="bg-white rounded-[32px] p-8 text-center reveal reveal-up group border border-slate-100 shadow-sm relative overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] {{ $unit['borderHover'] }} {{ $unit['anim'] }} flex flex-col h-full" style="transition-delay: {{ $unit['delay'] }};">
+                        
+                        <!-- Glow Background on Hover -->
+                        <div class="absolute inset-0 bg-gradient-to-b {{ $unit['bgGlow'] }} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+                        <div class="relative z-10 flex flex-col flex-grow">
+                            <!-- Logo Container -->
+                            <div class="w-24 h-24 rounded-2xl bg-white flex items-center justify-center mx-auto mb-6 shadow-sm border border-slate-100 overflow-hidden {{ $unit['shadowHover'] }} transition-all duration-500 relative">
+                                <!-- Inner glow for logo -->
+                                <div class="absolute inset-0 {{ $unit['innerGlow'] }} opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                <img src="{{ $unit['logo'] }}" alt="Logo {{ $unit['title'] }}"
+                                     class="w-full h-full object-contain p-2 relative z-10 transition-transform duration-500 group-hover:scale-[1.15] group-hover:rotate-[4deg]">
+                            </div>
+                            
+                            <h3 class="text-2xl font-black text-slate-800 mb-3 {{ $unit['textHover'] }} transition-colors duration-300">{{ $unit['title'] }}</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-8 flex-grow group-hover:text-slate-600 transition-colors duration-300">{{ $unit['desc'] }}</p>
+                            
+                            <!-- Button Link -->
+                            <div class="mt-auto">
+                                <a href="{{ route($unit['route']) }}" class="inline-flex items-center justify-center w-full py-3.5 rounded-xl bg-slate-50 {{ $unit['btnHover'] }} font-bold transition-all duration-300 overflow-hidden relative">
+                                    <span class="relative z-10 flex items-center gap-2 transform transition-transform duration-300 group-hover:translate-x-1.5 text-sm">
+                                        Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"></i>
+                                    </span>
+                                </a>
+                            </div>
                         </div>
-                        <h3 class="text-xl font-bold text-[var(--theme-primary)] mb-2">{{ $unit['title'] }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed mb-5">{{ $unit['desc'] }}</p>
-                        <a href="{{ route($unit['route']) }}" class="text-{{ $unit['color'] === 'sky' ? 'sky-600' : ($unit['color'] === 'amber' ? 'amber-600' : 'indigo-600') }} text-sm font-bold hover:underline inline-flex items-center gap-1">Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
                     </div>
                 @endforeach
             </div>
@@ -470,11 +580,12 @@
 
     {{-- TESTIMONI WALI MURID --}}
     <section class="public-section bg-white relative overflow-hidden">
-        <div class="w-full max-w-7xl mx-auto">
-            <div class="text-center mb-16 fade-up">
-                <span class="section-badge"><i data-lucide="message-square" class="w-4 h-4"></i> Testimoni</span>
-                <h2 class="section-title mx-auto">Apa Kata Orang Tua Wali Murid?</h2>
-                <p class="section-subtitle mx-auto text-center">Kepercayaan dan kebanggaan para orang tua atas perkembangan akademis dan karakter islami putra-putrinya di SIT Mutiara Qur'an.</p>
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-16 flex flex-col items-center">
+                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="message-square" class="w-4 h-4"></i> Testimoni</span>
+                <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Apa Kata Orang Tua Wali Murid?</h2>
+                <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
+                <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Kepercayaan dan kebanggaan para orang tua atas perkembangan akademis dan karakter islami putra-putrinya di SIT Mutiara Qur'an.</p>
             </div>
 
             @php
@@ -501,30 +612,45 @@
             @endphp
 
             {{-- Testimonial Slider --}}
-            <div class="max-w-4xl mx-auto relative overflow-hidden px-4 fade-up">
-                <div class="relative w-full overflow-hidden rounded-[32px] border border-slate-100 bg-white p-8 sm:p-12 shadow-xl shadow-slate-100/50">
+            <div class="max-w-4xl mx-auto relative px-4">
+                <div class="relative w-full rounded-[32px] border border-slate-100 bg-white p-8 sm:p-12 shadow-xl shadow-slate-100/50 reveal reveal-carousel" style="transition-delay: 600ms; transition-duration: 800ms;">
+                    
+                    <!-- Decorative Quote Icon -->
+                    <div class="absolute top-6 right-8 text-emerald-50 opacity-60">
+                        <i data-lucide="quote" class="w-24 h-24"></i>
+                    </div>
+
                     <div class="glow-emerald top-0 left-0"></div>
 
-                    {{-- Slider Track --}}
-                    <div class="flex transition-transform duration-500 ease-out" id="testiSliderTrack" style="width: 300%; transform: translateX(0%);">
-                        @foreach($testimonials as $index => $t)
-                            <div class="w-1/3 flex-shrink-0 text-center px-4 md:px-12">
-                                <div class="testi-quote text-base sm:text-lg md:text-xl font-medium mb-8 text-slate-700 leading-relaxed">{{ $t['quote'] }}</div>
-
-                                <div class="flex flex-col items-center justify-center">
-                                    <img src="{{ $t['avatar'] }}" alt="{{ $t['name'] }}" class="w-16 h-16 rounded-full object-cover border-4 border-emerald-100 shadow-md mb-3">
-                                    <h4 class="text-base sm:text-lg font-extrabold text-slate-800">{{ $t['name'] }}</h4>
-                                    <p class="text-xs sm:text-sm text-emerald-600 font-semibold mt-1">{{ $t['role'] }}</p>
+                    
+                    {{-- Carousel Viewport --}}
+                    <div class="overflow-hidden w-full relative z-10">
+                        {{-- Slider Track --}}
+                        <div class="flex transition-transform duration-500 ease-out" id="testiSliderTrack" style="width: 300%; transform: translateX(0%);">
+                            @foreach($testimonials as $index => $t)
+                                <div class="w-1/3 flex-shrink-0 text-center px-4 md:px-12">
+                                    <div class="testi-quote text-base sm:text-lg md:text-xl font-medium mb-8 text-slate-700 leading-relaxed">{{ $t['quote'] }}</div>
+                                    
+                                    <div class="flex flex-col items-center justify-center">
+                                        <!-- Image -->
+                                        <img src="{{ $t['avatar'] }}" alt="{{ $t['name'] }}" class="w-16 h-16 rounded-full object-cover border-4 border-emerald-100 shadow-md mb-3 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                                        <!-- Name & Role -->
+                                        <div>
+                                            <h4 class="text-base sm:text-lg font-extrabold text-slate-800">{{ $t['name'] }}</h4>
+                                            <p class="text-xs sm:text-sm text-emerald-600 font-semibold mt-1">{{ $t['role'] }}</p>
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
 
                     {{-- Navigation Controls --}}
-                    <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-md text-slate-500 z-10" aria-label="Previous slide">
+                    <button onclick="prevSlide()" class="absolute left-4 top-0 bottom-0 my-auto w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-md text-slate-500 z-20 hover:scale-110 reveal reveal-zoom" style="transition-delay: 750ms;" aria-label="Previous slide">
                         <i data-lucide="chevron-left" class="w-5 h-5"></i>
                     </button>
-                    <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-md text-slate-500 z-10" aria-label="Next slide">
+                    <button onclick="nextSlide()" class="absolute right-4 top-0 bottom-0 my-auto w-10 h-10 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300 shadow-md text-slate-500 z-20 hover:scale-110 reveal reveal-zoom" style="transition-delay: 750ms;" aria-label="Next slide">
                         <i data-lucide="chevron-right" class="w-5 h-5"></i>
                     </button>
                 </div>
@@ -532,7 +658,7 @@
                 {{-- Dots Indicator --}}
                 <div class="flex justify-center gap-2 mt-6">
                     @foreach($testimonials as $index => $t)
-                        <button onclick="goToSlide({{ $index }})" class="w-2.5 h-2.5 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-emerald-600 w-6' : 'bg-slate-300' }} slider-dot" aria-label="Go to slide {{ $index+1 }}"></button>
+                        <button onclick="goToSlide({{ $index }})" class="w-2.5 h-2.5 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-emerald-600 w-6 animate-pulse' : 'bg-slate-300' }} slider-dot reveal reveal-fade" style="transition-delay: {{ 850 + ($index * 100) }}ms;" aria-label="Go to slide {{ $index+1 }}"></button>
                     @endforeach
                 </div>
             </div>
@@ -541,11 +667,12 @@
 
     {{-- QUICK FAQ --}}
     <section class="public-section bg-slate-50 relative overflow-hidden">
-        <div class="w-full max-w-7xl mx-auto">
-            <div class="text-center mb-16 fade-up">
-                <span class="section-badge"><i data-lucide="help-circle" class="w-4 h-4"></i> FAQ</span>
-                <h2 class="section-title mx-auto">Pertanyaan Umum (FAQ)</h2>
-                <p class="section-subtitle mx-auto text-center">Menjawab keraguan dan pertanyaan paling umum seputar pendaftaran serta pola ajar di SIT Mutiara Qur'an.</p>
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-16 flex flex-col items-center">
+                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="help-circle" class="w-4 h-4"></i> FAQ</span>
+                <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Pertanyaan Umum (FAQ)</h2>
+                <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
+                <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Menjawab keraguan dan pertanyaan paling umum seputar pendaftaran serta pola ajar di SIT Mutiara Qur'an.</p>
             </div>
 
             <div class="max-w-3xl mx-auto">
@@ -571,7 +698,7 @@
                 @endphp
                 <div class="space-y-4">
                     @foreach($faqs as $index => $faq)
-                        <div class="premium-faq-item fade-up">
+                        <div class="premium-faq-item reveal reveal-up">
                             <button class="premium-faq-trigger" onclick="toggleFaq(this)">
                                 <span class="premium-faq-title">{{ $faq['question'] }}</span>
                                 <i data-lucide="chevron-down" class="premium-faq-icon"></i>
@@ -589,34 +716,114 @@
     </section>
 
     {{-- CTA PPDB --}}
-    <section class="public-section bg-gradient-to-br from-emerald-800 to-emerald-950 relative overflow-hidden">
-        <div class="absolute inset-0" style="background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 24px 24px;"></div>
-        <div class="max-w-3xl mx-auto text-center relative z-10 fade-up">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-amber-300 text-sm font-bold mb-6">
-                <i data-lucide="megaphone" class="w-4 h-4 text-amber-300 animate-pulse"></i> Pendaftaran Dibuka
-            </span>
-            <h2 class="text-3xl sm:text-4xl font-black text-white leading-tight mb-4">
-                Penerimaan Peserta Didik Baru<br>Tahun Ajaran {{ date('Y') }}/{{ date('Y') + 1 }}
-            </h2>
-            <p class="text-emerald-100/70 text-sm sm:text-base mb-10 max-w-lg mx-auto leading-relaxed">
-                Segera amankan kuota pendaftaran putra-putri Anda di SIT Mutiara Qur'an dan berikan mereka pondasi agama serta akademis terbaik.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="{{ route('public.ppdb.index') }}"
-                    class="inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-amber-400 text-emerald-950 font-extrabold text-base shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                    <i data-lucide="file-text" class="w-5 h-5"></i> Informasi Pendaftaran (PPDB)
-                </a>
-                <a href="{{ route('public.ppdb.form-kontak') }}"
-                    class="inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-base hover:bg-white/20 transition-all duration-300">
-                    <i data-lucide="phone" class="w-5 h-5"></i> Hubungi Panitia
-                </a>
+    <section id="cta-ppdb" class="public-section bg-gradient-to-br from-emerald-800 to-emerald-950 relative overflow-hidden">
+        <div class="absolute inset-0 cta-bg-pattern" style="background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 24px 24px;"></div>
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="max-w-3xl mx-auto text-center cta-container">
+                <span class="cta-badge reveal reveal-zoom inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-amber-300 text-sm font-bold mb-6 hover:shadow-[0_0_15px_rgba(252,211,77,0.3)] hover:bg-white/15 transition-all duration-300 cursor-default ">
+                    <i data-lucide="megaphone" class="w-4 h-4 text-amber-300 animate-pulse"></i> Pendaftaran Dibuka
+                </span>
+                <h2 class="cta-title reveal reveal-up text-3xl sm:text-4xl font-black text-white leading-tight mb-4 ">
+                    Penerimaan Peserta Didik Baru<br>Tahun Ajaran {{ date('Y') }}/{{ date('Y') + 1 }}
+                </h2>
+                <p class="cta-desc reveal reveal-up text-emerald-100/70 text-sm sm:text-base mb-10 max-w-lg mx-auto leading-relaxed ">
+                    Segera amankan kuota pendaftaran putra-putri Anda di SIT Mutiara Qur'an dan berikan mereka pondasi agama serta akademis terbaik.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 overflow-hidden py-2">
+                    <a href="{{ route('public.ppdb.index') }}"
+                        class="cta-btn-primary reveal reveal-left group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-amber-400 text-emerald-950 font-extrabold text-base shadow-lg shadow-amber-500/20 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(251,191,36,0.4)] transition-all duration-300 ">
+                        <i data-lucide="file-text" class="w-5 h-5 transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110"></i> Informasi Pendaftaran (PPDB)
+                    </a>
+                    <a href="{{ route('public.ppdb.form-kontak') }}"
+                        class="cta-btn-outline reveal reveal-right group inline-flex items-center gap-3 px-10 py-4 rounded-2xl bg-white/5 backdrop-blur-md border border-white/20 text-white font-bold text-base hover:bg-white/10 hover:border-white/40 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(255,255,255,0.1)] transition-all duration-300 ">
+                        <i data-lucide="phone" class="w-5 h-5 transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110"></i> Hubungi Panitia
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
+    <style>
+        /* CTA Animations */
+        @keyframes ctaPatternFloat {
+            0% { background-position: 0px 0px; }
+            100% { background-position: 24px 24px; }
+        }
+        .cta-bg-pattern {
+            animation: ctaPatternFloat 6s linear infinite;
+        }
+
+        /* Entry states via classes */
+        .cta-badge.is-visible {
+            animation: ctaBadgeBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        .cta-title.is-visible {
+            animation: ctaTitleZoom 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.2s;
+        }
+        .cta-desc.is-visible {
+            animation: ctaFadeUp 0.8s ease-out forwards;
+            animation-delay: 0.45s;
+        }
+        .cta-btn-primary.is-visible {
+            animation: ctaSlideRight 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.7s;
+        }
+        .cta-btn-outline.is-visible {
+            animation: ctaSlideLeft 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            animation-delay: 0.85s;
+        }
+
+        /* Keyframes */
+        @keyframes ctaBadgeBounce {
+            0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+            70% { opacity: 1; transform: scale(1.05) translateY(-5px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes ctaTitleZoom {
+            0% { opacity: 0; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes ctaFadeUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes ctaSlideRight {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes ctaSlideLeft {
+            0% { opacity: 0; transform: translateX(50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+
     {{-- INLINE FAQ & SLIDER & FILTER JAVASCRIPT --}}
     <script>
-        /* FAQ ACCORDION TOGGLE */
+        /* ROBUST REVEAL OBSERVER */
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add ready class to body to enable opacity: 0
+            document.body.classList.add('js-reveal-ready');
+
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.05,
+                rootMargin: "-10% 0px -25% 0px"
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+        });
+
+                /* FAQ ACCORDION TOGGLE */
         function toggleFaq(btn) {
             const item = btn.parentElement;
             const content = btn.nextElementSibling;
@@ -638,7 +845,7 @@
             }
         }
 
-        /* DYNAMIC PROGRAM FILTERING */
+        /* DYNAMIC PROGRAM FILTERING WITH STAGGERED RE-ENTRY */
         function filterPrograms(category, btn) {
             // Update active button styling
             document.querySelectorAll('.filter-btn').forEach(b => {
@@ -648,23 +855,31 @@
             btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
             btn.classList.add('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-200');
 
-            // Filter cards with scale animation
-            document.querySelectorAll('.program-item').forEach(card => {
-                const cardCat = card.getAttribute('data-category');
-                if (category === 'all' || cardCat === category) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
+            // Hide all cards first simultaneously
+            const cards = document.querySelectorAll('.program-item');
+            cards.forEach(card => {
+                card.style.transitionDelay = '0ms'; // reset delay for quick exit
+                card.classList.remove('is-visible'); // triggers exit animation
             });
+
+            // Wait for exit animation to almost finish, then re-layout
+            setTimeout(() => {
+                let visibleCount = 0;
+                cards.forEach(card => {
+                    const cardCat = card.getAttribute('data-category');
+                    if (category === 'all' || cardCat === category) {
+                        card.style.display = 'block';
+                        // Re-trigger entrance animation with staggered delay
+                        setTimeout(() => {
+                            card.style.transitionDelay = (120 + (visibleCount * 150)) + 'ms';
+                            card.classList.add('is-visible');
+                            visibleCount++;
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }, 500); // 500ms allows the exit to feel fluid before re-layout
         }
 
         /* TESTIMONIAL SLIDER CONTROLLER */
@@ -679,9 +894,9 @@
                 dots.forEach((dot, idx) => {
                     if (idx === currentSlide) {
                         dot.classList.remove('bg-slate-300');
-                        dot.classList.add('bg-emerald-600', 'w-6');
+                        dot.classList.add('bg-emerald-600', 'w-6', 'animate-pulse');
                     } else {
-                        dot.classList.remove('bg-emerald-600', 'w-6');
+                        dot.classList.remove('bg-emerald-600', 'w-6', 'animate-pulse');
                         dot.classList.add('bg-slate-300');
                     }
                 });
