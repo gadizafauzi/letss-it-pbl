@@ -230,20 +230,8 @@ Route::get('/unit', fn() => view('public.unit.index'))
 |--------------------------------------------------------------------------
 */
 
-Route::get('/unit/tk/profil', fn() => view('public.unit.tk.profil'))
-    ->name('public.unit.tk.profil');
-
-Route::get('/unit/tk/guru', fn() => view('public.unit.tk.guru'))
-    ->name('public.unit.tk.guru');
-
-Route::get('/unit/tk/ekskul', fn() => view('public.unit.tk.ekskul'))
-    ->name('public.unit.tk.ekskul');
-
-Route::get('/unit/tk/fasilitas', fn() => view('public.unit.tk.fasilitas'))
-    ->name('public.unit.tk.fasilitas');
-
-Route::get('/unit/tk/prestasi', fn() => view('public.unit.tk.prestasi'))
-    ->name('public.unit.tk.prestasi');
+Route::get('/unit/tk', fn() => view('public.unit.tk.index'))
+    ->name('public.unit.tk.index');
 
 
 /*
@@ -252,20 +240,14 @@ Route::get('/unit/tk/prestasi', fn() => view('public.unit.tk.prestasi'))
 |--------------------------------------------------------------------------
 */
 
-Route::get('/unit/sd/profil', fn() => view('public.unit.sd.profil'))
-    ->name('public.unit.sd.profil');
+/*
+|--------------------------------------------------------------------------
+| UNIT SD
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/unit/sd/guru', fn() => view('public.unit.sd.guru'))
-    ->name('public.unit.sd.guru');
-
-Route::get('/unit/sd/ekskul', fn() => view('public.unit.sd.ekskul'))
-    ->name('public.unit.sd.ekskul');
-
-Route::get('/unit/sd/fasilitas', fn() => view('public.unit.sd.fasilitas'))
-    ->name('public.unit.sd.fasilitas');
-
-Route::get('/unit/sd/prestasi', fn() => view('public.unit.sd.prestasi'))
-    ->name('public.unit.sd.prestasi');
+Route::get('/unit/sd', fn() => view('public.unit.sd.index'))
+    ->name('public.unit.sd.index');
 
 
 /*
@@ -274,20 +256,8 @@ Route::get('/unit/sd/prestasi', fn() => view('public.unit.sd.prestasi'))
 |--------------------------------------------------------------------------
 */
 
-Route::get('/unit/smp/profil', fn() => view('public.unit.smp.profil'))
-    ->name('public.unit.smp.profil');
-
-Route::get('/unit/smp/guru', fn() => view('public.unit.smp.guru'))
-    ->name('public.unit.smp.guru');
-
-Route::get('/unit/smp/ekskul', fn() => view('public.unit.smp.ekskul'))
-    ->name('public.unit.smp.ekskul');
-
-Route::get('/unit/smp/fasilitas', fn() => view('public.unit.smp.fasilitas'))
-    ->name('public.unit.smp.fasilitas');
-
-Route::get('/unit/smp/prestasi', fn() => view('public.unit.smp.prestasi'))
-    ->name('public.unit.smp.prestasi');
+Route::get('/unit/smp', fn() => view('public.unit.smp.index'))
+    ->name('public.unit.smp.index');
 
 
 /*

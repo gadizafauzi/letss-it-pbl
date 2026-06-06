@@ -27,10 +27,10 @@
 
         <div class="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
+
                 {{-- Left Text --}}
                 <div class="lg:col-span-7 max-w-3xl text-left">
-                    
+
                     {{-- Accreditation stamp --}}
                     <div class="accreditation-stamp mb-8 fade-up">
                         <i data-lucide="shield-check" class="w-6 h-6"></i>
@@ -96,7 +96,7 @@
                         <div class="w-full aspect-[4/5] rounded-[36px] bg-gradient-to-br from-emerald-800/80 to-emerald-950/80 border-4 border-white/10 shadow-2xl overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800" alt="Siswa SIT Mutiara Qur'an" class="w-full h-full object-cover mix-blend-overlay opacity-65">
                             <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-transparent"></div>
-                            
+
                             <div class="absolute bottom-8 left-8 right-8 z-10 text-left">
                                 <p class="text-xs font-extrabold text-amber-400 uppercase tracking-widest mb-2">Pendaftaran Sekolah</p>
                                 <h3 class="text-xl font-bold text-white leading-snug">Berikan Pendidikan Agama dan Akademis Terbaik Bagi Putra-Putri Anda</h3>
@@ -138,7 +138,7 @@
         <div class="glow-emerald top-10 left-10"></div>
         <div class="w-full max-w-7xl mx-auto relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
+
                 {{-- Avatar Column --}}
                 <div class="lg:col-span-5 flex justify-center fade-up">
                     <div class="sambutan-wrapper max-w-sm w-full">
@@ -151,12 +151,12 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {{-- Content Column --}}
                 <div class="lg:col-span-7 text-left fade-up">
                     <span class="section-badge"><i data-lucide="quote" class="w-4 h-4"></i> Kata Sambutan</span>
                     <h2 class="section-title text-left mb-6">Membentuk Generasi Rabbanî yang Unggul & Berkarakter</h2>
-                    
+
                     <div class="space-y-4 text-slate-600 leading-relaxed text-sm sm:text-base">
                         <p class="font-bold text-slate-800 text-lg">Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
                         <p>
@@ -169,13 +169,13 @@
                             Dengan dukungan asatidzah yang berkompeten, fasilitas yang kondusif, serta lingkungan yang islami, kami siap berkolaborasi erat dengan para orang tua untuk mendampingi tumbuh kembang putra-putri tercinta menjadi calon pemimpin umat masa depan yang berakhlak mulia.
                         </p>
                     </div>
-                    
+
                     <div class="mt-8 border-t border-slate-100 pt-6">
                         <h4 class="text-base font-extrabold text-slate-800">Ustadz Ahmad Fauzi, S.Pd.I, M.Pd</h4>
                         <p class="text-xs font-semibold text-emerald-600 uppercase tracking-widest mt-1">Pimpinan & Kepala Sekolah SIT Mutiara Qur'an</p>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </section>
@@ -189,7 +189,7 @@
                 <h2 class="section-title mx-auto">Program Khusus Keislaman & Akademik</h2>
                 <p class="section-subtitle mx-auto text-center">Kurikulum keagamaan dan akademik yang dirancang secara matang untuk menyeimbangkan kecerdasan intelektual dan spiritual.</p>
             </div>
-            
+
             {{-- Program Filter Tabs --}}
             <div class="flex flex-wrap justify-center gap-3 mb-12 fade-up">
                 <button onclick="filterPrograms('all', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-emerald-600 text-white shadow-md shadow-emerald-200 transition-all duration-300 filter-btn">Semua Program</button>
@@ -197,7 +197,7 @@
                 <button onclick="filterPrograms('akademik', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-300 filter-btn">Akademik & IT</button>
                 <button onclick="filterPrograms('karakter', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-300 filter-btn">Karakter & Pemimpin</button>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @php
                     $programs = [
@@ -334,7 +334,7 @@
                 <h2 class="section-title mx-auto">Apa Kata Orang Tua Wali Murid?</h2>
                 <p class="section-subtitle mx-auto text-center">Kepercayaan dan kebanggaan para orang tua atas perkembangan akademis dan karakter islami putra-putrinya di SIT Mutiara Qur'an.</p>
             </div>
-            
+
             @php
                 $testimonials = [
                     [
@@ -362,13 +362,13 @@
             <div class="max-w-4xl mx-auto relative overflow-hidden px-4 fade-up">
                 <div class="relative w-full overflow-hidden rounded-[32px] border border-slate-100 bg-white p-8 sm:p-12 shadow-xl shadow-slate-100/50">
                     <div class="glow-emerald top-0 left-0"></div>
-                    
+
                     {{-- Slider Track --}}
                     <div class="flex transition-transform duration-500 ease-out" id="testiSliderTrack" style="width: 300%; transform: translateX(0%);">
                         @foreach($testimonials as $index => $t)
                             <div class="w-1/3 flex-shrink-0 text-center px-4 md:px-12">
                                 <div class="testi-quote text-base sm:text-lg md:text-xl font-medium mb-8 text-slate-700 leading-relaxed">{{ $t['quote'] }}</div>
-                                
+
                                 <div class="flex flex-col items-center justify-center">
                                     <img src="{{ $t['avatar'] }}" alt="{{ $t['name'] }}" class="w-16 h-16 rounded-full object-cover border-4 border-emerald-100 shadow-md mb-3">
                                     <h4 class="text-base sm:text-lg font-extrabold text-slate-800">{{ $t['name'] }}</h4>
@@ -405,7 +405,7 @@
                 <h2 class="section-title mx-auto">Pertanyaan Umum (FAQ)</h2>
                 <p class="section-subtitle mx-auto text-center">Menjawab keraguan dan pertanyaan paling umum seputar pendaftaran serta pola ajar di SIT Mutiara Qur'an.</p>
             </div>
-            
+
             <div class="max-w-3xl mx-auto">
                 @php
                     $faqs = [
@@ -478,15 +478,15 @@
         function toggleFaq(btn) {
             const item = btn.parentElement;
             const content = btn.nextElementSibling;
-            
+
             const isOpen = item.classList.contains('faq-open');
-            
+
             // Close all FAQ items
             document.querySelectorAll('.premium-faq-item').forEach(el => {
                 el.classList.remove('faq-open');
                 el.querySelector('.premium-faq-content').style.maxHeight = null;
             });
-            
+
             if (!isOpen) {
                 item.classList.add('faq-open');
                 content.style.maxHeight = content.scrollHeight + "px";
@@ -569,7 +569,7 @@
             clearInterval(sliderInterval);
             sliderInterval = setInterval(nextSlide, 8000);
         }
-        
+
         // Wrap controls in timer resets
         const originalNext = nextSlide;
         nextSlide = function() {
