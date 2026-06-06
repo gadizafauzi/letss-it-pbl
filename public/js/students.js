@@ -1,130 +1,158 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-
-    const logoutModal      = document.getElementById('logoutModal');
-    const headerLogoutBtn  = document.getElementById('headerLogoutBtn');
-    const sidebarLogoutBtn = document.getElementById('sidebarLogoutBtn');
-    const cancelLogout     = document.getElementById('cancelLogout');
-    const confirmLogout    = document.getElementById('confirmLogout');
-    const modalBackdrop    = document.getElementById('modalBackdrop');
-
-    // Ambil CSRF token dari meta tag
-    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
-
-    function openLogoutModal() {
-        logoutModal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
     }
 
-    function closeLogoutModal() {
-        logoutModal.classList.add('hidden');
-        document.body.style.overflow = '';
-    }
+    /* COUNTER ANGKA */
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        const targetStr = counter.dataset.target;
+        if (!targetStr) return;
+        const target = parseFloat(targetStr);
+        if (isNaN(target)) return;
 
-    function doLogout() {
-        confirmLogout.textContent = 'Keluar...';
-        confirmLogout.disabled = true;
-
-
-        const logoutUrl = document.querySelector('meta[name="logout-url"]')?.getAttribute('content') || '/logout';
-
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = logoutUrl;
-
-        const csrfInput = document.createElement('input');
-        csrfInput.type  = 'hidden';
-        csrfInput.name  = '_token';
-        csrfInput.value = csrfToken;
-
-        form.appendChild(csrfInput);
-        document.body.appendChild(form);
-        form.submit();
-    }
-
-    if (headerLogoutBtn)  headerLogoutBtn.addEventListener('click', openLogoutModal);
-    if (sidebarLogoutBtn) sidebarLogoutBtn.addEventListener('click', openLogoutModal);
-    if (cancelLogout)     cancelLogout.addEventListener('click', closeLogoutModal);
-    if (modalBackdrop)    modalBackdrop.addEventListener('click', closeLogoutModal);
-    if (confirmLogout)    confirmLogout.addEventListener('click', doLogout);
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeLogoutModal();
-    });
-
-    const navItems = document.querySelectorAll('.nav-item');
-
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            // Jangan intercept jika link punya href nyata (bukan #)
-            const href = item.getAttribute('href');
-            if (href && href !== '#') return;
-
-            e.preventDefault();
-
-            navItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
-        });
-    });
-
-    function animateCounter(el, target, decimals, duration) {
-        if (!el) return;
+        const decimal = parseInt(counter.dataset.decimal || 0);
+        const duration = 1200;
         const startTime = performance.now();
 
-        function easeOutQuart(t) {
-            return 1 - Math.pow(1 - t, 4);
+        counter.textContent = decimal > 0 ? "0." + "0".repeat(decimal) : "0";
+
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeOut = 1 - Math.pow(1 - progress, 4);
+            const value = target * easeOut;
+
+            counter.textContent = decimal > 0
+                ? value.toFixed(decimal)
+                : Math.round(value);
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = decimal > 0
+                    ? target.toFixed(decimal)
+                    : target;
+            }
         }
+        requestAnimationFrame(updateCounter);
+    });
 
-        function tick(now) {
-            const progress = Math.min((now - startTime) / duration, 1);
-            const value    = target * easeOutQuart(progress);
-            el.textContent = decimals > 0 ? value.toFixed(decimals) : Math.round(value);
-            if (progress < 1) requestAnimationFrame(tick);
-        }
+    /* CARD HOVER EFFECT */
+    const cards = document.querySelectorAll('.dashboard-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', function (e) {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
-        requestAnimationFrame(tick);
-    }
+            card.style.background =
+                `radial-gradient(circle at ${x}px ${y}px,
+                rgba(92, 124, 250, 0.12),
+                white 45%)`;
+        });
 
-    animateCounter(document.getElementById('statKelas'), 8,    0, 900);
-    animateCounter(document.getElementById('statNilai'), 85.5, 1, 1200);
-
-    const tableRows = document.querySelectorAll('.table-row');
-
-    tableRows.forEach(row => {
-        row.addEventListener('click', () => {
-            tableRows.forEach(r => r.classList.remove('row-selected'));
-            row.classList.add('row-selected');
+        card.addEventListener('mouseleave', function () {
+            card.style.background = '';
         });
     });
 
-    const sidebar        = document.getElementById('sidebar');
+    // Toggle Sidebar Responsive Logic
+    const sidebar = document.getElementById('sidebar');
+    const desktopToggle = document.getElementById('desktopToggle');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
-    const menuToggle     = document.getElementById('menuToggle');
+    const mainContent = document.getElementById('mainContent');
 
-    if (menuToggle && sidebar && sidebarOverlay) {
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-            sidebarOverlay.classList.toggle('show');
-        });
+    function closeMobileSidebar() {
+        if(sidebar) sidebar.classList.remove('sidebar-mobile-open');
+        if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
+    }
 
-        sidebarOverlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            sidebarOverlay.classList.remove('show');
+    function openMobileSidebar() {
+        if(sidebar) sidebar.classList.add('sidebar-mobile-open');
+        if (sidebarOverlay) sidebarOverlay.classList.remove('hidden');
+    }
+
+    if (desktopToggle && sidebar) {
+        desktopToggle.addEventListener('click', function () {
+            if (window.innerWidth <= 1024) {
+                if (sidebar.classList.contains('sidebar-mobile-open')) {
+                    closeMobileSidebar();
+                } else {
+                    openMobileSidebar();
+                }
+            } else {
+                sidebar.classList.toggle('sidebar-collapse');
+                if (sidebar.classList.contains('sidebar-collapse')) {
+                    localStorage.setItem('studentSidebarCollapsed', 'true');
+                } else {
+                    localStorage.setItem('studentSidebarCollapsed', 'false');
+                }
+            }
         });
     }
 
-    const predikatLabels = {
-        a: 'Sangat Baik (≥ 90)',
-        b: 'Baik (75 – 89)',
-        c: 'Cukup (60 – 74)',
-        d: 'Kurang (< 60)',
-    };
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', function () {
+            closeMobileSidebar();
+        });
+    }
 
-    document.querySelectorAll('.predikat-badge').forEach(badge => {
-        const cls = [...badge.classList].find(c => /^predikat-[a-d]$/.test(c));
-        if (!cls) return;
-        const key = cls.split('-')[1];
-        badge.setAttribute('title', predikatLabels[key] || '');
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && window.innerWidth <= 1024) {
+            closeMobileSidebar();
+        }
     });
 
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 1024) {
+            if(sidebar) sidebar.classList.remove('sidebar-mobile-open');
+            if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
+        } else {
+            if(sidebar) sidebar.classList.remove('sidebar-collapse');
+        }
+    });
+
+    // Logout Modal
+    const logoutBtn = document.getElementById('studentLogoutBtn');
+    const logoutModal = document.getElementById('studentLogoutModal');
+    const cancelLogout = document.getElementById('studentCancelLogout');
+
+    if (logoutBtn && logoutModal) {
+        logoutBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            logoutModal.classList.remove('hidden');
+            logoutModal.classList.add('flex');
+        });
+    }
+
+    if (cancelLogout && logoutModal) {
+        cancelLogout.addEventListener('click', function () {
+            logoutModal.classList.remove('flex');
+            logoutModal.classList.add('hidden');
+        });
+    }
+
+    if (logoutModal) {
+        logoutModal.addEventListener('click', function (e) {
+            if (e.target === logoutModal) {
+                logoutModal.classList.remove('flex');
+                logoutModal.classList.add('hidden');
+            }
+        });
+    }
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+    }
 });

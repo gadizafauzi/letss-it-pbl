@@ -127,9 +127,13 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
 
     Route::get('/teacher/wali-data-siswa', [TeacherKelas::class, 'waliDataSiswa'])
         ->name('teacher.wali-data-siswa');
+    Route::get('/teacher/wali-data-siswa/export', [TeacherKelas::class, 'exportDataSiswa'])
+        ->name('teacher.wali-data-siswa.export');
 
     Route::get('/teacher/wali-rekap-nilai', [TeacherKelas::class, 'waliRekapNilai'])
         ->name('teacher.wali-rekap-nilai');
+    Route::get('/teacher/wali-rekap-nilai/export', [TeacherKelas::class, 'exportRekapNilai'])
+        ->name('teacher.wali-rekap-nilai.export');
 
     Route::get('/teacher/data-siswa/{classId}', [TeacherKelas::class, 'dataSiswa'])
         ->name('teacher.data-siswa');
@@ -145,6 +149,9 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
 
     Route::get('/teacher/profil', [TeacherKelas::class, 'profil'])
         ->name('teacher.profil');
+
+    Route::post('/teacher/profil/update', [TeacherKelas::class, 'updateProfile'])
+        ->name('teacher.profil.update');
 });
 
 /*
@@ -185,6 +192,11 @@ Route::get('/admin/login', [AuthController::class, 'showAdminLogin'])->name('adm
 Route::post('/admin/login', [AuthController::class, 'adminLogin'])->name('admin.login.post');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/profile/change-password', [AuthController::class, 'updatePassword'])
+        ->name('profile.password.update');
+});
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
     ->name('password.request');

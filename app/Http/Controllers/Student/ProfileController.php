@@ -33,12 +33,12 @@ class ProfileController extends Controller
 
         if ($request->hasFile('photo')) {
             // Hapus foto lama jika ada
-            if ($student->photo && Storage::exists('public/photos/' . $student->photo)) {
-                Storage::delete('public/photos/' . $student->photo);
+            if ($student->photo && Storage::disk('public')->exists('photos/' . $student->photo)) {
+                Storage::disk('public')->delete('photos/' . $student->photo);
             }
 
             $fileName = time() . '_' . $student->nis . '.' . $request->file('photo')->getClientOriginalExtension();
-            $request->file('photo')->storeAs('public/photos', $fileName);
+            $request->file('photo')->storeAs('photos', $fileName, 'public');
             $data['photo'] = $fileName;
         }
 
