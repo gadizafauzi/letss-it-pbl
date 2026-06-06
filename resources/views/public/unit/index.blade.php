@@ -19,11 +19,11 @@
         <div class="w-full">
             @php
                 $units = [
-                    ['icon' => 'baby', 'color' => 'sky', 'title' => 'TK Islam Terpadu', 'desc' => 'Pembelajaran usia dini yang menyenangkan dengan pendekatan bermain dan mengenal Al-Qur\'an sejak dini.', 'route' => 'public.unit.tk.profil', 'logo' => asset('images/tk.jpeg'),
+                    ['icon' => 'baby', 'color' => 'sky', 'title' => 'TK Islam Terpadu', 'desc' => 'Pembelajaran usia dini yang menyenangkan dengan pendekatan bermain dan mengenal Al-Qur\'an sejak dini.', 'route' => 'public.unit.tk.index', 'logo' => asset('images/tk.jpeg'),
                      'features' => ['Iqra & Hijaiyah', 'Sentra Bermain', 'Hafalan Juz 30', 'Seni & Kreativitas']],
-                    ['icon' => 'school', 'color' => 'amber', 'title' => 'SD Islam Terpadu', 'desc' => 'Pendidikan dasar 6 tahun yang memadukan kurikulum nasional dengan kurikulum keislaman.', 'route' => 'public.unit.sd.profil', 'logo' => asset('images/sd.jpeg'),
+                    ['icon' => 'school', 'color' => 'amber', 'title' => 'SD Islam Terpadu', 'desc' => 'Pendidikan dasar 6 tahun yang memadukan kurikulum nasional dengan kurikulum keislaman.', 'route' => 'public.unit.sd.index', 'logo' => asset('images/sd.jpeg'),
                      'features' => ['Target 5 Juz', 'Matematika & Sains', 'Bahasa Arab & Inggris', 'Ekstrakurikuler']],
-                    ['icon' => 'graduation-cap', 'color' => 'indigo', 'title' => 'SMP Islam Terpadu', 'desc' => 'Jenjang menengah pertama yang mempersiapkan siswa untuk menjadi pribadi unggul.', 'route' => 'public.unit.smp.profil', 'logo' => asset('images/smp.jpeg'),
+                    ['icon' => 'graduation-cap', 'color' => 'indigo', 'title' => 'SMP Islam Terpadu', 'desc' => 'Jenjang menengah pertama yang mempersiapkan siswa untuk menjadi pribadi unggul.', 'route' => 'public.unit.smp.index', 'logo' => asset('images/smp.jpeg'),
                      'features' => ['Target 10 Juz', 'Lab IPA & Komputer', 'English & Arabic', 'Leadership Camp']],
                 ];
             @endphp

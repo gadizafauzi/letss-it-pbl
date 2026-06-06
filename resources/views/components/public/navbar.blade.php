@@ -33,9 +33,9 @@
             </button>
             <div class="nav-dropdown-menu">
                 <a href="{{ route('public.unit.index') }}">Semua Unit</a>
-                <a href="{{ route('public.unit.tk.profil') }}">TK Islam Terpadu</a>
-                <a href="{{ route('public.unit.sd.profil') }}">SD Islam Terpadu</a>
-                <a href="{{ route('public.unit.smp.profil') }}">SMP Islam Terpadu</a>
+                <a href="{{ route('public.unit.tk.index') }}">TK Islam Terpadu</a>
+                <a href="{{ route('public.unit.sd.index') }}">SD Islam Terpadu</a>
+                <a href="{{ route('public.unit.smp.index') }}">SMP Islam Terpadu</a>
             </div>
         </li>
 
@@ -62,9 +62,9 @@
 
     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-1 px-4">Unit Pendidikan</p>
     <a href="{{ route('public.unit.index') }}"><i data-lucide="layers-3" class="w-5 h-5"></i> Semua Unit</a>
-    <a href="{{ route('public.unit.tk.profil') }}"><i data-lucide="baby" class="w-5 h-5"></i> TK Islam Terpadu</a>
-    <a href="{{ route('public.unit.sd.profil') }}"><i data-lucide="school" class="w-5 h-5"></i> SD Islam Terpadu</a>
-    <a href="{{ route('public.unit.smp.profil') }}"><i data-lucide="graduation-cap" class="w-5 h-5"></i> SMP Islam Terpadu</a>
+    <a href="{{ route('public.unit.tk.index') }}"><i data-lucide="baby" class="w-5 h-5"></i> TK Islam Terpadu</a>
+    <a href="{{ route('public.unit.sd.index') }}"><i data-lucide="school" class="w-5 h-5"></i> SD Islam Terpadu</a>
+    <a href="{{ route('public.unit.smp.index') }}"><i data-lucide="graduation-cap" class="w-5 h-5"></i> SMP Islam Terpadu</a>
 
     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-1 px-4">Lainnya</p>
     <a href="{{ route('public.berita.index') }}"><i data-lucide="newspaper" class="w-5 h-5"></i> Berita</a>
