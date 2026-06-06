@@ -37,36 +37,41 @@
         </button>
     </div>
 
+    @php
+        $unitName = strtolower($student->unit->unit_name ?? 'sd');
+    @endphp
+
     <!-- Kartu Pelajar Card -->
-    <div class="print-card w-[480px] h-[300px] text-slate-800 rounded-3xl p-6 relative shadow-2xl overflow-hidden border border-slate-200" style="background-image: url('{{ asset('images/ktm.jpeg') }}'); background-size: cover; background-position: center;">
+    <div class="print-card w-[480px] h-[300px] text-slate-800 rounded-3xl p-6 relative shadow-2xl overflow-hidden border border-slate-200" style="background-image: url('{{ asset('images/ktm' . ($unitName == 'smp' ? 'smp' : 'sd') . '.png') }}'); background-size: cover; background-position: center;">
         
         <!-- Card Body -->
         <div class="flex justify-between items-start mt-[80px] px-2">
             <!-- Left Info -->
-            <div class="space-y-3 max-w-[280px]">
-                <div>
-                    <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Nama Lengkap</span>
-                    <span class="text-base font-extrabold block leading-tight truncate text-white drop-shadow-md">{{ $student->full_name }}</span>
+            <div class="space-y-1.5 w-[300px]">
+                <div class="flex items-start text-[11px]">
+                    <span class="text-slate-600 font-bold w-[75px] shrink-0">Nama</span>
+                    <span class="text-slate-600 font-bold mr-1.5">:</span>
+                    <span class="font-extrabold text-slate-900 leading-tight">{{ $student->full_name }}</span>
                 </div>
-                <div class="flex gap-6">
-                    <div>
-                        <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Kelas</span>
-                        <span class="text-sm font-bold block leading-none mt-1 text-white drop-shadow-md">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
-                    </div>
-                    <div>
-                        <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Gender</span>
-                        <span class="text-sm font-bold block leading-none mt-1 text-white drop-shadow-md">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
-                    </div>
+                <div class="flex items-center text-[11px]">
+                    <span class="text-slate-600 font-bold w-[75px] shrink-0">Kelas</span>
+                    <span class="text-slate-600 font-bold mr-1.5">:</span>
+                    <span class="font-extrabold text-slate-900">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
                 </div>
-                <div class="flex gap-6">
-                    <div>
-                        <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">NISN</span>
-                        <span class="text-xs font-bold block leading-tight truncate mt-1 text-white drop-shadow-md">{{ $student->nisn ?? '-' }}</span>
-                    </div>
-                    <div>
-                        <span class="text-[10px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Tanggal Lahir</span>
-                        <span class="text-xs font-bold block leading-tight truncate mt-1 text-white drop-shadow-md">{{ $student->birth_date ? \Carbon\Carbon::parse($student->birth_date)->format('d/m/Y') : '-' }}</span>
-                    </div>
+                <div class="flex items-center text-[11px]">
+                    <span class="text-slate-600 font-bold w-[75px] shrink-0">Gender</span>
+                    <span class="text-slate-600 font-bold mr-1.5">:</span>
+                    <span class="font-extrabold text-slate-900">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
+                </div>
+                <div class="flex items-center text-[11px]">
+                    <span class="text-slate-600 font-bold w-[75px] shrink-0">NISN</span>
+                    <span class="text-slate-600 font-bold mr-1.5">:</span>
+                    <span class="font-extrabold text-slate-900">{{ $student->nisn ?? '-' }}</span>
+                </div>
+                <div class="flex items-center text-[11px]">
+                    <span class="text-slate-600 font-bold w-[75px] shrink-0">Tgl Lahir</span>
+                    <span class="text-slate-600 font-bold mr-1.5">:</span>
+                    <span class="font-extrabold text-slate-900">{{ $student->birth_date ? \Carbon\Carbon::parse($student->birth_date)->format('d/m/Y') : '-' }}</span>
                 </div>
             </div>
 

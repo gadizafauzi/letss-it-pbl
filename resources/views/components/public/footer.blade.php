@@ -13,14 +13,14 @@
                 
                 {{-- SOSIAL MEDIA --}}
                 <div class="flex items-center gap-3 mt-4">
-                    <a href="#" class="w-9 h-9 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300" title="Instagram">
-                        <i data-lucide="instagram" class="w-4 h-4"></i>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-100/10 border border-slate-700 text-slate-300 flex items-center justify-center hover:bg-emerald-500 hover:border-emerald-500 hover:text-white transition-all duration-300 shadow-sm" title="Instagram">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="w-9 h-9 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300" title="YouTube">
-                        <i data-lucide="youtube" class="w-4 h-4"></i>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-100/10 border border-slate-700 text-slate-300 flex items-center justify-center hover:bg-red-500 hover:border-red-500 hover:text-white transition-all duration-300 shadow-sm" title="YouTube">
+                        <i data-lucide="youtube" class="w-5 h-5"></i>
                     </a>
-                    <a href="#" class="w-9 h-9 rounded-xl bg-slate-800 text-slate-300 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition-all duration-300" title="Facebook">
-                        <i data-lucide="facebook" class="w-4 h-4"></i>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-slate-100/10 border border-slate-700 text-slate-300 flex items-center justify-center hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all duration-300 shadow-sm" title="Facebook">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
                     </a>
                 </div>
             </div>

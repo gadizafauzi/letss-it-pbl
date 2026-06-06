@@ -13,9 +13,9 @@
     </div>
 </div>
 
-<div class="bg-white rounded-[24px] shadow-sm border border-slate-200/80 overflow-hidden p-0">
+<div class="bg-[var(--bg-card)] rounded-[24px] shadow-sm border border-[var(--border-color)] overflow-hidden p-0 text-[var(--text-main)]">
 
-    <div class="px-5 md:px-6 py-4 md:py-5 border-b border-slate-100 flex items-center gap-3 bg-gradient-to-r from-[var(--theme-bg-light)] to-white">
+    <div class="px-5 md:px-6 py-4 md:py-5 border-b border-[var(--border-color)] flex items-center gap-3 bg-gradient-to-r from-[var(--theme-bg-light)] to-[var(--bg-card)] text-[var(--text-main)]">
         <div class="w-1 bg-[var(--theme-accent)] h-5 rounded-full"></div>
         <h2 class="font-extrabold text-[var(--theme-primary)] text-base">
             Daftar Kelas
@@ -26,7 +26,7 @@
 
         <table class="w-full text-sm">
 
-            <thead class="bg-slate-50 text-slate-500 text-xs uppercase">
+            <thead class="bg-[var(--theme-bg-light)] text-[var(--text-secondary)] text-xs uppercase border-b border-[var(--border-color)]">
 
                 <tr>
 
@@ -54,20 +54,20 @@
 
             </thead>
 
-            <tbody class="divide-y divide-slate-100">
+            <tbody class="divide-y divide-[var(--border-color)]">
 
                 @forelse ($assignments as $assignment)
-                    <tr class="hover:bg-slate-50 transition-all">
+                    <tr class="hover:bg-[var(--theme-bg-light)] transition-all">
 
-                        <td class="px-6 py-4 font-semibold text-slate-700">
+                        <td class="px-6 py-4 font-semibold text-[var(--text-main)]">
                             {{ $assignment->schoolClass->class_name }}
                         </td>
 
-                        <td class="px-6 py-4 text-slate-600">
+                        <td class="px-6 py-4 text-[var(--text-secondary)]">
                             {{ $assignment->subject->subject_name }}
                         </td>
 
-                        <td class="px-6 py-4 text-slate-600">
+                        <td class="px-6 py-4 text-[var(--text-secondary)]">
                             @php
                                 $jumlahSiswa = \App\Models\StudentClass::where('class_id', $assignment->class_id)
                                     ->whereHas('academicYear', fn($q) => $q->where('status', 'active'))
@@ -78,7 +78,7 @@
 
                         <td class="px-6 py-4">
 
-                            <span class="bg-emerald-100 text-emerald-600 px-3 py-1 rounded-full text-xs font-bold">
+                            <span class="bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-bold">
                                 Aktif
                             </span>
 
@@ -91,7 +91,7 @@
                                 {{-- LIHAT SISWA --}}
                                 <a href="{{ route('teacher.data-siswa', $assignment->schoolClass->id) }}"
                                     title="Lihat Siswa"
-                                    class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-100 flex items-center justify-center transition-all duration-200">
+                                    class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-500/30 flex items-center justify-center transition-all duration-200">
 
                                     <i data-lucide="eye" class="w-4 h-4"></i>
 
@@ -100,7 +100,7 @@
                                 {{-- INPUT NILAI --}}
                                 <a href="{{ route('teacher.input-nilai', $assignment->id) }}"
                                     title="Input Nilai"
-                                    class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 hover:bg-emerald-100 flex items-center justify-center transition-all duration-200">
+                                    class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/30 flex items-center justify-center transition-all duration-200">
 
                                     <i data-lucide="clipboard-pen-line" class="w-4 h-4"></i>
 
@@ -113,7 +113,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-6 py-4 text-center text-slate-400">
+                        <td colspan="5" class="px-6 py-4 text-center text-[var(--text-secondary)]">
                             Belum ada kelas yang diampu.
                         </td>
                     </tr>

@@ -8,7 +8,7 @@
 <div class="space-y-6">
 
     <!-- Banner Sambutan -->
-    <div class="w-full box-border rounded-[20px] p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between relative overflow-hidden shadow-sm mb-6 bg-gradient-to-br from-[var(--theme-primary)] to-[var(--theme-accent)] gap-4">
+    <div class="w-full box-border rounded-[20px] p-4 md:p-6 flex flex-col md:flex-row md:items-center justify-between relative overflow-hidden shadow-[0_8px_24px_rgba(15,23,42,0.06)] mb-6 bg-gradient-to-br from-[var(--theme-primary)] to-[var(--theme-accent)] shadow-[0_8px_30px_var(--theme-stat-hover)] gap-4">
         <!-- Dekorasi Background -->
         <div class="absolute top-0 right-0 w-48 h-48 bg-white opacity-5 rounded-full blur-3xl -mr-12 -mt-12 pointer-events-none"></div>
         <div class="absolute top-3 right-8 w-2.5 h-2.5 rounded-full opacity-35 pointer-events-none" style="background:#f472b6;"></div>
@@ -47,65 +47,65 @@
     <div class="flex flex-col gap-4 md:gap-6">
 
         <!-- BIODATA AKADEMIK -->
-        <div class="bg-[var(--theme-bg-light)] rounded-[24px] border border-[var(--theme-border-light)] p-5 md:p-7 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between w-full h-full">
+        <div class="bg-[var(--theme-bg-light)] rounded-[24px] border border-[var(--theme-border-light)] p-5 md:p-7 shadow-[0_8px_24px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_32px_rgba(15,23,42,0.1)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] flex flex-col justify-between w-full h-full">
             <div>
                 <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-white text-[var(--theme-primary)] shadow-sm flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-xl bg-white text-[var(--theme-text-primary)] shadow-[0_8px_24px_rgba(15,23,42,0.06)] flex items-center justify-center">
                         <i data-lucide="graduation-cap" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-extrabold text-[var(--theme-primary)] text-base">Biodata Akademik</h3>
+                    <h3 class="font-extrabold text-[var(--theme-text-primary)] text-base">Biodata Akademik</h3>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 font-sans mt-2">
-                    <div class="flex items-center justify-between py-2 border-b border-slate-100/60">
-                        <span class="text-slate-400 text-xs font-semibold uppercase">Nama</span>
-                        <span class="font-bold text-slate-700 text-sm">{{ $student->full_name }}</span>
+                    <div class="flex items-center justify-between py-2 border-b border-[var(--theme-border-light)]">
+                        <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase">Nama</span>
+                        <span class="font-bold text-[var(--text-main)] text-sm">{{ $student->full_name }}</span>
                     </div>
-                    <div class="flex items-center justify-between py-2 border-b border-slate-100/60">
-                        <span class="text-slate-400 text-xs font-semibold uppercase">Kelas</span>
-                        <span class="font-bold text-slate-700 text-sm">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
+                    <div class="flex items-center justify-between py-2 border-b border-[var(--theme-border-light)]">
+                        <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase">Kelas</span>
+                        <span class="font-bold text-[var(--text-main)] text-sm">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
                     </div>
-                    <div class="flex items-center justify-between py-2 border-b border-slate-100/60">
-                        <span class="text-slate-400 text-xs font-semibold uppercase">Status Registrasi</span>
-                        <span class="font-bold text-[var(--theme-primary)] text-sm">{{ $student->status === 'active' ? 'Aktif' : ucfirst($student->status) }}</span>
+                    <div class="flex items-center justify-between py-2 border-b border-[var(--theme-border-light)]">
+                        <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase">Status Registrasi</span>
+                        <span class="font-bold text-[var(--theme-text-primary)] text-sm">{{ $student->status === 'active' ? 'Aktif' : ucfirst($student->status) }}</span>
                     </div>
-                    <div class="flex items-center justify-between py-2 border-b border-slate-100/60">
-                        <span class="text-slate-400 text-xs font-semibold uppercase">NISN</span>
-                        <span class="font-bold text-slate-700 text-sm">{{ $student->nisn ?? '-' }}</span>
+                    <div class="flex items-center justify-between py-2 border-b border-[var(--theme-border-light)]">
+                        <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase">NISN</span>
+                        <span class="font-bold text-[var(--text-main)] text-sm">{{ $student->nisn ?? '-' }}</span>
                     </div>
-                    <div class="flex items-center justify-between py-2 border-b border-slate-100/60 md:border-b-0">
-                        <span class="text-slate-400 text-xs font-semibold uppercase">NIS</span>
-                        <span class="font-bold text-slate-700 text-sm">{{ $student->nis ?? '-' }}</span>
+                    <div class="flex items-center justify-between py-2 border-b border-[var(--theme-border-light)] md:border-b-0">
+                        <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase">NIS</span>
+                        <span class="font-bold text-[var(--text-main)] text-sm">{{ $student->nis ?? '-' }}</span>
                     </div>
                     <div class="flex items-center justify-between py-2">
-                        <span class="text-slate-400 text-xs font-semibold uppercase">Gender</span>
-                        <span class="font-bold text-slate-700 text-sm">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
+                        <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase">Gender</span>
+                        <span class="font-bold text-[var(--text-main)] text-sm">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- INFORMASI KEUANGAN -->
-        <div class="bg-[#ffffff] text-slate-800 rounded-[24px] border border-[#dbe4f0] p-5 md:p-7 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between w-full h-full relative overflow-hidden">
+        <div class="bg-[var(--bg-card)] text-[var(--text-main)] rounded-[24px] border border-[var(--border-color)] p-5 md:p-7 shadow-[0_8px_24px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_32px_rgba(15,23,42,0.1)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] flex flex-col justify-between w-full h-full relative overflow-hidden">
             <!-- Decorative circle backgrounds -->
             <div class="absolute -right-16 -top-16 w-36 h-36 rounded-full bg-[var(--theme-bg-light)] opacity-50 pointer-events-none"></div>
             <div class="absolute -left-10 -bottom-10 w-28 h-28 rounded-full bg-[var(--theme-bg-light)] opacity-50 pointer-events-none"></div>
 
             <div>
-                <div class="flex items-center gap-3 border-b border-[#e2e8f0] pb-4 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-[var(--theme-bg-light)] flex items-center justify-center text-[var(--theme-primary)]">
+                <div class="flex items-center gap-3 border-b border-[var(--theme-border-light)] pb-4 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-[var(--theme-bg-light)] flex items-center justify-center text-[var(--theme-text-primary)]">
                         <i data-lucide="wallet" class="w-5 h-5"></i>
                     </div>
-                    <h3 class="font-extrabold text-[var(--theme-primary)] text-base">Informasi Keuangan</h3>
+                    <h3 class="font-extrabold text-[var(--theme-text-primary)] text-base">Informasi Keuangan</h3>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="bg-[#f8fafc] rounded-2xl p-4 border border-[#e2e8f0]">
-                        <span class="text-[#64748b] text-xs font-semibold uppercase block mb-1">Tagihan Saat Ini</span>
+                    <div class="bg-[var(--theme-bg-workspace)] rounded-2xl p-4 border border-[var(--border-color)]">
+                        <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase block mb-1">Tagihan Saat Ini</span>
                         <span class="text-lg font-black text-[#f59e0b]">Rp {{ number_format($tagihanSaatIni, 0, ',', '.') }}</span>
                     </div>
-                    <div class="bg-[#f8fafc] rounded-2xl p-4 border border-[#e2e8f0]">
-                        <span class="text-[#64748b] text-xs font-semibold uppercase block mb-1">Total Terbayar</span>
+                    <div class="bg-[var(--theme-bg-workspace)] rounded-2xl p-4 border border-[var(--border-color)]">
+                        <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase block mb-1">Total Terbayar</span>
                         <span class="text-lg font-black text-[#10b981]">Rp {{ number_format($totalTerbayar, 0, ',', '.') }}</span>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
             </div>
 
             <div class="mt-6">
-                <a href="{{ route('student.tagihan') }}" class="w-full md:w-auto md:px-8 inline-flex bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white font-bold text-sm h-12 rounded-2xl transition-all items-center justify-center gap-2 shadow-sm">
+                <a href="{{ route('student.tagihan') }}" class="w-full md:w-auto md:px-8 inline-flex bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white font-bold text-sm h-12 rounded-2xl transition-all items-center justify-center gap-2 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
                     <span>Lihat Detail Tagihan</span>
                     <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
@@ -126,50 +126,51 @@
     <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-6 mt-6">
 
         <!-- KARTU PELAJAR -->
-        <div class="bg-[#ffffff] rounded-[24px] border border-[#dbe4f0] p-4 md:p-7 shadow-sm hover:shadow-md transition-shadow w-full h-full overflow-hidden">
-            <div class="flex flex-wrap items-center justify-between border-b border-slate-100 pb-3 md:pb-4 mb-4 md:mb-6 gap-2">
-                <div class="flex items-center gap-2 md:gap-3">
-                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[#f8fafc] text-[var(--theme-accent)] border border-[#dbe4f0] shadow-sm flex items-center justify-center shrink-0">
+        <div class="bg-[var(--bg-card)] rounded-[24px] border border-[var(--border-color)] p-4 md:p-7 shadow-[0_8px_24px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_32px_rgba(15,23,42,0.1)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] w-full h-full overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between border-b border-[var(--theme-border-light)] pb-3 md:pb-4 mb-4 md:mb-6 gap-2">
+                <div class="flex items-center gap-2.5 md:gap-3">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-[var(--theme-print-bg)] text-[var(--theme-print-icon)] border border-[var(--theme-print-hover)] shadow-[0_8px_24px_rgba(15,23,42,0.06)] flex items-center justify-center shrink-0">
                         <i data-lucide="contact-2" class="w-4 h-4 md:w-5 md:h-5"></i>
                     </div>
-                    <h3 class="font-extrabold text-[var(--theme-primary)] text-[15px] md:text-base leading-tight">Kartu Pelajar</h3>
+                    <h3 class="font-extrabold text-[var(--theme-text-primary)] text-[15px] md:text-base leading-tight">Kartu Pelajar</h3>
                 </div>
                 <a href="{{ route('student.cetak-ktm') }}" target="_blank" class="bg-[var(--theme-print-bg)] border border-[var(--theme-print-hover)] hover:bg-[var(--theme-print-hover)] text-[var(--theme-print-text)] font-bold text-[12px] md:text-xs px-3 md:px-4 py-1.5 md:py-2 h-[34px] md:h-[38px] rounded-lg md:rounded-xl transition-all flex items-center gap-1.5 md:gap-2 shrink-0">
                     <i data-lucide="printer" class="w-3.5 h-3.5 text-[var(--theme-print-icon)]"></i>
-                    <span class="whitespace-nowrap">Cetak</span>
+                    <span class="whitespace-nowrap">Cetak PDF</span>
                 </a>
             </div>
 
             <!-- Card Graphic component -->
             <div id="ktm-wrapper" class="w-full max-w-full overflow-hidden rounded-3xl mx-auto" style="aspect-ratio: 420/260; max-width: 420px;">
-                <div id="ktm-inner" class="w-[420px] h-[260px] text-slate-800 p-5 relative shadow-xl overflow-hidden border border-slate-200 origin-top-left" style="background-image: url('{{ asset('images/ktm.jpeg') }}'); background-size: cover; background-position: center;">
+                <div id="ktm-inner" class="w-[420px] h-[260px] text-slate-800 p-5 relative shadow-xl overflow-hidden border border-slate-200 origin-top-left" style="background-image: url('{{ asset('images/ktm' . ($unitName == 'smp' ? 'smp' : 'sd') . '.png') }}'); background-size: cover; background-position: center;">
                 
                 <!-- Card Content -->
                 <div class="flex justify-between items-start mt-[70px] px-2">
-                    <div class="space-y-3 max-w-[200px]">
-                        <div>
-                            <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Nama Lengkap</span>
-                            <span class="text-sm font-extrabold block leading-tight truncate text-white drop-shadow-md">{{ $student->full_name }}</span>
+                    <div class="space-y-1.5 w-[250px]">
+                        <div class="flex items-start text-[10px]">
+                            <span class="text-slate-600 font-bold w-[70px] shrink-0">Nama</span>
+                            <span class="text-slate-600 font-bold mr-1.5">:</span>
+                            <span class="font-extrabold text-slate-900 leading-tight">{{ $student->full_name }}</span>
                         </div>
-                        <div class="flex gap-4">
-                            <div>
-                                <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Kelas</span>
-                                <span class="text-xs font-bold block leading-none mt-1 text-white drop-shadow-md">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
-                            </div>
-                            <div>
-                                <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Gender</span>
-                                <span class="text-xs font-bold block leading-none mt-1 text-white drop-shadow-md">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
-                            </div>
+                        <div class="flex items-center text-[10px]">
+                            <span class="text-slate-600 font-bold w-[70px] shrink-0">Kelas</span>
+                            <span class="text-slate-600 font-bold mr-1.5">:</span>
+                            <span class="font-extrabold text-slate-900">{{ $student->currentClass->schoolClass->class_name ?? '-' }}</span>
                         </div>
-                        <div class="flex gap-4">
-                            <div>
-                                <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">NISN</span>
-                                <span class="text-xs font-bold block leading-tight truncate mt-1 text-white drop-shadow-md">{{ $student->nisn ?? '-' }}</span>
-                            </div>
-                            <div>
-                                <span class="text-[9px] text-blue-300 uppercase font-black block leading-none drop-shadow-sm">Tanggal Lahir</span>
-                                <span class="text-xs font-bold block leading-tight truncate mt-1 text-white drop-shadow-md">{{ $student->birth_date ? \Carbon\Carbon::parse($student->birth_date)->format('d/m/Y') : '-' }}</span>
-                            </div>
+                        <div class="flex items-center text-[10px]">
+                            <span class="text-slate-600 font-bold w-[70px] shrink-0">Gender</span>
+                            <span class="text-slate-600 font-bold mr-1.5">:</span>
+                            <span class="font-extrabold text-slate-900">{{ $student->gender === 'L' ? 'Laki-Laki' : ($student->gender === 'P' ? 'Perempuan' : '-') }}</span>
+                        </div>
+                        <div class="flex items-center text-[10px]">
+                            <span class="text-slate-600 font-bold w-[70px] shrink-0">NISN</span>
+                            <span class="text-slate-600 font-bold mr-1.5">:</span>
+                            <span class="font-extrabold text-slate-900">{{ $student->nisn ?? '-' }}</span>
+                        </div>
+                        <div class="flex items-center text-[10px]">
+                            <span class="text-slate-600 font-bold w-[70px] shrink-0">Tgl Lahir</span>
+                            <span class="text-slate-600 font-bold mr-1.5">:</span>
+                            <span class="font-extrabold text-slate-900">{{ $student->birth_date ? \Carbon\Carbon::parse($student->birth_date)->format('d/m/Y') : '-' }}</span>
                         </div>
                     </div>
 
@@ -213,12 +214,12 @@
         </div>
 
         <!-- GRAFIK RATA-RATA NILAI -->
-        <div class="bg-[#ffffff] rounded-[24px] border border-[#dbe4f0] p-5 md:p-7 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between w-full h-full">
-            <div class="flex items-center gap-3 border-b border-slate-100 pb-4 mb-4">
-                <div class="w-10 h-10 rounded-xl bg-[var(--theme-bg-light)] text-[var(--theme-accent)] border border-[var(--theme-border-light)] shadow-sm flex items-center justify-center">
+        <div class="bg-[var(--bg-card)] rounded-[24px] border border-[var(--border-color)] p-5 md:p-7 shadow-[0_8px_24px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_32px_rgba(15,23,42,0.1)] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] flex flex-col justify-between w-full h-full">
+            <div class="flex items-center gap-3 border-b border-[var(--theme-border-light)] pb-4 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-[var(--theme-print-bg)] text-[var(--theme-print-icon)] border border-[var(--theme-print-hover)] shadow-[0_8px_24px_rgba(15,23,42,0.06)] flex items-center justify-center">
                     <i data-lucide="line-chart" class="w-5 h-5"></i>
                 </div>
-                <h3 class="font-extrabold text-[var(--theme-primary)] text-base">Grafik Rata-rata Nilai per Semester</h3>
+                <h3 class="font-extrabold text-[var(--theme-text-primary)] text-base">Grafik Rata-rata Nilai per Semester</h3>
             </div>
 
             <div class="relative h-[250px] w-full">

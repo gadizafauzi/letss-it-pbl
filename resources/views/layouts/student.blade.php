@@ -15,6 +15,14 @@
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <link rel="stylesheet" href="{{ asset('css/student.css') }}">
 
+    <script>
+        // Prevent FOUC
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -44,6 +52,41 @@
             --theme-print-icon: #FACC15;
             --theme-print-hover: #FDE68A;
             --theme-logo-url: url('{{ asset("images/logomq.jpg") }}');
+            
+            --bg-sidebar: var(--theme-primary);
+            --bg-banner: linear-gradient(135deg, #5B3CC4, #8B5CF6);
+            --glow-banner: 0 8px 30px rgba(91, 60, 196, 0.3);
+            --bg-header: var(--theme-bg-light);
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --theme-text-primary: var(--theme-primary);
+        }
+        .dark {
+            --bg-sidebar: #312E81;
+            --bg-banner: linear-gradient(135deg, #312E81, #1F1147);
+            --glow-banner: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --bg-header: #1F1147;
+            --bg-card: #2E1065;
+            --text-main: #F8FAFC;
+            --text-secondary: #D8B4FE;
+            
+            --theme-primary: #8B5CF6;
+            --theme-primary-hover: #A78BFA;
+            --theme-accent: #A78BFA;
+            --theme-accent-hover: #C4B5FD;
+            --theme-bg-light: #2E1065;
+            --theme-bg-workspace: #1E1B4B;
+            --theme-border-light: #4C1D95;
+            --theme-text-light: #F8FAFC;
+            --theme-icon-active: #F8FAFC;
+            --theme-icon-indicator: #A78BFA;
+            --theme-stat-hover: rgba(167, 139, 250, 0.2);
+            --theme-print-bg: #4C1D95;
+            --theme-print-text: #FDE68A;
+            --theme-print-icon: #FACC15;
+            --theme-print-hover: #5B3CC4;
+            --theme-text-primary: #A78BFA;
         }
     </style>
     @else
@@ -65,12 +108,49 @@
             --theme-print-icon: #ef4444;
             --theme-print-hover: #fee2e2;
             --theme-logo-url: url('{{ asset("images/smp.jpeg") }}');
+            
+            --bg-sidebar: var(--theme-primary);
+            --bg-banner: linear-gradient(135deg, #4F74E8, #6D8CFF);
+            --glow-banner: 0 8px 30px rgba(79, 116, 232, 0.3);
+            --bg-header: var(--theme-bg-light);
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --theme-text-primary: var(--theme-primary);
+        }
+        .dark {
+            --bg-sidebar: #1E3A8A; /* Blue 900 */
+            --bg-banner: linear-gradient(135deg, #1E3A8A, #172554);
+            --glow-banner: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --bg-header: #0A192F; /* Deep Navy */
+            --bg-card: #112240; /* Rich Navy for cards */
+            --text-main: #F8FAFC;
+            --text-secondary: #93C5FD;
+            
+            --theme-primary: #3B82F6; /* Blue 500 */
+            --theme-primary-hover: #2563EB;
+            --theme-accent: #60A5FA; /* Blue 400 */
+            --theme-accent-hover: #3B82F6;
+            --theme-bg-light: #112240;
+            --theme-bg-workspace: #060F1E; /* Darkest Navy */
+            --theme-border-light: #1E3A8A;
+            --theme-text-light: #BFDBFE;
+            --theme-text-primary: #60A5FA;
+            --theme-icon-active: #ffffff;
+            --theme-icon-indicator: #60A5FA;
+            --theme-stat-hover: rgba(59, 130, 246, 0.2);
+            --theme-print-bg: #1E3A8A;
+            --theme-print-text: #FECACA;
+            --theme-print-icon: #F87171;
+            --theme-print-hover: #172554;
+            --border-color: #1E3A8A;
         }
     </style>
     @endif
 </head>
 
-<body class="bg-[var(--theme-bg-workspace)] text-slate-800 overflow-hidden">
+<body class="bg-[var(--theme-bg-workspace)] text-[var(--text-main)] overflow-hidden transition-colors duration-300">
 
 <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
@@ -92,165 +172,9 @@
 </div>
 
 <!-- Logout Confirmation Modal -->
-<x-student.logout-modal id="studentLogoutModal" cancelId="studentCancelLogout" action="{{ route('logout') }}" />
+<x-shared.logout-modal id="studentLogoutModal" cancelId="studentCancelLogout" action="{{ route('logout') }}" />
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-
-        /* COUNTER ANGKA */
-        const counters = document.querySelectorAll('.counter');
-        counters.forEach(counter => {
-            const targetStr = counter.dataset.target;
-            const target = parseFloat(targetStr);
-            if (isNaN(target)) return;
-
-            const decimal = parseInt(counter.dataset.decimal || 0);
-            const duration = 1200;
-            const startTime = performance.now();
-
-            // Set initial value to 0 to prevent flashing
-            counter.textContent = decimal > 0 ? "0." + "0".repeat(decimal) : "0";
-
-            function updateCounter(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easeOut = 1 - Math.pow(1 - progress, 4);
-                const value = target * easeOut;
-
-                counter.textContent = decimal > 0
-                    ? value.toFixed(decimal)
-                    : Math.round(value);
-
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = decimal > 0
-                        ? target.toFixed(decimal)
-                        : target;
-                }
-            }
-            requestAnimationFrame(updateCounter);
-        });
-
-        /* CARD HOVER EFFECT */
-        const cards = document.querySelectorAll('.dashboard-card');
-        cards.forEach(card => {
-            card.addEventListener('mousemove', function (e) {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                card.style.background =
-                    `radial-gradient(circle at ${x}px ${y}px,
-                    rgba(92, 124, 250, 0.12),
-                    white 45%)`; // using soft blue color
-            });
-
-            card.addEventListener('mouseleave', function () {
-                card.style.background = '';
-            });
-        });
-
-        // Toggle Sidebar Responsive Logic
-        const sidebar = document.getElementById('sidebar');
-        const desktopToggle = document.getElementById('desktopToggle');
-        const sidebarOverlay = document.getElementById('sidebarOverlay');
-        const mainContent = document.getElementById('mainContent');
-
-        // Fungsi menutup sidebar mobile
-        function closeMobileSidebar() {
-            sidebar.classList.remove('sidebar-mobile-open');
-            if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
-        }
-
-        // Fungsi membuka sidebar mobile
-        function openMobileSidebar() {
-            sidebar.classList.add('sidebar-mobile-open');
-            if (sidebarOverlay) sidebarOverlay.classList.remove('hidden');
-        }
-
-        if (desktopToggle && sidebar) {
-            desktopToggle.addEventListener('click', function () {
-                if (window.innerWidth <= 1024) {
-                    // Mobile: toggle panel biru tua (slide in/out di samping icon strip)
-                    if (sidebar.classList.contains('sidebar-mobile-open')) {
-                        closeMobileSidebar();
-                    } else {
-                        openMobileSidebar();
-                    }
-                } else {
-                    // Desktop: collapse/expand sidebar penuh
-                    sidebar.classList.toggle('sidebar-collapse');
-                    if (sidebar.classList.contains('sidebar-collapse')) {
-                        localStorage.setItem('studentSidebarCollapsed', 'true');
-                    } else {
-                        localStorage.setItem('studentSidebarCollapsed', 'false');
-                    }
-                }
-            });
-        }
-
-        // Tutup sidebar mobile saat overlay ditekan
-        if (sidebarOverlay) {
-            sidebarOverlay.addEventListener('click', function () {
-                closeMobileSidebar();
-            });
-        }
-
-        // Tutup sidebar mobile dengan tombol Escape
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && window.innerWidth <= 1024) {
-                closeMobileSidebar();
-            }
-        });
-
-        // Reset saat resize window
-        window.addEventListener('resize', function () {
-            if (window.innerWidth > 1024) {
-                // Desktop: bersihkan state mobile
-                sidebar.classList.remove('sidebar-mobile-open');
-                if (sidebarOverlay) sidebarOverlay.classList.add('hidden');
-            } else {
-                // Mobile: bersihkan state desktop collapse
-                sidebar.classList.remove('sidebar-collapse');
-            }
-        });
-
-
-
-        // Logout Modal
-        const logoutBtn = document.getElementById('studentLogoutBtn');
-        const logoutModal = document.getElementById('studentLogoutModal');
-        const cancelLogout = document.getElementById('studentCancelLogout');
-
-        if (logoutBtn && logoutModal) {
-            logoutBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                logoutModal.classList.remove('hidden');
-                logoutModal.classList.add('flex');
-            });
-        }
-
-        if (cancelLogout && logoutModal) {
-            cancelLogout.addEventListener('click', function () {
-                logoutModal.classList.remove('flex');
-                logoutModal.classList.add('hidden');
-            });
-        }
-
-        if (logoutModal) {
-            logoutModal.addEventListener('click', function (e) {
-                if (e.target === logoutModal) {
-                    logoutModal.classList.remove('flex');
-                    logoutModal.classList.add('hidden');
-                }
-            });
-        }
-    });
-</script>
+<script src="{{ asset('js/students.js') }}"></script>
 
 </body>
 </html>

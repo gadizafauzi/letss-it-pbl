@@ -3,8 +3,8 @@
    ============================================= */
 
 /* 1. Sidebar Container — desktop: relative, full height, biru tua */
-#sidebar {
-    background-color: var(--theme-primary) !important;
+#sidebar, .teacher-sidebar-panel {
+    background-color: var(--bg-sidebar) !important;
     border-right: none !important;
     border-radius: 0 24px 24px 0 !important;
     overflow: visible !important;

@@ -3,15 +3,15 @@
 @section('content')
 
 @if(session('success'))
-    <div class="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl text-sm font-bold flex items-center gap-2">
-        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i>
+    <div class="mb-6 p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 text-emerald-700 rounded-xl text-sm font-bold flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 dark:text-emerald-400"></i>
         {{ session('success') }}
     </div>
 @endif
 
 {{-- HEADER CARD --}}
 <div class="rounded-[20px] p-4 md:p-6 relative overflow-hidden shadow-sm mb-6 bg-gradient-to-br from-[var(--theme-primary)] to-[var(--theme-accent)]">
-    <div class="absolute top-0 right-0 w-48 h-48 bg-white opacity-5 rounded-full blur-3xl -mr-12 -mt-12 pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-48 h-48 bg-[var(--bg-card)] opacity-5 rounded-full blur-3xl -mr-12 -mt-12 pointer-events-none"></div>
     <div class="absolute top-3 right-8 w-2.5 h-2.5 rounded-full opacity-35 pointer-events-none" style="background:#f472b6;"></div>
     <div class="absolute bottom-3 right-20 w-2 h-2 rounded-full opacity-25 pointer-events-none" style="background:#fb7185;"></div>
     <div class="relative z-10">
@@ -20,17 +20,17 @@
     </div>
 </div>
 
-<div class="bg-white rounded-[24px] shadow-sm border border-slate-200/80 overflow-hidden mb-6 p-6">
+<div class="bg-[var(--bg-card)] rounded-[24px] shadow-sm border border-[var(--border-color)]/80 overflow-hidden mb-6 p-6 text-[var(--text-main)]">
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
         <div>
-            <label class="block text-xs font-bold text-slate-500 mb-2">
+            <label class="block text-xs font-bold text-[var(--text-secondary)] mb-2">
                 Kelas
             </label>
 
             <select onchange="if(this.value) window.location.href='/teacher/input-nilai/' + this.value" 
-                class="w-full h-10 md:h-11 rounded-xl border border-slate-200 px-3 md:px-4 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]">
+                class="w-full h-10 md:h-11 rounded-xl border border-[var(--border-color)] px-3 md:px-4 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
                 <option value="">Pilih Kelas - Mapel</option>
                 @foreach ($assignments as $assignment)
                     <option value="{{ $assignment->id }}" {{ $assignmentId == $assignment->id ? 'selected' : '' }}>
@@ -41,13 +41,13 @@
         </div>
 
         <div>
-            <label class="block text-xs font-bold text-slate-500 mb-2">
+            <label class="block text-xs font-bold text-[var(--text-secondary)] mb-2">
                 Mata Pelajaran
             </label>
 
             <input type="text" readonly 
                 value="{{ $selectedAssignment ? $selectedAssignment->subject->subject_name : '-' }}"
-                class="w-full h-10 md:h-11 rounded-xl border border-slate-100 bg-slate-50 px-3 md:px-4 text-xs md:text-sm text-slate-500 focus:outline-none">
+                class="w-full h-10 md:h-11 rounded-xl border border-[var(--border-color)] bg-[var(--theme-bg-light)] px-3 md:px-4 text-xs md:text-sm text-[var(--text-secondary)] focus:outline-none">
         </div>
 
     </div>
@@ -60,9 +60,9 @@
     @if($selectedAssignment)
         <input type="hidden" name="assignment_id" value="{{ $selectedAssignment->id }}">
     @endif
-    <div class="bg-white rounded-[24px] shadow-sm border border-slate-200/80 overflow-hidden p-0">
+    <div class="bg-[var(--bg-card)] rounded-[24px] shadow-sm border border-[var(--border-color)]/80 overflow-hidden p-0 text-[var(--text-main)]">
 
-        <div class="px-5 md:px-6 py-4 md:py-5 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-[var(--theme-bg-light)] to-white">
+        <div class="px-5 md:px-6 py-4 md:py-5 border-b border-[var(--border-color)] flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-[var(--theme-bg-light)] to-[var(--bg-card)] text-[var(--text-main)]">
             <div class="flex items-center gap-3">
                 <div class="w-1 bg-[var(--theme-accent)] h-5 rounded-full"></div>
                 <h2 class="font-extrabold text-[var(--theme-primary)] text-base">
@@ -81,7 +81,7 @@
 
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-slate-50 text-slate-500 text-xs uppercase">
+                <thead class="bg-[var(--theme-bg-light)] text-[var(--text-secondary)] text-xs uppercase">
                     <tr>
                         <th class="px-6 py-4 text-left">No</th>
                         <th class="px-6 py-4 text-left">NIS</th>
@@ -93,7 +93,7 @@
                     </tr>
                 </thead>
 
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-[var(--border-color)]">
 
                     @forelse($students as $index => $student)
                         @php
@@ -104,43 +104,43 @@
                             $average = $grade?->final_score !== null ? round($grade->final_score, 1) : '-';
                         @endphp
 
-                        <tr class="hover:bg-slate-50 transition-all">
+                        <tr class="grade-row hover:bg-[var(--theme-bg-light)] transition-all">
                             <td class="px-6 py-4">
                                 {{ $index + 1 }}
                             </td>
 
-                            <td class="px-6 py-4 text-slate-600">
+                            <td class="px-6 py-4 text-[var(--text-secondary)]">
                                 {{ $student->nis }}
                             </td>
 
-                            <td class="px-6 py-4 font-semibold text-slate-700">
+                            <td class="px-6 py-4 font-semibold text-[var(--text-main)]">
                                 {{ $student->full_name }}
                             </td>
 
                             <td class="px-6 py-4 text-center">
                                 <input type="number" name="grades[{{ $student->id }}][uts]" value="{{ $uts }}" min="0" max="100" step="0.01"
-                                    class="w-20 h-9 rounded-lg border border-slate-200 text-center text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]">
+                                    class="grade-input w-20 h-9 rounded-lg border border-[var(--border-color)] text-center text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
                             </td>
 
                             <td class="px-6 py-4 text-center">
                                 <input type="number" name="grades[{{ $student->id }}][uas]" value="{{ $uas }}" min="0" max="100" step="0.01"
-                                    class="w-20 h-9 rounded-lg border border-slate-200 text-center text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]">
+                                    class="grade-input w-20 h-9 rounded-lg border border-[var(--border-color)] text-center text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
                             </td>
 
                             <td class="px-6 py-4 text-center">
                                 <input type="number" name="grades[{{ $student->id }}][tugas]" value="{{ $tugas }}" min="0" max="100" step="0.01"
-                                    class="w-20 h-9 rounded-lg border border-slate-200 text-center text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]">
+                                    class="grade-input w-20 h-9 rounded-lg border border-[var(--border-color)] text-center text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
                             </td>
 
                             <td class="px-6 py-4 text-center">
-                                <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold">
+                                <span class="average-display bg-[var(--theme-bg-light)] text-[var(--text-secondary)] px-3 py-1 rounded-full text-xs font-bold transition-all duration-300">
                                     {{ $average }}
                                 </span>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-slate-400">
+                            <td colspan="7" class="px-6 py-4 text-center text-[var(--text-secondary)]">
                                 @if(!$selectedAssignment)
                                     Silakan pilih kelas terlebih dahulu.
                                 @else
@@ -158,9 +158,59 @@
 </form>
 
 {{-- CATATAN --}}
-<div class="mt-5 rounded-xl bg-blue-50 border border-blue-100 px-5 py-4 text-sm text-blue-600">
+<div class="mt-5 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-100 dark:border-[var(--theme-border-light)] px-5 py-4 text-sm text-blue-600 dark:text-blue-400">
     <span class="font-bold">Catatan:</span>
     Pastikan semua nilai sudah benar sebelum menyimpan. Nilai yang disimpan akan langsung terkirim ke sistem.
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Logika merata-ratakan nilai otomatis saat diketik
+        const rows = document.querySelectorAll('.grade-row');
+        
+        rows.forEach(row => {
+            const inputs = row.querySelectorAll('.grade-input');
+            const averageDisplay = row.querySelector('.average-display');
+            
+            const calculateAverage = () => {
+                let sum = 0;
+                let count = 0;
+                
+                inputs.forEach(input => {
+                    const val = parseFloat(input.value);
+                    if (!isNaN(val)) {
+                        sum += val;
+                        count++;
+                    }
+                });
+                
+                if (count > 0) {
+                    const average = (sum / count).toFixed(1);
+                    averageDisplay.textContent = average;
+                    
+                    // Beri efek warna jika sudah tuntas atau belum
+                    if (average >= 75) {
+                        averageDisplay.classList.remove('text-[var(--text-secondary)]', 'text-red-500');
+                        averageDisplay.classList.add('text-emerald-600', 'bg-emerald-100', 'dark:bg-emerald-500/20');
+                    } else {
+                        averageDisplay.classList.remove('text-[var(--text-secondary)]', 'text-emerald-600', 'bg-emerald-100', 'dark:bg-emerald-500/20');
+                        averageDisplay.classList.add('text-red-500');
+                    }
+                } else {
+                    averageDisplay.textContent = '-';
+                    averageDisplay.classList.remove('text-emerald-600', 'text-red-500', 'bg-emerald-100', 'dark:bg-emerald-500/20');
+                    averageDisplay.classList.add('text-[var(--text-secondary)]');
+                }
+            };
+            
+            inputs.forEach(input => {
+                input.addEventListener('input', calculateAverage);
+            });
+            
+            // Hitung rata-rata awal saat halaman dimuat
+            calculateAverage();
+        });
+    });
+</script>
 
 @endsection
