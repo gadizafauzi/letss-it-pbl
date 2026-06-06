@@ -67,6 +67,10 @@
                             </span>
                         </div>
 
+                        <div style="text-align: center; margin-top: 5px; margin-bottom: 20px;">
+                            <span style="color: #64748b; font-size: 0.8rem;">Lupa password? Silakan hubungi Tata Usaha / Admin.</span>
+                        </div>
+
                         <button class="submit" id="loginBtn" type="submit">
                             <span id="btnText">Masuk</span>
                         </button>
