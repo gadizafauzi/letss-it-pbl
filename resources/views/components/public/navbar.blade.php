@@ -1,54 +1,53 @@
 {{-- NAVBAR --}}
-<nav class="public-navbar">
-
-    {{-- LOGO --}}
-    <a href="{{ route('public.home') }}" class="nav-logo">
-        <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT Indonesia" style="width:42px;height:42px;border-radius:12px;object-fit:contain;background:#fff;padding:3px;">
-        <div class="nav-logo-text">
-            <h1>SIT Mutiara Qur'an</h1>
-            <p>Sekolah Islam Terpadu</p>
-        </div>
-    </a>
-
-    {{-- DESKTOP MENU --}}
-    <ul class="nav-menu">
-        <li><a href="{{ route('public.home') }}" class="{{ request()->routeIs('public.home') ? 'active' : '' }}">Beranda</a></li>
-
-        {{-- PROFIL DROPDOWN --}}
-        <li class="nav-dropdown">
-            <button class="nav-dropdown-btn {{ request()->is('profil*') ? 'active' : '' }}">
-                Profil <i data-lucide="chevron-down" class="w-3.5 h-3.5 ml-1"></i>
-            </button>
-            <div class="nav-dropdown-menu">
-                <a href="{{ route('public.profil.visi-misi') }}">Visi & Misi</a>
-                <a href="{{ route('public.profil.sejarah') }}">Sejarah</a>
-                <a href="{{ route('public.profil.struktur-organisasi') }}">Struktur Organisasi</a>
+<nav class="public-navbar" style="display: block; padding: 0;">
+    <div class="w-full max-w-7xl mx-auto flex items-center justify-between h-full px-4 sm:px-6 lg:px-12">
+        {{-- LOGO --}}
+        <a href="{{ route('public.home') }}" class="nav-logo">
+            <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT Indonesia" style="width:42px;height:42px;border-radius:12px;object-fit:contain;background:#fff;padding:3px;">
+            <div class="nav-logo-text">
+                <h1>SIT Mutiara Qur'an</h1>
+                <p>Sekolah Islam Terpadu</p>
             </div>
-        </li>
+        </a>
 
-        {{-- UNIT DROPDOWN --}}
-        <li class="nav-dropdown">
-            <button class="nav-dropdown-btn {{ request()->is('unit*') ? 'active' : '' }}">
-                Unit Pendidikan <i data-lucide="chevron-down" class="w-3.5 h-3.5 ml-1"></i>
-            </button>
-            <div class="nav-dropdown-menu">
-                <a href="{{ route('public.unit.index') }}">Semua Unit</a>
-                <a href="{{ route('public.unit.tk.index') }}">TK Islam Terpadu</a>
-                <a href="{{ route('public.unit.sd.index') }}">SD Islam Terpadu</a>
-                <a href="{{ route('public.unit.smp.index') }}">SMP Islam Terpadu</a>
-            </div>
-        </li>
+        {{-- DESKTOP MENU --}}
+        <ul class="nav-menu">
+            <li><a href="{{ route('public.home') }}" class="{{ request()->routeIs('public.home') ? 'active' : '' }}">Beranda</a></li>
 
-        <li><a href="{{ route('public.berita.index') }}" class="{{ request()->is('berita*') ? 'active' : '' }}">Berita</a></li>
-        <li><a href="{{ route('public.ppdb.index') }}" class="{{ request()->is('ppdb*') ? 'active' : '' }}">PPDB</a></li>
-        <li><a href="{{ route('login') }}" class="nav-login-btn"><i data-lucide="log-in" class="w-4 h-4"></i> Login</a></li>
-    </ul>
+            {{-- PROFIL DROPDOWN --}}
+            <li class="nav-dropdown">
+                <button class="nav-dropdown-btn {{ request()->is('profil*') ? 'active' : '' }}">
+                    Profil <i data-lucide="chevron-down" class="w-3.5 h-3.5 ml-1"></i>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <a href="{{ route('public.profil.visi-misi') }}">Visi & Misi</a>
+                    <a href="{{ route('public.profil.sejarah') }}">Sejarah</a>
+                    <a href="{{ route('public.profil.struktur-organisasi') }}">Struktur Organisasi</a>
+                </div>
+            </li>
 
-    {{-- HAMBURGER --}}
-    <button id="navHamburger" class="nav-hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-    </button>
+            {{-- UNIT DROPDOWN --}}
+            <li class="nav-dropdown">
+                <button class="nav-dropdown-btn {{ request()->is('unit*') ? 'active' : '' }}">
+                    Unit Pendidikan <i data-lucide="chevron-down" class="w-3.5 h-3.5 ml-1"></i>
+                </button>
+                <div class="nav-dropdown-menu">
+                    <a href="{{ route('public.unit.tk.index') }}">TK Islam Terpadu</a>
+                    <a href="{{ route('public.unit.sd.index') }}">SD Islam Terpadu</a>
+                    <a href="{{ route('public.unit.smp.index') }}">SMP Islam Terpadu</a>
+                </div>
+            </li>
 
+            <li><a href="{{ route('public.berita.index') }}" class="{{ request()->is('berita*') ? 'active' : '' }}">Berita</a></li>
+            <li><a href="{{ route('public.ppdb.index') }}" class="{{ request()->is('ppdb*') ? 'active' : '' }}">PPDB</a></li>
+            <li><a href="{{ route('login') }}" class="nav-login-btn"><i data-lucide="log-in" class="w-4 h-4"></i> Login</a></li>
+        </ul>
+
+        {{-- HAMBURGER --}}
+        <button id="navHamburger" class="nav-hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
 </nav>
 
 {{-- MOBILE MENU --}}
@@ -61,7 +60,6 @@
     <a href="{{ route('public.profil.struktur-organisasi') }}"><i data-lucide="network" class="w-5 h-5"></i> Struktur Organisasi</a>
 
     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-1 px-4">Unit Pendidikan</p>
-    <a href="{{ route('public.unit.index') }}"><i data-lucide="layers-3" class="w-5 h-5"></i> Semua Unit</a>
     <a href="{{ route('public.unit.tk.index') }}"><i data-lucide="baby" class="w-5 h-5"></i> TK Islam Terpadu</a>
     <a href="{{ route('public.unit.sd.index') }}"><i data-lucide="school" class="w-5 h-5"></i> SD Islam Terpadu</a>
     <a href="{{ route('public.unit.smp.index') }}"><i data-lucide="graduation-cap" class="w-5 h-5"></i> SMP Islam Terpadu</a>

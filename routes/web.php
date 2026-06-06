@@ -220,8 +220,7 @@ Route::get('/profil/struktur-organisasi', fn() => view('public.profil.struktur-o
 |--------------------------------------------------------------------------
 */
 
-Route::get('/unit', fn() => view('public.unit.index'))
-    ->name('public.unit.index');
+// Halaman utama unit pendidikan sudah dihapus agar pengunjung langsung diarahkan ke sub-unit (TK, SD, SMP).
 
 
 /*
@@ -294,7 +293,7 @@ Route::get('/ppdb/alur', fn() => redirect('/ppdb#alur'))
 Route::get('/ppdb/syarat', fn() => redirect('/ppdb#syarat'))
     ->name('public.ppdb.syarat');
 
-Route::get('/ppdb/jadwal', fn() => view('public.ppdb.jadwal'))
+Route::get('/ppdb/jadwal', fn() => redirect('/ppdb#timeline'))
     ->name('public.ppdb.jadwal');
 
 Route::get('/ppdb/faq', fn() => redirect('/ppdb#faq'))

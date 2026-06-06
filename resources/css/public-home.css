@@ -1,0 +1,108 @@
+        @keyframes waveTranslateX {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-25%); }
+        }
+        .anim-wave-front {
+            animation: waveTranslateX 8s ease-in-out infinite alternate;
+        }
+        .anim-wave-mid {
+            animation: waveTranslateX 6s ease-in-out infinite alternate;
+        }
+        .anim-wave-back {
+            animation: waveTranslateX 14s ease-in-out infinite alternate;
+        }
+
+        /* ROBUST REVEAL ANIMATION SYSTEM */
+        body:not(.js-reveal-ready) .reveal {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
+        body.js-reveal-ready .reveal {
+            opacity: 0;
+            transition-duration: 0.9s; /* Slower and smooth exit */
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* Smooth ease */
+            transition-property: opacity, transform;
+            will-change: opacity, transform;
+        }
+
+        body.js-reveal-ready .reveal-up { transform: translateY(40px); }
+        body.js-reveal-ready .reveal-left { transform: translateX(-40px); }
+        body.js-reveal-ready .reveal-right { transform: translateX(40px); }
+        body.js-reveal-ready .reveal-zoom { transform: scale(0.92); }
+        body.js-reveal-ready .reveal-fade { transform: none; }
+        body.js-reveal-ready .reveal-expand { transform: scaleX(0); transform-origin: center; }
+        body.js-reveal-ready .reveal-stat { transform: translateY(20px) scale(0.94); }
+        body.js-reveal-ready .reveal-photo { transform: translateX(-40px) scale(0.96); }
+        body.js-reveal-ready .reveal-pop { transform: scale(0.85); }
+        body.js-reveal-ready .reveal-bottom-left { transform: translate(-40px, 40px); }
+        body.js-reveal-ready .reveal-top { transform: translateY(-40px); }
+        body.js-reveal-ready .reveal-top-zoom { transform: translateY(-40px) scale(0.92); }
+        body.js-reveal-ready .reveal-bottom-right { transform: translate(40px, 40px); }
+        body.js-reveal-ready .reveal-carousel { transform: scale(0.96); }
+
+        body.js-reveal-ready .reveal.is-visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+            transition-duration: 0.7s; /* Smooth bouncy entrance */
+            transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body.js-reveal-ready .reveal-stat.is-visible {
+            transition-duration: 0.7s;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        body.js-reveal-ready .reveal-program.is-visible {
+            transition-duration: 0.85s;
+            transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* CUSTOM ANIMATION FOR SAMBUTAN TITLE */
+        @keyframes titleSambutanIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.96);
+            }
+            70% {
+                opacity: 1;
+                transform: translateY(0) scale(1.03);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        body.js-reveal-ready .reveal-sambutan-title {
+            transform: translateY(30px) scale(0.96);
+            transition-duration: 0.85s;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.js-reveal-ready .reveal-sambutan-title.is-visible {
+            animation: titleSambutanIn 0.9s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+            transition: none !important;
+        }
+
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0) rotate(180deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+        .animate-float { animation: floatEffect 4s ease-in-out infinite; }
+
+        @keyframes shine {
+            100% { left: 125%; }
+        }
+        .shine-effect {
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            z-index: 20;
+            pointer-events: none;
+        }
+        .group:hover .shine-effect {
+            animation: shine 0.7s ease-out forwards;
+        }
