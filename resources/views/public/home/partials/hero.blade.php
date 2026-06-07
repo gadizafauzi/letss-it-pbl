@@ -40,7 +40,7 @@
                             <i data-lucide="file-text" class="w-5 h-5"></i>
                             Daftar PPDB Online
                         </a>
-                        <a href="{{ route('public.profil.visi-misi') }}"
+                        <a href="{{ route('public.profil.index') }}"
                             class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
                             <i data-lucide="building-2" class="w-5 h-5"></i>
                             Profil Sekolah
