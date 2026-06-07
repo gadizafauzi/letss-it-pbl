@@ -214,9 +214,17 @@
 
         /* ── Float animation ──────────────────────── */
         @keyframes float {
-            0%   { transform: translateY(0px); }
-            50%  { transform: translateY(-16px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-16px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .animate-floating {
@@ -240,8 +248,15 @@
         }
 
         @keyframes tl-dot-pulse {
-            0%, 100% { box-shadow: 0 0 0 3px rgba(16,185,129,.28), 0 0 10px rgba(16,185,129,.22); }
-            50%       { box-shadow: 0 0 0 5px rgba(16,185,129,.15), 0 0 18px rgba(16,185,129,.40); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 3px rgba(16, 185, 129, .28), 0 0 10px rgba(16, 185, 129, .22);
+            }
+
+            50% {
+                box-shadow: 0 0 0 5px rgba(16, 185, 129, .15), 0 0 18px rgba(16, 185, 129, .40);
+            }
         }
     </style>
 
@@ -265,13 +280,16 @@
 
                 {{-- Left text --}}
                 <div class="reveal reveal-left">
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tighter mt-2 mb-6">
+                    <h1
+                        class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tighter mt-2 mb-6">
                         SMP ISLAM<br>
-                        <span style="background: linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TERPADU</span>
+                        <span
+                            style="background: linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TERPADU</span>
                     </h1>
 
                     <p class="text-base text-slate-400 leading-relaxed mb-8 max-w-md">
-                        Membangun generasi remaja yang unggul secara akademik, berkarakter islami kuat, dan siap menghadapi tantangan era global.
+                        Membangun generasi remaja yang unggul secara akademik, berkarakter islami kuat, dan siap menghadapi
+                        tantangan era global.
                     </p>
 
                     <div class="flex flex-wrap gap-3">
@@ -313,8 +331,11 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="reveal reveal-left p-4">
                     <div class="relative group">
-                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-100 to-green-50 rounded-2xl transform -rotate-3 transition-transform group-hover:rotate-0 duration-500"></div>
-                        <div class="relative bg-white rounded-2xl shadow-lg p-8 border border-slate-100 flex items-center justify-center min-h-[300px]">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-emerald-100 to-green-50 rounded-2xl transform -rotate-3 transition-transform group-hover:rotate-0 duration-500">
+                        </div>
+                        <div
+                            class="relative bg-white rounded-2xl shadow-lg p-8 border border-slate-100 flex items-center justify-center min-h-[300px]">
                             <img src="{{ asset('images/logomq.jpg') }}" alt="Logo SIT"
                                 class="w-40 h-40 object-contain animate-floating">
                         </div>
@@ -325,13 +346,19 @@
                     <h3 class="text-xl font-bold text-slate-800 mb-5">Pendidikan Menengah Berkualitas & Berkarakter</h3>
                     <div class="space-y-4 text-[0.95rem] text-slate-600 leading-relaxed">
                         <p>
-                            SMP Islam Terpadu SIT Mutiara Qur'an hadir sebagai solusi pendidikan menengah yang memadukan keunggulan akademik, teknologi, dan pendalaman ilmu agama (Diniyah) untuk mencetak lulusan yang siap bersaing di era global.
+                            SMP Islam Terpadu SIT Mutiara Qur'an hadir sebagai solusi pendidikan menengah yang memadukan
+                            keunggulan akademik, teknologi, dan pendalaman ilmu agama (Diniyah) untuk mencetak lulusan yang
+                            siap bersaing di era global.
                         </p>
                         <p>
-                            Dengan program bina pribadi islami (BPI), bahasa asing, dan sains, kami membimbing remaja untuk menemukan potensi terbaik mereka, melatih kepemimpinan, dan memperkuat identitas sebagai muslim sejati.
+                            Dengan program bina pribadi islami (BPI), bahasa asing, dan sains, kami membimbing remaja untuk
+                            menemukan potensi terbaik mereka, melatih kepemimpinan, dan memperkuat identitas sebagai muslim
+                            sejati.
                         </p>
                         <p>
-                            Siswa juga difasilitasi dengan berbagai kegiatan kokurikuler dan ekstrakurikuler yang sejalan dengan minat dan bakat mereka, mendorong tercapainya prestasi maksimal diimbangi pemahaman akhlak dan akidah.
+                            Siswa juga difasilitasi dengan berbagai kegiatan kokurikuler dan ekstrakurikuler yang sejalan
+                            dengan minat dan bakat mereka, mendorong tercapainya prestasi maksimal diimbangi pemahaman
+                            akhlak dan akidah.
                         </p>
                     </div>
                 </div>
@@ -346,16 +373,18 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
                 <h2 class="unit-section-title">GURU & TENAGA PENDIDIK</h2>
-                <p class="unit-section-desc">Dibimbing oleh pendidik profesional, inspiratif, dan berpengalaman di bidang akademik serta ilmu syar'i.</p>
+                <p class="unit-section-desc">Dibimbing oleh pendidik profesional yang berkompeten di bidangnya serta
+                    berdedikasi membina akhlak siswa.</p>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 @php
                     $guru = [
-                        ['https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80','Ustadz Ahmad, M.Pd','Kepala Sekolah SMP'],
-                        ['https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80','Ustadz Rizki, S.Pd','Guru Matematika & Sains'],
-                        ['https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80','Ustadzah Nisa, S.Pd.I','Guru Bahasa Arab'],
-                        ['https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=400&q=80','Ustadz Hasan, Lc','Guru Tahfidz & Diniyah'],
+                        ['https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Rina, S.Pd'],
+                        ['https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', 'Ustadz Fajar, M.Pd'],
+                        ['https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Sari, S.Pd.I'],
+                        ['https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=400&q=80', 'Ustadz Budi, S.Pd'],
+                        ['https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', 'Ustadzah Dewi, S.Pd'],
                     ];
                 @endphp
                 @foreach ($guru as $idx => $g)
@@ -365,7 +394,6 @@
                         </div>
                         <div class="unit-teacher-info">
                             <h3>{{ $g[1] }}</h3>
-                            <p>{{ $g[2] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -380,17 +408,54 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
                 <h2 class="unit-section-title">EKSTRAKURIKULER</h2>
-                <p class="unit-section-desc">Program pengembangan diri untuk menggali potensi, minat, dan bakat kepemimpinan siswa.</p>
+                <p class="unit-section-desc">Program pengembangan diri untuk menggali potensi, minat, dan bakat kepemimpinan
+                    siswa.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 @php
                     $ekskul = [
-                        ['icon'=>'tent','title'=>'Pramuka SIT','img'=>'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80','desc'=>'Melatih kemandirian, kedisiplinan, dan jiwa kepemimpinan dasar.'],
-                        ['icon'=>'book-open','title'=>'Tahfidz Club','img'=>'https://images.unsplash.com/photo-1585995604802-17c3fe6b53aa?auto=format&fit=crop&w=600&q=80','desc'=>'Program pengayaan hafalan Al-Qur\'an secara intensif dan terstruktur.'],
-                        ['icon'=>'crosshair','title'=>'Panahan','img'=>'https://images.unsplash.com/photo-1567699532083-f34b686df3af?auto=format&fit=crop&w=600&q=80','desc'=>'Melatih fokus, ketenangan, dan menjalankan sunnah Rasulullah SAW.'],
-                        ['icon'=>'flask-conical','title'=>'Olimpiade Sains','img'=>'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80','desc'=>'Bimbingan khusus bagi siswa berprestasi di bidang sains dan matematika.'],
-                        ['icon'=>'dribbble','title'=>'Futsal','img'=>'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80','desc'=>'Membangun kebugaran fisik, sportivitas, dan kerjasama tim.'],
-                        ['icon'=>'palette','title'=>'Seni & Kaligrafi','img'=>'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80','desc'=>'Mengembangkan kreativitas melalui seni rupa dan kaligrafi Islam.'],
+                        [
+                            'icon' => 'tent',
+                            'title' => 'Pramuka SIT',
+                            'img' =>
+                                'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80',
+                            'desc' => 'Melatih kemandirian, kedisiplinan, dan jiwa kepemimpinan dasar.',
+                        ],
+                        [
+                            'icon' => 'book-open',
+                            'title' => 'Tahfidz Club',
+                            'img' =>
+                                'https://images.unsplash.com/photo-1585995604802-17c3fe6b53aa?auto=format&fit=crop&w=600&q=80',
+                            'desc' => 'Program pengayaan hafalan Al-Qur\'an secara intensif dan terstruktur.',
+                        ],
+                        [
+                            'icon' => 'crosshair',
+                            'title' => 'Panahan',
+                            'img' =>
+                                'https://images.unsplash.com/photo-1567699532083-f34b686df3af?auto=format&fit=crop&w=600&q=80',
+                            'desc' => 'Melatih fokus, ketenangan, dan menjalankan sunnah Rasulullah SAW.',
+                        ],
+                        [
+                            'icon' => 'flask-conical',
+                            'title' => 'Olimpiade Sains',
+                            'img' =>
+                                'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80',
+                            'desc' => 'Bimbingan khusus bagi siswa berprestasi di bidang sains dan matematika.',
+                        ],
+                        [
+                            'icon' => 'dribbble',
+                            'title' => 'Futsal',
+                            'img' =>
+                                'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80',
+                            'desc' => 'Membangun kebugaran fisik, sportivitas, dan kerjasama tim.',
+                        ],
+                        [
+                            'icon' => 'palette',
+                            'title' => 'Seni & Kaligrafi',
+                            'img' =>
+                                'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80',
+                            'desc' => 'Mengembangkan kreativitas melalui seni rupa dan kaligrafi Islam.',
+                        ],
                     ];
                 @endphp
                 @foreach ($ekskul as $idx => $e)
@@ -407,7 +472,8 @@
                                 <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5"></i>
                             </div>
                             <h3 class="font-semibold text-white text-sm mb-1">{{ $e['title'] }}</h3>
-                            <p class="text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-500">
+                            <p
+                                class="text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-500">
                                 {{ $e['desc'] }}</p>
                         </div>
                     </div>
@@ -439,16 +505,7 @@
                 </div>
                 <div class="reveal reveal-right">
                     <div class="grid grid-cols-2 gap-3">
-                        @foreach ([
-                            ['monitor',     'Ruang Kelas Nyaman'],
-                            ['laptop',      'Laboratorium Komputer'],
-                            ['library',     'Perpustakaan'],
-                            ['moon',        'Musholla Luas'],
-                            ['activity',    'Lapangan Olahraga'],
-                            ['stethoscope', 'Klinik / UKS'],
-                            ['coffee',      'Kantin Sehat'],
-                            ['cctv',        'Keamanan CCTV'],
-                        ] as $f)
+                        @foreach ([['monitor', 'Ruang Kelas Nyaman'], ['laptop', 'Laboratorium Komputer'], ['library', 'Perpustakaan'], ['moon', 'Musholla Luas'], ['activity', 'Lapangan Olahraga'], ['stethoscope', 'Klinik / UKS'], ['coffee', 'Kantin Sehat'], ['cctv', 'Keamanan CCTV']] as $f)
                             <div class="flex items-center gap-2.5 p-3 rounded-xl transition-colors duration-300 hover:bg-white/5"
                                 style="border: 1px solid rgba(255,255,255,0.06);">
                                 <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -484,26 +541,50 @@
 
                 @php
                     $prestasi = [
-                        ['year' => '2024', 'title' => 'Juara 1 Olimpiade Sains Tingkat Provinsi', 'desc' => 'Kategori Matematika pada kompetisi antar SMP IT.', 'level' => 'Provinsi', 'side' => 'left'],
-                        ['year' => '2023', 'title' => 'Juara Umum MTQ Pelajar Tingkat Kabupaten', 'desc' => 'Kategori Tartil dan Tahfidz Al-Qur\'an.', 'level' => 'Kabupaten', 'side' => 'right'],
-                        ['year' => '2023', 'title' => 'Juara 2 Lomba Debat Bahasa Arab', 'desc' => 'Kompetisi antar SMP Islam se-Provinsi.', 'level' => 'Provinsi', 'side' => 'left'],
-                        ['year' => '2022', 'title' => 'Regu Tergiat Pramuka Penggalang', 'desc' => 'Jambore Tingkat Kecamatan dan Kabupaten.', 'level' => 'Kabupaten', 'side' => 'right'],
+                        [
+                            'year' => '2024',
+                            'title' => 'Juara 1 Olimpiade Sains Tingkat Provinsi',
+                            'desc' => 'Kategori Matematika pada kompetisi antar SMP IT.',
+                            'level' => 'Provinsi',
+                            'side' => 'left',
+                        ],
+                        [
+                            'year' => '2023',
+                            'title' => 'Juara Umum MTQ Pelajar Tingkat Kabupaten',
+                            'desc' => 'Kategori Tartil dan Tahfidz Al-Qur\'an.',
+                            'level' => 'Kabupaten',
+                            'side' => 'right',
+                        ],
+                        [
+                            'year' => '2023',
+                            'title' => 'Juara 2 Lomba Debat Bahasa Arab',
+                            'desc' => 'Kompetisi antar SMP Islam se-Provinsi.',
+                            'level' => 'Provinsi',
+                            'side' => 'left',
+                        ],
+                        [
+                            'year' => '2022',
+                            'title' => 'Regu Tergiat Pramuka Penggalang',
+                            'desc' => 'Jambore Tingkat Kecamatan dan Kabupaten.',
+                            'level' => 'Kabupaten',
+                            'side' => 'right',
+                        ],
                     ];
 
                     $lvlStyle = [
                         'Internasional' => 'background:rgba(220,38,38,.10);  color:#dc2626;',
-                        'Nasional'      => 'background:rgba(249,115,22,.10); color:#ea580c;',
-                        'Provinsi'      => 'background:rgba(59,130,246,.10); color:#2563eb;',
-                        'Kabupaten'     => 'background:rgba(16,185,129,.10); color:#059669;',
-                        'Kecamatan'     => 'background:rgba(100,116,139,.10);color:#475569;',
+                        'Nasional' => 'background:rgba(249,115,22,.10); color:#ea580c;',
+                        'Provinsi' => 'background:rgba(59,130,246,.10); color:#2563eb;',
+                        'Kabupaten' => 'background:rgba(16,185,129,.10); color:#059669;',
+                        'Kecamatan' => 'background:rgba(100,116,139,.10);color:#475569;',
                     ];
                 @endphp
 
                 @foreach ($prestasi as $idx => $p)
                     @php
                         $isLeft = $p['side'] === 'left';
-                        $delay  = $idx * 120;
-                        $ls     = $lvlStyle[$p['level']] ?? $lvlStyle['Kecamatan'];
+                        $delay = $idx * 120;
+                        $ls = $lvlStyle[$p['level']] ?? $lvlStyle['Kecamatan'];
                     @endphp
 
                     <div class="relative flex items-start mb-9 last:mb-0 reveal pl-8 md:pl-0 md:{{ $isLeft ? 'flex-row' : 'flex-row-reverse' }}"
@@ -511,7 +592,8 @@
 
                         {{-- Card --}}
                         <div class="w-full md:w-[calc(50%-28px)] {{ $isLeft ? 'md:pr-8' : 'md:pl-8' }}">
-                            <div class="tl-card group bg-white border border-slate-100 rounded-[20px] p-5
+                            <div
+                                class="tl-card group bg-white border border-slate-100 rounded-[20px] p-5
                                         shadow-sm transition-all duration-300 ease-out
                                         hover:-translate-y-1 hover:shadow-lg hover:border-emerald-300">
 
@@ -541,7 +623,8 @@
                         {{-- Dot --}}
                         <div class="tl-dot-wrap absolute left-[10px] md:left-1/2 -translate-x-1/2 flex items-center justify-center z-10"
                             style="top: 1.1rem;">
-                            <span class="tl-dot-glow absolute w-7 h-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            <span
+                                class="tl-dot-glow absolute w-7 h-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                                 style="background:rgba(16,185,129,.15);"></span>
                             <span class="tl-dot relative w-[14px] h-[14px] rounded-full border-[2.5px] border-white"
                                 style="background: linear-gradient(135deg,#34d399,#059669);
@@ -585,9 +668,10 @@
                     } else {
                         tlLine.classList.remove('visible');
                     }
-                }, { threshold: 0.05 }).observe(tlLine);
+                }, {
+                    threshold: 0.05
+                }).observe(tlLine);
             }
         </script>
     @endpush
-
 @endsection

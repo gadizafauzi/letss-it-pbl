@@ -346,16 +346,18 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
                 <h2 class="unit-section-title">GURU & TENAGA PENDIDIK</h2>
-                <p class="unit-section-desc">Dibimbing oleh pendidik yang penyayang, kompeten, dan berdedikasi dalam mendidik anak usia dini.</p>
+                <p class="unit-section-desc">Dibimbing oleh pendidik profesional yang berkompeten di bidangnya serta
+                    berdedikasi membina akhlak siswa.</p>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 @php
                     $guru = [
-                        ['https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=400&q=80','Ustadzah Aisyah, S.Pd','Kepala Sekolah TK'],
-                        ['https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80','Ustadzah Mira, S.Pd.I','Guru Kelas A'],
-                        ['https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=400&q=80','Ustadzah Dewi, S.Pd','Guru Kelas B'],
-                        ['https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80','Ustadzah Fitri, S.Pd.I','Guru Tahfidz'],
+                        ['https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Rina, S.Pd'],
+                        ['https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', 'Ustadz Fajar, M.Pd'],
+                        ['https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Sari, S.Pd.I'],
+                        ['https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=400&q=80', 'Ustadz Budi, S.Pd'],
+                        ['https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', 'Ustadzah Dewi, S.Pd'],
                     ];
                 @endphp
                 @foreach ($guru as $idx => $g)
@@ -365,13 +367,13 @@
                         </div>
                         <div class="unit-teacher-info">
                             <h3>{{ $g[1] }}</h3>
-                            <p>{{ $g[2] }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
     </section>
+
 
     {{-- ════════════════════════════════════════════
          EKSTRAKURIKULER
