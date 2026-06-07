@@ -344,7 +344,7 @@
             </div>
         </div>
     </section>
-
+    
     {{-- ════════════════════════════════════════════
          GURU SECTION
          ════════════════════════════════════════════ --}}
@@ -359,11 +359,11 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 @php
                     $guru = [
-                        ['https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Rina, S.Pd', 'Kepala Sekolah SD'],
-                        ['https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', 'Ustadz Fajar, M.Pd', 'Guru Kelas 4-6'],
-                        ['https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Sari, S.Pd.I', 'Guru Tahfidz'],
-                        ['https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=400&q=80', 'Ustadz Budi, S.Pd', 'Guru Olahraga'],
-                        ['https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', 'Ustadzah Dewi, S.Pd', 'Guru Kelas 1-3'],
+                        ['https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Rina, S.Pd'],
+                        ['https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', 'Ustadz Fajar, M.Pd'],
+                        ['https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Sari, S.Pd.I'],
+                        ['https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=400&q=80', 'Ustadz Budi, S.Pd'],
+                        ['https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', 'Ustadzah Dewi, S.Pd'],
                     ];
                 @endphp
                 @foreach ($guru as $idx => $g)
@@ -373,7 +373,6 @@
                         </div>
                         <div class="unit-teacher-info">
                             <h3>{{ $g[1] }}</h3>
-                            <p>{{ $g[2] }}</p>
                         </div>
                     </div>
                 @endforeach

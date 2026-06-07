@@ -177,7 +177,7 @@
 
                 {{-- Kanan: Ilustrasi --}}
                 <div class="hidden lg:flex justify-center items-center reveal reveal-right delay-200">
-                    <img src="{{ asset('images/visi-misi.svg') }}" alt="Ilustrasi Visi Misi"
+                    <img src="https://illustrations.popsy.co/amber/education.svg" alt="Ilustrasi Visi Misi"
                         class="w-full max-w-md drop-shadow-xl"
                         onerror="this.src='https://illustrations.popsy.co/emerald/student-going-to-school.svg'">
                 </div>
