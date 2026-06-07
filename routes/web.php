@@ -216,14 +216,8 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
 |--------------------------------------------------------------------------
 */
 
-Route::get('/profil/visi-misi', fn() => view('public.profil.visi-misi'))
-    ->name('public.profil.visi-misi');
-
-Route::get('/profil/sejarah', fn() => view('public.profil.sejarah'))
-    ->name('public.profil.sejarah');
-
-Route::get('/profil/struktur-organisasi', fn() => view('public.profil.struktur-organisasi'))
-    ->name('public.profil.struktur-organisasi');
+Route::get('/profil', fn() => view('public.profil.index'))
+    ->name('public.profil.index');
 
 
 /*

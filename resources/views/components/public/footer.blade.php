@@ -29,8 +29,7 @@
             <div class="footer-col">
                 <h4>Navigasi</h4>
                 <a href="{{ route('public.home') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Beranda</a>
-                <a href="{{ route('public.profil.visi-misi') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Visi & Misi</a>
-                <a href="{{ route('public.profil.sejarah') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Sejarah</a>
+                <a href="{{ route('public.profil.index') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Profil Sekolah</a>
                 <a href="{{ route('public.berita.index') }}"><i data-lucide="chevron-right" class="w-3.5 h-3.5 inline mr-1 text-emerald-500"></i> Berita & Kegiatan</a>
             </div>
 

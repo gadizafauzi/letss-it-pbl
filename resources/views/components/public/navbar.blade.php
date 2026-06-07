@@ -14,17 +14,7 @@
         <ul class="nav-menu">
             <li><a href="{{ route('public.home') }}" class="{{ request()->routeIs('public.home') ? 'active' : '' }}">Beranda</a></li>
 
-            {{-- PROFIL DROPDOWN --}}
-            <li class="nav-dropdown">
-                <button class="nav-dropdown-btn {{ request()->is('profil*') ? 'active' : '' }}">
-                    Profil <i data-lucide="chevron-down" class="w-3.5 h-3.5 ml-1"></i>
-                </button>
-                <div class="nav-dropdown-menu">
-                    <a href="{{ route('public.profil.visi-misi') }}">Visi & Misi</a>
-                    <a href="{{ route('public.profil.sejarah') }}">Sejarah</a>
-                    <a href="{{ route('public.profil.struktur-organisasi') }}">Struktur Organisasi</a>
-                </div>
-            </li>
+            <li><a href="{{ route('public.profil.index') }}" class="{{ request()->is('profil*') ? 'active' : '' }}">Profil</a></li>
 
             {{-- UNIT DROPDOWN --}}
             <li class="nav-dropdown">
@@ -54,10 +44,7 @@
 <div id="navMobileMenu" class="nav-mobile-menu">
     <a href="{{ route('public.home') }}" class="{{ request()->routeIs('public.home') ? 'active' : '' }}"><i data-lucide="home" class="w-5 h-5"></i> Beranda</a>
 
-    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-1 px-4">Profil</p>
-    <a href="{{ route('public.profil.visi-misi') }}"><i data-lucide="eye" class="w-5 h-5"></i> Visi & Misi</a>
-    <a href="{{ route('public.profil.sejarah') }}"><i data-lucide="clock" class="w-5 h-5"></i> Sejarah</a>
-    <a href="{{ route('public.profil.struktur-organisasi') }}"><i data-lucide="network" class="w-5 h-5"></i> Struktur Organisasi</a>
+    <a href="{{ route('public.profil.index') }}" class="{{ request()->is('profil*') ? 'active' : '' }}"><i data-lucide="user" class="w-5 h-5"></i> Profil</a>
 
     <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mt-4 mb-1 px-4">Unit Pendidikan</p>
     <a href="{{ route('public.unit.tk.index') }}"><i data-lucide="baby" class="w-5 h-5"></i> TK Islam Terpadu</a>
