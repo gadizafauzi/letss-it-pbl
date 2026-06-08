@@ -104,14 +104,30 @@
                     <span class="sidebar-text">Unit Pendidikan</span>
                 </a>
 
-                {{-- PEMBAYARAN --}}
-                <a href="{{ route('admin.pembayaran.index') }}"
-                    class="sidebar-link {{ request()->routeIs('admin.pembayaran.*') ? 'active-sidebar' : '' }}">
-                    <span class="sidebar-icon"><i data-lucide="wallet"></i></span>
-                    <span class="sidebar-text">Pembayaran</span>
-                </a>
-
-            </div>
+                {{-- KEUANGAN --}}
+                <div class="sidebar-title mt-4">Keuangan</div>
+                <div class="space-y-1 mt-2">
+                    <a href="{{ route('admin.jenis-tagihan.index') }}"
+                        class="sidebar-link {{ request()->routeIs('admin.jenis-tagihan.*') ? 'active-sidebar' : '' }}">
+                        <span class="sidebar-icon"><i data-lucide="tags"></i></span>
+                        <span class="sidebar-text">Jenis Tagihan</span>
+                    </a>
+                    <a href="{{ route('admin.tagihan.index') }}"
+                        class="sidebar-link {{ request()->routeIs('admin.tagihan.*') ? 'active-sidebar' : '' }}">
+                        <span class="sidebar-icon"><i data-lucide="receipt"></i></span>
+                        <span class="sidebar-text">Tagihan</span>
+                    </a>
+                    <a href="{{ route('admin.pembayaran.index') }}"
+                        class="sidebar-link {{ request()->routeIs('admin.pembayaran.*') || request()->routeIs('admin.rekening-sekolah.*') ? 'active-sidebar' : '' }}">
+                        <span class="sidebar-icon"><i data-lucide="wallet"></i></span>
+                        <span class="sidebar-text">Pembayaran</span>
+                    </a>
+                    <a href="{{ route('admin.laporan-keuangan.index') }}"
+                        class="sidebar-link {{ request()->routeIs('admin.laporan-keuangan.*') ? 'active-sidebar' : '' }}">
+                        <span class="sidebar-icon"><i data-lucide="bar-chart-3"></i></span>
+                        <span class="sidebar-text">Laporan Keuangan</span>
+                    </a>
+                </div>
 
         </div>
 

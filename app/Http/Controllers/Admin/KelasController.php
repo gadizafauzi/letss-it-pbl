@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\Admin\StoreKelasRequest;
+use App\Http\Requests\Admin\UpdateKelasRequest;
 use App\Models\SchoolClass;
 use App\Models\Unit;
 use App\Models\Teacher;
@@ -143,20 +145,9 @@ class KelasController extends Controller
      * STORE DATA
      * =========================================================
      */
-    public function store(Request $request)
+    public function store(StoreKelasRequest $request)
     {
-        /**
-         * VALIDASI
-         */
-        $validated = $request->validate([
-
-            'unit_id' => 'required|exists:units,id',
-
-            'class_name' => 'required|string|max:100',
-
-            'homeroom_teacher_id' => 'nullable|exists:teachers,id',
-
-        ]);
+        $validated = $request->validated();
 
         /**
          * CEK DUPLIKAT
@@ -293,21 +284,10 @@ class KelasController extends Controller
      * =========================================================
      */
     public function update(
-        Request $request,
+        UpdateKelasRequest $request,
         SchoolClass $kela
     ) {
-        /**
-         * VALIDASI
-         */
-        $validated = $request->validate([
-
-            'unit_id' => 'required|exists:units,id',
-
-            'class_name' => 'required|string|max:100',
-
-            'homeroom_teacher_id' => 'nullable|exists:teachers,id',
-
-        ]);
+        $validated = $request->validated();
 
         /**
          * CEK DUPLIKAT
