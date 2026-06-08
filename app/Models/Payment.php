@@ -8,6 +8,7 @@ class Payment extends Model
 {
     protected $fillable = [
         'invoice_id','verified_by',
+        'payment_method','school_account_id',
         'payment_date','payment_proof'
     ];
 
@@ -19,5 +20,10 @@ class Payment extends Model
     public function verifier()
     {
         return $this->belongsTo(User::class, 'verified_by');
+    }
+
+    public function schoolAccount()
+    {
+        return $this->belongsTo(SchoolAccount::class);
     }
 }

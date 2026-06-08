@@ -15,13 +15,13 @@
     {{-- STATS SECTION --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6 mb-10">
 
-        <x-admin.stats-card title="Total Siswa" value="{{ $totalSiswa }}" icon="graduation-cap" color="text-blue-500"
+        <x-admin.stats-card title="Total Siswa" value="{{ $stats['totalSiswa'] }}" icon="graduation-cap" color="text-blue-500"
             bg="bg-blue-50" />
 
-        <x-admin.stats-card title="Total Guru" value="{{ $totalGuru }}" icon="badge-check" color="text-indigo-500"
+        <x-admin.stats-card title="Total Guru" value="{{ $stats['totalGuru'] }}" icon="badge-check" color="text-indigo-500"
             bg="bg-indigo-50" />
 
-        <x-admin.stats-card title="Total Kelas" value="{{ $totalKelas }}" icon="school" color="text-sky-500"
+        <x-admin.stats-card title="Total Kelas" value="{{ $stats['totalKelas'] }}" icon="school" color="text-sky-500"
             bg="bg-sky-50" />
 
         <x-admin.stats-card title="Pembayaran" value="Belum tersedia" icon="wallet" color="text-blue-400"

@@ -54,7 +54,7 @@
                                         Nama Lengkap <span class="text-red-500">*</span>
                                     </label>
                                     <input type="text" name="full_name" value="{{ old('full_name') }}"
-                                        placeholder="Nama lengkap"
+                                        placeholder="Nama lengkap" 
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">

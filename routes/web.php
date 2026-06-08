@@ -16,6 +16,7 @@ use App\Http\Controllers\Teacher\DashboardController as TeacherDashboard;
 use App\Http\Controllers\Teacher\KelasController as TeacherKelas;
 
 // Admin Controllers
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\SiswaController;
 use App\Http\Controllers\Admin\GuruController;
 use App\Http\Controllers\Admin\KelasController;
@@ -45,13 +46,7 @@ Route::get('/', fn() => view('public.home.index'))->name('public.home');
 */
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
-    Route::get('/admin/dashboard', function () {
-        $totalSiswa = Student::count();
-        $totalGuru  = Teacher::count();
-        $totalKelas = SchoolClass::count();
-
-        return view('admin.dashboard', compact('totalSiswa', 'totalGuru', 'totalKelas'));
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     //tambahan 30 mei
     Route::get('/admin/siswa/export', [SiswaController::class, 'export'])
@@ -71,8 +66,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('/admin/siswa', SiswaController::class)->names('admin.siswa');
 
-    //======
-    Route::resource('/admin/siswa', SiswaController::class)->names('admin.siswa');
 
     Route::get('/admin/guru/export', [GuruController::class, 'export'])
         ->name('admin.guru.export');
@@ -100,8 +93,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/admin/jabatan', JabatanController::class)->names('admin.jabatan');
     Route::resource('/admin/unit', UnitController::class)->names('admin.unit');
 
-    Route::get('/admin/pembayaran', fn() => view('admin.pembayaran.index'))
-        ->name('admin.pembayaran.index');
+    // KEUANGAN
+    Route::resource('/admin/rekening-sekolah', \App\Http\Controllers\Admin\RekeningSekolahController::class)->names('admin.rekening-sekolah');
+    Route::resource('/admin/jenis-tagihan', \App\Http\Controllers\Admin\JenisTagihanController::class)->names('admin.jenis-tagihan');
+    Route::resource('/admin/tagihan', \App\Http\Controllers\Admin\TagihanController::class)->names('admin.tagihan');
+    Route::resource('/admin/pembayaran', \App\Http\Controllers\Admin\PembayaranController::class)->names('admin.pembayaran');
+    Route::get('/admin/laporan-keuangan', [\App\Http\Controllers\Admin\LaporanKeuanganController::class, 'index'])->name('admin.laporan-keuangan.index');
 
 
     // CMS
