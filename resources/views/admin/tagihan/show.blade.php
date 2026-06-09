@@ -67,12 +67,25 @@
             <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
                 <h2 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2">Pembayaran</h2>
                 
-                @if ($invoice->status == 'paid' && $invoice->payment)
+                @if ($invoice->payment)
                     <div class="space-y-3">
-                        <div class="bg-emerald-50 text-emerald-700 p-3 rounded-xl flex items-center gap-2 mb-4">
-                            <i data-lucide="check-circle" class="w-5 h-5"></i>
-                            <span class="text-sm font-semibold">Tagihan telah dibayar</span>
-                        </div>
+                        @if ($invoice->payment->verification_status == 'verified')
+                            <div class="bg-emerald-50 text-emerald-700 p-3 rounded-xl flex items-center gap-2 mb-4">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                <span class="text-sm font-semibold">Tagihan telah dibayar dan diverifikasi</span>
+                            </div>
+                        @elseif ($invoice->payment->verification_status == 'pending')
+                            <div class="bg-amber-50 text-amber-700 p-3 rounded-xl flex items-center gap-2 mb-4">
+                                <i data-lucide="clock" class="w-5 h-5"></i>
+                                <span class="text-sm font-semibold">Menunggu Verifikasi Admin</span>
+                            </div>
+                        @else
+                            <div class="bg-red-50 text-red-700 p-3 rounded-xl flex items-center gap-2 mb-4">
+                                <i data-lucide="x-circle" class="w-5 h-5"></i>
+                                <span class="text-sm font-semibold">Pembayaran Ditolak. Harap hapus dan ulangi proses pembayaran.</span>
+                            </div>
+                        @endif
+
                         <div>
                             <span class="block text-xs text-slate-400 font-semibold uppercase">Metode Pembayaran</span>
                             <span class="text-sm font-medium text-slate-800">{{ ucfirst($invoice->payment->payment_method) }}</span>
@@ -87,14 +100,31 @@
                             <span class="block text-xs text-slate-400 font-semibold uppercase">Tanggal Bayar</span>
                             <span class="text-sm font-medium text-slate-800">{{ \Carbon\Carbon::parse($invoice->payment->payment_date)->format('d F Y') }}</span>
                         </div>
+                        @if ($invoice->payment->payment_proof)
+                            <div>
+                                <span class="block text-xs text-slate-400 font-semibold uppercase">Bukti Transfer</span>
+                                <a href="{{ asset('storage/' . $invoice->payment->payment_proof) }}" target="_blank" class="text-sm font-medium text-sky-600 hover:underline">Lihat Bukti Foto</a>
+                            </div>
+                        @endif
+                        @if ($invoice->payment->verification_status == 'verified')
                         <div>
                             <span class="block text-xs text-slate-400 font-semibold uppercase">Diverifikasi Oleh</span>
-                            <span class="text-sm font-medium text-slate-800">{{ $invoice->payment->verifier->name ?? 'Admin' }}</span>
+                            <span class="text-sm font-medium text-slate-800">{{ $invoice->payment->verifier->name ?? 'Admin / Sistem' }}</span>
+                        </div>
+                        @endif
+                        
+                        <div class="pt-4 border-t border-slate-100 flex gap-2">
+                            <a href="{{ route('admin.pembayaran.index') }}" class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded hover:bg-emerald-100 transition-colors">Ke Halaman Verifikasi</a>
+                            <form action="{{ route('admin.pembayaran.destroy', $invoice->payment->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Hapus data pembayaran ini?')" class="text-xs font-semibold text-red-600 bg-red-50 px-3 py-1.5 rounded hover:bg-red-100 transition-colors border-none cursor-pointer">Hapus Pembayaran</button>
+                            </form>
                         </div>
                     </div>
                 @else
                     {{-- Form Proses Pembayaran oleh Admin --}}
-                    <form action="{{ route('admin.pembayaran.store') }}" method="POST" class="space-y-4">
+                    <form action="{{ route('admin.pembayaran.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                         @csrf
                         <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
                         
@@ -124,10 +154,16 @@
                             </select>
                         </div>
 
+                        <div id="proof_wrapper" class="hidden">
+                            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Bukti Transfer (Opsional)</label>
+                            <input type="file" name="payment_proof" accept="image/*"
+                                class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
+                        </div>
+
                         <div class="pt-2">
                             <button type="submit"
                                 class="w-full h-11 rounded-xl text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 shadow-sm shadow-emerald-500/20 transition-all flex items-center justify-center gap-2">
-                                <i data-lucide="check-circle" class="w-4 h-4"></i> Konfirmasi Pembayaran
+                                <i data-lucide="check-circle" class="w-4 h-4"></i> Catat Pembayaran
                             </button>
                         </div>
                     </form>
@@ -136,8 +172,8 @@
         </div>
 
         <div class="mt-4">
-            <a href="{{ route('admin.tagihan.index') }}" class="text-sm text-slate-500 hover:text-slate-800 flex items-center gap-1">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Data Tagihan
+            <a href="{{ route('admin.tagihan.student', $invoice->student_id) }}" class="text-sm text-slate-500 hover:text-slate-800 flex items-center gap-1">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Riwayat Tagihan Siswa
             </a>
         </div>
 
@@ -146,12 +182,15 @@
     <script>
         function toggleAccount(method) {
             const wrapper = document.getElementById('account_wrapper');
+            const proofWrapper = document.getElementById('proof_wrapper');
             const select = document.getElementById('school_account_id');
             if (method === 'transfer') {
                 wrapper.classList.remove('hidden');
+                proofWrapper.classList.remove('hidden');
                 select.setAttribute('required', 'required');
             } else {
                 wrapper.classList.add('hidden');
+                proofWrapper.classList.add('hidden');
                 select.removeAttribute('required');
                 select.value = "";
             }

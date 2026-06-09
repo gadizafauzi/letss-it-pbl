@@ -72,11 +72,11 @@
 
                 <div class="mb-6">
                     <label class="block text-sm font-semibold text-slate-700 mb-3">
-                        Masukkan File (.csv)
+                    Masukkan File (.xlsx)
                     </label>
                     <input type="file"
                            name="file"
-                           accept=".csv"
+                           accept=".xlsx, .xls"
                            class="block w-full text-sm text-slate-600
                            file:mr-4 file:py-2 file:px-4
                            file:rounded-xl file:border-0

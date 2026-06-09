@@ -277,7 +277,7 @@
                     <div class="flex gap-2.5 items-start bg-sky-50 border border-sky-100 rounded-xl px-4 py-3.5">
                         <i data-lucide="info" class="w-4 h-4 text-sky-400 flex-shrink-0 mt-0.5"></i>
                         <span class="text-[12px] text-slate-500">
-                            Data akan diexport dalam format <strong class="text-slate-700">CSV</strong>
+                            Data akan diexport dalam format <strong class="text-slate-700">Excel (XLSX)</strong>
                             dan dapat dibuka menggunakan Microsoft Excel.
                         </span>
                     </div>
@@ -293,7 +293,7 @@
                         class="h-10 px-5 bg-sky-500 hover:bg-sky-600 border-none rounded-xl
                                text-[13px] font-bold text-white flex items-center gap-1.5 cursor-pointer
                                shadow-sm hover:shadow-sky-200 hover:shadow-md transition-all">
-                        <i data-lucide="download" class="w-[14px] h-[14px]"></i>Export CSV
+                        <i data-lucide="download" class="w-[14px] h-[14px]"></i>Export Excel
                     </button>
                 </div>
             </form>

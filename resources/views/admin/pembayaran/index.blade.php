@@ -53,7 +53,7 @@
                 <table class="w-full min-w-[1000px] border-collapse">
                     <thead>
                         <tr class="bg-slate-50 border-b-[1.5px] border-slate-100">
-                            @foreach (['No', 'Siswa', 'Tagihan', 'Tgl Bayar', 'Metode', 'Verifikator', 'Aksi'] as $h)
+                            @foreach (['No', 'Siswa', 'Tagihan', 'Tgl Bayar', 'Metode', 'Bukti', 'Status Verifikasi', 'Aksi'] as $h)
                                 <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 whitespace-nowrap {{ $h == 'Aksi' ? 'text-center' : '' }}">
                                     {{ $h }}
                                 </th>
@@ -86,25 +86,64 @@
                                     @endif
                                 </td>
                                 <td class="px-4 py-3.5 text-[13px] text-slate-600">
-                                    {{ $payment->verifier->name ?? 'Admin' }}
+                                    @if ($payment->payment_proof)
+                                        <a href="{{ asset('storage/' . $payment->payment_proof) }}" target="_blank"
+                                            class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-emerald-50 hover:text-emerald-600 transition-colors text-[11px] font-semibold border border-slate-200">
+                                            <i data-lucide="image" class="w-3.5 h-3.5"></i> Lihat Bukti
+                                        </a>
+                                    @else
+                                        <span class="text-[11px] text-slate-400 italic">Tidak ada</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3.5 text-[13px] text-slate-600">
+                                    @if ($payment->verification_status == 'verified')
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-700">Terverifikasi</span>
+                                        <div class="text-[10px] text-slate-400 mt-1" title="Diverifikasi oleh">Oleh: {{ $payment->verifier->name ?? 'Sistem' }}</div>
+                                    @elseif ($payment->verification_status == 'pending')
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-100 text-amber-700">Menunggu Verifikasi</span>
+                                    @else
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-red-100 text-red-700">Ditolak</span>
+                                    @endif
                                 </td>
                                 <td class="px-4 py-3.5">
-                                    <div class="flex justify-center gap-1.5">
+                                    <div class="flex flex-wrap justify-center gap-1.5">
+                                        @if ($payment->verification_status == 'pending')
+                                            <form action="{{ route('admin.pembayaran.verify', $payment->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" onclick="return confirm('Konfirmasi verifikasi pembayaran ini?')"
+                                                    class="w-[30px] h-[30px] rounded-lg bg-emerald-100 text-emerald-600
+                                                           hover:bg-emerald-500 hover:text-white transition-all
+                                                           inline-flex items-center justify-center cursor-pointer border-none" title="Terima & Verifikasi">
+                                                    <i data-lucide="check" class="w-[13px] h-[13px]"></i>
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('admin.pembayaran.reject', $payment->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" onclick="return confirm('Tolak pembayaran ini?')"
+                                                    class="w-[30px] h-[30px] rounded-lg bg-amber-100 text-amber-600
+                                                           hover:bg-amber-500 hover:text-white transition-all
+                                                           inline-flex items-center justify-center cursor-pointer border-none" title="Tolak">
+                                                    <i data-lucide="x" class="w-[13px] h-[13px]"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                         <a href="{{ route('admin.tagihan.show', $payment->invoice->id) }}"
-                                            class="w-[30px] h-[30px] rounded-lg bg-emerald-100 text-emerald-600
-                                              hover:bg-emerald-500 hover:text-white transition-all
+                                            class="w-[30px] h-[30px] rounded-lg bg-sky-100 text-sky-600
+                                              hover:bg-sky-500 hover:text-white transition-all
                                               inline-flex items-center justify-content-center no-underline"
-                                            style="justify-content:center" title="Detail Tagihan">
+                                            style="justify-content:center" title="Lihat Tagihan">
                                             <i data-lucide="receipt" class="w-[13px] h-[13px]"></i>
                                         </a>
                                         <form action="{{ route('admin.pembayaran.destroy', $payment->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" onclick="return confirm('Hapus data pembayaran ini? Tagihan akan kembali menjadi Belum Lunas.')"
+                                            <button type="submit" onclick="return confirm('Hapus data pembayaran ini secara permanen? Tagihan akan kembali menjadi Belum Lunas.')"
                                                 class="w-[30px] h-[30px] rounded-lg bg-red-100 text-red-400
                                                        hover:bg-red-500 hover:text-white transition-all
-                                                       inline-flex items-center justify-center cursor-pointer border-none" title="Batalkan Pembayaran">
-                                                <i data-lucide="x-circle" class="w-[13px] h-[13px]"></i>
+                                                       inline-flex items-center justify-center cursor-pointer border-none" title="Hapus Permanen">
+                                                <i data-lucide="trash-2" class="w-[13px] h-[13px]"></i>
                                             </button>
                                         </form>
                                     </div>

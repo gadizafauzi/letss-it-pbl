@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ImportCsvRequest;
+use App\Http\Requests\Admin\ImportExcelRequest;
 use App\Http\Requests\Admin\StoreSiswaRequest;
 use App\Http\Requests\Admin\UpdateSiswaRequest;
 use App\Models\AcademicYear;
@@ -11,16 +11,16 @@ use App\Models\SchoolClass;
 use App\Models\Student;
 use App\Models\Unit;
 use App\Services\Admin\SiswaService;
-use App\Services\Shared\CsvExportService;
-use App\Services\Shared\CsvImportService;
+use App\Services\Shared\ExcelExportService;
+use App\Services\Shared\ExcelImportService;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
     public function __construct(
         protected SiswaService $siswaService,
-        protected CsvImportService $csvImportService,
-        protected CsvExportService $csvExportService
+        protected ExcelImportService $excelImportService,
+        protected ExcelExportService $excelExportService
     ) {}
 
     /**
@@ -204,7 +204,7 @@ class SiswaController extends Controller
             . str_replace(' ', '_', $unitName)
             . '_Kelas_'
             . str_replace(' ', '_', $className)
-            . '.csv';
+            . '.xlsx';
 
         $headers = [
             'NIS', 'NISN', 'NIK', 'Nama Lengkap', 'Unit', 'Kelas',
@@ -212,7 +212,7 @@ class SiswaController extends Controller
             'Alamat', 'Status'
         ];
 
-        return $this->csvExportService->export($students, $headers, function ($student) {
+        return $this->excelExportService->export($students, $headers, function ($student) {
             $activeClass = $student->studentClasses->first();
             return [
                 $student->nis,
@@ -242,9 +242,9 @@ class SiswaController extends Controller
     /**
      * PROSES IMPORT CSV
      */
-    public function import(ImportCsvRequest $request)
+    public function import(ImportExcelRequest $request)
     {
-        $result = $this->csvImportService->import($request->file('file'), function ($row) {
+        $result = $this->excelImportService->import($request->file('file'), function ($row) {
             return $this->siswaService->processImportRow($row);
         });
 
@@ -277,6 +277,6 @@ class SiswaController extends Controller
             'Nama Ayah', 'Nama Ibu', '08123456789', 'active'
         ];
 
-        return $this->csvExportService->downloadTemplate($headers, $sampleData, 'Template_Import_Siswa.csv');
+        return $this->excelExportService->downloadTemplate($headers, $sampleData, 'Template_Import_Siswa.xlsx');
     }
 }

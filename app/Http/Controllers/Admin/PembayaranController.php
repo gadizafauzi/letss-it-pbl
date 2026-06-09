@@ -42,6 +42,7 @@ class PembayaranController extends Controller
             'payment_method' => 'required|in:cash,transfer',
             'school_account_id' => 'required_if:payment_method,transfer|nullable|exists:school_accounts,id',
             'payment_date' => 'required|date',
+            'payment_proof' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $invoice = Invoice::findOrFail($request->invoice_id);
@@ -50,19 +51,31 @@ class PembayaranController extends Controller
             return back()->with('error', 'Tagihan ini sudah lunas.');
         }
 
+        $proofPath = null;
+        if ($request->hasFile('payment_proof')) {
+            $proofPath = $request->file('payment_proof')->store('payments', 'public');
+        }
+
+        $isCash = $request->payment_method === 'cash';
+
         $payment = Payment::create([
             'invoice_id' => $invoice->id,
-            'verified_by' => auth()->id(),
+            'verified_by' => $isCash ? auth()->id() : null,
             'payment_method' => $request->payment_method,
             'school_account_id' => $request->school_account_id,
             'payment_date' => $request->payment_date,
-            // Jika admin yang input cash, berarti langsung verified tanpa bukti transfer (bisa opsional)
+            'payment_proof' => $proofPath,
+            'verification_status' => $isCash ? 'verified' : 'pending',
         ]);
 
-        $invoice->update(['status' => 'paid']);
+        if ($isCash) {
+            $invoice->update(['status' => 'paid']);
+            return redirect()->route('admin.tagihan.show', $invoice->id)
+                ->with('success', 'Pembayaran tunai berhasil diproses dan diverifikasi.');
+        }
 
         return redirect()->route('admin.tagihan.show', $invoice->id)
-            ->with('success', 'Pembayaran berhasil diproses dan diverifikasi.');
+            ->with('success', 'Data pembayaran transfer dicatat dengan status PENDING menunggu verifikasi.');
     }
 
     public function show(Payment $payment)
@@ -71,23 +84,43 @@ class PembayaranController extends Controller
         return view('admin.pembayaran.show', compact('payment'));
     }
 
-    public function update(Request $request, Payment $payment)
+    public function verify(Payment $payment)
     {
-        // Admin memverifikasi pembayaran transfer yang di-submit siswa (jika ada portal siswa)
-        // Saat ini, kita asumsikan siswa kirim bukti, lalu admin ubah statusnya
-        
+        if ($payment->verification_status === 'verified') {
+            return back()->with('error', 'Pembayaran sudah diverifikasi sebelumnya.');
+        }
+
         $payment->update([
+            'verification_status' => 'verified',
             'verified_by' => auth()->id()
         ]);
 
         $payment->invoice->update(['status' => 'paid']);
 
-        return back()->with('success', 'Pembayaran berhasil diverifikasi.');
+        return back()->with('success', 'Pembayaran berhasil diverifikasi. Tagihan menjadi lunas.');
+    }
+
+    public function reject(Payment $payment)
+    {
+        if ($payment->verification_status === 'verified') {
+            return back()->with('error', 'Pembayaran sudah diverifikasi, tidak dapat ditolak.');
+        }
+
+        $payment->update([
+            'verification_status' => 'rejected'
+        ]);
+
+        $payment->invoice->update(['status' => 'unpaid']);
+
+        return back()->with('success', 'Pembayaran ditolak.');
     }
 
     public function destroy(Payment $payment)
     {
         $invoice = $payment->invoice;
+        if ($payment->payment_proof) {
+            Storage::disk('public')->delete($payment->payment_proof);
+        }
         $payment->delete();
         $invoice->update(['status' => 'unpaid']);
 
