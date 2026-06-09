@@ -55,7 +55,7 @@
 
     <!-- Grades Table Box -->
     <div class="bg-[var(--bg-card)] rounded-[24px] shadow-[0_8px_24px_rgba(15,23,42,0.06)] border border-[var(--border-color)] overflow-hidden">
-        <div class="px-5 md:px-6 py-4 md:py-5 border-b border-[var(--theme-border-light)] flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-[var(--theme-bg-light)] to-white">
+        <div class="px-5 md:px-6 py-4 md:py-5 border-b border-[var(--theme-border-light)] flex flex-wrap items-center justify-between gap-3 bg-[var(--theme-bg-light)]">
             <div class="flex items-center gap-3">
                 <div class="w-1 bg-[var(--theme-accent)] h-5 rounded-full"></div>
                 <h3 class="font-extrabold text-[var(--theme-text-primary)] text-base">Laporan Hasil Belajar</h3>

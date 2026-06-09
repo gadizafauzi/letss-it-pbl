@@ -1,4 +1,4 @@
-@extends('layouts.student')
+@extends('layouts.student.smp')
 
 @php
     $unitName = strtolower($student->unit->unit_name ?? 'sd');

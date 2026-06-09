@@ -1,0 +1,47 @@
+:root {
+    /* Warna Default Teacher Reguler (SMP - Tema Biru Tua) */
+    --bg-sidebar: #3b5998;
+    --bg-header: #ffffff;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+
+    --theme-primary: #3b5998;
+    --theme-primary-hover: #1e3a6e;
+    --theme-accent: #5c7cfa;
+    --theme-accent-hover: #3b5998;
+    --theme-bg-light: #eef4ff;
+    --theme-bg-workspace: #f1f5f9;
+    --theme-border-light: #c9d8ff;
+    --theme-text-light: #3b5998;
+    --theme-icon-active: #ffffff;
+    --theme-icon-indicator: rgba(255, 255, 255, 0.9);
+    
+    --theme-stat-hover: rgba(59, 130, 246, 0.06);
+    --theme-text-primary: #3b5998;
+}
+
+.dark {
+    /* Tema Dark Teacher Reguler (Midnight Ocean) */
+    --bg-sidebar: #1E3A8A; /* Blue 900 */
+    --bg-header: #0A192F; /* Deep Navy */
+    --bg-card: #112240; /* Rich Navy */
+    --text-main: #F8FAFC;
+    --text-secondary: #93C5FD;
+    --border-color: #1E3A8A;
+
+    --theme-primary: #3B82F6;
+    --theme-primary-hover: #2563EB;
+    --theme-accent: #60A5FA;
+    --theme-accent-hover: #3B82F6;
+    --theme-bg-light: #112240;
+    --theme-bg-workspace: #060F1E;
+    --theme-border-light: #1E3A8A;
+    --theme-text-light: #BFDBFE;
+    --theme-icon-active: #ffffff;
+    --theme-icon-indicator: #60A5FA;
+    
+    --theme-stat-hover: rgba(59, 130, 246, 0.2);
+    --theme-text-primary: #60A5FA;
+}

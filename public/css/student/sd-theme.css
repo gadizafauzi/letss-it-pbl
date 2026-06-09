@@ -1,0 +1,53 @@
+:root {
+    --theme-primary: #5B3CC4;
+    --theme-primary-hover: #8B5CF6;
+    --theme-accent: #8B5CF6;
+    --theme-accent-hover: #8B5CF6;
+    --theme-bg-light: #F1ECFF;
+    --theme-bg-workspace: #F8F7FC;
+    --theme-border-light: #D8CCFF;
+    --theme-text-light: #4C1D95;
+    --theme-icon-active: #5B3CC4;
+    --theme-icon-indicator: #5B3CC4;
+    --theme-stat-hover: rgba(139, 92, 246, 0.14);
+    --theme-print-bg: #FEF3C7;
+    --theme-print-text: #A16207;
+    --theme-print-icon: #FACC15;
+    --theme-print-hover: #FDE68A;
+    --theme-logo-url: url('/images/logomq.jpg');
+    
+    --bg-sidebar: var(--theme-primary);
+    --bg-banner: linear-gradient(135deg, #5B3CC4, #8B5CF6);
+    --glow-banner: 0 8px 30px rgba(91, 60, 196, 0.3);
+    --bg-header: var(--theme-bg-light);
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-secondary: #64748b;
+    --theme-text-primary: var(--theme-primary);
+}
+.dark {
+    --bg-sidebar: #312E81;
+    --bg-banner: linear-gradient(135deg, #312E81, #1F1147);
+    --glow-banner: 0 8px 30px rgba(0, 0, 0, 0.4);
+    --bg-header: #1F1147;
+    --bg-card: #2E1065;
+    --text-main: #F8FAFC;
+    --text-secondary: #D8B4FE;
+    
+    --theme-primary: #8B5CF6;
+    --theme-primary-hover: #A78BFA;
+    --theme-accent: #A78BFA;
+    --theme-accent-hover: #C4B5FD;
+    --theme-bg-light: #2E1065;
+    --theme-bg-workspace: #1E1B4B;
+    --theme-border-light: #4C1D95;
+    --theme-text-light: #F8FAFC;
+    --theme-icon-active: #F8FAFC;
+    --theme-icon-indicator: #A78BFA;
+    --theme-stat-hover: rgba(167, 139, 250, 0.2);
+    --theme-print-bg: #4C1D95;
+    --theme-print-text: #FDE68A;
+    --theme-print-icon: #FACC15;
+    --theme-print-hover: #5B3CC4;
+    --theme-text-primary: #A78BFA;
+}

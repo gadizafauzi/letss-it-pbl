@@ -33,7 +33,65 @@
         $unitNameLayout = strtolower($studentLayout->unit->unit_name ?? 'smp');
     @endphp
 
-    @if($unitNameLayout === 'sd')
+    @if($unitNameLayout === 'tk')
+    <style>
+        :root {
+            --theme-primary: #F97316; /* Orange 500 */
+            --theme-primary-hover: #EA580C; /* Orange 600 */
+            --theme-accent: #3B82F6; /* Blue 500 */
+            --theme-accent-hover: #2563EB; /* Blue 600 */
+            --theme-bg-light: #FFF7ED; /* Orange 50 */
+            --theme-bg-workspace: #FFEDD5; /* Orange 100 */
+            --theme-border-light: #FDBA74; /* Orange 300 */
+            --theme-text-light: #C2410C; /* Orange 700 */
+            --theme-icon-active: #ffffff;
+            --theme-icon-indicator: rgba(255, 255, 255, 0.9);
+            --theme-stat-hover: rgba(249, 115, 22, 0.1);
+            --theme-print-bg: #EFF6FF; /* Blue 50 */
+            --theme-print-text: #1D4ED8; /* Blue 700 */
+            --theme-print-icon: #3B82F6; /* Blue 500 */
+            --theme-print-hover: #DBEAFE; /* Blue 100 */
+            --theme-logo-url: url('{{ asset("images/tk.jpeg") }}');
+            
+            --bg-sidebar: var(--theme-primary);
+            --bg-banner: linear-gradient(135deg, #F97316, #3B82F6);
+            --glow-banner: 0 8px 30px rgba(249, 115, 22, 0.3);
+            --bg-header: var(--theme-bg-light);
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-main: #1e293b;
+            --text-secondary: #64748b;
+            --theme-text-primary: var(--theme-primary);
+        }
+        .dark {
+            --bg-sidebar: #0F172A; /* Slate 900 */
+            --bg-banner: linear-gradient(135deg, #1E293B, #0F172A);
+            --glow-banner: 0 8px 30px rgba(0, 0, 0, 0.4);
+            --bg-header: #020617; /* Slate 950 */
+            --bg-card: #1E293B; /* Slate 800 */
+            --text-main: #F8FAFC;
+            --text-secondary: #94A3B8; /* Slate 400 */
+            
+            --theme-primary: #F97316;
+            --theme-primary-hover: #EA580C;
+            --theme-accent: #3B82F6;
+            --theme-accent-hover: #2563EB;
+            --theme-bg-light: #1E293B;
+            --theme-bg-workspace: #020617; /* Slate 950 */
+            --theme-border-light: #334155; /* Slate 700 */
+            --theme-text-light: #CBD5E1;
+            --theme-text-primary: #FB923C;
+            --theme-icon-active: #ffffff;
+            --theme-icon-indicator: #FB923C;
+            --theme-stat-hover: rgba(249, 115, 22, 0.15);
+            --theme-print-bg: #1E293B;
+            --theme-print-text: #BFDBFE;
+            --theme-print-icon: #60A5FA;
+            --theme-print-hover: #334155;
+            --border-color: #334155;
+        }
+    </style>
+    @elseif($unitNameLayout === 'sd')
     <style>
         :root {
             --theme-primary: #5B3CC4;
