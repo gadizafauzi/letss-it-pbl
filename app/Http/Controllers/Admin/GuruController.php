@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ImportCsvRequest;
+use App\Http\Requests\Admin\ImportExcelRequest;
 use App\Http\Requests\Admin\StoreGuruRequest;
 use App\Http\Requests\Admin\UpdateGuruRequest;
 use App\Models\Position;
 use App\Models\Teacher;
 use App\Models\Unit;
 use App\Services\Admin\GuruService;
-use App\Services\Shared\CsvExportService;
-use App\Services\Shared\CsvImportService;
+use App\Services\Shared\ExcelExportService;
+use App\Services\Shared\ExcelImportService;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
 {
     public function __construct(
         protected GuruService $guruService,
-        protected CsvImportService $csvImportService,
-        protected CsvExportService $csvExportService
+        protected ExcelImportService $excelImportService,
+        protected ExcelExportService $excelExportService
     ) {}
 
     /**
@@ -149,7 +149,7 @@ class GuruController extends Controller
             $unitName = Unit::find($request->unit_id)?->unit_name ?? 'SemuaUnit';
         }
 
-        $filename = 'Data_Guru_' . str_replace(' ', '_', $unitName) . '.csv';
+        $filename = 'Data_Guru_' . str_replace(' ', '_', $unitName) . '.xlsx';
 
         $headers = [
             'NIP', 'Nama Lengkap', 'Unit', 'Jabatan', 'Jenis Kelamin',
@@ -157,7 +157,7 @@ class GuruController extends Controller
             'No Telepon', 'Alamat', 'Status Kepegawaian', 'Status'
         ];
 
-        return $this->csvExportService->export($teachers, $headers, function ($teacher) {
+        return $this->excelExportService->export($teachers, $headers, function ($teacher) {
             return [
                 $teacher->nip,
                 $teacher->full_name,
@@ -186,9 +186,9 @@ class GuruController extends Controller
     /**
      * PROSES IMPORT CSV
      */
-    public function import(ImportCsvRequest $request)
+    public function import(ImportExcelRequest $request)
     {
-        $result = $this->csvImportService->import($request->file('file'), function ($row) {
+        $result = $this->excelImportService->import($request->file('file'), function ($row) {
             return $this->guruService->processImportRow($row);
         });
 
@@ -221,6 +221,6 @@ class GuruController extends Controller
             'pegawai_tetap', 'active'
         ];
 
-        return $this->csvExportService->downloadTemplate($headers, $sampleData, 'Template_Import_Guru.csv');
+        return $this->excelExportService->downloadTemplate($headers, $sampleData, 'Template_Import_Guru.xlsx');
     }
 }

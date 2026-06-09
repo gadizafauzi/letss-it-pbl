@@ -71,4 +71,9 @@ class Student extends Model
     {
         return $this->hasMany(\App\Models\Grade::class);
     }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }
