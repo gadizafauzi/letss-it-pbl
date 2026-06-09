@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, {
         root: null,
-        // Aktifkan sedikit lebih awal sebelum ke tengah layar
         rootMargin: "-10% 0px -20% 0px",
         threshold: 0.1
     });
@@ -38,10 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const rect = timelineWrapper.getBoundingClientRect();
             const windowHeight = window.innerHeight;
 
-            // Garis akan mengikuti persis titik tengah layar (viewport)
             const progressInPx = (windowHeight / 2) - rect.top;
 
-            // Batasi panjang garis: minimal 0, maksimal sama dengan tinggi wrapper
             const clampedProgress = Math.max(0, Math.min(progressInPx, rect.height));
             const percentage = (clampedProgress / rect.height) * 100;
 

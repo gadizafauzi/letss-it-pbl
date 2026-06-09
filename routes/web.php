@@ -7,12 +7,18 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 
 // Student Controllers
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
+use App\Http\Controllers\Student\SD\DashboardController as SDDashboard;
+use App\Http\Controllers\Student\SMP\DashboardController as SMPDashboard;
 use App\Http\Controllers\Student\TagihanController;
 use App\Http\Controllers\Student\NilaiController;
 use App\Http\Controllers\Student\ProfileController as StudentProfile;
 
 // Teacher Controllers
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboard;
+use App\Http\Controllers\Teacher\WaliKelas\DashboardController as WaliKelasDashboard;
+use App\Http\Controllers\Teacher\WaliKelas\SiswaController as WaliKelasSiswa;
+use App\Http\Controllers\Teacher\WaliKelas\NilaiController as WaliKelasNilai;
+use App\Http\Controllers\Teacher\ProfileController as TeacherProfile;
 use App\Http\Controllers\Teacher\KelasController as TeacherKelas;
 
 // Admin Controllers
@@ -38,6 +44,7 @@ use App\Models\SchoolClass;
 */
 
 Route::get('/', fn() => view('public.home.index'))->name('public.home');
+Route::get('/coming-soon', fn() => view('shared.coming-soon'))->name('coming-soon');
 
 /*
 |--------------------------------------------------------------------------
@@ -121,15 +128,18 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
 
     Route::get('/teacher/dashboard', [TeacherDashboard::class, 'index'])
         ->name('teacher.dashboard');
+        
+    Route::get('/teacher/wali-kelas/dashboard', [WaliKelasDashboard::class, 'index'])
+        ->name('teacher.wali-kelas.dashboard');
 
-    Route::get('/teacher/wali-data-siswa', [TeacherKelas::class, 'waliDataSiswa'])
+    Route::get('/teacher/wali-data-siswa', [WaliKelasSiswa::class, 'index'])
         ->name('teacher.wali-data-siswa');
-    Route::get('/teacher/wali-data-siswa/export', [TeacherKelas::class, 'exportDataSiswa'])
+    Route::get('/teacher/wali-data-siswa/export', [WaliKelasSiswa::class, 'export'])
         ->name('teacher.wali-data-siswa.export');
 
-    Route::get('/teacher/wali-rekap-nilai', [TeacherKelas::class, 'waliRekapNilai'])
+    Route::get('/teacher/wali-rekap-nilai', [WaliKelasNilai::class, 'index'])
         ->name('teacher.wali-rekap-nilai');
-    Route::get('/teacher/wali-rekap-nilai/export', [TeacherKelas::class, 'exportRekapNilai'])
+    Route::get('/teacher/wali-rekap-nilai/export', [WaliKelasNilai::class, 'export'])
         ->name('teacher.wali-rekap-nilai.export');
 
     Route::get('/teacher/data-siswa/{classId}', [TeacherKelas::class, 'dataSiswa'])
@@ -144,10 +154,10 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::post('/teacher/input-nilai', [TeacherKelas::class, 'storeNilai'])
         ->name('teacher.input-nilai.store');
 
-    Route::get('/teacher/profil', [TeacherKelas::class, 'profil'])
+    Route::get('/teacher/profil', [TeacherProfile::class, 'profil'])
         ->name('teacher.profil');
 
-    Route::post('/teacher/profil/update', [TeacherKelas::class, 'updateProfile'])
+    Route::post('/teacher/profil/update', [TeacherProfile::class, 'updateProfile'])
         ->name('teacher.profil.update');
 });
 
@@ -160,6 +170,12 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::get('/student/dashboard', [StudentDashboard::class, 'index'])
         ->name('student.dashboard');
+
+    Route::get('/student/sd/dashboard', [SDDashboard::class, 'index'])
+        ->name('student.sd.dashboard');
+
+    Route::get('/student/smp/dashboard', [SMPDashboard::class, 'index'])
+        ->name('student.smp.dashboard');
 
     Route::get('/student/tagihan', [TagihanController::class, 'index'])
         ->name('student.tagihan');
