@@ -17,7 +17,7 @@ class LaporanKeuanganController extends Controller
         $payments = Payment::with(['invoice', 'invoice.student'])
             ->whereMonth('payment_date', $month)
             ->whereYear('payment_date', $year)
-            ->whereNotNull('verified_by')
+            ->where('verification_status', 'verified')
             ->get();
 
         $totalIncome = $payments->sum(function($payment) {

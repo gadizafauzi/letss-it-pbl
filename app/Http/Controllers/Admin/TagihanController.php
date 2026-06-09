@@ -13,23 +13,33 @@ class TagihanController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Invoice::with(['student', 'student.unit']);
-
-        if ($request->has('status') && $request->status != '') {
-            $query->where('status', $request->status);
-        }
+        $query = Student::with('unit')
+            ->has('invoices')
+            ->withCount('invoices as total_invoices')
+            ->withCount(['invoices as unpaid_count' => function($q) {
+                $q->where('status', 'unpaid');
+            }])
+            ->withSum(['invoices as total_tunggakan' => function($q) {
+                $q->where('status', 'unpaid');
+            }], 'amount');
 
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
-            $query->whereHas('student', function($q) use ($search) {
+            $query->where(function($q) use ($search) {
                 $q->where('full_name', 'like', "%{$search}%")
                   ->orWhere('nis', 'like', "%{$search}%");
             });
         }
 
-        $invoices = $query->latest()->paginate(20);
+        $students = $query->paginate(20);
 
-        return view('admin.tagihan.index', compact('invoices'));
+        return view('admin.tagihan.index', compact('students'));
+    }
+
+    public function student(Student $student)
+    {
+        $invoices = Invoice::where('student_id', $student->id)->latest()->paginate(20);
+        return view('admin.tagihan.student', compact('student', 'invoices'));
     }
 
     public function create()
@@ -55,7 +65,6 @@ class TagihanController extends Controller
         $students = collect();
 
         if ($request->target === 'all') {
-            // All active students, if payment type has unit_id, filter by unit
             $query = Student::where('status', 'active');
             if ($paymentType->unit_id) {
                 $query->where('unit_id', $paymentType->unit_id);
