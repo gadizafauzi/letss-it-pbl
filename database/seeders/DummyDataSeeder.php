@@ -67,14 +67,13 @@ class DummyDataSeeder extends Seeder
         // 3. Buat Kelas
         $classes = [];
         $classNames = ['5A', '5B', '6A', '6B'];
+        $unit = \App\Models\Unit::first();
         foreach ($classNames as $index => $className) {
             $classes[] = SchoolClass::firstOrCreate(
                 ['class_name' => $className],
                 [
-                    'room' => 'Ruang ' . ($index + 1),
-                    'level' => 'sd',
+                    'unit_id' => $unit->id,
                     'homeroom_teacher_id' => ($index === 0) ? $teacher1->id : (($index === 1) ? $teacher2->id : null),
-                    'academic_year_id' => $academicYear->id,
                 ]
             );
         }
@@ -82,14 +81,12 @@ class DummyDataSeeder extends Seeder
         // 4. Buat Mata Pelajaran
         $subjects = [];
         $subjectNames = ['Matematika', 'Bahasa Indonesia', 'IPA', 'IPS', 'Bahasa Inggris'];
-        foreach ($subjectNames as $subjectName) {
+        foreach ($subjectNames as $index => $subjectName) {
             $subjects[] = Subject::firstOrCreate(
                 ['subject_name' => $subjectName],
                 [
-                    'category' => 'wajib',
-                    'kkm' => 75,
-                    'is_sd' => true,
-                    'is_smp' => false,
+                    'unit_id' => $unit->id,
+                    'subject_code' => 'SUB' . ($index + 1),
                 ]
             );
         }
@@ -98,7 +95,7 @@ class DummyDataSeeder extends Seeder
         $studentCounter = 1;
         foreach ($classes as $class) {
             // Hitung siswa yang sudah ada di kelas ini
-            $existingCount = Student::where('class_id', $class->id)->count();
+            $existingCount = \App\Models\StudentClass::where('class_id', $class->id)->count();
             $needed = 20 - $existingCount;
 
             for ($i = 0; $i < $needed; $i++) {
@@ -128,7 +125,7 @@ class DummyDataSeeder extends Seeder
 
                 $studentData = [
                     'user_id' => $user->id,
-                    'class_id' => $class->id,
+                    'unit_id' => $unit->id,
                     'nis' => $nis,
                     'nisn' => $nisn,
                     'full_name' => $name,
@@ -140,7 +137,7 @@ class DummyDataSeeder extends Seeder
                         'birth_place' => 'koto Baru',
                         'birth_date' => '2006-04-01',
                         'religion' => 'Islam',
-                        'gender' => 'Perempuan',
+                        'gender' => 'P',
                         'address_origin' => 'Jorong Simpang, Koto Baru',
                         'address_domicile' => 'Pasar Baru, Jamsek, jln. Muhammad Hatta, Cupak Tangah Padang',
                         'region' => 'Kabupaten Solok (Sumatera Barat)',
@@ -164,11 +161,17 @@ class DummyDataSeeder extends Seeder
                         'parent_phone' => '085126270009',
                         
                         'is_kip_kuliah' => true,
-                        'gpa_history' => [3.2, 3.1, 3.8, 3.0, 3.2, 3.5, 3.7, 3.9],
+                        'gpa_history' => json_encode([3.2, 3.1, 3.8, 3.0, 3.2, 3.5, 3.7, 3.9]),
                     ]);
                 }
 
                 $student = Student::create($studentData);
+
+                \App\Models\StudentClass::create([
+                    'student_id' => $student->id,
+                    'class_id' => $class->id,
+                    'academic_year_id' => $academicYear->id,
+                ]);
 
                 $studentCounter++;
             }
