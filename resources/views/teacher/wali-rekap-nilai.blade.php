@@ -2,6 +2,20 @@
 
 @section('content')
 
+@if(session('success'))
+    <div class="mb-6 p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 text-emerald-700 rounded-xl text-sm font-bold flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 dark:text-emerald-400"></i>
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="mb-6 p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 text-red-700 rounded-xl text-sm font-bold flex items-center gap-2">
+        <i data-lucide="alert-circle" class="w-5 h-5 text-red-500 dark:text-red-400"></i>
+        {{ session('error') }}
+    </div>
+@endif
+
 {{-- HEADER CARD --}}
 <div class="rounded-[20px] p-4 md:p-6 relative overflow-hidden shadow-sm mb-6 bg-gradient-to-br from-[var(--theme-primary)] to-[var(--theme-accent)]">
     <div class="absolute top-0 right-0 w-48 h-48 bg-[var(--bg-card)] opacity-5 rounded-full blur-3xl -mr-12 -mt-12 pointer-events-none"></div>
@@ -145,11 +159,22 @@
             </h2>
         </div>
 
-        <a href="{{ route('teacher.wali-rekap-nilai.export', request()->all()) }}"
-            class="h-10 px-4 rounded-xl bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
-            <i data-lucide="download" class="w-4 h-4"></i>
-            Ekspor Nilai
-        </a>
+        <div class="flex items-center gap-2">
+            <form id="publishForm" action="{{ route('teacher.wali-rekap-nilai.publish') }}" method="POST">
+                @csrf
+                <input type="hidden" name="semester" value="{{ $semester }}">
+                <button type="button" onclick="openPublishModal()" class="h-10 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    Terbitkan Nilai
+                </button>
+            </form>
+
+            <a href="{{ route('teacher.wali-rekap-nilai.export', request()->all()) }}"
+                class="h-10 px-4 rounded-xl bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
+                <i data-lucide="download" class="w-4 h-4"></i>
+                Ekspor Nilai
+            </a>
+        </div>
     </div>
 
     <div class="overflow-x-auto">
@@ -239,5 +264,53 @@
     </div>
 
 </div>
+
+{{-- MODAL KONFIRMASI TERBITKAN NILAI --}}
+<div id="publishModal" class="fixed inset-0 z-50 hidden flex-col items-center justify-center">
+    <div class="fixed inset-0 bg-slate-900/50 dark:bg-slate-900/80 backdrop-blur-sm transition-opacity" onclick="closePublishModal()"></div>
+    <div class="relative bg-[var(--bg-card)] w-full max-w-md rounded-2xl shadow-xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 border border-[var(--border-color)] m-4" id="publishModalContent">
+        <div class="p-6">
+            <div class="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+                <i data-lucide="check-circle" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-xl font-bold text-[var(--text-main)] mb-2">Terbitkan Nilai?</h3>
+            <p class="text-[var(--text-secondary)] text-sm mb-6 leading-relaxed">
+                Apakah Anda yakin ingin menerbitkan nilai untuk semester ini? Nilai yang sudah diterbitkan akan langsung bisa dilihat oleh semua siswa.
+            </p>
+            <div class="flex gap-3 justify-end">
+                <button type="button" onclick="closePublishModal()" class="px-5 py-2.5 rounded-xl border border-[var(--border-color)] text-[var(--text-secondary)] hover:bg-[var(--theme-bg-light)] hover:text-[var(--text-main)] font-semibold transition-colors">Batal</button>
+                <button type="button" onclick="document.getElementById('publishForm').submit()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition-colors shadow-sm hover:shadow-md">Ya, Terbitkan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openPublishModal() {
+        const modal = document.getElementById('publishModal');
+        const content = document.getElementById('publishModalContent');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        
+        // Trigger reflow
+        void modal.offsetWidth;
+        
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+    }
+
+    function closePublishModal() {
+        const modal = document.getElementById('publishModal');
+        const content = document.getElementById('publishModalContent');
+        
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 300);
+    }
+</script>
 
 @endsection
