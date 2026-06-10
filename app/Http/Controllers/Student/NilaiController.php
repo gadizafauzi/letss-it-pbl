@@ -42,6 +42,7 @@ class NilaiController extends Controller
         $grades = Grade::where('student_id', $student->id)
             ->where('academic_year_id', $selectedYear?->id)
             ->where('semester', $semester)
+            ->where('status', 'published')
             ->with(['teachingAssignment.subject', 'teachingAssignment.teacher'])
             ->get();
 

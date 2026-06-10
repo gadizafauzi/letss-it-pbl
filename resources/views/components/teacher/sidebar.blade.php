@@ -35,7 +35,7 @@
             </p>
 
             <a href="{{ route('teacher.dashboard') }}"
-                class="sidebar-link {{ request()->routeIs('teacher.dashboard') ? 'active-sidebar' : '' }}">
+                class="sidebar-link {{ request()->routeIs('teacher.dashboard') || request()->routeIs('teacher.wali-kelas.dashboard') ? 'active-sidebar' : '' }}">
 
                 <span class="sidebar-icon">
                     <i data-lucide="layout-dashboard"></i>

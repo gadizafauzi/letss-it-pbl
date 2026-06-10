@@ -6,6 +6,7 @@
     --theme-bg-light: #F1ECFF;
     --theme-bg-workspace: #F8F7FC;
     --theme-border-light: #D8CCFF;
+    --border-color: #0f172a;
     --theme-text-light: #4C1D95;
     --theme-icon-active: #5B3CC4;
     --theme-icon-indicator: #5B3CC4;
@@ -41,6 +42,7 @@
     --theme-bg-light: #2E1065;
     --theme-bg-workspace: #1E1B4B;
     --theme-border-light: #4C1D95;
+    --border-color: #000000;
     --theme-text-light: #F8FAFC;
     --theme-icon-active: #F8FAFC;
     --theme-icon-indicator: #A78BFA;

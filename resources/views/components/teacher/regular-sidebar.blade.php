@@ -23,19 +23,13 @@
     {{-- MENU --}}
     <nav class="sidebar-menu flex-1 flex flex-col overflow-y-auto px-5 py-6 space-y-7">
 
-        {{-- UTAMA --}}
+        {{-- DASHBOARD --}}
         <div>
-            <p class="sidebar-title">Utama</p>
+            <p class="sidebar-title">Dashboard</p>
             <a href="{{ route('teacher.dashboard') }}"
                 class="sidebar-link {{ request()->routeIs('teacher.dashboard') ? 'active-sidebar' : '' }}">
                 <span class="sidebar-icon"><i data-lucide="layout-dashboard"></i></span>
                 <span class="sidebar-text">Dashboard</span>
-            </a>
-            
-            <a href="{{ route('teacher.profil') }}"
-                class="sidebar-link {{ request()->routeIs('teacher.profil') ? 'active-sidebar' : '' }}">
-                <span class="sidebar-icon"><i data-lucide="user"></i></span>
-                <span class="sidebar-text">Profil</span>
             </a>
         </div>
 
@@ -54,17 +48,17 @@
                     <span class="sidebar-icon"><i data-lucide="clipboard-check"></i></span>
                     <span class="sidebar-text">Input Nilai</span>
                 </a>
-
-                <a href="{{ route('coming-soon') }}" class="sidebar-link">
-                    <span class="sidebar-icon"><i data-lucide="calendar"></i></span>
-                    <span class="sidebar-text">Jadwal Mengajar</span>
-                </a>
-
-                <a href="{{ route('coming-soon') }}" class="sidebar-link">
-                    <span class="sidebar-icon"><i data-lucide="check-square"></i></span>
-                    <span class="sidebar-text">Absensi</span>
-                </a>
             </div>
+        </div>
+
+        {{-- AKUN --}}
+        <div>
+            <p class="sidebar-title">Akun</p>
+            <a href="{{ route('teacher.profil') }}"
+                class="sidebar-link {{ request()->routeIs('teacher.profil') ? 'active-sidebar' : '' }}">
+                <span class="sidebar-icon"><i data-lucide="user"></i></span>
+                <span class="sidebar-text">Profil</span>
+            </a>
         </div>
 
     </nav>

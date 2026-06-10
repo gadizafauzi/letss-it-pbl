@@ -156,7 +156,7 @@
 .dashboard-card {
     background: white;
 
-    border: 1px solid #e2e8f0;
+    border: 1px solid;
     border-radius: 20px;
 
     padding: 26px;
@@ -211,7 +211,7 @@
 .modern-box {
     background: white;
 
-    border: 1px solid #e2e8f0;
+    border: 1px solid;
     border-radius: 20px;
 
     padding: 26px;
@@ -301,7 +301,7 @@
 
     background: #f8fafc;
 
-    border: 1px solid #e2e8f0;
+    border: 1px solid;
     border-radius: 18px;
 
     transition: all 0.2s ease;

@@ -101,6 +101,7 @@
             --theme-bg-light: #F1ECFF;
             --theme-bg-workspace: #F8F7FC;
             --theme-border-light: #D8CCFF;
+            --border-color: #0f172a;
             --theme-text-light: #4C1D95;
             --theme-icon-active: #5B3CC4;
             --theme-icon-indicator: #5B3CC4;
@@ -136,6 +137,7 @@
             --theme-bg-light: #2E1065;
             --theme-bg-workspace: #1E1B4B;
             --theme-border-light: #4C1D95;
+            --border-color: #000000;
             --theme-text-light: #F8FAFC;
             --theme-icon-active: #F8FAFC;
             --theme-icon-indicator: #A78BFA;
@@ -172,7 +174,7 @@
             --glow-banner: 0 8px 30px rgba(79, 116, 232, 0.3);
             --bg-header: var(--theme-bg-light);
             --bg-card: #ffffff;
-            --border-color: #e2e8f0;
+            --border-color: #0f172a;
             --text-main: #1e293b;
             --text-secondary: #64748b;
             --theme-text-primary: var(--theme-primary);
