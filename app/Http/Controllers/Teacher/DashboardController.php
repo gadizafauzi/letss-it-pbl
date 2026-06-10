@@ -15,6 +15,14 @@ class DashboardController extends Controller
     public function index()
     {
         $teacher = Teacher::with('position')->where('user_id', auth()->id())->firstOrFail();
+        
+        if ($teacher->position && stripos($teacher->position->name, 'Wali') !== false) {
+            $homeroomClass = \App\Models\SchoolClass::where('homeroom_teacher_id', $teacher->id)->first();
+            if ($homeroomClass) {
+                return redirect()->route('teacher.wali-kelas.dashboard');
+            }
+        }
+
         $activeYear = AcademicYear::where('status', 'active')->first();
 
 

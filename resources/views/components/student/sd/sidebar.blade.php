@@ -25,17 +25,11 @@
 
         {{-- DASHBOARD --}}
         <div>
-            <p class="sidebar-title">Utama</p>
+            <p class="sidebar-title">Dashboard</p>
             <a href="{{ route('student.sd.dashboard') }}"
                 class="sidebar-link {{ request()->routeIs('student.sd.dashboard') ? 'active-sidebar' : '' }}">
                 <span class="sidebar-icon"><i data-lucide="layout-dashboard"></i></span>
                 <span class="sidebar-text">Dashboard</span>
-            </a>
-            
-            <a href="{{ route('student.profil') }}"
-                class="sidebar-link {{ request()->routeIs('student.profil') ? 'active-sidebar' : '' }}">
-                <span class="sidebar-icon"><i data-lucide="user"></i></span>
-                <span class="sidebar-text">Profil</span>
             </a>
         </div>
 
@@ -49,28 +43,22 @@
                     <span class="sidebar-text">Nilai</span>
                 </a>
                 
-                <!-- Tagihan -->
                 <a href="{{ route('student.tagihan') }}"
                     class="sidebar-link {{ request()->routeIs('student.tagihan') ? 'active-sidebar' : '' }}">
                     <span class="sidebar-icon"><i data-lucide="wallet"></i></span>
                     <span class="sidebar-text">Tagihan</span>
                 </a>
-
-                <a href="{{ route('coming-soon') }}" class="sidebar-link">
-                    <span class="sidebar-icon"><i data-lucide="calendar"></i></span>
-                    <span class="sidebar-text">Jadwal</span>
-                </a>
-
-                <a href="{{ route('coming-soon') }}" class="sidebar-link">
-                    <span class="sidebar-icon"><i data-lucide="check-square"></i></span>
-                    <span class="sidebar-text">Absensi</span>
-                </a>
-
-                <a href="{{ route('coming-soon') }}" class="sidebar-link">
-                    <span class="sidebar-icon"><i data-lucide="bell"></i></span>
-                    <span class="sidebar-text">Pengumuman</span>
-                </a>
             </div>
+        </div>
+
+        {{-- AKUN --}}
+        <div>
+            <p class="sidebar-title">Akun</p>
+            <a href="{{ route('student.profil') }}"
+                class="sidebar-link {{ request()->routeIs('student.profil') ? 'active-sidebar' : '' }}">
+                <span class="sidebar-icon"><i data-lucide="user"></i></span>
+                <span class="sidebar-text">Profil</span>
+            </a>
         </div>
 
     </nav>

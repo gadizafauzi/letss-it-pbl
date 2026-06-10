@@ -55,7 +55,7 @@
 </div>
 
 {{-- FORM INPUT NILAI --}}
-<form action="{{ route('teacher.input-nilai.store') }}" method="POST">
+<form id="formNilai" action="{{ route('teacher.input-nilai.store') }}" method="POST">
     @csrf
     @if($selectedAssignment)
         <input type="hidden" name="assignment_id" value="{{ $selectedAssignment->id }}">

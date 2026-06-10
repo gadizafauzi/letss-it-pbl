@@ -221,4 +221,32 @@ class NilaiController extends Controller
             fclose($file);
         }, $filename, ['Content-Type' => 'text/csv; charset=UTF-8']);
     }
+
+    public function publish(Request $request)
+    {
+        $teacher = Teacher::with('position')->where('user_id', auth()->id())->firstOrFail();
+        $activeYear = AcademicYear::where('status', 'active')->first();
+        
+        $class = null;
+        if ($teacher->position && stripos($teacher->position->name, 'Wali') !== false) {
+            $class = SchoolClass::where('homeroom_teacher_id', $teacher->id)->first();
+        }
+
+        if (!$class) {
+            return redirect()->back()->with('error', 'Akses ditolak. Anda bukan Wali Kelas.');
+        }
+
+        $semester = $request->input('semester', $activeYear?->active_semester ?? 'odd');
+
+        $studentIds = \App\Models\StudentClass::where('class_id', $class->id)
+            ->where('academic_year_id', $activeYear?->id)
+            ->pluck('student_id');
+
+        \App\Models\Grade::whereIn('student_id', $studentIds)
+            ->where('academic_year_id', $activeYear?->id)
+            ->where('semester', $semester)
+            ->update(['status' => 'published']);
+
+        return redirect()->back()->with('success', 'Nilai kelas pada semester ' . ($semester === 'odd' ? 'Ganjil' : 'Genap') . ' berhasil diterbitkan dan sekarang dapat dilihat oleh siswa!');
+    }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.teacher.wali-kelas')
+@extends('layouts.teacher')
 
 @section('content')
 

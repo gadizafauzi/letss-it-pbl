@@ -27,6 +27,9 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
 
+        $unit1 = \App\Models\Unit::create(['unit_name' => 'SMP']);
+        $unit2 = \App\Models\Unit::create(['unit_name' => 'SD']);
+
         /*
         |--------------------------------------------------------------------------
         | TEACHER 1 - WALI KELAS
@@ -44,6 +47,7 @@ class UserSeeder extends Seeder
 
         $teacher1 = Teacher::create([
             'user_id' => $teacherUser1->id,
+            'unit_id' => $unit1->id,
             'nip' => '1987654321',
             'full_name' => 'Guru 1',
             'status' => 'active',
@@ -66,6 +70,7 @@ class UserSeeder extends Seeder
 
         $teacher2 = Teacher::create([
             'user_id' => $teacherUser2->id,
+            'unit_id' => $unit2->id,
             'nip' => '1987654322',
             'full_name' => 'Guru 2',
             'status' => 'active',
