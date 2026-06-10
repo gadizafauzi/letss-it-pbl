@@ -28,16 +28,18 @@ class DashboardController extends Controller
             ->where('status', 'paid')
             ->sum('amount');
 
-        // Hitung jumlah mata pelajaran dari nilai semester aktif
+        // Hitung jumlah mata pelajaran dari nilai semester aktif yang sudah di-publish
         $jumlahMapel = Grade::where('student_id', $student->id)
             ->where('academic_year_id', $activeYear?->id)
             ->where('semester', $activeYear?->active_semester ?? 'odd')
+            ->where('status', 'published')
             ->count();
 
-        // Hitung rata-rata nilai akhir dari semester aktif
+        // Hitung rata-rata nilai akhir dari semester aktif yang sudah di-publish
         $rataRataNilai = Grade::where('student_id', $student->id)
             ->where('academic_year_id', $activeYear?->id)
             ->where('semester', $activeYear?->active_semester ?? 'odd')
+            ->where('status', 'published')
             ->whereNotNull('final_score')
             ->avg('final_score');
         $rataRataNilai = $rataRataNilai !== null ? round($rataRataNilai, 1) : '-';
