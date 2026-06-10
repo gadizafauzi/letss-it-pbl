@@ -6,6 +6,7 @@
     --theme-bg-light: #eef4ff;
     --theme-bg-workspace: #f1f5f9;
     --theme-border-light: #c9d8ff;
+    --border-color: #0f172a;
     --theme-text-light: #3b5998;
     --theme-icon-active: #ffffff;
     --theme-icon-indicator: rgba(255, 255, 255, 0.9);
@@ -21,7 +22,6 @@
     --glow-banner: 0 8px 30px rgba(79, 116, 232, 0.3);
     --bg-header: var(--theme-bg-light);
     --bg-card: #ffffff;
-    --border-color: #e2e8f0;
     --text-main: #1e293b;
     --text-secondary: #64748b;
     --theme-text-primary: var(--theme-primary);
@@ -42,6 +42,7 @@
     --theme-bg-light: #112240;
     --theme-bg-workspace: #060F1E; /* Darkest Navy */
     --theme-border-light: #1E3A8A;
+    --border-color: #000000;
     --theme-text-light: #BFDBFE;
     --theme-text-primary: #60A5FA;
     --theme-icon-active: #ffffff;
@@ -51,5 +52,4 @@
     --theme-print-text: #FECACA;
     --theme-print-icon: #F87171;
     --theme-print-hover: #172554;
-    --border-color: #1E3A8A;
 }
