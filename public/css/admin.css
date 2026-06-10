@@ -455,6 +455,7 @@ nav::-webkit-scrollbar-track {
 ======================================== */
 
 @media (max-width: 991px) {
+
     /* SIDEBAR MINI */
     .sidebar {
         width: 72px;
@@ -553,7 +554,7 @@ nav::-webkit-scrollbar-track {
 
 /* REMOVE BIG SPACE */
 
-.sidebar-collapse nav > div {
+.sidebar-collapse nav>div {
     margin: 0 !important;
 }
 
@@ -574,7 +575,7 @@ nav::-webkit-scrollbar-track {
         gap: 10px;
     }
 
-    .sidebar nav > div {
+    .sidebar nav>div {
         margin: 0 !important;
     }
 

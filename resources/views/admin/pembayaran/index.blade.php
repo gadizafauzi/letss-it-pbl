@@ -34,8 +34,16 @@
         @endif
 
         {{-- FILTER --}}
-        <div class="bg-white border border-slate-100 rounded-2xl px-5 py-4 shadow-sm">
+        <div class="bg-white border border-slate-100 rounded-2xl px-5 py-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <a href="{{ route('admin.pembayaran.index') }}" class="px-4 py-2 rounded-lg text-xs font-bold transition-all {{ !request('status') ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-50 text-slate-500 hover:bg-slate-100' }}">Semua</a>
+                <a href="{{ route('admin.pembayaran.index', ['status' => 'pending']) }}" class="px-4 py-2 rounded-lg text-xs font-bold transition-all {{ request('status') == 'pending' ? 'bg-amber-100 text-amber-700' : 'bg-slate-50 text-slate-500 hover:bg-slate-100' }}">Menunggu Verifikasi</a>
+                <a href="{{ route('admin.pembayaran.index', ['status' => 'verified']) }}" class="px-4 py-2 rounded-lg text-xs font-bold transition-all {{ request('status') == 'verified' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-50 text-slate-500 hover:bg-slate-100' }}">Terverifikasi</a>
+            </div>
             <form action="{{ route('admin.pembayaran.index') }}" method="GET" class="flex flex-wrap items-center gap-2.5">
+                @if(request('status'))
+                    <input type="hidden" name="status" value="{{ request('status') }}">
+                @endif
                 {{-- Search --}}
                 <div class="relative flex-1 min-w-[200px]">
                     <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
@@ -129,12 +137,21 @@
                                                 </button>
                                             </form>
                                         @endif
-                                        <a href="{{ route('admin.tagihan.show', $payment->invoice->id) }}"
+                                        @if ($payment->verification_status == 'verified')
+                                            <a href="{{ route('admin.pembayaran.print', $payment->id) }}" target="_blank"
+                                                class="w-[30px] h-[30px] rounded-lg bg-slate-100 text-slate-600
+                                                  hover:bg-slate-500 hover:text-white transition-all
+                                                  inline-flex items-center justify-content-center no-underline"
+                                                style="justify-content:center" title="Cetak Struk">
+                                                <i data-lucide="printer" class="w-[13px] h-[13px]"></i>
+                                            </a>
+                                        @endif
+                                        <a href="{{ route('admin.tagihan.student', $payment->invoice->student->id) }}"
                                             class="w-[30px] h-[30px] rounded-lg bg-sky-100 text-sky-600
                                               hover:bg-sky-500 hover:text-white transition-all
                                               inline-flex items-center justify-content-center no-underline"
-                                            style="justify-content:center" title="Lihat Tagihan">
-                                            <i data-lucide="receipt" class="w-[13px] h-[13px]"></i>
+                                            style="justify-content:center" title="Buku Siswa">
+                                            <i data-lucide="book" class="w-[13px] h-[13px]"></i>
                                         </a>
                                         <form action="{{ route('admin.pembayaran.destroy', $payment->id) }}" method="POST" class="inline">
                                             @csrf

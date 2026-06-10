@@ -220,18 +220,4 @@
 
     </nav>
 
-    {{-- FOOTER --}}
-    <div class="p-4 border-t border-white/[0.06]">
-
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit"
-                class="logout-btn w-full h-12 rounded-2xl bg-red-500/20 hover:bg-red-500/30 border border-red-500/25 transition-all duration-300 text-red-400 hover:text-red-300 font-semibold inline-flex items-center justify-center gap-3">
-                <i data-lucide="log-out"></i>
-                <span class="logout-text">Logout</span>
-            </button>
-        </form>
-
-    </div>
-
 </aside>

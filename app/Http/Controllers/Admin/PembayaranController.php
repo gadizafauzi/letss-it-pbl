@@ -23,6 +23,10 @@ class PembayaranController extends Controller
             });
         }
 
+        if ($request->has('status') && in_array($request->status, ['pending', 'verified', 'rejected'])) {
+            $query->where('verification_status', $request->status);
+        }
+
         $payments = $query->latest()->paginate(20);
 
         return view('admin.pembayaran.index', compact('payments'));
@@ -60,22 +64,23 @@ class PembayaranController extends Controller
 
         $payment = Payment::create([
             'invoice_id' => $invoice->id,
-            'verified_by' => $isCash ? auth()->id() : null,
+            'verified_by' => auth()->id(),
             'payment_method' => $request->payment_method,
             'school_account_id' => $request->school_account_id,
             'payment_date' => $request->payment_date,
             'payment_proof' => $proofPath,
-            'verification_status' => $isCash ? 'verified' : 'pending',
+            'verification_status' => 'verified',
         ]);
 
+        $invoice->update(['status' => 'paid']);
+
         if ($isCash) {
-            $invoice->update(['status' => 'paid']);
             return redirect()->route('admin.tagihan.show', $invoice->id)
-                ->with('success', 'Pembayaran tunai berhasil diproses dan diverifikasi.');
+                ->with('success', 'Pembayaran tunai berhasil dicatat dan tagihan lunas.');
         }
 
         return redirect()->route('admin.tagihan.show', $invoice->id)
-            ->with('success', 'Data pembayaran transfer dicatat dengan status PENDING menunggu verifikasi.');
+            ->with('success', 'Pembayaran transfer berhasil dicatat dan tagihan lunas.');
     }
 
     public function show(Payment $payment)
@@ -117,13 +122,27 @@ class PembayaranController extends Controller
 
     public function destroy(Payment $payment)
     {
-        $invoice = $payment->invoice;
         if ($payment->payment_proof) {
             Storage::disk('public')->delete($payment->payment_proof);
         }
-        $payment->delete();
-        $invoice->update(['status' => 'unpaid']);
 
-        return back()->with('success', 'Data pembayaran dihapus. Status tagihan dikembalikan menjadi belum lunas.');
+        $payment->invoice->update(['status' => 'unpaid']);
+        $payment->delete();
+
+        return redirect()->route('admin.pembayaran.index')->with('success', 'Data pembayaran berhasil dihapus secara permanen.');
+    }
+
+    public function print(Payment $payment)
+    {
+        if ($payment->verification_status !== 'verified') {
+            return back()->with('error', 'Hanya pembayaran yang sudah diverifikasi yang dapat dicetak.');
+        }
+
+        $payment->load(['invoice.student', 'verifier']);
+        
+        // Generate a simple transaction code if we don't have one in DB
+        $transactionCode = 'TRX-' . \Carbon\Carbon::parse($payment->created_at)->format('Ymd') . '-' . str_pad($payment->id, 4, '0', STR_PAD_LEFT);
+
+        return view('admin.pembayaran.print', compact('payment', 'transactionCode'));
     }
 }

@@ -22,6 +22,9 @@
     {{-- ICON --}}
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    {{-- ALPINE JS --}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
@@ -36,12 +39,6 @@
 <body class="bg-slate-50 text-slate-800 overflow-hidden">
 
     {{-- OVERLAY --}}
-    {{-- <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden md:hidden">
-    </div> --}}
-
-    {{-- <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/40 z-40 lg:hidden">
-    </div> --}}
-
     <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm lg:hidden">
     </div>
 
@@ -58,6 +55,9 @@
 
             {{-- CONTENT --}}
             <main class="flex-1 overflow-y-auto p-4 sm:p-5 lg:p-8">
+                {{-- BREADCRUMBS SLOT --}}
+                @yield('breadcrumbs')
+                
                 @yield('content')
             </main>
 
