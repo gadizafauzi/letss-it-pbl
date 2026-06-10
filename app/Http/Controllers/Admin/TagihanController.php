@@ -38,8 +38,21 @@ class TagihanController extends Controller
 
     public function student(Student $student)
     {
+        $student->load(['unit', 'studentClasses.schoolClass', 'studentClasses.academicYear']);
         $invoices = Invoice::where('student_id', $student->id)->latest()->paginate(20);
         return view('admin.tagihan.student', compact('student', 'invoices'));
+    }
+
+    public function searchStudent(Request $request)
+    {
+        $request->validate(['nis' => 'required|string']);
+        $student = Student::where('nis', $request->nis)->first();
+
+        if ($student) {
+            return redirect()->route('admin.tagihan.student', $student->id);
+        }
+
+        return back()->with('error', 'Data siswa dengan NIS ' . $request->nis . ' tidak ditemukan.');
     }
 
     public function create()

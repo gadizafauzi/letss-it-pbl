@@ -15,6 +15,20 @@
         </div>
     </div>
 
+    {{-- SUCCESS / ERROR ALERT --}}
+    @if (session('success'))
+        <div class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium bg-emerald-100 border border-emerald-200 text-emerald-700 mb-6">
+            <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium bg-red-100 border border-red-200 text-red-700 mb-6">
+            <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
+            {{ session('error') }}
+        </div>
+    @endif
+
     <!-- Invoices Table Box -->
     <div class="bg-[var(--bg-card)] rounded-[24px] shadow-[0_8px_24px_rgba(15,23,42,0.06)] border border-[var(--border-color)] overflow-hidden">
         <div class="px-5 md:px-6 py-4 md:py-5 border-b border-[var(--theme-border-light)] flex flex-wrap items-center justify-between gap-3 bg-[var(--theme-bg-light)]">
@@ -78,17 +92,26 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4 text-center">
-                                @if($invoice->status !== 'paid')
-                                    <label class="cursor-pointer bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-all inline-flex items-center gap-1 shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
-                                        <i data-lucide="upload" class="w-3 h-3"></i>
-                                        <span>Upload Bukti (Foto)</span>
-                                        <input type="file" class="hidden" accept="image/*">
-                                    </label>
-                                @else
+                                @if($invoice->status === 'paid')
                                     <button class="bg-[var(--theme-bg-workspace)] text-[var(--text-secondary)] text-[10px] px-3 py-1.5 rounded-lg font-bold cursor-not-allowed inline-flex items-center gap-1" disabled>
                                         <i data-lucide="check" class="w-3 h-3"></i>
                                         <span>Selesai</span>
                                     </button>
+                                @elseif($invoice->payment && $invoice->payment->verification_status === 'pending')
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold bg-[#fef3c7] text-[#b45309] shadow-[0_8px_24px_rgba(15,23,42,0.06)]">
+                                        <i data-lucide="clock" class="w-3 h-3"></i>
+                                        <span>Menunggu Verifikasi</span>
+                                    </span>
+                                @else
+                                    <div class="flex flex-col items-center gap-1">
+                                        <button type="button" onclick="openPaymentModal({{ $invoice->id }}, '{{ $invoice->payment_type }}', '{{ $invoice->period }}')" class="cursor-pointer bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white font-bold text-[10px] px-3 py-1.5 rounded-lg transition-all inline-flex items-center gap-1 shadow-[0_8px_24px_rgba(15,23,42,0.06)] border-none">
+                                            <i data-lucide="upload" class="w-3 h-3"></i>
+                                            <span>Upload Bukti (Foto)</span>
+                                        </button>
+                                        @if($invoice->payment && $invoice->payment->verification_status === 'rejected')
+                                            <span class="text-[9px] text-red-500 font-bold italic">Ditolak, harap upload ulang</span>
+                                        @endif
+                                    </div>
                                 @endif
                             </td>
                         </tr>
@@ -108,4 +131,78 @@
     </div>
 
 </div>
+
+<!-- Modal Upload Pembayaran -->
+<div id="paymentModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+        <div class="fixed inset-0 transition-opacity bg-slate-900/50 backdrop-blur-sm" aria-hidden="true" onclick="closePaymentModal()"></div>
+
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+        <div class="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-2xl shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div class="flex items-center justify-between mb-5">
+                <h3 class="text-lg font-extrabold text-slate-800 leading-6" id="modal-title">
+                    Upload Bukti Pembayaran
+                </h3>
+                <button type="button" onclick="closePaymentModal()" class="text-slate-400 hover:text-slate-500 focus:outline-none rounded-lg p-1 hover:bg-slate-50 transition-colors">
+                    <span class="sr-only">Close</span>
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <form id="paymentForm" action="" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-4">
+                    <p class="text-sm text-slate-600 font-medium mb-1">Tagihan: <span id="modalInvoiceType" class="font-bold text-slate-800"></span></p>
+                    <p class="text-sm text-slate-600 font-medium">Periode: <span id="modalInvoicePeriod" class="font-bold text-slate-800"></span></p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="school_account_id" class="block text-sm font-bold text-slate-700 mb-1.5">Rekening Tujuan Transfer</label>
+                        <select name="school_account_id" id="school_account_id" required class="w-full h-11 px-4 border border-slate-200 rounded-xl bg-slate-50 text-sm focus:bg-white focus:ring-2 focus:ring-[var(--theme-primary)]/20 focus:border-[var(--theme-primary)] outline-none transition-all">
+                            <option value="">-- Pilih Rekening Tujuan --</option>
+                            @foreach ($schoolAccounts as $acc)
+                                <option value="{{ $acc->id }}">{{ $acc->bank_name }} - {{ $acc->account_number }} ({{ $acc->account_name }})</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="payment_proof" class="block text-sm font-bold text-slate-700 mb-1.5">Foto Bukti Transfer</label>
+                        <input type="file" name="payment_proof" id="payment_proof" accept="image/jpeg,image/png,image/jpg" required class="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-[var(--theme-primary)]/10 file:text-[var(--theme-primary)] hover:file:bg-[var(--theme-primary)]/20 cursor-pointer">
+                        <p class="mt-1 text-xs text-slate-400">Format: JPG, JPEG, PNG. Maksimal 2MB.</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 sm:mt-8 sm:flex sm:flex-row-reverse gap-3">
+                    <button type="submit" class="w-full inline-flex justify-center rounded-xl border border-transparent px-4 py-2.5 bg-[var(--theme-primary)] text-base font-bold text-white hover:bg-[var(--theme-primary-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--theme-primary)] sm:w-auto sm:text-sm shadow-sm transition-all">
+                        Upload Bukti
+                    </button>
+                    <button type="button" onclick="closePaymentModal()" class="mt-3 w-full inline-flex justify-center rounded-xl border border-slate-200 px-4 py-2.5 bg-white text-base font-bold text-slate-700 hover:bg-slate-50 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200 sm:mt-0 sm:w-auto sm:text-sm transition-all">
+                        Batal
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openPaymentModal(invoiceId, type, period) {
+        document.getElementById('modalInvoiceType').innerText = type;
+        document.getElementById('modalInvoicePeriod').innerText = period;
+        
+        let form = document.getElementById('paymentForm');
+        form.action = `/student/tagihan/${invoiceId}/bayar`;
+        
+        document.getElementById('paymentModal').classList.remove('hidden');
+        lucide.createIcons();
+    }
+
+    function closePaymentModal() {
+        document.getElementById('paymentModal').classList.add('hidden');
+        document.getElementById('paymentForm').reset();
+    }
+</script>
 @endsection
