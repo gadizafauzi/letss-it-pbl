@@ -4,37 +4,36 @@
 
 Sistem Informasi Sekolah Islam Terpadu (SIT) merupakan aplikasi berbasis web yang dirancang untuk membantu digitalisasi pengelolaan akademik dan penyebaran informasi sekolah secara terintegrasi.
 
-Sistem ini memiliki dua bagian utama:
+Sistem ini terdiri dari dua bagian utama:
 
 - Website Publik Sekolah
 - Sistem Informasi Akademik
 
-Website publik digunakan untuk menyampaikan informasi sekolah kepada masyarakat seperti profil sekolah, berita, kegiatan, dan informasi PPDB.
+Website publik digunakan untuk menyampaikan informasi sekolah kepada masyarakat seperti profil sekolah, berita, kegiatan, informasi PPDB, serta informasi kontak sekolah.
 
-Sementara itu, sistem akademik internal digunakan oleh Admin, Guru, dan Siswa untuk mengelola data akademik secara digital seperti pengelolaan nilai, jadwal pelajaran dan tagihan siswa.
+Sementara itu, sistem akademik digunakan oleh Admin, Guru, Wali Kelas, dan Siswa untuk mengelola aktivitas akademik secara digital seperti pengelolaan data siswa, nilai, jadwal pelajaran, tagihan sekolah, dan informasi akademik lainnya.
 
-Project ini dikembangkan menggunakan framework Laravel dengan desain modern, responsif, dan sistem autentikasi 
+Project ini dikembangkan menggunakan Laravel Framework dengan tampilan modern, responsif, serta sistem autentikasi berbasis role.
 
 ---
 
 ## Tujuan Sistem
 
-- Mempermudah pengelolaan data akademik sekolah
-- Membantu guru dalam penginputan nilai siswa
-- Mempermudah siswa mengakses informasi akademik
-- Menyediakan sistem tagihan siswa secara digital
-- Meningkatkan efisiensi administrasi sekolah
-- Menyediakan media informasi sekolah yang terintegrasi
+- Mempermudah pengelolaan data akademik sekolah.
+- Membantu guru dalam proses penginputan nilai siswa.
+- Membantu wali kelas dalam memonitor perkembangan akademik siswa.
+- Mempermudah siswa mengakses informasi akademik secara mandiri.
+- Menyediakan sistem administrasi tagihan sekolah secara digital.
+- Meningkatkan efisiensi pengelolaan data dan informasi sekolah.
+- Menyediakan media informasi sekolah yang terintegrasi.
 
 ---
 
-## SDGs
+## SDGs yang Didukung
 
-Project ini mendukung:
+### SDG 4 – Quality Education (Pendidikan Berkualitas)
 
-### SDG 4 – Pendidikan Berkualitas
-
-Dengan membantu digitalisasi layanan pendidikan dan penyebaran informasi sekolah secara efektif.
+Project ini mendukung digitalisasi layanan pendidikan guna meningkatkan kualitas pengelolaan informasi dan layanan akademik sekolah.
 
 ---
 
@@ -44,90 +43,117 @@ Dengan membantu digitalisasi layanan pendidikan dan penyebaran informasi sekolah
 
 - Halaman Beranda
 - Profil Sekolah
-- Unit pendidikan (TK / SD / SMP)
-- Berita & Kegiatan
+- Visi dan Misi
+- Unit Pendidikan (TK, SD, SMP)
+- Berita dan Kegiatan
 - Informasi PPDB
-- Kontak & Lokasi Sekolah
+- Kontak Sekolah
+- Lokasi Sekolah
 
 ---
 
 ## Sistem Autentikasi
 
 - Login Multi Role
-- Hak Akses Admin, Guru, dan Siswa
-- Enkripsi Password
+- Login Admin
+- Login Guru
+- Login Wali Kelas
+- Login Siswa
 - Forgot Password
 - Reset Password
+- Enkripsi Password
 
 ---
 
 ## Dashboard Admin
 
+Admin memiliki akses penuh terhadap seluruh sistem.
+
+### Fitur Admin
+
 - CRUD User
 - CRUD Guru
 - CRUD Siswa
+- CRUD Wali Kelas
 - CRUD Kelas
 - CRUD Mata Pelajaran
-- CRUD Jadwal
+- CRUD Jadwal Pelajaran
 - CRUD Tahun Ajaran
 - CRUD Tagihan
 - CRUD Berita
 - CRUD PPDB
-- Manajemen Kontak
-- Manajemen Nilai
-- Manajemen Tagihan Siswa
-- Manajemen Role User
+- Manajemen Kontak Sekolah
+- Monitoring Nilai Siswa
+- Monitoring Pembayaran Tagihan
+- Manajemen Hak Akses dan Role
 
 ---
 
 ## Dashboard Guru
 
+Guru bertanggung jawab terhadap pengelolaan nilai berdasarkan mata pelajaran yang diampu.
+
+### Fitur Guru
+
 - Melihat Jadwal Mengajar
 - Melihat Daftar Kelas
+- Melihat Daftar Siswa
 - Input Nilai Siswa
 - Edit Nilai
-- Rekap Nilai
+- Rekap Nilai Mata Pelajaran
+
+---
+
+## Dashboard Wali Kelas
+
+Wali kelas bertugas memonitor perkembangan akademik siswa dalam kelas yang diampu.
+
+### Fitur Wali Kelas
+
+- Melihat Daftar Siswa dalam Kelas
+- Monitoring Nilai Siswa
+- Melihat Rekap Nilai Kelas
+- Monitoring Data Akademik Siswa
 
 ---
 
 ## Dashboard Siswa
 
+Siswa dapat mengakses informasi akademik secara mandiri.
+
+### Fitur Siswa
+
+- Melihat Profil
 - Melihat Nilai
-- Melihat Data Diri
+- Melihat Jadwal Pelajaran
 - Melihat Tagihan Sekolah
-- Riwayat Pembayaran
+- Melihat Riwayat Pembayaran
 
 ---
 
 ## Fitur Tagihan Siswa
 
-Sistem menyediakan fitur tagihan siswa untuk membantu pengelolaan administrasi pembayaran sekolah.
+Sistem menyediakan fitur administrasi keuangan sekolah secara digital.
 
-Fitur meliputi:
+### Fitur Keuangan
 
-- Informasi tagihan siswa
-- Status pembayaran
-- Riwayat pembayaran
-- Monitoring pembayaran oleh admin
-- Detail nominal tagihan
-
----
-
-<!-- ## AI Chatbot (Opsional)
-
-- Chatbot Informasi Sekolah
-- Integrasi Google Gemini API
-- Prompt Engineering AI Assistant -->
+- Informasi Tagihan Siswa
+- Detail Nominal Tagihan
+- Status Pembayaran
+- Upload Bukti Pembayaran
+- Riwayat Pembayaran
+- Monitoring Pembayaran oleh Admin
 
 ---
 
 # Role Pengguna
 
 | Role | Hak Akses |
-|------|------------|
+|--------|------------|
 | Admin | Mengelola seluruh data sistem |
-| Guru | Mengelola nilai siswa |
-| Siswa | Melihat nilai dan tagihan |
+| Guru | Mengelola dan menginput nilai siswa |
+| Wali Kelas | Monitoring perkembangan akademik siswa |
+| Siswa | Melihat nilai, jadwal, dan tagihan |
 | Pengunjung | Mengakses website publik |
 
 ---
@@ -140,37 +166,70 @@ Fitur meliputi:
 - Tailwind CSS
 - JavaScript
 - Blade Template
-- Git & GitHub
+- Git
+- GitHub
 - Figma
 
 ---
 
-<!-- # Tampilan Sistem
+# Tampilan Sistem
 
-## Dashboard Admin
+## Login Admin
 
-![Dashboard Admin](screenshots/admin-dashboard.png)
-
-## Dashboard Guru
-
-![Dashboard Guru](screenshots/guru-dashboard.png)
-
-## Dashboard Siswa
-
-![Dashboard Siswa](screenshots/siswa-dashboard.png)
+![Login Admin](public/images/adminlogin.png)
 
 ---
 
-# Instalasi Project -->
+## Login Guru
+
+![Login Guru](public/images/gurulogin.png)
+
+---
+
+## Login Siswa
+
+![Login Siswa](public/images/siswalogin.png)
+
+---
+
+## Dashboard Admin
+
+![Dashboard Admin](public/images/admindashboard.png)
+
+---
+
+## Dashboard Guru
+
+![Dashboard Guru](public/images/gurudashboard.png)
+
+---
+
+## Dashboard Wali Kelas
+
+![Dashboard Wali Kelas](public/images/walikelasdashboard.png)
+
+---
+
+## Dashboard Siswa SD
+
+![Dashboard Siswa](public/images/siswa_sd_dashboard.jpeg)
+
+---
+
+## Dashboard Siswa SMP
+
+![Dashboard Siswa](public/images/siswa_smp_dashboard.jpeg)
+
+---
+
+# Instalasi Project
 
 ## Clone Repository
 
 ```bash
-git clone https://https://github.com/gadizafauzi/letss-it-pbl
-cd nama-lets-it-pbl
+git clone https://github.com/gadizafauzi/letss-it-pbl.git
+cd letss-it-pbl
 ```
-
----
 
 ## Install Dependency
 
@@ -179,15 +238,13 @@ composer install
 npm install
 ```
 
----
-
 ## Konfigurasi Environment
 
 ```bash
 cp .env.example .env
 ```
 
-Lalu sesuaikan konfigurasi database pada file `.env`
+Sesuaikan konfigurasi database:
 
 ```env
 DB_CONNECTION=mysql
@@ -198,15 +255,11 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
----
-
 ## Generate Application Key
 
 ```bash
 php artisan key:generate
 ```
-
----
 
 ## Migrasi Database
 
@@ -214,9 +267,7 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
----
-
-## Jalankan Server
+## Menjalankan Server
 
 ```bash
 php artisan serve
@@ -228,21 +279,51 @@ php artisan serve
 
 ## Admin
 
-Email : admin@gmail.com  
-Password : 12345678
+Email: admin@gmail.com
 
-## student
+Password:
 
-NISN: SESUAI YANG DI DAFTARKAN DI ADMIN
+```text
+12345678
+```
 
-Password : 12345678
+---
 
-## Teacher
+## Guru
 
-NIP :  SESUAI YANG DI DAFTARKAN DI ADMIN
+NIP: Sesuai data yang didaftarkan admin
 
-Password : 12345678
+Password:
 
+```text
+12345678
+```
+
+---
+
+## Wali Kelas
+
+NIP: Sesuai data yang didaftarkan admin
+
+Password:
+
+```text
+12345678
+```
+
+---
+
+## Siswa
+
+NISN: Sesuai data yang didaftarkan admin
+
+Password:
+
+```text
+12345678
+```
+
+---
 
 # Struktur Project
 
@@ -251,13 +332,13 @@ Password : 12345678
 ├── bootstrap
 ├── config
 ├── database
-├── node_modules
 ├── public
+│   └── images
 ├── resources
 ├── routes
 ├── storage
 ├── tests
-├── screenshots
+├── vendor
 └── README.md
 ```
 
@@ -266,7 +347,7 @@ Password : 12345678
 # Tim Pengembang
 
 | Role | Nama |
-|------|------|
+|--------|--------|
 | Project Manager | Gadiza Fauzi |
 | System Analyst | Rezky Andikhe Wahyudi |
 | Lead Programmer | Zulfa Sahida |
@@ -277,16 +358,18 @@ Password : 12345678
 
 # Status Project
 
-Project masih dalam tahap pengembangan dan akan terus diperbarui dengan fitur-fitur baru.
+🚧 Project masih dalam tahap pengembangan dan akan terus diperbarui dengan fitur-fitur baru.
 
 ---
 
 # License
 
-Project ini dibuat untuk kebutuhan pembelajaran dan pengembangan akademik.
+Project ini dibuat untuk kebutuhan pembelajaran, penelitian, dan pengembangan akademik.
 
 ---
 
-# ⭐ Dukungan
+# Dukungan
 
-Jika project ini bermanfaat, jangan lupa untuk memberikan ⭐ pada repository GitHub ini. redme
+Jika project ini bermanfaat, jangan lupa memberikan ⭐ pada repository GitHub ini.
+
+Terima kasih atas dukungannya.

@@ -5,7 +5,12 @@
 
         {{-- PAGE HEADER --}}
         <div class="flex items-center gap-4 mb-4">
-            <a href="{{ route('admin.tagihan.student', $invoice->student_id) }}"
+            <a href="{{ $invoice->student?->id ? route('admin.tagihan.student', $invoice->student->id) : url()->previous() }}"
+
+
+
+
+
                 class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all no-underline">
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
             </a>
@@ -36,11 +41,12 @@
                 <div class="space-y-3">
                     <div>
                         <span class="block text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Nama Siswa</span>
-                        <span class="text-[13px] font-bold text-slate-800 dark:text-slate-200">{{ $invoice->student->full_name }} ({{ $invoice->student->nis }})</span>
+                        <span class="text-[13px] font-bold text-slate-800 dark:text-slate-200">{{ $invoice->student?->full_name ?? '-' }} ({{ $invoice->student?->nis ?? '-' }})</span>
+
                     </div>
                     <div>
                         <span class="block text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Unit</span>
-                        <span class="text-[13px] font-medium text-slate-700 dark:text-slate-300">{{ $invoice->student->unit->unit_name ?? '-' }}</span>
+                        <span class="text-[13px] font-medium text-slate-700 dark:text-slate-300">{{ $invoice->student?->unit->unit_name ?? '-' }}</span>
                     </div>
                     <div>
                         <span class="block text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5">Jenis Tagihan</span>
