@@ -71,6 +71,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/siswa/classes-by-unit/{unit}', [SiswaController::class, 'classesByUnit'])
         ->name('admin.siswa.classes-by-unit');
 
+    Route::post('/admin/siswa/bulk-destroy', [SiswaController::class, 'bulkDestroy'])
+        ->name('admin.siswa.bulk-destroy');
+
     Route::resource('/admin/siswa', SiswaController::class)->names('admin.siswa');
 
 

@@ -4,14 +4,14 @@
     <div class="space-y-6">
 
         {{-- HEADER --}}
-        <div class="flex items-center justify-between">
-
-            <div>
-                <h1 class="text-[30px] font-bold text-slate-800">
-                    Edit Guru
-                </h1>
-            </div>
-
+        <div class="flex items-center gap-3 mb-2">
+            <a href="{{ route('admin.guru.index') }}"
+                class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all no-underline">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </a>
+            <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100">
+                Edit Guru
+            </h1>
         </div>
 
         {{-- ERROR VALIDATION --}}
@@ -34,7 +34,7 @@
                 {{-- LEFT CONTENT --}}
                 <div class="xl:col-span-9">
 
-                    <div class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-[2rem] shadow-sm overflow-hidden">
 
                         {{-- TAB HEADER --}}
                         <div class="border-b border-slate-200 px-6 pt-5">
@@ -74,7 +74,7 @@
 
                                     <input type="text" name="full_name"
                                         value="{{ old('full_name', $teacher->full_name) }}" placeholder="Nama lengkap"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -122,7 +122,7 @@
 
                                     <input type="text" name="birth_place"
                                         value="{{ old('birth_place', $teacher->birth_place) }}" placeholder="Tempat lahir"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -137,7 +137,7 @@
 
                                     <input type="date" name="birth_date"
                                         value="{{ old('birth_date', $teacher->birth_date) }}"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -152,7 +152,7 @@
 
                                     <input type="text" name="phone" value="{{ old('phone', $teacher->phone) }}"
                                         placeholder="08xxxxxxxxxx"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -166,7 +166,7 @@
                                     </label>
 
                                     <textarea rows="4" name="address" placeholder="Alamat"
-                                        class="w-full p-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full p-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm resize-none transition-all">{{ old('address', $teacher->address) }}</textarea>
 
@@ -186,7 +186,7 @@
 
                                     <input type="text" name="nip" value="{{ old('nip', $teacher->nip) }}"
                                         placeholder="Masukkan NIP"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -200,7 +200,7 @@
                                     </label>
 
                                     <select name="unit_id"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -227,7 +227,7 @@
                                     </label>
 
                                     <select name="position_id"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -256,7 +256,7 @@
                                     <input type="text" name="last_education"
                                         value="{{ old('last_education', $teacher->last_education) }}"
                                         placeholder="Contoh: S1 Pendidikan"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -270,7 +270,7 @@
                                     </label>
 
                                     <select name="employment_status"
-                                        class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
+                                        class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
 
@@ -302,7 +302,7 @@
                 <div class="xl:col-span-3 space-y-6">
 
                     {{-- STATUS --}}
-                    <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
+                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-3xl shadow-sm p-6">
 
                         <h3 class="text-base font-bold text-[var(--theme-primary)] mb-5">
                             Status
@@ -335,7 +335,7 @@
                     </div>
 
                     {{-- FOTO --}}
-                    <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
+                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-3xl shadow-sm p-6">
 
                         <h3 class="text-base font-bold text-[var(--theme-primary)] mb-4">
                             Foto
@@ -385,19 +385,15 @@
                     <div class="space-y-3">
 
                         <button type="submit"
-                            class="w-full h-12 rounded-2xl bg-blue-500 hover:bg-blue-600
-                            text-white font-bold shadow-lg shadow-blue-100 transition-all">
-
+                            class="w-full h-12 rounded-2xl bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90
+                            text-white font-bold shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all border-none cursor-pointer">
                             Simpan Perubahan
-
                         </button>
 
                         <a href="{{ route('admin.guru.index') }}"
-                            class="w-full h-12 rounded-2xl bg-slate-200 hover:bg-slate-300
-                            text-slate-700 font-bold inline-flex items-center justify-center transition-all">
-
+                            class="w-full h-12 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700
+                            text-slate-700 dark:text-slate-200 font-bold inline-flex items-center justify-center transition-all no-underline">
                             Batal
-
                         </a>
 
                     </div>

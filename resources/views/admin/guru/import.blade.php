@@ -3,17 +3,19 @@
 @section('content')
 <div class="space-y-6 w-full">
 
-    {{-- PAGE TITLE --}}
-    <div class="flex items-center gap-3">
+    {{-- HEADER --}}
+    <div class="flex items-center gap-3 mb-2">
         <a href="{{ route('admin.guru.index') }}"
-            class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition">
-            <i data-lucide="arrow-left" class="w-4 h-4 text-slate-600"></i>
+            class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all no-underline">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
         </a>
-        <h1 class="text-[28px] font-bold text-slate-800">Import Guru</h1>
+        <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100">
+            Import Guru
+        </h1>
     </div>
 
     {{-- CARD --}}
-    <div class="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-[2rem] overflow-hidden shadow-sm">
 
         {{-- PETUNJUK --}}
         <div class="p-6 border-b border-slate-100">
@@ -22,7 +24,7 @@
                 Penginputan data guru bisa dilakukan dengan mengcopy data dari file Ms. Excel.
                 Format file harus sesuai kebutuhan aplikasi.
                 <a href="{{ route('admin.guru.import.template') }}"
-                    class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-xs font-semibold ml-1 transition">
+                    class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] text-white text-xs font-semibold ml-1 transition no-underline hover:opacity-90">
                     <i data-lucide="download" class="w-3 h-3"></i>
                     Download Template
                 </a>
@@ -87,11 +89,11 @@
 
                 <div class="flex gap-3">
                     <button type="submit"
-                        class="h-11 px-6 rounded-2xl bg-blue-500 hover:bg-blue-600 text-white font-bold inline-flex items-center justify-center shadow-lg shadow-blue-100 transition-all">
+                        class="h-[42px] px-6 rounded-xl bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white font-bold shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 inline-flex items-center justify-center transition-all border-none cursor-pointer">
                         Import
                     </button>
                     <a href="{{ route('admin.guru.index') }}"
-                        class="h-11 px-6 rounded-2xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold inline-flex items-center justify-center transition-all">
+                        class="h-[42px] px-6 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold inline-flex items-center justify-center transition-all no-underline">
                         Kembali
                     </a>
                 </div>

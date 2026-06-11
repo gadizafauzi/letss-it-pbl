@@ -70,7 +70,7 @@ class KelasController extends Controller
          */
         $classes = $query
             ->latest()
-            ->paginate(10);
+            ->paginate($request->get('per_page', 10));
 
         /**
          * TAHUN AJARAN AKTIF

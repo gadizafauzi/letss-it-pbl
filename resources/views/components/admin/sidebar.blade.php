@@ -3,20 +3,19 @@
     class="sidebar fixed top-0 left-0 lg:relative z-50 lg:z-0 h-screen flex flex-col transition-all duration-300">
 
     {{-- LOGO --}}
-    <div class="h-20 border-b border-white/[0.06] flex items-center justify-between px-4 lg:px-6">
+    <div class="h-20 border-b border-white/[0.06] dark:border-slate-700/50 flex items-center justify-between px-4 lg:px-6">
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 logo-wrapper">
 
-            <div
-                class="w-9 h-9 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-900/40">
-                <i data-lucide="school-2" class="w-4 h-4 lg:w-6 lg:h-6 text-white"></i>
+            <div class="w-9 h-9 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl overflow-hidden shadow-lg shadow-black/5 dark:shadow-slate-900/50 border border-white/20 shrink-0">
+                <img src="{{ asset('images/logomq.jpg') }}" alt="Logo MQ" class="w-full h-full object-cover">
             </div>
 
             <div class="logo-text">
-                <h1 class="text-sm font-extrabold tracking-tight text-slate-100">
+                <h1 class="text-sm font-extrabold tracking-tight text-white dark:text-slate-100">
                     SIT Mutiara Qur'an
                 </h1>
-                <p class="text-xs text-slate-500 mt-0.5">
+                <p class="text-xs text-blue-100 dark:text-slate-400 mt-0.5">
                     Administrator Panel
                 </p>
             </div>

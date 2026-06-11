@@ -4,49 +4,63 @@
     <div class="space-y-5">
 
         {{-- PAGE HEADER --}}
-        <div class="relative overflow-hidden rounded-2xl px-7 py-6"
-            style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 55%, #60a5fa 100%);">
-            <div class="absolute -top-12 -right-12 w-44 h-44 bg-white/[.08] rounded-full"></div>
-            <div class="absolute -bottom-16 left-8 w-56 h-56 bg-white/[.05] rounded-full"></div>
-            <div class="relative z-10 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
-                <div>
-                    <p class="text-[11px] font-semibold uppercase tracking-widest text-white/60 mb-1">
-                        Manajemen Akademik
-                    </p>
-                    <h1 class="text-[26px] font-extrabold text-white leading-tight">Data Guru</h1>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="{{ route('admin.guru.import') }}"
-                        class="inline-flex items-center gap-1.5 h-[38px] px-4 rounded-[10px] text-xs font-semibold text-white
-                          bg-white/15 border border-white/30 hover:bg-white/25 hover:border-white/50 transition-all no-underline">
-                        <i data-lucide="upload" class="w-[14px] h-[14px]"></i>Import
-                    </a>
-                    <button type="button" onclick="openExportModal()"
-                        class="inline-flex items-center gap-1.5 h-[38px] px-4 rounded-[10px] text-xs font-semibold text-white
-                               bg-white/15 border border-white/30 hover:bg-white/25 hover:border-white/50 transition-all cursor-pointer">
-                        <i data-lucide="download" class="w-[14px] h-[14px]"></i>Export
-                    </button>
-                    <a href="{{ route('admin.guru.create') }}"
-                        class="inline-flex items-center gap-1.5 h-[38px] px-4 rounded-[10px] text-xs font-bold
-                          bg-white text-sky-500 hover:bg-sky-50 shadow-md hover:shadow-lg transition-all no-underline">
-                        <i data-lucide="plus" class="w-[14px] h-[14px]"></i>Tambah Guru
-                    </a>
-                </div>
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-2">
+            <div>
+                <h1 class="text-[24px] font-bold text-slate-800 dark:text-slate-100 mb-1">
+                    Data Guru
+                </h1>
+            </div>
+            <div class="flex flex-wrap items-center gap-2.5">
+                <a href="{{ route('admin.guru.import') }}"
+                    class="inline-flex items-center gap-2 h-[42px] px-4 rounded-xl text-[13px] font-semibold text-slate-600 dark:text-slate-300
+                           bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm no-underline">
+                    <i data-lucide="upload" class="w-4 h-4 text-slate-400 dark:text-slate-500"></i>Import
+                </a>
+                <button type="button" onclick="openExportModal()"
+                    class="inline-flex items-center gap-2 h-[42px] px-4 rounded-xl text-[13px] font-semibold text-slate-600 dark:text-slate-300
+                           bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm cursor-pointer">
+                    <i data-lucide="download" class="w-4 h-4 text-slate-400 dark:text-slate-500"></i>Export
+                </button>
+                <a href="{{ route('admin.guru.create') }}"
+                    class="inline-flex items-center gap-2 h-[42px] px-5 rounded-xl text-[13px] font-bold text-white
+                           bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all no-underline">
+                    <i data-lucide="plus" class="w-4 h-4"></i>Tambah Guru
+                </a>
             </div>
         </div>
 
-        {{-- SUCCESS --}}
+        {{-- TOAST NOTIFICATION --}}
         @if (session('success'))
-            <div
-                class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium
-                    bg-sky-100 border border-sky-200 text-sky-700">
-                <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
-                {{ session('success') }}
+            <div id="toast-success"
+                class="fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl shadow-green-500/20
+                      bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-white/80 dark:border-slate-700/60
+                      transform transition-all duration-500 translate-y-0 opacity-100">
+                <div class="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-400 flex-shrink-0">
+                    <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                </div>
+                <div class="mr-4">
+                    <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100">Berhasil!</h4>
+                    <p class="text-[13px] text-slate-600 dark:text-slate-400 mt-0.5">{{ session('success') }}</p>
+                </div>
+                <button type="button" onclick="closeToast()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors">
+                    <i data-lucide="x" class="w-[18px] h-[18px]"></i>
+                </button>
             </div>
+            <script>
+                function closeToast() {
+                    const toast = document.getElementById('toast-success');
+                    if(toast) {
+                        toast.classList.remove('translate-y-0', 'opacity-100');
+                        toast.classList.add('translate-y-full', 'opacity-0');
+                        setTimeout(() => toast.style.display = 'none', 500);
+                    }
+                }
+                setTimeout(closeToast, 4000);
+            </script>
         @endif
 
         {{-- FILTER --}}
-        <div class="bg-white border border-sky-100 rounded-2xl px-5 py-4 shadow-sm">
+        <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
             <form id="filterForm" action="{{ route('admin.guru.index') }}" method="GET"
                 class="flex flex-wrap items-center gap-2.5">
 
@@ -92,19 +106,22 @@
         </div>
 
         {{-- TABLE --}}
-        <div class="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm">
+        <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full min-w-[1200px] border-collapse">
                     <thead>
-                        <tr class="bg-sky-50 border-b-[1.5px] border-sky-100">
+                        <tr class="bg-sky-50/50 dark:bg-slate-800/50 border-b-[1.5px] border-sky-100 dark:border-slate-700/50">
+                            <th class="px-4 py-3.5 text-center w-10">
+                                <input type="checkbox" id="checkAll" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500 bg-white dark:bg-slate-900/50 dark:border-slate-600 dark:checked:bg-blue-500 cursor-pointer w-4 h-4 transition-all">
+                            </th>
                             @foreach (['No', 'NIP', 'Nama Guru', 'Unit', 'Jabatan', 'Status Kepegawaian', 'No. Telepon', 'Alamat', 'Status'] as $h)
                                 <th
-                                    class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 whitespace-nowrap">
+                                    class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">
                                     {{ $h }}
                                 </th>
                             @endforeach
                             <th
-                                class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500">
+                                class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400">
                                 Aksi
                             </th>
                         </tr>
@@ -114,30 +131,30 @@
                             @php
                                 $status = $teacher->status;
                                 $statusLabel = $status == 'active' ? 'Aktif' : 'Nonaktif';
-                                $statusCls = $status == 'active' ? 'bg-sky-100 text-sky-700' : 'bg-slate-100 text-slate-500';
+                                $statusCls = $status == 'active' ? 'bg-sky-100 text-sky-700 dark:bg-sky-500/20 dark:text-sky-400 border-sky-200 dark:border-sky-500/30' : 'bg-slate-100 text-slate-500 dark:bg-slate-500/20 dark:text-slate-400 border-slate-200 dark:border-slate-500/30';
                                 $statusDot = $status == 'active' ? 'bg-sky-500' : 'bg-slate-400';
                             @endphp
-                            <tr class="border-b border-sky-50 hover:bg-sky-50/50 transition-colors">
-                                <td class="px-4 py-3.5 text-xs text-slate-400 font-semibold">
-                                    {{ $loop->iteration }}
+                            <tr class="border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                <td class="px-4 py-3.5 text-center">
+                                    <input type="checkbox" value="{{ $teacher->id }}" class="row-checkbox rounded border-slate-300 text-blue-600 focus:ring-blue-500 bg-white dark:bg-slate-900/50 dark:border-slate-600 dark:checked:bg-blue-500 cursor-pointer w-4 h-4 transition-all">
+                                </td>
+                                <td class="px-4 py-3.5 text-xs text-slate-400 dark:text-slate-500 font-semibold">
+                                    {{ $loop->iteration + ($teachers->currentPage() - 1) * $teachers->perPage() }}
                                 </td>
                                 <td class="px-4 py-3.5">
-                                    <span
-                                        class="text-xs font-bold text-slate-800 bg-sky-50 px-2.5 py-1 rounded-lg inline-block">
-                                        {{ $teacher->nip ?? '-' }}
-                                    </span>
+                                    <span class="text-[13px] font-bold text-slate-700 dark:text-slate-300">{{ $teacher->nip ?? '-' }}</span>
                                 </td>
                                 <td class="px-4 py-3.5">
-                                    <div class="text-[13px] font-bold text-slate-800">{{ $teacher->full_name }}</div>
-                                    <div class="text-[11px] text-slate-400">{{ $teacher->email ?? '' }}</div>
+                                    <div class="text-[13px] font-bold text-slate-800 dark:text-slate-200">{{ $teacher->full_name }}</div>
+                                    <div class="text-[11px] text-slate-400 dark:text-slate-500">{{ $teacher->email ?? '' }}</div>
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $teacher->unit->unit_name ?? '-' }}
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $teacher->position->name ?? '-' }}
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     @if ($teacher->employment_status == 'pegawai_tetap')
                                         Pegawai Tetap
                                     @elseif($teacher->employment_status == 'pegawai_tidak_tetap')
@@ -146,17 +163,17 @@
                                         -
                                     @endif
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $teacher->phone ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3.5 max-w-[150px]">
-                                    <span class="text-[13px] text-slate-500 block truncate">
+                                    <span class="text-[13px] text-slate-500 dark:text-slate-400 block truncate">
                                         {{ $teacher->address ?? '-' }}
                                     </span>
                                 </td>
                                 <td class="px-4 py-3.5">
                                     <span
-                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold {{ $statusCls }}">
+                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border {{ $statusCls }}">
                                         <span class="w-1.5 h-1.5 rounded-full {{ $statusDot }} flex-shrink-0"></span>
                                         {{ $statusLabel }}
                                     </span>
@@ -164,29 +181,29 @@
                                 <td class="px-4 py-3.5">
                                     <div class="flex justify-center gap-1.5">
                                         <a href="{{ route('admin.guru.show', $teacher->id) }}"
-                                            class="w-[30px] h-[30px] rounded-lg bg-slate-100 text-slate-500
-                                              hover:bg-slate-200 hover:text-slate-700 transition-all
-                                              inline-flex items-center justify-content-center no-underline"
-                                            style="justify-content:center" title="Detail">
-                                            <i data-lucide="eye" class="w-[13px] h-[13px]"></i>
+                                            class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 
+                                              hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-500 dark:text-slate-400 
+                                              hover:text-slate-700 dark:hover:text-slate-200 transition-all inline-flex items-center justify-center shadow-sm no-underline"
+                                            title="Detail">
+                                            <i data-lucide="eye" class="w-[14px] h-[14px]"></i>
                                         </a>
                                         <a href="{{ route('admin.guru.edit', $teacher->id) }}"
-                                            class="w-[30px] h-[30px] rounded-lg bg-sky-100 text-sky-500
-                                              hover:bg-sky-500 hover:text-white transition-all
-                                              inline-flex items-center justify-content-center no-underline"
-                                            style="justify-content:center" title="Edit">
-                                            <i data-lucide="square-pen" class="w-[13px] h-[13px]"></i>
+                                            class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 
+                                              hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:border-blue-200 dark:hover:border-blue-800 text-blue-500 dark:text-blue-400 
+                                              hover:text-blue-600 dark:hover:text-blue-300 transition-all inline-flex items-center justify-center shadow-sm no-underline"
+                                            title="Edit">
+                                            <i data-lucide="square-pen" class="w-[14px] h-[14px]"></i>
                                         </a>
-                                        <form action="{{ route('admin.guru.destroy', $teacher->id) }}" method="POST"
-                                            onsubmit="return confirm('Hapus data guru ini?')" class="inline">
+                                        <form action="{{ route('admin.guru.destroy', $teacher->id) }}" method="POST" class="inline"
+                                            onsubmit="return confirm('Hapus data guru ini? Tindakan ini tidak dapat dibatalkan.')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="w-[30px] h-[30px] rounded-lg bg-red-100 text-red-400
-                                                       hover:bg-red-500 hover:text-white transition-all
-                                                       inline-flex items-center justify-center cursor-pointer border-none"
+                                                class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 
+                                                  hover:bg-red-50 dark:hover:bg-red-900/30 hover:border-red-200 dark:hover:border-red-800 text-red-500 dark:text-red-400 
+                                                  hover:text-red-600 dark:hover:text-red-300 transition-all inline-flex items-center justify-center shadow-sm cursor-pointer border-none"
                                                 title="Hapus">
-                                                <i data-lucide="trash-2" class="w-[13px] h-[13px]"></i>
+                                                <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -194,21 +211,49 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="10">
-                                    <div class="flex flex-col items-center justify-center py-16 text-center">
-                                        <div
-                                            class="w-14 h-14 bg-sky-50 rounded-2xl inline-flex items-center justify-center mb-4 text-sky-300">
-                                            <i data-lucide="users" class="w-7 h-7"></i>
+                                <td colspan="11">
+                                    <div class="flex flex-col items-center justify-center py-20 text-center">
+                                        <div class="mb-6 relative">
+                                            <div class="absolute inset-0 bg-sky-200 dark:bg-sky-900 blur-[32px] opacity-30 rounded-full"></div>
+                                            <div class="w-28 h-28 bg-sky-50 dark:bg-slate-800/80 rounded-[2rem] border border-white/60 dark:border-slate-700 shadow-xl flex items-center justify-center relative z-10 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                                                <i data-lucide="users" class="w-12 h-12 text-sky-400 dark:text-sky-300"></i>
+                                            </div>
                                         </div>
-                                        <p class="text-[15px] font-bold text-slate-800 mb-1.5">Belum ada data guru</p>
-                                        <p class="text-[13px] text-slate-400">Data guru belum tersedia atau pencarian
-                                            tidak cocok.</p>
+                                        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Belum Ada Data Guru</h3>
+                                        <p class="text-[14px] text-slate-500 dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
+                                            Sepertinya data guru masih kosong atau pencarian Anda tidak menemukan hasil yang cocok. Coba ubah filter atau tambahkan data baru.
+                                        </p>
                                     </div>
                                 </td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            {{-- BOTTOM BAR (PER PAGE & PAGINATION) --}}
+            <div class="px-5 py-4 border-t border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                {{-- Per Page --}}
+                <div class="flex items-center gap-2">
+                    <span class="text-[13px] font-semibold text-slate-500 dark:text-slate-400">Tampilkan</span>
+                    <select name="per_page" form="filterForm" onchange="document.getElementById('filterForm').submit()"
+                        class="h-[36px] px-2 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-lg
+                               bg-sky-50 dark:bg-slate-900/50 text-[13px] font-bold text-slate-700 dark:text-slate-200 outline-none
+                               focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 transition-all cursor-pointer">
+                        <option value="10" {{ request('per_page', 10) == 10 ? 'selected' : '' }}>10</option>
+                        <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                    </select>
+                    <span class="text-[13px] font-semibold text-slate-500 dark:text-slate-400">data</span>
+                </div>
+
+                {{-- Pagination Links --}}
+                @if ($teachers->hasPages())
+                    <div class="w-full sm:w-auto overflow-x-auto">
+                        {{ $teachers->links() }}
+                    </div>
+                @endif
             </div>
         </div>
 

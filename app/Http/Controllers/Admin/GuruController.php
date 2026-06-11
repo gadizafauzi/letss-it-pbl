@@ -44,7 +44,8 @@ class GuruController extends Controller
             $query->where('position_id', $request->position);
         }
 
-        $teachers = $query->latest()->get();
+        $perPage = $request->input('per_page', 10);
+        $teachers = $query->latest()->paginate($perPage)->appends($request->query());
         $units = Unit::all();
         $positions = Position::all();
 

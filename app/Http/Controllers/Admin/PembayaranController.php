@@ -27,7 +27,8 @@ class PembayaranController extends Controller
             $query->where('verification_status', $request->status);
         }
 
-        $payments = $query->latest()->paginate(20);
+        $perPage = $request->input('per_page', 10);
+        $payments = $query->latest()->paginate($perPage)->appends(request()->query());
 
         return view('admin.pembayaran.index', compact('payments'));
     }
