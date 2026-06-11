@@ -24,50 +24,47 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
 
     {{-- TOTAL KELAS DIAJAR --}}
-    <div class="bg-[var(--bg-card)] border-2 border-blue-100 dark:border-[var(--theme-border-light)] rounded-3xl px-4 py-4 md:px-6 md:py-5 group flex items-center gap-3 md:gap-4
-        transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm
-        hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-[-8px_12px_25px_var(--theme-stat-hover)]">
+    <div class="bg-gradient-to-br from-blue-500 to-blue-600 border border-blue-400 rounded-3xl px-4 py-4 md:px-6 md:py-5 group flex items-center gap-3 md:gap-4
+        transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(59,130,246,0.3)] hover:shadow-[0_8px_25px_rgba(59,130,246,0.45)]">
 
-        <div class="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center shrink-0
-            transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110">
-            <i data-lucide="book-open" class="w-6 h-6 text-blue-500 dark:text-blue-400"></i>
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center shrink-0
+            transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 backdrop-blur-sm">
+            <i data-lucide="book-open" class="w-6 h-6 text-white"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">Total kelas diajar</p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)] counter" data-target="{{ $totalKelasDiajar }}">0</h2>
+            <p class="text-xs font-bold text-blue-100 mb-0.5">Total kelas diajar</p>
+            <h2 class="text-base font-extrabold text-white counter" data-target="{{ $totalKelasDiajar }}">0</h2>
         </div>
     </div>
 
     {{-- TOTAL SISWA DIAJAR --}}
-    <div class="bg-[var(--bg-card)] border-2 border-emerald-100 dark:border-[var(--theme-border-light)] rounded-3xl px-4 py-4 md:px-6 md:py-5 group flex items-center gap-3 md:gap-4
-        transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm
-        hover:border-emerald-300 dark:hover:border-emerald-500 hover:shadow-[-8px_12px_25px_var(--theme-stat-hover)]">
+    <div class="bg-gradient-to-br from-rose-500 to-rose-600 border border-rose-400 rounded-3xl px-4 py-4 md:px-6 md:py-5 group flex items-center gap-3 md:gap-4
+        transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(244,63,94,0.3)] hover:shadow-[0_8px_25px_rgba(244,63,94,0.45)]">
 
-        <div class="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center shrink-0
-            transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110">
-            <i data-lucide="users" class="w-6 h-6 text-emerald-500 dark:text-emerald-400"></i>
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center shrink-0
+            transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 backdrop-blur-sm">
+            <i data-lucide="users" class="w-6 h-6 text-white"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">Total siswa diajar</p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)] counter" data-target="{{ $totalSiswaDiajar }}">0</h2>
+            <p class="text-xs font-bold text-rose-100 mb-0.5">Total siswa diajar</p>
+            <h2 class="text-base font-extrabold text-white counter" data-target="{{ $totalSiswaDiajar }}">0</h2>
         </div>
     </div>
 
     {{-- TOTAL MAPEL DIAJAR --}}
-    <div class="bg-[var(--bg-card)] border-2 border-purple-100 dark:border-[var(--theme-border-light)] rounded-3xl px-4 py-4 md:px-6 md:py-5 group flex items-center gap-3 md:gap-4
-        transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm
-        hover:border-purple-300 dark:hover:border-purple-500 hover:shadow-[-8px_12px_25px_var(--theme-stat-hover)]">
+    <div class="bg-gradient-to-br from-purple-500 to-purple-600 border border-purple-400 rounded-3xl px-4 py-4 md:px-6 md:py-5 group flex items-center gap-3 md:gap-4
+        transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(168,85,247,0.3)] hover:shadow-[0_8px_25px_rgba(168,85,247,0.45)]">
 
-        <div class="w-14 h-14 rounded-2xl bg-purple-50 dark:bg-purple-500/10 flex items-center justify-center shrink-0
-            transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110">
-            <i data-lucide="graduation-cap" class="w-6 h-6 text-purple-500 dark:text-purple-400"></i>
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center shrink-0
+            transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 backdrop-blur-sm">
+            <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">Mata pelajaran diajar</p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)] counter" data-target="{{ $totalMapelDiajar }}">0</h2>
+            <p class="text-xs font-bold text-purple-100 mb-0.5">Mata pelajaran diajar</p>
+            <h2 class="text-base font-extrabold text-white counter" data-target="{{ $totalMapelDiajar }}">0</h2>
         </div>
     </div>
 
@@ -83,7 +80,7 @@
 
     <div class="overflow-x-auto">
         <table class="w-full text-sm">
-            <thead class="bg-[var(--theme-bg-light)] text-[var(--text-secondary)] text-xs uppercase">
+            <thead class="bg-slate-50 dark:bg-slate-800/40 text-[var(--text-secondary)] text-xs uppercase font-bold border-b border-[var(--border-color)]">
                 <tr>
                     <th class="px-6 py-4 text-left">No</th>
                     <th class="px-6 py-4 text-left">Kelas</th>
@@ -105,7 +102,7 @@
                         <td class="px-6 py-4 text-[var(--text-secondary)]">{{ $assignment->subject->subject_name ?? '-' }}</td>
                         <td class="px-6 py-4 font-semibold text-[var(--text-main)] counter" data-target="{{ $assignment->student_count ?? 0 }}">0</td>
                         <td class="px-6 py-4">
-                            <span class="bg-emerald-100 text-emerald-600 px-3 py-1 rounded-full text-xs font-bold">
+                            <span class="bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-bold">
                                 Aktif
                             </span>
                         </td>

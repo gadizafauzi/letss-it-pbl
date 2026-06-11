@@ -31,7 +31,7 @@
 
     <div class="overflow-x-auto">
         <table class="w-full text-sm">
-            <thead class="bg-[var(--theme-bg-light)] text-[var(--text-secondary)] text-xs uppercase">
+            <thead class="bg-slate-50 dark:bg-slate-800/40 text-[var(--text-secondary)] text-xs uppercase font-bold border-b border-[var(--border-color)]">
                 <tr>
                     <th class="px-6 py-4 text-left">No</th>
                     <th class="px-6 py-4 text-left">Nama Siswa</th>
@@ -51,7 +51,7 @@
                             {{ $studentClass->student->nis }}
                         </td>
                         <td class="px-6 py-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $studentClass->student->status === 'active' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-rose-100 text-rose-600' }}">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $studentClass->student->status === 'active' ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400' : 'bg-rose-100 text-rose-600' }}">
                                 {{ $studentClass->student->status === 'active' ? 'Aktif' : 'Tidak Aktif' }}
                             </span>
                         </td>

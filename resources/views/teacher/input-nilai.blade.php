@@ -3,8 +3,8 @@
 @section('content')
 
 @if(session('success'))
-    <div class="mb-6 p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 text-emerald-700 rounded-xl text-sm font-bold flex items-center gap-2">
-        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 dark:text-emerald-400"></i>
+    <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 text-blue-700 rounded-xl text-sm font-bold flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 dark:text-blue-400"></i>
         {{ session('success') }}
     </div>
 @endif
@@ -81,7 +81,7 @@
 
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
-                <thead class="bg-[var(--theme-bg-light)] text-[var(--text-secondary)] text-xs uppercase">
+                <thead class="bg-slate-50 dark:bg-slate-800/40 text-[var(--text-secondary)] text-xs uppercase font-bold border-b border-[var(--border-color)]">
                     <tr>
                         <th class="px-6 py-4 text-left">No</th>
                         <th class="px-6 py-4 text-left">NIS</th>
@@ -191,14 +191,14 @@
                     // Beri efek warna jika sudah tuntas atau belum
                     if (average >= 75) {
                         averageDisplay.classList.remove('text-[var(--text-secondary)]', 'text-red-500');
-                        averageDisplay.classList.add('text-emerald-600', 'bg-emerald-100', 'dark:bg-emerald-500/20');
+                        averageDisplay.classList.add('text-blue-600', 'bg-blue-100', 'dark:bg-blue-500/20');
                     } else {
-                        averageDisplay.classList.remove('text-[var(--text-secondary)]', 'text-emerald-600', 'bg-emerald-100', 'dark:bg-emerald-500/20');
+                        averageDisplay.classList.remove('text-[var(--text-secondary)]', 'text-blue-600', 'bg-blue-100', 'dark:bg-blue-500/20');
                         averageDisplay.classList.add('text-red-500');
                     }
                 } else {
                     averageDisplay.textContent = '-';
-                    averageDisplay.classList.remove('text-emerald-600', 'text-red-500', 'bg-emerald-100', 'dark:bg-emerald-500/20');
+                    averageDisplay.classList.remove('text-blue-600', 'text-red-500', 'bg-blue-100', 'dark:bg-blue-500/20');
                     averageDisplay.classList.add('text-[var(--text-secondary)]');
                 }
             };
