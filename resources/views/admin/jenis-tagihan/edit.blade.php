@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="space-y-5 max-w-3xl">
+    <div class="space-y-5">
 
         {{-- HEADER --}}
         <div class="flex items-center gap-3 mb-2">

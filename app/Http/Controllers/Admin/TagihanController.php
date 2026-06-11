@@ -31,6 +31,18 @@ class TagihanController extends Controller
             });
         }
 
+        if ($request->has('status') && $request->status != '') {
+            if ($request->status == 'unpaid') {
+                $query->whereHas('invoices', function($q) {
+                    $q->where('status', 'unpaid');
+                });
+            } elseif ($request->status == 'paid') {
+                $query->whereDoesntHave('invoices', function($q) {
+                    $q->where('status', 'unpaid');
+                });
+            }
+        }
+
         $students = $query->paginate(20);
 
         return view('admin.tagihan.index', compact('students'));
