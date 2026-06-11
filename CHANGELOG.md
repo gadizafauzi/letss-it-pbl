@@ -1,10 +1,88 @@
-# Changelog
+## [v0.7.0] - 2026-06-08
 
-Semua perubahan penting pada proyek Sistem Informasi Sekolah Islam Terpadu dicatat dalam file ini.
+### Added
+
+* Menambahkan fitur tagihan dan pembayaran.
+* Menambahkan fitur export dan import data.
+
+### Changed
+
+* Memperbarui tampilan website publik.
+* Menambahkan animasi pada halaman website publik.
+
+### Refactor
+
+* Memisahkan dashboard siswa berdasarkan unit SD dan SMP.
+* Memisahkan dashboard Guru dan Wali Kelas.
+* Memisahkan layout dan sidebar berdasarkan role dan unit.
+* Mengubah `Student\DashboardController` menjadi dispatcher untuk redirect otomatis sesuai unit siswa.
+* Memecah `KelasController` menjadi beberapa controller yang lebih spesifik.
+* Menambahkan controller khusus untuk fitur Wali Kelas.
+* Menyesuaikan struktur route untuk mendukung arsitektur baru.
+* Menjaga kompatibilitas route lama melalui sistem redirect dan alias route.
+* Menghapus modul dan tampilan unit TK yang tidak lagi digunakan.
+* Memodularisasi halaman publik (Home, Profil, Unit, Berita, dan PPDB).
+
+### Fixed
+
+* Memastikan fitur lama tetap berjalan setelah proses refactoring.
+* Berhasil melakukan merge dengan branch `develop` tanpa konflik.
 
 ---
 
+## [v0.6.4] - 2026-06-07
+
+### Added
+
+* Menambahkan fitur pembayaran.
+* Menambahkan fitur edit profil pengguna.
+* Menambahkan fitur upload foto profil.
+* Menambahkan perhitungan nilai otomatis (*live grades calculation*).
+* Menambahkan fitur cetak KTM siswa.
+
+### Refactor
+
+* Refactoring controller Guru dan Siswa.
+
+### Fixed
+
+* Memperbaiki route yang duplikat.
+
+---
+
+## [v0.6.3] - 2026-06-06
+
+### Fixed
+
+* Memperbaiki tata letak halaman profil.
+* Memperbaiki tata letak halaman unit pendidikan.
+
+---
+
+## [v0.6.2] - 2026-06-04
+
+### Changed
+
+* Memperbarui tampilan website publik.
+
+---
+
+## [v0.6.1] - 2026-05-31
+
+### Added
+
+* Menambahkan fitur import data.
+* Menambahkan fitur export data.
+* Menambahkan fitur pencarian data.
+* Menambahkan fitur filter data.
+* Menambahkan fitur upload foto siswa pada dashboard admin.
+
+### Documentation
+
+* Menambahkan dokumentasi fitur yang belum selesai dikembangkan.
+
 ## [v0.6.0] - 2026-05-29
+---
 
 ### Public Website Update
 

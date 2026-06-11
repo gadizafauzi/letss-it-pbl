@@ -69,8 +69,8 @@
                                 <option value="">Pilih Wali Kelas</option>
                                 @foreach ($teachers as $teacher)
                                     <option value="{{ $teacher->id }}"
-                                        {{ $class->homeroom_teacher_id == $teacher->id ? 'selected' : '' }}>
-                                        {{ $teacher->full_name }}
+                                        {{ old('homeroom_teacher_id', $class->homeroom_teacher_id) == $teacher->id ? 'selected' : '' }}>
+                                        {{ $teacher->full_name }} ({{ $teacher->unit->unit_name ?? 'Tanpa Unit' }})
                                     </option>
                                 @endforeach
                             </select>

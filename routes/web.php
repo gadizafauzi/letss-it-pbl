@@ -105,20 +105,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // KEUANGAN
     Route::resource('/admin/rekening-sekolah', \App\Http\Controllers\Admin\RekeningSekolahController::class)->names('admin.rekening-sekolah');
-    Route::resource('/admin/jenis-tagihan', \App\Http\Controllers\Admin\JenisTagihanController::class)
-        ->names('admin.jenis-tagihan')
-        ->parameters(['jenis_tagihan' => 'paymentType']);
-    Route::post('/admin/tagihan/search', [\App\Http\Controllers\Admin\TagihanController::class, 'searchStudent'])->name('admin.tagihan.search_student');
-    Route::get('/admin/tagihan/student/{student}', [\App\Http\Controllers\Admin\TagihanController::class, 'student'])->name('admin.tagihan.student');
-    Route::resource('/admin/tagihan', \App\Http\Controllers\Admin\TagihanController::class)
-        ->names('admin.tagihan')
-        ->parameters(['tagihan' => 'invoice']);
-    Route::get('/admin/pembayaran/{payment}/print', [\App\Http\Controllers\Admin\PembayaranController::class, 'print'])->name('admin.pembayaran.print');
-    Route::patch('/admin/pembayaran/{payment}/verify', [\App\Http\Controllers\Admin\PembayaranController::class, 'verify'])->name('admin.pembayaran.verify');
-    Route::patch('/admin/pembayaran/{payment}/reject', [\App\Http\Controllers\Admin\PembayaranController::class, 'reject'])->name('admin.pembayaran.reject');
-    Route::resource('/admin/pembayaran', \App\Http\Controllers\Admin\PembayaranController::class)
-        ->names('admin.pembayaran')
-        ->parameters(['pembayaran' => 'payment']);
+    Route::resource('/admin/jenis-tagihan', \App\Http\Controllers\Admin\JenisTagihanController::class)->names('admin.jenis-tagihan');
+    Route::resource('/admin/tagihan', \App\Http\Controllers\Admin\TagihanController::class)->names('admin.tagihan');
+    Route::resource('/admin/pembayaran', \App\Http\Controllers\Admin\PembayaranController::class)->names('admin.pembayaran');
     Route::get('/admin/laporan-keuangan', [\App\Http\Controllers\Admin\LaporanKeuanganController::class, 'index'])->name('admin.laporan-keuangan.index');
 
 
@@ -155,6 +144,8 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
         ->name('teacher.wali-rekap-nilai');
     Route::get('/teacher/wali-rekap-nilai/export', [WaliKelasNilai::class, 'export'])
         ->name('teacher.wali-rekap-nilai.export');
+    Route::post('/teacher/wali-rekap-nilai/publish', [WaliKelasNilai::class, 'publish'])
+        ->name('teacher.wali-rekap-nilai.publish');
 
     Route::get('/teacher/data-siswa/{classId}', [TeacherKelas::class, 'dataSiswa'])
         ->name('teacher.data-siswa');
@@ -193,9 +184,6 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::get('/student/tagihan', [TagihanController::class, 'index'])
         ->name('student.tagihan');
-
-    Route::post('/student/tagihan/{invoice}/bayar', [TagihanController::class, 'storePayment'])
-        ->name('student.tagihan.bayar');
 
     Route::get('/student/nilai', [NilaiController::class, 'index'])
         ->name('student.nilai');

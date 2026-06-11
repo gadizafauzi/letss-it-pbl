@@ -131,6 +131,7 @@ class KelasController extends Controller
             'status',
             'active'
         )
+            ->with('unit')
             ->orderBy('full_name')
             ->get();
 

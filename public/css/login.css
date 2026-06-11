@@ -288,3 +288,9 @@ body::before {
         padding: 9px 10px;
     }
 }
+
+/* Hide Edge native password reveal icon */
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+    display: none;
+}

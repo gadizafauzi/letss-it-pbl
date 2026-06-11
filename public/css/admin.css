@@ -171,8 +171,8 @@
 
 .dashboard-card {
     background: white;
-
     border: none;
+
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(20, 35, 75, 0.03);
 
@@ -225,8 +225,8 @@
 
 .modern-box {
     background: white;
-
     border: none;
+
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(20, 35, 75, 0.03);
 
@@ -317,7 +317,7 @@
 
     background: #f8fafc;
 
-    border: 1px solid #e2e8f0;
+    border: 1px solid;
     border-radius: 18px;
 
     transition: all 0.2s ease;
