@@ -106,10 +106,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // KEUANGAN
     Route::resource('/admin/rekening-sekolah', \App\Http\Controllers\Admin\RekeningSekolahController::class)->names('admin.rekening-sekolah');
     Route::resource('/admin/jenis-tagihan', \App\Http\Controllers\Admin\JenisTagihanController::class)->names('admin.jenis-tagihan');
+
+    // Tambahan untuk view detail per siswa (dipanggil dari resources/views/admin/tagihan/index.blade.php)
+    Route::get('/admin/tagihan/student/{student}', [\App\Http\Controllers\Admin\TagihanController::class, 'student'])
+        ->name('admin.tagihan.student');
+
     Route::resource('/admin/tagihan', \App\Http\Controllers\Admin\TagihanController::class)->names('admin.tagihan');
     Route::resource('/admin/pembayaran', \App\Http\Controllers\Admin\PembayaranController::class)->names('admin.pembayaran');
     Route::get('/admin/laporan-keuangan', [\App\Http\Controllers\Admin\LaporanKeuanganController::class, 'index'])->name('admin.laporan-keuangan.index');
-
+    
 
     // CMS
     Route::get('/admin/beranda', fn() => view('admin.beranda.index'))->name('admin.beranda.index');
