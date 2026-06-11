@@ -1,8 +1,8 @@
 <div
-    class="group bg-white border border-slate-200 rounded-3xl px-4 py-4 lg:px-6 lg:py-5 flex items-center
+    class="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-3xl px-4 py-4 lg:px-6 lg:py-5 flex items-center
     transition-all duration-300 cursor-pointer
-    hover:-translate-y-1 hover:border-blue-200
-    hover:shadow-[-8px_12px_25px_rgba(59,130,246,0.12)]">
+    hover:-translate-y-1 hover:border-blue-200 dark:hover:border-slate-600
+    hover:shadow-[-8px_12px_25px_rgba(59,130,246,0.12)] dark:hover:shadow-slate-900/50">
 
     <div class="flex items-center gap-4">
 
@@ -20,7 +20,7 @@
         {{-- TEXT --}}
         <div>
 
-            <h3 class="text-xl lg:text-2xl font-extrabold text-slate-900 leading-none">
+            <h3 class="text-xl lg:text-2xl font-extrabold text-slate-900 dark:text-slate-100 leading-none">
                 {{ $value }}
             </h3>
 

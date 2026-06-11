@@ -57,7 +57,8 @@ class SiswaController extends Controller
             $query->where('status', $request->status);
         }
 
-        $students = $query->latest()->paginate(5)->appends($request->query());
+        $perPage = $request->input('per_page', 10);
+        $students = $query->latest()->paginate($perPage)->appends($request->query());
         $units    = Unit::all();
         $classes  = SchoolClass::query();
 
@@ -164,6 +165,27 @@ class SiswaController extends Controller
         return redirect()
             ->route('admin.siswa.index')
             ->with('success', 'Data siswa berhasil dihapus');
+    }
+
+    /**
+     * DELETE MASSAL DATA SISWA
+     */
+    public function bulkDestroy(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:students,id'
+        ]);
+
+        $students = Student::whereIn('id', $request->ids)->get();
+
+        foreach ($students as $student) {
+            $this->siswaService->deleteStudent($student);
+        }
+
+        return redirect()
+            ->route('admin.siswa.index')
+            ->with('success', count($students) . ' data siswa berhasil dihapus');
     }
 
     /**

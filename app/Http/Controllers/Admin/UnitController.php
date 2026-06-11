@@ -16,7 +16,8 @@ class UnitController extends Controller
             $query->where('unit_name', 'like', '%' . $request->search . '%');
         }
 
-        $units = $query->latest()->get();
+        $perPage = $request->input('per_page', 10);
+        $units = $query->latest()->paginate($perPage)->appends(request()->query());
 
         return view('admin.unit.index', compact('units'));
     }

@@ -11,7 +11,8 @@ class JenisTagihanController extends Controller
 {
     public function index()
     {
-        $types = PaymentType::with('unit')->get();
+        $perPage = request('per_page', 10);
+        $types = PaymentType::with('unit')->paginate($perPage)->appends(request()->query());
         return view('admin.jenis-tagihan.index', compact('types'));
     }
 

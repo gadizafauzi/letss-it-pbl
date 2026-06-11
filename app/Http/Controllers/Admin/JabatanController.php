@@ -16,7 +16,8 @@ class JabatanController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        $jabatans = $query->latest()->get();
+        $perPage = $request->input('per_page', 10);
+        $jabatans = $query->latest()->paginate($perPage)->appends(request()->query());
 
         return view('admin.jabatan.index', compact('jabatans'));
     }

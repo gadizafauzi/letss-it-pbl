@@ -3,52 +3,40 @@
 @section('content')
     <div class="space-y-5">
 
-        {{-- PAGE HEADER --}}
-        <div class="relative overflow-hidden rounded-2xl px-7 py-6"
-            style="background: linear-gradient(135deg, #2563eb 0%, #3b82f6 55%, #60a5fa 100%);">
-            <div class="absolute -top-12 -right-12 w-44 h-44 bg-white/[.08] rounded-full"></div>
-            <div class="absolute -bottom-16 left-8 w-56 h-56 bg-white/[.05] rounded-full"></div>
-            <div class="relative z-10 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
-                <div>
-                    <p class="text-[11px] font-semibold uppercase tracking-widest text-white/60 mb-1">
-                        Manajemen Akademik
-                    </p>
-                    <h1 class="text-[26px] font-extrabold text-white leading-tight">Data Kelas</h1>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <a href="{{ route('admin.kelas.create') }}"
-                        class="inline-flex items-center gap-1.5 h-[38px] px-4 rounded-[10px] text-xs font-bold
-                          bg-white text-sky-500 hover:bg-sky-50 shadow-md hover:shadow-lg transition-all no-underline">
-                        <i data-lucide="plus" class="w-[14px] h-[14px]"></i>Tambah Kelas
-                    </a>
-                </div>
+        {{-- HEADER --}}
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">
+                    Data Kelas
+                </h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="{{ route('admin.kelas.create') }}"
+                    class="inline-flex items-center gap-2 h-10 px-5 rounded-xl bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white text-sm font-semibold shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all no-underline">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    Tambah Kelas
+                </a>
             </div>
         </div>
 
-        {{-- SUCCESS --}}
+        {{-- TOAST ALERTS --}}
         @if (session('success'))
-            <div
-                class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium
-                    bg-sky-100 border border-sky-200 text-sky-700">
-                <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
-                {{ session('success') }}
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
+                <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0"></i>
+                <p class="text-sm font-medium">{{ session('success') }}</p>
             </div>
         @endif
 
-        {{-- ERROR --}}
         @if (session('error'))
-            <div
-                class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium
-                    bg-red-100 border border-red-200 text-red-700">
-                <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
-                {{ session('error') }}
+            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400">
+                <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0"></i>
+                <p class="text-sm font-medium">{{ session('error') }}</p>
             </div>
         @endif
 
-        {{-- FILTER --}}
-        <div class="bg-white border border-sky-100 rounded-2xl px-5 py-4 shadow-sm">
-            <form id="filterForm" action="{{ route('admin.kelas.index') }}" method="GET"
-                class="flex flex-wrap items-center gap-2.5">
+        {{-- FILTER & SEARCH --}}
+        <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
+            <form id="filterForm" action="{{ route('admin.kelas.index') }}" method="GET" class="flex flex-wrap items-center gap-2.5">
 
                 {{-- Search --}}
                 <div class="relative flex-1 min-w-[200px]">
@@ -65,7 +53,7 @@
                 <select name="unit_id" onchange="this.form.submit()"
                     class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
                            bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
-                           focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
+                           focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
                     <option value="">Semua Unit</option>
                     @foreach ($units as $unit)
                         <option value="{{ $unit->id }}" {{ request('unit_id') == $unit->id ? 'selected' : '' }}>
@@ -78,63 +66,64 @@
         </div>
 
         {{-- TABLE --}}
-        <div class="bg-white border border-sky-100 rounded-2xl overflow-hidden shadow-sm">
+        <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full min-w-[1000px] border-collapse">
+                <table class="w-full min-w-[800px] border-collapse">
                     <thead>
-                        <tr class="bg-sky-50 border-b-[1.5px] border-sky-100">
-                            @foreach (['No', 'Nama Kelas', 'Unit', 'Wali Kelas', 'Jumlah Siswa'] as $h)
-                                <th
-                                    class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 whitespace-nowrap">
-                                    {{ $h }}
-                                </th>
-                            @endforeach
-                            <th
-                                class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500">
-                                Aksi
+                        <tr class="bg-sky-50/50 dark:bg-slate-800/50 border-b-[1.5px] border-sky-100 dark:border-slate-700/50">
+                            <th class="px-4 py-3.5 text-center w-10">
+                                <input type="checkbox" class="row-checkbox rounded border-slate-300 text-blue-600 focus:ring-blue-500 bg-white dark:bg-slate-900/50 dark:border-slate-600 dark:checked:bg-blue-500 cursor-pointer w-4 h-4 transition-all">
                             </th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">No</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Nama Kelas</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Unit</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Wali Kelas</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Jumlah Siswa</th>
+                            <th class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($classes as $class)
-                            <tr class="border-b border-sky-50 hover:bg-sky-50/50 transition-colors">
-                                <td class="px-4 py-3.5 text-xs text-slate-400 font-semibold">
-                                    {{ $loop->iteration }}
+                            <tr class="border-b border-sky-50 dark:border-slate-700/50 hover:bg-white dark:hover:bg-slate-700/30 transition-colors">
+                                <td class="px-4 py-3.5 text-center">
+                                    <input type="checkbox" value="{{ $class->id }}" class="row-checkbox rounded border-slate-300 text-blue-600 focus:ring-blue-500 bg-white dark:bg-slate-900/50 dark:border-slate-600 dark:checked:bg-blue-500 cursor-pointer w-4 h-4 transition-all">
+                                </td>
+                                <td class="px-4 py-3.5 text-xs text-slate-400 dark:text-slate-500 font-semibold">
+                                    {{ $loop->iteration + ($classes->currentPage() - 1) * $classes->perPage() }}
                                 </td>
                                 <td class="px-4 py-3.5">
-                                    <div class="text-[13px] font-bold text-slate-800">{{ $class->class_name }}</div>
+                                    <div class="text-[13px] font-bold text-slate-800 dark:text-slate-200">{{ $class->class_name }}</div>
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $class->unit->unit_name }}
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] text-slate-500">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $class->homeroomTeacher->full_name ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3.5">
-                                    <span
-                                        class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-sky-100 text-sky-700">
+                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border bg-sky-100 text-sky-700 dark:bg-sky-500/20 dark:text-sky-400 border-sky-200 dark:border-sky-500/30">
                                         {{ $class->students_count }} siswa
                                     </span>
                                 </td>
                                 <td class="px-4 py-3.5">
                                     <div class="flex justify-center gap-1.5">
                                         <a href="{{ route('admin.kelas.edit', $class->id) }}"
-                                            class="w-[30px] h-[30px] rounded-lg bg-sky-100 text-sky-500
-                                              hover:bg-sky-500 hover:text-white transition-all
-                                              inline-flex items-center justify-content-center no-underline"
-                                            style="justify-content:center" title="Edit">
-                                            <i data-lucide="square-pen" class="w-[13px] h-[13px]"></i>
+                                            class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 
+                                              hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:border-blue-200 dark:hover:border-blue-800 text-blue-500 dark:text-blue-400 
+                                              hover:text-blue-600 dark:hover:text-blue-300 transition-all inline-flex items-center justify-center shadow-sm no-underline"
+                                            title="Edit">
+                                            <i data-lucide="square-pen" class="w-[14px] h-[14px]"></i>
                                         </a>
                                         <form action="{{ route('admin.kelas.destroy', $class->id) }}" method="POST"
                                             class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" onclick="return confirm('Hapus data?')"
-                                                class="w-[30px] h-[30px] rounded-lg bg-red-100 text-red-400
-                                                       hover:bg-red-500 hover:text-white transition-all
-                                                       inline-flex items-center justify-center cursor-pointer border-none"
+                                                class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 
+                                                  hover:bg-red-50 dark:hover:bg-red-900/30 hover:border-red-200 dark:hover:border-red-800 text-red-500 dark:text-red-400 
+                                                  hover:text-red-600 dark:hover:text-red-300 transition-all inline-flex items-center justify-center shadow-sm cursor-pointer border-none"
                                                 title="Hapus">
-                                                <i data-lucide="trash-2" class="w-[13px] h-[13px]"></i>
+                                                <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -142,21 +131,49 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6">
-                                    <div class="flex flex-col items-center justify-center py-16 text-center">
-                                        <div
-                                            class="w-14 h-14 bg-sky-50 rounded-2xl inline-flex items-center justify-center mb-4 text-sky-300">
-                                            <i data-lucide="school" class="w-7 h-7"></i>
+                                <td colspan="7">
+                                    <div class="flex flex-col items-center justify-center py-20 text-center">
+                                        <div class="mb-6 relative">
+                                            <div class="absolute inset-0 bg-sky-200 dark:bg-sky-900 blur-[32px] opacity-30 rounded-full"></div>
+                                            <div class="w-28 h-28 bg-sky-50 dark:bg-slate-800/80 rounded-[2rem] border border-white/60 dark:border-slate-700 shadow-xl flex items-center justify-center relative z-10 transform -rotate-3 hover:rotate-0 transition-transform duration-300">
+                                                <i data-lucide="school" class="w-12 h-12 text-sky-400 dark:text-sky-300"></i>
+                                            </div>
                                         </div>
-                                        <p class="text-[15px] font-bold text-slate-800 mb-1.5">Belum ada data kelas</p>
-                                        <p class="text-[13px] text-slate-400">Data kelas belum tersedia atau pencarian
-                                            tidak cocok.</p>
+                                        <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2">Belum Ada Data Kelas</h3>
+                                        <p class="text-[14px] text-slate-500 dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
+                                            Sepertinya data kelas masih kosong atau pencarian Anda tidak menemukan hasil yang cocok. Coba ubah filter atau tambahkan data baru.
+                                        </p>
                                     </div>
                                 </td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            {{-- BOTTOM BAR (PER PAGE & PAGINATION) --}}
+            <div class="px-5 py-4 border-t border-slate-100 dark:border-slate-700/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+                {{-- Per Page --}}
+                <div class="flex items-center gap-2">
+                    <span class="text-[13px] font-semibold text-slate-500 dark:text-slate-400">Tampilkan</span>
+                    <select name="per_page" form="filterForm" onchange="document.getElementById('filterForm').submit()"
+                        class="h-[36px] px-2 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-lg
+                               bg-sky-50 dark:bg-slate-900/50 text-[13px] font-bold text-slate-700 dark:text-slate-200 outline-none
+                               focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 transition-all cursor-pointer">
+                        <option value="10" {{ request('per_page', 10) == 10 ? 'selected' : '' }}>10</option>
+                        <option value="25" {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                        <option value="50" {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                    </select>
+                    <span class="text-[13px] font-semibold text-slate-500 dark:text-slate-400">data</span>
+                </div>
+
+                {{-- Pagination Links --}}
+                @if ($classes->hasPages())
+                    <div class="w-full sm:w-auto overflow-x-auto">
+                        {{ $classes->links() }}
+                    </div>
+                @endif
             </div>
         </div>
 

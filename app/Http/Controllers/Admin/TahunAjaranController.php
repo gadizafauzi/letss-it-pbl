@@ -45,7 +45,8 @@ class TahunAjaranController extends Controller
             })
 
             ->latest()
-            ->get();
+            ->paginate($request->input('per_page', 10))
+            ->appends(request()->query());
 
         return view(
             'admin.tahun-ajaran.index',

@@ -3,61 +3,65 @@
 @section('content')
     <div class="space-y-5 max-w-3xl">
 
-        {{-- PAGE HEADER --}}
-        <div>
-            <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight mb-1">Generate Tagihan Masal</h1>
-            <p class="text-sm text-slate-500">Buat tagihan untuk satu kelas atau semua siswa aktif sekaligus.</p>
+        {{-- HEADER --}}
+        <div class="flex items-center gap-3 mb-2">
+            <a href="{{ route('admin.tagihan.index') }}"
+                class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all no-underline">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </a>
+            <div>
+                <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100">Generate Tagihan Masal</h1>
+            </div>
         </div>
 
-        {{-- FORM --}}
-        <div class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm">
-            <form action="{{ route('admin.tagihan.store') }}" method="POST" class="space-y-4">
+        <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-[2rem] shadow-sm p-6">
+            <form action="{{ route('admin.tagihan.store') }}" method="POST" class="space-y-5">
                 @csrf
 
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Jenis Tagihan</label>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Jenis Tagihan</label>
                     <select name="payment_type_id" required
-                        class="w-full h-11 px-4 border border-slate-200 rounded-xl bg-slate-50 text-sm focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
+                        class="w-full h-12 px-4 rounded-2xl border bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 text-sm text-slate-700 dark:text-slate-200 transition-all">
                         <option value="">-- Pilih Tagihan --</option>
                         @foreach ($paymentTypes as $type)
                             <option value="{{ $type->id }}">
-                                {{ $type->name }} - Rp {{ number_format($type->amount,0,',','.') }} ({{ $type->unit ? $type->unit->unit_name : 'Semua Unit' }})
+                                {{ $type->name }} - Rp {{ number_format($type->amount, 0, ',', '.') }} ({{ $type->unit ? $type->unit->unit_name : 'Semua Unit' }})
                             </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Periode Bulan / Keterangan</label>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Periode Bulan / Keterangan</label>
                     <input type="text" name="period" value="{{ old('period', date('F Y')) }}" required
-                        class="w-full h-11 px-4 border border-slate-200 rounded-xl bg-slate-50 text-sm focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all"
-                        placeholder="Contoh: Juli 2026">
+                        placeholder="Contoh: Juli 2026"
+                        class="w-full h-12 px-4 rounded-2xl border bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 text-sm text-slate-700 dark:text-slate-200 transition-all">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Jatuh Tempo</label>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Jatuh Tempo</label>
                     <input type="date" name="due_date" value="{{ old('due_date', date('Y-m-15')) }}" required
-                        class="w-full h-11 px-4 border border-slate-200 rounded-xl bg-slate-50 text-sm focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
+                        class="w-full h-12 px-4 rounded-2xl border bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 text-sm text-slate-700 dark:text-slate-200 transition-all">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Target Siswa</label>
-                    <div class="space-y-2 mt-2">
-                        <label class="flex items-center gap-2">
-                            <input type="radio" name="target" value="all" checked class="text-emerald-500 focus:ring-emerald-500" onchange="toggleKelas(false)">
-                            <span class="text-sm text-slate-700">Semua Siswa Aktif (Sesuai Unit Tagihan)</span>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Target Siswa</label>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/30 cursor-pointer hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+                            <input type="radio" name="target" value="all" checked class="text-blue-600 focus:ring-blue-500 w-4 h-4" onchange="toggleKelas(false)">
+                            <span class="text-sm text-slate-700 dark:text-slate-300 font-medium">Semua Siswa Aktif <span class="text-slate-400 dark:text-slate-500 text-xs">(Sesuai Unit Tagihan)</span></span>
                         </label>
-                        <label class="flex items-center gap-2">
-                            <input type="radio" name="target" value="class" class="text-emerald-500 focus:ring-emerald-500" onchange="toggleKelas(true)">
-                            <span class="text-sm text-slate-700">Spesifik Kelas</span>
+                        <label class="flex items-center gap-3 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/30 cursor-pointer hover:border-blue-300 dark:hover:border-blue-700 transition-all">
+                            <input type="radio" name="target" value="class" class="text-blue-600 focus:ring-blue-500 w-4 h-4" onchange="toggleKelas(true)">
+                            <span class="text-sm text-slate-700 dark:text-slate-300 font-medium">Spesifik Kelas</span>
                         </label>
                     </div>
                 </div>
 
                 <div id="kelasWrapper" class="hidden">
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">Pilih Kelas</label>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Pilih Kelas</label>
                     <select name="class_id"
-                        class="w-full h-11 px-4 border border-slate-200 rounded-xl bg-slate-50 text-sm focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition-all">
+                        class="w-full h-12 px-4 rounded-2xl border bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600 focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-400 text-sm text-slate-700 dark:text-slate-200 transition-all">
                         <option value="">-- Pilih Kelas --</option>
                         @foreach ($classes as $class)
                             <option value="{{ $class->id }}">
@@ -67,19 +71,18 @@
                     </select>
                 </div>
 
-                <div class="pt-4 flex items-center gap-3">
-                    <a href="{{ route('admin.tagihan.index') }}"
-                        class="px-5 py-2.5 rounded-xl text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors">
-                        Batal
-                    </a>
+                <div class="pt-2 flex items-center gap-3">
                     <button type="submit"
-                        class="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 shadow-sm shadow-emerald-500/20 transition-all">
+                        class="h-12 px-8 rounded-2xl bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white font-bold shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all border-none cursor-pointer">
                         Generate Tagihan
                     </button>
+                    <a href="{{ route('admin.tagihan.index') }}"
+                        class="h-12 px-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold inline-flex items-center justify-center transition-all no-underline">
+                        Batal
+                    </a>
                 </div>
             </form>
         </div>
-
     </div>
 
     <script>

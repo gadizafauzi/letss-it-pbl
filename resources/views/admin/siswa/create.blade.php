@@ -4,12 +4,14 @@
     <div class="space-y-6">
 
         {{-- HEADER --}}
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-[30px] font-bold text-slate-800">
-                    Tambah Siswa
-                </h1>
-            </div>
+        <div class="flex items-center gap-3 mb-2">
+            <a href="{{ route('admin.siswa.index') }}"
+                class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all no-underline">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            </a>
+            <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100">
+                Tambah Siswa
+            </h1>
         </div>
 
         <form action="{{ route('admin.siswa.store') }}" method="POST" enctype="multipart/form-data">
@@ -19,24 +21,24 @@
 
                 {{-- LEFT CONTENT --}}
                 <div class="xl:col-span-9">
-                    <div class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-[2rem] shadow-sm overflow-hidden">
 
                         {{-- TAB HEADER --}}
-                        <div class="border-b border-slate-200 px-6 pt-5">
+                        <div class="border-b border-slate-200 dark:border-slate-700/50 px-6 pt-5">
                             <div class="flex flex-wrap gap-2">
 
                                 <button type="button" data-tab-target="tab-data-pribadi"
-                                    class="tab-btn h-11 px-5 rounded-t-2xl border-b-2 border-blue-500 text-blue-600 bg-blue-50 text-sm font-bold transition-all">
+                                    class="tab-btn h-11 px-5 rounded-t-2xl border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 text-sm font-bold transition-all">
                                     Data Pribadi
                                 </button>
 
                                 <button type="button" data-tab-target="tab-data-sekolah"
-                                    class="tab-btn h-11 px-5 rounded-t-2xl text-slate-500 hover:text-blue-600 hover:bg-blue-50 text-sm font-semibold transition-all">
+                                    class="tab-btn h-11 px-5 rounded-t-2xl text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-sm font-semibold transition-all">
                                     Data Sekolah
                                 </button>
 
                                 <button type="button" data-tab-target="tab-data-keluarga"
-                                    class="tab-btn h-11 px-5 rounded-t-2xl text-slate-500 hover:text-blue-600 hover:bg-blue-50 text-sm font-semibold transition-all">
+                                    class="tab-btn h-11 px-5 rounded-t-2xl text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-sm font-semibold transition-all">
                                     Data Keluarga
                                 </button>
 
@@ -224,29 +226,27 @@
 
 
                                 {{-- INFORMASI AKUN LOGIN --}}
-                                <div class="rounded-3xl border border-amber-200 bg-amber-50 p-5">
+                                <div class="rounded-[1.5rem] border border-amber-200 dark:border-amber-500/20 bg-amber-50 dark:bg-amber-500/10 p-5">
                                     <div class="flex items-center gap-2 mb-4">
-                                        <i data-lucide="shield-check" class="w-5 h-5 text-amber-600"></i>
-                                        <h3 class="text-sm font-bold text-amber-800">Informasi Akun Login</h3>
+                                        <i data-lucide="shield-check" class="w-5 h-5 text-amber-600 dark:text-amber-400"></i>
+                                        <h3 class="text-sm font-bold text-amber-800 dark:text-amber-300">Informasi Akun Login</h3>
                                     </div>
                                     <div class="space-y-4">
                                         <div>
-                                            <label class="block text-sm font-bold text-slate-700 mb-2">Username
-                                                Login</label>
+                                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Username Login</label>
                                             <input type="text" value="Menggunakan NIS siswa" readonly
-                                                class="w-full h-12 px-4 rounded-2xl border border-amber-200 bg-white text-slate-500 text-sm">
+                                                class="w-full h-12 px-4 rounded-2xl border border-amber-200 dark:border-amber-500/30 bg-white dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-sm">
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-bold text-slate-700 mb-2">Password
-                                                Default</label>
+                                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Password Default</label>
                                             <input type="text" value="12345678" readonly
-                                                class="w-full h-12 px-4 rounded-2xl border border-amber-200 bg-white text-red-500 font-bold text-sm">
+                                                class="w-full h-12 px-4 rounded-2xl border border-amber-200 dark:border-amber-500/30 bg-white dark:bg-slate-800/50 text-red-500 dark:text-red-400 font-bold text-sm">
                                         </div>
-                                        <div class="rounded-2xl bg-white border border-amber-100 p-4">
-                                            <p class="text-xs text-amber-700 leading-relaxed">
+                                        <div class="rounded-2xl bg-white/50 dark:bg-slate-800/30 border border-amber-100 dark:border-amber-500/20 p-4">
+                                            <p class="text-xs text-amber-700 dark:text-amber-400 leading-relaxed">
                                                 Sistem akan otomatis membuat akun login siswa menggunakan
-                                                <span class="font-bold">NIS</span> sebagai username dan password default
-                                                <span class="font-bold text-red-500">12345678</span>.
+                                                <span class="font-bold text-amber-800 dark:text-amber-300">NIS</span> sebagai username dan password default
+                                                <span class="font-bold text-red-500 dark:text-red-400">12345678</span>.
                                             </p>
                                             <p class="text-xs text-amber-700 mt-2 leading-relaxed">
                                                 Setelah siswa berhasil login, password dapat diubah melalui menu profil akun
@@ -298,8 +298,8 @@
                 <div class="xl:col-span-3 space-y-6">
 
                     {{-- STATUS --}}
-                    <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
-                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-5">Status</h3>
+                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-[2rem] shadow-sm p-6">
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] dark:text-blue-400 mb-5">Status</h3>
                         <div class="space-y-4">
                             <label class="flex items-center gap-3 text-sm text-slate-700">
                                 <input type="radio" name="status" value="inactive"
@@ -335,13 +335,13 @@
                     </div>
 
                     {{-- FOTO --}}
-                    <div class="bg-white border border-slate-200 rounded-3xl shadow-sm p-6">
-                        <h3 class="text-base font-bold text-[var(--theme-primary)] mb-4">Foto</h3>
+                    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-[2rem] shadow-sm p-6">
+                        <h3 class="text-base font-bold text-[var(--theme-primary)] dark:text-blue-400 mb-4">Foto</h3>
                         <div id="photo-preview-wrapper"
-                            class="aspect-square rounded-3xl border-2 border-dashed border-slate-200 bg-slate-50 flex items-center justify-center overflow-hidden">
+                            class="aspect-square rounded-3xl border-2 border-dashed border-sky-200 dark:border-slate-600 bg-sky-50/50 dark:bg-slate-900/50 flex items-center justify-center overflow-hidden">
                             <div class="text-center" id="photo-placeholder">
-                                <i data-lucide="user-circle-2" class="w-24 h-24 text-slate-300 mx-auto mb-3"></i>
-                                <p class="text-xs text-slate-400">Preview Foto</p>
+                                <i data-lucide="user-circle-2" class="w-24 h-24 text-sky-200 dark:text-slate-600 mx-auto mb-3"></i>
+                                <p class="text-xs text-sky-400 dark:text-slate-500 font-medium">Preview Foto</p>
                             </div>
                             <img id="photo-preview" src="" alt="Preview"
                                 class="hidden w-full h-full object-cover">
@@ -358,8 +358,8 @@
                     {{-- ACTION --}}
                     <div class="space-y-3">
                         <button type="submit"
-                            class="w-full h-12 rounded-2xl bg-blue-500 hover:bg-blue-600
-                            text-white font-bold shadow-lg shadow-blue-100 transition-all">
+                            class="w-full h-12 rounded-2xl bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90
+                            text-white font-bold shadow-lg shadow-[#4D7EEB]/30 transition-all">
                             Simpan
                         </button>
                         <a href="{{ route('admin.siswa.index') }}"

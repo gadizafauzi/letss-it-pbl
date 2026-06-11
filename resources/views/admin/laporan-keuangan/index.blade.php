@@ -3,118 +3,157 @@
 @section('content')
     <div class="space-y-5">
 
-        {{-- PAGE HEADER --}}
-        <div class="relative overflow-hidden rounded-2xl px-7 py-6"
-            style="background: linear-gradient(135deg, #10b981 0%, #34d399 55%, #6ee7b7 100%);">
-            <div class="absolute -top-12 -right-12 w-44 h-44 bg-white/[.08] rounded-full"></div>
-            <div class="absolute -bottom-16 left-8 w-56 h-56 bg-white/[.05] rounded-full"></div>
-            <div class="relative z-10 flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
-                <div>
-                    <p class="text-[11px] font-semibold uppercase tracking-widest text-white/60 mb-1">
-                        Manajemen Keuangan
-                    </p>
-                    <h1 class="text-[26px] font-extrabold text-white leading-tight">Laporan Keuangan</h1>
-                </div>
-            </div>
+        {{-- HEADER --}}
+        <div class="mb-2">
+            <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Laporan Keuangan</h1>
         </div>
 
         {{-- FILTER --}}
-        <div class="bg-white border border-slate-100 rounded-2xl px-5 py-4 shadow-sm">
+        <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
             <form action="{{ route('admin.laporan-keuangan.index') }}" method="GET" class="flex flex-wrap items-center gap-4">
+                
+                {{-- Bulan --}}
                 <div class="flex items-center gap-2">
-                    <label class="text-sm font-semibold text-slate-700">Bulan:</label>
-                    <select name="month" onchange="this.form.submit()" class="h-[42px] px-3 border-[1.5px] border-slate-200 rounded-[10px] bg-slate-50 text-[13px] text-slate-700 outline-none">
-                        @for($i=1; $i<=12; $i++)
+                    <label class="text-[13px] font-bold text-slate-700 dark:text-slate-300">Bulan:</label>
+                    <select name="month" onchange="this.form.submit()"
+                        class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                               bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
+                               focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
+                        @for($i = 1; $i <= 12; $i++)
                             <option value="{{ sprintf('%02d', $i) }}" {{ $month == sprintf('%02d', $i) ? 'selected' : '' }}>
                                 {{ date('F', mktime(0, 0, 0, $i, 1)) }}
                             </option>
                         @endfor
                     </select>
                 </div>
+
+                {{-- Tahun --}}
                 <div class="flex items-center gap-2">
-                    <label class="text-sm font-semibold text-slate-700">Tahun:</label>
-                    <select name="year" onchange="this.form.submit()" class="h-[42px] px-3 border-[1.5px] border-slate-200 rounded-[10px] bg-slate-50 text-[13px] text-slate-700 outline-none">
-                        @for($y=2024; $y<=date('Y')+1; $y++)
+                    <label class="text-[13px] font-bold text-slate-700 dark:text-slate-300">Tahun:</label>
+                    <select name="year" onchange="this.form.submit()"
+                        class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                               bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[120px]
+                               focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
+                        @for($y = 2024; $y <= date('Y') + 1; $y++)
                             <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>
                         @endfor
                     </select>
                 </div>
-                <button type="submit" class="hidden"></button>
+
             </form>
         </div>
 
-        {{-- SUMMARY CARD --}}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div class="bg-white rounded-2xl p-6 border border-emerald-100 shadow-sm relative overflow-hidden">
-                <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-4 translate-y-4">
-                    <i data-lucide="banknote" class="w-32 h-32 text-emerald-500"></i>
+        {{-- SUMMARY CARDS --}}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {{-- Total Pemasukan --}}
+            <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-[2rem] shadow-sm p-6 relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-emerald-100 dark:bg-emerald-500/10 rounded-full"></div>
+                <div class="absolute -right-1 -bottom-1 w-16 h-16 bg-emerald-200 dark:bg-emerald-500/20 rounded-full"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                            <i data-lucide="banknote" class="w-5 h-5 text-emerald-600 dark:text-emerald-400"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Pemasukan Bulan Ini</span>
+                    </div>
+                    <div class="text-3xl font-black text-emerald-600 dark:text-emerald-400">Rp {{ number_format($totalIncome, 0, ',', '.') }}</div>
                 </div>
-                <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2 relative z-10">Total Pemasukan Bulan Ini</h3>
-                <div class="text-3xl font-black text-emerald-600 relative z-10">Rp {{ number_format($totalIncome, 0, ',', '.') }}</div>
             </div>
-            
-            <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm relative overflow-hidden">
-                <div class="absolute right-0 bottom-0 opacity-5 pointer-events-none transform translate-x-4 translate-y-4">
-                    <i data-lucide="receipt" class="w-32 h-32 text-slate-500"></i>
+
+            {{-- Total Transaksi --}}
+            <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-[2rem] shadow-sm p-6 relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-28 h-28 bg-blue-100 dark:bg-blue-500/10 rounded-full"></div>
+                <div class="absolute -right-1 -bottom-1 w-16 h-16 bg-blue-200 dark:bg-blue-500/20 rounded-full"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-500/20 rounded-xl flex items-center justify-center">
+                            <i data-lucide="receipt" class="w-5 h-5 text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Transaksi</span>
+                    </div>
+                    <div class="text-3xl font-black text-blue-600 dark:text-blue-400">{{ $payments->count() }} <span class="text-xl font-bold text-slate-500 dark:text-slate-400">Transaksi</span></div>
                 </div>
-                <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2 relative z-10">Total Transaksi</h3>
-                <div class="text-3xl font-black text-slate-700 relative z-10">{{ $payments->count() }} Transaksi</div>
             </div>
         </div>
 
-        {{-- TABLE DETAILS --}}
-        <div class="bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm mt-5">
-            <div class="p-4 border-b border-slate-100">
-                <h2 class="font-bold text-slate-800">Rincian Pembayaran</h2>
+        {{-- TABLE RINCIAN --}}
+        <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl shadow-sm overflow-hidden">
+            <div class="px-6 py-4 border-b border-sky-100 dark:border-slate-700/50 flex items-center gap-3 bg-sky-50/50 dark:bg-slate-800/50">
+                <div class="w-9 h-9 bg-emerald-100 dark:bg-emerald-500/20 rounded-xl flex items-center justify-center">
+                    <i data-lucide="list" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+                </div>
+                <h2 class="text-[15px] font-bold text-slate-800 dark:text-slate-100">Rincian Pembayaran</h2>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full min-w-[800px] border-collapse">
                     <thead>
-                        <tr class="bg-slate-50 border-b-[1.5px] border-slate-100">
-                            @foreach (['Tgl Bayar', 'Siswa', 'Jenis Tagihan', 'Metode', 'Nominal'] as $h)
-                                <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 whitespace-nowrap">
-                                    {{ $h }}
-                                </th>
-                            @endforeach
+                        <tr class="bg-sky-50/50 dark:bg-slate-800/50 border-b-[1.5px] border-sky-100 dark:border-slate-700/50">
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">No</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Tgl Bayar</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Siswa</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Jenis Tagihan</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Metode</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Nominal</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($payments as $payment)
-                            <tr class="border-b border-slate-50 hover:bg-slate-50/50 transition-colors">
-                                <td class="px-4 py-3.5 text-[13px] text-slate-600 font-medium">
+                            <tr class="border-b border-sky-50 dark:border-slate-700/50 hover:bg-white dark:hover:bg-slate-700/30 transition-colors">
+                                <td class="px-4 py-3.5 text-xs text-slate-400 dark:text-slate-500 font-semibold">{{ $loop->iteration }}</td>
+                                <td class="px-4 py-3.5 text-[13px] text-slate-600 dark:text-slate-400 font-medium">
                                     {{ \Carbon\Carbon::parse($payment->payment_date)->format('d M Y') }}
                                 </td>
                                 <td class="px-4 py-3.5">
-                                    <div class="text-[13px] font-bold text-slate-800">{{ $payment->invoice->student->full_name }}</div>
-                                    <div class="text-[11px] text-slate-500">{{ $payment->invoice->student->nis }}</div>
+                                    <div class="text-[13px] font-bold text-slate-800 dark:text-slate-200">{{ $payment->invoice->student->full_name }}</div>
+                                    <div class="text-[11px] text-slate-400 dark:text-slate-500 font-mono">{{ $payment->invoice->student->nis }}</div>
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] text-slate-700">
-                                    {{ $payment->invoice->payment_type }} ({{ $payment->invoice->period }})
+                                <td class="px-4 py-3.5 text-[13px] text-slate-700 dark:text-slate-300">
+                                    {{ $payment->invoice->payment_type }}
+                                    <span class="text-[11px] text-slate-400 dark:text-slate-500">({{ $payment->invoice->period }})</span>
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] text-slate-600">
+                                <td class="px-4 py-3.5 text-[13px] text-slate-600 dark:text-slate-400">
                                     @if($payment->payment_method == 'cash')
-                                        Tunai
+                                        <span class="inline-flex items-center gap-1.5 text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 px-2.5 py-1 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-600">
+                                            <i data-lucide="banknote" class="w-3 h-3"></i> Tunai
+                                        </span>
                                     @else
-                                        Transfer ({{ $payment->schoolAccount->bank_name ?? '' }})
+                                        <span class="inline-flex items-center gap-1.5 text-sky-700 dark:text-sky-400 bg-sky-100 dark:bg-sky-900/30 px-2.5 py-1 rounded-full text-xs font-bold border border-sky-200 dark:border-sky-800">
+                                            <i data-lucide="building-2" class="w-3 h-3"></i> Transfer {{ $payment->schoolAccount->bank_name ?? '' }}
+                                        </span>
                                     @endif
                                 </td>
-                                <td class="px-4 py-3.5 text-[13px] font-bold text-emerald-600">
-                                    Rp {{ number_format($payment->invoice->amount,0,',','.') }}
+                                <td class="px-4 py-3.5">
+                                    <span class="text-[13px] font-bold text-emerald-600 dark:text-emerald-400">
+                                        Rp {{ number_format($payment->invoice->amount, 0, ',', '.') }}
+                                    </span>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5">
-                                    <div class="flex flex-col items-center justify-center py-12 text-center">
-                                        <p class="text-[14px] text-slate-500">Tidak ada transaksi pada bulan ini.</p>
+                                <td colspan="6">
+                                    <div class="flex flex-col items-center justify-center py-16 text-center">
+                                        <div class="mb-4 w-20 h-20 bg-slate-50 dark:bg-slate-800 rounded-2xl flex items-center justify-center">
+                                            <i data-lucide="bar-chart-2" class="w-10 h-10 text-slate-300 dark:text-slate-600"></i>
+                                        </div>
+                                        <p class="text-[14px] font-bold text-slate-800 dark:text-slate-100 mb-1">Tidak ada transaksi</p>
+                                        <p class="text-[13px] text-slate-500 dark:text-slate-400">Tidak ada transaksi pada bulan ini.</p>
                                     </div>
                                 </td>
                             </tr>
                         @endforelse
                     </tbody>
+                    @if($payments->count() > 0)
+                        <tfoot>
+                            <tr class="border-t-2 border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-800/80">
+                                <td colspan="5" class="px-4 py-3.5 text-sm font-bold text-slate-800 dark:text-slate-200 text-right">Total:</td>
+                                <td class="px-4 py-3.5 text-sm font-black text-emerald-600 dark:text-emerald-400">
+                                    Rp {{ number_format($totalIncome, 0, ',', '.') }}
+                                </td>
+                            </tr>
+                        </tfoot>
+                    @endif
                 </table>
             </div>
         </div>
-
     </div>
 @endsection
