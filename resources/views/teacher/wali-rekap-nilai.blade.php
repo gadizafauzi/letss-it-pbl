@@ -3,8 +3,8 @@
 @section('content')
 
 @if(session('success'))
-    <div class="mb-6 p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 text-emerald-700 rounded-xl text-sm font-bold flex items-center gap-2">
-        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500 dark:text-emerald-400"></i>
+    <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 text-blue-700 rounded-xl text-sm font-bold flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-5 h-5 text-blue-500 dark:text-blue-400"></i>
         {{ session('success') }}
     </div>
 @endif
@@ -30,61 +30,61 @@
 {{-- CARD --}}
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
 
-    <div class="bg-[var(--bg-card)] border-2 border-emerald-100 dark:border-[var(--theme-border-light)] rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-emerald-300 dark:hover:border-emerald-500">
-        <div class="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
+    <div class="bg-gradient-to-br from-rose-500 to-rose-600 border border-rose-400 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(244,63,94,0.3)] hover:shadow-[0_8px_25px_rgba(244,63,94,0.45)]">
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0 backdrop-blur-sm">
             <i data-lucide="school" class="w-6 h-6"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">
+            <p class="text-xs font-bold text-rose-100 mb-0.5">
                 Kelas
             </p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)]">
+            <h2 class="text-base font-extrabold text-white">
                 {{ $class->class_name ?? '-' }}
             </h2>
         </div>
     </div>
 
-    <div class="bg-[var(--bg-card)] border-2 border-blue-100 dark:border-[var(--theme-border-light)] rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-blue-300 dark:hover:border-blue-500">
-        <div class="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
+    <div class="bg-gradient-to-br from-blue-500 to-blue-600 border border-blue-400 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(59,130,246,0.3)] hover:shadow-[0_8px_25px_rgba(59,130,246,0.45)]">
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0 backdrop-blur-sm">
             <i data-lucide="users" class="w-6 h-6"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">
+            <p class="text-xs font-bold text-blue-100 mb-0.5">
                 Total Siswa
             </p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)]">
+            <h2 class="text-base font-extrabold text-white">
                 {{ $students ? $students->count() : 0 }}
             </h2>
         </div>
     </div>
 
-    <div class="bg-[var(--bg-card)] border-2 border-purple-100 dark:border-[var(--theme-border-light)] rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-purple-300 dark:hover:border-purple-500">
-        <div class="w-14 h-14 rounded-2xl bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
+    <div class="bg-gradient-to-br from-purple-500 to-purple-600 border border-purple-400 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(168,85,247,0.3)] hover:shadow-[0_8px_25px_rgba(168,85,247,0.45)]">
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0 backdrop-blur-sm">
             <i data-lucide="book-open-check" class="w-6 h-6"></i>
         </div>
 
-        <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">
+        <div class="flex-1 min-w-0">
+            <p class="text-xs font-bold text-purple-100 mb-0.5">
                 Mata Pelajaran
             </p>
-            <h2 class="text-xl font-extrabold text-[var(--text-main)] truncate max-w-[150px]" title="{{ $selectedSubject?->subject_name ?? '-' }}">
+            <h2 class="text-xs font-extrabold text-white leading-tight line-clamp-2" title="{{ $selectedSubject?->subject_name ?? '-' }}">
                 {{ $selectedSubject?->subject_name ?? '-' }}
             </h2>
         </div>
     </div>
 
-    <div class="bg-[var(--bg-card)] border-2 border-orange-100 dark:border-[var(--theme-border-light)] rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-orange-300 dark:hover:border-orange-500">
-        <div class="w-14 h-14 rounded-2xl bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
+    <div class="bg-gradient-to-br from-orange-500 to-orange-600 border border-orange-400 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(249,115,22,0.3)] hover:shadow-[0_8px_25px_rgba(249,115,22,0.45)]">
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0 backdrop-blur-sm">
             <i data-lucide="award" class="w-6 h-6"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">
+            <p class="text-xs font-bold text-orange-100 mb-0.5">
                 Rata-rata Kelas
             </p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)]">
+            <h2 class="text-base font-extrabold text-white">
                 {{ $classAverage }}
             </h2>
         </div>
@@ -163,7 +163,7 @@
             <form id="publishForm" action="{{ route('teacher.wali-rekap-nilai.publish') }}" method="POST">
                 @csrf
                 <input type="hidden" name="semester" value="{{ $semester }}">
-                <button type="button" onclick="openPublishModal()" class="h-10 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
+                <button type="button" onclick="openPublishModal()" class="h-10 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
                     <i data-lucide="check-circle" class="w-4 h-4"></i>
                     Terbitkan Nilai
                 </button>
@@ -179,7 +179,7 @@
 
     <div class="overflow-x-auto">
         <table class="w-full text-sm">
-            <thead class="bg-[var(--theme-bg-light)] text-[var(--text-secondary)] text-xs uppercase">
+            <thead class="bg-slate-50 dark:bg-slate-800/40 text-[var(--text-secondary)] text-xs uppercase font-bold border-b border-[var(--border-color)]">
                 <tr>
                     <th class="px-6 py-4 text-left">No</th>
                     <th class="px-6 py-4 text-left">NIS</th>
@@ -241,7 +241,7 @@
                                     Belum Dinilai
                                 </span>
                             @elseif($isTuntas)
-                                <span class="bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-bold">
+                                <span class="bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-bold">
                                     Tuntas
                                 </span>
                             @else
@@ -270,7 +270,7 @@
     <div class="fixed inset-0 bg-slate-900/50 dark:bg-slate-900/80 backdrop-blur-sm transition-opacity" onclick="closePublishModal()"></div>
     <div class="relative bg-[var(--bg-card)] w-full max-w-md rounded-2xl shadow-xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300 border border-[var(--border-color)] m-4" id="publishModalContent">
         <div class="p-6">
-            <div class="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+            <div class="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
                 <i data-lucide="check-circle" class="w-6 h-6"></i>
             </div>
             <h3 class="text-xl font-bold text-[var(--text-main)] mb-2">Terbitkan Nilai?</h3>
@@ -279,7 +279,7 @@
             </p>
             <div class="flex gap-3 justify-end">
                 <button type="button" onclick="closePublishModal()" class="px-5 py-2.5 rounded-xl border border-[var(--border-color)] text-[var(--text-secondary)] hover:bg-[var(--theme-bg-light)] hover:text-[var(--text-main)] font-semibold transition-colors">Batal</button>
-                <button type="button" onclick="document.getElementById('publishForm').submit()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition-colors shadow-sm hover:shadow-md">Ya, Terbitkan</button>
+                <button type="button" onclick="document.getElementById('publishForm').submit()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-colors shadow-sm hover:shadow-md">Ya, Terbitkan</button>
             </div>
         </div>
     </div>

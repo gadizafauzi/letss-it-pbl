@@ -26,7 +26,7 @@
 
         <table class="w-full text-sm">
 
-            <thead class="bg-[var(--theme-bg-light)] text-[var(--text-secondary)] text-xs uppercase border-b border-[var(--border-color)]">
+            <thead class="bg-slate-50 dark:bg-slate-800/40 text-[var(--text-secondary)] text-xs uppercase border-b border-[var(--border-color)] font-bold">
 
                 <tr>
 
@@ -78,7 +78,7 @@
 
                         <td class="px-6 py-4">
 
-                            <span class="bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-3 py-1 rounded-full text-xs font-bold">
+                            <span class="bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-xs font-bold">
                                 Aktif
                             </span>
 
@@ -100,7 +100,7 @@
                                 {{-- INPUT NILAI --}}
                                 <a href="{{ route('teacher.input-nilai', $assignment->id) }}"
                                     title="Input Nilai"
-                                    class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-500/30 flex items-center justify-center transition-all duration-200">
+                                    class="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-500/20 text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-500/30 flex items-center justify-center transition-all duration-200">
 
                                     <i data-lucide="clipboard-pen-line" class="w-4 h-4"></i>
 

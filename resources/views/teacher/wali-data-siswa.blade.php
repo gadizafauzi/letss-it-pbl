@@ -18,61 +18,61 @@
 {{-- CARD INFO KELAS --}}
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
 
-    <div class="bg-[var(--bg-card)] border-2 border-emerald-100 dark:border-[var(--theme-border-light)] rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-emerald-300 dark:hover:border-emerald-500 hover:shadow-[-8px_12px_25px_var(--theme-stat-hover)]">
-        <div class="w-14 h-14 rounded-2xl bg-[#D1FAE5] text-[#059669] flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
+    <div class="bg-gradient-to-br from-rose-500 to-rose-600 border border-rose-400 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(244,63,94,0.3)] hover:shadow-[0_8px_25px_rgba(244,63,94,0.45)]">
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0 backdrop-blur-sm">
             <i data-lucide="school" class="w-6 h-6"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">
+            <p class="text-xs font-bold text-rose-100 mb-0.5">
                 Kelas Wali
             </p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)]">
+            <h2 class="text-base font-extrabold text-white">
                 {{ $class->class_name ?? '-' }}
             </h2>
         </div>
     </div>
 
-    <div class="bg-[var(--bg-card)] border-2 border-blue-100 dark:border-[var(--theme-border-light)] rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-[-8px_12px_25px_var(--theme-stat-hover)]">
-        <div class="w-14 h-14 rounded-2xl bg-[#DBEAFE] text-[#2563EB] flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
+    <div class="bg-gradient-to-br from-blue-500 to-blue-600 border border-blue-400 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(59,130,246,0.3)] hover:shadow-[0_8px_25px_rgba(59,130,246,0.45)]">
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0 backdrop-blur-sm">
             <i data-lucide="users" class="w-6 h-6"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">
+            <p class="text-xs font-bold text-blue-100 mb-0.5">
                 Total Siswa
             </p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)] counter" data-target="{{ $students ? $students->count() : 0 }}">
+            <h2 class="text-base font-extrabold text-white counter" data-target="{{ $students ? $students->count() : 0 }}">
                 {{ $students ? $students->count() : 0 }}
             </h2>
         </div>
     </div>
 
-    <div class="bg-[var(--bg-card)] border-2 border-purple-100 dark:border-[var(--theme-border-light)] rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-purple-300 dark:hover:border-purple-500 hover:shadow-[-8px_12px_25px_var(--theme-stat-hover)]">
-        <div class="w-14 h-14 rounded-2xl bg-[#F3E8FF] text-[#9333EA] flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
+    <div class="bg-gradient-to-br from-purple-500 to-purple-600 border border-purple-400 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(168,85,247,0.3)] hover:shadow-[0_8px_25px_rgba(168,85,247,0.45)]">
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0 backdrop-blur-sm">
             <i data-lucide="calendar-days" class="w-6 h-6"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">
+            <p class="text-xs font-bold text-purple-100 mb-0.5">
                 Tahun Ajaran
             </p>
-            <h2 class="text-xl font-extrabold text-[var(--text-main)]">
+            <h2 class="text-base font-extrabold text-white">
                 {{ $activeYear?->year ?? '-' }}
             </h2>
         </div>
     </div>
 
-    <div class="bg-[var(--bg-card)] border-2 border-orange-100 dark:border-[var(--theme-border-light)] rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-sm hover:border-orange-300 dark:hover:border-orange-500 hover:shadow-[-8px_12px_25px_var(--theme-stat-hover)]">
-        <div class="w-14 h-14 rounded-2xl bg-[#FFEDD5] text-[#EA580C] flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0">
+    <div class="bg-gradient-to-br from-orange-500 to-orange-600 border border-orange-400 rounded-3xl px-6 py-5 flex items-center gap-4 group transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] shadow-[0_4px_15px_-3px_rgba(249,115,22,0.3)] hover:shadow-[0_8px_25px_rgba(249,115,22,0.45)]">
+        <div class="w-14 h-14 rounded-2xl bg-white/20 text-white flex items-center justify-center transition-all duration-300 group-hover:-rotate-12 group-hover:scale-110 shrink-0 backdrop-blur-sm">
             <i data-lucide="book-open-check" class="w-6 h-6"></i>
         </div>
 
         <div>
-            <p class="text-sm font-semibold text-[var(--text-secondary)] mb-1">
+            <p class="text-xs font-bold text-orange-100 mb-0.5">
                 Semester
             </p>
-            <h2 class="text-2xl font-extrabold text-[var(--text-main)]">
+            <h2 class="text-base font-extrabold text-white">
                 {{ $activeYear?->active_semester === 'odd' ? 'Ganjil' : 'Genap' }}
             </h2>
         </div>
@@ -135,7 +135,7 @@
 
     <div class="overflow-x-auto">
         <table class="w-full text-sm">
-            <thead class="bg-[var(--theme-bg-light)] text-[var(--text-secondary)] text-xs uppercase">
+            <thead class="bg-slate-50 dark:bg-slate-800/40 text-[var(--text-secondary)] text-xs uppercase font-bold border-b border-[var(--border-color)]">
                 <tr>
                     <th class="px-6 py-4 text-left">No</th>
                     <th class="px-6 py-4 text-left">NIS</th>
@@ -168,7 +168,7 @@
                         </td>
 
                         <td class="px-6 py-4">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $student->status === 'active' ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400' : 'bg-rose-100 text-rose-600' }}">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold {{ $student->status === 'active' ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400' : 'bg-rose-100 text-rose-600' }}">
                                 {{ $student->status === 'active' ? 'Aktif' : 'Tidak Aktif' }}
                             </span>
                         </td>

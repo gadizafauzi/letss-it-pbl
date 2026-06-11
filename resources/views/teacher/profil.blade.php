@@ -50,7 +50,7 @@
                     $tagColors = [
                         ['bg' => 'bg-pink-100', 'text' => 'text-pink-600'],
                         ['bg' => 'bg-amber-100', 'text' => 'text-amber-600'],
-                        ['bg' => 'bg-emerald-100 dark:bg-emerald-500/20', 'text' => 'text-emerald-600 dark:text-emerald-400'],
+                        ['bg' => 'bg-purple-100 dark:bg-purple-500/20', 'text' => 'text-purple-600 dark:text-purple-400'],
                         ['bg' => 'bg-cyan-100', 'text' => 'text-cyan-600'],
                     ];
                 @endphp
@@ -97,7 +97,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <div class="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <div class="w-11 h-11 rounded-xl bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 flex items-center justify-center">
                 <i data-lucide="badge-check" class="w-5 h-5"></i>
             </div>
             <div>
