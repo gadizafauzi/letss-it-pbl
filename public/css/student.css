@@ -539,6 +539,8 @@ header {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     z-index: 1;
+    transform: none;
+    border: none;
 }
 
 /* ==== CONCAVE notch KANAN ATAS ====

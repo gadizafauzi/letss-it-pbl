@@ -17,7 +17,7 @@
     --theme-text-light: #065f46;
     --theme-icon-active: #ffffff;
     --theme-icon-indicator: rgba(255, 255, 255, 0.9);
-    
+
     --theme-stat-hover: rgba(16, 185, 129, 0.06);
     --theme-text-primary: #059669;
 }
@@ -41,7 +41,7 @@
     --theme-text-light: #a7f3d0;
     --theme-icon-active: #ffffff;
     --theme-icon-indicator: #6ee7b7;
-    
+
     --theme-stat-hover: rgba(16, 185, 129, 0.2);
     --theme-text-primary: #6ee7b7;
 }

@@ -4,7 +4,7 @@
 
 /* 1. Sidebar Container — desktop: relative, full height, biru tua */
 #sidebar, .teacher-sidebar-panel {
-    background-color: var(--bg-sidebar) !important;
+    background: var(--bg-sidebar) !important;
     border-right: none !important;
     border-radius: 0 24px 24px 0 !important;
     overflow: visible !important;
@@ -187,6 +187,8 @@
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     z-index: 1;
+    transform: none;
+    border: none;
 }
 
 /* ==== CONCAVE notch KANAN ATAS ====
