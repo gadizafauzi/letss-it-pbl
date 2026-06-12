@@ -115,14 +115,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Tambahan untuk view detail per siswa (dipanggil dari resources/views/admin/tagihan/index.blade.php)
     Route::get('/admin/tagihan/student/{student}', [\App\Http\Controllers\Admin\TagihanController::class, 'student'])
         ->name('admin.tagihan.student');
+        
+    Route::post('/admin/tagihan/broadcast-wa', [\App\Http\Controllers\Admin\TagihanController::class, 'broadcastWa'])
+        ->name('admin.tagihan.broadcast-wa');
+        
+    Route::post('/admin/tagihan/{invoice}/kirim-wa', [\App\Http\Controllers\Admin\TagihanController::class, 'kirimWa'])
+        ->name('admin.tagihan.kirim-wa');
 
     Route::resource('/admin/tagihan', \App\Http\Controllers\Admin\TagihanController::class)
         ->parameters(['tagihan' => 'invoice'])
         ->names('admin.tagihan');
         
-    Route::post('/admin/pembayaran/{payment}/verify', [\App\Http\Controllers\Admin\PembayaranController::class, 'verify'])
+    Route::patch('/admin/pembayaran/{payment}/verify', [\App\Http\Controllers\Admin\PembayaranController::class, 'verify'])
         ->name('admin.pembayaran.verify');
-    Route::post('/admin/pembayaran/{payment}/reject', [\App\Http\Controllers\Admin\PembayaranController::class, 'reject'])
+    Route::patch('/admin/pembayaran/{payment}/reject', [\App\Http\Controllers\Admin\PembayaranController::class, 'reject'])
         ->name('admin.pembayaran.reject');
     Route::get('/admin/pembayaran/{payment}/print', [\App\Http\Controllers\Admin\PembayaranController::class, 'print'])
         ->name('admin.pembayaran.print');
@@ -206,6 +212,8 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 
     Route::get('/student/tagihan', [TagihanController::class, 'index'])
         ->name('student.tagihan');
+    Route::post('/student/tagihan/{invoice}/bayar', [TagihanController::class, 'storePayment'])
+        ->name('student.tagihan.bayar');
 
     Route::get('/student/nilai', [NilaiController::class, 'index'])
         ->name('student.nilai');
