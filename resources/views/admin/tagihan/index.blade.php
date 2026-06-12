@@ -9,6 +9,15 @@
                 <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Data Tagihan</h1>
             </div>
             <div class="flex items-center gap-3">
+                <form id="broadcastWaForm" action="{{ route('admin.tagihan.broadcast-wa') }}" method="POST">
+                    @csrf
+                    <button type="button" onclick="openBroadcastWaModal()"
+                        class="inline-flex items-center gap-2 h-10 px-5 rounded-xl bg-gradient-to-br from-green-400 to-green-600 hover:opacity-90 text-white text-sm font-semibold shadow-md shadow-green-500/30 hover:shadow-lg hover:shadow-green-500/40 transition-all">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        Broadcast WA
+                    </button>
+                </form>
+
                 <a href="{{ route('admin.tagihan.create') }}"
                     class="inline-flex items-center gap-2 h-10 px-5 rounded-xl bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white text-sm font-semibold shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all no-underline">
                     <i data-lucide="plus" class="w-4 h-4"></i>
@@ -169,5 +178,44 @@
                 });
             }
         });
+    </script>
+
+    {{-- MODAL BROADCAST WA --}}
+    <div id="broadcastWaModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-slate-900/40 backdrop-blur-[2px] transition-opacity">
+        <div class="bg-white dark:bg-slate-800 rounded-[2rem] p-8 w-full max-w-sm shadow-2xl border border-slate-200 dark:border-slate-700 transform transition-all text-center">
+            <div class="w-16 h-16 rounded-full bg-green-100 dark:bg-green-500/20 text-green-500 flex items-center justify-center mx-auto mb-5">
+                <i data-lucide="send" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Kirim Broadcast WA?</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mb-8 leading-relaxed">
+                Apakah Anda yakin ingin mengirim pesan broadcast tagihan ke SEMUA orang tua siswa yang belum lunas? Tindakan ini akan memakan waktu beberapa saat.
+            </p>
+            <div class="flex gap-3 justify-center">
+                <button type="button" onclick="closeBroadcastWaModal()"
+                    class="h-11 px-6 rounded-2xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold transition-all">
+                    Batal
+                </button>
+                <button type="button" onclick="confirmBroadcastWa()"
+                    class="h-11 px-6 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-bold shadow-md shadow-green-500/20 hover:shadow-lg hover:shadow-green-500/30 transition-all">
+                    Ya, Kirim
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openBroadcastWaModal() {
+            const modal = document.getElementById('broadcastWaModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function closeBroadcastWaModal() {
+            const modal = document.getElementById('broadcastWaModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+        function confirmBroadcastWa() {
+            document.getElementById('broadcastWaForm').submit();
+        }
     </script>
 @endsection

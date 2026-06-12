@@ -8,16 +8,13 @@
         <div class="flex items-center gap-3 logo-wrapper">
 
             <div class="w-9 h-9 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl overflow-hidden shadow-lg shadow-black/5 dark:shadow-slate-900/50 border border-white/20 shrink-0">
-                <img src="{{ asset('images/logomq.jpg') }}" alt="Logo MQ" class="w-full h-full object-cover">
+                <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo MQ" class="w-full h-full object-cover">
             </div>
 
             <div class="logo-text">
                 <h1 class="text-sm font-extrabold tracking-tight text-white dark:text-slate-100">
                     SIT Mutiara Qur'an
                 </h1>
-                <p class="text-xs text-blue-100 dark:text-slate-400 mt-0.5">
-                    Administrator Panel
-                </p>
             </div>
 
         </div>
