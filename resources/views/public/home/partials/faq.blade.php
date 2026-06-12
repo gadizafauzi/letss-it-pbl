@@ -10,27 +10,37 @@
 
             <div class="max-w-3xl mx-auto">
                 @php
-                    $faqs = [
-                        [
-                            'question' => 'Kapan pendaftaran PPDB SIT Mutiara Qur\'an dibuka?',
-                            'answer' => 'Penerimaan Peserta Didik Baru (PPDB) SIT Mutiara Qur\'an dibuka mulai tanggal 15 Oktober hingga kuota terpenuhi untuk setiap gelombang. Kami menyarankan untuk melakukan pendaftaran lebih awal dikarenakan keterbatasan kuota kelas (rombel) demi menjaga kenyamanan belajar mengajar.'
-                        ],
-                        [
-                            'question' => 'Bagaimana sistem kurikulum yang diterapkan di sekolah?',
-                            'answer' => 'SIT Mutiara Qur\'an mengintegrasikan Kurikulum Nasional (Kurikulum Merdeka) dengan Kurikulum JSIT (Jaringan Sekolah Islam Terpadu) yang menitikberatkan pada pembiasaan ibadah islami, pembelajaran Al-Qur\'an metode khusus, serta penguatan adab dan karakter mulia sehari-hari.'
-                        ],
-                        [
-                            'question' => 'Apakah ada fasilitas antar-jemput dan katering untuk siswa?',
-                            'answer' => 'Ya, kami menyediakan layanan antar-jemput berjadwal dengan armada yang aman bagi siswa di area sekitar Kabupaten Solok, serta katering makan siang sehat bersertifikasi halal khusus untuk siswa jenjang SD dan SMP yang mengikuti program full-day school.'
-                        ],
-                        [
-                            'question' => 'Berapa target hafalan Al-Qur\'an untuk masing-masing jenjang?',
-                            'answer' => 'Target hafalan mutqin kami adalah: Jenjang TK (Juz 30), Jenjang SD IT (Minimal 5 Juz), dan Jenjang SMP IT (Minimal 10 Juz) selama masa studi penuh, didukung dengan program karantina tahfidz tahunan khusus.'
-                        ]
-                    ];
+                    $displayFaqs = [];
+                    if (isset($faqs) && !$faqs->isEmpty()) {
+                        foreach ($faqs as $f) {
+                            $displayFaqs[] = [
+                                'question' => $f->question,
+                                'answer' => $f->answer
+                            ];
+                        }
+                    } else {
+                        $displayFaqs = [
+                            [
+                                'question' => 'Kapan pendaftaran PPDB SIT Mutiara Qur\'an dibuka?',
+                                'answer' => 'Penerimaan Peserta Didik Baru (PPDB) SIT Mutiara Qur\'an dibuka mulai tanggal 15 Oktober hingga kuota terpenuhi untuk setiap gelombang. Kami menyarankan untuk melakukan pendaftaran lebih awal dikarenakan keterbatasan kuota kelas (rombel) demi menjaga kenyamanan belajar mengajar.'
+                            ],
+                            [
+                                'question' => 'Bagaimana sistem kurikulum yang diterapkan di sekolah?',
+                                'answer' => 'SIT Mutiara Qur\'an mengintegrasikan Kurikulum Nasional (Kurikulum Merdeka) with Kurikulum JSIT (Jaringan Sekolah Islam Terpadu) yang menitikberatkan pada pembiasaan ibadah islami, pembelajaran Al-Qur\'an metode khusus, serta penguatan adab dan karakter mulia sehari-hari.'
+                            ],
+                            [
+                                'question' => 'Apakah ada fasilitas antar-jemput dan katering untuk siswa?',
+                                'answer' => 'Ya, kami menyediakan layanan antar-jemput berjadwal dengan armada yang aman bagi siswa di area sekitar Kabupaten Solok, serta katering makan siang sehat bersertifikasi halal khusus untuk siswa jenjang SD dan SMP yang mengikuti program full-day school.'
+                            ],
+                            [
+                                'question' => 'Berapa target hafalan Al-Qur\'an untuk masing-masing jenjang?',
+                                'answer' => 'Target hafalan mutqin kami adalah: Jenjang TK (Juz 30), Jenjang SD IT (Minimal 5 Juz), dan Jenjang SMP IT (Minimal 10 Juz) selama masa studi penuh, didukung dengan program karantina tahfidz tahunan khusus.'
+                            ]
+                        ];
+                    }
                 @endphp
                 <div class="space-y-4">
-                    @foreach($faqs as $i => $faq)
+                    @foreach($displayFaqs as $i => $faq)
                     @php
                         // Alternate slide directions: left, right, left, right
                         $translateClass = $i % 2 === 0 ? '-translate-x-8' : 'translate-x-8';

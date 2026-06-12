@@ -32,6 +32,13 @@ use App\Http\Controllers\Admin\TahunAjaranController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitController;
 
+// Public Controllers
+use App\Http\Controllers\PublicHomeController;
+use App\Http\Controllers\PublicProfileController;
+use App\Http\Controllers\PublicPpdbController;
+use App\Http\Controllers\PublicNewsController;
+use App\Http\Controllers\PublicUnitController;
+
 // Models
 use App\Models\Student;
 use App\Models\Teacher;
@@ -43,7 +50,7 @@ use App\Models\SchoolClass;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', fn() => view('public.home.index'))->name('public.home');
+Route::get('/', [PublicHomeController::class, 'index'])->name('public.home');
 Route::get('/coming-soon', fn() => view('shared.coming-soon'))->name('coming-soon');
 
 /*
@@ -264,17 +271,8 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
 |--------------------------------------------------------------------------
 */
 
-Route::get('/profil', fn() => view('public.profil.index'))
+Route::get('/profil', [PublicProfileController::class, 'index'])
     ->name('public.profil.index');
-
-
-/*
-|--------------------------------------------------------------------------
-| UNIT
-|--------------------------------------------------------------------------
-*/
-
-// Halaman utama unit pendidikan sudah dihapus agar pengunjung langsung diarahkan ke sub-unit (TK, SD, SMP).
 
 
 /*
@@ -283,7 +281,7 @@ Route::get('/profil', fn() => view('public.profil.index'))
 |--------------------------------------------------------------------------
 */
 
-Route::get('/unit/tk', fn() => view('public.unit.tk.index'))
+Route::get('/unit/tk', [PublicUnitController::class, 'tk'])
     ->name('public.unit.tk.index');
 
 
@@ -293,13 +291,7 @@ Route::get('/unit/tk', fn() => view('public.unit.tk.index'))
 |--------------------------------------------------------------------------
 */
 
-/*
-|--------------------------------------------------------------------------
-| UNIT SD
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/unit/sd', fn() => view('public.unit.sd.index'))
+Route::get('/unit/sd', [PublicUnitController::class, 'sd'])
     ->name('public.unit.sd.index');
 
 
@@ -309,7 +301,7 @@ Route::get('/unit/sd', fn() => view('public.unit.sd.index'))
 |--------------------------------------------------------------------------
 */
 
-Route::get('/unit/smp', fn() => view('public.unit.smp.index'))
+Route::get('/unit/smp', [PublicUnitController::class, 'smp'])
     ->name('public.unit.smp.index');
 
 
@@ -319,17 +311,20 @@ Route::get('/unit/smp', fn() => view('public.unit.smp.index'))
 |--------------------------------------------------------------------------
 */
 
-Route::get('/berita', fn() => view('public.berita.index'))
+Route::get('/berita', [PublicNewsController::class, 'index'])
     ->name('public.berita.index');
 
-Route::get('/berita/detail', fn() => view('public.berita.detail'))
-    ->name('public.berita.detail');
-
-Route::get('/berita/kategori', fn() => view('public.berita.kategori'))
+Route::get('/berita/kategori', [PublicNewsController::class, 'categories'])
     ->name('public.berita.kategori');
 
-Route::get('/berita/search', fn() => view('public.berita.search'))
+Route::get('/berita/kategori/{slug}', [PublicNewsController::class, 'category'])
+    ->name('public.berita.category');
+
+Route::get('/berita/search', [PublicNewsController::class, 'search'])
     ->name('public.berita.search');
+
+Route::get('/berita/{slug}', [PublicNewsController::class, 'show'])
+    ->name('public.berita.detail');
 
 
 /*
@@ -338,7 +333,7 @@ Route::get('/berita/search', fn() => view('public.berita.search'))
 |--------------------------------------------------------------------------
 */
 
-Route::get('/ppdb', fn() => view('public.ppdb.index'))
+Route::get('/ppdb', [PublicPpdbController::class, 'index'])
     ->name('public.ppdb.index');
 
 Route::get('/ppdb/alur', fn() => redirect('/ppdb#alur'))

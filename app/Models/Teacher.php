@@ -60,5 +60,20 @@ class Teacher extends Model
         return $this->belongsTo(Position::class);
     }
 
-    
+    /*
+     * --------------------------------------------------------------------------
+     * RELASI CMS
+     * --------------------------------------------------------------------------
+     */
+
+    public function cmsUnitTeachers()
+    {
+        return $this->hasMany(CmsUnitTeacher::class, 'teacher_id');
+    }
+
+    public function cmsAchievements()
+    {
+        return $this->hasMany(CmsAchievement::class, 'teacher_id');
+    }
 }
+

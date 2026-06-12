@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('content')
-    @include('public.home.partials.marquee')
+
     @include('public.home.partials.hero')
     @include('public.home.partials.statistics')
     

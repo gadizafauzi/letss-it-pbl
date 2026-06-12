@@ -11,21 +11,21 @@
                 <div class="text-left reveal reveal-left delay-100">
                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-sm font-semibold mb-6">
                         <i data-lucide="megaphone" class="w-4 h-4 text-amber-400"></i>
-                        Pendaftaran Dibuka TA {{ date('Y') }}/{{ date('Y')+1 }}
+                        {{ $hero && $hero->badge_text ? $hero->badge_text : 'Pendaftaran Dibuka TA ' . date('Y') . '/' . (date('Y')+1) }}
                     </span>
                     <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
-                        Penerimaan Peserta Didik Baru
+                        {{ $hero && $hero->title ? $hero->title : 'Penerimaan Peserta Didik Baru' }}
                     </h1>
                     <p class="text-emerald-100/80 text-lg mb-8 max-w-lg">
-                        Bergabunglah bersama SIT Mutiara Qur'an untuk masa depan putra-putri Anda yang lebih baik, berkarakter mulia, dan berprestasi.
+                        {{ $hero && $hero->subtitle ? $hero->subtitle : "Bergabunglah bersama SIT Mutiara Qur'an untuk masa depan putra-putri Anda yang lebih baik, berkarakter mulia, dan berprestasi." }}
                     </p>
                     
                     <div class="flex flex-wrap gap-4">
-                        <a href="#informasi" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-emerald-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                            <i data-lucide="info" class="w-4 h-4"></i> Lihat Informasi PPDB
+                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#informasi' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-emerald-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            <i data-lucide="info" class="w-4 h-4"></i> {{ $hero && $hero->button_text ? $hero->button_text : 'Lihat Informasi PPDB' }}
                         </a>
-                        <a href="#brosur" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
-                            <i data-lucide="download" class="w-4 h-4"></i> Download Brosur
+                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#brosur' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
+                            <i data-lucide="download" class="w-4 h-4"></i> {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Download Brosur' }}
                         </a>
                         <a href="#kontak" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
                             <i data-lucide="phone" class="w-4 h-4"></i> Hubungi Panitia
@@ -37,7 +37,7 @@
                 <div class="hidden lg:block relative reveal reveal-right delay-200">
                     <div class="w-full aspect-[4/3] rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl">
                         {{-- Menggunakan placeholder gambar sekolah / siswa belajar --}}
-                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800" alt="Kegiatan Belajar" class="w-full h-full object-cover">
+                        <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800' }}" alt="Kegiatan Belajar" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-emerald-900/20"></div>
                     </div>
                     
@@ -68,49 +68,101 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @php
-                    $units = [
-                        [
-                            'logo' => asset('images/tk.jpeg'),  
-                            'gradient' => 'from-cyan-50 to-blue-50/50',
-                            'border' => 'border-cyan-200',
-                            'hover_shadow' => 'hover:shadow-cyan-200/50 hover:border-cyan-300',
-                            'blob' => 'bg-cyan-300/30',
-                            'text' => 'text-cyan-700',
-                            'title' => 'TK Islam Terpadu',  
-                            'usia' => 'Usia 4-6 tahun',  
-                            'kuota' => '60 siswa', 
-                            'reveal' => 'reveal-left', 
-                            'delay' => 'delay-100'
-                        ],
-                        [
-                            'logo' => asset('images/sd.jpeg'),  
-                            'gradient' => 'from-emerald-50 to-amber-50/50',
-                            'border' => 'border-emerald-200',
-                            'hover_shadow' => 'hover:shadow-emerald-200/50 hover:border-emerald-300',
-                            'blob' => 'bg-emerald-300/30',
-                            'text' => 'text-emerald-700',
-                            'title' => 'SD Islam Terpadu',  
-                            'usia' => 'Usia 6-7 tahun',  
-                            'kuota' => '90 siswa', 
-                            'reveal' => 'reveal-zoom', 
-                            'delay' => 'delay-200'
-                        ],
-                        [
-                            'logo' => asset('images/smp.jpeg'), 
-                            'gradient' => 'from-indigo-50 to-violet-50/50',
-                            'border' => 'border-indigo-200',
-                            'hover_shadow' => 'hover:shadow-indigo-200/50 hover:border-indigo-300',
-                            'blob' => 'bg-indigo-300/30',
-                            'text' => 'text-indigo-700',
-                            'title' => 'SMP Islam Terpadu', 
-                            'usia' => 'Lulusan SD/MI',   
-                            'kuota' => '60 siswa', 
-                            'reveal' => 'reveal-right', 
-                            'delay' => 'delay-300'
-                        ],
-                    ];
+                    $displayUnits = [];
+                    if (isset($units) && !$units->isEmpty()) {
+                        foreach ($units as $u) {
+                            $slug = strtolower($u->unit_name);
+                            $detail = $u->cmsUnitDetail;
+                            if (Str::contains($slug, 'tk')) {
+                                $styles = [
+                                    'logo' => $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/tk.jpeg'),
+                                    'gradient' => 'from-cyan-50 to-blue-50/50',
+                                    'border' => 'border-cyan-200',
+                                    'hover_shadow' => 'hover:shadow-cyan-200/50 hover:border-cyan-300',
+                                    'blob' => 'bg-cyan-300/30',
+                                    'text' => 'text-cyan-700',
+                                    'title' => $detail && $detail->description_title ? $detail->description_title : 'TK Islam Terpadu',
+                                    'usia' => $detail && $detail->target_age ? $detail->target_age : 'Usia 4-6 tahun',
+                                    'kuota' => $detail && $detail->quota ? $detail->quota : '60 siswa',
+                                    'reveal' => 'reveal-left',
+                                    'delay' => 'delay-100'
+                                ];
+                            } elseif (Str::contains($slug, 'sd')) {
+                                $styles = [
+                                    'logo' => $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/sd.jpeg'),
+                                    'gradient' => 'from-emerald-50 to-amber-50/50',
+                                    'border' => 'border-emerald-200',
+                                    'hover_shadow' => 'hover:shadow-emerald-200/50 hover:border-emerald-300',
+                                    'blob' => 'bg-emerald-300/30',
+                                    'text' => 'text-emerald-700',
+                                    'title' => $detail && $detail->description_title ? $detail->description_title : 'SD Islam Terpadu',
+                                    'usia' => $detail && $detail->target_age ? $detail->target_age : 'Usia 6-7 tahun',
+                                    'kuota' => $detail && $detail->quota ? $detail->quota : '90 siswa',
+                                    'reveal' => 'reveal-zoom',
+                                    'delay' => 'delay-200'
+                                ];
+                            } else {
+                                $styles = [
+                                    'logo' => $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/smp.jpeg'),
+                                    'gradient' => 'from-indigo-50 to-violet-50/50',
+                                    'border' => 'border-indigo-200',
+                                    'hover_shadow' => 'hover:shadow-indigo-200/50 hover:border-indigo-300',
+                                    'blob' => 'bg-indigo-300/30',
+                                    'text' => 'text-indigo-700',
+                                    'title' => $detail && $detail->description_title ? $detail->description_title : 'SMP Islam Terpadu',
+                                    'usia' => $detail && $detail->target_age ? $detail->target_age : 'Lulusan SD/MI',
+                                    'kuota' => $detail && $detail->quota ? $detail->quota : '60 siswa',
+                                    'reveal' => 'reveal-right',
+                                    'delay' => 'delay-300'
+                                ];
+                            }
+                            $displayUnits[] = $styles;
+                        }
+                    } else {
+                        $displayUnits = [
+                            [
+                                'logo' => asset('images/tk.jpeg'),  
+                                'gradient' => 'from-cyan-50 to-blue-50/50',
+                                'border' => 'border-cyan-200',
+                                'hover_shadow' => 'hover:shadow-cyan-200/50 hover:border-cyan-300',
+                                'blob' => 'bg-cyan-300/30',
+                                'text' => 'text-cyan-700',
+                                'title' => 'TK Islam Terpadu',  
+                                'usia' => 'Usia 4-6 tahun',  
+                                'kuota' => '60 siswa', 
+                                'reveal' => 'reveal-left', 
+                                'delay' => 'delay-100'
+                            ],
+                            [
+                                'logo' => asset('images/sd.jpeg'),  
+                                'gradient' => 'from-emerald-50 to-amber-50/50',
+                                'border' => 'border-emerald-200',
+                                'hover_shadow' => 'hover:shadow-emerald-200/50 hover:border-emerald-300',
+                                'blob' => 'bg-emerald-300/30',
+                                'text' => 'text-emerald-700',
+                                'title' => 'SD Islam Terpadu',  
+                                'usia' => 'Usia 6-7 tahun',  
+                                'kuota' => '90 siswa', 
+                                'reveal' => 'reveal-zoom', 
+                                'delay' => 'delay-200'
+                            ],
+                            [
+                                'logo' => asset('images/smp.jpeg'), 
+                                'gradient' => 'from-indigo-50 to-violet-50/50',
+                                'border' => 'border-indigo-200',
+                                'hover_shadow' => 'hover:shadow-indigo-200/50 hover:border-indigo-300',
+                                'blob' => 'bg-indigo-300/30',
+                                'text' => 'text-indigo-700',
+                                'title' => 'SMP Islam Terpadu', 
+                                'usia' => 'Lulusan SD/MI',   
+                                'kuota' => '60 siswa', 
+                                'reveal' => 'reveal-right', 
+                                'delay' => 'delay-300'
+                            ],
+                        ];
+                    }
                 @endphp
-                @foreach($units as $u)
+                @foreach($displayUnits as $u)
                 <div class="relative overflow-hidden group cursor-pointer rounded-[32px] p-8 text-center border bg-gradient-to-br {{ $u['gradient'] }} {{ $u['border'] }} shadow-lg jenjang-card {{ $u['hover_shadow'] }} reveal {{ $u['reveal'] }} {{ $u['delay'] }}">
                     {{-- Decorative Blobs --}}
                     <div class="absolute -top-12 -right-12 w-32 h-32 rounded-full blur-2xl {{ $u['blob'] }} group-hover:scale-150 transition-transform duration-700 pointer-events-none"></div>
@@ -146,43 +198,50 @@
             </div>
 
             @php
-                $jadwal = [
-                    [
-                        'tahun'   => date('Y'),
-                        'judul'   => 'Tahap Pendaftaran',
-                        'desc'    => 'Pendaftaran Tim dan Submit Proposal',
-                        'tanggal' => 'April — 13 Juni ' . date('Y'),
-                        'status'  => 'Dibuka',
-                    ],
-                    [
-                        'tahun'   => date('Y'),
-                        'judul'   => 'Babak Penyisihan I',
-                        'desc'    => 'Babak Penyisihan Pertama',
-                        'tanggal' => '26 — 27 Juni ' . date('Y'),
-                        'status'  => 'Segera',
-                    ],
-                    [
-                        'tahun'   => date('Y'),
-                        'judul'   => 'Babak Penyisihan II',
-                        'desc'    => 'Seleksi lanjutan untuk mencari finalis.',
-                        'tanggal' => '27 Juli — 8 Agustus ' . date('Y'),
-                        'status'  => 'Menunggu',
-                    ],
-                    [
-                        'tahun'   => date('Y'),
-                        'judul'   => 'Pengumuman Finalis',
-                        'desc'    => 'Tim yang lolos menuju tahap akhir.',
-                        'tanggal' => '10 Agustus ' . date('Y'),
-                        'status'  => 'Menunggu',
-                    ],
-                    [
-                        'tahun'   => date('Y'),
-                        'judul'   => 'Daftar Ulang',
-                        'desc'    => 'Lakukan pembayaran dan daftar ulang untuk mengamankan tempat.',
-                        'tanggal' => '16 — 30 Agustus ' . date('Y'),
-                        'status'  => 'Menunggu',
-                    ],
-                ];
+                $displayTimeline = [];
+                if (isset($timeline) && !$timeline->isEmpty()) {
+                    foreach ($timeline as $t) {
+                        $displayTimeline[] = [
+                            'judul'   => $t->title,
+                            'desc'    => $t->description,
+                            'tanggal' => $t->date_range,
+                            'status'  => $t->status,
+                        ];
+                    }
+                } else {
+                    $displayTimeline = [
+                        [
+                            'judul'   => 'Tahap Pendaftaran',
+                            'desc'    => 'Pendaftaran Tim dan Submit Proposal',
+                            'tanggal' => 'April — 13 Juni ' . date('Y'),
+                            'status'  => 'Dibuka',
+                        ],
+                        [
+                            'judul'   => 'Babak Penyisihan I',
+                            'desc'    => 'Babak Penyisihan Pertama',
+                            'tanggal' => '26 — 27 Juni ' . date('Y'),
+                            'status'  => 'Segera',
+                        ],
+                        [
+                            'judul'   => 'Babak Penyisihan II',
+                            'desc'    => 'Seleksi lanjutan untuk mencari finalis.',
+                            'tanggal' => '27 Juli — 8 Agustus ' . date('Y'),
+                            'status'  => 'Menunggu',
+                        ],
+                        [
+                            'judul'   => 'Pengumuman Finalis',
+                            'desc'    => 'Tim yang lolos menuju tahap akhir.',
+                            'tanggal' => '10 Agustus ' . date('Y'),
+                            'status'  => 'Menunggu',
+                        ],
+                        [
+                            'judul'   => 'Daftar Ulang',
+                            'desc'    => 'Lakukan pembayaran dan daftar ulang untuk mengamankan tempat.',
+                            'tanggal' => '16 — 30 Agustus ' . date('Y'),
+                            'status'  => 'Menunggu',
+                        ],
+                    ];
+                }
             @endphp
 
             <div class="timeline-wrapper">
@@ -191,7 +250,7 @@
                 {{-- Garis progress berwarna --}}
                 <div class="timeline-progress"></div>
 
-                @foreach($jadwal as $i => $j)
+                @foreach($displayTimeline as $i => $j)
                 @php
                     $revealClass = $i % 2 === 0 ? 'reveal-left' : 'reveal-right';
                     $delay = 'delay-' . (($i % 4) + 1) * 100;
@@ -203,11 +262,11 @@
                         <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $j['judul'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $j['desc'] }}</p>
                         <div>
-                            @if($j['status'] === 'Dibuka')
+                            @if(strtolower($j['status']) === 'dibuka')
                                 <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">🟢 {{ $j['status'] }}</span>
-                            @elseif($j['status'] === 'Selesai')
+                            @elseif(strtolower($j['status']) === 'selesai')
                                 <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">✓ {{ $j['status'] }}</span>
-                            @elseif($j['status'] === 'Segera')
+                            @elseif(strtolower($j['status']) === 'segera')
                                 <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">⏳ {{ $j['status'] }}</span>
                             @else
                                 <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-600">🔵 {{ $j['status'] }}</span>
@@ -232,16 +291,28 @@
                 <h2 class="section-title mx-auto">Langkah Mudah Mendaftar</h2>
             </div>
             @php
-                $alur = [
-                    ['no' => '1', 'icon' => 'file-edit',     'judul' => 'Mengisi Formulir',  'desc' => 'Isi formulir pendaftaran online atau datang langsung ke sekolah.'],
-                    ['no' => '2', 'icon' => 'folder-check',  'judul' => 'Melengkapi Berkas', 'desc' => 'Siapkan dan serahkan berkas persyaratan yang diperlukan.'],
-                    ['no' => '3', 'icon' => 'clipboard-pen', 'judul' => 'Tes Seleksi',       'desc' => 'Calon siswa mengikuti tes baca tulis, wawancara, dan tes Al-Quran.'],
-                    ['no' => '4', 'icon' => 'megaphone',     'judul' => 'Pengumuman',         'desc' => 'Hasil seleksi diumumkan melalui website dan WhatsApp.'],
-                    ['no' => '5', 'icon' => 'badge-check',   'judul' => 'Daftar Ulang',       'desc' => 'Lakukan pembayaran dan daftar ulang untuk mengamankan tempat.'],
-                ];
+                $displayAlur = [];
+                if (isset($steps) && !$steps->isEmpty()) {
+                    foreach ($steps as $step) {
+                        $displayAlur[] = [
+                            'no' => $step->step_number,
+                            'icon' => $step->icon ? $step->icon : 'file-edit',
+                            'judul' => $step->title,
+                            'desc' => $step->description,
+                        ];
+                    }
+                } else {
+                    $displayAlur = [
+                        ['no' => '1', 'icon' => 'file-edit',     'judul' => 'Mengisi Formulir',  'desc' => 'Isi formulir pendaftaran online atau datang langsung ke sekolah.'],
+                        ['no' => '2', 'icon' => 'folder-check',  'judul' => 'Melengkapi Berkas', 'desc' => 'Siapkan dan serahkan berkas persyaratan yang diperlukan.'],
+                        ['no' => '3', 'icon' => 'clipboard-pen', 'judul' => 'Tes Seleksi',       'desc' => 'Calon siswa mengikuti tes baca tulis, wawancara, dan tes Al-Quran.'],
+                        ['no' => '4', 'icon' => 'megaphone',     'judul' => 'Pengumuman',         'desc' => 'Hasil seleksi diumumkan melalui website dan WhatsApp.'],
+                        ['no' => '5', 'icon' => 'badge-check',   'judul' => 'Daftar Ulang',       'desc' => 'Lakukan pembayaran dan daftar ulang untuk mengamankan tempat.'],
+                    ];
+                }
             @endphp
             <div class="space-y-0">
-                @foreach($alur as $i => $step)
+                @foreach($displayAlur as $i => $step)
                 <div class="timeline-item reveal reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
                     <div class="timeline-dot">{{ $step['no'] }}</div>
                     <div class="pt-1">
@@ -266,49 +337,113 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @php
-                    $syaratData = [
-                        [
-                            'logo' => asset('images/tk.jpeg'),  
-                            'color' => 'cyan',
-                            'gradient' => 'from-cyan-50/70 to-blue-50/20',
-                            'border' => 'border-cyan-100',
-                            'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(6,182,212,0.3)] hover:border-cyan-300',
-                            'bgGlow' => 'from-cyan-50/0 to-cyan-100/60',
-                            'blob' => 'bg-cyan-300/20',
-                            'title' => 'TK', 
-                            'items' => ['Usia minimal 4 tahun','Fotokopi akta kelahiran','Fotokopi KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'], 
-                            'reveal' => 'reveal-left', 
-                            'delay' => 'delay-100'
-                        ],
-                        [
-                            'logo' => asset('images/sd.jpeg'),  
-                            'color' => 'emerald',  
-                            'gradient' => 'from-emerald-50/70 to-amber-50/20',
-                            'border' => 'border-emerald-100',
-                            'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.3)] hover:border-emerald-300',
-                            'bgGlow' => 'from-emerald-50/0 to-emerald-100/60',
-                            'blob' => 'bg-emerald-300/20',
-                            'title' => 'SD', 
-                            'items' => ['Usia minimal 6 tahun','Ijazah / surat keterangan TK','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'], 
-                            'reveal' => 'reveal-zoom', 
-                            'delay' => 'delay-200'
-                        ],
-                        [
-                            'logo' => asset('images/smp.jpeg'), 
-                            'color' => 'indigo', 
-                            'gradient' => 'from-indigo-50/70 to-violet-50/20',
-                            'border' => 'border-indigo-100',
-                            'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.3)] hover:border-indigo-300',
-                            'bgGlow' => 'from-indigo-50/0 to-indigo-100/60',
-                            'blob' => 'bg-indigo-300/20',
-                            'title' => 'SMP',
-                            'items' => ['Ijazah / SKL SD','Rapor kelas 4, 5, 6','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'], 
-                            'reveal' => 'reveal-right', 
-                            'delay' => 'delay-300'
-                        ],
-                    ];
+                    $displaySyarat = [];
+                    if (isset($units) && !$units->isEmpty()) {
+                        foreach ($units as $u) {
+                            $slug = strtolower($u->unit_name);
+                            $reqList = isset($requirements[$u->id]) ? $requirements[$u->id]->pluck('text')->all() : [];
+                            
+                            if (empty($reqList)) {
+                                if (Str::contains($slug, 'tk')) {
+                                    $reqList = ['Usia minimal 4 tahun','Fotokopi akta kelahiran','Fotokopi KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'];
+                                } elseif (Str::contains($slug, 'sd')) {
+                                    $reqList = ['Usia minimal 6 tahun','Ijazah / surat keterangan TK','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'];
+                                } else {
+                                    $reqList = ['Ijazah / SKL SD','Rapor kelas 4, 5, 6','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'];
+                                }
+                            }
+
+                            $detail = $u->cmsUnitDetail;
+                            if (Str::contains($slug, 'tk')) {
+                                $styles = [
+                                    'logo' => $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/tk.jpeg'),
+                                    'color' => 'cyan',
+                                    'gradient' => 'from-cyan-50/70 to-blue-50/20',
+                                    'border' => 'border-cyan-100',
+                                    'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(6,182,212,0.3)] hover:border-cyan-300',
+                                    'bgGlow' => 'from-cyan-50/0 to-cyan-100/60',
+                                    'blob' => 'bg-cyan-300/20',
+                                    'title' => 'TK',
+                                    'items' => $reqList,
+                                    'reveal' => 'reveal-left',
+                                    'delay' => 'delay-100'
+                                ];
+                            } elseif (Str::contains($slug, 'sd')) {
+                                $styles = [
+                                    'logo' => $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/sd.jpeg'),
+                                    'color' => 'emerald',
+                                    'gradient' => 'from-emerald-50/70 to-amber-50/20',
+                                    'border' => 'border-emerald-100',
+                                    'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.3)] hover:border-emerald-300',
+                                    'bgGlow' => 'from-emerald-50/0 to-emerald-100/60',
+                                    'blob' => 'bg-emerald-300/20',
+                                    'title' => 'SD',
+                                    'items' => $reqList,
+                                    'reveal' => 'reveal-zoom',
+                                    'delay' => 'delay-200'
+                                ];
+                            } else {
+                                $styles = [
+                                    'logo' => $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/smp.jpeg'),
+                                    'color' => 'indigo',
+                                    'gradient' => 'from-indigo-50/70 to-violet-50/20',
+                                    'border' => 'border-indigo-100',
+                                    'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.3)] hover:border-indigo-300',
+                                    'bgGlow' => 'from-indigo-50/0 to-indigo-100/60',
+                                    'blob' => 'bg-indigo-300/20',
+                                    'title' => 'SMP',
+                                    'items' => $reqList,
+                                    'reveal' => 'reveal-right',
+                                    'delay' => 'delay-300'
+                                ];
+                            }
+                            $displaySyarat[] = $styles;
+                        }
+                    } else {
+                        $displaySyarat = [
+                            [
+                                'logo' => asset('images/tk.jpeg'),  
+                                'color' => 'cyan',
+                                'gradient' => 'from-cyan-50/70 to-blue-50/20',
+                                'border' => 'border-cyan-100',
+                                'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(6,182,212,0.3)] hover:border-cyan-300',
+                                'bgGlow' => 'from-cyan-50/0 to-cyan-100/60',
+                                'blob' => 'bg-cyan-300/20',
+                                'title' => 'TK', 
+                                'items' => ['Usia minimal 4 tahun','Fotokopi akta kelahiran','Fotokopi KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'], 
+                                'reveal' => 'reveal-left', 
+                                'delay' => 'delay-100'
+                            ],
+                            [
+                                'logo' => asset('images/sd.jpeg'),  
+                                'color' => 'emerald',  
+                                'gradient' => 'from-emerald-50/70 to-amber-50/20',
+                                'border' => 'border-emerald-100',
+                                'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.3)] hover:border-emerald-300',
+                                'bgGlow' => 'from-emerald-50/0 to-emerald-100/60',
+                                'blob' => 'bg-emerald-300/20',
+                                'title' => 'SD', 
+                                'items' => ['Usia minimal 6 tahun','Ijazah / surat keterangan TK','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'], 
+                                'reveal' => 'reveal-zoom', 
+                                'delay' => 'delay-200'
+                            ],
+                            [
+                                'logo' => asset('images/smp.jpeg'), 
+                                'color' => 'indigo', 
+                                'gradient' => 'from-indigo-50/70 to-violet-50/20',
+                                'border' => 'border-indigo-100',
+                                'hover_shadow' => 'hover:shadow-[0_20px_40px_-15px_rgba(99,102,241,0.3)] hover:border-indigo-300',
+                                'bgGlow' => 'from-indigo-50/0 to-indigo-100/60',
+                                'blob' => 'bg-indigo-300/20',
+                                'title' => 'SMP',
+                                'items' => ['Ijazah / SKL SD','Rapor kelas 4, 5, 6','Fotokopi akta & KK','Pas foto 3x4 (4 lembar)','Surat keterangan sehat'], 
+                                'reveal' => 'reveal-right', 
+                                'delay' => 'delay-300'
+                            ],
+                        ];
+                    }
                 @endphp
-                @foreach($syaratData as $s)
+                @foreach($displaySyarat as $s)
                 <div class="relative bg-gradient-to-br {{ $s['gradient'] }} border {{ $s['border'] }} p-8 rounded-[32px] overflow-hidden group cursor-pointer shadow-sm transition-all duration-500 hover:-translate-y-3 hover:scale-[1.03] {{ $s['hover_shadow'] }} reveal {{ $s['reveal'] }} {{ $s['delay'] }}">
                     
                     {{-- Decorative Blobs --}}
@@ -360,18 +495,28 @@
 
             <div class="space-y-4 faq-container">
                 @php
-                    $faqs = [
-                        ['q' => 'Kapan pendaftaran PPDB dibuka?',                       'a' => 'Pendaftaran PPDB dibuka mulai bulan Maret hingga Juni setiap tahunnya. Untuk informasi terbaru, silakan cek halaman Jadwal & Timeline.'],
-                        ['q' => 'Apakah ada tes masuk untuk calon siswa?',               'a' => 'Ya, calon siswa akan mengikuti tes seleksi yang meliputi tes baca tulis, wawancara, dan tes kemampuan Al-Quran sesuai jenjang.'],
-                        ['q' => 'Berapa biaya pendaftaran?',                             'a' => 'Biaya formulir pendaftaran sebesar Rp 150.000. Informasi biaya pendidikan lengkap akan disampaikan saat daftar ulang.'],
-                        ['q' => 'Apakah tersedia program beasiswa?',                    'a' => 'Ya, kami menyediakan program beasiswa untuk siswa berprestasi dan siswa dari keluarga kurang mampu. Hubungi kami untuk informasi lebih lanjut.'],
-                        ['q' => 'Bagaimana sistem pembelajaran di SIT Mutiara Quran?', 'a' => 'Kami menggunakan Kurikulum Merdeka yang diintegrasikan dengan kurikulum keislaman. Pembelajaran berlangsung dari pukul 07.00 hingga 15.30 WIB (fullday school).'],
-                        ['q' => 'Apakah ada program tahfidz?',                          'a' => 'Ya, program tahfidz merupakan program unggulan kami. Target hafalan: TK (Juz 30), SD (5 Juz), SMP (10 Juz).'],
-                        ['q' => 'Bagaimana cara mendaftar?',                            'a' => 'Anda bisa mendaftar secara online melalui website atau datang langsung ke sekolah. Lihat bagian Alur Pendaftaran di atas untuk detail langkah-langkahnya.'],
-                    ];
+                    $displayFaqs = [];
+                    if (isset($faqs) && !$faqs->isEmpty()) {
+                        foreach ($faqs as $faq) {
+                            $displayFaqs[] = [
+                                'q' => $faq->question,
+                                'a' => $faq->answer,
+                            ];
+                        }
+                    } else {
+                        $displayFaqs = [
+                            ['q' => 'Kapan pendaftaran PPDB dibuka?',                       'a' => 'Pendaftaran PPDB dibuka mulai bulan Maret hingga Juni setiap tahunnya. Untuk informasi terbaru, silakan cek halaman Jadwal & Timeline.'],
+                            ['q' => 'Apakah ada tes masuk untuk calon siswa?',               'a' => 'Ya, calon siswa akan mengikuti tes seleksi yang meliputi tes baca tulis, wawancara, dan tes kemampuan Al-Quran sesuai jenjang.'],
+                            ['q' => 'Berapa biaya pendaftaran?',                             'a' => 'Biaya formulir pendaftaran sebesar Rp 150.000. Informasi biaya pendidikan lengkap akan disampaikan saat daftar ulang.'],
+                            ['q' => 'Apakah tersedia program beasiswa?',                    'a' => 'Ya, kami menyediakan program beasiswa untuk siswa berprestasi dan siswa dari keluarga kurang mampu. Hubungi kami untuk informasi lebih lanjut.'],
+                            ['q' => 'Bagaimana sistem pembelajaran di SIT Mutiara Quran?', 'a' => 'Kami menggunakan Kurikulum Merdeka yang diintegrasikan dengan kurikulum keislaman. Pembelajaran berlangsung dari pukul 07.00 hingga 15.30 WIB (fullday school).'],
+                            ['q' => 'Apakah ada program tahfidz?',                          'a' => 'Ya, program tahfidz merupakan program unggulan kami. Target hafalan: TK (Juz 30), SD (5 Juz), SMP (10 Juz).'],
+                            ['q' => 'Bagaimana cara mendaftar?',                            'a' => 'Anda bisa mendaftar secara online melalui website atau datang langsung ke sekolah. Lihat bagian Alur Pendaftaran di atas untuk detail langkah-langkahnya.'],
+                        ];
+                    }
                 @endphp
 
-                @foreach($faqs as $i => $faq)
+                @foreach($displayFaqs as $i => $faq)
                 @php
                     // Alternate slide directions: left, right, left, right
                     $translateClass = $i % 2 === 0 ? '-translate-x-8' : 'translate-x-8';
@@ -534,14 +679,28 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @php
-                    $brosurs = [
-                        ['title' => 'Syarat PPDB TK/SD', 'desc' => 'Lihat persyaratan pendaftaran tingkat TK dan SD', 'file' => 'syarat-tksd.jpeg', 'delay' => 'delay-100', 'reveal' => 'reveal-left'],
-                        ['title' => 'Biaya PPDB TK/SD', 'desc' => 'Lihat rincian biaya pendaftaran tingkat TK dan SD', 'file' => 'biaya-tksd.jpeg', 'delay' => 'delay-200', 'reveal' => 'reveal-up'],
-                        ['title' => 'Syarat PPDB SMP', 'desc' => 'Lihat persyaratan pendaftaran tingkat SMP', 'file' => 'syarat-smp.jpeg', 'delay' => 'delay-300', 'reveal' => 'reveal-zoom'],
-                        ['title' => 'Biaya PPDB SMP', 'desc' => 'Lihat rincian biaya pendaftaran tingkat SMP', 'file' => 'biaya-smp.jpeg', 'delay' => 'delay-400', 'reveal' => 'reveal-right'],
-                    ];
+                    $displayBrosurs = [];
+                    if (isset($brochures) && !$brochures->isEmpty()) {
+                        foreach ($brochures as $i => $brochure) {
+                            $reveals = ['reveal-left', 'reveal-up', 'reveal-zoom', 'reveal-right'];
+                            $displayBrosurs[] = [
+                                'title' => $brochure->title,
+                                'desc' => $brochure->description,
+                                'file' => Str::startsWith($brochure->file_path, 'http') ? $brochure->file_path : asset('storage/' . $brochure->file_path),
+                                'delay' => 'delay-' . (($i % 4) + 1) * 100,
+                                'reveal' => $reveals[$i % 4],
+                            ];
+                        }
+                    } else {
+                        $displayBrosurs = [
+                            ['title' => 'Syarat PPDB TK/SD', 'desc' => 'Lihat persyaratan pendaftaran tingkat TK dan SD', 'file' => asset('images/syarat-tksd.jpeg'), 'delay' => 'delay-100', 'reveal' => 'reveal-left'],
+                            ['title' => 'Biaya PPDB TK/SD', 'desc' => 'Lihat rincian biaya pendaftaran tingkat TK dan SD', 'file' => asset('images/biaya-tksd.jpeg'), 'delay' => 'delay-200', 'reveal' => 'reveal-up'],
+                            ['title' => 'Syarat PPDB SMP', 'desc' => 'Lihat persyaratan pendaftaran tingkat SMP', 'file' => asset('images/syarat-smp.jpeg'), 'delay' => 'delay-300', 'reveal' => 'reveal-zoom'],
+                            ['title' => 'Biaya PPDB SMP', 'desc' => 'Lihat rincian biaya pendaftaran tingkat SMP', 'file' => asset('images/biaya-smp.jpeg'), 'delay' => 'delay-400', 'reveal' => 'reveal-right'],
+                        ];
+                    }
                 @endphp
-                @foreach($brosurs as $brosur)
+                @foreach($displayBrosurs as $brosur)
                 <div class="bg-white rounded-[20px] p-6 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 flex flex-col group premium-card reveal {{ $brosur['reveal'] }} {{ $brosur['delay'] }}">
                     <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm">
                         <i data-lucide="file-text" class="w-6 h-6"></i>
@@ -549,10 +708,10 @@
                     <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $brosur['title'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed mb-6 flex-grow">{{ $brosur['desc'] }}</p>
                     <div class="flex flex-col xl:flex-row gap-2 mt-auto">
-                        <a href="{{ asset('images/' . $brosur['file']) }}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-100 text-emerald-600 font-bold text-xs hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                        <a href="{{ $brosur['file'] }}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-100 text-emerald-600 font-bold text-xs hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
                             <i data-lucide="eye" class="w-4 h-4"></i> Lihat
                         </a>
-                        <a href="{{ asset('images/' . $brosur['file']) }}" download class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-200 hover:bg-emerald-600 transition-all duration-300">
+                        <a href="{{ $brosur['file'] }}" download class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-200 hover:bg-emerald-600 transition-all duration-300">
                             <i data-lucide="download" class="w-4 h-4"></i> Unduh
                         </a>
                     </div>
@@ -563,7 +722,7 @@
             {{-- CTA --}}
             <div class="text-center mt-16 pt-10 border-t border-slate-100 reveal reveal-up delay-500">
                 <p class="text-slate-500 mb-4">Masih ada pertanyaan atau butuh bantuan pendaftaran?</p>
-                <a href="https://wa.me/6282286204878" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold shadow-lg shadow-emerald-200 hover:-translate-y-1 transition-all duration-300">
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '6282286204878' }}" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold shadow-lg shadow-emerald-200 hover:-translate-y-1 transition-all duration-300">
                     <i data-lucide="message-circle" class="w-5 h-5"></i> Hubungi via WhatsApp
                 </a>
             </div>
@@ -592,7 +751,7 @@
                             </div>
                             <h3 class="text-sm font-bold text-slate-800 mb-1">Alamat</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
-                                Karasak, Jorong Pasar Baru,<br>Cupak, Gunung Talang, Solok
+                                {!! nl2br(e($settings['address'] ?? "Karasak, Jorong Pasar Baru,\nCupak, Gunung Talang, Solok")) !!}
                             </p>
                         </div>
                         <div class="feature-card p-5 bg-white">
@@ -600,28 +759,28 @@
                                 <i data-lucide="phone" class="w-5 h-5"></i>
                             </div>
                             <h3 class="text-sm font-bold text-slate-800 mb-1">Telepon / WA</h3>
-                            <p class="text-xs text-slate-500">+62 822-8620-4878</p>
+                            <p class="text-xs text-slate-500">{{ $settings['phone'] ?? '+62 822-8620-4878' }}</p>
                         </div>
                         <div class="feature-card p-5 bg-white">
                             <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-3">
                                 <i data-lucide="mail" class="w-5 h-5"></i>
                             </div>
                             <h3 class="text-sm font-bold text-slate-800 mb-1">Email</h3>
-                            <p class="text-xs text-slate-500">info@sitmutiaraquran.sch.id</p>
+                            <p class="text-xs text-slate-500">{{ $settings['email'] ?? 'info@sitmutiaraquran.sch.id' }}</p>
                         </div>
                         <div class="feature-card p-5 bg-white">
                             <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-3">
                                 <i data-lucide="clock" class="w-5 h-5"></i>
                             </div>
                             <h3 class="text-sm font-bold text-slate-800 mb-1">Jam Layanan</h3>
-                            <p class="text-xs text-slate-500">Senin – Jum'at: 08.00 – 14.00 WIB</p>
+                            <p class="text-xs text-slate-500">{!! nl2br(e($settings['operational_hours'] ?? "Senin – Jum'at: 08.00 – 14.00 WIB")) !!}</p>
                         </div>
                     </div>
                     
                     {{-- Google Maps Frame --}}
                     <div class="rounded-3xl overflow-hidden border border-slate-200 shadow-lg flex-1" style="min-height: 280px;">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31914.641419208794!2d100.598466!3d-0.8962703!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2b356b0a8eba63%3A0x771bff3cc34e0a68!2sSDIT%20MUTIARA%20QURAN!5e0!3m2!1sid!2sid!4v1780587530868!5m2!1sid!2sid"
+                            src="{{ $settings['maps_embed'] ?? "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31914.641419208794!2d100.598466!3d-0.8962703!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2b356b0a8eba63%3A0x771bff3cc34e0a68!2sSDIT%20MUTIARA%20QURAN!5e0!3m2!1sid!2sid!4v1780587530868!5m2!1sid!2sid" }}"
                             width="100%"
                             height="100%"
                             style="border:0; display:block;"

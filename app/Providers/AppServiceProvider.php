@@ -20,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultView('pagination.custom');
 
+        View::composer(['layouts.public', 'layouts.unit', 'components.public.navbar', 'components.public.footer'], function ($view) {
+            $settings = \App\Models\CmsSetting::pluck('value', 'key')->all();
+            $view->with('settings', $settings);
+        });
+
         View::composer('components.teacher.sidebar', function ($view) {
 
             $homeroomClass = null;

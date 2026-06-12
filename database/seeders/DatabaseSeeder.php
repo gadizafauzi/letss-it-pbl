@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             AcademicYearSeeder::class,
             ClassSeeder::class,
             DummyDataSeeder::class,
+            CmsSeeder::class,
         ]);
     }
 }
+
