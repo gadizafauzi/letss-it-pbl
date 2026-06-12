@@ -11,13 +11,26 @@
                 <div class="lg:col-span-7 max-w-3xl text-left">
 
                     {{-- Accreditation stamp --}}
-                    <div class="accreditation-stamp mb-6 reveal reveal-left">
-                        <i data-lucide="shield-check" class="w-6 h-6"></i>
-                        <div class="accreditation-text">
-                            <h5>Terakreditasi A</h5>
-                            <p>BAN-PDM PROVINSI SUMATERA BARAT</p>
+                    @if ($hero && $hero->badge_text)
+                        @php
+                            $badgeParts = explode(' - ', $hero->badge_text, 2);
+                        @endphp
+                        <div class="accreditation-stamp mb-6 reveal reveal-left">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            <div class="accreditation-text">
+                                <h5>{{ $badgeParts[0] }}</h5>
+                                <p>{{ $badgeParts[1] ?? '' }}</p>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="accreditation-stamp mb-6 reveal reveal-left">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            <div class="accreditation-text">
+                                <h5>Terakreditasi A</h5>
+                                <p>BAN-PDM PROVINSI SUMATERA BARAT</p>
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-sm font-semibold mb-6 reveal reveal-right">
                         <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
@@ -25,25 +38,29 @@
                     </div>
 
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight reveal reveal-up">
-                        Mendidik Generasi
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-amber-300">Qur'ani</span>
-                        yang Berakhlak Mulia & Berprestasi
+                        @if ($hero && $hero->title)
+                            {!! str_replace("Qur'an", '<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-amber-300">Qur\'an</span>', e($hero->title)) !!}
+                        @else
+                            Mendidik Generasi
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-amber-300">Qur'ani</span>
+                            yang Berakhlak Mulia & Berprestasi
+                        @endif
                     </h1>
 
                     <p class="mt-6 text-base sm:text-lg text-emerald-100/80 leading-relaxed max-w-xl reveal reveal-up">
-                        SIT Mutiara Qur'an hadir di Nagari Cupak untuk membentuk generasi robbani yang mandiri, berkarakter mulia, cerdas akademis, serta mencintai Al-Qur'an.
+                        {{ $hero && $hero->subtitle ? $hero->subtitle : "SIT Mutiara Qur'an hadir di Nagari Cupak untuk membentuk generasi robbani yang mandiri, berkarakter mulia, cerdas akademis, serta mencintai Al-Qur'an." }}
                     </p>
 
                     <div class="flex flex-wrap gap-4 mt-8 reveal reveal-up">
-                        <a href="{{ route('public.ppdb.index') }}"
+                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : route('public.ppdb.index') }}"
                             class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                             <i data-lucide="file-text" class="w-5 h-5"></i>
-                            Daftar PPDB Online
+                            {{ $hero && $hero->button_text ? $hero->button_text : 'Daftar PPDB Online' }}
                         </a>
-                        <a href="{{ route('public.profil.index') }}"
+                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : route('public.profil.index') }}"
                             class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
                             <i data-lucide="building-2" class="w-5 h-5"></i>
-                            Profil Sekolah
+                            {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Profil Sekolah' }}
                         </a>
                     </div>
                 </div>
@@ -73,7 +90,7 @@
                         </div>
 
                         <div class="w-full aspect-[4/5] rounded-[36px] bg-gradient-to-br from-emerald-800/80 to-emerald-950/80 border-4 border-white/10 shadow-2xl overflow-hidden relative">
-                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800" alt="Siswa SIT Mutiara Qur'an" class="w-full h-full object-cover mix-blend-overlay opacity-65">
+                            <img src="{{ $hero && $hero->image ? $hero->image : 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800' }}" alt="Siswa SIT Mutiara Qur'an" class="w-full h-full object-cover mix-blend-overlay opacity-65">
                             <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-transparent"></div>
 
                             <div class="absolute bottom-8 left-8 right-8 z-10 text-left">

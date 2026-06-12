@@ -17,57 +17,68 @@
                 <button onclick="filterPrograms('karakter', this)" class="px-6 py-2.5 rounded-full text-sm font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all duration-500 filter-btn reveal reveal-up" style="transition-delay: 750ms;">Karakter & Pemimpin</button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @php
-                    $programs = [
-                        [
-                            'icon' => 'book-open',
-                            'title' => 'Tahfidz Qur\'an Mutqin',
-                            'desc' => 'Program menghafal Al-Qur\'an terstruktur dengan metode talaqqi dan murojaah intensif untuk menjaga kualitas hafalan siswa (target mutqin).',
-                            'detail' => 'Target: TK Juz 30, SD 5 Juz, SMP 10 Juz',
-                            'category' => 'keislaman'
-                        ],
-                        [
-                            'icon' => 'heart',
-                            'title' => 'Pembiasaan Akhlakul Karimah',
-                            'desc' => 'Internalisasi adab islami harian melalui Sholat Dhuha, Mabit (Malam Bina Iman dan Taqwa), Dzikir Pagi-Petang, serta pengawasan ibadah mandiri.',
-                            'detail' => 'Karakter islami terintegrasi dalam keseharian',
-                            'category' => 'keislaman'
-                        ],
-                        [
-                            'icon' => 'languages',
-                            'title' => 'Bilingual Environment',
-                            'desc' => 'Peningkatan kapasitas bahasa asing (Arab & Inggris) yang digunakan dalam komunikasi harian ringan, doa, dan materi ajar tertentu.',
-                            'detail' => 'Daily Arabic & English Conversation',
-                            'category' => 'akademik'
-                        ],
-                        [
-                            'icon' => 'code',
-                            'title' => 'Digital Literacy & Coding',
-                            'desc' => 'Khusus untuk tingkat SMP, dibekali dasar pemrograman komputer, logika digital, dan etika penggunaan teknologi informasi.',
-                            'detail' => 'Kesiapan menghadapi era revolusi industri 4.0',
-                            'category' => 'akademik'
-                        ],
-                        [
-                            'icon' => 'users',
-                            'title' => 'Mentoring & Halaqah',
-                            'desc' => 'Kelompok bimbingan rohani khusus (liqo/mentoring) dengan rasio asatidzah kecil untuk memantau perkembangan emosional dan spiritual siswa.',
-                            'detail' => 'Konseling terpadu yang penuh perhatian',
-                            'category' => 'karakter'
-                        ],
-                        [
-                            'icon' => 'compass',
-                            'title' => 'Leadership & Outbound',
-                            'desc' => 'Pelatihan kepemimpinan dasar, pramuka IT, kemah ukhuwah, dan kegiatan outbound untuk melatih kemandirian, keberanian, dan kerjasama tim.',
-                            'detail' => 'Mencetak calon pemimpin umat masa depan',
-                            'category' => 'karakter'
-                        ]
-                    ];
-                @endphp
-                @php
+                    $displayPrograms = [];
+                    if (isset($programs) && !$programs->isEmpty()) {
+                        foreach ($programs as $prog) {
+                            $displayPrograms[] = [
+                                'icon' => $prog->icon,
+                                'title' => $prog->title,
+                                'desc' => $prog->description,
+                                'detail' => $prog->detail,
+                                'category' => $prog->category
+                            ];
+                        }
+                    } else {
+                        $displayPrograms = [
+                            [
+                                'icon' => 'book-open',
+                                'title' => 'Tahfidz Qur\'an Mutqin',
+                                'desc' => 'Program menghafal Al-Qur\'an terstruktur dengan metode talaqqi dan murojaah intensif untuk menjaga kualitas hafalan siswa (target mutqin).',
+                                'detail' => 'Target: TK Juz 30, SD 5 Juz, SMP 10 Juz',
+                                'category' => 'keislaman'
+                            ],
+                            [
+                                'icon' => 'heart',
+                                'title' => 'Pembiasaan Akhlakul Karimah',
+                                'desc' => 'Internalisasi adab islami harian melalui Sholat Dhuha, Mabit (Malam Bina Iman dan Taqwa), Dzikir Pagi-Petang, serta pengawasan ibadah mandiri.',
+                                'detail' => 'Karakter islami terintegrasi dalam keseharian',
+                                'category' => 'keislaman'
+                            ],
+                            [
+                                'icon' => 'languages',
+                                'title' => 'Bilingual Environment',
+                                'desc' => 'Peningkatan kapasitas bahasa asing (Arab & Inggris) yang digunakan dalam komunikasi harian ringan, doa, dan materi ajar tertentu.',
+                                'detail' => 'Daily Arabic & English Conversation',
+                                'category' => 'akademik'
+                            ],
+                            [
+                                'icon' => 'code',
+                                'title' => 'Digital Literacy & Coding',
+                                'desc' => 'Khusus untuk tingkat SMP, dibekali dasar pemrograman komputer, logika digital, dan etika penggunaan teknologi informasi.',
+                                'detail' => 'Kesiapan menghadapi era revolusi industri 4.0',
+                                'category' => 'akademik'
+                            ],
+                            [
+                                'icon' => 'users',
+                                'title' => 'Mentoring & Halaqah',
+                                'desc' => 'Kelompok bimbingan rohani khusus (liqo/mentoring) dengan rasio asatidzah kecil untuk memantau perkembangan emosional dan spiritual siswa.',
+                                'detail' => 'Konseling terpadu yang penuh perhatian',
+                                'category' => 'karakter'
+                            ],
+                            [
+                                'icon' => 'compass',
+                                'title' => 'Leadership & Outbound',
+                                'desc' => 'Pelatihan kepemimpinan dasar, pramuka IT, kemah ukhuwah, dan kegiatan outbound untuk melatih kemandirian, keberanian, dan kerjasama tim.',
+                                'detail' => 'Mencetak calon pemimpin umat masa depan',
+                                'category' => 'karakter'
+                            ]
+                        ];
+                    }
                     $animClasses = ['reveal-bottom-left', 'reveal-top', 'reveal-bottom-right', 'reveal-left', 'reveal-zoom', 'reveal-right'];
                 @endphp
-                @foreach($programs as $idx => $p)
+                @foreach($displayPrograms as $idx => $p)
                     <div tabindex="0" class="bg-white rounded-2xl p-6 min-h-[320px] md:min-h-[340px] flex flex-col border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(52,211,153,0.25)] hover:scale-[1.03] hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group reveal reveal-program program-item {{ $animClasses[$idx % 6] }} focus:outline-none" data-category="{{ $p['category'] }}" style="transition-delay: {{ 120 + ($idx * 150) }}ms;">
                         
                         <!-- Top Accent Bar -->

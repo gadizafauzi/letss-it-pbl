@@ -9,26 +9,38 @@
             </div>
 
             @php
-                $testimonials = [
-                    [
-                        'quote' => 'Alhamdulillah, semenjak bersekolah di SD IT Mutiara Qur\'an, anak saya menjadi sangat rajin sholat tepat waktu bahkan sering berinisiatif Sholat Dhuha sendiri. Hafalannya juga berkembang pesat. Guru-gurunya sangat sabar dan komunikatif.',
-                        'name' => 'dr. H. Hendra Syahputra, Sp.A',
-                        'role' => 'Wali Murid Kelas 4 SD IT / Dokter Anak',
-                        'avatar' => 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=200'
-                    ],
-                    [
-                        'quote' => 'Perpaduan materi akademis umum dan pendidikan akhlak di SMP IT Mutiara Qur\'an sangat berimbang. Anak saya tidak hanya mahir secara akademis, tapi juga memiliki pemahaman agama yang mendalam dan adab yang sopan dalam keluarga.',
-                        'name' => 'Prof. Dr. Ir. Hj. Mulyani, M.T',
-                        'role' => 'Wali Murid Kelas 8 SMP IT / Dosen Perguruan Tinggi',
-                        'avatar' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200'
-                    ],
-                    [
-                        'quote' => 'Metode pembelajaran di TK IT Mutiara Qur\'an sangat menyenangkan. Anak kami pulang dengan wajah ceria setiap hari, dan luar biasa di usia 5 tahun sudah lancar melafalkan doa harian serta hafal surah-surah pendek Juz 30. Terima kasih asatidzah!',
-                        'name' => 'Ronaldi, S.E',
-                        'role' => 'Wali Murid TK IT / Wiraswasta',
-                        'avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200'
-                    ]
-                ];
+                $displayTestimonial = [];
+                if (isset($testimonials) && !$testimonials->isEmpty()) {
+                    foreach ($testimonials as $t) {
+                        $displayTestimonial[] = [
+                            'quote' => $t->quote,
+                            'name' => $t->name,
+                            'role' => $t->role,
+                            'avatar' => $t->avatar
+                        ];
+                    }
+                } else {
+                    $displayTestimonial = [
+                        [
+                            'quote' => 'Alhamdulillah, semenjak bersekolah di SD IT Mutiara Qur\'an, anak saya menjadi sangat rajin sholat tepat waktu bahkan sering berinisiatif Sholat Dhuha sendiri. Hafalannya juga berkembang pesat. Guru-gurunya sangat sabar dan komunikatif.',
+                            'name' => 'dr. H. Hendra Syahputra, Sp.A',
+                            'role' => 'Wali Murid Kelas 4 SD IT / Dokter Anak',
+                            'avatar' => 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=200'
+                        ],
+                        [
+                            'quote' => 'Perpaduan materi akademis umum dan pendidikan akhlak di SMP IT Mutiara Qur\'an sangat berimbang. Anak saya tidak hanya mahir secara akademis, tapi juga memiliki pemahaman agama yang mendalam dan adab yang sopan dalam keluarga.',
+                            'name' => 'Prof. Dr. Ir. Hj. Mulyani, M.T',
+                            'role' => 'Wali Murid Kelas 8 SMP IT / Dosen Perguruan Tinggi',
+                            'avatar' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200'
+                        ],
+                        [
+                            'quote' => 'Metode pembelajaran di TK IT Mutiara Qur\'an sangat menyenangkan. Anak kami pulang dengan wajah ceria setiap hari, dan luar biasa di usia 5 tahun sudah lancar melafalkan doa harian serta hafal surah-surah pendek Juz 30. Terima kasih asatidzah!',
+                            'name' => 'Ronaldi, S.E',
+                            'role' => 'Wali Murid TK IT / Wiraswasta',
+                            'avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200'
+                        ]
+                    ];
+                }
             @endphp
 
             {{-- Testimonial Slider --}}
@@ -47,7 +59,7 @@
                     <div class="overflow-hidden w-full relative z-10">
                         {{-- Slider Track --}}
                         <div class="flex transition-transform duration-500 ease-out" id="testiSliderTrack" style="width: 300%; transform: translateX(0%);">
-                            @foreach($testimonials as $index => $t)
+                            @foreach($displayTestimonial as $index => $t)
                                 <div class="w-1/3 flex-shrink-0 text-center px-4 md:px-12">
                                     <div class="testi-quote text-base sm:text-lg md:text-xl font-medium mb-8 text-slate-700 leading-relaxed">{{ $t['quote'] }}</div>
                                     
@@ -76,7 +88,7 @@
 
                 {{-- Dots Indicator --}}
                 <div class="flex justify-center gap-2 mt-6">
-                    @foreach($testimonials as $index => $t)
+                    @foreach($displayTestimonial as $index => $t)
                         <button onclick="goToSlide({{ $index }})" class="w-2.5 h-2.5 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-emerald-600 w-6 animate-pulse' : 'bg-slate-300' }} slider-dot reveal reveal-fade" style="transition-delay: {{ 850 + ($index * 100) }}ms;" aria-label="Go to slide {{ $index+1 }}"></button>
                     @endforeach
                 </div>

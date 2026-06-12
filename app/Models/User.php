@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Student::class);
     }
+
+    public function cmsPosts()
+    {
+        return $this->hasMany(CmsPost::class, 'author_id');
+    }
 }

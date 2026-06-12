@@ -25,16 +25,32 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 @php
-                    $keunggulan = [
-                        ['icon' => 'book-marked', 'bg' => 'amber', 'anim' => 'reveal-bottom-left', 'delay' => '150ms', 'title' => 'Kurikulum Merdeka + JSIT', 'desc' => 'Mengintegrasikan kurikulum nasional Kurikulum Merdeka dengan kurikulum kekhasan JSIT.'],
-                        ['icon' => 'monitor', 'bg' => 'emerald', 'anim' => 'reveal-top-zoom', 'delay' => '300ms', 'title' => 'Laboratorium Komputer', 'desc' => 'Fasilitas komputer modern penunjang praktikum TIK dan pemrograman dasar sejak dini.'],
-                        ['icon' => 'users-2', 'bg' => 'blue', 'anim' => 'reveal-bottom-right', 'delay' => '450ms', 'title' => 'Tenaga Pendidik Berdedikasi', 'desc' => 'Asatidzah lulusan perguruan tinggi terkemuka, bersertifikat pendidik, dan hafizh.'],
-                        ['icon' => 'home', 'bg' => 'violet', 'anim' => 'reveal-left', 'delay' => '600ms', 'title' => 'Fasilitas Kelas Kondusif', 'desc' => 'Ruang kelas ber-AC, proyektor LCD, serta lingkungan asri yang jauh dari kebisingan.'],
-                        ['icon' => 'shield-check', 'bg' => 'rose', 'anim' => 'reveal-zoom', 'delay' => '750ms', 'title' => 'Lingkungan Aman & Ramah', 'desc' => 'Keamanan terpadu 24 jam dengan sistem sekolah bebas bullying dan hangat.'],
-                        ['icon' => 'activity', 'bg' => 'cyan', 'anim' => 'reveal-right', 'delay' => '900ms', 'title' => 'Ekstrakurikuler Variatif', 'desc' => 'Panahan, berkuda, karate, robotik, seni kaligrafi, tilawah, sepak bola, dan pramuka.'],
-                    ];
+                    $displayKeunggulan = [];
+                    if (isset($keunggulan) && !$keunggulan->isEmpty()) {
+                        $animClasses = ['reveal-bottom-left', 'reveal-top-zoom', 'reveal-bottom-right', 'reveal-left', 'reveal-zoom', 'reveal-right'];
+                        $delays = ['150ms', '300ms', '450ms', '600ms', '750ms', '900ms'];
+                        foreach ($keunggulan as $index => $item) {
+                            $displayKeunggulan[] = [
+                                'icon' => $item->icon,
+                                'bg' => $item->bg_color ?: 'emerald',
+                                'anim' => $animClasses[$index % 6],
+                                'delay' => $delays[$index % 6],
+                                'title' => $item->title,
+                                'desc' => $item->description
+                            ];
+                        }
+                    } else {
+                        $displayKeunggulan = [
+                            ['icon' => 'book-marked', 'bg' => 'amber', 'anim' => 'reveal-bottom-left', 'delay' => '150ms', 'title' => 'Kurikulum Merdeka + JSIT', 'desc' => 'Mengintegrasikan kurikulum nasional Kurikulum Merdeka dengan kurikulum kekhasan JSIT.'],
+                            ['icon' => 'monitor', 'bg' => 'emerald', 'anim' => 'reveal-top-zoom', 'delay' => '300ms', 'title' => 'Laboratorium Komputer', 'desc' => 'Fasilitas komputer modern penunjang praktikum TIK dan pemrograman dasar sejak dini.'],
+                            ['icon' => 'users-2', 'bg' => 'blue', 'anim' => 'reveal-bottom-right', 'delay' => '450ms', 'title' => 'Tenaga Pendidik Berdedikasi', 'desc' => 'Asatidzah lulusan perguruan tinggi terkemuka, bersertifikat pendidik, dan hafizh.'],
+                            ['icon' => 'home', 'bg' => 'violet', 'anim' => 'reveal-left', 'delay' => '600ms', 'title' => 'Fasilitas Kelas Kondusif', 'desc' => 'Ruang kelas ber-AC, proyektor LCD, serta lingkungan asri yang jauh dari kebisingan.'],
+                            ['icon' => 'shield-check', 'bg' => 'rose', 'anim' => 'reveal-zoom', 'delay' => '750ms', 'title' => 'Lingkungan Aman & Ramah', 'desc' => 'Keamanan terpadu 24 jam dengan sistem sekolah bebas bullying dan hangat.'],
+                            ['icon' => 'activity', 'bg' => 'cyan', 'anim' => 'reveal-right', 'delay' => '900ms', 'title' => 'Ekstrakurikuler Variatif', 'desc' => 'Panahan, berkuda, karate, robotik, seni kaligrafi, tilawah, sepak bola, dan pramuka.'],
+                        ];
+                    }
                 @endphp
-                @foreach($keunggulan as $item)
+                @foreach($displayKeunggulan as $item)
                     <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 hover:scale-[1.03] hover:border-{{ $item['bg'] }}-300 transition-all duration-300 relative overflow-hidden group reveal reveal-program {{ $item['anim'] }}" style="transition-delay: {{ $item['delay'] }};">
                         
                         <!-- Shine effect passing across the card -->

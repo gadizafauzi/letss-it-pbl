@@ -10,9 +10,31 @@
     <section class="public-section">
         <div class="w-full">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @php $kategori = [['icon'=>'book-marked','title'=>'Tahfidz','count'=>'12','color'=>'emerald'],['icon'=>'trophy','title'=>'Prestasi','count'=>'8','color'=>'amber'],['icon'=>'megaphone','title'=>'Pengumuman','count'=>'15','color'=>'blue'],['icon'=>'calendar','title'=>'Kegiatan','count'=>'20','color'=>'violet'],['icon'=>'graduation-cap','title'=>'Akademik','count'=>'10','color'=>'cyan'],['icon'=>'heart','title'=>'Sosial','count'=>'6','color'=>'rose']]; @endphp
-                @foreach($kategori as $k)
-                <a href="{{ route('public.berita.index') }}" class="feature-card flex items-center gap-4 fade-up">
+                @php
+                    $displayCategories = [];
+                    if (isset($categories) && !$categories->isEmpty()) {
+                        foreach ($categories as $cat) {
+                            $displayCategories[] = [
+                                'icon' => $cat->icon ? $cat->icon : 'book-marked',
+                                'title' => $cat->name,
+                                'slug' => $cat->slug,
+                                'count' => $cat->posts_count,
+                                'color' => $cat->color ? $cat->color : 'emerald',
+                            ];
+                        }
+                    } else {
+                        $displayCategories = [
+                            ['icon'=>'book-marked','title'=>'Tahfidz','slug'=>'tahfidz','count'=>'12','color'=>'emerald'],
+                            ['icon'=>'trophy','title'=>'Prestasi','slug'=>'prestasi','count'=>'8','color'=>'amber'],
+                            ['icon'=>'megaphone','title'=>'Pengumuman','slug'=>'pengumuman','count'=>'15','color'=>'blue'],
+                            ['icon'=>'calendar','title'=>'Kegiatan','slug'=>'kegiatan','count'=>'20','color'=>'violet'],
+                            ['icon'=>'graduation-cap','title'=>'Akademik','slug'=>'akademik','count'=>'10','color'=>'cyan'],
+                            ['icon'=>'heart','title'=>'Sosial','slug'=>'sosial','count'=>'6','color'=>'rose']
+                        ];
+                    }
+                @endphp
+                @foreach($displayCategories as $k)
+                <a href="{{ route('public.berita.category', $k['slug']) }}" class="feature-card flex items-center gap-4 fade-up">
                     <div class="w-14 h-14 rounded-2xl bg-{{ $k['color'] }}-50 flex items-center justify-center flex-shrink-0">
                         <i data-lucide="{{ $k['icon'] }}" class="w-6 h-6 text-{{ $k['color'] }}-500"></i>
                     </div>

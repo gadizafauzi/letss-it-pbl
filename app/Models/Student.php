@@ -76,4 +76,16 @@ class Student extends Model
     {
         return $this->hasMany(Invoice::class);
     }
+
+    /*
+     * --------------------------------------------------------------------------
+     * RELASI CMS
+     * --------------------------------------------------------------------------
+     */
+
+    public function cmsAchievements()
+    {
+        return $this->hasMany(CmsAchievement::class, 'student_id');
+    }
 }
+
