@@ -116,7 +116,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->names('admin.rekening-sekolah');
     
     Route::resource('/admin/jenis-tagihan', \App\Http\Controllers\Admin\JenisTagihanController::class)
-        ->parameters(['jenis_tagihan' => 'paymentType'])
+        ->parameters(['jenis-tagihan' => 'paymentType'])
         ->names('admin.jenis-tagihan');
 
     // Tambahan untuk view detail per siswa (dipanggil dari resources/views/admin/tagihan/index.blade.php)
@@ -146,8 +146,39 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/laporan-keuangan', [\App\Http\Controllers\Admin\LaporanKeuanganController::class, 'index'])->name('admin.laporan-keuangan.index');
     
 
-    // CMS
-    Route::get('/admin/beranda', fn() => view('admin.beranda.index'))->name('admin.beranda.index');
+    // CMS Beranda
+    Route::prefix('admin/cms/beranda')->name('admin.beranda.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'index'])->name('index');
+        Route::put('/hero/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'updateHero'])->name('hero.update');
+        Route::put('/welcome/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'updateWelcome'])->name('welcome.update');
+        
+        // Statistik
+        Route::post('/statistic', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'storeStatistic'])->name('statistic.store');
+        Route::put('/statistic/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'updateStatistic'])->name('statistic.update');
+        Route::delete('/statistic/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'destroyStatistic'])->name('statistic.destroy');
+
+        // Program
+        Route::post('/program', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'storeProgram'])->name('program.store');
+        Route::put('/program/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'updateProgram'])->name('program.update');
+        Route::delete('/program/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'destroyProgram'])->name('program.destroy');
+
+        // Keunggulan
+        Route::post('/keunggulan', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'storeKeunggulan'])->name('keunggulan.store');
+        Route::put('/keunggulan/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'updateKeunggulan'])->name('keunggulan.update');
+        Route::delete('/keunggulan/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'destroyKeunggulan'])->name('keunggulan.destroy');
+
+        // Testimoni
+        Route::post('/testimoni', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'storeTestimoni'])->name('testimoni.store');
+        Route::put('/testimoni/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'updateTestimoni'])->name('testimoni.update');
+        Route::delete('/testimoni/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'destroyTestimoni'])->name('testimoni.destroy');
+
+        // FAQ
+        Route::post('/faq', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'storeFaq'])->name('faq.store');
+        Route::put('/faq/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'updateFaq'])->name('faq.update');
+        Route::delete('/faq/{id}', [\App\Http\Controllers\Admin\CmsBerandaController::class, 'destroyFaq'])->name('faq.destroy');
+    });
+
+    // Placeholder CMS (Akan diimplementasikan nanti)
     Route::get('/admin/profil', fn() => view('admin.profil.index'))->name('admin.profil.index');
     Route::get('/admin/unit-cms', fn() => view('admin.unit-cms.index'))->name('admin.unit-cms.index');
     Route::get('/admin/berita', fn() => view('admin.berita.index'))->name('admin.berita.index');

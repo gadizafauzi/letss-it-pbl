@@ -22,7 +22,7 @@
     </div>
 
     <!-- Top Cards: Kelas, Mapel, Rata-rata -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6">
+    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6">
         <x-student.stat-card 
             title="Kelas Saat Ini" 
             value="{{ $student->currentClass->schoolClass->class_name ?? '-' }}" 
@@ -99,7 +99,7 @@
                     <h3 class="font-extrabold text-[var(--theme-text-primary)] text-base">Informasi Keuangan</h3>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-2 gap-4">
                     <div class="bg-[var(--theme-bg-workspace)] rounded-2xl p-4 border border-[var(--border-color)]">
                         <span class="text-[var(--text-secondary)] text-xs font-semibold uppercase block mb-1">Tagihan Saat Ini</span>
                         <span class="text-lg font-black text-[#f59e0b]">Rp {{ number_format($tagihanSaatIni, 0, ',', '.') }}</span>

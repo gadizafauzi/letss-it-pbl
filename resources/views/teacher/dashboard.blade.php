@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+<div class="grid grid-cols-2 md:grid-cols-3 gap-5 mb-6">
 
     {{-- TOTAL KELAS DIAJAR --}}
     <div class="bg-gradient-to-br from-blue-500 to-blue-600 border border-blue-400 rounded-3xl px-4 py-4 md:px-6 md:py-5 group flex items-center gap-3 md:gap-4

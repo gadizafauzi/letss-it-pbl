@@ -16,7 +16,7 @@
                             'quote' => $t->quote,
                             'name' => $t->name,
                             'role' => $t->role,
-                            'avatar' => $t->avatar
+                            'avatar' => $t->avatar ? (str_starts_with($t->avatar, 'http') ? $t->avatar : asset('storage/' . $t->avatar)) : null
                         ];
                     }
                 } else {
@@ -65,7 +65,7 @@
                                     
                                     <div class="flex flex-col items-center justify-center">
                                         <!-- Image -->
-                                        <img src="{{ $t['avatar'] }}" alt="{{ $t['name'] }}" class="w-16 h-16 rounded-full object-cover border-4 border-emerald-100 shadow-md mb-3 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                                        <img src="{{ $t['avatar'] ?? 'https://ui-avatars.com/api/?name='.urlencode($t['name']).'&background=random' }}" alt="{{ $t['name'] }}" class="w-16 h-16 rounded-full object-cover border-4 border-emerald-100 shadow-md mb-3 transition-all duration-300 hover:scale-110 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
                                         <!-- Name & Role -->
                                         <div>
                                             <h4 class="text-base sm:text-lg font-extrabold text-slate-800">{{ $t['name'] }}</h4>

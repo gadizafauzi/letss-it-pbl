@@ -10,7 +10,7 @@
                         <div class="sambutan-avatar-container">
                             <div class="sambutan-avatar-bg"></div>
                             <div class="sambutan-image-frame relative overflow-hidden rounded-[24px] group transition-all duration-400 hover:shadow-[0_10px_40px_-10px_rgba(5,150,105,0.3)] bg-white">
-                                <img src="{{ $welcomeMessage && $welcomeMessage->kepsek_photo ? $welcomeMessage->kepsek_photo : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600' }}" alt="Kepala Sekolah SIT Mutiara Qur'an" class="w-full h-96 object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.08]">
+                                <img src="{{ $welcomeMessage && $welcomeMessage->kepsek_photo ? (Str::startsWith($welcomeMessage->kepsek_photo, 'http') ? $welcomeMessage->kepsek_photo : asset('storage/' . $welcomeMessage->kepsek_photo)) : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600' }}" alt="Kepala Sekolah SIT Mutiara Qur'an" class="w-full h-96 object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.08]">
                                 <div class="sambutan-badge transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:bg-emerald-600 group-hover:text-white reveal reveal-pop" style="transition-property: all !important; transition-delay: 150ms;">Kepala Sekolah</div>
                             </div>
                         </div>
