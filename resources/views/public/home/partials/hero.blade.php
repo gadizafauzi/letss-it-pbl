@@ -1,12 +1,12 @@
 {{-- HERO --}}
-    <section class="hero-section relative overflow-hidden flex items-center">
+    <section class="hero-section relative overflow-hidden flex items-center min-h-[calc(100vh-72px)] xl:min-h-[720px]">
         <div class="hero-overlay"></div>
         <div class="hero-pattern"></div>
         <div class="glow-emerald top-20 left-10"></div>
         <div class="glow-amber bottom-20 right-10"></div>
 
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-6 pb-20 sm:pt-8 sm:pb-28 lg:pt-10 lg:pb-36">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center -translate-y-6 lg:-translate-y-16">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-10 pb-28 lg:pt-12 lg:pb-32 xl:pt-16 xl:pb-40">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-16 items-center">
                 {{-- Left Text --}}
                 <div class="lg:col-span-7 max-w-3xl text-left">
 
@@ -15,29 +15,29 @@
                         @php
                             $badgeParts = explode(' - ', $hero->badge_text, 2);
                         @endphp
-                        <div class="accreditation-stamp mb-6 reveal reveal-left">
-                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        <div class="accreditation-stamp mb-4 lg:mb-6 reveal reveal-left">
+                            <i data-lucide="shield-check" class="w-5 h-5 lg:w-6 lg:h-6"></i>
                             <div class="accreditation-text">
-                                <h5>{{ $badgeParts[0] }}</h5>
-                                <p>{{ $badgeParts[1] ?? '' }}</p>
+                                <h5 class="text-xs lg:text-sm">{{ $badgeParts[0] }}</h5>
+                                <p class="text-[10px] lg:text-xs">{{ $badgeParts[1] ?? '' }}</p>
                             </div>
                         </div>
                     @else
-                        <div class="accreditation-stamp mb-6 reveal reveal-left">
-                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        <div class="accreditation-stamp mb-4 lg:mb-6 reveal reveal-left">
+                            <i data-lucide="shield-check" class="w-5 h-5 lg:w-6 lg:h-6"></i>
                             <div class="accreditation-text">
-                                <h5>Terakreditasi A</h5>
-                                <p>BAN-PDM PROVINSI SUMATERA BARAT</p>
+                                <h5 class="text-xs lg:text-sm">Terakreditasi A</h5>
+                                <p class="text-[10px] lg:text-xs">BAN-PDM PROVINSI SUMATERA BARAT</p>
                             </div>
                         </div>
                     @endif
 
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-sm font-semibold mb-6 reveal reveal-right">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-xs lg:text-sm font-semibold mb-4 lg:mb-6 reveal reveal-right">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5 lg:w-4 lg:h-4 text-amber-400"></i>
                         Sekolah Islam Terpadu (JSIT)
                     </div>
 
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight tracking-tight reveal reveal-up">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight tracking-tight reveal reveal-up">
                         @if ($hero && $hero->title)
                             {!! str_replace("Qur'an", '<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-amber-300">Qur\'an</span>', e($hero->title)) !!}
                         @else
@@ -47,19 +47,19 @@
                         @endif
                     </h1>
 
-                    <p class="mt-6 text-base sm:text-lg text-emerald-100/80 leading-relaxed max-w-xl reveal reveal-up">
+                    <p class="mt-4 lg:mt-6 text-sm sm:text-base lg:text-lg text-emerald-100/80 leading-relaxed max-w-xl reveal reveal-up">
                         {{ $hero && $hero->subtitle ? $hero->subtitle : "SIT Mutiara Qur'an hadir di Nagari Cupak untuk membentuk generasi robbani yang mandiri, berkarakter mulia, cerdas akademis, serta mencintai Al-Qur'an." }}
                     </p>
 
-                    <div class="flex flex-wrap gap-4 mt-8 reveal reveal-up">
+                    <div class="flex flex-wrap gap-3 lg:gap-4 mt-6 lg:mt-8 reveal reveal-up">
                         <a href="{{ $hero && $hero->button_link ? $hero->button_link : route('public.ppdb.index') }}"
-                            class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                            <i data-lucide="file-text" class="w-5 h-5"></i>
+                            class="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 font-extrabold text-xs lg:text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            <i data-lucide="file-text" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                             {{ $hero && $hero->button_text ? $hero->button_text : 'Daftar PPDB Online' }}
                         </a>
                         <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : route('public.profil.index') }}"
-                            class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
-                            <i data-lucide="building-2" class="w-5 h-5"></i>
+                            class="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-xs lg:text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
+                            <i data-lucide="building-2" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                             {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Profil Sekolah' }}
                         </a>
                     </div>
@@ -67,35 +67,35 @@
 
                 {{-- Right Visual representation --}}
                 <div class="lg:col-span-5 hidden lg:block reveal reveal-up">
-                    <div class="relative">
+                    <div class="relative max-w-sm xl:max-w-md mx-auto">
                         {{-- Decorative float card --}}
-                        <div class="absolute top-4 -left-4 z-20 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-emerald-100 shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 4s;">
-                            <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-500">
-                                <i data-lucide="award" class="w-5 h-5"></i>
+                        <div class="absolute -top-6 -left-8 z-20 bg-white/95 backdrop-blur-md p-3 lg:p-4 rounded-xl lg:rounded-2xl border border-emerald-100 shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 4s;">
+                            <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-amber-50 flex items-center justify-center text-amber-500">
+                                <i data-lucide="award" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                             </div>
                             <div>
-                                <h6 class="text-xs font-black text-slate-800">Target Hafalan Mapan</h6>
-                                <p class="text-[10px] text-slate-500">Up to 10 Juz Mutqin</p>
+                                <h6 class="text-[10px] lg:text-xs font-black text-slate-800">Target Hafalan Mapan</h6>
+                                <p class="text-[9px] lg:text-[10px] text-slate-500">Up to 10 Juz Mutqin</p>
                             </div>
                         </div>
 
-                        <div class="absolute -bottom-4 -right-4 z-20 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-emerald-100 shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 5s;">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500">
-                                <i data-lucide="users" class="w-5 h-5"></i>
+                        <div class="absolute -bottom-6 -right-6 z-20 bg-white/95 backdrop-blur-md p-3 lg:p-4 rounded-xl lg:rounded-2xl border border-emerald-100 shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 5s;">
+                            <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500">
+                                <i data-lucide="users" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                             </div>
                             <div>
-                                <h6 class="text-xs font-black text-slate-800">Pembinaan Akhlak</h6>
-                                <p class="text-[10px] text-slate-500">Mentoring Harian & Mabit</p>
+                                <h6 class="text-[10px] lg:text-xs font-black text-slate-800">Pembinaan Akhlak</h6>
+                                <p class="text-[9px] lg:text-[10px] text-slate-500">Mentoring Harian & Mabit</p>
                             </div>
                         </div>
 
-                        <div class="w-full aspect-[4/5] rounded-[36px] bg-gradient-to-br from-emerald-800/80 to-emerald-950/80 border-4 border-white/10 shadow-2xl overflow-hidden relative">
-                            <img src="{{ $hero && $hero->image ? $hero->image : 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800' }}" alt="Siswa SIT Mutiara Qur'an" class="w-full h-full object-cover mix-blend-overlay opacity-65">
+                        <div class="w-full aspect-square xl:aspect-[4/5] rounded-[24px] lg:rounded-[36px] bg-gradient-to-br from-emerald-800/80 to-emerald-950/80 border-4 border-white/10 shadow-2xl overflow-hidden relative">
+                            <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800' }}" alt="Siswa SIT Mutiara Qur'an" class="w-full h-full object-cover mix-blend-overlay opacity-65">
                             <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-transparent"></div>
 
-                            <div class="absolute bottom-8 left-8 right-8 z-10 text-left">
-                                <p class="text-xs font-extrabold text-amber-400 uppercase tracking-widest mb-2">Pendaftaran Sekolah</p>
-                                <h3 class="text-xl font-bold text-white leading-snug">Berikan Pendidikan Agama dan Akademis Terbaik Bagi Putra-Putri Anda</h3>
+                            <div class="absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8 z-10 text-left">
+                                <p class="text-[10px] lg:text-xs font-extrabold text-amber-400 uppercase tracking-widest mb-1 lg:mb-2">Pendaftaran Sekolah</p>
+                                <h3 class="text-sm lg:text-xl font-bold text-white leading-snug">Berikan Pendidikan Agama dan Akademis Terbaik Bagi Putra-Putri Anda</h3>
                             </div>
                         </div>
                     </div>
