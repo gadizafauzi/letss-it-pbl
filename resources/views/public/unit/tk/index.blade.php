@@ -503,9 +503,9 @@
                                 style="border: 1px solid rgba(255,255,255,0.06);">
                                 <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                                     style="background: rgba(16,185,129,0.12); color: #10b981;">
-                                    <i data-lucide="{{ $f[0] }}" class="w-3.5 h-3.5"></i>
+                                    <i data-lucide="{{ $f['icon'] ?? $f[0] }}" class="w-3.5 h-3.5"></i>
                                 </div>
-                                <span class="text-xs font-semibold text-slate-300">{{ $f[1] }}</span>
+                                <span class="text-xs font-semibold text-slate-300">{{ $f['title'] ?? $f[1] }}</span>
                             </div>
                         @endforeach
                     </div>

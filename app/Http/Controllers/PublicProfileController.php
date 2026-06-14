@@ -8,6 +8,7 @@ use App\Models\CmsWelcomeMessage;
 use App\Models\CmsVisi;
 use App\Models\CmsMisiItem;
 use App\Models\CmsSejarahItem;
+use App\Models\CmsSetting;
 
 class PublicProfileController extends Controller
 {
@@ -22,13 +23,16 @@ class PublicProfileController extends Controller
         $misiItems = CmsMisiItem::where('is_active', true)->orderBy('order')->get();
         
         $sejarahItems = CmsSejarahItem::where('is_active', true)->orderBy('order')->get();
+        
+        $strukturOrganisasi = CmsSetting::where('key', 'struktur_organisasi_image')->first();
 
         return view('public.profil.index', compact(
             'hero',
             'welcomeMessage',
             'visi',
             'misiItems',
-            'sejarahItems'
+            'sejarahItems',
+            'strukturOrganisasi'
         ));
     }
 }

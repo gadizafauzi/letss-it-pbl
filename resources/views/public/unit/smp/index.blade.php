@@ -280,29 +280,30 @@
 
                 {{-- Left text --}}
                 <div class="reveal reveal-left">
-                    <h1
-                        class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tighter mt-2 mb-6">
-                        SMP ISLAM<br>
-                        <span
-                            style="background: linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TERPADU</span>
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tighter mt-2 mb-6">
+                        @if($hero && $hero->title)
+                            {{ $hero->title }}
+                        @else
+                            SMP ISLAM<br>
+                            <span style="background: linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TERPADU</span>
+                        @endif
                     </h1>
 
                     <p class="text-base text-slate-400 leading-relaxed mb-8 max-w-md">
-                        Membangun generasi remaja yang unggul secara akademik, berkarakter islami kuat, dan siap menghadapi
-                        tantangan era global.
+                        {{ $hero && $hero->subtitle ? $hero->subtitle : 'Membangun generasi remaja yang unggul secara akademik, berkarakter islami kuat, dan siap menghadapi tantangan era global.' }}
                     </p>
 
                     <div class="flex flex-wrap gap-3">
-                        <a href="#profil" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"
+                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil' }}" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"
                             class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm shadow-lg hover:-translate-y-1 hover:shadow-emerald-500/30 transition-all duration-300">
                             <i data-lucide="info" class="w-4 h-4"></i>
-                            Deskripsi Umum
+                            {{ $hero && $hero->button_text ? $hero->button_text : 'Deskripsi Umum' }}
                         </a>
-                        <a href="#prestasi"
+                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#prestasi' }}"
                             class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white transition-all duration-300 hover:-translate-y-1"
                             style="border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);">
                             <i data-lucide="play-circle" class="w-4 h-4"></i>
-                            Lihat Prestasi
+                            {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Lihat Prestasi' }}
                         </a>
                     </div>
                 </div>
@@ -310,7 +311,7 @@
                 <div class="relative hidden lg:block reveal reveal-right">
                     <div class="relative w-full h-[400px] lg:h-[480px] animate-floating">
                         <div class="absolute inset-0 bg-emerald-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                        <img src="{{ asset('images/smp_dummy.png') }}" alt="SMP Islam Terpadu SIT Mutiara Qur'an"
+                        <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : asset('images/smp_dummy.png') }}" alt="SMP Islam Terpadu SIT Mutiara Qur'an"
                             class="relative w-full h-full object-contain mix-blend-screen drop-shadow-2xl">
                     </div>
                 </div>
@@ -331,35 +332,36 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="reveal reveal-left p-4">
                     <div class="relative group">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-br from-emerald-100 to-green-50 rounded-2xl transform -rotate-3 transition-transform group-hover:rotate-0 duration-500">
-                        </div>
-                        <div
-                            class="relative bg-white rounded-2xl shadow-lg p-8 border border-slate-100 flex items-center justify-center min-h-[300px]">
-                            <img src="{{ asset('images/logomq.jpg') }}" alt="Logo SIT"
+                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-100 to-green-50 rounded-2xl transform -rotate-3 transition-transform group-hover:rotate-0 duration-500"></div>
+                        <div class="relative bg-white rounded-2xl shadow-lg p-8 border border-slate-100 flex items-center justify-center min-h-[300px]">
+                            <img src="{{ $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/logomq.jpg') }}" alt="Logo SIT"
                                 class="w-40 h-40 object-contain animate-floating">
                         </div>
                     </div>
                 </div>
 
                 <div class="reveal reveal-right">
-                    <h3 class="text-xl font-bold text-slate-800 mb-5">Pendidikan Menengah Berkualitas & Berkarakter</h3>
+                    <h3 class="text-xl font-bold text-slate-800 mb-5">{{ $detail && $detail->description_title ? $detail->description_title : 'Pendidikan Menengah Berkualitas & Berkarakter' }}</h3>
                     <div class="space-y-4 text-[0.95rem] text-slate-600 leading-relaxed">
-                        <p>
-                            SMP Islam Terpadu SIT Mutiara Qur'an hadir sebagai solusi pendidikan menengah yang memadukan
-                            keunggulan akademik, teknologi, dan pendalaman ilmu agama (Diniyah) untuk mencetak lulusan yang
-                            siap bersaing di era global.
-                        </p>
-                        <p>
-                            Dengan program bina pribadi islami (BPI), bahasa asing, dan sains, kami membimbing remaja untuk
-                            menemukan potensi terbaik mereka, melatih kepemimpinan, dan memperkuat identitas sebagai muslim
-                            sejati.
-                        </p>
-                        <p>
-                            Siswa juga difasilitasi dengan berbagai kegiatan kokurikuler dan ekstrakurikuler yang sejalan
-                            dengan minat dan bakat mereka, mendorong tercapainya prestasi maksimal diimbangi pemahaman
-                            akhlak dan akidah.
-                        </p>
+                        @if($detail && $detail->description_body)
+                            {!! nl2br(e($detail->description_body)) !!}
+                        @else
+                            <p>
+                                SMP Islam Terpadu SIT Mutiara Qur'an hadir sebagai solusi pendidikan menengah yang memadukan
+                                keunggulan akademik, teknologi, dan pendalaman ilmu agama (Diniyah) untuk mencetak lulusan yang
+                                siap bersaing di era global.
+                            </p>
+                            <p>
+                                Dengan program bina pribadi islami (BPI), bahasa asing, dan sains, kami membimbing remaja untuk
+                                menemukan potensi terbaik mereka, melatih kepemimpinan, dan memperkuat identitas sebagai muslim
+                                sejati.
+                            </p>
+                            <p>
+                                Siswa juga difasilitasi dengan berbagai kegiatan kokurikuler dan ekstrakurikuler yang sejalan
+                                dengan minat dan bakat mereka, mendorong tercapainya prestasi maksimal diimbangi pemahaman
+                                akhlak dan akidah.
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -379,21 +381,34 @@
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
                 @php
-                    $guru = [
-                        ['https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Rina, S.Pd'],
-                        ['https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', 'Ustadz Fajar, M.Pd'],
-                        ['https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80', 'Ustadzah Sari, S.Pd.I'],
-                        ['https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=400&q=80', 'Ustadz Budi, S.Pd'],
-                        ['https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', 'Ustadzah Dewi, S.Pd'],
-                    ];
+                    $displayTeachers = [];
+                    if (isset($teachers) && !$teachers->isEmpty()) {
+                        foreach ($teachers as $item) {
+                            if ($item->teacher) {
+                                $displayTeachers[] = [
+                                    'name' => $item->teacher->full_name,
+                                    'photo' => $item->teacher->photo ? (Str::startsWith($item->teacher->photo, 'http') ? $item->teacher->photo : asset('storage/' . $item->teacher->photo)) : 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80',
+                                ];
+                            }
+                        }
+                    }
+                    if (empty($displayTeachers)) {
+                        $displayTeachers = [
+                            ['photo' => 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadzah Rina, S.Pd'],
+                            ['photo' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadz Fajar, M.Pd'],
+                            ['photo' => 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadzah Sari, S.Pd.I'],
+                            ['photo' => 'https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadz Budi, S.Pd'],
+                            ['photo' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadzah Dewi, S.Pd'],
+                        ];
+                    }
                 @endphp
-                @foreach ($guru as $idx => $g)
+                @foreach ($displayTeachers as $idx => $g)
                     <div class="unit-teacher-card reveal" style="transition-delay: {{ $idx * 70 }}ms">
                         <div class="unit-teacher-photo">
-                            <img src="{{ $g[0] }}" alt="{{ $g[1] }}">
+                            <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}">
                         </div>
                         <div class="unit-teacher-info">
-                            <h3>{{ $g[1] }}</h3>
+                            <h3>{{ $g['name'] }}</h3>
                         </div>
                     </div>
                 @endforeach
@@ -413,52 +428,29 @@
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 @php
-                    $ekskul = [
-                        [
-                            'icon' => 'tent',
-                            'title' => 'Pramuka SIT',
-                            'img' =>
-                                'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80',
-                            'desc' => 'Melatih kemandirian, kedisiplinan, dan jiwa kepemimpinan dasar.',
-                        ],
-                        [
-                            'icon' => 'book-open',
-                            'title' => 'Tahfidz Club',
-                            'img' =>
-                                'https://images.unsplash.com/photo-1585995604802-17c3fe6b53aa?auto=format&fit=crop&w=600&q=80',
-                            'desc' => 'Program pengayaan hafalan Al-Qur\'an secara intensif dan terstruktur.',
-                        ],
-                        [
-                            'icon' => 'crosshair',
-                            'title' => 'Panahan',
-                            'img' =>
-                                'https://images.unsplash.com/photo-1567699532083-f34b686df3af?auto=format&fit=crop&w=600&q=80',
-                            'desc' => 'Melatih fokus, ketenangan, dan menjalankan sunnah Rasulullah SAW.',
-                        ],
-                        [
-                            'icon' => 'flask-conical',
-                            'title' => 'Olimpiade Sains',
-                            'img' =>
-                                'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80',
-                            'desc' => 'Bimbingan khusus bagi siswa berprestasi di bidang sains dan matematika.',
-                        ],
-                        [
-                            'icon' => 'dribbble',
-                            'title' => 'Futsal',
-                            'img' =>
-                                'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80',
-                            'desc' => 'Membangun kebugaran fisik, sportivitas, dan kerjasama tim.',
-                        ],
-                        [
-                            'icon' => 'palette',
-                            'title' => 'Seni & Kaligrafi',
-                            'img' =>
-                                'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80',
-                            'desc' => 'Mengembangkan kreativitas melalui seni rupa dan kaligrafi Islam.',
-                        ],
-                    ];
+                    $displayEkskuls = [];
+                    if (isset($ekskuls) && !$ekskuls->isEmpty()) {
+                        foreach ($ekskuls as $ekskul) {
+                            $displayEkskuls[] = [
+                                'icon' => $ekskul->icon ? $ekskul->icon : 'activity',
+                                'title' => $ekskul->title,
+                                'img' => $ekskul->image ? (Str::startsWith($ekskul->image, 'http') ? $ekskul->image : asset('storage/' . $ekskul->image)) : 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80',
+                                'desc' => $ekskul->description,
+                            ];
+                        }
+                    }
+                    if (empty($displayEkskuls)) {
+                        $displayEkskuls = [
+                            ['icon' => 'tent',           'title' => 'Pramuka SIT',      'img' => 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80', 'desc' => 'Melatih kemandirian, kedisiplinan, dan jiwa kepemimpinan dasar.'],
+                            ['icon' => 'book-open',      'title' => 'Tahfidz Club',     'img' => 'https://images.unsplash.com/photo-1585995604802-17c3fe6b53aa?auto=format&fit=crop&w=600&q=80', 'desc' => 'Program pengayaan hafalan Al-Qur\'an secara intensif dan terstruktur.'],
+                            ['icon' => 'crosshair',      'title' => 'Panahan',          'img' => 'https://images.unsplash.com/photo-1567699532083-f34b686df3af?auto=format&fit=crop&w=600&q=80', 'desc' => 'Melatih fokus, ketenangan, dan menjalankan sunnah Rasulullah SAW.'],
+                            ['icon' => 'flask-conical',  'title' => 'Olimpiade Sains',  'img' => 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80', 'desc' => 'Bimbingan khusus bagi siswa berprestasi di bidang sains dan matematika.'],
+                            ['icon' => 'dribbble',       'title' => 'Futsal',           'img' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80', 'desc' => 'Membangun kebugaran fisik, sportivitas, dan kerjasama tim.'],
+                            ['icon' => 'palette',        'title' => 'Seni & Kaligrafi', 'img' => 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80', 'desc' => 'Mengembangkan kreativitas melalui seni rupa dan kaligrafi Islam.'],
+                        ];
+                    }
                 @endphp
-                @foreach ($ekskul as $idx => $e)
+                @foreach ($displayEkskuls as $idx => $e)
                     <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal"
                         style="transition-delay: {{ ($idx % 3) * 90 }}ms; aspect-ratio: 4/3;">
                         <img src="{{ $e['img'] }}" alt="{{ $e['title'] }}"
@@ -472,8 +464,7 @@
                                 <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5"></i>
                             </div>
                             <h3 class="font-semibold text-white text-sm mb-1">{{ $e['title'] }}</h3>
-                            <p
-                                class="text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-500">
+                            <p class="text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-500">
                                 {{ $e['desc'] }}</p>
                         </div>
                     </div>
@@ -505,14 +496,37 @@
                 </div>
                 <div class="reveal reveal-right">
                     <div class="grid grid-cols-2 gap-3">
-                        @foreach ([['monitor', 'Ruang Kelas Nyaman'], ['laptop', 'Laboratorium Komputer'], ['library', 'Perpustakaan'], ['moon', 'Musholla Luas'], ['activity', 'Lapangan Olahraga'], ['stethoscope', 'Klinik / UKS'], ['coffee', 'Kantin Sehat'], ['cctv', 'Keamanan CCTV']] as $f)
+                        @php
+                            $displayFacilities = [];
+                            if (isset($facilities) && !$facilities->isEmpty()) {
+                                foreach ($facilities as $fac) {
+                                    $displayFacilities[] = [
+                                        'icon' => $fac->icon ? $fac->icon : 'check',
+                                        'title' => $fac->title,
+                                    ];
+                                }
+                            }
+                            if (empty($displayFacilities)) {
+                                $displayFacilities = [
+                                    ['monitor',     'Ruang Kelas Nyaman'],
+                                    ['laptop',      'Laboratorium Komputer'],
+                                    ['library',     'Perpustakaan'],
+                                    ['moon',        'Musholla Luas'],
+                                    ['activity',    'Lapangan Olahraga'],
+                                    ['stethoscope', 'Klinik / UKS'],
+                                    ['coffee',      'Kantin Sehat'],
+                                    ['cctv',        'Keamanan CCTV'],
+                                ];
+                            }
+                        @endphp
+                        @foreach ($displayFacilities as $f)
                             <div class="flex items-center gap-2.5 p-3 rounded-xl transition-colors duration-300 hover:bg-white/5"
                                 style="border: 1px solid rgba(255,255,255,0.06);">
                                 <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
                                     style="background: rgba(16,185,129,0.12); color: #10b981;">
-                                    <i data-lucide="{{ $f[0] }}" class="w-3.5 h-3.5"></i>
+                                    <i data-lucide="{{ $f['icon'] ?? $f[0] }}" class="w-3.5 h-3.5"></i>
                                 </div>
-                                <span class="text-xs font-semibold text-slate-300">{{ $f[1] }}</span>
+                                <span class="text-xs font-semibold text-slate-300">{{ $f['title'] ?? $f[1] }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -540,51 +554,41 @@
                 <div class="tl-line absolute top-0 bottom-0 w-px left-[10px] md:left-1/2 md:-translate-x-px"></div>
 
                 @php
-                    $prestasi = [
-                        [
-                            'year' => '2024',
-                            'title' => 'Juara 1 Olimpiade Sains Tingkat Provinsi',
-                            'desc' => 'Kategori Matematika pada kompetisi antar SMP IT.',
-                            'level' => 'Provinsi',
-                            'side' => 'left',
-                        ],
-                        [
-                            'year' => '2023',
-                            'title' => 'Juara Umum MTQ Pelajar Tingkat Kabupaten',
-                            'desc' => 'Kategori Tartil dan Tahfidz Al-Qur\'an.',
-                            'level' => 'Kabupaten',
-                            'side' => 'right',
-                        ],
-                        [
-                            'year' => '2023',
-                            'title' => 'Juara 2 Lomba Debat Bahasa Arab',
-                            'desc' => 'Kompetisi antar SMP Islam se-Provinsi.',
-                            'level' => 'Provinsi',
-                            'side' => 'left',
-                        ],
-                        [
-                            'year' => '2022',
-                            'title' => 'Regu Tergiat Pramuka Penggalang',
-                            'desc' => 'Jambore Tingkat Kecamatan dan Kabupaten.',
-                            'level' => 'Kabupaten',
-                            'side' => 'right',
-                        ],
-                    ];
+                    $displayAchievements = [];
+                    if (isset($achievements) && !$achievements->isEmpty()) {
+                        foreach ($achievements as $ach) {
+                            $displayAchievements[] = [
+                                'year' => $ach->year,
+                                'title' => $ach->title,
+                                'desc' => $ach->description,
+                                'level' => $ach->level,
+                                'side' => $ach->side ? $ach->side : 'left',
+                            ];
+                        }
+                    }
+                    if (empty($displayAchievements)) {
+                        $displayAchievements = [
+                            ['year' => '2024', 'title' => 'Juara 1 Olimpiade Sains Tingkat Provinsi', 'desc' => 'Kategori Matematika pada kompetisi antar SMP IT.', 'level' => 'Provinsi', 'side' => 'left'],
+                            ['year' => '2023', 'title' => 'Juara Umum MTQ Pelajar Tingkat Kabupaten', 'desc' => 'Kategori Tartil dan Tahfidz Al-Qur\'an.', 'level' => 'Kabupaten', 'side' => 'right'],
+                            ['year' => '2023', 'title' => 'Juara 2 Lomba Debat Bahasa Arab',          'desc' => 'Kompetisi antar SMP Islam se-Provinsi.', 'level' => 'Provinsi',  'side' => 'left'],
+                            ['year' => '2022', 'title' => 'Regu Tergiat Pramuka Penggalang',          'desc' => 'Jambore Tingkat Kecamatan dan Kabupaten.', 'level' => 'Kabupaten', 'side' => 'right'],
+                        ];
+                    }
 
                     $lvlStyle = [
                         'Internasional' => 'background:rgba(220,38,38,.10);  color:#dc2626;',
-                        'Nasional' => 'background:rgba(249,115,22,.10); color:#ea580c;',
-                        'Provinsi' => 'background:rgba(59,130,246,.10); color:#2563eb;',
-                        'Kabupaten' => 'background:rgba(16,185,129,.10); color:#059669;',
-                        'Kecamatan' => 'background:rgba(100,116,139,.10);color:#475569;',
+                        'Nasional'      => 'background:rgba(249,115,22,.10); color:#ea580c;',
+                        'Provinsi'      => 'background:rgba(59,130,246,.10); color:#2563eb;',
+                        'Kabupaten'     => 'background:rgba(16,185,129,.10); color:#059669;',
+                        'Kecamatan'     => 'background:rgba(100,116,139,.10);color:#475569;',
                     ];
                 @endphp
 
-                @foreach ($prestasi as $idx => $p)
+                @foreach ($displayAchievements as $idx => $p)
                     @php
                         $isLeft = $p['side'] === 'left';
-                        $delay = $idx * 120;
-                        $ls = $lvlStyle[$p['level']] ?? $lvlStyle['Kecamatan'];
+                        $delay  = $idx * 120;
+                        $ls     = $lvlStyle[$p['level']] ?? $lvlStyle['Kecamatan'];
                     @endphp
 
                     <div class="relative flex items-start mb-9 last:mb-0 reveal pl-8 md:pl-0 md:{{ $isLeft ? 'flex-row' : 'flex-row-reverse' }}"
@@ -592,8 +596,7 @@
 
                         {{-- Card --}}
                         <div class="w-full md:w-[calc(50%-28px)] {{ $isLeft ? 'md:pr-8' : 'md:pl-8' }}">
-                            <div
-                                class="tl-card group bg-white border border-slate-100 rounded-[20px] p-5
+                            <div class="tl-card group bg-white border border-slate-100 rounded-[20px] p-5
                                         shadow-sm transition-all duration-300 ease-out
                                         hover:-translate-y-1 hover:shadow-lg hover:border-emerald-300">
 
