@@ -29,7 +29,7 @@
                 {{-- Kanan: Gambar --}}
                 <div class="hidden lg:block relative reveal reveal-right delay-200">
                     <div class="w-full aspect-[4/3] rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl">
-                        <img src="{{ $hero && $hero->image ? $hero->image : 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800' }}"
+                        <img src="{{ $hero && $hero->image ? (str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800' }}"
                             alt="Gedung Sekolah" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-emerald-900/20"></div>
                     </div>
@@ -44,7 +44,6 @@
     <section id="profil-singkat" class="public-section py-16 scroll-mt-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="info" class="w-4 h-4"></i> Tentang Kami</span>
                 <h2 class="section-title mx-auto">Profil Singkat Sekolah</h2>
             </div>
 
@@ -52,7 +51,7 @@
                 <div class="lg:col-span-5 reveal reveal-left delay-100">
                     <div
                         class="relative rounded-[32px] overflow-hidden border-4 border-emerald-50 shadow-2xl aspect-[4/5] max-w-md mx-auto">
-                        <img src="{{ $welcomeMessage && $welcomeMessage->kepsek_photo ? $welcomeMessage->kepsek_photo : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600' }}"
+                        <img src="{{ $welcomeMessage && $welcomeMessage->kepsek_photo ? (str_starts_with($welcomeMessage->kepsek_photo, 'http') ? $welcomeMessage->kepsek_photo : asset('storage/' . $welcomeMessage->kepsek_photo)) : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600' }}"
                             alt="Sambutan Kepala Sekolah" class="w-full h-auto object-cover">
                     </div>
                     <div class="mt-6 text-center">
@@ -100,7 +99,6 @@
     <section id="visi-misi" class="public-section py-16 scroll-mt-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="target" class="w-4 h-4"></i> Visi & Misi</span>
                 <h2 class="section-title mx-auto">Arah & Tujuan Pendidikan</h2>
                 <p class="section-subtitle mx-auto text-center">
                     Berikut adalah Visi dan Misi SIT Mutiara Qur'an yang menjadi landasan penyelenggaraan pendidikan.
@@ -110,7 +108,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
                 {{-- Kiri: Accordion --}}
-                <div class="space-y-3 reveal reveal-left delay-100" x-data="{ open: null }">
+                <div class="space-y-3 reveal reveal-left delay-100" x-data="{ open: 'visi' }">
 
                     {{-- VISI --}}
                     <div class="border border-slate-200 rounded-xl overflow-hidden bg-white cursor-pointer hover:border-slate-300 transition-all duration-200"
@@ -191,9 +189,8 @@
 
                 {{-- Kanan: Ilustrasi --}}
                 <div class="hidden lg:flex justify-center items-center reveal reveal-right delay-200">
-                    <img src="https://illustrations.popsy.co/amber/education.svg" alt="Ilustrasi Visi Misi"
-                        class="w-full max-w-md drop-shadow-xl"
-                        onerror="this.src='https://illustrations.popsy.co/emerald/student-going-to-school.svg'">
+                    <img src="{{ asset('images/ilustrasi-visi-misi.png') }}" alt="Ilustrasi Visi Misi"
+                        class="w-full max-w-md mix-blend-multiply">
                 </div>
 
             </div>
@@ -207,7 +204,6 @@
     <section id="sejarah" class="public-section py-16 bg-slate-50/50 scroll-mt-32">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="clock" class="w-4 h-4"></i> Sejarah</span>
                 <h2 class="section-title mx-auto">Perjalanan Kami</h2>
                 <p class="section-subtitle mx-auto text-center">Rekam jejak perkembangan SIT Mutiara Qur'an dari masa ke
                     masa.</p>
@@ -289,15 +285,19 @@
     <section id="struktur-organisasi" class="public-section py-16 scroll-mt-32">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="mb-12 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="network" class="w-4 h-4"></i> Organisasi</span>
                 <h2 class="section-title mx-auto">Struktur Organisasi</h2>
                 <p class="section-subtitle mx-auto text-center">Susunan kepengurusan dan pimpinan SIT Mutiara Qur'an.</p>
             </div>
 
             <div
                 class="bg-white p-4 sm:p-8 rounded-[32px] shadow-lg shadow-slate-200/50 border border-slate-100 reveal reveal-zoom delay-100 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-100/50 cursor-pointer group">
-                <img src="{{ asset('images/struktur.png') }}" alt="Struktur Organisasi"
-                    class="w-full h-auto rounded-2xl group-hover:scale-[1.01] transition-transform duration-500">
+                @if(isset($strukturOrganisasi) && $strukturOrganisasi->value)
+                    <img src="{{ str_starts_with($strukturOrganisasi->value, 'http') ? $strukturOrganisasi->value : asset('storage/' . $strukturOrganisasi->value) }}" alt="Struktur Organisasi"
+                        class="w-full h-auto rounded-2xl group-hover:scale-[1.01] transition-transform duration-500">
+                @else
+                    <img src="{{ asset('images/struktur.png') }}" alt="Struktur Organisasi Default"
+                        class="w-full h-auto rounded-2xl group-hover:scale-[1.01] transition-transform duration-500">
+                @endif
             </div>
         </div>
     </section>

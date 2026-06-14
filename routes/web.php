@@ -123,11 +123,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/tagihan/student/{student}', [\App\Http\Controllers\Admin\TagihanController::class, 'student'])
         ->name('admin.tagihan.student');
         
-    Route::post('/admin/tagihan/broadcast-wa', [\App\Http\Controllers\Admin\TagihanController::class, 'broadcastWa'])
-        ->name('admin.tagihan.broadcast-wa');
-        
-    Route::post('/admin/tagihan/{invoice}/kirim-wa', [\App\Http\Controllers\Admin\TagihanController::class, 'kirimWa'])
-        ->name('admin.tagihan.kirim-wa');
+
 
     Route::resource('/admin/tagihan', \App\Http\Controllers\Admin\TagihanController::class)
         ->parameters(['tagihan' => 'invoice'])
@@ -179,8 +175,52 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
     // Placeholder CMS (Akan diimplementasikan nanti)
-    Route::get('/admin/profil', fn() => view('admin.profil.index'))->name('admin.profil.index');
-    Route::get('/admin/unit-cms', fn() => view('admin.unit-cms.index'))->name('admin.unit-cms.index');
+    // CMS Profil
+    Route::prefix('admin/cms/profil')->name('admin.profil.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\CmsProfilController::class, 'index'])->name('index');
+        
+        // Hero
+        Route::put('/hero/{id}', [\App\Http\Controllers\Admin\CmsProfilController::class, 'updateHero'])->name('hero.update');
+        
+        // Visi
+        Route::put('/visi', [\App\Http\Controllers\Admin\CmsProfilController::class, 'updateVisi'])->name('visi.update');
+        
+        // Misi
+        Route::post('/misi', [\App\Http\Controllers\Admin\CmsProfilController::class, 'storeMisi'])->name('misi.store');
+        Route::put('/misi/{id}', [\App\Http\Controllers\Admin\CmsProfilController::class, 'updateMisi'])->name('misi.update');
+        Route::delete('/misi/{id}', [\App\Http\Controllers\Admin\CmsProfilController::class, 'destroyMisi'])->name('misi.destroy');
+        
+        // Sejarah
+        Route::post('/sejarah', [\App\Http\Controllers\Admin\CmsProfilController::class, 'storeSejarah'])->name('sejarah.store');
+        Route::put('/sejarah/{id}', [\App\Http\Controllers\Admin\CmsProfilController::class, 'updateSejarah'])->name('sejarah.update');
+        Route::delete('/sejarah/{id}', [\App\Http\Controllers\Admin\CmsProfilController::class, 'destroySejarah'])->name('sejarah.destroy');
+        
+        // Struktur Organisasi
+        Route::put('/struktur-organisasi', [\App\Http\Controllers\Admin\CmsProfilController::class, 'updateStrukturOrganisasi'])->name('struktur.update');
+    });
+    Route::prefix('admin/unit-cms')->name('admin.unit-cms.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\CmsUnitController::class, 'index'])->name('index');
+        Route::get('/{id}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'show'])->name('show');
+        
+        Route::put('/{id}/hero', [\App\Http\Controllers\Admin\CmsUnitController::class, 'updateHero'])->name('hero.update');
+        Route::put('/{id}/detail', [\App\Http\Controllers\Admin\CmsUnitController::class, 'updateDetail'])->name('detail.update');
+        
+        Route::post('/{id}/fasilitas', [\App\Http\Controllers\Admin\CmsUnitController::class, 'storeFasilitas'])->name('fasilitas.store');
+        Route::put('/{id}/fasilitas/{facilityId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'updateFasilitas'])->name('fasilitas.update');
+        Route::delete('/{id}/fasilitas/{facilityId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'destroyFasilitas'])->name('fasilitas.destroy');
+
+        Route::post('/{id}/ekskul', [\App\Http\Controllers\Admin\CmsUnitController::class, 'storeEkskul'])->name('ekskul.store');
+        Route::put('/{id}/ekskul/{ekskulId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'updateEkskul'])->name('ekskul.update');
+        Route::delete('/{id}/ekskul/{ekskulId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'destroyEkskul'])->name('ekskul.destroy');
+
+        Route::post('/{id}/guru', [\App\Http\Controllers\Admin\CmsUnitController::class, 'storeGuru'])->name('guru.store');
+        Route::put('/{id}/guru/{guruId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'updateGuru'])->name('guru.update');
+        Route::delete('/{id}/guru/{guruId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'destroyGuru'])->name('guru.destroy');
+
+        Route::post('/{id}/prestasi', [\App\Http\Controllers\Admin\CmsUnitController::class, 'storePrestasi'])->name('prestasi.store');
+        Route::put('/{id}/prestasi/{prestasiId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'updatePrestasi'])->name('prestasi.update');
+        Route::delete('/{id}/prestasi/{prestasiId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'destroyPrestasi'])->name('prestasi.destroy');
+    });
     Route::get('/admin/berita', fn() => view('admin.berita.index'))->name('admin.berita.index');
     Route::get('/admin/ppdb', fn() => view('admin.ppdb.index'))->name('admin.ppdb.index');
     Route::get('/admin/kontak', fn() => view('admin.kontak.index'))->name('admin.kontak.index');
