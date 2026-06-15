@@ -1,7 +1,7 @@
 @extends('layouts.public')
 @section('content')
     <div class="page-hero">
-        <div class="relative z-10 w-full">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="breadcrumb"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><a href="{{ route('public.berita.index') }}">Berita</a><span>/</span><span class="current">Detail</span></div>
             <h1 class="text-3xl sm:text-4xl font-black text-white">Detail Berita</h1>
         </div>

@@ -229,9 +229,9 @@ class SiswaController extends Controller
             . '.xlsx';
 
         $headers = [
-            'NIS', 'NISN', 'NIK', 'Nama Lengkap', 'Unit', 'Kelas',
-            'Jenis Kelamin', 'Nama Ayah', 'Nama Ibu', 'No HP Orang Tua',
-            'Alamat', 'Status'
+            'NIS SISWA', 'NISN SISWA', 'NIK', 'NAMA SISWA', 'ID KELAS', 'ID UNIT',
+            'NO. WA ORTU', 'JENIS KELAMIN', 'TEMPAT LAHIR', 'TANGGAL LAHIR',
+            'HOBI', 'NO. HP SISWA', 'ALAMAT', 'NAMA AYAH', 'NAMA IBU'
         ];
 
         return $this->excelExportService->export($students, $headers, function ($student) {
@@ -241,14 +241,17 @@ class SiswaController extends Controller
                 $student->nisn,
                 $student->nik,
                 $student->full_name,
-                $student->unit?->unit_name ?? '-',
-                $activeClass?->schoolClass?->class_name ?? '-',
+                $activeClass?->class_id ?? '',
+                $student->unit_id,
+                $student->parent_phone,
                 $student->gender,
+                $student->birth_place,
+                $student->birth_date ? $student->birth_date->format('Y-m-d') : '',
+                $student->hobby,
+                $student->phone,
+                $student->address,
                 $student->father_name,
                 $student->mother_name,
-                $student->parent_phone,
-                $student->address,
-                $student->status,
             ];
         }, $filename);
     }
@@ -287,16 +290,15 @@ class SiswaController extends Controller
     public function importTemplate()
     {
         $headers = [
-            'NIS', 'NISN', 'NIK', 'Nama Lengkap', 'Jenis Kelamin (L/P)',
-            'Tempat Lahir', 'Tanggal Lahir (YYYY-MM-DD)', 'Alamat',
-            'Nama Ayah', 'Nama Ibu', 'No HP Orang Tua',
-            'Status (active/inactive/graduated/transfer/dropout)'
+            'NIS SISWA', 'NISN SISWA', 'NIK', 'NAMA SISWA', 'ID KELAS', 'ID UNIT',
+            'NO. WA ORTU', 'JENIS KELAMIN', 'TEMPAT LAHIR', 'TANGGAL LAHIR',
+            'HOBI', 'NO. HP SISWA', 'ALAMAT', 'NAMA AYAH', 'NAMA IBU'
         ];
 
         $sampleData = [
-            '2024001', '1234567890', '1234567890123456', 'Nama Siswa Contoh',
-            'L', 'Pekanbaru', '2010-05-15', 'Jl. Contoh No. 1',
-            'Nama Ayah', 'Nama Ibu', '08123456789', 'active'
+            '2018011', '14569041', '1234567890123456', 'ABDULLAH IMPORT', '1', '2',
+            '6285812345678', 'L', 'Pekanbaru', '2018-09-10',
+            'Sepak Bola', '6285812345613', 'Kota Bunga', 'Father', 'Mother'
         ];
 
         return $this->excelExportService->downloadTemplate($headers, $sampleData, 'Template_Import_Siswa.xlsx');

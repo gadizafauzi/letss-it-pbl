@@ -31,6 +31,8 @@ use App\Http\Controllers\Admin\MengajarController;
 use App\Http\Controllers\Admin\TahunAjaranController;
 use App\Http\Controllers\Admin\JabatanController;
 use App\Http\Controllers\Admin\UnitController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProfileController;
 
 // Public Controllers
 use App\Http\Controllers\PublicHomeController;
@@ -82,6 +84,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->name('admin.siswa.bulk-destroy');
 
     Route::resource('/admin/siswa', SiswaController::class)->names('admin.siswa');
+
+    // KENAIKAN KELAS / BULK PROMOTION
+    Route::get('/admin/kenaikan-kelas', [\App\Http\Controllers\Admin\KenaikanKelasController::class, 'index'])->name('admin.kenaikan-kelas.index');
+    Route::get('/admin/kenaikan-kelas/students', [\App\Http\Controllers\Admin\KenaikanKelasController::class, 'getStudents'])->name('admin.kenaikan-kelas.students');
+    Route::post('/admin/kenaikan-kelas/process', [\App\Http\Controllers\Admin\KenaikanKelasController::class, 'process'])->name('admin.kenaikan-kelas.process');
 
 
     Route::get('/admin/guru/export', [GuruController::class, 'export'])
@@ -272,8 +279,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/cms/kontak', [\App\Http\Controllers\Admin\CmsKontakController::class, 'index'])->name('admin.kontak.index');
     Route::put('/admin/cms/kontak', [\App\Http\Controllers\Admin\CmsKontakController::class, 'update'])->name('admin.kontak.update');
 
-    Route::get('/admin/user', fn() => view('admin.user.index'))->name('admin.user.index');
-    Route::get('/admin/profile', fn() => view('admin.profile.index'))->name('admin.profile.index');
+    Route::resource('/admin/user', UserController::class)->names('admin.user');
+    
+    Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
+    Route::put('/admin/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
+    Route::put('/admin/profile/password', [ProfileController::class, 'updatePassword'])->name('admin.profile.password');
 });
 
 /*

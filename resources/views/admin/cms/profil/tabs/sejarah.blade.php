@@ -4,7 +4,7 @@
             <h2 class="text-lg font-semibold text-slate-800 dark:text-slate-100">Sejarah Sekolah</h2>
             <p class="text-sm text-slate-500">Kelola timeline sejarah perjalanan sekolah.</p>
         </div>
-        <button onclick="openModal('modal-add-sejarah')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2">
+        <button onclick="openModal('modal-add-sejarah')" class="px-4 py-2 bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white text-sm font-medium rounded-lg shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all flex items-center gap-2">
             <i data-lucide="plus" class="w-4 h-4"></i>
             Tambah Sejarah
         </button>
@@ -113,7 +113,7 @@
                 <button type="button" onclick="closeModal('modal-add-sejarah')" class="px-4 py-2 text-slate-600 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
                     Batal
                 </button>
-                <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                <button type="submit" class="px-4 py-2 bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white font-medium rounded-lg shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all">
                     Simpan
                 </button>
             </div>
@@ -159,7 +159,7 @@
                 <button type="button" onclick="closeModal('modal-edit-sejarah')" class="px-4 py-2 text-slate-600 dark:text-slate-400 font-medium hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
                     Batal
                 </button>
-                <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                <button type="submit" class="px-4 py-2 bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white font-medium rounded-lg shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all">
                     Simpan Perubahan
                 </button>
             </div>
