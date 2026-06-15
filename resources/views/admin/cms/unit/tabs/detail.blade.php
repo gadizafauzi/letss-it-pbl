@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 p-6">
+<div class="p-6">
     <div class="mb-6">
         <h2 class="text-lg font-bold text-slate-800 dark:text-white">Detail Unit</h2>
         <p class="text-sm text-slate-500">Atur deskripsi, logo, usia target, dan informasi kuota untuk unit pendidikan ini.</p>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="flex justify-end pt-6 mt-6 border-t border-slate-100 dark:border-slate-700">
-            <button type="submit" class="px-6 py-2.5 bg-blue-600 text-white font-medium rounded-xl hover:bg-blue-700 transition-colors flex items-center gap-2">
+            <button type="submit" class="px-6 py-2.5 bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white font-medium rounded-xl shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all flex items-center gap-2">
                 <i data-lucide="save" class="w-4 h-4"></i>
                 Simpan Deskripsi Unit
             </button>

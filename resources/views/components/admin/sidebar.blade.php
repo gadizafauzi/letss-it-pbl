@@ -51,6 +51,13 @@
                     <span class="sidebar-text">Data Siswa</span>
                 </a>
 
+                {{-- KENAIKAN KELAS --}}
+                <a href="{{ route('admin.kenaikan-kelas.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.kenaikan-kelas.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="arrow-up-right"></i></span>
+                    <span class="sidebar-text">Kenaikan Kelas</span>
+                </a>
+
                 {{-- DATA GURU --}}
                 <a href="{{ route('admin.guru.index') }}"
                     class="sidebar-link {{ request()->routeIs('admin.guru.*') ? 'active-sidebar' : '' }}">

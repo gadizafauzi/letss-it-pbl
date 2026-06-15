@@ -1,4 +1,4 @@
-<div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 p-6">
+<div class="p-6">
     <div class="flex items-center justify-between mb-6">
         <div>
             <h2 class="text-lg font-bold text-slate-800 dark:text-white">Ekstrakurikuler</h2>
@@ -106,7 +106,7 @@
             </div>
             <div class="mt-6 flex justify-end gap-3 border-t border-slate-100 pt-4">
                 <button type="button" onclick="document.getElementById('modal-add-ekskul').classList.add('hidden')" class="px-4 py-2 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl font-medium text-sm transition-colors">Batal</button>
-                <button type="submit" class="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-xl font-medium text-sm transition-colors">Simpan Ekskul</button>
+                <button type="submit" class="px-4 py-2 text-white bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 rounded-xl font-medium text-sm shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all">Simpan Ekskul</button>
             </div>
         </form>
     </div>
@@ -154,7 +154,7 @@
             </div>
             <div class="mt-6 flex justify-end gap-3 border-t border-slate-100 pt-4">
                 <button type="button" onclick="document.getElementById('modal-edit-ekskul').classList.add('hidden')" class="px-4 py-2 text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl font-medium text-sm transition-colors">Batal</button>
-                <button type="submit" class="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-xl font-medium text-sm transition-colors">Simpan Perubahan</button>
+                <button type="submit" class="px-4 py-2 text-white bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 rounded-xl font-medium text-sm shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all">Simpan Perubahan</button>
             </div>
         </form>
     </div>

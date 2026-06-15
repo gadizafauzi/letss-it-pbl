@@ -43,7 +43,7 @@
         </div>
 
         <div class="flex justify-end border-t border-slate-200 dark:border-slate-700 pt-6">
-            <button type="submit" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center gap-2">
+            <button type="submit" class="px-6 py-2.5 bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white font-medium rounded-lg shadow-md shadow-[#4D7EEB]/30 hover:shadow-lg hover:shadow-[#4D7EEB]/40 transition-all flex items-center gap-2">
                 <i data-lucide="save" class="w-5 h-5"></i>
                 Simpan Perubahan
             </button>

@@ -41,29 +41,19 @@
         ];
     @endphp
 
-    <div x-data="{ activeTab: 'hero' }" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <div x-data="{ activeTab: 'hero' }" class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden flex flex-col">
         
-        {{-- Sidebar Tabs --}}
-        <div class="lg:col-span-3 bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden sticky top-6">
-            <div class="p-4 border-b border-slate-100 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
-                <h3 class="font-bold text-slate-800 dark:text-white flex items-center gap-2">
-                    <i data-lucide="layout" class="w-4 h-4 text-blue-500"></i>
-                    Menu Konten
-                </h3>
-            </div>
-            <nav class="p-2 flex flex-col gap-1">
+        {{-- Horizontal Tabs --}}
+        <div class="px-2 overflow-x-auto hide-scrollbar border-b border-slate-100 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50">
+            <nav class="flex min-w-max">
                 @foreach($tabs as $tab)
                     <button 
                         @click="activeTab = '{{ $tab['id'] }}'"
                         :class="{
-                            'bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400 font-semibold': activeTab === '{{ $tab['id'] }}',
-                            'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white': activeTab !== '{{ $tab['id'] }}'
+                            'text-blue-600 dark:text-blue-400 border-[#8DAEF5] font-bold': activeTab === '{{ $tab['id'] }}',
+                            'text-slate-500 dark:text-slate-400 border-transparent hover:text-slate-800 dark:hover:text-white hover:border-slate-200 dark:hover:border-slate-600': activeTab !== '{{ $tab['id'] }}'
                         }"
-                        class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-sm text-left group">
-                        <i data-lucide="{{ $tab['icon'] }}" 
-                           class="w-4 h-4 transition-colors"
-                           :class="activeTab === '{{ $tab['id'] }}' ? 'text-blue-500' : 'text-slate-400 group-hover:text-slate-600'">
-                        </i>
+                        class="flex items-center px-6 py-4 border-b-[3px] transition-all duration-200 text-[13px] font-medium group whitespace-nowrap">
                         {{ $tab['label'] }}
                     </button>
                 @endforeach
@@ -71,7 +61,7 @@
         </div>
 
         {{-- Content Area --}}
-        <div class="lg:col-span-9 space-y-6">
+        <div class="w-full space-y-6">
             {{-- Alert --}}
             @if(session('success'))
             <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center gap-3">
@@ -103,27 +93,27 @@
 
             {{-- Tabs Content --}}
             <div x-show="activeTab === 'hero'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-                @include('admin.unit-cms.tabs.hero')
+                @include('admin.cms.unit.tabs.hero')
             </div>
 
             <div x-cloak x-show="activeTab === 'detail'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-                @include('admin.unit-cms.tabs.detail')
+                @include('admin.cms.unit.tabs.detail')
             </div>
 
             <div x-cloak x-show="activeTab === 'fasilitas'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-                @include('admin.unit-cms.tabs.fasilitas')
+                @include('admin.cms.unit.tabs.fasilitas')
             </div>
 
             <div x-cloak x-show="activeTab === 'ekskul'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-                @include('admin.unit-cms.tabs.ekskul')
+                @include('admin.cms.unit.tabs.ekskul')
             </div>
 
             <div x-cloak x-show="activeTab === 'guru'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-                @include('admin.unit-cms.tabs.guru')
+                @include('admin.cms.unit.tabs.guru')
             </div>
 
             <div x-cloak x-show="activeTab === 'prestasi'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-                @include('admin.unit-cms.tabs.prestasi')
+                @include('admin.cms.unit.tabs.prestasi')
             </div>
         </div>
 

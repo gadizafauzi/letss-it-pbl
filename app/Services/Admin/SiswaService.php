@@ -116,16 +116,28 @@ class SiswaService
         $nisn = trim($row[1] ?? '');
         $nik  = trim($row[2] ?? '') ?: null;
         $nama = trim($row[3] ?? '');
+        
+        $classId = trim($row[4] ?? '');
+        $unitId  = trim($row[5] ?? '');
+        $parentPhone = trim($row[6] ?? '');
+        $gender = trim($row[7] ?? '');
+        $birthPlace = trim($row[8] ?? '');
+        $birthDate = trim($row[9] ?? '');
+        $hobby = trim($row[10] ?? '');
+        $phone = trim($row[11] ?? '');
+        $address = trim($row[12] ?? '');
+        $fatherName = trim($row[13] ?? '');
+        $motherName = trim($row[14] ?? '');
 
-        if (!$nis || !$nisn || !$nama) {
-            throw new \Exception("Data tidak lengkap (NIS: $nis)");
+        if (!$nis || !$nama) {
+            throw new \Exception("Data tidak lengkap (NIS/Nama kosong)");
         }
 
         if (Student::where('nis', $nis)->exists()) {
             throw new \Exception("NIS $nis sudah terdaftar");
         }
 
-        DB::transaction(function () use ($nis, $nisn, $nik, $nama, $row) {
+        DB::transaction(function () use ($nis, $nisn, $nik, $nama, $classId, $unitId, $parentPhone, $gender, $birthPlace, $birthDate, $hobby, $phone, $address, $fatherName, $motherName) {
             $user = User::create([
                 'name'     => $nama,
                 'username' => $nis,
@@ -134,21 +146,34 @@ class SiswaService
                 'status'   => 'active',
             ]);
 
-            Student::create([
+            $student = Student::create([
                 'user_id'      => $user->id,
+                'unit_id'      => $unitId ?: null,
                 'nis'          => $nis,
                 'nisn'         => $nisn,
                 'nik'          => $nik,
                 'full_name'    => $nama,
-                'gender'       => trim($row[4] ?? null) ?: null,
-                'birth_place'  => trim($row[5] ?? null) ?: null,
-                'birth_date'   => trim($row[6] ?? null) ?: null,
-                'address'      => trim($row[7] ?? null) ?: null,
-                'father_name'  => trim($row[8] ?? null) ?: null,
-                'mother_name'  => trim($row[9] ?? null) ?: null,
-                'parent_phone' => trim($row[10] ?? null) ?: null,
-                'status'       => trim($row[11] ?? 'active') ?: 'active',
+                'gender'       => $gender ?: null,
+                'birth_place'  => $birthPlace ?: null,
+                'birth_date'   => $birthDate ?: null,
+                'hobby'        => $hobby ?: null,
+                'phone'        => $phone ?: null,
+                'address'      => $address ?: null,
+                'father_name'  => $fatherName ?: null,
+                'mother_name'  => $motherName ?: null,
+                'parent_phone' => $parentPhone ?: null,
+                'status'       => 'active',
             ]);
+
+            $activeYear = \App\Models\AcademicYear::where('status', 'active')->first();
+
+            if ($classId && $activeYear) {
+                \App\Models\StudentClass::create([
+                    'student_id'       => $student->id,
+                    'class_id'         => $classId,
+                    'academic_year_id' => $activeYear->id,
+                ]);
+            }
         });
 
         return true;

@@ -1,7 +1,7 @@
 @extends('layouts.public')
 @section('content')
     <div class="page-hero">
-        <div class="relative z-10 w-full">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="breadcrumb">
                 <a href="{{ route('public.home') }}">Beranda</a>
                 <span>/</span>
@@ -24,7 +24,7 @@
         </div>
     </div>
     <section class="public-section">
-        <div class="w-full">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             @php
                 $displayPosts = [];
                 if (isset($posts) && !$posts->isEmpty()) {

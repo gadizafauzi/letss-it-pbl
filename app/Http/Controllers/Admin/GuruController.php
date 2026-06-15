@@ -153,18 +153,18 @@ class GuruController extends Controller
         $filename = 'Data_Guru_' . str_replace(' ', '_', $unitName) . '.xlsx';
 
         $headers = [
-            'NIP', 'Nama Lengkap', 'Unit', 'Jabatan', 'Jenis Kelamin',
-            'Tempat Lahir', 'Tanggal Lahir', 'Pendidikan Terakhir',
-            'No Telepon', 'Alamat', 'Status Kepegawaian', 'Status'
+            'NIP', 'NAMA LENGKAP', 'ID UNIT', 'ID JABATAN', 'JENIS KELAMIN',
+            'TEMPAT LAHIR', 'TANGGAL LAHIR', 'PENDIDIKAN TERAKHIR',
+            'NO TELEPON', 'ALAMAT', 'STATUS KEPEGAWAIAN', 'STATUS'
         ];
 
         return $this->excelExportService->export($teachers, $headers, function ($teacher) {
             return [
                 $teacher->nip,
                 $teacher->full_name,
-                $teacher->unit?->unit_name ?? '-',
-                $teacher->position?->name ?? '-',
-                $teacher->gender,
+                $teacher->unit_id,
+                $teacher->position_id,
+                $teacher->gender === 'male' ? 'L' : ($teacher->gender === 'female' ? 'P' : ''),
                 $teacher->birth_place,
                 $teacher->birth_date,
                 $teacher->last_education,
@@ -210,14 +210,14 @@ class GuruController extends Controller
     public function importTemplate()
     {
         $headers = [
-            'NIP', 'Nama Lengkap', 'Unit', 'Jabatan', 'Jenis Kelamin (male/female)',
-            'Tempat Lahir', 'Tanggal Lahir (YYYY-MM-DD)', 'Pendidikan Terakhir',
-            'No Telepon', 'Alamat', 'Status Kepegawaian (pegawai_tetap/pegawai_tidak_tetap)',
-            'Status (active/inactive)'
+            'NIP', 'NAMA LENGKAP', 'ID UNIT', 'ID JABATAN', 'JENIS KELAMIN (L/P)',
+            'TEMPAT LAHIR', 'TANGGAL LAHIR (YYYY-MM-DD)', 'PENDIDIKAN TERAKHIR',
+            'NO TELEPON', 'ALAMAT', 'STATUS KEPEGAWAIAN',
+            'STATUS'
         ];
 
         $sampleData = [
-            '198501012010011001', 'Nama Guru Contoh', 'SD', 'Guru Kelas', 'male',
+            '198501012010011001', 'Nama Guru Contoh', '1', '2', 'L',
             'Pekanbaru', '1985-01-01', 'S1', '08123456789', 'Jl. Contoh No. 1',
             'pegawai_tetap', 'active'
         ];

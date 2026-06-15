@@ -123,16 +123,19 @@ class GuruService
                 'status'   => 'active',
             ]);
 
-            $unit = Unit::where('unit_name', trim($row[2] ?? ''))->first();
-            $position = Position::where('name', trim($row[3] ?? ''))->first();
+            $unitId = trim($row[2] ?? '');
+            $positionId = trim($row[3] ?? '');
+
+            $genderInput = strtoupper(trim($row[4] ?? ''));
+            $genderMapped = $genderInput === 'L' ? 'male' : ($genderInput === 'P' ? 'female' : null);
 
             Teacher::create([
                 'user_id'           => $user->id,
-                'unit_id'           => $unit?->id ?? null,
-                'position_id'       => $position?->id ?? null,
+                'unit_id'           => $unitId ?: null,
+                'position_id'       => $positionId ?: null,
                 'nip'               => $nip,
                 'full_name'         => $nama,
-                'gender'            => trim($row[4] ?? null) ?: null,
+                'gender'            => $genderMapped,
                 'birth_place'       => trim($row[5] ?? null) ?: null,
                 'birth_date'        => trim($row[6] ?? null) ?: null,
                 'last_education'    => trim($row[7] ?? null) ?: null,

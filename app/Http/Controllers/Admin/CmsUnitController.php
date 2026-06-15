@@ -20,7 +20,7 @@ class CmsUnitController extends Controller
     public function index()
     {
         $units = Unit::all();
-        return view('admin.unit-cms.index', compact('units'));
+        return view('admin.cms.unit.index', compact('units'));
     }
 
     public function show($id)
@@ -56,7 +56,7 @@ class CmsUnitController extends Controller
         $availableTeachers = Teacher::where('unit_id', $unit->id)->get();
         $availableStudents = Student::where('unit_id', $unit->id)->get();
 
-        return view('admin.unit-cms.show', compact(
+        return view('admin.cms.unit.show', compact(
             'unit', 'hero', 'detail', 'teachers', 'ekskuls', 'facilities', 'achievements', 'availableTeachers', 'availableStudents'
         ));
     }

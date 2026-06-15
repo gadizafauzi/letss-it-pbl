@@ -41,8 +41,8 @@
                     </span>
                 </li>
                 <li>
-                    Jenis kelamin diisi dengan <strong>male</strong> (Laki-laki)
-                    atau <strong>female</strong> (Perempuan)
+                    Jenis kelamin diisi dengan <strong>L</strong> (Laki-laki)
+                    atau <strong>P</strong> (Perempuan)
                 </li>
                 <li>
                     Status kepegawaian diisi dengan: <strong>pegawai_tetap</strong>
@@ -52,8 +52,8 @@
                     Status diisi dengan: <strong>active</strong> atau <strong>inactive</strong>
                 </li>
                 <li>
-                    Kolom <strong>Unit</strong> dan <strong>Jabatan</strong> diisi sesuai nama yang
-                    sudah terdaftar di sistem (jika tidak ditemukan akan dikosongkan)
+                    Kolom <strong>ID Unit</strong> dan <strong>ID Jabatan</strong> diisi dengan <strong>Angka ID</strong> yang
+                    sesuai di sistem (misal: 1, 2, 3). Kosongkan jika belum diketahui.
                 </li>
             </ol>
         </div>
