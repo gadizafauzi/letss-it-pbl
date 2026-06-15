@@ -240,8 +240,38 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
     // Redirect lama -> baru
     Route::get('/admin/berita', fn() => redirect()->route('admin.berita.posts.index'))->name('admin.berita.index');
-    Route::get('/admin/ppdb', fn() => view('admin.ppdb.index'))->name('admin.ppdb.index');
-    Route::get('/admin/kontak', fn() => view('admin.kontak.index'))->name('admin.kontak.index');
+    // CMS PPDB
+    Route::prefix('admin/cms/ppdb')->name('admin.ppdb.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'index'])->name('index');
+
+        // Hero (Edit Only)
+        Route::put('/hero/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'updateHero'])->name('hero.update');
+
+        // Timeline (CRUD)
+        Route::post('/timeline', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'storeTimeline'])->name('timeline.store');
+        Route::put('/timeline/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'updateTimeline'])->name('timeline.update');
+        Route::delete('/timeline/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'destroyTimeline'])->name('timeline.destroy');
+
+        // Alur / Step (CRUD)
+        Route::post('/step', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'storeStep'])->name('step.store');
+        Route::put('/step/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'updateStep'])->name('step.update');
+        Route::delete('/step/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'destroyStep'])->name('step.destroy');
+
+        // Brosur (CRUD + file upload)
+        Route::post('/brochure', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'storeBrochure'])->name('brochure.store');
+        Route::put('/brochure/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'updateBrochure'])->name('brochure.update');
+        Route::delete('/brochure/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'destroyBrochure'])->name('brochure.destroy');
+
+        // FAQ PPDB (CRUD)
+        Route::post('/faq', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'storeFaq'])->name('faq.store');
+        Route::put('/faq/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'updateFaq'])->name('faq.update');
+        Route::delete('/faq/{id}', [\App\Http\Controllers\Admin\CmsPpdbController::class, 'destroyFaq'])->name('faq.destroy');
+    });
+
+    // CMS Kontak Global
+    Route::get('/admin/cms/kontak', [\App\Http\Controllers\Admin\CmsKontakController::class, 'index'])->name('admin.kontak.index');
+    Route::put('/admin/cms/kontak', [\App\Http\Controllers\Admin\CmsKontakController::class, 'update'])->name('admin.kontak.update');
+
     Route::get('/admin/user', fn() => view('admin.user.index'))->name('admin.user.index');
     Route::get('/admin/profile', fn() => view('admin.profile.index'))->name('admin.profile.index');
 });
