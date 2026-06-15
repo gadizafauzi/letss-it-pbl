@@ -221,7 +221,25 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::put('/{id}/prestasi/{prestasiId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'updatePrestasi'])->name('prestasi.update');
         Route::delete('/{id}/prestasi/{prestasiId}', [\App\Http\Controllers\Admin\CmsUnitController::class, 'destroyPrestasi'])->name('prestasi.destroy');
     });
-    Route::get('/admin/berita', fn() => view('admin.berita.index'))->name('admin.berita.index');
+    // CMS Berita & Kegiatan
+    Route::prefix('admin/cms/berita')->name('admin.berita.')->group(function () {
+        // Kategori Berita
+        Route::get('/kategori', [\App\Http\Controllers\Admin\CmsCategoryController::class, 'index'])->name('kategori.index');
+        Route::post('/kategori', [\App\Http\Controllers\Admin\CmsCategoryController::class, 'store'])->name('kategori.store');
+        Route::put('/kategori/{id}', [\App\Http\Controllers\Admin\CmsCategoryController::class, 'update'])->name('kategori.update');
+        Route::delete('/kategori/{id}', [\App\Http\Controllers\Admin\CmsCategoryController::class, 'destroy'])->name('kategori.destroy');
+
+        // Berita & Kegiatan
+        Route::get('/', [\App\Http\Controllers\Admin\CmsPostController::class, 'index'])->name('posts.index');
+        Route::get('/create', [\App\Http\Controllers\Admin\CmsPostController::class, 'create'])->name('posts.create');
+        Route::post('/', [\App\Http\Controllers\Admin\CmsPostController::class, 'store'])->name('posts.store');
+        Route::get('/{id}/edit', [\App\Http\Controllers\Admin\CmsPostController::class, 'edit'])->name('posts.edit');
+        Route::put('/{id}', [\App\Http\Controllers\Admin\CmsPostController::class, 'update'])->name('posts.update');
+        Route::delete('/{id}', [\App\Http\Controllers\Admin\CmsPostController::class, 'destroy'])->name('posts.destroy');
+        Route::get('/{id}/preview', [\App\Http\Controllers\Admin\CmsPostController::class, 'preview'])->name('posts.preview');
+    });
+    // Redirect lama -> baru
+    Route::get('/admin/berita', fn() => redirect()->route('admin.berita.posts.index'))->name('admin.berita.index');
     Route::get('/admin/ppdb', fn() => view('admin.ppdb.index'))->name('admin.ppdb.index');
     Route::get('/admin/kontak', fn() => view('admin.kontak.index'))->name('admin.kontak.index');
     Route::get('/admin/user', fn() => view('admin.user.index'))->name('admin.user.index');
