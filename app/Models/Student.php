@@ -8,8 +8,12 @@ use App\Models\Unit;
 use App\Models\User;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Student extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
 
         'user_id',
