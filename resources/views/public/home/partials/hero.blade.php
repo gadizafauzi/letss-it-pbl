@@ -32,10 +32,7 @@
                         </div>
                     @endif
 
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 lg:px-4 lg:py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-emerald-200 text-xs lg:text-sm font-semibold mb-4 lg:mb-6 reveal reveal-right">
-                        <i data-lucide="sparkles" class="w-3.5 h-3.5 lg:w-4 lg:h-4 text-amber-400"></i>
-                        Sekolah Islam Terpadu (JSIT)
-                    </div>
+                    
 
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight tracking-tight reveal reveal-up">
                         @if ($hero && $hero->title)
@@ -105,7 +102,7 @@
         </div>
 
         <!-- Animated Wave Divider (Bottom of Hero) -->
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none">
+        <div class="absolute -bottom-[1px] left-0 w-full overflow-hidden leading-[0] z-20 pointer-events-none">
             <svg class="relative block w-[200%] h-[80px] sm:h-[120px] md:h-[160px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 160" preserveAspectRatio="none">
                 <defs>
                     <linearGradient id="heroWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">

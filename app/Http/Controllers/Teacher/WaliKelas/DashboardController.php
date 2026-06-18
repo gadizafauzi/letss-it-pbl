@@ -37,6 +37,7 @@ class DashboardController extends Controller
             $totalWaliStudents = $classStudentIds->count();
             $averageScore = Grade::whereIn('student_id', $classStudentIds)
                 ->where('academic_year_id', $activeYear?->id)
+                ->whereIn('status', ['final', 'published'])
                 ->avg('final_score');
 
             $classAverage = $averageScore !== null ? round($averageScore, 1) : '-';
