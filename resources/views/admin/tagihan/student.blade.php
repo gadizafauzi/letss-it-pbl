@@ -128,7 +128,18 @@
                                                     {{ $invoice->status == 'paid' ? 'Detail' : 'Bayar' }}
                                                 </a>
 
-
+                                                <!-- 1. Tombol Kirim WA Satuan -->
+                                                @if ($invoice->status == 'unpaid')
+                                                    <form id="wa-form-{{ $invoice->id }}" action="{{ route('admin.tagihan.kirim-wa', $invoice->id) }}" method="POST">
+                                                        @csrf
+                                                        <button type="button" onclick="openWaModal('{{ $invoice->id }}')"
+                                                            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-[13px] font-bold transition-all shadow-sm bg-green-500 text-white hover:bg-green-600"
+                                                            title="Kirim Tagihan via WA">
+                                                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                                                            WA
+                                                        </button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -154,5 +165,46 @@
                     @endif
                 </div>
             </div>
+
+<!-- 2. Modal Konfirmasi & Script -->
+<div id="waModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-slate-900/40 backdrop-blur-[2px] transition-opacity">
+    <div class="bg-white dark:bg-slate-800 rounded-[2rem] p-8 w-full max-w-sm shadow-2xl border border-slate-200 dark:border-slate-700 transform transition-all text-center">
+        <div class="w-16 h-16 rounded-full bg-green-100 dark:bg-green-500/20 text-green-500 flex items-center justify-center mx-auto mb-5">
+            <i data-lucide="message-circle" class="w-8 h-8"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Kirim Pesan WA?</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mb-8 leading-relaxed">
+            Apakah Anda yakin ingin mengirim pesan pengingat tagihan ini ke WhatsApp orang tua siswa?
+        </p>
+        <div class="flex gap-3 justify-center">
+            <button type="button" onclick="closeWaModal()"
+                class="h-11 px-6 rounded-2xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold transition-all">
+                Batal
+            </button>
+            <button type="button" onclick="confirmWa()"
+                class="h-11 px-6 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-bold shadow-md shadow-green-500/20 hover:shadow-lg hover:shadow-green-500/30 transition-all">
+                Ya, Kirim
+            </button>
+        </div>
+    </div>
+</div>
+<script>
+    let waFormToSubmit = null;
+    function openWaModal(invoiceId) {
+        waFormToSubmit = document.getElementById('wa-form-' + invoiceId);
+        const modal = document.getElementById('waModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    }
+    function closeWaModal() {
+        const modal = document.getElementById('waModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        waFormToSubmit = null;
+    }
+    function confirmWa() {
+        if(waFormToSubmit) waFormToSubmit.submit();
+    }
+</script>
 
 @endsection
