@@ -1,3 +1,40 @@
+## [v0.8.0] -2026-06-18-
+### Added
+
+* Integrasi WhatsApp Gateway menggunakan Fonnte API.
+* Penambahan konfigurasi `FONNTE_TOKEN` pada file `.env`.
+* Fitur pengiriman tagihan pendidikan ke nomor WhatsApp wali murid.
+* Method `sendWhatsAppBill()` pada `TagihanController`.
+* Tombol aksi **Kirim WhatsApp** pada halaman daftar tagihan.
+* Notifikasi status pengiriman pesan (berhasil/gagal) pada dashboard admin.
+
+### Changed
+
+* Penyesuaian alur pengelolaan tagihan untuk mendukung pengiriman notifikasi WhatsApp.
+* Penyesuaian format data invoice yang digunakan dalam pesan WhatsApp.
+
+### Fixed
+
+* Perbaikan logika validasi pembayaran saat proses pelunasan tagihan.
+* Perbaikan struktur data invoice yang menyebabkan kegagalan pembuatan informasi tagihan.
+
+### Impacted Modules
+
+* Modul Tagihan
+* Modul Pembayaran
+* Modul Invoice
+* Modul Siswa
+* Modul Wali Murid
+
+### Planned Tasks
+
+- [ ] Setup FONNTE_TOKEN pada file `.env`
+- [ ] Implementasi method `sendWhatsAppBill()`
+- [ ] Menambahkan route pengiriman WhatsApp
+- [ ] Menambahkan tombol **Kirim WA** pada halaman tagihan
+- [ ] Pengujian pengiriman WhatsApp menggunakan Fonnte API
+- [ ] Dokumentasi penggunaan fitur
+- [ ] Merge branch `feature/whatsapp-billing-notification`
 ## [v0.7.0] - 2026-06-08
 
 ### Added
