@@ -81,6 +81,47 @@ class Student extends Model
         return $this->hasMany(Invoice::class);
     }
 
+    public function getGpaHistoryAttribute()
+    {
+        $enrolledYears = $this->studentClasses()
+            ->with('academicYear')
+            ->get()
+            ->sortBy(function($sc) {
+                return $sc->academicYear->year ?? '';
+            });
+
+        $gpaHistory = [];
+        
+        foreach ($enrolledYears as $sc) {
+            $yearId = $sc->academic_year_id;
+            
+            // Rata-rata semester Ganjil (odd)
+            $avgOdd = \App\Models\Grade::where('student_id', $this->id)
+                ->where('academic_year_id', $yearId)
+                ->where('semester', 'odd')
+                ->where('status', 'published')
+                ->whereNotNull('final_score')
+                ->avg('final_score');
+                
+            // Rata-rata semester Genap (even)
+            $avgEven = \App\Models\Grade::where('student_id', $this->id)
+                ->where('academic_year_id', $yearId)
+                ->where('semester', 'even')
+                ->where('status', 'published')
+                ->whereNotNull('final_score')
+                ->avg('final_score');
+                
+            $gpaHistory[] = $avgOdd !== null ? round($avgOdd, 1) : 0;
+            $gpaHistory[] = $avgEven !== null ? round($avgEven, 1) : 0;
+        }
+
+        while (count($gpaHistory) < 8) {
+            $gpaHistory[] = 0;
+        }
+        
+        return array_slice($gpaHistory, 0, 8);
+    }
+
     /*
      * --------------------------------------------------------------------------
      * RELASI CMS

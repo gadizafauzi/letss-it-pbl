@@ -29,7 +29,7 @@
                 Kelas
             </label>
 
-            <select onchange="if(this.value) window.location.href='/teacher/input-nilai/' + this.value" 
+            <select id="classSelect" 
                 class="w-full h-10 md:h-11 rounded-xl border border-[var(--border-color)] px-3 md:px-4 text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
                 <option value="">Pilih Kelas - Mapel</option>
                 @foreach ($assignments as $assignment)
@@ -71,11 +71,18 @@
             </div>
 
             @if($selectedAssignment && $students->isNotEmpty())
-                <button type="submit" form="formNilai"
-                    class="h-10 px-4 rounded-xl bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
-                    <i data-lucide="save" class="w-4 h-4"></i>
-                    Simpan Semua
-                </button>
+                <div class="flex gap-2">
+                    <button type="submit" name="submit_action" value="draft" form="formNilai"
+                        class="h-10 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 text-sm font-bold inline-flex items-center gap-2 transition-all border border-slate-200 dark:border-slate-700">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        Simpan Draft
+                    </button>
+                    <button type="submit" name="submit_action" value="final" form="formNilai"
+                        class="h-10 px-4 rounded-xl bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        Kirim ke Wali Kelas
+                    </button>
+                </div>
             @endif
         </div>
 
@@ -90,6 +97,7 @@
                         <th class="px-6 py-4 text-center">UAS</th>
                         <th class="px-6 py-4 text-center">Tugas</th>
                         <th class="px-6 py-4 text-center">Rata-rata</th>
+                        <th class="px-6 py-4 text-center">Status</th>
                     </tr>
                 </thead>
 
@@ -137,10 +145,32 @@
                                     {{ $average }}
                                 </span>
                             </td>
+
+                            <td class="px-6 py-4 text-center">
+                                @if($grade)
+                                    @if($grade->status === 'published')
+                                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-600 dark:bg-green-500/20 dark:text-green-400">
+                                            Diterbitkan
+                                        </span>
+                                    @elseif($grade->status === 'final')
+                                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400">
+                                            Telah Dikirim
+                                        </span>
+                                    @else
+                                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                                            Draft
+                                        </span>
+                                    @endif
+                                @else
+                                    <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                                        Belum Diisi
+                                    </span>
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="px-6 py-4 text-center text-[var(--text-secondary)]">
+                            <td colspan="8" class="px-6 py-4 text-center text-[var(--text-secondary)]">
                                 @if(!$selectedAssignment)
                                     Silakan pilih kelas terlebih dahulu.
                                 @else
@@ -210,6 +240,47 @@
             // Hitung rata-rata awal saat halaman dimuat
             calculateAverage();
         });
+
+        // Form change-tracking & redirection handling
+        let formChanged = false;
+        const form = document.getElementById('formNilai');
+        if (form) {
+            form.addEventListener('input', () => {
+                formChanged = true;
+            });
+            form.addEventListener('submit', () => {
+                formChanged = false;
+            });
+        }
+
+        window.addEventListener('beforeunload', (e) => {
+            if (formChanged) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
+        const classSelect = document.getElementById('classSelect');
+        if (classSelect) {
+            classSelect.addEventListener('change', function(event) {
+                if (!event.isTrusted) return; // Ignore programmatic events (Fake Filler)
+                
+                const targetVal = this.value;
+                if (!targetVal) return;
+
+                if (formChanged) {
+                    if (confirm('Anda memiliki perubahan nilai yang belum disimpan. Apakah Anda yakin ingin berpindah kelas dan membuang perubahan?')) {
+                        formChanged = false;
+                        window.location.href = '/teacher/input-nilai/' + targetVal;
+                    } else {
+                        // Reset select value to previous
+                        this.value = "{{ $assignmentId }}";
+                    }
+                } else {
+                    window.location.href = '/teacher/input-nilai/' + targetVal;
+                }
+            });
+        }
     });
 </script>
 

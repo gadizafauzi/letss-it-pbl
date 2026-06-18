@@ -60,7 +60,8 @@ class NilaiController extends Controller
                 $query = Student::whereIn('id', $studentIds)
                     ->with(['grades' => function ($q) use ($targetAssignment, $semester) {
                         $q->where('teaching_assignment_id', $targetAssignment->id)
-                          ->where('semester', $semester);
+                          ->where('semester', $semester)
+                          ->whereIn('status', ['final', 'published']);
                     }]);
 
                 if ($request->filled('search')) {
@@ -151,7 +152,8 @@ class NilaiController extends Controller
                 $query = Student::whereIn('id', $studentIds)
                     ->with(['grades' => function ($q) use ($targetAssignment, $semester) {
                         $q->where('teaching_assignment_id', $targetAssignment->id)
-                          ->where('semester', $semester);
+                          ->where('semester', $semester)
+                          ->whereIn('status', ['final', 'published']);
                     }]);
 
                 if ($request->filled('search')) {
@@ -245,6 +247,7 @@ class NilaiController extends Controller
         \App\Models\Grade::whereIn('student_id', $studentIds)
             ->where('academic_year_id', $activeYear?->id)
             ->where('semester', $semester)
+            ->where('status', 'final')
             ->update(['status' => 'published']);
 
         return redirect()->back()->with('success', 'Nilai kelas pada semester ' . ($semester === 'odd' ? 'Ganjil' : 'Genap') . ' berhasil diterbitkan dan sekarang dapat dilihat oleh siswa!');

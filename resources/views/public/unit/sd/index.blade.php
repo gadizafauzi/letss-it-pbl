@@ -252,6 +252,13 @@
             style="background: radial-gradient(circle, #34d399, transparent 70%); filter: blur(60px);"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-20 w-full">
+            {{-- Breadcrumb --}}
+            <div class="flex items-center gap-3 mb-6 md:mb-10 text-[0.95rem] reveal reveal-left">
+                <a href="{{ route('public.home') }}" class="text-emerald-100/80 hover:text-white font-medium transition-colors duration-300">Beranda</a>
+                <span class="text-emerald-100/40">/</span>
+                <span class="text-emerald-300 font-semibold tracking-wide drop-shadow-md">SD Islam Terpadu</span>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                 {{-- Left text --}}
@@ -401,7 +408,7 @@
                 <h2 class="unit-section-title">EKSTRAKURIKULER</h2>
                 <p class="unit-section-desc">Program pengembangan diri untuk menggali potensi, minat, dan bakat kepemimpinan siswa.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-5">
                 @php
                     $displayEkskuls = [];
                     if (isset($ekskuls) && !$ekskuls->isEmpty()) {
