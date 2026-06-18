@@ -132,6 +132,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         
 
 
+    Route::post('/admin/tagihan/broadcast-wa', [\App\Http\Controllers\Admin\TagihanController::class, 'broadcastWa'])
+        ->name('admin.tagihan.broadcast-wa');
+        
+    Route::post('/admin/tagihan/{invoice}/kirim-wa', [\App\Http\Controllers\Admin\TagihanController::class, 'kirimWa'])
+        ->name('admin.tagihan.kirim-wa');
+
     Route::resource('/admin/tagihan', \App\Http\Controllers\Admin\TagihanController::class)
         ->parameters(['tagihan' => 'invoice'])
         ->names('admin.tagihan');
