@@ -155,13 +155,7 @@
                                     {{ $teacher->position->name ?? '-' }}
                                 </td>
                                 <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
-                                    @if ($teacher->employment_status == 'pegawai_tetap')
-                                        Pegawai Tetap
-                                    @elseif($teacher->employment_status == 'pegawai_tidak_tetap')
-                                        Pegawai Tidak Tetap
-                                    @else
-                                        -
-                                    @endif
+                                    {{ $teacher->employment_status ? ucwords(str_replace('_', ' ', $teacher->employment_status)) : '-' }}
                                 </td>
                                 <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $teacher->phone ?? '-' }}

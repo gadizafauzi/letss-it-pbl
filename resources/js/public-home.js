@@ -48,9 +48,9 @@
             // Update active button styling
             document.querySelectorAll('.filter-btn').forEach(b => {
                 b.classList.remove('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-200');
-                b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+                b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200', 'hover:bg-slate-50');
             });
-            btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+            btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200', 'hover:bg-slate-50');
             btn.classList.add('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-200');
 
             // Hide all cards first simultaneously

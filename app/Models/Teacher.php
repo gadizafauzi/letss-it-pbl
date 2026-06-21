@@ -11,8 +11,12 @@ use App\Models\TeachingAssignment;
 use App\Models\SchoolClass;
 
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Teacher extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'user_id',
         'unit_id',

@@ -81,12 +81,14 @@ class KelasController extends Controller
     {
         $request->validate([
             'assignment_id' => 'required|exists:teaching_assignments,id',
+            'submit_action' => 'required|in:draft,final',
             'grades' => 'required|array',
             'grades.*.uts' => 'nullable|numeric|min:0|max:100',
             'grades.*.uas' => 'nullable|numeric|min:0|max:100',
             'grades.*.tugas' => 'nullable|numeric|min:0|max:100',
         ]);
 
+        $status = $request->input('submit_action', 'draft');
         $assignment = TeachingAssignment::with('academicYear')->findOrFail($request->assignment_id);
 
         foreach ($request->grades as $studentId => $scores) {
@@ -127,12 +129,16 @@ class KelasController extends Controller
                     'assignment_score' => $tugas,
                     'final_score' => $finalScore,
                     'grade_letter' => $gradeLetter,
-                    'status' => 'draft',
+                    'status' => $status,
                 ]
             );
         }
 
-        return redirect()->back()->with('success', 'Nilai berhasil disimpan!');
+        $message = $status === 'final'
+            ? 'Nilai berhasil disimpan dan dikirim ke Wali Kelas!'
+            : 'Nilai berhasil disimpan sebagai draft!';
+
+        return redirect()->back()->with('success', $message);
     }
 
 }

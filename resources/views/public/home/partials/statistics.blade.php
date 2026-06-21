@@ -1,7 +1,7 @@
 {{-- STATS --}}
     <section class="bg-white py-16 md:py-24 relative z-20">
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 @forelse($statistics ?? [] as $index => $stat)
                 @php
                     $colors = ['amber', 'emerald', 'teal', 'amber'];

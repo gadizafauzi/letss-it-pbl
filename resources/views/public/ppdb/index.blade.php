@@ -62,7 +62,6 @@
     <section id="informasi" class="public-section pb-10 scroll-mt-32">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="info" class="w-4 h-4"></i> PPDB {{ date('Y') }}/{{ date('Y')+1 }}</span>
                 <h2 class="section-title mx-auto">Pendaftaran Siswa Baru</h2>
                 <p class="section-subtitle mx-auto text-center">Bergabunglah bersama SIT Mutiara Qur'an untuk masa depan putra-putri Anda yang lebih baik.</p>
             </div>
@@ -192,7 +191,6 @@
     <section id="timeline" class="public-section py-16 bg-white scroll-mt-32">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="calendar-days" class="w-4 h-4"></i> Timeline PPDB</span>
                 <h2 class="section-title mx-auto">Timeline Pendaftaran</h2>
                 <p class="section-subtitle mx-auto text-center">Ikuti setiap tahap seleksi sesuai jadwal yang telah ditetapkan.</p>
             </div>
@@ -287,7 +285,6 @@
     <section id="alur" class="public-section py-16 scroll-mt-32">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-12 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="route" class="w-4 h-4"></i> Alur Pendaftaran</span>
                 <h2 class="section-title mx-auto">Langkah Mudah Mendaftar</h2>
             </div>
             @php
@@ -332,7 +329,6 @@
     <section id="syarat" class="public-section py-16 bg-slate-50/50 scroll-mt-32">
         <div class="w-full max-w-7xl mx-auto">
             <div class="text-center mb-12 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="clipboard-list" class="w-4 h-4"></i> Persyaratan</span>
                 <h2 class="section-title mx-auto">Syarat Pendaftaran</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -483,9 +479,6 @@
 
         <div class="max-w-3xl mx-auto relative z-10">
             <div class="text-center mb-16 flex flex-col items-center">
-                <span class="section-badge faq-badge transition-all duration-700 ease-out inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-600 font-bold text-sm mb-4" style="opacity: 0; transform: scale(0.85) translateY(10px); transition-delay: 0ms;">
-                    <i data-lucide="help-circle" class="w-4 h-4"></i> FAQ
-                </span>
                 <h2 class="section-title mx-auto faq-title transition-all duration-700 ease-out text-3xl md:text-4xl font-extrabold text-slate-800 mb-2" style="opacity: 0; transform: scale(0.92) translateY(15px); transition-delay: 150ms;">Pertanyaan yang Sering Diajukan</h2>
                 <div class="faq-divider h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full mb-6 transition-all duration-700 ease-out" style="opacity: 0; transform: scaleX(0); transition-delay: 300ms; transform-origin: center;"></div>
                 <p class="section-subtitle mx-auto text-center text-slate-500 faq-subtitle transition-all duration-700 ease-out max-w-xl" style="opacity: 0; transform: translateY(20px); transition-delay: 450ms;">
@@ -671,7 +664,6 @@
     <section id="brosur" class="public-section py-16 bg-white scroll-mt-32">
         <div class="w-full max-w-7xl mx-auto">
             <div class="text-center mb-12 flex flex-col items-center">
-                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="file-down" class="w-4 h-4"></i> Brosur PPDB</span>
                 <h2 class="section-title mx-auto reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Download Brosur Lengkap</h2>
                 <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
                 <p class="section-subtitle mx-auto text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Unduh brosur resmi untuk melihat informasi lengkap mengenai jadwal pendaftaran, timeline, syarat, biaya pendidikan, program unggulan, fasilitas sekolah, dan informasi penting lainnya.</p>
@@ -736,7 +728,6 @@
     <section id="kontak" class="public-section py-16 bg-slate-50/50 scroll-mt-32">
         <div class="w-full max-w-7xl mx-auto">
             <div class="text-center mb-12 reveal reveal-up">
-                <span class="section-badge"><i data-lucide="phone" class="w-4 h-4"></i> Hubungi Kami</span>
                 <h2 class="section-title mx-auto">Kontak & Lokasi</h2>
                 <p class="section-subtitle mx-auto text-center">Kunjungi kami atau kirimkan pesan untuk pertanyaan seputar PPDB SIT Mutiara Qur'an.</p>
             </div>
@@ -795,7 +786,6 @@
                 {{-- FORMULIR KONTAK --}}
                 <div class="lg:col-span-6 bg-white p-8 rounded-3xl border border-slate-200/60 shadow-lg flex flex-col justify-between reveal reveal-right delay-200 premium-card">
                     <div>
-                        <span class="section-badge mb-4"><i data-lucide="send" class="w-4 h-4"></i> Kirim Pesan</span>
                         <h3 class="text-xl font-extrabold text-slate-800 mb-6">Formulir Kontak</h3>
                         <form class="space-y-4">
                             <div>

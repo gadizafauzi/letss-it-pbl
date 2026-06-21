@@ -2,7 +2,6 @@
     <section class="public-section bg-white relative overflow-hidden">
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="text-center mb-16 flex flex-col items-center">
-                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="message-square" class="w-4 h-4"></i> Testimoni</span>
                 <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Apa Kata Orang Tua Wali Murid?</h2>
                 <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
                 <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Kepercayaan dan kebanggaan para orang tua atas perkembangan akademis dan karakter islami putra-putrinya di SIT Mutiara Qur'an.</p>

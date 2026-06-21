@@ -729,6 +729,21 @@ html.dark .modern-box:hover {
     border-color: #475569;
 }
 
+html.dark .box-title,
+.dark .box-title {
+    color: var(--text-main, #f1f5f9) !important;
+}
+
+html.dark .card-value,
+.dark .card-value {
+    color: var(--text-main, #f1f5f9) !important;
+}
+
+html.dark .activity-title,
+.dark .activity-title {
+    color: var(--text-main, #f1f5f9) !important;
+}
+
 @media (max-width: 991px) {
     html.dark .sidebar {
         background: linear-gradient(to bottom right, #1e293b, #0f172a);

@@ -17,13 +17,12 @@
 
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="text-center mb-16 flex flex-col items-center">
-                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="award" class="w-4 h-4"></i> Keunggulan Kami</span>
                 <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Mengapa Memilih Mutiara Qur'an?</h2>
                 <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
                 <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Fasilitas yang modern dan lingkungan yang aman bersinergi melahirkan kenyamanan belajar penuh berkah.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 @php
                     $displayKeunggulan = [];
                     if (isset($keunggulan) && !$keunggulan->isEmpty()) {
@@ -51,7 +50,7 @@
                     }
                 @endphp
                 @foreach($displayKeunggulan as $item)
-                    <div class="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 hover:scale-[1.03] hover:border-{{ $item['bg'] }}-300 transition-all duration-300 relative overflow-hidden group reveal reveal-program {{ $item['anim'] }}" style="transition-delay: {{ $item['delay'] }};">
+                    <div class="bg-white rounded-2xl p-4 md:p-6 lg:p-8 border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(0,0,0,0.12)] hover:-translate-y-2.5 hover:scale-[1.03] hover:border-{{ $item['bg'] }}-300 transition-all duration-300 relative overflow-hidden group reveal reveal-program {{ $item['anim'] }}" style="transition-delay: {{ $item['delay'] }};">
                         
                         <!-- Shine effect passing across the card -->
                         <div class="shine-effect"></div>
@@ -63,11 +62,11 @@
                         <div class="absolute -right-6 -top-6 w-32 h-32 bg-gradient-to-br from-{{ $item['bg'] }}-100 to-white rounded-full opacity-40 group-hover:scale-[2.5] group-hover:opacity-70 transition-all duration-700 ease-out z-0 blur-2xl"></div>
 
                         <div class="relative z-10">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-{{ $item['bg'] }}-50 to-{{ $item['bg'] }}-100/60 text-{{ $item['bg'] }}-600 flex items-center justify-center mb-6 shadow-inner group-hover:-translate-y-2 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300">
-                                <i data-lucide="{{ $item['icon'] }}" class="w-7 h-7"></i>
+                            <div class="w-10 h-10 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br from-{{ $item['bg'] }}-50 to-{{ $item['bg'] }}-100/60 text-{{ $item['bg'] }}-600 flex items-center justify-center mb-3 md:mb-6 shadow-inner group-hover:-translate-y-2 group-hover:rotate-6 group-hover:scale-110 transition-transform duration-300">
+                                <i data-lucide="{{ $item['icon'] }}" class="w-5 h-5 md:w-7 md:h-7"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-{{ $item['bg'] }}-600 transition-colors duration-300">{{ $item['title'] }}</h3>
-                            <p class="text-sm text-slate-500 leading-relaxed">{{ $item['desc'] }}</p>
+                            <h3 class="text-sm md:text-xl font-bold text-slate-800 mb-2 md:mb-3 group-hover:text-{{ $item['bg'] }}-600 transition-colors duration-300 line-clamp-2">{{ $item['title'] }}</h3>
+                            <p class="text-xs md:text-sm text-slate-500 leading-relaxed line-clamp-3 md:line-clamp-none">{{ $item['desc'] }}</p>
                         </div>
                     </div>
                 @endforeach

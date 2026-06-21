@@ -7,13 +7,12 @@
         
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="text-center mb-16 flex flex-col items-center">
-                <span class="section-badge reveal reveal-zoom" style="transition-delay: 0ms;"><i data-lucide="layers-3" class="w-4 h-4"></i> Unit Pendidikan</span>
                 <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Jenjang Pendidikan Kami</h2>
                 <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
                 <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Menyediakan jenjang pendidikan berkesinambungan dari usia emas anak hingga pra-remaja.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 lg:px-0">
+            <div class="flex flex-nowrap lg:grid lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 px-4 -mx-4 lg:mx-0 lg:px-0 overflow-x-auto pb-8 pt-4 custom-scrollbar snap-x">
                 @php
                     $units = [
 
@@ -62,28 +61,28 @@
                     ];
                 @endphp
                 @foreach($units as $unit)
-                    <div class="bg-white rounded-[32px] p-8 text-center reveal reveal-up group border border-slate-100 shadow-sm relative overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] {{ $unit['borderHover'] }} {{ $unit['anim'] }} flex flex-col h-full" style="transition-delay: {{ $unit['delay'] }};">
+                    <div class="snap-center flex-shrink-0 w-[85%] sm:w-[45%] lg:w-auto bg-white rounded-[28px] lg:rounded-[32px] p-6 lg:p-8 text-center reveal reveal-up group border border-slate-100 shadow-sm relative overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] {{ $unit['borderHover'] }} {{ $unit['anim'] }} flex flex-col h-full" style="transition-delay: {{ $unit['delay'] }};">
                         
                         <!-- Glow Background on Hover -->
                         <div class="absolute inset-0 bg-gradient-to-b {{ $unit['bgGlow'] }} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
                         <div class="relative z-10 flex flex-col flex-grow">
                             <!-- Logo Container -->
-                            <div class="w-24 h-24 rounded-2xl bg-white flex items-center justify-center mx-auto mb-6 shadow-sm border border-slate-100 overflow-hidden {{ $unit['shadowHover'] }} transition-all duration-500 relative">
+                            <div class="w-12 h-12 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center mx-auto mb-3 md:mb-6 shadow-sm border border-slate-100 overflow-hidden {{ $unit['shadowHover'] }} transition-all duration-500 relative">
                                 <!-- Inner glow for logo -->
                                 <div class="absolute inset-0 {{ $unit['innerGlow'] }} opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <img src="{{ $unit['logo'] }}" alt="Logo {{ $unit['title'] }}"
                                      class="w-full h-full object-contain p-2 relative z-10 transition-transform duration-500 group-hover:scale-[1.15] group-hover:rotate-[4deg]">
                             </div>
                             
-                            <h3 class="text-2xl font-black text-slate-800 mb-3 {{ $unit['textHover'] }} transition-colors duration-300">{{ $unit['title'] }}</h3>
-                            <p class="text-slate-500 text-sm leading-relaxed mb-8 flex-grow group-hover:text-slate-600 transition-colors duration-300">{{ $unit['desc'] }}</p>
+                            <h3 class="text-base md:text-xl font-black text-slate-800 mb-2 md:mb-3 {{ $unit['textHover'] }} transition-colors duration-300 line-clamp-2">{{ $unit['title'] }}</h3>
+                            <p class="text-slate-500 text-xs md:text-sm leading-relaxed mb-4 md:mb-8 flex-grow group-hover:text-slate-600 transition-colors duration-300 line-clamp-3 md:line-clamp-none">{{ $unit['desc'] }}</p>
                             
                             <!-- Button Link -->
                             <div class="mt-auto">
-                                <a href="{{ route($unit['route']) }}" class="inline-flex items-center justify-center w-full py-3.5 rounded-xl bg-slate-50 {{ $unit['btnHover'] }} font-bold transition-all duration-300 overflow-hidden relative">
-                                    <span class="relative z-10 flex items-center gap-2 transform transition-transform duration-300 group-hover:translate-x-1.5 text-sm">
-                                        Selengkapnya <i data-lucide="arrow-right" class="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1"></i>
+                                <a href="{{ route($unit['route']) }}" class="inline-flex items-center justify-center w-full py-2 md:py-3.5 rounded-xl bg-slate-50 {{ $unit['btnHover'] }} font-bold transition-all duration-300 overflow-hidden relative">
+                                    <span class="relative z-10 flex items-center gap-2 transform transition-transform duration-300 group-hover:translate-x-1.5 text-xs md:text-sm">
+                                        Selengkapnya <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4 transform transition-transform duration-300 group-hover:translate-x-1"></i>
                                     </span>
                                 </a>
                             </div>

@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AcademicYearSeeder::class,
             ClassSeeder::class,
+            SubjectSeeder::class,
             DummyDataSeeder::class,
+            FinanceSeeder::class,
             CmsSeeder::class,
         ]);
     }
