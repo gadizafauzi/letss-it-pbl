@@ -7,10 +7,18 @@ use App\Models\Student;
 use App\Models\AcademicYear;
 use App\Models\Invoice;
 use App\Models\Grade;
+use App\Services\Student\DashboardService;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    protected DashboardService $dashboardService;
+
+    public function __construct(DashboardService $dashboardService)
+    {
+        $this->dashboardService = $dashboardService;
+    }
+
     public function index()
     {
         $student = Student::where('user_id', auth()->id())
@@ -19,36 +27,16 @@ class DashboardController extends Controller
 
         $activeYear = AcademicYear::where('status', 'active')->first();
 
-        // Hitung Invoice/Tagihan
-        $tagihanSaatIni = Invoice::where('student_id', $student->id)
-            ->where('status', 'unpaid')
-            ->sum('amount');
+        $stats = $this->dashboardService->getStats($student, $activeYear);
 
-        $totalTerbayar = Invoice::where('student_id', $student->id)
-            ->where('status', 'paid')
-            ->sum('amount');
-
-        // Hitung jumlah mata pelajaran dari nilai semester aktif yang sudah di-publish
-        $jumlahMapel = Grade::where('student_id', $student->id)
-            ->where('academic_year_id', $activeYear?->id)
-            ->where('semester', $activeYear?->active_semester ?? 'odd')
-            ->where('status', 'published')
-            ->count();
-
-        // Hitung rata-rata nilai akhir dari semester aktif yang sudah di-publish
-        $rataRataNilai = Grade::where('student_id', $student->id)
-            ->where('academic_year_id', $activeYear?->id)
-            ->where('semester', $activeYear?->active_semester ?? 'odd')
-            ->where('status', 'published')
-            ->whereNotNull('final_score')
-            ->avg('final_score');
-        $rataRataNilai = $rataRataNilai !== null ? round($rataRataNilai, 1) : '-';
-
-        return view('student.smp.dashboard', compact(
-            'student', 'activeYear',
-            'tagihanSaatIni', 'totalTerbayar',
-            'jumlahMapel', 'rataRataNilai'
-        ));
+        return view('student.smp.dashboard', [
+            'student'        => $student,
+            'activeYear'     => $activeYear,
+            'tagihanSaatIni' => $stats['tagihanSaatIni'],
+            'totalTerbayar'  => $stats['totalTerbayar'],
+            'jumlahMapel'    => $stats['jumlahMapel'],
+            'rataRataNilai'  => $stats['rataRataNilai'],
+        ]);
     }
 
     public function cetakKtm()

@@ -42,6 +42,13 @@ class Student extends Model
         'status',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'birth_date' => 'date',
+        ];
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
