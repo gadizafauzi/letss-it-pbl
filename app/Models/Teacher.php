@@ -30,6 +30,13 @@ class Teacher extends Model
         'photo',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'birth_date' => 'date',
+        ];
+    }
+
     // RELASI USER
     public function user()
     {

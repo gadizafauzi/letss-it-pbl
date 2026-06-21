@@ -32,9 +32,9 @@ class DashboardService
         // 3. Data Grafik Keuangan (Bulanan tahun ini)
         $currentYear = date('Y');
         $monthlyRevenue = Payment::where('verification_status', 'verified')
-            ->whereYear('payments.updated_at', $currentYear)
+            ->whereYear('payments.payment_date', $currentYear)
             ->join('invoices', 'payments.invoice_id', '=', 'invoices.id')
-            ->selectRaw('MONTH(payments.updated_at) as month, SUM(invoices.amount) as total')
+            ->selectRaw('MONTH(payments.payment_date) as month, SUM(invoices.amount) as total')
             ->groupBy('month')
             ->pluck('total', 'month')
             ->toArray();

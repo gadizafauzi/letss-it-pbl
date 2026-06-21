@@ -151,3 +151,41 @@ resources/
 ## Kesimpulan
 
 Refactoring tahap ini berhasil menyelesaikan masalah kompleksitas pada area kritis aplikasi. Pemisahan tugas melalui _Service Layer_, _Shared Services_, dan isolasi berdasarkan peran/unit menjadikan _codebase_ SIAKAD jauh lebih bersih (_Clean Code_). Sistem kini sudah dalam kondisi solid dan sangat siap untuk menerima penambahan fitur baru dengan cepat dan aman.
+
+---
+
+## 6. Penyelesaian & Refactoring Fitur Hapus Massal (Bulk Delete)
+
+### Masalah
+Banyak _checkbox_ hapus massal yang antarmuka (_Front-End_)-nya sudah ada namun logika _Back-End_-nya belum terhubung, atau terjadi _error_ (seperti kesalahan nama tabel) saat diakses.
+
+### Perubahan
+Mengimplementasikan _refactoring_ menyeluruh dengan menambahkan validasi `BulkDestroyRequest` dan mengaktifkan hapus massal untuk:
+- Data Kelas (Memperbaiki _error_ tabel tidak ditemukan)
+- Mata Pelajaran
+- Data Mengajar (Menyelesaikan _bug_ paginasi baris yang tidak sinkron)
+- Tahun Ajaran (Memperbaiki _error View not found_)
+- Data Jabatan
+- Unit Pendidikan
+- Tagihan Keuangan (Logika diubah agar **hanya menghapus tagihan yang berstatus Belum Lunas**)
+- Jenis Tagihan
+
+### Dampak
+Fitur hapus massal dapat berfungsi penuh di hampir semua lini modul dengan tingkat keamanaan tinggi karena difilter melalui fungsi Form Request dan aturan bisnis spesifik.
+
+---
+
+## 7. Pemisahan Logika Dashboard Siswa & Guru (Service Pattern Lanjutan)
+
+### Masalah
+Ditemukan _Code Duplication_ (kode yang berulang persis sama) secara masif pada Controller:
+- `Student\SD\DashboardController` & `Student\SMP\DashboardController` memiliki kueri pencarian tagihan dan nilai akhir yang 100% sama.
+- `Teacher\DashboardController` & `Teacher\WaliKelas\DashboardController` memiliki perhitungan rumit terkait tugas penugasan yang tumpang tindih.
+
+### Perubahan
+1. **Service Layer Baru**: Membuat `app/Services/Student/DashboardService.php` dan `app/Services/Teacher/DashboardService.php` untuk menampung semua kueri perhitungan spesifik peran tersebut.
+2. **Penerapan Caching**: Menggunakan `Cache::remember()` dengan rentang waktu 10 menit di dalam masing-masing Service tersebut.
+3. **Optimasi Grafik Admin**: Mengubah referensi penghasilan (_revenue chart_) dari `updated_at` menjadi `payment_date` agar grafik keuangan akurat sesuai bulan pembayaran.
+
+### Dampak
+_Controller_ terbebas dari query panjang sehingga strukturnya menjadi sangat "bersih" (_Thin Controller_). Adanya lapisan **Caching** membuat _dashboard_ merespon secara instan bagi para siswa dan guru meskipun aplikasi sedang diakses secara masal di jam-jam sibuk.
