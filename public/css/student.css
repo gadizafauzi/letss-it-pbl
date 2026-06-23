@@ -63,31 +63,31 @@ html, body {
 }
 
 .nav-item:hover {
-    background-color: #ecfdf5;
-    color: #059669;
+    background-color: #f8fafc;
+    color: #334155;
 }
 
 .nav-item:hover .nav-icon svg {
-    stroke: #059669;
+    stroke: #334155;
     transform: scale(1.1);
 }
 
 .nav-item.active {
-    background-color: #d1fae5;
-    color: #047857;
+    background-color: #e2e8f0;
+    color: #1e293b;
     font-weight: 700;
-    box-shadow: inset 3px 0 0 #10b981;
+    box-shadow: inset 3px 0 0 #475569;
 }
 
 .nav-item.active .nav-icon svg {
-    stroke: #047857;
+    stroke: #1e293b;
 }
 
 .nav-item::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: #10b981;
+    background: #475569;
     opacity: 0;
     border-radius: inherit;
     transform: scale(0.9);
@@ -127,28 +127,28 @@ html, body {
 }
 
 .table-container:hover {
-    box-shadow: 0 8px 28px -6px rgba(16, 185, 129, 0.14);
+    box-shadow: 0 8px 28px -6px rgba(30, 41, 59, 0.14);
 }
 
 .table-header {
-    background: linear-gradient(135deg, #ecfdf5 0%, #f8faff 100%);
-    border-bottom: 2px solid #a7f3d0;
+    background: linear-gradient(135deg, #f8fafc 0%, #f8faff 100%);
+    border-bottom: 2px solid #cbd5e1;
 }
 
 .table-title-bar {
     width: 4px;
     height: 20px;
-    background: linear-gradient(180deg, #10b981, #34d399);
+    background: linear-gradient(180deg, #475569, #64748b);
     border-radius: 999px;
     flex-shrink: 0;
 }
 
 .table-thead {
-    background: linear-gradient(135deg, #047857 0%, #059669 60%, #10b981 100%);
+    background: linear-gradient(135deg, #1e293b 0%, #334155 60%, #475569 100%);
 }
 
 .table-thead th {
-    color: #a7f3d0;
+    color: #cbd5e1;
     letter-spacing: 0.07em;
     padding-top: 14px;
     padding-bottom: 14px;
@@ -170,13 +170,13 @@ html, body {
 }
 
 .table-row:hover {
-    background-color: #ecfdf5;
+    background-color: #f8fafc;
     transform: translateX(3px);
-    box-shadow: -3px 0 0 #10b981;
+    box-shadow: -3px 0 0 #475569;
 }
 
 .table-row:hover td {
-    color: #064e3b;
+    color: #0f172a;
 }
 
 PREDIKAT BADGES
@@ -197,8 +197,8 @@ PREDIKAT BADGES
 }
 
 .predikat-b {
-    background-color: #d1fae5;
-    color: #047857;
+    background-color: #e2e8f0;
+    color: #1e293b;
 }
 
 .predikat-c {
@@ -342,7 +342,7 @@ header {
 }
 
 .nav-item.active {
-    background-color: #10b981 !important;
+    background-color: #475569 !important;
     color: white !important;
 }
 

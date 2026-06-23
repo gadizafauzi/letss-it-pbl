@@ -39,6 +39,9 @@
     {{-- ALPINE JS --}}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+    {{-- SWEETALERT 2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
@@ -137,6 +140,120 @@
                 }
             }
             
+        });
+
+        // GLOBAL DELETE CONFIRMATION (SWEETALERT2)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove native onsubmit from all delete forms
+            document.querySelectorAll('form').forEach(form => {
+                if (form.querySelector('input[name="_method"][value="DELETE"]')) {
+                    form.removeAttribute('onsubmit');
+                }
+            });
+        });
+
+        document.addEventListener('submit', function(e) {
+            const form = e.target;
+            if (form && form.tagName === 'FORM') {
+                const methodInput = form.querySelector('input[name="_method"][value="DELETE"]');
+                if (methodInput) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Hapus Data?',
+                        text: "Data ini akan dihapus permanen!",
+                        icon: 'warning',
+                        width: '340px',
+                        padding: '1.5em',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ef4444',
+                        cancelButtonColor: '#64748b',
+                        confirmButtonText: 'Ya, Hapus!',
+                        cancelButtonText: 'Batal',
+                        customClass: {
+                            confirmButton: 'px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-xl font-medium shadow-sm mx-1.5 border-none outline-none',
+                            cancelButton: 'px-4 py-2 text-sm text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl font-medium mx-1.5 border-none outline-none dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600',
+                            popup: 'rounded-2xl dark:bg-slate-800 dark:text-slate-100 border dark:border-slate-700',
+                            title: 'text-lg text-slate-800 dark:text-slate-100 mb-1',
+                            htmlContainer: 'text-sm text-slate-500 dark:text-slate-400',
+                            icon: 'scale-75 my-2'
+                        },
+                        buttonsStyling: false
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                }
+            }
+        });
+
+        // UNSAVED CHANGES TRACKER
+        let hasUnsavedChanges = false;
+        let formIsSubmitting = false;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const trackChanges = (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                    const form = e.target.closest('form');
+                    // Hanya lacak form POST (form data), abaikan GET (form pencarian/filter)
+                    if (form && form.method.toUpperCase() === 'POST') {
+                        if (e.target.type !== 'hidden' && e.target.type !== 'search') {
+                            hasUnsavedChanges = true;
+                        }
+                    }
+                }
+            };
+            
+            document.body.addEventListener('input', trackChanges);
+            document.body.addEventListener('change', trackChanges);
+
+            document.body.addEventListener('submit', function(e) {
+                formIsSubmitting = true;
+            });
+        });
+
+        // Intercept link clicks with SweetAlert2
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (link && link.href && !link.href.startsWith('javascript:') && !link.href.includes('#') && link.target !== '_blank') {
+                if (hasUnsavedChanges && !formIsSubmitting) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Perubahan Belum Disimpan!',
+                        text: 'Anda memiliki data yang belum disimpan. Yakin ingin pindah halaman?',
+                        icon: 'warning',
+                        width: '360px',
+                        padding: '1.5em',
+                        showCancelButton: true,
+                        confirmButtonColor: '#ef4444',
+                        cancelButtonColor: '#64748b',
+                        confirmButtonText: 'Ya, Tinggalkan',
+                        cancelButtonText: 'Batal',
+                        customClass: {
+                            confirmButton: 'px-4 py-2 text-sm text-white bg-red-500 hover:bg-red-600 rounded-xl font-medium shadow-sm mx-1.5 border-none outline-none',
+                            cancelButton: 'px-4 py-2 text-sm text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl font-medium mx-1.5 border-none outline-none dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600',
+                            popup: 'rounded-2xl dark:bg-slate-800 dark:text-slate-100 border dark:border-slate-700',
+                            title: 'text-lg text-slate-800 dark:text-slate-100 mb-1',
+                            htmlContainer: 'text-sm text-slate-500 dark:text-slate-400',
+                            icon: 'scale-75 my-2'
+                        },
+                        buttonsStyling: false
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            hasUnsavedChanges = false;
+                            window.location.href = link.href;
+                        }
+                    });
+                }
+            }
+        });
+
+        // Native browser warning for closing tab / reloading
+        window.addEventListener('beforeunload', function(e) {
+            if (hasUnsavedChanges && !formIsSubmitting) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
         });
     </script>
 

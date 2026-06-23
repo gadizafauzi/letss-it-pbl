@@ -28,13 +28,15 @@ class RekeningSekolahController extends Controller
         return redirect()->route('admin.rekening-sekolah.index')->with('success', 'Rekening berhasil ditambahkan.');
     }
 
-    public function edit(SchoolAccount $schoolAccount)
+    public function edit(SchoolAccount $rekening_sekolah)
     {
+        $schoolAccount = $rekening_sekolah;
         return view('admin.keuangan.rekening-sekolah.edit', compact('schoolAccount'));
     }
 
-    public function update(UpdateRekeningRequest $request, SchoolAccount $schoolAccount)
+    public function update(UpdateRekeningRequest $request, SchoolAccount $rekening_sekolah)
     {
+        $schoolAccount = $rekening_sekolah;
         $data = $request->all();
         $data['is_active'] = $request->has('is_active');
 
@@ -43,9 +45,9 @@ class RekeningSekolahController extends Controller
         return redirect()->route('admin.rekening-sekolah.index')->with('success', 'Rekening berhasil diperbarui.');
     }
 
-    public function destroy(SchoolAccount $schoolAccount)
+    public function destroy(SchoolAccount $rekening_sekolah)
     {
-        $schoolAccount->delete();
+        $rekening_sekolah->delete();
         return redirect()->route('admin.rekening-sekolah.index')->with('success', 'Rekening berhasil dihapus.');
     }
 }

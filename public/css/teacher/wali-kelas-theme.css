@@ -1,47 +1,47 @@
 :root {
     /* Warna Default Teacher Wali Kelas (Tema Emerald/Kehijauan) */
-    --bg-sidebar: #065f46;
+    --bg-sidebar: #1e293b;
     --bg-header: #ffffff;
     --bg-card: #ffffff;
     --text-main: #1e293b;
     --text-secondary: #64748b;
     --border-color: #e2e8f0;
 
-    --theme-primary: #059669;
-    --theme-primary-hover: #047857;
-    --theme-accent: #34d399;
-    --theme-accent-hover: #10b981;
-    --theme-bg-light: #ecfdf5;
+    --theme-primary: #334155;
+    --theme-primary-hover: #1e293b;
+    --theme-accent: #64748b;
+    --theme-accent-hover: #475569;
+    --theme-bg-light: #f8fafc;
     --theme-bg-workspace: #f1f5f9;
-    --theme-border-light: #a7f3d0;
-    --theme-text-light: #065f46;
+    --theme-border-light: #cbd5e1;
+    --theme-text-light: #1e293b;
     --theme-icon-active: #ffffff;
     --theme-icon-indicator: rgba(255, 255, 255, 0.9);
 
-    --theme-stat-hover: rgba(16, 185, 129, 0.06);
-    --theme-text-primary: #059669;
+    --theme-stat-hover: rgba(30, 41, 59, 0.06);
+    --theme-text-primary: #334155;
 }
 
 .dark {
     /* Tema Dark Teacher Wali Kelas */
-    --bg-sidebar: #022c22;
-    --bg-header: #022c22;
-    --bg-card: #064e3b;
+    --bg-sidebar: #020617;
+    --bg-header: #020617;
+    --bg-card: #0f172a;
     --text-main: #F8FAFC;
-    --text-secondary: #a7f3d0;
-    --border-color: #065f46;
+    --text-secondary: #cbd5e1;
+    --border-color: #1e293b;
 
-    --theme-primary: #10b981;
-    --theme-primary-hover: #34d399;
-    --theme-accent: #6ee7b7;
-    --theme-accent-hover: #10b981;
-    --theme-bg-light: #064e3b;
+    --theme-primary: #475569;
+    --theme-primary-hover: #64748b;
+    --theme-accent: #94a3b8;
+    --theme-accent-hover: #475569;
+    --theme-bg-light: #0f172a;
     --theme-bg-workspace: #020617;
-    --theme-border-light: #065f46;
-    --theme-text-light: #a7f3d0;
+    --theme-border-light: #1e293b;
+    --theme-text-light: #cbd5e1;
     --theme-icon-active: #ffffff;
-    --theme-icon-indicator: #6ee7b7;
+    --theme-icon-indicator: #94a3b8;
 
-    --theme-stat-hover: rgba(16, 185, 129, 0.2);
-    --theme-text-primary: #6ee7b7;
+    --theme-stat-hover: rgba(30, 41, 59, 0.2);
+    --theme-text-primary: #94a3b8;
 }
