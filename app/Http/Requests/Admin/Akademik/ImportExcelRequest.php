@@ -25,4 +25,19 @@ class ImportExcelRequest extends FormRequest
             'file' => 'required|file|mimes:xlsx,xls|max:5120',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'file.required' => 'File Excel wajib diunggah',
+            'file.mimes' => 'File harus berformat xlsx atau xls',
+            'file.max' => 'Ukuran file maksimal 5MB',
+            'file.uploaded' => 'Gagal mengunggah file. Pastikan ukuran file tidak melebihi 5MB.',
+        ];
+    }
 }

@@ -12,17 +12,7 @@
             <h1 class="text-xl font-bold text-slate-800 dark:text-slate-100">Tambah Data Mengajar</h1>
         </div>
 
-        {{-- ERROR --}}
-        @if ($errors->any())
-            <div class="flex items-start gap-3 px-4 py-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400">
-                <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0 mt-0.5"></i>
-                <ul class="text-sm space-y-1">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
 
         {{-- FORM --}}
         <form action="{{ route('admin.mengajar.store') }}" method="POST">

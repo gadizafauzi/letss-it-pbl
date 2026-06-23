@@ -284,28 +284,40 @@
                 
                 <div>
                     <label class="block text-xs font-bold text-[var(--text-secondary)] mb-1">Nama Lengkap</label>
-                    <input type="text" name="full_name" value="{{ $teacher->full_name }}" required
-                        class="w-full h-11 rounded-xl border border-[var(--border-color)] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
+                    <input type="text" name="full_name" value="{{ old('full_name', $teacher->full_name) }}" required
+                        class="w-full h-11 rounded-xl border {{ $errors->has('full_name') ? 'border-red-500' : 'border-[var(--border-color)]' }} px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
+                    @error('full_name')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-[var(--text-secondary)] mb-1">Nomor Telepon</label>
-                    <input type="text" name="phone" value="{{ $teacher->phone }}"
-                        class="w-full h-11 rounded-xl border border-[var(--border-color)] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
+                    <input type="text" name="phone" value="{{ old('phone', $teacher->phone) }}"
+                        class="w-full h-11 rounded-xl border {{ $errors->has('phone') ? 'border-red-500' : 'border-[var(--border-color)]' }} px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
+                    @error('phone')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-[var(--text-secondary)] mb-1">Pendidikan Terakhir</label>
-                    <input type="text" name="last_education" value="{{ $teacher->last_education }}"
-                        class="w-full h-11 rounded-xl border border-[var(--border-color)] px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
+                    <input type="text" name="last_education" value="{{ old('last_education', $teacher->last_education) }}"
+                        class="w-full h-11 rounded-xl border {{ $errors->has('last_education') ? 'border-red-500' : 'border-[var(--border-color)]' }} px-4 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]">
+                    @error('last_education')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-[var(--text-secondary)] mb-1">Foto Profil (Opsional)</label>
                     <input type="file" name="photo" accept="image/png, image/jpeg, image/jpg"
-                        class="w-full rounded-xl border border-[var(--border-color)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]
+                        class="w-full rounded-xl border {{ $errors->has('photo') ? 'border-red-500' : 'border-[var(--border-color)]' }} text-sm focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] bg-[var(--bg-card)] text-[var(--text-main)]
                         file:mr-4 file:py-2.5 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-[var(--theme-bg-light)] file:text-[var(--theme-primary)] hover:file:bg-[var(--theme-primary)] hover:file:text-white file:transition-colors">
                     <p class="text-[11px] text-[var(--text-secondary)] mt-1">Format: JPG, PNG. Maksimal 2MB.</p>
+                    @error('photo')
+                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
             </form>
         </div>
@@ -321,5 +333,13 @@
         </div>
     </div>
 </div>
+
+@if($errors->has('full_name') || $errors->has('phone') || $errors->has('last_education') || $errors->has('photo'))
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('editProfileModal').classList.remove('hidden');
+    });
+</script>
+@endif
 
 @endsection

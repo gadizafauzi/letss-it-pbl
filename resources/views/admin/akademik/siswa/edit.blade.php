@@ -65,6 +65,9 @@
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
+                                    @error('full_name')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 {{-- INFORMASI AKUN LOGIN --}}
@@ -166,6 +169,9 @@
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
+                                    @error('nis')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div>
@@ -176,6 +182,9 @@
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
+                                    @error('nisn')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div>
@@ -185,6 +194,9 @@
                                         class="w-full h-12 px-4 rounded-2xl border border-slate-200 bg-slate-50
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
+                                    @error('nik')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div>
@@ -200,6 +212,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('unit_id')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
 
@@ -214,6 +229,9 @@
                                             <option :value="item.id" x-text="item.class_name"></option>
                                         </template>
                                     </select>
+                                    @error('class_id')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div>
@@ -230,6 +248,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('academic_year_id')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
 
                             </div>
@@ -310,6 +331,9 @@
                                 Drop Out
                             </label>
                         </div>
+                        @error('status')
+                            <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     {{-- FOTO --}}
@@ -334,6 +358,9 @@
                             file:text-sm file:font-semibold
                             file:bg-blue-50 file:text-blue-600
                             hover:file:bg-blue-100">
+                        @error('photo')
+                            <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     {{-- ACTION --}}
