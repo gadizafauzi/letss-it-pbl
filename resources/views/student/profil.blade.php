@@ -30,8 +30,11 @@
                 <label class="w-full bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white font-bold text-xs h-10 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md shadow-[var(--theme-primary)]/10">
                     <i data-lucide="camera" class="w-3.5 h-3.5"></i>
                     <span>Ganti Foto</span>
-                    <input type="file" name="photo" class="hidden" onchange="this.form.submit()">
+                    <input type="file" name="photo" class="hidden" accept="image/png, image/jpeg, image/jpg" onchange="this.form.submit()">
                 </label>
+                @error('photo')
+                    <p class="text-xs text-red-500 mt-2 text-left font-semibold">{{ $message }}</p>
+                @enderror
             </form>
         </div>
 

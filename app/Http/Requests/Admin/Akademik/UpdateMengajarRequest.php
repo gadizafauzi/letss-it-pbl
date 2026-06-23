@@ -28,4 +28,23 @@ class UpdateMengajarRequest extends FormRequest
             'academic_year_id' => 'required|exists:academic_years,id',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'teacher_id.required' => 'Guru wajib dipilih',
+            'teacher_id.exists' => 'Guru tidak valid',
+            'subject_id.required' => 'Mata pelajaran wajib dipilih',
+            'subject_id.exists' => 'Mata pelajaran tidak valid',
+            'class_id.required' => 'Kelas wajib dipilih',
+            'class_id.exists' => 'Kelas tidak valid',
+            'academic_year_id.required' => 'Tahun ajaran wajib dipilih',
+            'academic_year_id.exists' => 'Tahun ajaran tidak valid',
+        ];
+    }
 }
