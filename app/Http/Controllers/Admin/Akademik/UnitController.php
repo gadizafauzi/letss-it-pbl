@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Akademik;
 use App\Http\Controllers\Controller;
 use App\Models\Unit;
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\Akademik\StoreUnitRequest;
-use App\Http\Requests\Admin\Akademik\UpdateUnitRequest;
+use App\Http\Requests\Admin\Cms\StoreUnitRequest;
+use App\Http\Requests\Admin\Cms\UpdateUnitRequest;
 use App\Http\Requests\Admin\Akademik\BulkDestroyUnitRequest;
 
 class UnitController extends Controller
