@@ -328,21 +328,6 @@
                     <div class="space-y-4 text-[0.95rem] text-slate-600 leading-relaxed">
                         @if($detail && $detail->description_body)
                             {!! nl2br(e($detail->description_body)) !!}
-                        @else
-                            <p>
-                                SD Islam Terpadu SIT Mutiara Qur'an memadukan kurikulum nasional dengan nilai-nilai keislaman
-                                secara komprehensif, menciptakan lingkungan yang kondusif bagi perkembangan intelektual,
-                                spiritual, dan emosional siswa.
-                            </p>
-                            <p>
-                                Kami fokus pada pembentukan karakter mandiri, kejujuran, serta kecintaan terhadap Al-Qur'an dan
-                                ilmu pengetahuan, agar siswa siap menghadapi tantangan masa depan dengan akhlak yang tangguh.
-                            </p>
-                            <p>
-                                Program unggulan kami meliputi tahfidz Al-Qur'an terstruktur dengan target 5 juz mutqin,
-                                pembiasaan ibadah harian seperti shalat dhuha dan shalat berjamaah, serta pembelajaran yang
-                                interaktif dan berpusat pada siswa.
-                            </p>
                         @endif
                     </div>
                 </div>
@@ -374,16 +359,8 @@
                             }
                         }
                     }
-                    if (empty($displayTeachers)) {
-                        $displayTeachers = [
-                            ['photo' => 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadzah Rina, S.Pd'],
-                            ['photo' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadz Fajar, M.Pd'],
-                            ['photo' => 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadzah Sari, S.Pd.I'],
-                            ['photo' => 'https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadz Budi, S.Pd'],
-                            ['photo' => 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', 'name' => 'Ustadzah Dewi, S.Pd'],
-                        ];
-                    }
                 @endphp
+                @if(!empty($displayTeachers))
                 @foreach ($displayTeachers as $idx => $g)
                     <div class="unit-teacher-card reveal" style="transition-delay: {{ $idx * 70 }}ms">
                         <div class="unit-teacher-photo">
@@ -394,6 +371,7 @@
                         </div>
                     </div>
                 @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -421,17 +399,8 @@
                             ];
                         }
                     }
-                    if (empty($displayEkskuls)) {
-                        $displayEkskuls = [
-                            ['icon' => 'tent',           'title' => 'Pramuka SIT',      'img' => 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80', 'desc' => 'Melatih kemandirian, kedisiplinan, dan jiwa kepemimpinan dasar.'],
-                            ['icon' => 'book-open',      'title' => 'Tahfidz Club',     'img' => 'https://images.unsplash.com/photo-1585995604802-17c3fe6b53aa?auto=format&fit=crop&w=600&q=80', 'desc' => 'Program pengayaan hafalan Al-Qur\'an secara intensif.'],
-                            ['icon' => 'dribbble',       'title' => 'Futsal',           'img' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80', 'desc' => 'Membangun kebugaran fisik dan sportivitas tim.'],
-                            ['icon' => 'crosshair',      'title' => 'Panahan',          'img' => 'https://images.unsplash.com/photo-1567699532083-f34b686df3af?auto=format&fit=crop&w=600&q=80', 'desc' => 'Melatih fokus, ketenangan, dan menjalankan sunnah Rasul.'],
-                            ['icon' => 'flask-conical',  'title' => 'Olimpiade Sains',  'img' => 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80', 'desc' => 'Bimbingan khusus bagi siswa berprestasi akademik.'],
-                            ['icon' => 'palette',        'title' => 'Seni & Kaligrafi', 'img' => 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80', 'desc' => 'Mengembangkan kreativitas melalui seni rupa dan kaligrafi Islam.'],
-                        ];
-                    }
                 @endphp
+                @if(!empty($displayEkskuls))
                 @foreach ($displayEkskuls as $idx => $e)
                     <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal"
                         style="transition-delay: {{ ($idx % 3) * 90 }}ms; aspect-ratio: 4/3;">
@@ -451,6 +420,7 @@
                         </div>
                     </div>
                 @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -501,6 +471,7 @@
                                 ];
                             }
                         @endphp
+                        @if(!empty($displayFacilities))
                         @foreach ($displayFacilities as $f)
                             <div class="flex items-center gap-2.5 p-3 rounded-xl transition-colors duration-300 hover:bg-white/5"
                                 style="border: 1px solid rgba(255,255,255,0.06);">
@@ -511,6 +482,7 @@
                                 <span class="text-xs font-semibold text-slate-300">{{ $f['title'] ?? $f[1] }}</span>
                             </div>
                         @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -548,14 +520,6 @@
                             ];
                         }
                     }
-                    if (empty($displayAchievements)) {
-                        $displayAchievements = [
-                            ['year' => '2024', 'title' => 'Medali Emas Olimpiade Sains Nasional (OSN)', 'desc' => 'Tingkat Kabupaten/Kota untuk mata pelajaran Matematika.', 'level' => 'Kabupaten', 'side' => 'left'],
-                            ['year' => '2023', 'title' => 'Juara Umum Lomba Cerdas Cermat PAI',         'desc' => 'Kompetisi antar SD IT se-Provinsi.',                   'level' => 'Provinsi',  'side' => 'right'],
-                            ['year' => '2023', 'title' => 'Juara 1 Lomba Tahfidz Al-Qur\'an',           'desc' => 'Kategori 2 Juz pada MTQ Pelajar.',                    'level' => 'Kabupaten', 'side' => 'left'],
-                            ['year' => '2022', 'title' => 'Regu Tergiat Pramuka Penggalang',             'desc' => 'Jambore Ranting tingkat Kecamatan.',                  'level' => 'Kecamatan', 'side' => 'right'],
-                        ];
-                    }
 
                     $lvlStyle = [
                         'Internasional' => 'background:rgba(220,38,38,.10);  color:#dc2626;',
@@ -565,6 +529,7 @@
                         'Kecamatan'     => 'background:rgba(100,116,139,.10);color:#475569;',
                     ];
                 @endphp
+                @if(!empty($displayAchievements))
 
                 @foreach ($displayAchievements as $idx => $p)
                     @php
@@ -573,7 +538,7 @@
                         $ls     = $lvlStyle[$p['level']] ?? $lvlStyle['Kecamatan'];
                     @endphp
 
-                    <div class="relative flex items-start mb-9 last:mb-0 reveal pl-8 md:pl-0 md:{{ $isLeft ? 'flex-row' : 'flex-row-reverse' }}"
+                    <div class="relative flex items-start mb-9 last:mb-0 reveal reveal-repeat pl-8 md:pl-0 md:{{ $isLeft ? 'flex-row' : 'flex-row-reverse' }}"
                         style="transition-delay: {{ $delay }}ms;">
 
                         {{-- Card --}}
@@ -620,6 +585,7 @@
                             <div class="hidden md:block md:w-[calc(50%-28px)]"></div>
                         </div>
                 @endforeach
+                @endif
 
             </div>
         </div>
@@ -632,7 +598,7 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                    } else {
+                    } else if (entry.target.classList.contains('reveal-repeat')) {
                         entry.target.classList.remove('visible');
                     }
                 });

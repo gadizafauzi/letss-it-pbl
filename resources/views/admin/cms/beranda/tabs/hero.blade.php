@@ -62,13 +62,7 @@
                             <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Teks Badge (Label atas)</label>
                             <input type="text" name="badge_text" value="{{ old('badge_text', $hero->badge_text) }}" class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Gambar/Ilustrasi</label>
-                            @if($hero->image)
-                                <img src="{{ Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/'.$hero->image) }}" alt="Hero" class="h-32 object-contain bg-slate-100 rounded-lg mb-2">
-                            @endif
-                            <input type="file" name="image" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        </div>
+
                         <div class="flex items-center gap-2 mt-6">
                             <input type="checkbox" name="is_active" id="hero_active" value="1" {{ $hero->is_active ? 'checked' : '' }} class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border border-slate-300">
                             <label for="hero_active" class="text-sm text-slate-700 dark:text-slate-300">Tampilkan Hero Section</label>

@@ -22,17 +22,9 @@
                                 'color' => $cat->color ? $cat->color : 'emerald',
                             ];
                         }
-                    } else {
-                        $displayCategories = [
-                            ['icon'=>'book-marked','title'=>'Tahfidz','slug'=>'tahfidz','count'=>'12','color'=>'emerald'],
-                            ['icon'=>'trophy','title'=>'Prestasi','slug'=>'prestasi','count'=>'8','color'=>'amber'],
-                            ['icon'=>'megaphone','title'=>'Pengumuman','slug'=>'pengumuman','count'=>'15','color'=>'blue'],
-                            ['icon'=>'calendar','title'=>'Kegiatan','slug'=>'kegiatan','count'=>'20','color'=>'violet'],
-                            ['icon'=>'graduation-cap','title'=>'Akademik','slug'=>'akademik','count'=>'10','color'=>'cyan'],
-                            ['icon'=>'heart','title'=>'Sosial','slug'=>'sosial','count'=>'6','color'=>'rose']
-                        ];
                     }
                 @endphp
+                @if(!empty($displayCategories))
                 @foreach($displayCategories as $k)
                 <a href="{{ route('public.berita.category', $k['slug']) }}" class="feature-card flex items-center gap-4 fade-up">
                     <div class="w-14 h-14 rounded-2xl bg-{{ $k['color'] }}-50 flex items-center justify-center flex-shrink-0">
@@ -44,6 +36,7 @@
                     </div>
                 </a>
                 @endforeach
+                @endif
             </div>
         </div>
     </section>

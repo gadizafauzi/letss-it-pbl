@@ -70,22 +70,6 @@
                         @foreach ($paragraphs ?? [] as $paragraph)
                             <p>{!! $paragraph !!}</p>
                         @endforeach
-                    @else
-                        <p>
-                            Puji syukur kepada Allah SWT, Shalawat dan Salam senantiasa tercurah kepada Baginda Nabi Muhammad
-                            SAW. Selamat datang di portal resmi <strong>SIT Mutiara Qur'an Nagari Cupak</strong>.
-                        </p>
-                        <p>
-                            Sebagai lembaga pendidikan Islam terpadu, kami berkomitmen untuk melahirkan generasi Qur'an yang
-                            seimbang secara spiritual, intelektual, dan moral. Kami berupaya menghadirkan lingkungan belajar
-                            yang kondusif, kurikulum terintegrasi antara ilmu pengetahuan umum dan keislaman, serta pembinaan
-                            akhlak yang berkelanjutan.
-                        </p>
-                        <p>
-                            Dengan dukungan asatidzah yang berkompeten dan fasilitas yang representatif, kami siap berkolaborasi
-                            erat dengan para orang tua untuk mendampingi tumbuh kembang putra-putri tercinta menjadi calon
-                            pemimpin umat yang berakhlak mulia.
-                        </p>
                     @endif
                 </div>
             </div>
@@ -166,22 +150,15 @@
                                     foreach ($misiItems as $item) {
                                         $displayMisi[] = $item->text;
                                     }
-                                } else {
-                                    $displayMisi = [
-                                        'Menyelenggarakan pendidikan yang mengintegrasikan kurikulum nasional dan keislaman.',
-                                        'Menumbuhkan kecintaan terhadap Al-Quran melalui program tahfidz.',
-                                        'Membina akhlak mulia dan karakter islami pada seluruh peserta didik.',
-                                        'Mengembangkan potensi akademik, minat, dan bakat siswa secara optimal.',
-                                        'Menciptakan lingkungan belajar yang aman, nyaman, dan kondusif.',
-                                        'Membangun kerjasama yang baik antara sekolah, orang tua, dan masyarakat.',
-                                    ];
                                 }
                             @endphp
+                            @if(!empty($displayMisi))
                             <ol class="space-y-2 list-decimal list-inside">
                                 @foreach ($displayMisi as $item)
                                     <li class="text-sm text-slate-600 leading-relaxed">{{ $item }}</li>
                                 @endforeach
                             </ol>
+                            @endif
                         </div>
                     </div>
 
@@ -219,49 +196,17 @@
                             'desc' => $item->description
                         ];
                     }
-                } else {
-                    $displaySejarah = [
-                        [
-                            'tahun' => '2010',
-                            'judul' => 'Pendirian Sekolah',
-                            'desc' => 'SIT Mutiara Quran didirikan oleh yayasan dengan 2 kelas pertama dan 30 siswa. Visi awal adalah menciptakan pendidikan Islam yang memadukan ilmu dunia dan akhirat.',
-                        ],
-                        [
-                            'tahun' => '2012',
-                            'judul' => 'Pembukaan PAUD/TK',
-                            'desc' => 'Membuka jenjang PAUD/TK Islam Terpadu untuk memulai pendidikan Qur\'ani sejak usia dini.',
-                        ],
-                        [
-                            'tahun' => '2014',
-                            'judul' => 'Akreditasi A',
-                            'desc' => 'Meraih akreditasi A dari BAN-S/M untuk jenjang SD Islam Terpadu, membuktikan kualitas pendidikan yang unggul.',
-                        ],
-                        [
-                            'tahun' => '2016',
-                            'judul' => 'Wisuda Tahfidz Pertama',
-                            'desc' => 'Angkatan pertama program tahfidz berhasil menyelesaikan target hafalan, menandai keberhasilan program unggulan.',
-                        ],
-                        [
-                            'tahun' => '2018',
-                            'judul' => 'Pembukaan SMP IT',
-                            'desc' => 'Membuka jenjang SMP Islam Terpadu untuk melanjutkan misi pendidikan ke tingkat yang lebih tinggi.',
-                        ],
-                        [
-                            'tahun' => '2023',
-                            'judul' => 'Kampus Baru',
-                            'desc' => 'Pindah ke kampus baru dengan fasilitas modern termasuk laboratorium, perpustakaan digital, dan area bermain yang luas.',
-                        ],
-                    ];
                 }
             @endphp
 
+            @if(!empty($displaySejarah))
             <div class="ppdb-timeline">
                 @foreach ($displaySejarah as $i => $s)
                     @php
                         $revealClass = $i % 2 === 0 ? 'reveal-left' : 'reveal-right';
                         $delay = 'delay-' . (($i % 4) + 1) * 100;
                     @endphp
-                    <div class="ppdb-timeline-item reveal {{ $revealClass }} {{ $delay }}">
+                    <div class="ppdb-timeline-item reveal reveal-repeat {{ $revealClass }} {{ $delay }}">
                         <div class="ppdb-timeline-dot-wrapper">
                             <div class="ppdb-timeline-dot">
                                 <i data-lucide="check" class="w-5 h-5 text-emerald-400"></i>
@@ -275,6 +220,7 @@
                     </div>
                 @endforeach
             </div>
+            @endif
         </div>
     </section>
 

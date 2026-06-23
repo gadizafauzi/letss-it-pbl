@@ -1,3 +1,4 @@
+@if ($hero)
 {{-- HERO --}}
     <section class="hero-section relative overflow-hidden flex items-center min-h-[calc(100vh-72px)] xl:min-h-[720px]">
         <div class="hero-overlay"></div>
@@ -7,96 +8,50 @@
 
         <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-10 pb-28 lg:pt-12 lg:pb-32 xl:pt-16 xl:pb-40">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-16 items-center">
-                {{-- Left Text --}}
-                <div class="lg:col-span-7 max-w-3xl text-left">
+                {{-- Center Text --}}
+                <div class="lg:col-span-12 max-w-4xl mx-auto text-center flex flex-col items-center">
 
                     {{-- Accreditation stamp --}}
-                    @if ($hero && $hero->badge_text)
+                    @if ($hero->badge_text)
                         @php
                             $badgeParts = explode(' - ', $hero->badge_text, 2);
                         @endphp
-                        <div class="accreditation-stamp mb-4 lg:mb-6 reveal reveal-left">
+                        <div class="accreditation-stamp mb-2 lg:mb-4 reveal reveal-up inline-flex items-center text-left">
                             <i data-lucide="shield-check" class="w-5 h-5 lg:w-6 lg:h-6"></i>
-                            <div class="accreditation-text">
+                            <div class="accreditation-text ml-2">
                                 <h5 class="text-xs lg:text-sm">{{ $badgeParts[0] }}</h5>
                                 <p class="text-[10px] lg:text-xs">{{ $badgeParts[1] ?? '' }}</p>
                             </div>
                         </div>
-                    @else
-                        <div class="accreditation-stamp mb-4 lg:mb-6 reveal reveal-left">
-                            <i data-lucide="shield-check" class="w-5 h-5 lg:w-6 lg:h-6"></i>
-                            <div class="accreditation-text">
-                                <h5 class="text-xs lg:text-sm">Terakreditasi A</h5>
-                                <p class="text-[10px] lg:text-xs">BAN-PDM PROVINSI SUMATERA BARAT</p>
-                            </div>
-                        </div>
                     @endif
 
-                    
-
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white leading-tight tracking-tight reveal reveal-up">
-                        @if ($hero && $hero->title)
-                            {!! str_replace("Qur'an", '<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-amber-300">Qur\'an</span>', e($hero->title)) !!}
-                        @else
-                            Mendidik Generasi
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-amber-300">Qur'ani</span>
-                            yang Berakhlak Mulia & Berprestasi
-                        @endif
+                        {!! str_replace("Qur'an", '<span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-amber-300">Qur\'an</span>', e($hero->title)) !!}
                     </h1>
 
-                    <p class="mt-4 lg:mt-6 text-sm sm:text-base lg:text-lg text-emerald-100/80 leading-relaxed max-w-xl reveal reveal-up">
-                        {{ $hero && $hero->subtitle ? $hero->subtitle : "SIT Mutiara Qur'an hadir di Nagari Cupak untuk membentuk generasi robbani yang mandiri, berkarakter mulia, cerdas akademis, serta mencintai Al-Qur'an." }}
+                    <p class="mt-2 lg:mt-4 text-sm sm:text-base lg:text-lg text-emerald-100/80 leading-relaxed max-w-2xl mx-auto reveal reveal-up">
+                        {{ $hero->subtitle }}
                     </p>
 
-                    <div class="flex flex-wrap gap-3 lg:gap-4 mt-6 lg:mt-8 reveal reveal-up">
-                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : route('public.ppdb.index') }}"
+                    <div class="flex flex-wrap justify-center gap-3 lg:gap-4 mt-4 lg:mt-6 reveal reveal-up">
+                        @if ($hero->button_text)
+                        <a href="{{ $hero->button_link ?? '#' }}"
                             class="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-emerald-950 font-extrabold text-xs lg:text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                             <i data-lucide="file-text" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                            {{ $hero && $hero->button_text ? $hero->button_text : 'Daftar PPDB Online' }}
+                            {{ $hero->button_text }}
                         </a>
-                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : route('public.profil.index') }}"
+                        @endif
+                        @if ($hero->button_secondary_text)
+                        <a href="{{ $hero->button_secondary_link ?? '#' }}"
                             class="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-xs lg:text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
                             <i data-lucide="building-2" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                            {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Profil Sekolah' }}
+                            {{ $hero->button_secondary_text }}
                         </a>
+                        @endif
                     </div>
                 </div>
 
-                {{-- Right Visual representation --}}
-                <div class="lg:col-span-5 hidden lg:block reveal reveal-up">
-                    <div class="relative max-w-sm xl:max-w-md mx-auto">
-                        {{-- Decorative float card --}}
-                        <div class="absolute -top-6 -left-8 z-20 bg-white/95 backdrop-blur-md p-3 lg:p-4 rounded-xl lg:rounded-2xl border border-emerald-100 shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 4s;">
-                            <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-amber-50 flex items-center justify-center text-amber-500">
-                                <i data-lucide="award" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                            </div>
-                            <div>
-                                <h6 class="text-[10px] lg:text-xs font-black text-slate-800">Target Hafalan Mapan</h6>
-                                <p class="text-[9px] lg:text-[10px] text-slate-500">Up to 10 Juz Mutqin</p>
-                            </div>
-                        </div>
 
-                        <div class="absolute -bottom-6 -right-6 z-20 bg-white/95 backdrop-blur-md p-3 lg:p-4 rounded-xl lg:rounded-2xl border border-emerald-100 shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 5s;">
-                            <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-500">
-                                <i data-lucide="users" class="w-4 h-4 lg:w-5 lg:h-5"></i>
-                            </div>
-                            <div>
-                                <h6 class="text-[10px] lg:text-xs font-black text-slate-800">Pembinaan Akhlak</h6>
-                                <p class="text-[9px] lg:text-[10px] text-slate-500">Mentoring Harian & Mabit</p>
-                            </div>
-                        </div>
-
-                        <div class="w-full aspect-square xl:aspect-[4/5] rounded-[24px] lg:rounded-[36px] bg-gradient-to-br from-emerald-800/80 to-emerald-950/80 border-4 border-white/10 shadow-2xl overflow-hidden relative">
-                            <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800' }}" alt="Siswa SIT Mutiara Qur'an" class="w-full h-full object-cover mix-blend-overlay opacity-65">
-                            <div class="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-transparent"></div>
-
-                            <div class="absolute bottom-6 left-6 right-6 lg:bottom-8 lg:left-8 lg:right-8 z-10 text-left">
-                                <p class="text-[10px] lg:text-xs font-extrabold text-amber-400 uppercase tracking-widest mb-1 lg:mb-2">Pendaftaran Sekolah</p>
-                                <h3 class="text-sm lg:text-xl font-bold text-white leading-snug">Berikan Pendidikan Agama dan Akademis Terbaik Bagi Putra-Putri Anda</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -119,4 +74,5 @@
             </svg>
         </div>
     </section>
+@endif
 

@@ -1,3 +1,4 @@
+@if(isset($programs) && !$programs->isEmpty())
 {{-- PROGRAM UNGGULAN --}}
     <section class="public-section bg-slate-50 relative overflow-hidden">
         <div class="glow-amber bottom-10 right-10"></div>
@@ -19,60 +20,13 @@
              <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
                 @php
                     $displayPrograms = [];
-                    if (isset($programs) && !$programs->isEmpty()) {
-                        foreach ($programs as $prog) {
-                            $displayPrograms[] = [
-                                'icon' => $prog->icon,
-                                'title' => $prog->title,
-                                'desc' => $prog->description,
-                                'detail' => $prog->detail,
-                                'category' => $prog->category
-                            ];
-                        }
-                    } else {
-                        $displayPrograms = [
-                            [
-                                'icon' => 'book-open',
-                                'title' => 'Tahfidz Qur\'an Mutqin',
-                                'desc' => 'Program menghafal Al-Qur\'an terstruktur dengan metode talaqqi dan murojaah intensif untuk menjaga kualitas hafalan siswa (target mutqin).',
-                                'detail' => 'Target: TK Juz 30, SD 5 Juz, SMP 10 Juz',
-                                'category' => 'keislaman'
-                            ],
-                            [
-                                'icon' => 'heart',
-                                'title' => 'Pembiasaan Akhlakul Karimah',
-                                'desc' => 'Internalisasi adab islami harian melalui Sholat Dhuha, Mabit (Malam Bina Iman dan Taqwa), Dzikir Pagi-Petang, serta pengawasan ibadah mandiri.',
-                                'detail' => 'Karakter islami terintegrasi dalam keseharian',
-                                'category' => 'keislaman'
-                            ],
-                            [
-                                'icon' => 'languages',
-                                'title' => 'Bilingual Environment',
-                                'desc' => 'Peningkatan kapasitas bahasa asing (Arab & Inggris) yang digunakan dalam komunikasi harian ringan, doa, dan materi ajar tertentu.',
-                                'detail' => 'Daily Arabic & English Conversation',
-                                'category' => 'akademik'
-                            ],
-                            [
-                                'icon' => 'code',
-                                'title' => 'Digital Literacy & Coding',
-                                'desc' => 'Khusus untuk tingkat SMP, dibekali dasar pemrograman komputer, logika digital, dan etika penggunaan teknologi informasi.',
-                                'detail' => 'Kesiapan menghadapi era revolusi industri 4.0',
-                                'category' => 'akademik'
-                            ],
-                            [
-                                'icon' => 'users',
-                                'title' => 'Mentoring & Halaqah',
-                                'desc' => 'Kelompok bimbingan rohani khusus (liqo/mentoring) dengan rasio asatidzah kecil untuk memantau perkembangan emosional dan spiritual siswa.',
-                                'detail' => 'Konseling terpadu yang penuh perhatian',
-                                'category' => 'karakter'
-                            ],
-                            [
-                                'icon' => 'compass',
-                                'title' => 'Leadership & Outbound',
-                                'desc' => 'Pelatihan kepemimpinan dasar, pramuka IT, kemah ukhuwah, dan kegiatan outbound untuk melatih kemandirian, keberanian, dan kerjasama tim.',
-                                'detail' => 'Mencetak calon pemimpin umat masa depan',
-                                'category' => 'karakter'
-                            ]
+                    foreach ($programs as $prog) {
+                        $displayPrograms[] = [
+                            'icon' => $prog->icon,
+                            'title' => $prog->title,
+                            'desc' => $prog->description,
+                            'detail' => $prog->detail,
+                            'category' => $prog->category
                         ];
                     }
                     $animClasses = ['reveal-bottom-left', 'reveal-top', 'reveal-bottom-right', 'reveal-left', 'reveal-zoom', 'reveal-right'];
@@ -126,4 +80,5 @@
             </div>
         </div>
     </section>
+@endif
 
