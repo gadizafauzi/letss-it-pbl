@@ -176,7 +176,7 @@
     position: absolute;
     inset: 0;
     background: url('/images/bg.png') center/cover no-repeat;
-    opacity: 0.08;
+    opacity: 0.3;
 }
 
 .hero-pattern {

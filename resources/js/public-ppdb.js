@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-            } else {
+            } else if (entry.target.classList.contains('reveal-repeat')) {
                 entry.target.classList.remove('is-visible');
             }
         });
