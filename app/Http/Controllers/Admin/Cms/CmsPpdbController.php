@@ -103,7 +103,9 @@ class CmsPpdbController extends Controller
 
     public function storeStep(StorePpdbStepRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
+        $data['icon'] = $data['icon'] ?? 'file-edit';
+        $data['description'] = $data['description'] ?? '';
         $data['is_active'] = $request->has('is_active');
 
         CmsPpdbStep::create($data);
@@ -114,7 +116,9 @@ class CmsPpdbController extends Controller
     public function updateStep(UpdatePpdbStepRequest $request, $id)
     {
         $step = CmsPpdbStep::findOrFail($id);
-        $data = $request->all();
+        $data = $request->validated();
+        $data['icon'] = $data['icon'] ?? $step->icon ?? 'file-edit';
+        $data['description'] = $data['description'] ?? '';
         $data['is_active'] = $request->has('is_active');
 
         $step->update($data);
