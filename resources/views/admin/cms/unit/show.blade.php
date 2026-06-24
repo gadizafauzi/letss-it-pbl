@@ -41,7 +41,7 @@
         ];
     @endphp
 
-    <div x-data="{ activeTab: 'hero' }" class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden flex flex-col">
+    <div x-data="{ activeTab: '{{ session('active_tab', 'hero') }}' }" class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden flex flex-col">
         
         {{-- Horizontal Tabs --}}
         <div class="px-2 overflow-x-auto hide-scrollbar border-b border-slate-100 dark:border-slate-700/50 bg-slate-50/50 dark:bg-slate-800/50">

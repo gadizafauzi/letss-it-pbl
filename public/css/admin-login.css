@@ -9,7 +9,7 @@
 /* ================= BODY ================= */
 body {
     min-height: 100vh;
-    background: #022c22;
+    background: #020617;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,9 +22,9 @@ body {
     position: fixed;
     inset: 0;
     background:
-        radial-gradient(circle at top left, rgba(16,185,129,0.22), transparent 35%),
+        radial-gradient(circle at top left, rgba(30, 41, 59,0.22), transparent 35%),
         radial-gradient(circle at bottom right, rgba(250,204,21,0.12), transparent 28%),
-        linear-gradient(135deg, #022c22 0%, #064e3b 50%, #021712 100%);
+        linear-gradient(135deg, #020617 0%, #0f172a 50%, #021712 100%);
     z-index: 0;
 }
 
@@ -38,7 +38,7 @@ body {
 .shape-1 {
     width: 500px;
     height: 500px;
-    background: #10b981;
+    background: #475569;
     top: -150px;
     left: -150px;
     animation: drift1 10s ease-in-out infinite;
@@ -56,7 +56,7 @@ body {
 .shape-3 {
     width: 280px;
     height: 280px;
-    background: #34d399;
+    background: #64748b;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -114,9 +114,9 @@ body {
     background:
         linear-gradient(
             160deg,
-            rgba(6,78,59,0.96),
-            rgba(5,150,105,0.90),
-            rgba(2,44,34,0.96)
+            rgba(30, 41, 59,0.96),
+            rgba(30, 41, 59,0.90),
+            rgba(30, 41, 59,0.96)
         );
 
     padding: 55px 42px;
@@ -259,7 +259,7 @@ body {
     width: 72px;
     height: 72px;
 
-    background: linear-gradient(135deg, #059669, #10b981);
+    background: linear-gradient(135deg, #334155, #475569);
 
     border-radius: 22px;
 
@@ -270,7 +270,7 @@ body {
     margin: 0 auto 16px;
 
     box-shadow:
-        0 12px 28px rgba(16,185,129,0.32);
+        0 12px 28px rgba(30, 41, 59,0.32);
 }
 
 .admin-icon-wrap i {
@@ -347,11 +347,11 @@ body {
 }
 
 .input-wrap input:focus {
-    border-color: #10b981;
+    border-color: #475569;
     background: #fff;
 
     box-shadow:
-        0 0 0 4px rgba(16,185,129,0.14);
+        0 0 0 4px rgba(30, 41, 59,0.14);
 }
 
 .input-wrap input::placeholder {
@@ -391,7 +391,7 @@ body {
     border-radius: 16px;
     border: none;
 
-    background: linear-gradient(135deg, #059669, #10b981);
+    background: linear-gradient(135deg, #334155, #475569);
 
     color: #fff;
 
@@ -405,18 +405,18 @@ body {
     margin-top: 8px;
 
     box-shadow:
-        0 8px 22px rgba(16,185,129,0.32);
+        0 8px 22px rgba(30, 41, 59,0.32);
 
     letter-spacing: 0.3px;
 }
 
 .admin-submit:hover {
-    background: linear-gradient(135deg, #047857, #059669);
+    background: linear-gradient(135deg, #1e293b, #334155);
 
     transform: translateY(-2px);
 
     box-shadow:
-        0 10px 28px rgba(16,185,129,0.42);
+        0 10px 28px rgba(30, 41, 59,0.42);
 }
 
 .admin-submit:active {
@@ -440,7 +440,7 @@ body {
 }
 
 .back-link:hover {
-    color: #059669;
+    color: #334155;
 }
 
 .back-link i {
