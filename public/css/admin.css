@@ -507,7 +507,7 @@ nav::-webkit-scrollbar {
    MOBILE
 ======================================== */
 
-@media (max-width: 991px) {
+@media (max-width: 1023px) {
 
     /* SIDEBAR MINI */
     .sidebar {
@@ -527,6 +527,13 @@ nav::-webkit-scrollbar {
     .sidebar .sidebar-title,
     .sidebar .sidebar-text,
     .sidebar .logout-text {
+        opacity: 0;
+        visibility: hidden;
+        width: 0;
+        height: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
         display: none;
     }
 
@@ -611,19 +618,42 @@ nav::-webkit-scrollbar {
     .sidebar.expand .sidebar-title,
     .sidebar.expand .sidebar-text,
     .sidebar.expand .logout-text {
+        opacity: 1 !important;
+        visibility: visible !important;
+        width: auto !important;
+        height: auto !important;
         display: block !important;
+    }
+
+    /* LOGO EXPAND */
+    .sidebar.expand > .h-20 {
+        padding-left: 1rem !important;
+        padding-right: 1.5rem !important;
+        justify-content: space-between !important;
+    }
+
+    .sidebar.expand .logo-wrapper {
+        gap: 12px !important;
+        justify-content: flex-start !important;
+        width: auto !important;
     }
 
     /* NORMAL MENU */
     .sidebar.expand .sidebar-link {
-        justify-content: flex-start;
-        padding: 0 16px;
-        gap: 14px;
+        width: 100% !important;
+        height: 50px !important;
+        margin: 0 !important;
+        justify-content: flex-start !important;
+        padding: 0 16px !important;
+        gap: 14px !important;
     }
 
     .sidebar.expand .logout-btn {
-        justify-content: center;
-        padding: 0 16px;
+        width: 100% !important;
+        height: 50px !important;
+        margin: 0 !important;
+        justify-content: center !important;
+        padding: 0 16px !important;
     }
 
     /* OVERLAY */
