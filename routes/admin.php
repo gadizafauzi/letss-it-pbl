@@ -155,9 +155,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'index'])->name('index');
         Route::put('/hero/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'updateHero'])->name('hero.update');
         Route::put('/welcome/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'updateWelcome'])->name('welcome.update');
+        Route::put('/jenjang-image', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'updateJenjangImage'])->name('jenjang_image.update');
+
         
         // Statistik
         Route::post('/statistic', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'storeStatistic'])->name('statistic.store');
+        Route::put('/statistic-bg', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'updateStatisticBg'])->name('statistic_bg.update');
         Route::put('/statistic/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'updateStatistic'])->name('statistic.update');
         Route::delete('/statistic/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'destroyStatistic'])->name('statistic.destroy');
 
@@ -166,10 +169,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::put('/program/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'updateProgram'])->name('program.update');
         Route::delete('/program/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'destroyProgram'])->name('program.destroy');
 
-        // Keunggulan
-        Route::post('/keunggulan', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'storeKeunggulan'])->name('keunggulan.store');
-        Route::put('/keunggulan/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'updateKeunggulan'])->name('keunggulan.update');
-        Route::delete('/keunggulan/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'destroyKeunggulan'])->name('keunggulan.destroy');
+        // Tujuan Pendidikan
+        Route::post('/tujuan-pendidikan', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'storeTujuanPendidikan'])->name('tujuan_pendidikan.store');
+        Route::put('/tujuan-pendidikan/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'updateTujuanPendidikan'])->name('tujuan_pendidikan.update');
+        Route::delete('/tujuan-pendidikan/{id}', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'destroyTujuanPendidikan'])->name('tujuan_pendidikan.destroy');
 
         // Testimoni
         Route::post('/testimoni', [\App\Http\Controllers\Admin\Cms\CmsBerandaController::class, 'storeTestimoni'])->name('testimoni.store');

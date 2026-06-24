@@ -41,7 +41,7 @@
     @yield('footer')
 
     {{-- FLOATING BACK TO TOP --}}
-    <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-700 text-white flex items-center justify-center shadow-lg shadow-emerald-700/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 translate-y-16 opacity-0 z-50 pointer-events-none" aria-label="Kembali ke atas">
+    <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg shadow-blue-700/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 translate-y-16 opacity-0 z-50 pointer-events-none" aria-label="Kembali ke atas">
         <i data-lucide="arrow-up" class="w-5 h-5"></i>
     </button>
 

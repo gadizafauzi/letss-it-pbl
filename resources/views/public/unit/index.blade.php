@@ -11,7 +11,7 @@
                 <span class="current">Unit Pendidikan</span>
             </div>
             <h1 class="text-3xl sm:text-4xl font-black text-white">Unit Pendidikan</h1>
-            <p class="text-emerald-200/70 mt-3 max-w-lg">Jenjang pendidikan Islam terpadu dari TK hingga SMP.</p>
+            <p class="text-slate-200/70 mt-3 max-w-lg">Jenjang pendidikan Islam terpadu dari TK hingga SMP.</p>
         </div>
     </div>
 
@@ -75,7 +75,7 @@
                                     </div>
                                     <div>
                                         <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none">{{ $pm['badge2']['label'] }}</p>
-                                        <p class="text-xs font-black text-slate-800 mt-0.5">{{ $pm['badge2']['val'] }}</p>
+                                        <p class="text-xs font-black text-[#003f88] mt-0.5">{{ $pm['badge2']['val'] }}</p>
                                     </div>
                                 </div>
 
@@ -86,13 +86,13 @@
                                     </div>
                                     <div>
                                         <p class="text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none">{{ $pm['badge1']['label'] }}</p>
-                                        <p class="text-xs font-black text-slate-800 mt-0.5">{{ $pm['badge1']['val'] }}</p>
+                                        <p class="text-xs font-black text-[#003f88] mt-0.5">{{ $pm['badge1']['val'] }}</p>
                                     </div>
                                 </div>
 
                                 {{-- Pill accredited inside frame, bottom-right --}}
-                                <div class="absolute bottom-10 right-4 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1.5 border border-emerald-100 shadow-sm z-10">
-                                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-500 flex-shrink-0"></i>
+                                <div class="absolute bottom-10 right-4 bg-white/95 backdrop-blur-sm rounded-full px-3 py-1.5 flex items-center gap-1.5 border border-slate-100 shadow-sm z-10">
+                                    <i data-lucide="shield-check" class="w-3.5 h-3.5 text-slate-700 flex-shrink-0"></i>
                                     <span class="text-[11px] font-bold text-slate-700">Terakreditasi A</span>
                                 </div>
                             </div>

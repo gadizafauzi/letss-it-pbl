@@ -14,13 +14,13 @@
                     <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
                         {{ $hero && $hero->title ? $hero->title : "Profil SIT Mutiara Qur'an" }}
                     </h1>
-                    <p class="text-emerald-100/80 text-lg mb-8 max-w-lg">
+                    <p class="text-slate-100/80 text-lg mb-8 max-w-lg">
                         {{ $hero && $hero->subtitle ? $hero->subtitle : "Membangun generasi Qur'ani yang berkarakter, berprestasi, dan berwawasan global." }}
                     </p>
 
                     <div class="flex flex-wrap gap-4">
                         <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil-singkat' }}"
-                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-emerald-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                             {{ $hero && $hero->button_text ? $hero->button_text : 'Jelajahi Profil' }}
                         </a>
                     </div>
@@ -31,7 +31,7 @@
                     <div class="w-full aspect-[4/3] rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl">
                         <img src="{{ $hero && $hero->image ? (str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800' }}"
                             alt="Gedung Sekolah" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-emerald-900/20"></div>
+                        <div class="absolute inset-0 bg-[#002244]/20"></div>
                     </div>
                 </div>
             </div>
@@ -50,19 +50,19 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 <div class="lg:col-span-5 reveal reveal-left delay-100">
                     <div
-                        class="relative rounded-[32px] overflow-hidden border-4 border-emerald-50 shadow-2xl aspect-[4/5] max-w-md mx-auto">
+                        class="relative rounded-[32px] overflow-hidden border-4 border-slate-50 shadow-2xl aspect-[4/5] max-w-md mx-auto">
                         <img src="{{ $welcomeMessage && $welcomeMessage->kepsek_photo ? (str_starts_with($welcomeMessage->kepsek_photo, 'http') ? $welcomeMessage->kepsek_photo : asset('storage/' . $welcomeMessage->kepsek_photo)) : 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600' }}"
                             alt="Sambutan Kepala Sekolah" class="w-full h-auto object-cover">
                     </div>
                     <div class="mt-6 text-center">
-                        <h4 class="text-base font-extrabold text-slate-800">{{ $welcomeMessage && $welcomeMessage->kepsek_name ? $welcomeMessage->kepsek_name : 'Ustadz Ahmad Fauzi, S.Pd.I, M.Pd' }}</h4>
-                        <p class="text-xs font-semibold text-emerald-600 uppercase tracking-widest mt-1">{{ $welcomeMessage && $welcomeMessage->kepsek_title ? $welcomeMessage->kepsek_title : 'Kepala Sekolah SIT Mutiara Qur\'an' }}</p>
+                        <h4 class="text-base font-extrabold text-[#003f88]">{{ $welcomeMessage && $welcomeMessage->kepsek_name ? $welcomeMessage->kepsek_name : 'Ustadz Ahmad Fauzi, S.Pd.I, M.Pd' }}</h4>
+                        <p class="text-xs font-semibold text-[#003f88] uppercase tracking-widest mt-1">{{ $welcomeMessage && $welcomeMessage->kepsek_title ? $welcomeMessage->kepsek_title : 'Kepala Sekolah SIT Mutiara Qur\'an' }}</p>
                     </div>
                 </div>
 
                 <div
                     class="lg:col-span-7 space-y-6 text-slate-600 leading-relaxed reveal reveal-right delay-200 feature-card bg-slate-50/50">
-                    <p class="font-bold text-slate-800 text-lg">Bismillahirrahmanirrahim,</p>
+                    <p class="font-bold text-[#003f88] text-lg">Bismillahirrahmanirrahim,</p>
                     @if ($welcomeMessage && $welcomeMessage->paragraphs)
                         @php
                             $paragraphs = is_array($welcomeMessage->paragraphs) ? $welcomeMessage->paragraphs : json_decode($welcomeMessage->paragraphs, true);
@@ -84,9 +84,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14 reveal reveal-up">
                 <h2 class="section-title mx-auto">Arah & Tujuan Pendidikan</h2>
-                <p class="section-subtitle mx-auto text-center">
-                    Berikut adalah Visi dan Misi SIT Mutiara Qur'an yang menjadi landasan penyelenggaraan pendidikan.
-                </p>
+
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -101,7 +99,7 @@
 
                         <div class="flex items-center justify-between px-5 py-4 gap-4">
                             <span class="font-semibold text-sm transition-colors duration-200"
-                                :class="open === 'visi' ? 'text-emerald-600' : 'text-slate-700'">
+                                :class="open === 'visi' ? 'text-[#003f88]' : 'text-slate-700'">
                                 Visi SIT Mutiara Qur'an
                             </span>
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +127,7 @@
 
                         <div class="flex items-center justify-between px-5 py-4 gap-4">
                             <span class="font-semibold text-sm transition-colors duration-200"
-                                  :class="open === 'misi' ? 'text-emerald-600' : 'text-slate-700'">
+                                  :class="open === 'misi' ? 'text-[#003f88]' : 'text-slate-700'">
                                 Misi SIT Mutiara Qur'an
                             </span>
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -182,8 +180,7 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal reveal-up">
                 <h2 class="section-title mx-auto">Perjalanan Kami</h2>
-                <p class="section-subtitle mx-auto text-center">Rekam jejak perkembangan SIT Mutiara Qur'an dari masa ke
-                    masa.</p>
+
             </div>
 
             @php
@@ -209,7 +206,7 @@
                     <div class="ppdb-timeline-item reveal reveal-repeat {{ $revealClass }} {{ $delay }}">
                         <div class="ppdb-timeline-dot-wrapper">
                             <div class="ppdb-timeline-dot">
-                                <i data-lucide="check" class="w-5 h-5 text-emerald-400"></i>
+                                <i data-lucide="check" class="w-5 h-5 text-slate-600"></i>
                             </div>
                         </div>
                         <div class="ppdb-timeline-content">
@@ -232,11 +229,11 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="mb-12 reveal reveal-up">
                 <h2 class="section-title mx-auto">Struktur Organisasi</h2>
-                <p class="section-subtitle mx-auto text-center">Susunan kepengurusan dan pimpinan SIT Mutiara Qur'an.</p>
+
             </div>
 
             <div
-                class="bg-white p-4 sm:p-8 rounded-[32px] shadow-lg shadow-slate-200/50 border border-slate-100 reveal reveal-zoom delay-100 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-100/50 cursor-pointer group">
+                class="bg-white p-4 sm:p-8 rounded-[32px] shadow-lg shadow-slate-200/50 border border-slate-100 reveal reveal-zoom delay-100 transition-all duration-300 hover:shadow-xl hover:shadow-slate-100/50 cursor-pointer group">
                 @if(isset($strukturOrganisasi) && $strukturOrganisasi->value)
                     <img src="{{ str_starts_with($strukturOrganisasi->value, 'http') ? $strukturOrganisasi->value : asset('storage/' . $strukturOrganisasi->value) }}" alt="Struktur Organisasi"
                         class="w-full h-auto rounded-2xl group-hover:scale-[1.01] transition-transform duration-500">

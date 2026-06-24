@@ -8,6 +8,27 @@
                     <i data-lucide="plus" class="w-4 h-4"></i> Tambah Statistik
                 </button>
             </div>
+
+            <!-- Upload Background Latar Statistik -->
+            <div class="mb-8 p-5 bg-white border border-slate-200 rounded-xl shadow-sm">
+                <h3 class="text-base font-semibold text-slate-800 mb-3">Latar Belakang Bagian Statistik</h3>
+                <form action="{{ route('admin.beranda.statistic_bg.update') }}" method="POST" enctype="multipart/form-data" class="flex flex-col md:flex-row items-start md:items-center gap-4">
+                    @csrf
+                    @method('PUT')
+                    <div class="flex-grow">
+                        @if(isset($statistic_bg_image) && $statistic_bg_image->value)
+                            <div class="mb-3">
+                                <img src="{{ str_starts_with($statistic_bg_image->value, 'http') ? $statistic_bg_image->value : Storage::url($statistic_bg_image->value) }}" alt="Background Statistik" class="h-24 w-auto rounded-lg object-cover border border-slate-200">
+                            </div>
+                        @endif
+                        <input type="file" name="image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        <p class="text-xs text-slate-500 mt-1">Disarankan gambar landscape (misal: rasio 16:9), format: JPG/PNG/WebP, maksimal 2MB.</p>
+                    </div>
+                    <button type="submit" class="px-4 py-2 bg-slate-800 text-white rounded-xl text-sm font-medium hover:bg-slate-900 shrink-0">
+                        Upload & Simpan
+                    </button>
+                </form>
+            </div>
             
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left">

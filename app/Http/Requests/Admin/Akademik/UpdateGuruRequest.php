@@ -39,4 +39,31 @@ class UpdateGuruRequest extends FormRequest
             'photo'             => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'unit_id.required' => 'Unit pendidikan wajib dipilih',
+            'unit_id.exists'   => 'Unit pendidikan tidak valid',
+            'position_id.exists' => 'Jabatan tidak valid',
+            'nip.required'     => 'NIP wajib diisi',
+            'nip.unique'       => 'NIP sudah terdaftar',
+            'nip.max'          => 'NIP maksimal 50 karakter',
+            'full_name.required' => 'Nama lengkap wajib diisi',
+            'full_name.max'    => 'Nama lengkap maksimal 255 karakter',
+            'gender.in'        => 'Jenis kelamin tidak valid',
+            'birth_date.date'  => 'Format tanggal lahir tidak valid',
+            'employment_status.in' => 'Status kepegawaian tidak valid',
+            'status.required'  => 'Status wajib dipilih',
+            'status.in'        => 'Status tidak valid',
+            'photo.image'      => 'Foto harus berformat gambar',
+            'photo.mimes'      => 'Foto harus berformat jpg, jpeg, atau png',
+            'photo.max'        => 'Ukuran foto maksimal 2MB',
+        ];
+    }
 }

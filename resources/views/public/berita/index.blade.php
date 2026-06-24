@@ -20,7 +20,7 @@
                     Berita & Kegiatan
                 @endif
             </h1>
-            <p class="text-emerald-200/70 mt-3 max-w-lg">Informasi terbaru seputar kegiatan dan pencapaian SIT Mutiara Qur'an.</p>
+            <p class="text-slate-200/70 mt-3 max-w-lg">Informasi terbaru seputar kegiatan dan pencapaian SIT Mutiara Qur'an.</p>
         </div>
     </div>
     <section class="public-section">
@@ -34,7 +34,7 @@
                             'slug' => $post->slug,
                             'tanggal' => \Carbon\Carbon::parse($post->publish_date)->translatedFormat('d F Y'),
                             'kategori' => $post->category ? $post->category->name : 'Berita',
-                            'color' => $post->category ? $post->category->color : 'emerald',
+                            'color' => $post->category ? $post->category->color : 'blue',
                             'excerpt' => $post->excerpt,
                             'img' => $post->featured_image ? (Str::startsWith($post->featured_image, 'http') ? $post->featured_image : asset('storage/' . $post->featured_image)) : 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=600&q=80',
                         ];
@@ -55,7 +55,7 @@
                         <span class="text-xs text-slate-400 block mb-2">{{ $berita['tanggal'] }}</span>
                         <h3 class="text-base font-bold text-[var(--theme-primary)] mb-2 leading-snug">{{ $berita['judul'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $berita['excerpt'] }}</p>
-                        <a href="{{ route('public.berita.detail', $berita['slug']) }}" class="inline-flex items-center gap-1 text-emerald-600 font-bold text-sm hover:underline mt-2">
+                        <a href="{{ route('public.berita.detail', $berita['slug']) }}" class="inline-flex items-center gap-1 text-[#003f88] font-bold text-sm hover:underline mt-2">
                             Lihat Detail <i data-lucide="arrow-right" class="w-4 h-4"></i>
                         </a>
                     </div>

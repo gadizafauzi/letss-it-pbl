@@ -9,10 +9,11 @@
 @endsection
 
 @section('content')
+<div class="theme-smp">
     <style>
         :root {
-            --unit-accent: #10b981;
-            --unit-accent-lt: #6ee7b7;
+            --unit-accent: #3b82f6;
+            --unit-accent-lt: #93c5fd;
         }
 
         /* ── Reveal animations ────────────────────── */
@@ -42,9 +43,9 @@
             gap: 0.4rem;
             padding: 0.3rem 0.85rem;
             border-radius: 999px;
-            background: rgba(16, 185, 129, 0.10);
-            border: 1px solid rgba(16, 185, 129, 0.22);
-            color: #059669;
+            background: rgba(37, 99, 235, 0.10);
+            border: 1px solid rgba(37, 99, 235, 0.22);
+            color: #2563eb;
             font-size: 0.7rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -52,32 +53,6 @@
             margin-bottom: 0.75rem;
         }
 
-        /* ── Section title ────────────────────────── */
-        .unit-section-title {
-            font-size: clamp(1.4rem, 2.5vw, 1.875rem);
-            font-weight: 800;
-            color: #0f172a;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 0.5rem;
-            letter-spacing: -0.01em;
-        }
-
-        .unit-section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 36px;
-            height: 3px;
-            border-radius: 99px;
-            background: linear-gradient(90deg, #10b981, #34d399);
-        }
-
-        .unit-section-title.light {
-            color: white;
-        }
 
         /* ── Section subtitle ─────────────────────── */
         .unit-section-desc {
@@ -105,8 +80,8 @@
         }
 
         .unit-stat-card:hover {
-            background: rgba(16, 185, 129, 0.08);
-            border-color: rgba(16, 185, 129, 0.3);
+            background: rgba(37, 99, 235, 0.08);
+            border-color: rgba(37, 99, 235, 0.3);
         }
 
         /* ── Curriculum card ──────────────────────── */
@@ -119,8 +94,8 @@
         }
 
         .unit-curriculum-card:hover {
-            border-color: #10b981;
-            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.10);
+            border-color: #3b82f6;
+            box-shadow: 0 6px 24px rgba(37, 99, 235, 0.10);
             transform: translateY(-3px);
         }
 
@@ -128,17 +103,17 @@
             width: 44px;
             height: 44px;
             border-radius: 12px;
-            background: rgba(16, 185, 129, 0.1);
+            background: rgba(37, 99, 235, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
-            color: #10b981;
+            color: #3b82f6;
             transition: background 0.3s;
         }
 
         .unit-curriculum-card:hover .unit-curriculum-icon {
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: white;
         }
 
@@ -154,7 +129,7 @@
         .unit-teacher-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 28px rgba(15, 23, 42, 0.09);
-            border-color: #a7f3d0;
+            border-color: #93c5fd;
         }
 
         .unit-teacher-photo {
@@ -191,7 +166,7 @@
         .unit-teacher-info p {
             font-size: 0.7rem;
             font-weight: 500;
-            color: #10b981;
+            color: #3b82f6;
         }
 
         /* ── Timeline dot ─────────────────────────── */
@@ -199,9 +174,9 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #10b981;
+            background: #3b82f6;
             border: 2px solid white;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
             position: absolute;
             left: -8px;
             top: 1.4rem;
@@ -233,7 +208,7 @@
 
         /* ── Timeline line ────────────────────────── */
         .tl-line {
-            background: linear-gradient(to bottom, #34d399, #10b981, #059669);
+            background: linear-gradient(to bottom, #60a5fa, #3b82f6, #2563eb);
             transform-origin: top center;
             transform: scaleY(0);
             transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -251,11 +226,11 @@
 
             0%,
             100% {
-                box-shadow: 0 0 0 3px rgba(16, 185, 129, .28), 0 0 10px rgba(16, 185, 129, .22);
+                box-shadow: 0 0 0 3px rgba(37, 99, 235, .28), 0 0 10px rgba(37, 99, 235, .22);
             }
 
             50% {
-                box-shadow: 0 0 0 5px rgba(16, 185, 129, .15), 0 0 18px rgba(16, 185, 129, .40);
+                box-shadow: 0 0 0 5px rgba(37, 99, 235, .15), 0 0 18px rgba(37, 99, 235, .40);
             }
         }
     </style>
@@ -264,23 +239,23 @@
          HERO SECTION
          ════════════════════════════════════════════ --}}
     <section id="home" class="relative min-h-screen flex items-center overflow-hidden"
-        style="background: linear-gradient(135deg, #022c22 0%, #064e3b 60%, #047857 100%);">
+        style="background: linear-gradient(135deg, #172554 0%, #1e3a8a 60%, #1d4ed8 100%);">
 
         <div class="absolute inset-0 opacity-20"
-            style="background-image: radial-gradient(rgba(16,185,129,0.6) 1px, transparent 1px); background-size: 32px 32px;">
+            style="background-image: radial-gradient(rgba(37, 99, 235,0.6) 1px, transparent 1px); background-size: 32px 32px;">
         </div>
 
         <div class="absolute top-1/4 left-0 w-72 h-72 rounded-full opacity-20"
-            style="background: radial-gradient(circle, #10b981, transparent 70%); filter: blur(40px);"></div>
+            style="background: radial-gradient(circle, #3b82f6, transparent 70%); filter: blur(40px);"></div>
         <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-10"
-            style="background: radial-gradient(circle, #34d399, transparent 70%); filter: blur(60px);"></div>
+            style="background: radial-gradient(circle, #60a5fa, transparent 70%); filter: blur(60px);"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-20 w-full">
             {{-- Breadcrumb --}}
             <div class="flex items-center gap-3 mb-6 md:mb-10 text-[0.95rem] reveal reveal-left">
-                <a href="{{ route('public.home') }}" class="text-emerald-100/80 hover:text-white font-medium transition-colors duration-300">Beranda</a>
-                <span class="text-emerald-100/40">/</span>
-                <span class="text-emerald-300 font-semibold tracking-wide drop-shadow-md">SMP Islam Terpadu</span>
+                <a href="{{ route('public.home') }}" class="text-blue-100/80 hover:text-white font-medium transition-colors duration-300">Beranda</a>
+                <span class="text-blue-100/40">/</span>
+                <span class="text-blue-300 font-semibold tracking-wide drop-shadow-md">SMP Islam Terpadu</span>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -292,7 +267,7 @@
                             {{ $hero->title }}
                         @else
                             SMP ISLAM<br>
-                            <span style="background: linear-gradient(90deg, #10b981, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TERPADU</span>
+                            <span style="background: linear-gradient(90deg, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TERPADU</span>
                         @endif
                     </h1>
 
@@ -301,8 +276,8 @@
                     </p>
 
                     <div class="flex flex-wrap gap-3">
-                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil' }}" style="background: linear-gradient(135deg, #10b981, #059669); color: white;"
-                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm shadow-lg hover:-translate-y-1 hover:shadow-emerald-500/30 transition-all duration-300">
+                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil' }}" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white;"
+                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm shadow-lg hover:-translate-y-1 hover:shadow-blue-500/30 transition-all duration-300">
                             <i data-lucide="info" class="w-4 h-4"></i>
                             {{ $hero && $hero->button_text ? $hero->button_text : 'Deskripsi Umum' }}
                         </a>
@@ -317,7 +292,7 @@
 
                 <div class="relative hidden lg:block reveal reveal-right">
                     <div class="relative w-full h-[400px] lg:h-[480px] animate-floating">
-                        <div class="absolute inset-0 bg-emerald-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                        <div class="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
                         <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : asset('images/smp_dummy.png') }}" alt="SMP Islam Terpadu SIT Mutiara Qur'an"
                             class="relative w-full h-full object-contain mix-blend-screen drop-shadow-2xl">
                     </div>
@@ -333,13 +308,13 @@
     <section id="profil" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
-                <h2 class="unit-section-title">DESKRIPSI SMP</h2>
+                <h2 class="section-title">DESKRIPSI SMP</h2>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="reveal reveal-left p-4">
                     <div class="relative group">
-                        <div class="absolute inset-0 bg-gradient-to-br from-emerald-100 to-green-50 rounded-2xl transform -rotate-3 transition-transform group-hover:rotate-0 duration-500"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl transform -rotate-3 transition-transform group-hover:rotate-0 duration-500"></div>
                         <div class="relative bg-white rounded-2xl shadow-lg p-8 border border-slate-100 flex items-center justify-center min-h-[300px]">
                             <img src="{{ $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/logomq.jpg') }}" alt="Logo SIT"
                                 class="w-40 h-40 object-contain animate-floating">
@@ -365,9 +340,8 @@
     <section id="guru" class="py-20" style="background: #f8fafc;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
-                <h2 class="unit-section-title">GURU & TENAGA PENDIDIK</h2>
-                <p class="unit-section-desc">Dibimbing oleh pendidik profesional yang berkompeten di bidangnya serta
-                    berdedikasi membina akhlak siswa.</p>
+                <h2 class="section-title">GURU & TENAGA PENDIDIK</h2>
+
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -406,9 +380,8 @@
     <section id="ekstrakurikuler" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
-                <h2 class="unit-section-title">EKSTRAKURIKULER</h2>
-                <p class="unit-section-desc">Program pengembangan diri untuk menggali potensi, minat, dan bakat kepemimpinan
-                    siswa.</p>
+                <h2 class="section-title">EKSTRAKURIKULER</h2>
+
             </div>
             <div class="grid grid-cols-2 lg:grid-cols-3 gap-5">
                 @php
@@ -435,7 +408,7 @@
                         </div>
                         <div class="absolute bottom-0 left-0 right-0 p-4">
                             <div class="w-8 h-8 rounded-lg mb-2 flex items-center justify-center"
-                                style="background: rgba(16,185,129,0.18); color:#6ee7b7; border:1px solid rgba(16,185,129,0.3);">
+                                style="background: rgba(37, 99, 235,0.18); color:#6ee7b7; border:1px solid rgba(37, 99, 235,0.3);">
                                 <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5"></i>
                             </div>
                             <h3 class="font-semibold text-white text-sm mb-1">{{ $e['title'] }}</h3>
@@ -452,13 +425,11 @@
     {{-- ════════════════════════════════════════════
          FASILITAS SECTION
          ════════════════════════════════════════════ --}}
-    <section id="fasilitas" class="py-20" style="background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);">
+    <section id="fasilitas" class="py-20" style="background: linear-gradient(135deg, #172554 0%, #1e3a8a 100%);">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
-                <h2 class="unit-section-title light">FASILITAS</h2>
-                <p class="unit-section-desc light">
-                    Sarana pendukung lengkap untuk proses belajar mengajar yang efektif dan menyenangkan.
-                </p>
+                <h2 class="section-title light">FASILITAS</h2>
+
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-7 mb-8">
@@ -500,7 +471,7 @@
                             <div class="flex items-center gap-2.5 p-3 rounded-xl transition-colors duration-300 hover:bg-white/5"
                                 style="border: 1px solid rgba(255,255,255,0.06);">
                                 <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                                    style="background: rgba(16,185,129,0.12); color: #10b981;">
+                                    style="background: rgba(37, 99, 235,0.12); color: #3b82f6;">
                                     <i data-lucide="{{ $f['icon'] ?? $f[0] }}" class="w-3.5 h-3.5"></i>
                                 </div>
                                 <span class="text-xs font-semibold text-slate-300">{{ $f['title'] ?? $f[1] }}</span>
@@ -520,10 +491,8 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="text-center mb-14 reveal">
-                <h2 class="unit-section-title">PRESTASI</h2>
-                <p class="unit-section-desc">
-                    Bukti dedikasi dan kualitas pendidikan SMP IT Mutiara Qur'an di berbagai kompetisi.
-                </p>
+                <h2 class="section-title">PRESTASI</h2>
+
             </div>
 
             <div class="relative tl-container">
@@ -549,7 +518,7 @@
                         'Internasional' => 'background:rgba(220,38,38,.10);  color:#dc2626;',
                         'Nasional'      => 'background:rgba(249,115,22,.10); color:#ea580c;',
                         'Provinsi'      => 'background:rgba(59,130,246,.10); color:#2563eb;',
-                        'Kabupaten'     => 'background:rgba(16,185,129,.10); color:#059669;',
+                        'Kabupaten'     => 'background:rgba(37, 99, 235,.10); color:#2563eb;',
                         'Kecamatan'     => 'background:rgba(100,116,139,.10);color:#475569;',
                     ];
                 @endphp
@@ -569,11 +538,11 @@
                         <div class="w-full md:w-[calc(50%-28px)] {{ $isLeft ? 'md:pr-8' : 'md:pl-8' }}">
                             <div class="tl-card group bg-white border border-slate-100 rounded-[20px] p-5
                                         shadow-sm transition-all duration-300 ease-out
-                                        hover:-translate-y-1 hover:shadow-lg hover:border-emerald-300">
+                                        hover:-translate-y-1 hover:shadow-lg hover:border-blue-300">
 
                                 <div class="flex items-center justify-between mb-3">
                                     <span class="inline-block px-2.5 py-0.5 text-xs font-bold rounded-full"
-                                        style="background:rgba(16,185,129,.10); color:#059669;">
+                                        style="background:rgba(37, 99, 235,.10); color:#2563eb;">
                                         {{ $p['year'] }}
                                     </span>
                                     <span class="inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full"
@@ -584,7 +553,7 @@
 
                                 <div class="flex items-start gap-3 mb-2">
                                     <div class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center mt-0.5"
-                                        style="background: linear-gradient(135deg,#10b981,#059669);">
+                                        style="background: linear-gradient(135deg,#3b82f6,#2563eb);">
                                         <i data-lucide="trophy" class="w-4 h-4 text-white"></i>
                                     </div>
                                     <h3 class="text-sm font-bold text-slate-800 leading-snug">{{ $p['title'] }}</h3>
@@ -599,10 +568,10 @@
                             style="top: 1.1rem;">
                             <span
                                 class="tl-dot-glow absolute w-7 h-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                                style="background:rgba(16,185,129,.15);"></span>
+                                style="background:rgba(37, 99, 235,.15);"></span>
                             <span class="tl-dot relative w-[14px] h-[14px] rounded-full border-[2.5px] border-white"
-                                style="background: linear-gradient(135deg,#34d399,#059669);
-                                       box-shadow: 0 0 0 3px rgba(16,185,129,.28), 0 0 10px rgba(16,185,129,.25);">
+                                style="background: linear-gradient(135deg,#60a5fa,#2563eb);
+                                       box-shadow: 0 0 0 3px rgba(37, 99, 235,.28), 0 0 10px rgba(37, 99, 235,.25);">
                             </span>
                         </div>
 
@@ -649,4 +618,5 @@
             }
         </script>
     @endpush
+</div>
 @endsection

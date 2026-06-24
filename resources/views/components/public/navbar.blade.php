@@ -3,7 +3,10 @@
     <div class="w-full max-w-7xl mx-auto flex items-center justify-between h-full px-4 sm:px-6 lg:px-12">
         {{-- LOGO --}}
         <a href="{{ route('public.home') }}" class="nav-logo">
-            <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT Indonesia" style="width:42px;height:42px;border-radius:12px;object-fit:contain;background:#fff;padding:3px;">
+            <div class="flex items-center gap-1.5">
+                <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo JSIT Indonesia" style="width:42px;height:42px;border-radius:12px;object-fit:contain;background:#fff;padding:3px;">
+                <img src="{{ asset('images/logomq.jpg') }}" alt="Logo Mutiara Qur'an" style="width:42px;height:42px;border-radius:12px;object-fit:contain;background:#fff;padding:3px;">
+            </div>
             <div class="nav-logo-text">
                 <h1>SIT Mutiara Qur'an</h1>
                 <p>Sekolah Islam Terpadu</p>

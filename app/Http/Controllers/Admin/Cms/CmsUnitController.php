@@ -38,13 +38,16 @@ class CmsUnitController extends Controller
         $unit = Unit::findOrFail($id);
         
         // Determine page name for hero section based on unit name
-        $pageName = '';
         if (stripos($unit->unit_name, 'tk') !== false) {
             $pageName = 'unit_tk';
         } elseif (stripos($unit->unit_name, 'sd') !== false) {
             $pageName = 'unit_sd';
         } elseif (stripos($unit->unit_name, 'smp') !== false) {
             $pageName = 'unit_smp';
+        } elseif (stripos($unit->unit_name, 'sma') !== false) {
+            $pageName = 'unit_sma';
+        } else {
+            $pageName = 'unit_' . strtolower(str_replace(' ', '_', $unit->unit_name));
         }
 
         $hero = CmsHeroSection::firstOrCreate(
@@ -95,7 +98,10 @@ class CmsUnitController extends Controller
         $hero->is_active = $request->has('is_active');
         $hero->save();
 
-        return redirect()->back()->with('success', 'Hero Section unit berhasil diperbarui!');
+        return redirect()->back()->with([
+            'success' => 'Hero Section unit berhasil diperbarui!',
+            'active_tab' => 'hero'
+        ]);
     }
 
     public function updateDetail(UpdateUnitDetailRequest $request, $id)
@@ -115,7 +121,10 @@ class CmsUnitController extends Controller
         $detail->quota = $request->quota;
         $detail->save();
 
-        return redirect()->back()->with('success', 'Detail unit berhasil diperbarui!');
+        return redirect()->back()->with([
+            'success' => 'Detail unit berhasil diperbarui!',
+            'active_tab' => 'detail'
+        ]);
     }
 
     public function storeFasilitas(StoreUnitFasilitasRequest $request, $id)
@@ -128,7 +137,10 @@ class CmsUnitController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        return redirect()->back()->with('success', 'Fasilitas berhasil ditambahkan!');
+        return redirect()->back()->with([
+            'success' => 'Fasilitas berhasil ditambahkan!',
+            'active_tab' => 'fasilitas'
+        ]);
     }
 
     public function updateFasilitas(UpdateUnitFasilitasRequest $request, $id, $facilityId)
@@ -142,13 +154,19 @@ class CmsUnitController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        return redirect()->back()->with('success', 'Fasilitas berhasil diperbarui!');
+        return redirect()->back()->with([
+            'success' => 'Fasilitas berhasil diperbarui!',
+            'active_tab' => 'fasilitas'
+        ]);
     }
 
     public function destroyFasilitas($id, $facilityId)
     {
         CmsUnitFacility::findOrFail($facilityId)->delete();
-        return redirect()->back()->with('success', 'Fasilitas berhasil dihapus!');
+        return redirect()->back()->with([
+            'success' => 'Fasilitas berhasil dihapus!',
+            'active_tab' => 'fasilitas'
+        ]);
     }
 
     public function storeEkskul(StoreUnitEkskulRequest $request, $id)
@@ -164,7 +182,10 @@ class CmsUnitController extends Controller
 
         CmsUnitEkskul::create($data);
 
-        return redirect()->back()->with('success', 'Ekstrakurikuler berhasil ditambahkan!');
+        return redirect()->back()->with([
+            'success' => 'Ekstrakurikuler berhasil ditambahkan!',
+            'active_tab' => 'ekskul'
+        ]);
     }
 
     public function updateEkskul(UpdateUnitEkskulRequest $request, $id, $ekskulId)
@@ -184,7 +205,10 @@ class CmsUnitController extends Controller
 
         $ekskul->update($data);
 
-        return redirect()->back()->with('success', 'Ekstrakurikuler berhasil diperbarui!');
+        return redirect()->back()->with([
+            'success' => 'Ekstrakurikuler berhasil diperbarui!',
+            'active_tab' => 'ekskul'
+        ]);
     }
 
     public function destroyEkskul($id, $ekskulId)
@@ -195,7 +219,10 @@ class CmsUnitController extends Controller
         }
         $ekskul->delete();
         
-        return redirect()->back()->with('success', 'Ekstrakurikuler berhasil dihapus!');
+        return redirect()->back()->with([
+            'success' => 'Ekstrakurikuler berhasil dihapus!',
+            'active_tab' => 'ekskul'
+        ]);
     }
 
     public function storeGuru(StoreUnitGuruRequest $request, $id)
@@ -212,7 +239,10 @@ class CmsUnitController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        return redirect()->back()->with('success', 'Guru pengajar berhasil ditambahkan!');
+        return redirect()->back()->with([
+            'success' => 'Guru pengajar berhasil ditambahkan!',
+            'active_tab' => 'guru'
+        ]);
     }
 
     public function updateGuru(UpdateUnitGuruRequest $request, $id, $guruId)
@@ -230,13 +260,19 @@ class CmsUnitController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        return redirect()->back()->with('success', 'Guru pengajar berhasil diperbarui!');
+        return redirect()->back()->with([
+            'success' => 'Guru pengajar berhasil diperbarui!',
+            'active_tab' => 'guru'
+        ]);
     }
 
     public function destroyGuru($id, $guruId)
     {
         CmsUnitTeacher::findOrFail($guruId)->delete();
-        return redirect()->back()->with('success', 'Guru pengajar berhasil dihapus!');
+        return redirect()->back()->with([
+            'success' => 'Guru pengajar berhasil dihapus!',
+            'active_tab' => 'guru'
+        ]);
     }
 
     public function storePrestasi(StoreUnitPrestasiRequest $request, $id)
@@ -248,7 +284,10 @@ class CmsUnitController extends Controller
 
         CmsAchievement::create($data);
 
-        return redirect()->back()->with('success', 'Prestasi berhasil ditambahkan!');
+        return redirect()->back()->with([
+            'success' => 'Prestasi berhasil ditambahkan!',
+            'active_tab' => 'prestasi'
+        ]);
     }
 
     public function updatePrestasi(UpdateUnitPrestasiRequest $request, $id, $prestasiId)
@@ -261,13 +300,19 @@ class CmsUnitController extends Controller
 
         $prestasi->update($data);
 
-        return redirect()->back()->with('success', 'Prestasi berhasil diperbarui!');
+        return redirect()->back()->with([
+            'success' => 'Prestasi berhasil diperbarui!',
+            'active_tab' => 'prestasi'
+        ]);
     }
 
     public function destroyPrestasi($id, $prestasiId)
     {
         CmsAchievement::findOrFail($prestasiId)->delete();
-        return redirect()->back()->with('success', 'Prestasi berhasil dihapus!');
+        return redirect()->back()->with([
+            'success' => 'Prestasi berhasil dihapus!',
+            'active_tab' => 'prestasi'
+        ]);
     }
 }
 

@@ -93,7 +93,7 @@ class TagihanController extends Controller
         } elseif ($request->target === 'class') {
             $students = Student::where('status', 'active')
                 ->whereHas('studentClasses', function($q) use ($request) {
-                    $q->where('school_class_id', $request->class_id)
+                    $q->where('class_id', $request->class_id)
                       ->whereHas('academicYear', function($q2) {
                           $q2->where('status', 'active');
                       });
@@ -165,23 +165,32 @@ class TagihanController extends Controller
             return back()->with('error', 'Nomor WA orang tua tidak ditemukan!');
         }
         $pesan = $this->formatPesanWa($invoice);
-        $response = Http::withoutVerifying()->withHeaders([
-            'Authorization' => env('FONNTE_API_TOKEN')
-        ])->post('https://api.fonnte.com/send', [
-            'target' => $nomorWa,
-            'message' => $pesan,
-            'countryCode' => '62',
-        ]);
-        $responseData = $response->json();
-        if ($response->successful() && isset($responseData['status']) && $responseData['status'] === true) {
-            return back()->with('success', 'Tagihan berhasil dikirim ke WA!');
+        
+        try {
+            $response = Http::withoutVerifying()->timeout(15)->withHeaders([
+                'Authorization' => env('FONNTE_API_TOKEN')
+            ])->post('https://api.fonnte.com/send', [
+                'target' => $nomorWa,
+                'message' => $pesan,
+                'countryCode' => '62',
+            ]);
+            
+            $responseData = $response->json();
+            if ($response->successful() && isset($responseData['status']) && $responseData['status'] === true) {
+                return back()->with('success', 'Tagihan berhasil dikirim ke WA!');
+            }
+            $errorDetail = isset($responseData['reason']) ? $responseData['reason'] : (isset($responseData['detail']) ? $responseData['detail'] : $response->body());
+            return back()->with('error', 'Gagal mengirim WA. Pesan dari server: ' . $errorDetail);
+        } catch (\Exception $e) {
+            return back()->with('error', 'Koneksi ke server WhatsApp (Fonnte) terputus atau timeout: ' . $e->getMessage());
         }
-        $errorDetail = isset($responseData['reason']) ? $responseData['reason'] : (isset($responseData['detail']) ? $responseData['detail'] : $response->body());
-        return back()->with('error', 'Gagal mengirim WA. Pesan dari server: ' . $errorDetail);
     }
 
     public function broadcastWa(Request $request)
     {
+        // Hindari PHP timeout (Maximum execution time of 30 seconds exceeded)
+        set_time_limit(0);
+        
         // Ambil semua tagihan yang belum dibayar dan siswa punya nomor WA
         $invoices = Invoice::with('student')
             ->where('status', 'unpaid')
@@ -194,19 +203,38 @@ class TagihanController extends Controller
             return back()->with('error', 'Tidak ada tagihan tertunggak dengan nomor WA orang tua yang valid.');
         }
         $berhasil = 0;
-        foreach ($invoices as $invoice) {
-            $pesan = $this->formatPesanWa($invoice);
+        $gagal = 0;
+        // Memproses pengiriman pesan secara asinkron (concurrent) dalam kelompok-kelompok kecil (25 sekaligus)
+        // Ini akan mempercepat waktu proses secara eksponensial dan mencegah bottleneck API Fonnte
+        foreach ($invoices->chunk(25) as $chunk) {
+            $responses = Http::withoutVerifying()->pool(function (\Illuminate\Http\Client\Pool $pool) use ($chunk) {
+                $requests = [];
+                foreach ($chunk as $invoice) {
+                    $pesan = $this->formatPesanWa($invoice);
+                    $requests[] = $pool->withHeaders([
+                        'Authorization' => env('FONNTE_API_TOKEN')
+                    ])->timeout(15)->post('https://api.fonnte.com/send', [
+                        'target' => $invoice->student->parent_phone,
+                        'message' => $pesan,
+                        'countryCode' => '62',
+                    ]);
+                }
+                return $requests;
+            });
             
-            $response = Http::withoutVerifying()->withHeaders([
-                'Authorization' => env('FONNTE_API_TOKEN')
-            ])->post('https://api.fonnte.com/send', [
-                'target' => $invoice->student->parent_phone,
-                'message' => $pesan,
-                'countryCode' => '62',
-            ]);
-            if ($response->successful()) {
-                $berhasil++;
+            foreach ($responses as $response) {
+                if ($response instanceof \Exception || !$response->successful()) {
+                    $gagal++;
+                } else {
+                    $berhasil++;
+                }
             }
+        }
+        
+        if ($gagal > 0 && $berhasil == 0) {
+            return back()->with('error', "Gagal mengirim broadcast ke {$invoices->count()} tagihan. Kemungkinan server WhatsApp sedang gangguan/timeout.");
+        } elseif ($gagal > 0) {
+            return back()->with('success', "Berhasil mengirim broadcast ke $berhasil tagihan, namun $gagal tagihan gagal dikirim.");
         }
         return back()->with('success', "Berhasil mengirim broadcast ke $berhasil dari {$invoices->count()} tagihan.");
     }

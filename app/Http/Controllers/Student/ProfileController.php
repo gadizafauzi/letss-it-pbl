@@ -26,7 +26,12 @@ class ProfileController extends Controller
             'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string',
             'hobby' => 'nullable|string|max:255',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ], [
+            'photo.mimes' => 'Foto harus berformat jpeg, png, atau jpg',
+            'photo.image' => 'File yang diunggah harus berupa gambar',
+            'photo.max' => 'Ukuran foto maksimal 2MB',
+            'photo.uploaded' => 'Gagal mengunggah foto. Pastikan ukuran file tidak melebihi batas (maks 2MB).',
         ]);
 
         $data = $request->only(['phone', 'address', 'hobby']);

@@ -8,7 +8,7 @@ use App\Models\CmsHeroSection;
 use App\Models\CmsWelcomeMessage;
 use App\Models\CmsStatistic;
 use App\Models\CmsProgram;
-use App\Models\CmsKeunggulan;
+use App\Models\CmsTujuanPendidikan;
 use App\Models\CmsTestimonial;
 use App\Models\CmsFaq;
 use Illuminate\Support\Facades\Storage;
@@ -18,8 +18,8 @@ use App\Http\Requests\Admin\Cms\StoreCmsStatisticRequest;
 use App\Http\Requests\Admin\Cms\UpdateCmsStatisticRequest;
 use App\Http\Requests\Admin\Cms\StoreCmsProgramRequest;
 use App\Http\Requests\Admin\Cms\UpdateCmsProgramRequest;
-use App\Http\Requests\Admin\Cms\StoreCmsKeunggulanRequest;
-use App\Http\Requests\Admin\Cms\UpdateCmsKeunggulanRequest;
+use App\Http\Requests\Admin\Cms\StoreCmsTujuanPendidikanRequest;
+use App\Http\Requests\Admin\Cms\UpdateCmsTujuanPendidikanRequest;
 use App\Http\Requests\Admin\Cms\StoreCmsTestimoniRequest;
 use App\Http\Requests\Admin\Cms\UpdateCmsTestimoniRequest;
 use App\Http\Requests\Admin\Cms\StoreCmsFaqRequest;
@@ -49,12 +49,22 @@ class CmsBerandaController extends Controller
         $statistics = CmsStatistic::orderBy('order')->get();
         // Data lain akan di-passing saat diimplementasikan
         $programs = CmsProgram::orderBy('order')->get();
-        $keunggulans = CmsKeunggulan::orderBy('order')->get();
+        $tujuanPendidikans = CmsTujuanPendidikan::orderBy('order')->get();
         $testimonials = CmsTestimonial::orderBy('order')->get();
         $faqs = CmsFaq::where('page', 'home')->orderBy('order')->get();
 
+        $jenjang_image = \App\Models\CmsSetting::firstOrCreate(
+            ['key' => 'jenjang_pendidikan_image'],
+            ['value' => null, 'type' => 'image']
+        );
+
+        $statistic_bg_image = \App\Models\CmsSetting::firstOrCreate(
+            ['key' => 'statistic_bg_image'],
+            ['value' => null, 'type' => 'image']
+        );
+
         return view('admin.cms.beranda.index', compact(
-            'hero', 'welcome', 'statistics', 'programs', 'keunggulans', 'testimonials', 'faqs'
+            'hero', 'welcome', 'statistics', 'programs', 'tujuanPendidikans', 'testimonials', 'faqs', 'jenjang_image', 'statistic_bg_image'
         ));
     }
 
@@ -127,6 +137,30 @@ class CmsBerandaController extends Controller
         return redirect()->back()->with('success', 'Statistik berhasil dihapus.');
     }
 
+    public function updateStatisticBg(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $setting = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
+        if (!$setting) {
+            $setting = new \App\Models\CmsSetting();
+            $setting->key = 'statistic_bg_image';
+            $setting->type = 'image';
+        }
+
+        if ($request->hasFile('image')) {
+            if ($setting->value && !str_starts_with($setting->value, 'http')) {
+                Storage::disk('public')->delete($setting->value);
+            }
+            $setting->value = $request->file('image')->store('cms/beranda', 'public');
+            $setting->save();
+        }
+
+        return redirect()->back()->with('success', 'Gambar Latar Statistik berhasil diperbarui.');
+    }
+
     public function storeProgram(StoreCmsProgramRequest $request)
     {
         $data = $request->all();
@@ -156,33 +190,33 @@ class CmsBerandaController extends Controller
         return redirect()->back()->with('success', 'Program berhasil dihapus.');
     }
 
-    public function storeKeunggulan(StoreCmsKeunggulanRequest $request)
+    public function storeTujuanPendidikan(StoreCmsTujuanPendidikanRequest $request)
     {
         $data = $request->all();
         $data['is_active'] = $request->has('is_active');
         
-        CmsKeunggulan::create($data);
+        CmsTujuanPendidikan::create($data);
 
-        return redirect()->back()->with('success', 'Keunggulan berhasil ditambahkan.');
+        return redirect()->back()->with('success', 'Tujuan Pendidikan berhasil ditambahkan.');
     }
 
-    public function updateKeunggulan(UpdateCmsKeunggulanRequest $request, $id)
+    public function updateTujuanPendidikan(UpdateCmsTujuanPendidikanRequest $request, $id)
     {
-        $keunggulan = CmsKeunggulan::findOrFail($id);
+        $tujuanPendidikan = CmsTujuanPendidikan::findOrFail($id);
         $data = $request->all();
         $data['is_active'] = $request->has('is_active');
         
-        $keunggulan->update($data);
+        $tujuanPendidikan->update($data);
 
-        return redirect()->back()->with('success', 'Keunggulan berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Tujuan Pendidikan berhasil diperbarui.');
     }
 
-    public function destroyKeunggulan($id)
+    public function destroyTujuanPendidikan($id)
     {
-        $keunggulan = CmsKeunggulan::findOrFail($id);
-        $keunggulan->delete();
+        $tujuanPendidikan = CmsTujuanPendidikan::findOrFail($id);
+        $tujuanPendidikan->delete();
 
-        return redirect()->back()->with('success', 'Keunggulan berhasil dihapus.');
+        return redirect()->back()->with('success', 'Tujuan Pendidikan berhasil dihapus.');
     }
     public function storeTestimoni(StoreCmsTestimoniRequest $request)
     {
@@ -255,5 +289,29 @@ class CmsBerandaController extends Controller
         $faq->delete();
 
         return redirect()->back()->with('success', 'FAQ berhasil dihapus.');
+    }
+
+    public function updateJenjangImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $setting = \App\Models\CmsSetting::where('key', 'jenjang_pendidikan_image')->first();
+        if (!$setting) {
+            $setting = new \App\Models\CmsSetting();
+            $setting->key = 'jenjang_pendidikan_image';
+            $setting->type = 'image';
+        }
+
+        if ($request->hasFile('image')) {
+            if ($setting->value && !str_starts_with($setting->value, 'http')) {
+                Storage::disk('public')->delete($setting->value);
+            }
+            $setting->value = $request->file('image')->store('cms/beranda', 'public');
+            $setting->save();
+        }
+
+        return redirect()->back()->with('success', 'Gambar Jenjang Pendidikan berhasil diperbarui.');
     }
 }

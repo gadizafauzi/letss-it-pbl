@@ -17,13 +17,13 @@
 
             @if(isset($q) && $q !== '')
                 @if(isset($posts) && !$posts->isEmpty())
-                    <h2 class="text-xl font-bold text-slate-800 mb-6">Hasil Pencarian untuk: "{{ $q }}"</h2>
+                    <h2 class="text-xl font-bold text-[#003f88] mb-6">Hasil Pencarian untuk: "{{ $q }}"</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach($posts as $post)
                         @php
                             $tanggal = \Carbon\Carbon::parse($post->publish_date)->translatedFormat('d F Y');
                             $kategori = $post->category ? $post->category->name : 'Berita';
-                            $color = $post->category ? $post->category->color : 'emerald';
+                            $color = $post->category ? $post->category->color : 'blue';
                             $img = $post->featured_image ? (Str::startsWith($post->featured_image, 'http') ? $post->featured_image : asset('storage/' . $post->featured_image)) : 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=600&q=80';
                         @endphp
                         <div class="news-card fade-up group">
@@ -37,7 +37,7 @@
                                 <span class="text-xs text-slate-400 block mb-2">{{ $tanggal }}</span>
                                 <h3 class="text-base font-bold text-[var(--theme-primary)] mb-2 leading-snug">{{ $post->title }}</h3>
                                 <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $post->excerpt }}</p>
-                                <a href="{{ route('public.berita.detail', $post->slug) }}" class="inline-flex items-center gap-1 text-emerald-600 font-bold text-sm hover:underline mt-2">
+                                <a href="{{ route('public.berita.detail', $post->slug) }}" class="inline-flex items-center gap-1 text-[#003f88] font-bold text-sm hover:underline mt-2">
                                     Lihat Detail <i data-lucide="arrow-right" class="w-4 h-4"></i>
                                 </a>
                             </div>

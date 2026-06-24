@@ -1,95 +1,91 @@
-{{-- UNIT PENDIDIKAN PREVIEW --}}
-    <section class="public-section bg-slate-50 relative overflow-hidden">
-        <!-- Floating background blobs -->
-        <div class="absolute top-10 right-10 w-64 h-64 bg-sky-200/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-10 left-10 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-100/30 rounded-full blur-3xl pointer-events-none"></div>
+{{-- UNIT PENDIDIKAN --}}
+<section class="public-section bg-slate-50 relative overflow-hidden">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
-        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-            <div class="text-center mb-16 flex flex-col items-center">
-                <h2 class="section-title reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Jenjang Pendidikan Kami</h2>
-                <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
-                <p class="section-subtitle text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Menyediakan jenjang pendidikan berkesinambungan dari usia emas anak hingga pra-remaja.</p>
-            </div>
-
-            <div class="flex flex-nowrap lg:grid lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 px-4 -mx-4 lg:mx-0 lg:px-0 overflow-x-auto pb-8 pt-4 custom-scrollbar snap-x">
-                @php
-                    $units = [
-
-                        [
-                            'logo' => asset('images/tk.jpeg'),
-                            'title' => 'TK Islam Terpadu',
-                            'desc' => 'Pembelajaran bermain sambil belajar yang bermakna dengan fokus pengenalan huruf hijaiyah, adab dasar, dan hafalan surah pendek.',
-                            'route' => 'public.unit.tk.index',
-                            'anim' => 'anim-bottom-left',
-                            'delay' => '0ms',
-                            'borderHover' => 'hover:border-sky-300',
-                            'shadowHover' => 'group-hover:shadow-sky-200/50',
-                            'bgGlow' => 'from-sky-50/0 to-sky-100/60',
-                            'innerGlow' => 'bg-sky-100/50',
-                            'textHover' => 'group-hover:text-sky-700',
-                            'btnHover' => 'text-sky-600 group-hover:bg-sky-600 group-hover:text-white group-hover:shadow-sky-600/30',
-                        ],
-                        [
-                            'logo' => asset('images/sd.jpeg'),
-                            'title' => 'SD Islam Terpadu',
-                            'desc' => 'Pembentukan pondasi keilmuan akademis umum, penguatan hafalan Al-Qur\'an hingga 5 juz, pembiasaan ibadah mandiri, dan kemandirian.',
-                            'route' => 'public.unit.sd.index',
-                            'anim' => 'anim-zoom',
-                            'delay' => '150ms',
-                            'borderHover' => 'hover:border-amber-300',
-                            'shadowHover' => 'group-hover:shadow-amber-200/50',
-                            'bgGlow' => 'from-amber-50/0 to-amber-100/60',
-                            'innerGlow' => 'bg-amber-100/50',
-                            'textHover' => 'group-hover:text-amber-700',
-                            'btnHover' => 'text-amber-600 group-hover:bg-amber-500 group-hover:text-white group-hover:shadow-amber-500/30',
-                        ],
-                        [
-                            'logo' => asset('images/smp.jpeg'),
-                            'title' => 'SMP Islam Terpadu',
-                            'desc' => 'Pengembangan kemampuan analisis akademis, penguasaan literasi digital, hafalan Al-Qur\'an hingga 10 juz, dan pelatihan kepemimpinan.',
-                            'route' => 'public.unit.smp.index',
-                            'anim' => 'anim-bottom-right',
-                            'delay' => '300ms',
-                            'borderHover' => 'hover:border-indigo-300',
-                            'shadowHover' => 'group-hover:shadow-indigo-200/50',
-                            'bgGlow' => 'from-indigo-50/0 to-indigo-100/60',
-                            'innerGlow' => 'bg-indigo-100/50',
-                            'textHover' => 'group-hover:text-indigo-700',
-                            'btnHover' => 'text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white group-hover:shadow-indigo-600/30',
-                        ],
-                    ];
-                @endphp
-                @foreach($units as $unit)
-                    <div class="snap-center flex-shrink-0 w-[85%] sm:w-[45%] lg:w-auto bg-white rounded-[28px] lg:rounded-[32px] p-6 lg:p-8 text-center reveal reveal-up group border border-slate-100 shadow-sm relative overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.1)] {{ $unit['borderHover'] }} {{ $unit['anim'] }} flex flex-col h-full" style="transition-delay: {{ $unit['delay'] }};">
-                        
-                        <!-- Glow Background on Hover -->
-                        <div class="absolute inset-0 bg-gradient-to-b {{ $unit['bgGlow'] }} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                        <div class="relative z-10 flex flex-col flex-grow">
-                            <!-- Logo Container -->
-                            <div class="w-12 h-12 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center mx-auto mb-3 md:mb-6 shadow-sm border border-slate-100 overflow-hidden {{ $unit['shadowHover'] }} transition-all duration-500 relative">
-                                <!-- Inner glow for logo -->
-                                <div class="absolute inset-0 {{ $unit['innerGlow'] }} opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                                <img src="{{ $unit['logo'] }}" alt="Logo {{ $unit['title'] }}"
-                                     class="w-full h-full object-contain p-2 relative z-10 transition-transform duration-500 group-hover:scale-[1.15] group-hover:rotate-[4deg]">
-                            </div>
-                            
-                            <h3 class="text-base md:text-xl font-black text-slate-800 mb-2 md:mb-3 {{ $unit['textHover'] }} transition-colors duration-300 line-clamp-2">{{ $unit['title'] }}</h3>
-                            <p class="text-slate-500 text-xs md:text-sm leading-relaxed mb-4 md:mb-8 flex-grow group-hover:text-slate-600 transition-colors duration-300 line-clamp-3 md:line-clamp-none">{{ $unit['desc'] }}</p>
-                            
-                            <!-- Button Link -->
-                            <div class="mt-auto">
-                                <a href="{{ route($unit['route']) }}" class="inline-flex items-center justify-center w-full py-2 md:py-3.5 rounded-xl bg-slate-50 {{ $unit['btnHover'] }} font-bold transition-all duration-300 overflow-hidden relative">
-                                    <span class="relative z-10 flex items-center gap-2 transform transition-transform duration-300 group-hover:translate-x-1.5 text-xs md:text-sm">
-                                        Selengkapnya <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4 transform transition-transform duration-300 group-hover:translate-x-1"></i>
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+        <div class="text-center mb-16">
+            <h2 class="section-title reveal reveal-zoom mb-2" style="transition-delay: 150ms;">Jenjang Pendidikan Kami</h2>
+            <p class="text-slate-500 max-w-2xl mx-auto reveal reveal-up" style="transition-delay: 300ms;">Menyediakan pendidikan berkelanjutan dengan kurikulum Islami yang komprehensif.</p>
         </div>
-    </section>
+
+        <div class="flex flex-row gap-4 md:gap-8 lg:gap-16 items-center">
+            
+            <!-- Left Column: Organic Blob Photo -->
+            <div class="w-[40%] md:w-5/12 reveal reveal-right" style="transition-delay: 200ms;">
+                <div class="relative w-full max-w-[260px] mx-auto pt-4 pb-4">
+                    <!-- Decorations -->
+                    <!-- Slanted Rectangle Background -->
+                    <div class="absolute inset-0 m-auto w-48 h-48 md:w-64 md:h-64 rounded-[32px] bg-blue-100/60 blur-2xl z-0 transform scale-125 rotate-6"></div>
+                    <div class="absolute inset-0 m-auto w-44 h-44 md:w-60 md:h-60 rounded-[32px] bg-gradient-to-tr from-amber-200 to-amber-100 z-0 transform -rotate-6 shadow-lg"></div>
+                    
+                    <style>
+                        @keyframes float-box {
+                            0% { transform: translateY(0px); }
+                            50% { transform: translateY(-10px); }
+                            100% { transform: translateY(0px); }
+                        }
+                        .animate-float-box {
+                            animation: float-box 6s ease-in-out infinite;
+                        }
+                    </style>
+                    <div class="relative z-10 animate-float-box flex justify-center items-center" 
+                         style="width: 100%; aspect-ratio: 4/5;">
+                        @if(isset($jenjang_image) && $jenjang_image->value)
+                            <img src="{{ str_starts_with($jenjang_image->value, 'http') ? $jenjang_image->value : Storage::url($jenjang_image->value) }}" alt="Pendidikan Kami" class="w-full h-full object-contain">
+                        @else
+                            <img src="{{ asset('images/sd.jpeg') }}" alt="Mutiara Qur'an" class="w-full h-full object-contain mix-blend-multiply">
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: 3 Vertical List Items -->
+            <div class="w-[60%] md:w-7/12 flex flex-col justify-center">
+                <div class="flex flex-col gap-3 lg:gap-5">
+                    @php
+                        $units = [
+                            [
+                                'icon' => 'baby',
+                                'title' => 'TK Islam Terpadu',
+                                'route' => 'public.unit.tk.index',
+                                'delay' => '300ms',
+                            ],
+                            [
+                                'icon' => 'backpack',
+                                'title' => 'SD Islam Terpadu',
+                                'route' => 'public.unit.sd.index',
+                                'delay' => '400ms',
+                            ],
+                            [
+                                'icon' => 'graduation-cap',
+                                'title' => 'SMP Islam Terpadu',
+                                'route' => 'public.unit.smp.index',
+                                'delay' => '500ms',
+                            ],
+                        ];
+                    @endphp
+
+                    @foreach($units as $unit)
+                        <a href="{{ route($unit['route']) }}" class="bg-white rounded-xl md:rounded-2xl p-2.5 sm:p-4 lg:p-6 shadow-md md:shadow-lg shadow-slate-200/40 flex items-center border border-slate-100 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,34,68,0.08)] transition-all duration-300 reveal reveal-up group" style="transition-delay: {{ $unit['delay'] }};">
+                            <!-- Icon -->
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl bg-[#002244]/5 flex items-center justify-center mr-3 lg:mr-5 text-[#002244] group-hover:scale-105 group-hover:bg-[#002244] group-hover:text-white transition-all duration-300 flex-shrink-0">
+                                <i data-lucide="{{ $unit['icon'] }}" class="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8"></i>
+                            </div>
+                            
+                            <!-- Title -->
+                            <div class="flex-grow text-left">
+                                <h3 class="text-[13px] sm:text-base lg:text-xl font-bold text-[#002244] leading-tight">{{ $unit['title'] }}</h3>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div class="hidden sm:flex w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-slate-50 items-center justify-center text-slate-400 group-hover:bg-amber-400 group-hover:text-[#002244] transition-all duration-300 flex-shrink-0">
+                                <i data-lucide="arrow-right" class="w-4 h-4 lg:w-5 lg:h-5"></i>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
