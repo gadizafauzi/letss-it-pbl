@@ -58,10 +58,7 @@
                         </div>
                     </div>
                     <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Teks Badge (Label atas)</label>
-                            <input type="text" name="badge_text" value="{{ old('badge_text', $hero->badge_text) }}" class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
+
 
                         <div class="flex items-center gap-2 mt-6">
                             <input type="checkbox" name="is_active" id="hero_active" value="1" {{ $hero->is_active ? 'checked' : '' }} class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border border-slate-300">

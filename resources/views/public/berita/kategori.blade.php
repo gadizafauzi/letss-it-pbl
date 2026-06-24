@@ -4,7 +4,7 @@
         <div class="relative z-10 w-full">
             <div class="breadcrumb"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><a href="{{ route('public.berita.index') }}">Berita</a><span>/</span><span class="current">Kategori</span></div>
             <h1 class="text-3xl sm:text-4xl font-black text-white">Kategori Berita</h1>
-            <p class="text-emerald-200/70 mt-3">Jelajahi berita berdasarkan kategori.</p>
+            <p class="text-slate-200/70 mt-3">Jelajahi berita berdasarkan kategori.</p>
         </div>
     </div>
     <section class="public-section">
@@ -19,7 +19,7 @@
                                 'title' => $cat->name,
                                 'slug' => $cat->slug,
                                 'count' => $cat->posts_count,
-                                'color' => $cat->color ? $cat->color : 'emerald',
+                                'color' => $cat->color ? $cat->color : 'blue',
                             ];
                         }
                     }

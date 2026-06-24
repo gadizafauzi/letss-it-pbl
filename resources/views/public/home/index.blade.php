@@ -8,9 +8,14 @@
     @vite(['resources/css/public-home.css'])
 
     @include('public.home.partials.sambutan')
+    
     @include('public.home.partials.program')
-    @include('public.home.partials.keunggulan')
+    @include('public.home.partials.tujuan-pendidikan')
     @include('public.home.partials.jenjang')
+    
+    {{-- Parallax Window Gap (Small) --}}
+    <div class="w-full h-16 md:h-24 lg:h-32 bg-transparent"></div>
+
     @include('public.home.partials.testimoni')
     @include('public.home.partials.faq')
     

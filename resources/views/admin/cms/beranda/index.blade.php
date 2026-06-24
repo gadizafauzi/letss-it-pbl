@@ -31,14 +31,17 @@
         <button onclick="openTab('tab-program')" id="btn-tab-program" class="tab-btn whitespace-nowrap px-6 py-4 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
             Program
         </button>
-        <button onclick="openTab('tab-keunggulan')" id="btn-tab-keunggulan" class="tab-btn whitespace-nowrap px-6 py-4 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
-            Keunggulan
+        <button onclick="openTab('tab-tujuan-pendidikan')" id="btn-tab-tujuan-pendidikan" class="tab-btn whitespace-nowrap px-6 py-4 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
+            Tujuan Pendidikan
         </button>
         <button onclick="openTab('tab-testimoni')" id="btn-tab-testimoni" class="tab-btn whitespace-nowrap px-6 py-4 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
             Testimoni
         </button>
         <button onclick="openTab('tab-faq')" id="btn-tab-faq" class="tab-btn whitespace-nowrap px-6 py-4 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
             FAQ Home
+        </button>
+        <button onclick="openTab('tab-jenjang')" id="btn-tab-jenjang" class="tab-btn whitespace-nowrap px-6 py-4 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
+            Jenjang Pendidikan
         </button>
     </div>
 
@@ -56,13 +59,16 @@
         @include('admin.cms.beranda.tabs.program')
 
         {{-- TAB KEUNGGULAN --}}
-        @include('admin.cms.beranda.tabs.keunggulan')
+        @include('admin.cms.beranda.tabs.tujuan-pendidikan')
 
         {{-- TAB TESTIMONI --}}
         @include('admin.cms.beranda.tabs.testimoni')
 
         {{-- TAB FAQ --}}
         @include('admin.cms.beranda.tabs.faq')
+
+        {{-- TAB JENJANG PENDIDIKAN --}}
+        @include('admin.cms.beranda.tabs.jenjang')
     </div>
 </div>
 

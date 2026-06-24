@@ -9,10 +9,10 @@
     <section class="public-section">
         <div class="max-w-3xl mx-auto">
             <div class="fade-up">
-                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full">
+                <span class="text-xs font-bold text-[#003f88] bg-slate-50 px-2.5 py-1 rounded-full">
                     {{ $post && $post->category ? $post->category->name : 'Tahfidz' }}
                 </span>
-                <h1 class="text-2xl sm:text-3xl font-black text-slate-800 mt-4 mb-3">
+                <h1 class="text-2xl sm:text-3xl font-black text-[#003f88] mt-4 mb-3">
                     {{ $post ? $post->title : 'Wisuda Tahfidz Angkatan ke-8' }}
                 </h1>
                 <div class="flex items-center gap-4 text-sm text-slate-400 mb-8">
@@ -32,8 +32,8 @@
                              alt="{{ $post->title }}" class="w-full h-full object-cover">
                     </div>
                 @else
-                    <div class="w-full aspect-video rounded-2xl bg-gradient-to-br from-emerald-100 to-emerald-200 flex items-center justify-center mb-8">
-                        <i data-lucide="image" class="w-20 h-20 text-emerald-300"></i>
+                    <div class="w-full aspect-video rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center mb-8">
+                        <i data-lucide="image" class="w-20 h-20 text-slate-400"></i>
                     </div>
                 @endif
 
@@ -48,7 +48,7 @@
                     @endif
                 </div>
                 <div class="mt-10 pt-8 border-t border-slate-200">
-                    <a href="{{ route('public.berita.index') }}" class="inline-flex items-center gap-2 text-emerald-600 font-bold text-sm hover:underline">
+                    <a href="{{ route('public.berita.index') }}" class="inline-flex items-center gap-2 text-[#003f88] font-bold text-sm hover:underline">
                         <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Daftar Berita
                     </a>
                 </div>

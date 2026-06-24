@@ -22,14 +22,14 @@
         
         {{-- Illustration Area --}}
         <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-2 sm:mb-4">
-            <div class="absolute inset-0 bg-blue-100 rounded-full blur-2xl opacity-50 animate-pulse"></div>
-            <div class="relative w-full h-full flex items-center justify-center bg-white rounded-full shadow-xl shadow-blue-900/5 border border-slate-100">
-                <i data-lucide="compass" class="w-16 h-16 sm:w-20 sm:h-20 text-blue-500"></i>
+            <div class="absolute inset-0 bg-slate-100 rounded-full blur-2xl opacity-50 animate-pulse"></div>
+            <div class="relative w-full h-full flex items-center justify-center bg-white rounded-full shadow-xl shadow-slate-900/5 border border-slate-100">
+                <i data-lucide="compass" class="w-16 h-16 sm:w-20 sm:h-20 text-slate-700"></i>
             </div>
             
             {{-- Floating Elements --}}
-            <div class="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-8 h-8 sm:w-10 sm:h-10 bg-emerald-100 rounded-full flex items-center justify-center shadow-lg animate-bounce" style="animation-delay: 0.1s">
-                <i data-lucide="map-pin-off" class="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600"></i>
+            <div class="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-8 h-8 sm:w-10 sm:h-10 bg-slate-100 rounded-full flex items-center justify-center shadow-lg animate-bounce" style="animation-delay: 0.1s">
+                <i data-lucide="map-pin-off" class="w-4 h-4 sm:w-5 sm:h-5 text-slate-800"></i>
             </div>
             <div class="absolute -bottom-1 -left-1 sm:-bottom-2 sm:-left-2 w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-full flex items-center justify-center shadow-lg animate-bounce" style="animation-delay: 0.5s">
                 <i data-lucide="search-x" class="w-5 h-5 sm:w-6 sm:h-6 text-red-500"></i>
@@ -51,7 +51,7 @@
                 <i data-lucide="arrow-left" class="w-4 h-4"></i>
                 Kembali
             </a>
-            <a href="{{ url('/') }}" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all shadow-md shadow-blue-500/30 flex items-center justify-center gap-2 text-sm sm:text-base">
+            <a href="{{ url('/') }}" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-800 text-white font-semibold transition-all shadow-md shadow-slate-700/30 flex items-center justify-center gap-2 text-sm sm:text-base">
                 <i data-lucide="home" class="w-4 h-4"></i>
                 Ke Beranda
             </a>

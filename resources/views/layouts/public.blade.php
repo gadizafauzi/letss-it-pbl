@@ -27,7 +27,12 @@
     </style>
 </head>
 
-<body class="bg-white text-slate-800 antialiased">
+<body class="bg-transparent text-slate-800 antialiased relative">
+    
+    {{-- GLOBAL PARALLAX BACKGROUND --}}
+    <div class="fixed inset-0 z-[-1] pointer-events-none bg-slate-100">
+        <div class="absolute inset-0 opacity-100" style="background-image: url('{{ asset('/images/bg.png') }}'); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+    </div>
 
     {{-- NAVBAR --}}
     @include('components.public.navbar')
@@ -49,7 +54,7 @@
     </a>
 
     {{-- FLOATING BACK TO TOP --}}
-    <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-700 text-white flex items-center justify-center shadow-lg shadow-emerald-700/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 translate-y-16 opacity-0 z-50 pointer-events-none" aria-label="Kembali ke atas">
+    <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-2xl bg-gradient-to-r from-slate-800 to-slate-800 text-white flex items-center justify-center shadow-lg shadow-slate-800/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300 translate-y-16 opacity-0 z-50 pointer-events-none" aria-label="Kembali ke atas">
         <i data-lucide="arrow-up" class="w-5 h-5"></i>
     </button>
 
