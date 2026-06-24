@@ -38,13 +38,16 @@ class CmsUnitController extends Controller
         $unit = Unit::findOrFail($id);
         
         // Determine page name for hero section based on unit name
-        $pageName = '';
         if (stripos($unit->unit_name, 'tk') !== false) {
             $pageName = 'unit_tk';
         } elseif (stripos($unit->unit_name, 'sd') !== false) {
             $pageName = 'unit_sd';
         } elseif (stripos($unit->unit_name, 'smp') !== false) {
             $pageName = 'unit_smp';
+        } elseif (stripos($unit->unit_name, 'sma') !== false) {
+            $pageName = 'unit_sma';
+        } else {
+            $pageName = 'unit_' . strtolower(str_replace(' ', '_', $unit->unit_name));
         }
 
         $hero = CmsHeroSection::firstOrCreate(

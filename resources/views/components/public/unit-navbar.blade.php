@@ -19,7 +19,7 @@
 
     #unit-navbar.scrolled {
         position: fixed;
-        background: rgba(6, 78, 59, 0.85);
+        background: rgba(0, 21, 43, 0.85);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -101,8 +101,8 @@
     }
 
     .unit-nav-links a.active {
-        color: #34d399; /* emerald-400 */
-        background: rgba(52, 211, 153, 0.15);
+        color: var(--unit-accent, #ffc629);
+        background: rgba(255,255,255,0.15);
     }
 
 
@@ -136,7 +136,7 @@
         right: -100%;
         width: min(320px, 85vw);
         height: 100vh;
-        background: #022c22; /* emerald-950 */
+        background: #020617;
         z-index: 200;
         transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         overflow-y: auto;
@@ -181,8 +181,8 @@
 
     .unit-mobile-drawer a:hover,
     .unit-mobile-drawer a.active {
-        background: rgba(52, 211, 153, 0.15);
-        color: #34d399; /* emerald-400 */
+        background: rgba(255,255,255,0.15);
+        color: var(--unit-accent, #ffc629);
     }
 
     .unit-mobile-drawer .drawer-label {
@@ -213,34 +213,34 @@
 
     /* === THEME DARK (For light hero backgrounds) === */
     #unit-navbar.theme-dark:not(.scrolled) .unit-nav-logo-text h1 {
-        color: #064e3b; /* emerald-900 */
+        color: var(--unit-accent, #ffc629);
         text-shadow: none;
     }
     #unit-navbar.theme-dark:not(.scrolled) .unit-nav-logo-text p {
-        color: #059669; /* emerald-600 */
+        color: var(--unit-accent, #ffc629);
     }
     #unit-navbar.theme-dark:not(.scrolled) .unit-nav-divider {
-        background: rgba(5, 150, 105, 0.2);
+        background: rgba(0,0,0,0.2);
     }
     #unit-navbar.theme-dark:not(.scrolled) .unit-nav-links a {
-        color: #064e3b;
+        color: var(--unit-accent, #ffc629);
         text-shadow: none;
     }
     #unit-navbar.theme-dark:not(.scrolled) .unit-nav-links a:hover {
-        background: rgba(5, 150, 105, 0.1);
-        color: #047857;
+        background: rgba(0,0,0,0.1);
+        color: var(--unit-accent, #ffc629);
     }
     #unit-navbar.theme-dark:not(.scrolled) .unit-nav-links a.active {
-        color: #059669;
-        background: rgba(5, 150, 105, 0.15);
+        color: var(--unit-accent, #ffc629);
+        background: rgba(0,0,0,0.15);
     }
     #unit-navbar.theme-dark:not(.scrolled) .unit-nav-hamburger {
-        color: #064e3b;
-        border: 1px solid rgba(5, 150, 105, 0.2);
+        color: var(--unit-accent, #ffc629);
+        border: 1px solid rgba(0,0,0,0.2);
         background: transparent;
     }
     #unit-navbar.theme-dark:not(.scrolled) .unit-nav-hamburger:hover {
-        background: rgba(5, 150, 105, 0.1);
+        background: rgba(0,0,0,0.1);
     }
 </style>
 
@@ -268,7 +268,7 @@
     <a href="#prestasi" class="nav-link-mobile"><i data-lucide="award" class="w-4 h-4"></i>Prestasi</a>
     
     <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.06);">
-        <a href="{{ route('public.ppdb.index') }}" style="background: linear-gradient(135deg, #059669, #047857); color:white; justify-content:center; border-radius:12px; padding:0.9rem 1.5rem; font-weight:800; font-size:0.85rem; display:flex; text-shadow:none;">
+        <a href="{{ route('public.ppdb.index') }}" style="background: var(--unit-accent, #ffc629); color: #fff; color:white; justify-content:center; border-radius:12px; padding:0.9rem 1.5rem; font-weight:800; font-size:0.85rem; display:flex; text-shadow:none;">
             Daftar PPDB
         </a>
     </div>

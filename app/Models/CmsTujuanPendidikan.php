@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CmsKeunggulan extends Model
+class CmsTujuanPendidikan extends Model
 {
-    protected $table = 'cms_keunggulan';
+    protected $table = 'cms_tujuan_pendidikan';
 
     protected $fillable = [
         'icon',

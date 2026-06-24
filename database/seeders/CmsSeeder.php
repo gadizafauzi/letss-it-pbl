@@ -12,7 +12,7 @@ use App\Models\CmsMisiItem;
 use App\Models\CmsMarqueeItem;
 use App\Models\CmsStatistic;
 use App\Models\CmsProgram;
-use App\Models\CmsKeunggulan;
+use App\Models\CmsTujuanPendidikan;
 use App\Models\CmsTestimonial;
 use App\Models\CmsFaq;
 use App\Models\CmsSejarahItem;
@@ -262,8 +262,8 @@ class CmsSeeder extends Seeder
             CmsProgram::create($prog);
         }
 
-        // 9. Seed cms_keunggulan
-        $keunggulan = [
+        // 9. Seed cms_tujuan_pendidikan
+        $tujuanPendidikan = [
             ['icon' => 'book-marked', 'bg_color' => 'amber', 'title' => 'Kurikulum Merdeka + JSIT', 'description' => 'Mengintegrasikan kurikulum nasional Kurikulum Merdeka dengan kurikulum kekhasan JSIT.', 'order' => 0],
             ['icon' => 'monitor', 'bg_color' => 'emerald', 'title' => 'Laboratorium Komputer', 'description' => 'Fasilitas komputer modern penunjang praktikum TIK dan pemrograman dasar sejak dini.', 'order' => 1],
             ['icon' => 'users-2', 'bg_color' => 'blue', 'title' => 'Tenaga Pendidik Berdedikasi', 'description' => 'Asatidzah lulusan perguruan tinggi terkemuka, bersertifikat pendidik, dan hafizh.', 'order' => 2],
@@ -272,9 +272,9 @@ class CmsSeeder extends Seeder
             ['icon' => 'activity', 'bg_color' => 'cyan', 'title' => 'Ekstrakurikuler Variatif', 'description' => 'Panahan, berkuda, karate, robotik, seni kaligrafi, tilawah, sepak bola, dan pramuka.', 'order' => 5],
         ];
 
-        CmsKeunggulan::truncate();
-        foreach ($keunggulan as $item) {
-            CmsKeunggulan::create($item);
+        CmsTujuanPendidikan::truncate();
+        foreach ($tujuanPendidikan as $item) {
+            CmsTujuanPendidikan::create($item);
         }
 
         // 10. Seed cms_testimonials

@@ -11,12 +11,12 @@
                     <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
                         {{ $hero && $hero->title ? $hero->title : 'Penerimaan Peserta Didik Baru' }}
                     </h1>
-                    <p class="text-emerald-100/80 text-lg mb-8 max-w-lg">
+                    <p class="text-slate-100/80 text-lg mb-8 max-w-lg">
                         {{ $hero && $hero->subtitle ? $hero->subtitle : "Bergabunglah bersama SIT Mutiara Qur'an untuk masa depan putra-putri Anda yang lebih baik, berkarakter mulia, dan berprestasi." }}
                     </p>
                     
                     <div class="flex flex-wrap gap-4">
-                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#informasi' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-emerald-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#informasi' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                             <i data-lucide="info" class="w-4 h-4"></i> {{ $hero && $hero->button_text ? $hero->button_text : 'Lihat Informasi PPDB' }}
                         </a>
                         <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#brosur' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
@@ -33,7 +33,7 @@
                     <div class="w-full aspect-[4/3] rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl">
                         {{-- Menggunakan placeholder gambar sekolah / siswa belajar --}}
                         <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800' }}" alt="Kegiatan Belajar" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-emerald-900/20"></div>
+                        <div class="absolute inset-0 bg-[#002244]/20"></div>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16 reveal reveal-up">
                 <h2 class="section-title mx-auto">Timeline Pendaftaran</h2>
-                <p class="section-subtitle mx-auto text-center">Ikuti setiap tahap seleksi sesuai jadwal yang telah ditetapkan.</p>
+
             </div>
 
             @php
@@ -82,18 +82,18 @@
                 <div class="timeline-item-container reveal reveal-repeat {{ $revealClass }} {{ $delay }}">
                     <div class="timeline-node"></div>
                     <div class="timeline-content">
-                        <span class="inline-block px-3 py-1 mb-3 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">{{ strtoupper($j['tanggal']) }}</span>
-                        <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $j['judul'] }}</h3>
+                        <span class="inline-block px-3 py-1 mb-3 rounded-full text-xs font-bold bg-slate-50 text-[#003f88] border border-slate-100">{{ strtoupper($j['tanggal']) }}</span>
+                        <h3 class="text-lg font-bold text-[#003f88] mb-2">{{ $j['judul'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $j['desc'] }}</p>
                         <div>
                             @if(strtolower($j['status']) === 'dibuka')
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">🟢 {{ $j['status'] }}</span>
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🟢 {{ $j['status'] }}</span>
                             @elseif(strtolower($j['status']) === 'selesai')
                                 <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">✓ {{ $j['status'] }}</span>
                             @elseif(strtolower($j['status']) === 'segera')
                                 <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">⏳ {{ $j['status'] }}</span>
                             @else
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-600">🔵 {{ $j['status'] }}</span>
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🔵 {{ $j['status'] }}</span>
                             @endif
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                 <div class="timeline-item reveal reveal-repeat reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
                     <div class="timeline-dot">{{ $step['no'] }}</div>
                     <div class="pt-1">
-                        <h3 class="text-lg font-bold text-slate-800 mb-1">{{ $step['judul'] }}</h3>
+                        <h3 class="text-lg font-bold text-[#003f88] mb-1">{{ $step['judul'] }}</h3>
                         <p class="text-sm text-slate-500 leading-relaxed">{{ $step['desc'] }}</p>
                     </div>
                 </div>
@@ -152,9 +152,9 @@
     <section id="brosur" class="public-section py-16 bg-white scroll-mt-32">
         <div class="w-full max-w-7xl mx-auto">
             <div class="text-center mb-12 flex flex-col items-center">
-                <h2 class="section-title mx-auto reveal reveal-zoom text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 to-emerald-500 mb-2" style="transition-delay: 150ms;">Download Brosur Lengkap</h2>
-                <div class="h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-amber-400 rounded-full mb-6 reveal reveal-expand" style="transition-delay: 450ms;"></div>
-                <p class="section-subtitle mx-auto text-center max-w-2xl reveal reveal-up" style="transition-delay: 300ms;">Unduh brosur resmi untuk melihat informasi lengkap mengenai jadwal pendaftaran, timeline, syarat, biaya pendidikan, program unggulan, fasilitas sekolah, dan informasi penting lainnya.</p>
+                <h2 class="section-title mx-auto reveal reveal-zoom mb-2" style="transition-delay: 150ms;">Download Brosur Lengkap</h2>
+
+
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -179,13 +179,13 @@
                     <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm">
                         <i data-lucide="file-text" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-800 mb-2">{{ $brosur['title'] }}</h3>
+                    <h3 class="text-lg font-bold text-[#003f88] mb-2">{{ $brosur['title'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed mb-6 flex-grow">{{ $brosur['desc'] }}</p>
                     <div class="flex flex-col xl:flex-row gap-2 mt-auto">
-                        <a href="{{ $brosur['file'] }}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border-2 border-emerald-100 text-emerald-600 font-bold text-xs hover:bg-emerald-50 hover:border-emerald-200 transition-all duration-300">
+                        <a href="{{ $brosur['file'] }}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border-2 border-slate-100 text-[#003f88] font-bold text-xs hover:bg-slate-50 hover:border-slate-200 transition-all duration-300">
                             <i data-lucide="eye" class="w-4 h-4"></i> Lihat
                         </a>
-                        <a href="{{ $brosur['file'] }}" download class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-xs shadow-md shadow-emerald-200 hover:bg-emerald-600 transition-all duration-300">
+                        <a href="{{ $brosur['file'] }}" download class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-700 text-white font-bold text-xs shadow-md shadow-slate-200 hover:bg-[#003f88] transition-all duration-300">
                             <i data-lucide="download" class="w-4 h-4"></i> Unduh
                         </a>
                     </div>
@@ -197,7 +197,7 @@
             {{-- CTA --}}
             <div class="text-center mt-16 pt-10 border-t border-slate-100 reveal reveal-up delay-500">
                 <p class="text-slate-500 mb-4">Masih ada pertanyaan atau butuh bantuan pendaftaran?</p>
-                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '6282286204878' }}" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold shadow-lg shadow-emerald-200 hover:-translate-y-1 transition-all duration-300">
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '6282286204878' }}" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-slate-700 to-[#003f88] text-white font-bold shadow-lg shadow-slate-200 hover:-translate-y-1 transition-all duration-300">
                     <i data-lucide="message-circle" class="w-5 h-5"></i> Hubungi via WhatsApp
                 </a>
             </div>
@@ -211,16 +211,14 @@
     {{-- ===== FAQ ===== --}}
     <section id="faq" class="public-section py-20 bg-white relative overflow-hidden scroll-mt-32">
         {{-- Dekorasi background --}}
-        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-emerald-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-slate-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
         <div class="max-w-3xl mx-auto relative z-10">
             <div class="text-center mb-16 flex flex-col items-center">
-                <h2 class="section-title mx-auto faq-title transition-all duration-700 ease-out text-3xl md:text-4xl font-extrabold text-slate-800 mb-2" style="opacity: 0; transform: scale(0.92) translateY(15px); transition-delay: 150ms;">Pertanyaan yang Sering Diajukan</h2>
-                <div class="faq-divider h-1.5 w-24 mx-auto bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full mb-6 transition-all duration-700 ease-out" style="opacity: 0; transform: scaleX(0); transition-delay: 300ms; transform-origin: center;"></div>
-                <p class="section-subtitle mx-auto text-center text-slate-500 faq-subtitle transition-all duration-700 ease-out max-w-xl" style="opacity: 0; transform: translateY(20px); transition-delay: 450ms;">
-                    Temukan jawaban untuk pertanyaan umum seputar Penerimaan Peserta Didik Baru (PPDB) SIT Mutiara Qur'an.
-                </p>
+                <h2 class="section-title mx-auto faq-title transition-all duration-700 ease-out text-3xl md:text-4xl font-extrabold text-[#003f88] mb-2" style="opacity: 0; transform: scale(0.92) translateY(15px); transition-delay: 150ms;">Pertanyaan yang Sering Diajukan</h2>
+                <div class="faq-divider h-1.5 w-24 mx-auto bg-gradient-to-r from-[#005fc0] to-slate-700 rounded-full mb-6 transition-all duration-700 ease-out" style="opacity: 0; transform: scaleX(0); transition-delay: 300ms; transform-origin: center;"></div>
+
             </div>
 
             <div class="space-y-4 faq-container">
@@ -243,18 +241,18 @@
                     $translateClass = $i % 2 === 0 ? '-translate-x-8' : 'translate-x-8';
                     $delay = 400 + ($i * 120); // 0.12s increments
                 @endphp
-                <div class="faq-item-interactive bg-white border border-slate-200 rounded-2xl p-5 md:p-6 cursor-pointer opacity-0 {{ $translateClass }} transition-all duration-700 ease-out hover:-translate-y-1 hover:border-emerald-300 hover:bg-emerald-50/30 hover:shadow-lg hover:shadow-emerald-100/50 group" 
+                <div class="faq-item-interactive bg-white border border-slate-200 rounded-2xl p-5 md:p-6 cursor-pointer opacity-0 {{ $translateClass }} transition-all duration-700 ease-out hover:-translate-y-1 hover:border-slate-400 hover:bg-slate-50/30 hover:shadow-lg hover:shadow-slate-100/50 group" 
                      style="transition-delay: {{ $delay }}ms;"
                      onclick="toggleInteractiveFaq(this)">
                     <div class="flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-full bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-100 group-hover:text-emerald-600 group-hover:border-emerald-200 transition-colors faq-icon-box">
+                        <div class="w-8 h-8 rounded-full bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-100 group-hover:text-[#003f88] group-hover:border-slate-200 transition-colors faq-icon-box">
                             <span class="text-sm font-bold">{{ $i + 1 }}</span>
                         </div>
                         <div class="flex-grow pt-1 w-full">
                             <div class="flex items-center justify-between gap-4">
-                                <h3 class="text-base md:text-lg font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">{{ $faq['q'] }}</h3>
-                                <div class="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-100 transition-colors faq-chevron-wrapper">
-                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-emerald-600 transition-transform duration-300 faq-chevron-icon"></i>
+                                <h3 class="text-base md:text-lg font-bold text-[#003f88] group-hover:text-[#003f88] transition-colors">{{ $faq['q'] }}</h3>
+                                <div class="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-100 transition-colors faq-chevron-wrapper">
+                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-[#003f88] transition-transform duration-300 faq-chevron-icon"></i>
                                 </div>
                             </div>
                             <div class="faq-answer-interactive grid transition-all duration-300 ease-in-out opacity-0" style="grid-template-rows: 0fr;">
@@ -276,29 +274,29 @@
     <style>
         /* Custom styles for FAQ interactive */
         .faq-item-interactive.is-active {
-            border-color: #34d399; /* emerald-400 */
-            background-color: #f0fdf4; /* emerald-50 */
-            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+            border-color: #34d399; /* slate-600 */
+            background-color: #f0fdf4; /* slate-50 */
+            box-shadow: 0 10px 25px -5px rgba(0, 63, 136, 0.1), 0 8px 10px -6px rgba(0, 63, 136, 0.1);
             border-left: 4px solid #10b981; /* Aksen hijau di kiri */
         }
         
         .faq-item-interactive.is-active .faq-icon-box {
-            background-color: #10b981; /* emerald-500 */
+            background-color: #10b981; /* slate-700 */
             color: white;
             border-color: #10b981;
         }
 
         .faq-item-interactive.is-active h3 {
-            color: #047857; /* emerald-700 */
+            color: #047857; /* slate-800 */
         }
 
         .faq-item-interactive.is-active .faq-chevron-wrapper {
-            background-color: #d1fae5; /* emerald-100 */
+            background-color: #d1fae5; /* slate-100 */
         }
         
         .faq-item-interactive.is-active .faq-chevron-icon {
             transform: rotate(180deg);
-            color: #059669; /* emerald-600 */
+            color: #059669; /* slate-800 */
         }
 
         .faq-item-interactive.is-active .faq-answer-interactive {
@@ -394,7 +392,7 @@
         <div class="w-full max-w-7xl mx-auto">
             <div class="text-center mb-12 reveal reveal-up">
                 <h2 class="section-title mx-auto">Kontak & Lokasi</h2>
-                <p class="section-subtitle mx-auto text-center">Kunjungi kami atau kirimkan pesan untuk pertanyaan seputar PPDB SIT Mutiara Qur'an.</p>
+
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
@@ -402,10 +400,10 @@
                 <div class="lg:col-span-6 flex flex-col gap-6 reveal reveal-left delay-100">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="feature-card p-5 bg-white">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-slate-50 text-[#003f88] flex items-center justify-center mb-3">
                                 <i data-lucide="map-pin" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-sm font-bold text-slate-800 mb-1">Alamat</h3>
+                            <h3 class="text-sm font-bold text-[#003f88] mb-1">Alamat</h3>
                             <p class="text-xs text-slate-500 leading-relaxed">
                                 {!! nl2br(e($settings['address'] ?? "Karasak, Jorong Pasar Baru,\nCupak, Gunung Talang, Solok")) !!}
                             </p>
@@ -414,21 +412,21 @@
                             <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-3">
                                 <i data-lucide="phone" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-sm font-bold text-slate-800 mb-1">Telepon / WA</h3>
+                            <h3 class="text-sm font-bold text-[#003f88] mb-1">Telepon / WA</h3>
                             <p class="text-xs text-slate-500">{{ $settings['phone'] ?? '+62 822-8620-4878' }}</p>
                         </div>
                         <div class="feature-card p-5 bg-white">
                             <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-3">
                                 <i data-lucide="mail" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-sm font-bold text-slate-800 mb-1">Email</h3>
+                            <h3 class="text-sm font-bold text-[#003f88] mb-1">Email</h3>
                             <p class="text-xs text-slate-500">{{ $settings['email'] ?? 'info@sitmutiaraquran.sch.id' }}</p>
                         </div>
                         <div class="feature-card p-5 bg-white">
                             <div class="w-10 h-10 rounded-xl bg-violet-50 text-violet-600 flex items-center justify-center mb-3">
                                 <i data-lucide="clock" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-sm font-bold text-slate-800 mb-1">Jam Layanan</h3>
+                            <h3 class="text-sm font-bold text-[#003f88] mb-1">Jam Layanan</h3>
                             <p class="text-xs text-slate-500">{!! nl2br(e($settings['operational_hours'] ?? "Senin – Jum'at: 08.00 – 14.00 WIB")) !!}</p>
                         </div>
                     </div>
@@ -451,7 +449,7 @@
                 {{-- FORMULIR KONTAK --}}
                 <div class="lg:col-span-6 bg-white p-8 rounded-3xl border border-slate-200/60 shadow-lg flex flex-col justify-between reveal reveal-right delay-200 premium-card">
                     <div>
-                        <h3 class="text-xl font-extrabold text-slate-800 mb-6">Formulir Kontak</h3>
+                        <h3 class="text-xl font-extrabold text-[#003f88] mb-6">Formulir Kontak</h3>
                         <form class="space-y-4">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Lengkap</label>
@@ -469,7 +467,7 @@
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Pesan</label>
                                 <textarea class="contact-input" rows="4" placeholder="Tulis pesan Anda di sini..."></textarea>
                             </div>
-                            <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-200 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-slate-700 to-[#003f88] text-white font-bold text-sm shadow-lg shadow-slate-200 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                                 <i data-lucide="send" class="w-4 h-4"></i> Kirim Pesan
                             </button>
                         </form>

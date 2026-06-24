@@ -8,7 +8,7 @@ use App\Models\CmsHeroSection;
 use App\Models\CmsStatistic;
 use App\Models\CmsWelcomeMessage;
 use App\Models\CmsProgram;
-use App\Models\CmsKeunggulan;
+use App\Models\CmsTujuanPendidikan;
 use App\Models\CmsTestimonial;
 use App\Models\CmsFaq;
 use App\Models\Student;
@@ -39,11 +39,14 @@ class PublicHomeController extends Controller
         
         $programs = CmsProgram::where('is_active', true)->orderBy('order')->get();
         
-        $keunggulan = CmsKeunggulan::where('is_active', true)->orderBy('order')->get();
+        $tujuanPendidikan = CmsTujuanPendidikan::where('is_active', true)->orderBy('order')->get();
         
         $testimonials = CmsTestimonial::where('is_active', true)->orderBy('order')->get();
         
         $faqs = CmsFaq::where('page', 'home')->where('is_active', true)->orderBy('order')->get();
+
+        $jenjang_image = \App\Models\CmsSetting::where('key', 'jenjang_pendidikan_image')->first();
+        $statistic_bg_image = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
 
         return view('public.home.index', compact(
 
@@ -51,9 +54,11 @@ class PublicHomeController extends Controller
             'statistics',
             'welcomeMessage',
             'programs',
-            'keunggulan',
+            'tujuanPendidikan',
             'testimonials',
-            'faqs'
+            'faqs',
+            'jenjang_image',
+            'statistic_bg_image'
         ));
     }
 }

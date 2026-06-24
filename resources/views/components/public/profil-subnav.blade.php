@@ -10,7 +10,7 @@
         @endphp
         
         @foreach($navs as $nav)
-            <a href="#{{ $nav['id'] }}" class="profil-nav-link whitespace-nowrap px-4 py-2 text-sm font-bold text-slate-500 hover:text-emerald-600 rounded-xl transition-all duration-300">
+            <a href="#{{ $nav['id'] }}" class="profil-nav-link whitespace-nowrap px-4 py-2 text-sm font-bold text-slate-500 hover:text-[#003f88] rounded-xl transition-all duration-300">
                 {{ $nav['label'] }}
             </a>
         @endforeach
@@ -19,8 +19,8 @@
 
 <style>
     .profil-nav-link.active {
-        background-color: #ecfdf5; /* emerald-50 */
-        color: #059669; /* emerald-600 */
+        background-color: #f8fafc; /* slate-50 */
+        color: #1e293b; /* slate-800 */
     }
 </style>
 

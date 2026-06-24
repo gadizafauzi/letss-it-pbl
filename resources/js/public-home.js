@@ -47,11 +47,11 @@
         window.filterPrograms = function(category, btn) {
             // Update active button styling
             document.querySelectorAll('.filter-btn').forEach(b => {
-                b.classList.remove('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-200');
+                b.classList.remove('bg-[#003f88]', 'text-white', 'shadow-md', 'shadow-slate-200');
                 b.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200', 'hover:bg-slate-50');
             });
             btn.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200', 'hover:bg-slate-50');
-            btn.classList.add('bg-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-200');
+            btn.classList.add('bg-[#003f88]', 'text-white', 'shadow-md', 'shadow-slate-200');
 
             // Hide all cards first simultaneously
             const cards = document.querySelectorAll('.program-item');
@@ -63,16 +63,24 @@
             // Wait for exit animation to almost finish, then re-layout
             setTimeout(() => {
                 let visibleCount = 0;
+                // Determine max limit based on screen size (1024px is 'lg' in Tailwind)
+                const maxLimit = window.innerWidth >= 1024 ? 6 : 4;
+
                 cards.forEach(card => {
                     const cardCat = card.getAttribute('data-category');
                     if (category === 'all' || cardCat === category) {
-                        card.style.display = 'block';
-                        // Re-trigger entrance animation with staggered delay
-                        setTimeout(() => {
-                            card.style.transitionDelay = (120 + (visibleCount * 150)) + 'ms';
-                            card.classList.add('is-visible');
+                        // Limit based on screen size when showing 'all'
+                        if (category === 'all' && visibleCount >= maxLimit) {
+                            card.style.display = 'none';
+                        } else {
+                            card.style.display = 'flex';
+                            // Re-trigger entrance animation with staggered delay
+                            setTimeout(() => {
+                                card.style.transitionDelay = (120 + (visibleCount * 150)) + 'ms';
+                                card.classList.add('is-visible');
+                            }, 50);
                             visibleCount++;
-                        }, 50);
+                        }
                     } else {
                         card.style.display = 'none';
                     }
@@ -92,9 +100,9 @@
                 dots.forEach((dot, idx) => {
                     if (idx === currentSlide) {
                         dot.classList.remove('bg-slate-300');
-                        dot.classList.add('bg-emerald-600', 'w-6', 'animate-pulse');
+                        dot.classList.add('bg-amber-500', 'w-6', 'animate-pulse');
                     } else {
-                        dot.classList.remove('bg-emerald-600', 'w-6', 'animate-pulse');
+                        dot.classList.remove('bg-amber-500', 'w-6', 'animate-pulse');
                         dot.classList.add('bg-slate-300');
                     }
                 });
