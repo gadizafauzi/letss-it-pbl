@@ -41,6 +41,12 @@ class ProfileController extends Controller
             'phone' => 'nullable|string|max:20',
             'last_education' => 'nullable|string|max:100',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ], [
+            'photo.mimes' => 'Foto harus berformat jpeg, png, atau jpg',
+            'photo.image' => 'File yang diunggah harus berupa gambar',
+            'photo.max' => 'Ukuran foto maksimal 2MB',
+            'photo.uploaded' => 'Gagal mengunggah foto. Pastikan ukuran file tidak melebihi batas (maks 2MB).',
+            'full_name.required' => 'Nama lengkap wajib diisi',
         ]);
 
         if ($request->hasFile('photo')) {

@@ -14,17 +14,6 @@
             </h1>
         </div>
 
-        {{-- ERROR VALIDATION --}}
-        @if ($errors->any())
-            <div class="bg-red-50 border border-red-200 rounded-2xl p-4">
-                <ul class="list-disc list-inside text-sm text-red-600 space-y-1">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <form action="{{ route('admin.guru.update', $teacher->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -77,6 +66,9 @@
                                         class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
+                                    @error('full_name')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -189,6 +181,9 @@
                                         class="w-full h-12 px-4 rounded-2xl bg-white/50 dark:bg-slate-900/50 border-sky-100 dark:border-slate-600
                                         focus:bg-white focus:outline-none focus:ring-4 focus:ring-blue-100
                                         focus:border-blue-400 text-sm transition-all">
+                                    @error('nip')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -216,6 +211,9 @@
                                         @endforeach
 
                                     </select>
+                                    @error('unit_id')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -243,6 +241,9 @@
                                         @endforeach
 
                                     </select>
+                                    @error('position_id')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -287,6 +288,9 @@
                                         </option>
 
                                     </select>
+                                    @error('employment_status')
+                                        <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                                    @enderror
 
                                 </div>
 
@@ -331,6 +335,9 @@
                             </label>
 
                         </div>
+                        @error('status')
+                            <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                        @enderror
 
                     </div>
 
@@ -374,6 +381,9 @@
                             file:bg-blue-50
                             file:text-blue-600
                             hover:file:bg-blue-100">
+                        @error('photo')
+                            <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                        @enderror
 
                         <p class="text-xs text-slate-500 mt-2">
                             Biarkan kosong jika tidak ingin mengganti foto.

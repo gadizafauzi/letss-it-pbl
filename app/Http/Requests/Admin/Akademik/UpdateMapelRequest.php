@@ -27,4 +27,23 @@ class UpdateMapelRequest extends FormRequest
             'subject_name' => 'required|string|max:100|unique:subjects,subject_name,' . $this->route('mapel')->id,
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'unit_id.required' => 'Unit wajib dipilih',
+            'unit_id.exists' => 'Unit tidak valid',
+            'subject_code.required' => 'Kode mapel wajib diisi',
+            'subject_code.max' => 'Kode mapel maksimal 20 karakter',
+            'subject_code.unique' => 'Kode mapel sudah digunakan',
+            'subject_name.required' => 'Nama mata pelajaran wajib diisi',
+            'subject_name.max' => 'Nama mata pelajaran maksimal 100 karakter',
+            'subject_name.unique' => 'Nama mata pelajaran sudah digunakan',
+        ];
+    }
 }

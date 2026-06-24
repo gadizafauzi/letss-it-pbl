@@ -45,4 +45,31 @@ class UpdateSiswaRequest extends FormRequest
             'status'           => 'required',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'full_name.required' => 'Nama lengkap wajib diisi',
+            'nis.required' => 'NIS wajib diisi',
+            'nis.unique'   => 'NIS sudah digunakan',
+            'nisn.required' => 'NISN wajib diisi',
+            'nisn.unique'   => 'NISN sudah digunakan',
+            'nik.digits'   => 'NIK harus 16 digit',
+            'nik.unique'   => 'NIK sudah digunakan',
+            'photo.image'  => 'Foto harus berformat jpg, jpeg, atau png',
+            'photo.mimes'  => 'Foto harus berformat jpg, jpeg, atau png',
+            'photo.max'    => 'Ukuran foto maksimal 2MB',
+            'status.required' => 'Status siswa wajib dipilih',
+            'unit_id.exists' => 'Unit pendidikan tidak valid',
+            'class_id.exists' => 'Kelas tidak valid',
+            'academic_year_id.exists' => 'Tahun ajaran tidak valid',
+            'gender.in' => 'Jenis kelamin tidak valid',
+            'birth_date.date' => 'Format tanggal lahir tidak valid',
+        ];
+    }
 }
