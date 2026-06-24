@@ -44,46 +44,11 @@
 
             <div class="space-y-2">
 
-                {{-- DATA SISWA --}}
-                <a href="{{ route('admin.siswa.index') }}"
-                    class="sidebar-link {{ request()->routeIs('admin.siswa.*') ? 'active-sidebar' : '' }}">
-                    <span class="sidebar-icon"><i data-lucide="graduation-cap"></i></span>
-                    <span class="sidebar-text">Data Siswa</span>
-                </a>
-
-                {{-- KENAIKAN KELAS --}}
-                <a href="{{ route('admin.kenaikan-kelas.index') }}"
-                    class="sidebar-link {{ request()->routeIs('admin.kenaikan-kelas.*') ? 'active-sidebar' : '' }}">
-                    <span class="sidebar-icon"><i data-lucide="arrow-up-right"></i></span>
-                    <span class="sidebar-text">Kenaikan Kelas</span>
-                </a>
-
-                {{-- DATA GURU --}}
-                <a href="{{ route('admin.guru.index') }}"
-                    class="sidebar-link {{ request()->routeIs('admin.guru.*') ? 'active-sidebar' : '' }}">
-                    <span class="sidebar-icon"><i data-lucide="badge-check"></i></span>
-                    <span class="sidebar-text">Data Guru</span>
-                </a>
-
-                {{-- DATA KELAS --}}
-                <a href="{{ route('admin.kelas.index') }}"
-                    class="sidebar-link {{ request()->routeIs('admin.kelas.*') ? 'active-sidebar' : '' }}">
-                    <span class="sidebar-icon"><i data-lucide="school"></i></span>
-                    <span class="sidebar-text">Data Kelas</span>
-                </a>
-
-                {{-- MATA PELAJARAN --}}
-                <a href="{{ route('admin.mapel.index') }}"
-                    class="sidebar-link {{ request()->routeIs('admin.mapel.*') ? 'active-sidebar' : '' }}">
-                    <span class="sidebar-icon"><i data-lucide="book-copy"></i></span>
-                    <span class="sidebar-text">Mata Pelajaran</span>
-                </a>
-
-                {{-- DATA MENGAJAR --}}
-                <a href="{{ route('admin.mengajar.index') }}"
-                    class="sidebar-link {{ request()->routeIs('admin.mengajar.*') ? 'active-sidebar' : '' }}">
-                    <span class="sidebar-icon"><i data-lucide="book-open"></i></span>
-                    <span class="sidebar-text">Data Mengajar</span>
+                {{-- UNIT PENDIDIKAN --}}
+                <a href="{{ route('admin.unit.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.unit.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="layers-3"></i></span>
+                    <span class="sidebar-text">Unit Pendidikan</span>
                 </a>
 
                 {{-- TAHUN AJARAN --}}
@@ -100,38 +65,76 @@
                     <span class="sidebar-text">Jabatan</span>
                 </a>
 
-                {{-- UNIT PENDIDIKAN --}}
-                <a href="{{ route('admin.unit.index') }}"
-                    class="sidebar-link {{ request()->routeIs('admin.unit.*') ? 'active-sidebar' : '' }}">
-                    <span class="sidebar-icon"><i data-lucide="layers-3"></i></span>
-                    <span class="sidebar-text">Unit Pendidikan</span>
+                {{-- MATA PELAJARAN --}}
+                <a href="{{ route('admin.mapel.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.mapel.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="book-copy"></i></span>
+                    <span class="sidebar-text">Mata Pelajaran</span>
                 </a>
 
-                {{-- KEUANGAN --}}
-                <div class="sidebar-title mt-4">Keuangan</div>
-                <div class="space-y-1 mt-2">
-                    <a href="{{ route('admin.jenis-tagihan.index') }}"
-                        class="sidebar-link {{ request()->routeIs('admin.jenis-tagihan.*') ? 'active-sidebar' : '' }}">
-                        <span class="sidebar-icon"><i data-lucide="tags"></i></span>
-                        <span class="sidebar-text">Jenis Tagihan</span>
-                    </a>
-                    <a href="{{ route('admin.tagihan.index') }}"
-                        class="sidebar-link {{ request()->routeIs('admin.tagihan.*') ? 'active-sidebar' : '' }}">
-                        <span class="sidebar-icon"><i data-lucide="receipt"></i></span>
-                        <span class="sidebar-text">Tagihan</span>
-                    </a>
-                    <a href="{{ route('admin.pembayaran.index') }}"
-                        class="sidebar-link {{ request()->routeIs('admin.pembayaran.*') || request()->routeIs('admin.rekening-sekolah.*') ? 'active-sidebar' : '' }}">
-                        <span class="sidebar-icon"><i data-lucide="wallet"></i></span>
-                        <span class="sidebar-text">Pembayaran</span>
-                    </a>
-                    <a href="{{ route('admin.laporan-keuangan.index') }}"
-                        class="sidebar-link {{ request()->routeIs('admin.laporan-keuangan.*') ? 'active-sidebar' : '' }}">
-                        <span class="sidebar-icon"><i data-lucide="bar-chart-3"></i></span>
-                        <span class="sidebar-text">Laporan Keuangan</span>
-                    </a>
-                </div>
+                {{-- DATA GURU --}}
+                <a href="{{ route('admin.guru.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.guru.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="badge-check"></i></span>
+                    <span class="sidebar-text">Data Guru</span>
+                </a>
 
+                {{-- DATA KELAS --}}
+                <a href="{{ route('admin.kelas.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.kelas.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="school"></i></span>
+                    <span class="sidebar-text">Data Kelas</span>
+                </a>
+
+                {{-- DATA MENGAJAR --}}
+                <a href="{{ route('admin.mengajar.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.mengajar.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="book-open"></i></span>
+                    <span class="sidebar-text">Data Mengajar</span>
+                </a>
+
+                {{-- DATA SISWA --}}
+                <a href="{{ route('admin.siswa.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.siswa.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="graduation-cap"></i></span>
+                    <span class="sidebar-text">Data Siswa</span>
+                </a>
+
+                {{-- KENAIKAN KELAS --}}
+                <a href="{{ route('admin.kenaikan-kelas.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.kenaikan-kelas.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="arrow-up-right"></i></span>
+                    <span class="sidebar-text">Kenaikan Kelas</span>
+                </a>
+
+            </div>
+        </div>
+
+        {{-- KEUANGAN --}}
+        <div>
+            <p class="sidebar-title">Keuangan</p>
+            <div class="space-y-2">
+                <a href="{{ route('admin.jenis-tagihan.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.jenis-tagihan.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="tags"></i></span>
+                    <span class="sidebar-text">Jenis Tagihan</span>
+                </a>
+                <a href="{{ route('admin.tagihan.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.tagihan.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="receipt"></i></span>
+                    <span class="sidebar-text">Tagihan</span>
+                </a>
+                <a href="{{ route('admin.pembayaran.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.pembayaran.*') || request()->routeIs('admin.rekening-sekolah.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="wallet"></i></span>
+                    <span class="sidebar-text">Pembayaran</span>
+                </a>
+                <a href="{{ route('admin.laporan-keuangan.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.laporan-keuangan.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="bar-chart-3"></i></span>
+                    <span class="sidebar-text">Laporan Keuangan</span>
+                </a>
+            </div>
         </div>
 
         {{-- CMS --}}

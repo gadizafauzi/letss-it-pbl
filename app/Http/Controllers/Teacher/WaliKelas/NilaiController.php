@@ -179,49 +179,50 @@ class NilaiController extends Controller
             }
         }
 
-        $filename = 'Rekap_Nilai_Kelas_' . str_replace(' ', '_', $class->class_name) . '_' . str_replace(' ', '_', $subjectName) . '.csv';
+        $filename = 'Rekap_Nilai_Kelas_' . str_replace(' ', '_', $class->class_name) . '_' . str_replace(' ', '_', $subjectName) . '.xlsx';
 
-        return response()->streamDownload(function () use ($students) {
-            $file = fopen('php://output', 'w');
-            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'NIS');
+        $sheet->setCellValue('C1', 'Nama Siswa');
+        $sheet->setCellValue('D1', 'UTS');
+        $sheet->setCellValue('E1', 'UAS');
+        $sheet->setCellValue('F1', 'Tugas');
+        $sheet->setCellValue('G1', 'Rata-rata');
+        $sheet->setCellValue('H1', 'Status');
+
+        $row = 2;
+        foreach ($students as $index => $student) {
+            $grade = $student->grades->first();
+            $uts = $grade?->mid_exam !== null ? round($grade->mid_exam) : '-'; 
+            $uas = $grade?->final_exam !== null ? round($grade->final_exam) : '-';
+            $tugas = $grade?->assignment_score !== null ? round($grade->assignment_score) : '-';
+            $average = $grade?->final_score !== null ? round($grade->final_score, 1) : '-';
             
-            fputcsv($file, [
-                'No',
-                'NIS',
-                'Nama Siswa',
-                'UTS',
-                'UAS',
-                'Tugas',
-                'Rata-rata',
-                'Status'
-            ], ';');
-
-            foreach ($students as $index => $student) {
-                $grade = $student->grades->first();
-                $uts = $grade?->mid_exam !== null ? round($grade->mid_exam) : '-'; 
-                $uas = $grade?->final_exam !== null ? round($grade->final_exam) : '-';
-                $tugas = $grade?->assignment_score !== null ? round($grade->assignment_score) : '-';
-                $average = $grade?->final_score !== null ? round($grade->final_score, 1) : '-';
-                
-                $statusText = 'Belum Dinilai';
-                if ($grade?->final_score !== null) {
-                    $statusText = $grade->final_score >= 75 ? 'Tuntas' : 'Belum Tuntas';
-                }
-
-                fputcsv($file, [
-                    $index + 1,
-                    $student->nis,
-                    $student->full_name,
-                    $uts,
-                    $uas,
-                    $tugas,
-                    $average,
-                    $statusText
-                ], ';');
+            $statusText = 'Belum Dinilai';
+            if ($grade?->final_score !== null) {
+                $statusText = $grade->final_score >= 75 ? 'Tuntas' : 'Belum Tuntas';
             }
 
-            fclose($file);
-        }, $filename, ['Content-Type' => 'text/csv; charset=UTF-8']);
+            $sheet->setCellValue('A' . $row, $index + 1);
+            $sheet->setCellValueExplicit('B' . $row, $student->nis, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+            $sheet->setCellValue('C' . $row, $student->full_name);
+            $sheet->setCellValue('D' . $row, $uts);
+            $sheet->setCellValue('E' . $row, $uas);
+            $sheet->setCellValue('F' . $row, $tugas);
+            $sheet->setCellValue('G' . $row, $average);
+            $sheet->setCellValue('H' . $row, $statusText);
+            $row++;
+        }
+
+        return response()->streamDownload(function () use ($spreadsheet) {
+            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+            $writer->save('php://output');
+        }, $filename, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
     }
 
     public function publish(Request $request)

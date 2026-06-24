@@ -97,31 +97,32 @@ class SiswaController extends Controller
             $students = $query->get();
         }
 
-        $filename = 'Data_Siswa_Kelas_' . str_replace(' ', '_', $class->class_name) . '.csv';
+        $filename = 'Data_Siswa_Kelas_' . str_replace(' ', '_', $class->class_name) . '.xlsx';
 
-        return response()->streamDownload(function () use ($students, $class) {
-            $file = fopen('php://output', 'w');
-            fprintf($file, chr(0xEF) . chr(0xBB) . chr(0xBF));
-            
-            fputcsv($file, [
-                'No',
-                'NIS',
-                'NISN',
-                'Nama Siswa',
-                'Status'
-            ], ';');
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'NIS');
+        $sheet->setCellValue('C1', 'NISN');
+        $sheet->setCellValue('D1', 'Nama Siswa');
+        $sheet->setCellValue('E1', 'Status');
 
-            foreach ($students as $index => $student) {
-                fputcsv($file, [
-                    $index + 1,
-                    $student->nis,
-                    $student->nisn,
-                    $student->full_name,
-                    $student->status === 'active' ? 'Aktif' : 'Tidak Aktif'
-                ], ';');
-            }
+        $row = 2;
+        foreach ($students as $index => $student) {
+            $sheet->setCellValue('A' . $row, $index + 1);
+            $sheet->setCellValueExplicit('B' . $row, $student->nis, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+            $sheet->setCellValueExplicit('C' . $row, $student->nisn, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
+            $sheet->setCellValue('D' . $row, $student->full_name);
+            $sheet->setCellValue('E' . $row, $student->status === 'active' ? 'Aktif' : 'Tidak Aktif');
+            $row++;
+        }
 
-            fclose($file);
-        }, $filename, ['Content-Type' => 'text/csv; charset=UTF-8']);
+        return response()->streamDownload(function () use ($spreadsheet) {
+            $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+            $writer->save('php://output');
+        }, $filename, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        ]);
     }
 }
