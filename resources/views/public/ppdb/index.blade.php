@@ -2,40 +2,58 @@
 @section('content')
     @vite(['resources/css/public-ppdb.css', 'resources/js/public-ppdb.js'])
 
-    <section class="page-hero relative overflow-hidden flex items-center min-h-[480px]">
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-16">
-            <div class="breadcrumb mb-8"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><span class="current">PPDB</span></div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section class="page-hero relative overflow-hidden flex items-center min-h-[320px] bg-[#001a33]">
+        
+        {{-- Background Image with Overlays --}}
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1510531704581-5b28709e20eb?auto=format&fit=crop&q=80&w=1920" alt="Hero Background" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#002244] via-[#002244]/95 to-[#002244]/60"></div>
+            <div class="absolute inset-0 backdrop-blur-[2px]"></div>
+        </div>
+
+        {{-- Decorative Glows for Hero --}}
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden mix-blend-color-dodge">
+            <div class="absolute -top-20 -left-20 w-96 h-96 bg-amber-500/20 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-10 right-10 w-[30rem] h-[30rem] bg-emerald-500/20 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-10">
+            <div class="breadcrumb mb-6"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><span class="current">PPDB</span></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 {{-- Kiri: Teks & CTA --}}
                 <div class="text-left reveal reveal-left delay-100">
-                    <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
+                    <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-4">
                         {{ $hero && $hero->title ? $hero->title : 'Penerimaan Peserta Didik Baru' }}
                     </h1>
-                    <p class="text-slate-100/80 text-lg mb-8 max-w-lg">
+                    <p class="text-slate-100/80 text-base sm:text-lg mb-6 max-w-lg">
                         {{ $hero && $hero->subtitle ? $hero->subtitle : "Bergabunglah bersama SIT Mutiara Qur'an untuk masa depan putra-putri Anda yang lebih baik, berkarakter mulia, dan berprestasi." }}
                     </p>
                     
                     <div class="flex flex-wrap gap-4">
-                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#informasi' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                            <i data-lucide="info" class="w-4 h-4"></i> {{ $hero && $hero->button_text ? $hero->button_text : 'Lihat Informasi PPDB' }}
+                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#informasi' }}" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            <i data-lucide="info" class="w-4 h-4"></i> {{ $hero && $hero->button_text ? $hero->button_text : 'Lihat Informasi' }}
                         </a>
-                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#brosur' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
-                            <i data-lucide="download" class="w-4 h-4"></i> {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Download Brosur' }}
-                        </a>
-                        <a href="#kontak" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
+                        <a href="#kontak" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
                             <i data-lucide="phone" class="w-4 h-4"></i> Hubungi Panitia
                         </a>
                     </div>
                 </div>
 
                 {{-- Kanan: Gambar --}}
-                <div class="hidden lg:block relative reveal reveal-right delay-200">
-                    <div class="w-full aspect-[4/3] rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl">
-                        {{-- Menggunakan placeholder gambar sekolah / siswa belajar --}}
-                        <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800' }}" alt="Kegiatan Belajar" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-[#002244]/20"></div>
+                @if($hero && !empty($hero->image))
+                <div class="hidden lg:block relative reveal reveal-right delay-200" id="hero-image-container">
+                    <div class="w-full aspect-[16/9] rounded-[24px] overflow-hidden border-4 border-white/10 shadow-2xl relative group">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
+
+                        <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}" 
+                             alt="Kegiatan Belajar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                             onerror="document.getElementById('hero-image-container').style.display='none';">
+                        
+                        <div class="absolute inset-0 bg-[#002244]/20 pointer-events-none z-10 transition-opacity duration-500 group-hover:opacity-50"></div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>
@@ -48,9 +66,14 @@
     {{-- ===== TIMELINE PENDAFTARAN (DIPINDAH KE SINI) ===== --}}
     <section id="timeline" class="public-section py-16 bg-white scroll-mt-32">
         <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16 reveal reveal-up">
-                <h2 class="section-title mx-auto">Timeline Pendaftaran</h2>
-
+            <div class="text-center mb-16 reveal reveal-up relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto relative z-10 text-[#002244] after:hidden">Timeline Pendaftaran</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
             @php
@@ -109,10 +132,21 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== ALUR PENDAFTARAN ===== --}}
-    <section id="alur" class="public-section py-16 scroll-mt-32">
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-12 reveal reveal-up">
-                <h2 class="section-title mx-auto">Langkah Mudah Mendaftar</h2>
+    <section id="alur" class="public-section py-20 bg-slate-50 relative overflow-hidden scroll-mt-32">
+        {{-- Decorative background --}}
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-16 reveal reveal-up relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto relative z-10 text-[#002244] after:hidden">Langkah Mudah Mendaftar</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-emerald-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
+                <p class="text-slate-500 mt-6 max-w-2xl mx-auto">Ikuti panduan ringkas berikut untuk mendaftarkan putra-putri Anda ke SIT Mutiara Qur'an.</p>
             </div>
             @php
                 $displayAlur = [];
@@ -128,13 +162,24 @@
                 }
             @endphp
             @if(!empty($displayAlur))
-            <div class="space-y-0">
+            <div class="space-y-6 relative before:absolute before:inset-0 before:ml-8 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
                 @foreach($displayAlur as $i => $step)
-                <div class="timeline-item reveal reveal-repeat reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
-                    <div class="timeline-dot">{{ $step['no'] }}</div>
-                    <div class="pt-1">
-                        <h3 class="text-lg font-bold text-[#003f88] mb-1">{{ $step['judul'] }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed">{{ $step['desc'] }}</p>
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal reveal-repeat reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
+                    
+                    {{-- Icon Badge --}}
+                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 text-[#003f88] font-black text-xl shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 group-hover:bg-[#003f88] group-hover:text-white transition-all duration-300 z-10">
+                        {{ $step['no'] }}
+                    </div>
+                    
+                    {{-- Card --}}
+                    <div class="w-[calc(100%-5.5rem)] md:w-[calc(50%-3rem)] bg-white p-6 rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-100 group-hover:-translate-y-1 group-hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="{{ $step['icon'] }}" class="w-4 h-4"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-[#003f88]">{{ $step['judul'] }}</h3>
+                        </div>
+                        <p class="text-sm text-slate-500 leading-relaxed pl-11">{{ $step['desc'] }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -151,13 +196,17 @@
     {{-- ===== BROSUR PPDB ===== --}}
     <section id="brosur" class="public-section py-16 bg-white scroll-mt-32">
         <div class="w-full max-w-7xl mx-auto">
-            <div class="text-center mb-12 flex flex-col items-center">
-                <h2 class="section-title mx-auto reveal reveal-zoom mb-2" style="transition-delay: 150ms;">Download Brosur Lengkap</h2>
-
-
+            <div class="text-center mb-12 flex flex-col items-center relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto reveal reveal-zoom mb-2 relative z-10 text-[#002244] after:hidden" style="transition-delay: 150ms;">Download Brosur Lengkap</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex flex-wrap justify-center gap-6">
                 @php
                     $displayBrosurs = [];
                     if (isset($brochures) && !$brochures->isEmpty()) {
@@ -175,18 +224,18 @@
                 @endphp
                 @if(!empty($displayBrosurs))
                 @foreach($displayBrosurs as $brosur)
-                <div class="bg-white rounded-[20px] p-6 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 flex flex-col group premium-card reveal {{ $brosur['reveal'] }} {{ $brosur['delay'] }}">
-                    <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div class="w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] bg-white rounded-[24px] p-6 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 flex flex-col h-full group premium-card reveal {{ $brosur['reveal'] }} {{ $brosur['delay'] }}">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-[#003f88] group-hover:text-white transition-all duration-300 shadow-sm">
                         <i data-lucide="file-text" class="w-6 h-6"></i>
                     </div>
                     <h3 class="text-lg font-bold text-[#003f88] mb-2">{{ $brosur['title'] }}</h3>
                     <p class="text-sm text-slate-500 leading-relaxed mb-6 flex-grow">{{ $brosur['desc'] }}</p>
-                    <div class="flex flex-col xl:flex-row gap-2 mt-auto">
-                        <a href="{{ $brosur['file'] }}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border-2 border-slate-100 text-[#003f88] font-bold text-xs hover:bg-slate-50 hover:border-slate-200 transition-all duration-300">
-                            <i data-lucide="eye" class="w-4 h-4"></i> Lihat
+                    <div class="grid grid-cols-2 gap-2 mt-auto">
+                        <a href="{{ $brosur['file'] }}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-1.5 px-2 py-2.5 rounded-xl border-2 border-slate-100 text-[#003f88] font-bold text-[11px] sm:text-xs hover:bg-slate-50 hover:border-slate-200 transition-all duration-300">
+                            <i data-lucide="eye" class="w-3.5 h-3.5"></i> Lihat
                         </a>
-                        <a href="{{ $brosur['file'] }}" download class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-700 text-white font-bold text-xs shadow-md shadow-slate-200 hover:bg-[#003f88] transition-all duration-300">
-                            <i data-lucide="download" class="w-4 h-4"></i> Unduh
+                        <a href="{{ $brosur['file'] }}" download class="flex-1 inline-flex items-center justify-center gap-1.5 px-2 py-2.5 rounded-xl bg-slate-700 text-white font-bold text-[11px] sm:text-xs shadow-md shadow-slate-200 hover:bg-[#003f88] transition-all duration-300">
+                            <i data-lucide="download" class="w-3.5 h-3.5"></i> Unduh
                         </a>
                     </div>
                 </div>
@@ -197,7 +246,7 @@
             {{-- CTA --}}
             <div class="text-center mt-16 pt-10 border-t border-slate-100 reveal reveal-up delay-500">
                 <p class="text-slate-500 mb-4">Masih ada pertanyaan atau butuh bantuan pendaftaran?</p>
-                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '6282286204878' }}" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-slate-700 to-[#003f88] text-white font-bold shadow-lg shadow-slate-200 hover:-translate-y-1 transition-all duration-300">
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '6282286204878' }}" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#003f88] text-white font-bold shadow-lg shadow-[#003f88]/20 hover:-translate-y-1 hover:shadow-xl hover:bg-[#002244] transition-all duration-300">
                     <i data-lucide="message-circle" class="w-5 h-5"></i> Hubungi via WhatsApp
                 </a>
             </div>
@@ -215,10 +264,14 @@
         <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
         <div class="max-w-3xl mx-auto relative z-10">
-            <div class="text-center mb-16 flex flex-col items-center">
-                <h2 class="section-title mx-auto faq-title transition-all duration-700 ease-out text-3xl md:text-4xl font-extrabold text-[#003f88] mb-2" style="opacity: 0; transform: scale(0.92) translateY(15px); transition-delay: 150ms;">Pertanyaan yang Sering Diajukan</h2>
-                <div class="faq-divider h-1.5 w-24 mx-auto bg-gradient-to-r from-[#005fc0] to-slate-700 rounded-full mb-6 transition-all duration-700 ease-out" style="opacity: 0; transform: scaleX(0); transition-delay: 300ms; transform-origin: center;"></div>
-
+            <div class="text-center mb-16 flex flex-col items-center relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto faq-title transition-all duration-700 ease-out text-3xl md:text-4xl font-extrabold text-[#002244] relative z-10 mb-2 after:hidden" style="opacity: 0; transform: scale(0.92) translateY(15px); transition-delay: 150ms;">Pertanyaan yang Sering Diajukan</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-emerald-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
             <div class="space-y-4 faq-container">
@@ -274,29 +327,29 @@
     <style>
         /* Custom styles for FAQ interactive */
         .faq-item-interactive.is-active {
-            border-color: #34d399; /* slate-600 */
-            background-color: #f0fdf4; /* slate-50 */
+            border-color: #fbbf24; /* amber-400 */
+            background-color: #fffbeb; /* amber-50 */
             box-shadow: 0 10px 25px -5px rgba(0, 63, 136, 0.1), 0 8px 10px -6px rgba(0, 63, 136, 0.1);
-            border-left: 4px solid #10b981; /* Aksen hijau di kiri */
+            border-left: 4px solid #d97706; /* amber-600 */
         }
         
         .faq-item-interactive.is-active .faq-icon-box {
-            background-color: #10b981; /* slate-700 */
+            background-color: #d97706; /* amber-600 */
             color: white;
-            border-color: #10b981;
+            border-color: #d97706;
         }
 
         .faq-item-interactive.is-active h3 {
-            color: #047857; /* slate-800 */
+            color: #92400e; /* amber-800 */
         }
 
         .faq-item-interactive.is-active .faq-chevron-wrapper {
-            background-color: #d1fae5; /* slate-100 */
+            background-color: #fde68a; /* amber-200 */
         }
         
         .faq-item-interactive.is-active .faq-chevron-icon {
             transform: rotate(180deg);
-            color: #059669; /* slate-800 */
+            color: #92400e; /* amber-800 */
         }
 
         .faq-item-interactive.is-active .faq-answer-interactive {
@@ -388,11 +441,20 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== LOKASI SEKOLAH (MAPS) & HUBUNGI KAMI ===== --}}
-    <section id="kontak" class="public-section py-16 bg-slate-50/50 scroll-mt-32">
-        <div class="w-full max-w-7xl mx-auto">
-            <div class="text-center mb-12 reveal reveal-up">
-                <h2 class="section-title mx-auto">Kontak & Lokasi</h2>
+    <section id="kontak" class="public-section py-20 bg-slate-50 relative overflow-hidden scroll-mt-32">
+        {{-- Decorative background --}}
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
+        <div class="w-full max-w-7xl mx-auto relative z-10">
+            <div class="text-center mb-12 reveal reveal-up relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto relative z-10 text-[#002244] after:hidden">Kontak & Lokasi</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-emerald-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
