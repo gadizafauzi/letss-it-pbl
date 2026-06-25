@@ -143,7 +143,7 @@
 /* Card Timeline Container */
 .timeline-item-container {
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     width: 100%;
     display: flex;
     justify-content: flex-end; /* Mobile: content at right */
@@ -181,8 +181,8 @@
 .timeline-content {
     width: 100%; /* Penuh sisa ruang di mobile */
     background: white;
-    border-radius: 16px;
-    padding: 1rem;
+    border-radius: 20px;
+    padding: 1.5rem;
     border: 1px solid #f1f5f9;
     box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03);
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -190,8 +190,8 @@
 
 .timeline-content:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 30px -10px rgba(0, 63, 136, 0.12);
-    border-color: #bfdbfe;
+    box-shadow: 0 20px 30px -10px rgba(16, 185, 129, 0.15);
+    border-color: #a7f3d0;
 }
 
 /* --- MEDIA QUERY DESKTOP (Kiri - Kanan) --- */
@@ -220,59 +220,32 @@
         width: 45%; /* Menyisakan 10% di tengah untuk node */
     }
 
-    /* Ganjil: Muncul di kiri, masuk dari kiri */
+    .timeline-opposite {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 45%;
+    }
+
+    /* Ganjil: Opposite di Kiri, Card di Kanan */
     .timeline-item-container:nth-child(odd) {
-        justify-content: flex-start;
+        flex-direction: row;
+    }
+    .timeline-item-container:nth-child(odd) .timeline-opposite {
+        text-align: right;
+        align-items: flex-end;
+        padding-right: 2rem;
     }
 
-    /* Genap: Muncul di kanan, masuk dari kanan */
+    /* Genap: Card di Kiri, Opposite di Kanan */
     .timeline-item-container:nth-child(even) {
-        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
+    .timeline-item-container:nth-child(even) .timeline-opposite {
+        text-align: left;
+        align-items: flex-start;
+        padding-left: 2rem;
     }
 
-    /* Panah kecil pada Card */
-    .timeline-content::before {
-        content: '';
-        position: absolute;
-        top: 26px;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        z-index: 1;
-    }
-
-    /* Panah border (outline) agar matching dengan border card */
-    .timeline-content::after {
-        content: '';
-        position: absolute;
-        top: 25px;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        z-index: 0;
-    }
-
-    /* Panah untuk Card di kiri (menunjuk ke kanan) */
-    .timeline-item-container:nth-child(odd) .timeline-content::before {
-        right: -9px;
-        border-width: 8px 0 8px 10px;
-        border-color: transparent transparent transparent white;
-    }
-    .timeline-item-container:nth-child(odd) .timeline-content::after {
-        right: -11px;
-        border-width: 9px 0 9px 11px;
-        border-color: transparent transparent transparent #f1f5f9; /* shadow border */
-    }
-
-    /* Panah untuk Card di kanan (menunjuk ke kiri) */
-    .timeline-item-container:nth-child(even) .timeline-content::before {
-        left: -9px;
-        border-width: 8px 10px 8px 0;
-        border-color: transparent white transparent transparent;
-    }
-    .timeline-item-container:nth-child(even) .timeline-content::after {
-        left: -11px;
-        border-width: 9px 11px 9px 0;
-        border-color: transparent #f1f5f9 transparent transparent;
-    }
+    /* Panah dihilangkan sesuai desain terbaru */
 }

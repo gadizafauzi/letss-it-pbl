@@ -23,6 +23,7 @@ class StorePpdbTimelineRequest extends FormRequest
     {
         return [
             'title'       => 'required|string|max:255',
+            'card_title'  => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'date_range'  => 'required|string|max:255',
             'status'      => 'required|in:Dibuka,Segera,Menunggu,Selesai',
