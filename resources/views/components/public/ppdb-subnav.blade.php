@@ -2,7 +2,6 @@
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex gap-4 overflow-x-auto py-3 no-scrollbar scroll-smooth">
         @php
             $navs = [
-                ['id' => 'informasi', 'label' => 'Informasi'],
                 ['id' => 'timeline', 'label' => 'Timeline'],
                 ['id' => 'alur', 'label' => 'Alur'],
                 ['id' => 'brosur', 'label' => 'Download Brosur'],
@@ -12,7 +11,7 @@
         @endphp
         
         @foreach($navs as $nav)
-            <a href="#{{ $nav['id'] }}" class="ppdb-nav-link whitespace-nowrap px-4 py-2 text-sm font-bold text-slate-500 hover:text-[#003f88] rounded-xl transition-all duration-300">
+            <a href="#{{ $nav['id'] }}" class="ppdb-nav-link relative whitespace-nowrap px-4 py-3 text-sm font-bold text-slate-500 hover:text-[#003f88] transition-all duration-300">
                 {{ $nav['label'] }}
             </a>
         @endforeach
@@ -20,9 +19,25 @@
 </div>
 
 <style>
+    .ppdb-nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 3px;
+        background-color: #f59e0b; /* amber-500 */
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+        border-radius: 3px 3px 0 0;
+    }
+    
     .ppdb-nav-link.active {
-        background-color: #f8fafc; /* slate-50 */
-        color: #1e293b; /* slate-800 */
+        color: #0f172a; /* slate-900 */
+    }
+    
+    .ppdb-nav-link.active::after {
+        width: calc(100% - 2rem);
     }
 </style>
 
