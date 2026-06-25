@@ -52,8 +52,7 @@
                                 <i data-lucide="edit" class="w-4 h-4"></i>
                             </button>
                             <form action="{{ route('admin.ppdb.step.destroy', $step->id) }}" method="POST"
-                                class="contents"
-                                onsubmit="return confirm('Yakin ingin menghapus alur \'{{ addslashes($step->title) }}\'?')">
+                                class="contents">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">

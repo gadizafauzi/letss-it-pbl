@@ -249,3 +249,20 @@
 
     /* Panah dihilangkan sesuai desain terbaru */
 }
+
+/* ==========================================================================
+   4. ANIMATED BACKGROUND
+   ========================================================================== */
+
+.bg-animate-pattern {
+    animation: movePattern 30s linear infinite;
+}
+
+@keyframes movePattern {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 400px 400px;
+    }
+}

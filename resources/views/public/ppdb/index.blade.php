@@ -109,23 +109,31 @@
                     {{-- Sisi Teks Floating (Desktop) --}}
                     <div class="timeline-opposite hidden md:flex flex-col justify-center">
                         <h3 class="text-lg md:text-xl font-bold text-[#002244] mb-1">{{ $j['judul'] }}</h3>
+                        @if(!empty($j['desc']))
                         <p class="text-sm text-slate-500">{{ $j['desc'] }}</p>
+                        @endif
                     </div>
 
                     {{-- Sisi Card --}}
-                    <div class="timeline-content">
-                        <span class="inline-block px-3 py-1 mb-3 rounded-full text-xs font-bold bg-slate-50 text-[#003f88] border border-slate-100">{{ strtoupper($j['tanggal']) }}</span>
-                        <h3 class="text-lg font-bold text-[#003f88] mb-2">{{ $j['judul'] }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $j['desc'] }}</p>
-                        <div>
-                            @if(strtolower($j['status']) === 'dibuka')
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🟢 {{ $j['status'] }}</span>
-                            @elseif(strtolower($j['status']) === 'selesai')
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">✓ {{ $j['status'] }}</span>
-                            @elseif(strtolower($j['status']) === 'segera')
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">⏳ {{ $j['status'] }}</span>
-                            @else
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🔵 {{ $j['status'] }}</span>
+                    <div class="timeline-content !p-0 overflow-hidden shadow-sm border border-slate-200 flex flex-col">
+                        <div class="bg-[#1e3a8a] text-white px-5 py-3 text-sm font-bold tracking-wide">
+                            {{ strtoupper($j['tanggal']) }}
+                        </div>
+                        <div class="p-5 bg-white flex-grow">
+                            <h3 class="text-base md:text-lg font-bold text-slate-800">{{ $j['card_title'] ?? $j['judul'] }}</h3>
+                            
+                            @if(!empty($j['status']))
+                            <div class="mt-4">
+                                @if(strtolower($j['status']) === 'dibuka')
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🟢 {{ $j['status'] }}</span>
+                                @elseif(strtolower($j['status']) === 'selesai')
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">✓ {{ $j['status'] }}</span>
+                                @elseif(strtolower($j['status']) === 'segera')
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">⏳ {{ $j['status'] }}</span>
+                                @else
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🔵 {{ $j['status'] }}</span>
+                                @endif
+                            </div>
                             @endif
                         </div>
                     </div>
@@ -141,17 +149,13 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== ALUR PENDAFTARAN ===== --}}
-    <section id="alur" class="public-section py-20 bg-slate-50 relative overflow-hidden scroll-mt-32">
-        {{-- Decorative background --}}
-        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-400 rounded-full blur-3xl opacity-20 pointer-events-none z-0"></div>
-        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-400 rounded-full blur-3xl opacity-20 pointer-events-none z-0"></div>
-
+    <section id="alur" class="public-section py-20 bg-gradient-to-r from-[#002244]/95 via-[#002244]/80 to-transparent backdrop-blur-sm relative overflow-hidden scroll-mt-32">
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="text-center mb-10 reveal reveal-up relative z-10">
                 <div class="inline-block relative">
                     <h2 class="section-title light mx-auto relative z-10 after:hidden">Langkah Mudah Mendaftar</h2>
                     {{-- Decorative Underline --}}
-                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-emerald-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                    <svg class="absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0 opacity-100" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
                         <path d="M5 15Q50 5 100 10T195 15" />
                     </svg>
                 </div>
@@ -170,24 +174,24 @@
                 }
             @endphp
             @if(!empty($displayAlur))
-            <div class="space-y-6 relative before:absolute before:inset-0 before:ml-8 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-300/50 before:to-transparent">
+            <div class="space-y-6 relative before:absolute before:inset-0 before:ml-8 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/30 before:to-transparent">
                 @foreach($displayAlur as $i => $step)
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal reveal-repeat reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
                     
                     {{-- Icon Badge --}}
-                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 text-[#003f88] font-black text-xl shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 group-hover:bg-[#003f88] group-hover:text-white transition-all duration-300 z-10">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-[#003f88] border-[3px] border-amber-400 text-white font-black text-xl shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 group-hover:bg-[#002244] shadow-lg shadow-black/20 transition-all duration-300 z-10">
                         {{ $step['no'] }}
                     </div>
                     
                     {{-- Card --}}
-                    <div class="w-[calc(100%-5.5rem)] md:w-[calc(50%-3rem)] bg-white p-6 rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-100 group-hover:-translate-y-1 group-hover:shadow-xl transition-all duration-300">
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                                <i data-lucide="{{ $step['icon'] }}" class="w-4 h-4"></i>
+                    <div class="w-[calc(100%-5.5rem)] md:w-[calc(50%-3rem)] bg-white/95 backdrop-blur-sm p-6 rounded-3xl shadow-xl shadow-black/10 border border-white/20 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:shadow-black/20 transition-all duration-300">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="{{ $step['icon'] }}" class="w-5 h-5"></i>
                             </div>
-                            <h3 class="text-base font-bold text-[#003f88]">{{ $step['judul'] }}</h3>
+                            <h3 class="text-base md:text-lg font-extrabold text-[#002244]">{{ $step['judul'] }}</h3>
                         </div>
-                        <p class="text-xs text-slate-500 leading-relaxed pl-9">{{ $step['desc'] }}</p>
+                        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">{{ $step['desc'] }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -286,12 +290,12 @@
         <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-40 pointer-events-none z-0"></div>
         <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-40 pointer-events-none z-0"></div>
 
-        <div class="max-w-3xl mx-auto relative z-10">
+        <div class="max-w-4xl mx-auto relative z-10">
             <div class="text-center mb-16 flex flex-col items-center relative z-10">
                 <div class="inline-block relative">
                     <h2 class="section-title mx-auto faq-title transition-all duration-700 ease-out text-3xl md:text-4xl font-extrabold text-[#002244] relative z-10 mb-2 after:hidden" style="opacity: 0; transform: scale(0.92) translateY(15px); transition-delay: 150ms;">Pertanyaan yang Sering Diajukan</h2>
                     {{-- Decorative Underline --}}
-                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-emerald-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-400 z-0 opacity-80" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
                         <path d="M5 15Q50 5 100 10T195 15" />
                     </svg>
                 </div>
@@ -313,27 +317,30 @@
 
                 @foreach($displayFaqs as $i => $faq)
                 @php
-                    // Alternate slide directions: left, right, left, right
-                    $translateClass = $i % 2 === 0 ? '-translate-x-8' : 'translate-x-8';
-                    $delay = 400 + ($i * 120); // 0.12s increments
+                    $translateClass = $i % 2 === 0 ? '-translate-x-4' : 'translate-x-4';
+                    $delay = 400 + ($i * 100);
                 @endphp
-                <div class="faq-item-interactive bg-white border border-slate-200 rounded-2xl p-5 md:p-6 cursor-pointer opacity-0 {{ $translateClass }} transition-all duration-700 ease-out hover:-translate-y-1 hover:border-slate-400 hover:bg-slate-50/30 hover:shadow-lg hover:shadow-slate-100/50 group" 
+                <div class="faq-item-interactive bg-white border border-slate-100 rounded-3xl p-6 md:p-8 cursor-pointer opacity-0 {{ $translateClass }} transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#003f88]/20 hover:shadow-xl hover:shadow-[#003f88]/5 group relative overflow-hidden" 
                      style="transition-delay: {{ $delay }}ms;"
                      onclick="toggleInteractiveFaq(this)">
-                    <div class="flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-full bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-100 group-hover:text-[#003f88] group-hover:border-slate-200 transition-colors faq-icon-box">
-                            <span class="text-sm font-bold">{{ $i + 1 }}</span>
+                    
+                    {{-- Active Indicator Line --}}
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-amber-400 opacity-0 transition-opacity duration-300 faq-active-indicator"></div>
+
+                    <div class="flex items-start gap-4 md:gap-6 relative z-10">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center flex-shrink-0 group-hover:bg-[#003f88] group-hover:text-white group-hover:border-[#003f88] group-hover:shadow-lg group-hover:shadow-[#003f88]/20 transition-all duration-300 faq-icon-box">
+                            <span class="text-base md:text-lg font-black">{{ $i + 1 }}</span>
                         </div>
-                        <div class="flex-grow pt-1 w-full">
+                        <div class="flex-grow pt-1.5 w-full">
                             <div class="flex items-center justify-between gap-4">
-                                <h3 class="text-base md:text-lg font-bold text-[#003f88] group-hover:text-[#003f88] transition-colors">{{ $faq['q'] }}</h3>
-                                <div class="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-100 transition-colors faq-chevron-wrapper">
-                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-[#003f88] transition-transform duration-300 faq-chevron-icon"></i>
+                                <h3 class="text-base md:text-lg font-bold text-slate-800 group-hover:text-[#003f88] transition-colors leading-snug pr-4">{{ $faq['q'] }}</h3>
+                                <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-100 transition-colors faq-chevron-wrapper">
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-hover:text-amber-600 transition-transform duration-300 faq-chevron-icon"></i>
                                 </div>
                             </div>
-                            <div class="faq-answer-interactive grid transition-all duration-300 ease-in-out opacity-0" style="grid-template-rows: 0fr;">
+                            <div class="faq-answer-interactive grid transition-all duration-500 ease-in-out opacity-0" style="grid-template-rows: 0fr;">
                                 <div class="overflow-hidden">
-                                    <p class="text-sm md:text-base text-slate-600 leading-relaxed pt-4 pb-1 pr-8 border-t border-slate-100 mt-4">
+                                    <p class="text-sm md:text-base text-slate-600 leading-relaxed pt-5 pb-2 pr-8 border-t border-slate-100 mt-5">
                                         {{ $faq['a'] }}
                                     </p>
                                 </div>
@@ -350,29 +357,33 @@
     <style>
         /* Custom styles for FAQ interactive */
         .faq-item-interactive.is-active {
-            border-color: #fbbf24; /* amber-400 */
-            background-color: #fffbeb; /* amber-50 */
-            box-shadow: 0 10px 25px -5px rgba(0, 63, 136, 0.1), 0 8px 10px -6px rgba(0, 63, 136, 0.1);
-            border-left: 4px solid #d97706; /* amber-600 */
+            border-color: #ffc629; /* amber-400 */
+            background-color: #ffffff; 
+            box-shadow: 0 16px 40px -10px rgba(0, 34, 68, 0.1), 0 8px 16px -6px rgba(0, 34, 68, 0.05);
         }
         
+        .faq-item-interactive.is-active .faq-active-indicator {
+            opacity: 1;
+        }
+
         .faq-item-interactive.is-active .faq-icon-box {
-            background-color: #d97706; /* amber-600 */
+            background-color: #003f88;
             color: white;
-            border-color: #d97706;
+            border-color: #003f88;
+            box-shadow: 0 4px 14px rgba(0, 63, 136, 0.2);
         }
 
         .faq-item-interactive.is-active h3 {
-            color: #92400e; /* amber-800 */
+            color: #002244; 
         }
 
         .faq-item-interactive.is-active .faq-chevron-wrapper {
-            background-color: #fde68a; /* amber-200 */
+            background-color: #fef3c7; /* amber-100 */
         }
         
         .faq-item-interactive.is-active .faq-chevron-icon {
             transform: rotate(180deg);
-            color: #92400e; /* amber-800 */
+            color: #d97706; /* amber-600 */
         }
 
         .faq-item-interactive.is-active .faq-answer-interactive {

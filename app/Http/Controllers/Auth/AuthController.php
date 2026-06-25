@@ -23,6 +23,12 @@ class AuthController extends Controller
         $request->authenticate();
         $user = Auth::user();
 
+        // Cek status aktif
+        if ($user->status !== 'active') {
+            Auth::logout();
+            return back()->withErrors(['login' => 'Akun Anda sudah tidak aktif. Silakan hubungi Administrator.']);
+        }
+
         // Hanya siswa & guru boleh login di sini
         if ($user->role === 'admin') {
             Auth::logout();
@@ -48,6 +54,12 @@ class AuthController extends Controller
     {
         $request->authenticate();
         $user = Auth::user();
+
+        // Cek status aktif
+        if ($user->status !== 'active') {
+            Auth::logout();
+            return back()->withErrors(['login' => 'Akun admin Anda sudah tidak aktif.']);
+        }
 
         // Hanya admin boleh login di sini
         if ($user->role !== 'admin') {
@@ -95,6 +107,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password_baru)
         ]);
 
-        return back()->with('success', 'Password berhasil diperbarui.');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login')->with('success', 'Password berhasil diperbarui. Silakan login kembali.');
     }
 }
