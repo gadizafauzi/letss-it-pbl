@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Kontak & Maps')
 
@@ -7,13 +7,6 @@
     <h1 class="text-2xl font-bold text-slate-800 dark:text-slate-100">Pengaturan Kontak & Peta</h1>
     <p class="text-slate-500 mt-1 text-sm">Kelola informasi kontak dan lokasi sekolah yang akan tampil di halaman publik (Website & PPDB).</p>
 </div>
-
-@if (session('success'))
-    <div class="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center gap-3">
-        <i data-lucide="check-circle" class="w-5 h-5 text-emerald-500"></i>
-        <span class="font-medium">{{ session('success') }}</span>
-    </div>
-@endif
 
 <form action="{{ route('admin.kontak.update') }}" method="POST">
     @csrf

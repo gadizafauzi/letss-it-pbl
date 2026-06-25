@@ -51,7 +51,7 @@
                         <button type="button" onclick="editEkskul({{ $item->id }}, '{{ addslashes($item->title) }}', '{{ $item->icon }}', '{{ addslashes($item->description) }}', {{ $item->order }}, {{ $item->is_active ? 1 : 0 }})" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded-md">
                             <i data-lucide="edit" class="w-4 h-4"></i>
                         </button>
-                        <form action="{{ route('admin.unit-cms.ekskul.destroy', ['id' => $unit->id, 'ekskulId' => $item->id]) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus ekstrakurikuler ini?')">
+                        <form action="{{ route('admin.unit-cms.ekskul.destroy', ['id' => $unit->id, 'ekskulId' => $item->id]) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="p-1.5 text-red-600 hover:bg-red-50 rounded-md">

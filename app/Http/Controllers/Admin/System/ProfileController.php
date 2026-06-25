@@ -36,6 +36,10 @@ class ProfileController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('admin.profile.index')->with('success', 'Password berhasil diubah.');
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login')->with('success', 'Password berhasil diubah. Silakan login kembali.');
     }
 }
