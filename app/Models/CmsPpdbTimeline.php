@@ -10,6 +10,7 @@ class CmsPpdbTimeline extends Model
 
     protected $fillable = [
         'title',
+        'card_title',
         'description',
         'date_range',
         'status',

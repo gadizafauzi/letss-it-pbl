@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="173.2" viewBox="0 0 200 173.2">
+  <defs>
+    <pattern id="stripes" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+      <line x1="0" y1="5" x2="10" y2="5" stroke="#2C3E50" stroke-width="2" />
+    </pattern>
+  </defs>
+  
+  <!-- Row 1 -->
+  <!-- Triangle Down (Stripe) -->
+  <polygon points="0,0 100,0 50,86.6" fill="url(#stripes)" />
+  <!-- Triangle Down (Mint) -->
+  <polygon points="100,0 200,0 150,86.6" fill="#1ABC9C" />
+  <!-- Triangle Up (Coral) -->
+  <polygon points="50,86.6 150,86.6 100,0" fill="#E74C3C" />
+  <!-- Triangle Up (Yellow) -->
+  <polygon points="-50,86.6 50,86.6 0,0" fill="#F1C40F" />
+  <polygon points="150,86.6 250,86.6 200,0" fill="#F1C40F" />
+  
+  <!-- Row 2 -->
+  <!-- Triangle Up (Navy) -->
+  <polygon points="0,173.2 100,173.2 50,86.6" fill="#2C3E50" />
+  <!-- Triangle Up (Stripe) -->
+  <polygon points="100,173.2 200,173.2 150,86.6" fill="url(#stripes)" />
+  <!-- Triangle Down (Mint) -->
+  <polygon points="50,86.6 150,86.6 100,173.2" fill="#1ABC9C" />
+  <!-- Triangle Down (Yellow) -->
+  <polygon points="-50,86.6 50,86.6 0,173.2" fill="#F1C40F" />
+  <polygon points="150,86.6 250,86.6 200,173.2" fill="#F1C40F" />
+</svg>
