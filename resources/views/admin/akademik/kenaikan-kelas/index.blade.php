@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Kenaikan Kelas Massal')
 
@@ -11,19 +11,6 @@
     </div>
 
     {{-- Alert --}}
-    @if(session('success'))
-    <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center gap-3 shadow-sm">
-        <i data-lucide="check-circle" class="w-5 h-5"></i>
-        <p class="font-medium">{{ session('success') }}</p>
-    </div>
-    @endif
-
-    @if(session('error'))
-    <div class="p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 flex items-center gap-3 shadow-sm">
-        <i data-lucide="alert-circle" class="w-5 h-5"></i>
-        <p class="font-medium">{{ session('error') }}</p>
-    </div>
-    @endif
 
     <div class="p-4 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-amber-600 dark:text-amber-400 flex items-start gap-3 shadow-sm">
         <i data-lucide="alert-triangle" class="w-5 h-5 shrink-0 mt-0.5"></i>

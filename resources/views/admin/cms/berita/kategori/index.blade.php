@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
 <div class="space-y-5">
@@ -24,29 +24,6 @@
     </div>
 
     {{-- TOAST --}}
-    @if(session('success'))
-        <div id="toast-success"
-            class="fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl shadow-green-500/20
-                  bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 transition-all duration-500">
-            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-400 flex-shrink-0">
-                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-            </div>
-            <div class="mr-4">
-                <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100">Berhasil!</h4>
-                <p class="text-[13px] text-slate-600 dark:text-slate-400 mt-0.5">{{ session('success') }}</p>
-            </div>
-            <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 transition-colors">
-                <i data-lucide="x" class="w-[18px] h-[18px]"></i>
-            </button>
-        </div>
-        <script>setTimeout(() => { const t = document.getElementById('toast-success'); if(t) t.remove(); }, 4000);</script>
-    @endif
-    @if(session('error'))
-        <div class="flex items-center gap-3 p-4 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/30 text-red-700 dark:text-red-400 text-sm font-medium">
-            <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0"></i>
-            {{ session('error') }}
-        </div>
-    @endif
 
     {{-- TABLE --}}
     <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl overflow-hidden shadow-sm">
@@ -113,8 +90,7 @@
                                     <i data-lucide="square-pen" class="w-[14px] h-[14px]"></i>
                                 </button>
                                 {{-- Hapus --}}
-                                <form action="{{ route('admin.berita.kategori.destroy', $cat->id) }}" method="POST" class="inline"
-                                    onsubmit="return confirm('Hapus kategori \'{{ $cat->name }}\'? Kategori yang masih memiliki berita tidak dapat dihapus.')">
+                                <form action="{{ route('admin.berita.kategori.destroy', $cat->id) }}" method="POST" class="inline">
                                     @csrf @method('DELETE')
                                     <button type="submit"
                                         class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700

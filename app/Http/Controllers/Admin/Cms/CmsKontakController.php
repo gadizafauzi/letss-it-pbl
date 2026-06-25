@@ -17,7 +17,7 @@ class CmsKontakController extends Controller
 
     public function update(UpdateCmsKontakRequest $request)
     {
-        $keys = ['address', 'phone', 'whatsapp_number', 'email', 'operational_hours', 'maps_embed'];
+        $keys = ['address', 'phone', 'whatsapp_number', 'email', 'operational_hours', 'maps_embed', 'facebook', 'instagram', 'youtube'];
 
         foreach ($keys as $key) {
             CmsSetting::updateOrCreate(

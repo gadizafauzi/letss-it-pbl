@@ -2,40 +2,58 @@
 @section('content')
     @vite(['resources/css/public-ppdb.css', 'resources/js/public-ppdb.js'])
 
-    <section class="page-hero relative overflow-hidden flex items-center min-h-[480px]">
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-16">
-            <div class="breadcrumb mb-8"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><span class="current">PPDB</span></div>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section class="page-hero relative overflow-hidden flex items-center min-h-[320px] bg-[#001a33]">
+        
+        {{-- Background Image with Overlays --}}
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1510531704581-5b28709e20eb?auto=format&fit=crop&q=80&w=1920" alt="Hero Background" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#002244] via-[#002244]/95 to-[#002244]/60"></div>
+            <div class="absolute inset-0 backdrop-blur-[2px]"></div>
+        </div>
+
+        {{-- Decorative Glows for Hero --}}
+        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden mix-blend-color-dodge">
+            <div class="absolute -top-20 -left-20 w-96 h-96 bg-amber-500/20 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-10 right-10 w-[30rem] h-[30rem] bg-emerald-500/20 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-10">
+            <div class="breadcrumb mb-6"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><span class="current">PPDB</span></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 {{-- Kiri: Teks & CTA --}}
                 <div class="text-left reveal reveal-left delay-100">
-                    <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
+                    <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-4">
                         {{ $hero && $hero->title ? $hero->title : 'Penerimaan Peserta Didik Baru' }}
                     </h1>
-                    <p class="text-slate-100/80 text-lg mb-8 max-w-lg">
+                    <p class="text-slate-100/80 text-base sm:text-lg mb-6 max-w-lg">
                         {{ $hero && $hero->subtitle ? $hero->subtitle : "Bergabunglah bersama SIT Mutiara Qur'an untuk masa depan putra-putri Anda yang lebih baik, berkarakter mulia, dan berprestasi." }}
                     </p>
                     
                     <div class="flex flex-wrap gap-4">
-                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#informasi' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                            <i data-lucide="info" class="w-4 h-4"></i> {{ $hero && $hero->button_text ? $hero->button_text : 'Lihat Informasi PPDB' }}
+                        <a href="{{ $hero && $hero->button_link && $hero->button_link !== '#informasi' ? $hero->button_link : '#timeline' }}" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            <i data-lucide="info" class="w-4 h-4"></i> {{ $hero && $hero->button_text ? $hero->button_text : 'Lihat Informasi' }}
                         </a>
-                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#brosur' }}" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
-                            <i data-lucide="download" class="w-4 h-4"></i> {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Download Brosur' }}
-                        </a>
-                        <a href="#kontak" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
+                        <a href="#kontak" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-white/40 transition-all duration-300">
                             <i data-lucide="phone" class="w-4 h-4"></i> Hubungi Panitia
                         </a>
                     </div>
                 </div>
 
                 {{-- Kanan: Gambar --}}
-                <div class="hidden lg:block relative reveal reveal-right delay-200">
-                    <div class="w-full aspect-[4/3] rounded-[32px] overflow-hidden border-4 border-white/10 shadow-2xl">
-                        {{-- Menggunakan placeholder gambar sekolah / siswa belajar --}}
-                        <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800' }}" alt="Kegiatan Belajar" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-[#002244]/20"></div>
+                @if($hero && !empty($hero->image))
+                <div class="hidden lg:block relative reveal reveal-right delay-200" id="hero-image-container">
+                    <div class="w-full aspect-[16/9] rounded-[24px] overflow-hidden border-4 border-white/10 shadow-2xl relative group">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
+
+                        <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}" 
+                             alt="Kegiatan Belajar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                             onerror="document.getElementById('hero-image-container').style.display='none';">
+                        
+                        <div class="absolute inset-0 bg-[#002244]/20 pointer-events-none z-10 transition-opacity duration-500 group-hover:opacity-50"></div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>
@@ -48,9 +66,14 @@
     {{-- ===== TIMELINE PENDAFTARAN (DIPINDAH KE SINI) ===== --}}
     <section id="timeline" class="public-section py-16 bg-white scroll-mt-32">
         <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16 reveal reveal-up">
-                <h2 class="section-title mx-auto">Timeline Pendaftaran</h2>
-
+            <div class="text-center mb-16 reveal reveal-up relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto relative z-10 text-[#002244] after:hidden">Timeline Pendaftaran</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-emerald-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
             @php
@@ -58,10 +81,11 @@
                 if (isset($timeline) && !$timeline->isEmpty()) {
                     foreach ($timeline as $t) {
                         $displayTimeline[] = [
-                            'judul'   => $t->title,
-                            'desc'    => $t->description,
-                            'tanggal' => $t->date_range,
-                            'status'  => $t->status,
+                            'judul'      => $t->title,
+                            'card_title' => $t->card_title ?: $t->title, // Fallback to title
+                            'desc'       => $t->description,
+                            'tanggal'    => $t->date_range,
+                            'status'     => $t->status,
                         ];
                     }
                 }
@@ -81,19 +105,35 @@
                 @endphp
                 <div class="timeline-item-container reveal reveal-repeat {{ $revealClass }} {{ $delay }}">
                     <div class="timeline-node"></div>
-                    <div class="timeline-content">
-                        <span class="inline-block px-3 py-1 mb-3 rounded-full text-xs font-bold bg-slate-50 text-[#003f88] border border-slate-100">{{ strtoupper($j['tanggal']) }}</span>
-                        <h3 class="text-lg font-bold text-[#003f88] mb-2">{{ $j['judul'] }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $j['desc'] }}</p>
-                        <div>
-                            @if(strtolower($j['status']) === 'dibuka')
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🟢 {{ $j['status'] }}</span>
-                            @elseif(strtolower($j['status']) === 'selesai')
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">✓ {{ $j['status'] }}</span>
-                            @elseif(strtolower($j['status']) === 'segera')
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">⏳ {{ $j['status'] }}</span>
-                            @else
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🔵 {{ $j['status'] }}</span>
+                    
+                    {{-- Sisi Teks Floating (Desktop) --}}
+                    <div class="timeline-opposite hidden md:flex flex-col justify-center">
+                        <h3 class="text-lg md:text-xl font-bold text-[#002244] mb-1">{{ $j['judul'] }}</h3>
+                        @if(!empty($j['desc']))
+                        <p class="text-sm text-slate-500">{{ $j['desc'] }}</p>
+                        @endif
+                    </div>
+
+                    {{-- Sisi Card --}}
+                    <div class="timeline-content !p-0 overflow-hidden shadow-sm border border-slate-200 flex flex-col">
+                        <div class="bg-[#1e3a8a] text-white px-5 py-3 text-sm font-bold tracking-wide">
+                            {{ strtoupper($j['tanggal']) }}
+                        </div>
+                        <div class="p-5 bg-white flex-grow">
+                            <h3 class="text-base md:text-lg font-bold text-slate-800">{{ $j['card_title'] ?? $j['judul'] }}</h3>
+                            
+                            @if(!empty($j['status']))
+                            <div class="mt-4">
+                                @if(strtolower($j['status']) === 'dibuka')
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🟢 {{ $j['status'] }}</span>
+                                @elseif(strtolower($j['status']) === 'selesai')
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">✓ {{ $j['status'] }}</span>
+                                @elseif(strtolower($j['status']) === 'segera')
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">⏳ {{ $j['status'] }}</span>
+                                @else
+                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🔵 {{ $j['status'] }}</span>
+                                @endif
+                            </div>
                             @endif
                         </div>
                     </div>
@@ -109,10 +149,16 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== ALUR PENDAFTARAN ===== --}}
-    <section id="alur" class="public-section py-16 scroll-mt-32">
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-12 reveal reveal-up">
-                <h2 class="section-title mx-auto">Langkah Mudah Mendaftar</h2>
+    <section id="alur" class="public-section py-20 bg-gradient-to-r from-[#002244]/95 via-[#002244]/80 to-transparent backdrop-blur-sm relative overflow-hidden scroll-mt-32">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-10 reveal reveal-up relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title light mx-auto relative z-10 after:hidden">Langkah Mudah Mendaftar</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0 opacity-100" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
             @php
                 $displayAlur = [];
@@ -128,13 +174,24 @@
                 }
             @endphp
             @if(!empty($displayAlur))
-            <div class="space-y-0">
+            <div class="space-y-6 relative before:absolute before:inset-0 before:ml-8 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/30 before:to-transparent">
                 @foreach($displayAlur as $i => $step)
-                <div class="timeline-item reveal reveal-repeat reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
-                    <div class="timeline-dot">{{ $step['no'] }}</div>
-                    <div class="pt-1">
-                        <h3 class="text-lg font-bold text-[#003f88] mb-1">{{ $step['judul'] }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed">{{ $step['desc'] }}</p>
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal reveal-repeat reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
+                    
+                    {{-- Icon Badge --}}
+                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-[#003f88] border-[3px] border-amber-400 text-white font-black text-xl shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 group-hover:bg-[#002244] shadow-lg shadow-black/20 transition-all duration-300 z-10">
+                        {{ $step['no'] }}
+                    </div>
+                    
+                    {{-- Card --}}
+                    <div class="w-[calc(100%-5.5rem)] md:w-[calc(50%-3rem)] bg-white/95 backdrop-blur-sm p-6 rounded-3xl shadow-xl shadow-black/10 border border-white/20 group-hover:-translate-y-1 group-hover:shadow-2xl group-hover:shadow-black/20 transition-all duration-300">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-50 to-amber-100 border border-amber-200 text-amber-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="{{ $step['icon'] }}" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-base md:text-lg font-extrabold text-[#002244]">{{ $step['judul'] }}</h3>
+                        </div>
+                        <p class="text-xs md:text-sm text-slate-600 leading-relaxed">{{ $step['desc'] }}</p>
                     </div>
                 </div>
                 @endforeach
@@ -149,15 +206,19 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== BROSUR PPDB ===== --}}
-    <section id="brosur" class="public-section py-16 bg-white scroll-mt-32">
-        <div class="w-full max-w-7xl mx-auto">
-            <div class="text-center mb-12 flex flex-col items-center">
-                <h2 class="section-title mx-auto reveal reveal-zoom mb-2" style="transition-delay: 150ms;">Download Brosur Lengkap</h2>
-
-
+    <section id="brosur" class="py-16 bg-slate-50 scroll-mt-32">
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div class="text-center mb-12 flex flex-col items-center relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto reveal reveal-zoom mb-2 relative z-10 text-[#002244] after:hidden" style="transition-delay: 150ms;">Download Brosur Lengkap</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="flex flex-wrap justify-start gap-6">
                 @php
                     $displayBrosurs = [];
                     if (isset($brochures) && !$brochures->isEmpty()) {
@@ -175,19 +236,30 @@
                 @endphp
                 @if(!empty($displayBrosurs))
                 @foreach($displayBrosurs as $brosur)
-                <div class="bg-white rounded-[20px] p-6 shadow-lg shadow-slate-200/50 border border-slate-100 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-2 transition-all duration-300 flex flex-col group premium-card reveal {{ $brosur['reveal'] }} {{ $brosur['delay'] }}">
-                    <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-500 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300 shadow-sm">
-                        <i data-lucide="file-text" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-[#003f88] mb-2">{{ $brosur['title'] }}</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed mb-6 flex-grow">{{ $brosur['desc'] }}</p>
-                    <div class="flex flex-col xl:flex-row gap-2 mt-auto">
-                        <a href="{{ $brosur['file'] }}" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border-2 border-slate-100 text-[#003f88] font-bold text-xs hover:bg-slate-50 hover:border-slate-200 transition-all duration-300">
-                            <i data-lucide="eye" class="w-4 h-4"></i> Lihat
-                        </a>
-                        <a href="{{ $brosur['file'] }}" download class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-700 text-white font-bold text-xs shadow-md shadow-slate-200 hover:bg-[#003f88] transition-all duration-300">
-                            <i data-lucide="download" class="w-4 h-4"></i> Unduh
-                        </a>
+                <div class="w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] relative bg-white rounded-[24px] p-6 sm:p-8 shadow-xl shadow-slate-200/40 border border-slate-100 hover:shadow-2xl hover:shadow-slate-300/60 hover:-translate-y-3 transition-all duration-500 flex flex-col h-full group premium-card reveal {{ $brosur['reveal'] }} {{ $brosur['delay'] }} overflow-hidden">
+                    {{-- Decorative Background Elements --}}
+                    <div class="absolute -right-8 -top-8 w-32 h-32 bg-gradient-to-br from-amber-100/50 to-transparent rounded-full blur-2xl group-hover:bg-amber-200/50 transition-colors duration-500 z-0"></div>
+                    <div class="absolute -left-8 -bottom-8 w-32 h-32 bg-gradient-to-tr from-blue-100/50 to-transparent rounded-full blur-2xl group-hover:bg-blue-200/50 transition-colors duration-500 z-0"></div>
+                    
+                    {{-- Glowing Top Border --}}
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#003f88] via-emerald-400 to-amber-400 opacity-80 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+
+                    <div class="relative z-10 flex-grow flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 text-amber-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-amber-200/50 transition-all duration-500 border border-amber-100 shrink-0">
+                            <i data-lucide="file-text" class="w-7 h-7"></i>
+                        </div>
+                        
+                        <h3 class="text-xl font-extrabold text-[#002244] mb-3 group-hover:text-[#003f88] transition-colors duration-300">{{ $brosur['title'] }}</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed mb-8 flex-grow group-hover:text-slate-600 transition-colors duration-300">{{ $brosur['desc'] }}</p>
+                        
+                        <div class="flex flex-col gap-3 mt-auto">
+                            <a href="{{ $brosur['file'] }}" download class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#003f88] to-[#002244] text-white font-bold text-sm shadow-md shadow-[#003f88]/20 hover:shadow-lg hover:shadow-[#003f88]/40 hover:-translate-y-0.5 transition-all duration-300">
+                                <i data-lucide="download" class="w-4 h-4"></i> Unduh File
+                            </a>
+                            <a href="{{ $brosur['file'] }}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-[#003f88] font-bold text-sm hover:bg-white hover:border-[#003f88]/30 hover:shadow-sm hover:text-[#002244] transition-all duration-300">
+                                <i data-lucide="eye" class="w-4 h-4"></i> Pratinjau
+                            </a>
+                        </div>
                     </div>
                 </div>
                 @endforeach
@@ -197,7 +269,7 @@
             {{-- CTA --}}
             <div class="text-center mt-16 pt-10 border-t border-slate-100 reveal reveal-up delay-500">
                 <p class="text-slate-500 mb-4">Masih ada pertanyaan atau butuh bantuan pendaftaran?</p>
-                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '6282286204878' }}" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gradient-to-r from-slate-700 to-[#003f88] text-white font-bold shadow-lg shadow-slate-200 hover:-translate-y-1 transition-all duration-300">
+                <a href="https://wa.me/{{ $settings['whatsapp_number'] ?? '6282286204878' }}" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#003f88] text-white font-bold shadow-lg shadow-[#003f88]/20 hover:-translate-y-1 hover:shadow-xl hover:bg-[#002244] transition-all duration-300">
                     <i data-lucide="message-circle" class="w-5 h-5"></i> Hubungi via WhatsApp
                 </a>
             </div>
@@ -209,16 +281,24 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== FAQ ===== --}}
-    <section id="faq" class="public-section py-20 bg-white relative overflow-hidden scroll-mt-32">
+    <section id="faq" class="public-section py-20 relative overflow-hidden scroll-mt-32 bg-white">
+        {{-- Section-specific Pattern Parallax Background --}}
+        <div class="absolute inset-0 bg-fixed bg-center bg-repeat z-0 opacity-100" style="background-image: url('{{ asset('images/faq-pattern.svg') }}'); background-size: 200px;"></div>
+        {{-- Light Parallax Overlay --}}
+        <div class="absolute inset-0 bg-white/75 z-0"></div>
         {{-- Dekorasi background --}}
-        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-slate-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-40 pointer-events-none z-0"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-40 pointer-events-none z-0"></div>
 
-        <div class="max-w-3xl mx-auto relative z-10">
-            <div class="text-center mb-16 flex flex-col items-center">
-                <h2 class="section-title mx-auto faq-title transition-all duration-700 ease-out text-3xl md:text-4xl font-extrabold text-[#003f88] mb-2" style="opacity: 0; transform: scale(0.92) translateY(15px); transition-delay: 150ms;">Pertanyaan yang Sering Diajukan</h2>
-                <div class="faq-divider h-1.5 w-24 mx-auto bg-gradient-to-r from-[#005fc0] to-slate-700 rounded-full mb-6 transition-all duration-700 ease-out" style="opacity: 0; transform: scaleX(0); transition-delay: 300ms; transform-origin: center;"></div>
-
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="text-center mb-16 flex flex-col items-center relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto faq-title transition-all duration-700 ease-out text-3xl md:text-4xl font-extrabold text-[#002244] relative z-10 mb-2 after:hidden" style="opacity: 0; transform: scale(0.92) translateY(15px); transition-delay: 150ms;">Pertanyaan yang Sering Diajukan</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-amber-400 z-0 opacity-80" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
             <div class="space-y-4 faq-container">
@@ -237,27 +317,30 @@
 
                 @foreach($displayFaqs as $i => $faq)
                 @php
-                    // Alternate slide directions: left, right, left, right
-                    $translateClass = $i % 2 === 0 ? '-translate-x-8' : 'translate-x-8';
-                    $delay = 400 + ($i * 120); // 0.12s increments
+                    $translateClass = $i % 2 === 0 ? '-translate-x-4' : 'translate-x-4';
+                    $delay = 400 + ($i * 100);
                 @endphp
-                <div class="faq-item-interactive bg-white border border-slate-200 rounded-2xl p-5 md:p-6 cursor-pointer opacity-0 {{ $translateClass }} transition-all duration-700 ease-out hover:-translate-y-1 hover:border-slate-400 hover:bg-slate-50/30 hover:shadow-lg hover:shadow-slate-100/50 group" 
+                <div class="faq-item-interactive bg-white border border-slate-100 rounded-3xl p-6 md:p-8 cursor-pointer opacity-0 {{ $translateClass }} transition-all duration-500 ease-out hover:-translate-y-1 hover:border-[#003f88]/20 hover:shadow-xl hover:shadow-[#003f88]/5 group relative overflow-hidden" 
                      style="transition-delay: {{ $delay }}ms;"
                      onclick="toggleInteractiveFaq(this)">
-                    <div class="flex items-start gap-4">
-                        <div class="w-8 h-8 rounded-full bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-100 group-hover:text-[#003f88] group-hover:border-slate-200 transition-colors faq-icon-box">
-                            <span class="text-sm font-bold">{{ $i + 1 }}</span>
+                    
+                    {{-- Active Indicator Line --}}
+                    <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-amber-400 opacity-0 transition-opacity duration-300 faq-active-indicator"></div>
+
+                    <div class="flex items-start gap-4 md:gap-6 relative z-10">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-slate-50 border border-slate-100 text-slate-400 flex items-center justify-center flex-shrink-0 group-hover:bg-[#003f88] group-hover:text-white group-hover:border-[#003f88] group-hover:shadow-lg group-hover:shadow-[#003f88]/20 transition-all duration-300 faq-icon-box">
+                            <span class="text-base md:text-lg font-black">{{ $i + 1 }}</span>
                         </div>
-                        <div class="flex-grow pt-1 w-full">
+                        <div class="flex-grow pt-1.5 w-full">
                             <div class="flex items-center justify-between gap-4">
-                                <h3 class="text-base md:text-lg font-bold text-[#003f88] group-hover:text-[#003f88] transition-colors">{{ $faq['q'] }}</h3>
-                                <div class="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 group-hover:bg-slate-100 transition-colors faq-chevron-wrapper">
-                                    <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-[#003f88] transition-transform duration-300 faq-chevron-icon"></i>
+                                <h3 class="text-base md:text-lg font-bold text-slate-800 group-hover:text-[#003f88] transition-colors leading-snug pr-4">{{ $faq['q'] }}</h3>
+                                <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-100 transition-colors faq-chevron-wrapper">
+                                    <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-hover:text-amber-600 transition-transform duration-300 faq-chevron-icon"></i>
                                 </div>
                             </div>
-                            <div class="faq-answer-interactive grid transition-all duration-300 ease-in-out opacity-0" style="grid-template-rows: 0fr;">
+                            <div class="faq-answer-interactive grid transition-all duration-500 ease-in-out opacity-0" style="grid-template-rows: 0fr;">
                                 <div class="overflow-hidden">
-                                    <p class="text-sm md:text-base text-slate-600 leading-relaxed pt-4 pb-1 pr-8 border-t border-slate-100 mt-4">
+                                    <p class="text-sm md:text-base text-slate-600 leading-relaxed pt-5 pb-2 pr-8 border-t border-slate-100 mt-5">
                                         {{ $faq['a'] }}
                                     </p>
                                 </div>
@@ -274,29 +357,33 @@
     <style>
         /* Custom styles for FAQ interactive */
         .faq-item-interactive.is-active {
-            border-color: #34d399; /* slate-600 */
-            background-color: #f0fdf4; /* slate-50 */
-            box-shadow: 0 10px 25px -5px rgba(0, 63, 136, 0.1), 0 8px 10px -6px rgba(0, 63, 136, 0.1);
-            border-left: 4px solid #10b981; /* Aksen hijau di kiri */
+            border-color: #ffc629; /* amber-400 */
+            background-color: #ffffff; 
+            box-shadow: 0 16px 40px -10px rgba(0, 34, 68, 0.1), 0 8px 16px -6px rgba(0, 34, 68, 0.05);
         }
         
+        .faq-item-interactive.is-active .faq-active-indicator {
+            opacity: 1;
+        }
+
         .faq-item-interactive.is-active .faq-icon-box {
-            background-color: #10b981; /* slate-700 */
+            background-color: #003f88;
             color: white;
-            border-color: #10b981;
+            border-color: #003f88;
+            box-shadow: 0 4px 14px rgba(0, 63, 136, 0.2);
         }
 
         .faq-item-interactive.is-active h3 {
-            color: #047857; /* slate-800 */
+            color: #002244; 
         }
 
         .faq-item-interactive.is-active .faq-chevron-wrapper {
-            background-color: #d1fae5; /* slate-100 */
+            background-color: #fef3c7; /* amber-100 */
         }
         
         .faq-item-interactive.is-active .faq-chevron-icon {
             transform: rotate(180deg);
-            color: #059669; /* slate-800 */
+            color: #d97706; /* amber-600 */
         }
 
         .faq-item-interactive.is-active .faq-answer-interactive {
@@ -388,11 +475,20 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== LOKASI SEKOLAH (MAPS) & HUBUNGI KAMI ===== --}}
-    <section id="kontak" class="public-section py-16 bg-slate-50/50 scroll-mt-32">
-        <div class="w-full max-w-7xl mx-auto">
-            <div class="text-center mb-12 reveal reveal-up">
-                <h2 class="section-title mx-auto">Kontak & Lokasi</h2>
+    <section id="kontak" class="py-20 bg-slate-50 relative overflow-hidden scroll-mt-32">
+        {{-- Decorative background --}}
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
+        <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+            <div class="text-center mb-12 reveal reveal-up relative z-10">
+                <div class="inline-block relative">
+                    <h2 class="section-title mx-auto relative z-10 text-[#002244] after:hidden">Kontak & Lokasi</h2>
+                    {{-- Decorative Underline --}}
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-emerald-400 z-0 opacity-60" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
@@ -450,27 +546,48 @@
                 <div class="lg:col-span-6 bg-white p-8 rounded-3xl border border-slate-200/60 shadow-lg flex flex-col justify-between reveal reveal-right delay-200 premium-card">
                     <div>
                         <h3 class="text-xl font-extrabold text-[#003f88] mb-6">Formulir Kontak</h3>
-                        <form class="space-y-4">
+                        <form id="contactForm" class="space-y-4" onsubmit="sendToWhatsApp(event)">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nama Lengkap</label>
-                                <input type="text" class="contact-input" placeholder="Masukkan nama lengkap Anda">
+                                <input type="text" id="contactName" class="contact-input" placeholder="Masukkan nama lengkap Anda" required>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Email</label>
-                                <input type="email" class="contact-input" placeholder="contoh@email.com">
+                                <input type="email" id="contactEmail" class="contact-input" placeholder="contoh@email.com">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Subjek</label>
-                                <input type="text" class="contact-input" placeholder="Perihal pesan Anda">
+                                <input type="text" id="contactSubject" class="contact-input" placeholder="Perihal pesan Anda" required>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Pesan</label>
-                                <textarea class="contact-input" rows="4" placeholder="Tulis pesan Anda di sini..."></textarea>
+                                <textarea id="contactMessage" class="contact-input" rows="4" placeholder="Tulis pesan Anda di sini..." required></textarea>
                             </div>
-                            <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-slate-700 to-[#003f88] text-white font-bold text-sm shadow-lg shadow-slate-200 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                                <i data-lucide="send" class="w-4 h-4"></i> Kirim Pesan
+                            <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-500/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/40 transition-all duration-300">
+                                <i class="fab fa-whatsapp text-lg"></i> Kirim via WhatsApp
                             </button>
                         </form>
+
+                        <script>
+                            function sendToWhatsApp(e) {
+                                e.preventDefault();
+                                
+                                const name = document.getElementById('contactName').value;
+                                const email = document.getElementById('contactEmail').value || '-';
+                                const subject = document.getElementById('contactSubject').value;
+                                const message = document.getElementById('contactMessage').value;
+                                
+                                const waText = `Halo Admin SIT Mutiara Qur'an, saya ingin bertanya tentang PPDB.\n\n*Nama:* ${name}\n*Email:* ${email}\n*Subjek:* ${subject}\n*Pesan:*\n${message}`;
+                                
+                                // Bersihkan nomor WA jika ada karakter selain angka
+                                let waNumber = "{{ $settings['whatsapp_number'] ?? '6282286204878' }}";
+                                waNumber = waNumber.replace(/\D/g, '');
+                                if(waNumber.startsWith('0')) waNumber = '62' + waNumber.slice(1);
+                                
+                                const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
+                                window.open(waUrl, '_blank');
+                            }
+                        </script>
                     </div>
                 </div>
             </div>

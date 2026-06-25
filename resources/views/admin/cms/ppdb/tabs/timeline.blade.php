@@ -64,8 +64,7 @@
                                 <i data-lucide="edit" class="w-4 h-4"></i>
                             </button>
                             <form action="{{ route('admin.ppdb.timeline.destroy', $item->id) }}" method="POST"
-                                class="contents"
-                                onsubmit="return confirm('Yakin ingin menghapus tahap \'{{ addslashes($item->title) }}\'?')">
+                                class="contents">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">
@@ -105,9 +104,15 @@
             @csrf
             <div class="space-y-4 mb-6">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Judul Tahap <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Judul Utama (Teks Samping) <span class="text-red-500">*</span></label>
                     <input type="text" name="title" required placeholder="Contoh: Tahap Pendaftaran"
                         class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Judul dalam Card (Opsional)</label>
+                    <input type="text" name="card_title" placeholder="Contoh: Pendaftaran Tim dan Submit Proposal"
+                        class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                    <p class="text-xs text-slate-500 mt-1">Jika dikosongkan, akan otomatis menggunakan Judul Utama.</p>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Deskripsi</label>
@@ -168,9 +173,15 @@
             @method('PUT')
             <div class="space-y-4 mb-6">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Judul Tahap <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Judul Utama (Teks Samping) <span class="text-red-500">*</span></label>
                     <input type="text" name="title" id="edit_timeline_title" required
                         class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Judul dalam Card (Opsional)</label>
+                    <input type="text" name="card_title" id="edit_timeline_card_title"
+                        class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                    <p class="text-xs text-slate-500 mt-1">Jika dikosongkan, akan otomatis menggunakan Judul Utama.</p>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Deskripsi</label>
@@ -222,6 +233,7 @@
         form.action = `/admin/cms/ppdb/timeline/${item.id}`;
 
         document.getElementById('edit_timeline_title').value       = item.title;
+        document.getElementById('edit_timeline_card_title').value  = item.card_title ?? '';
         document.getElementById('edit_timeline_description').value = item.description ?? '';
         document.getElementById('edit_timeline_date_range').value  = item.date_range;
         document.getElementById('edit_timeline_order').value       = item.order;

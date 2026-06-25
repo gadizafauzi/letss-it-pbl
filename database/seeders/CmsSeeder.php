@@ -52,9 +52,9 @@ class CmsSeeder extends Seeder
             ['key' => 'email', 'value' => 'info@sitmutiaraquran.sch.id', 'type' => 'text'],
             ['key' => 'phone', 'value' => '+62 822-8620-4878', 'type' => 'text'],
             ['key' => 'whatsapp_number', 'value' => '6282286204878', 'type' => 'text'],
-            ['key' => 'instagram', 'value' => 'https://instagram.com/sitmutiaraquran', 'type' => 'text'],
-            ['key' => 'youtube', 'value' => 'https://youtube.com/sitmutiaraquran', 'type' => 'text'],
-            ['key' => 'facebook', 'value' => 'https://facebook.com/sitmutiaraquran', 'type' => 'text'],
+            ['key' => 'instagram', 'value' => 'https://www.instagram.com/sit_mutiara_quran?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', 'type' => 'text'],
+            ['key' => 'youtube', 'value' => 'https://www.youtube.com/@sditmutiaraquran8329', 'type' => 'text'],
+            ['key' => 'facebook', 'value' => 'https://web.facebook.com/sdit.mutiara.988', 'type' => 'text'],
             ['key' => 'operational_hours', 'value' => "Senin - Jum'at: 07.15 - 15.30 WIB\nSabtu - Minggu: Libur", 'type' => 'textarea'],
             ['key' => 'maps_embed', 'value' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31914.641419208794!2d100.598466!3d-0.8962703!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2b356b0a8eba63%3A0x771bff3cc34e0a68!2sSDIT%20MUTIARA%20QURAN!5e0!3m2!1sid!2sid!4v1780587530868!5m2!1sid!2sid', 'type' => 'text'],
         ];

@@ -5,10 +5,15 @@
 document.addEventListener('DOMContentLoaded', function () {
 
     /* ======= NAVBAR SCROLL ======= */
+    const header = document.querySelector('.public-header');
     const navbar = document.querySelector('.public-navbar');
-    if (navbar) {
+    if (header) {
         window.addEventListener('scroll', function () {
-            navbar.classList.toggle('scrolled', window.scrollY > 30);
+            const isScrolled = window.scrollY > 30;
+            header.classList.toggle('scrolled', isScrolled);
+            if (navbar) {
+                navbar.classList.toggle('scrolled', isScrolled);
+            }
         });
     }
 

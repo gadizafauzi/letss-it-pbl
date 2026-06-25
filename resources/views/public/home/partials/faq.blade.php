@@ -3,9 +3,12 @@
     <section class="public-section bg-slate-50 relative overflow-hidden pt-0 md:pt-4">
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="text-center mb-10 md:mb-12 flex flex-col items-center">
-                <h2 class="section-title reveal reveal-zoom mb-2" style="transition-delay: 150ms;">Pertanyaan Umum (FAQ)</h2>
-
-
+                <div class="inline-block relative mb-4">
+                    <h2 class="section-title reveal reveal-zoom after:hidden" style="transition-delay: 150ms;">Pertanyaan Umum (FAQ)</h2>
+                    <svg class="absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
             <div class="max-w-3xl mx-auto">
@@ -61,9 +64,6 @@
         <div class="absolute inset-0" style="background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 24px 24px;"></div>
         <div class="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-2xl mx-auto text-center">
-                <span class="reveal reveal-zoom inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-700 text-xs font-bold mb-4 hover:bg-amber-500/20 transition-all duration-300 cursor-default">
-                    <i data-lucide="megaphone" class="w-3.5 h-3.5 text-amber-600"></i> Pendaftaran Dibuka
-                </span>
                 <h2 class="reveal reveal-up delay-100 text-2xl sm:text-3xl font-black text-[#002244] leading-tight mb-3">
                     Penerimaan Peserta Didik Baru<br>Tahun Ajaran {{ date('Y') }}/{{ date('Y') + 1 }}
                 </h2>

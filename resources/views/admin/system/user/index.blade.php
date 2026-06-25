@@ -112,7 +112,7 @@
                                             <i data-lucide="square-pen" class="w-[14px] h-[14px]"></i>
                                         </a>
                                         @if($user->role === 'admin' && auth()->id() !== $user->id)
-                                        <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus admin ini?');">
+                                        <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

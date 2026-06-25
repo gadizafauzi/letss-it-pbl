@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
 <div class="mb-6">
@@ -7,13 +7,6 @@
     </h1>
     <p class="text-sm text-slate-400 mt-1">Kelola konten halaman utama (Beranda) website.</p>
 </div>
-
-@if(session('success'))
-<div class="mb-6 p-4 rounded-xl bg-blue-50 border border-blue-200 text-blue-600 flex items-center gap-3">
-    <i data-lucide="check-circle" class="w-5 h-5"></i>
-    <p class="text-sm font-medium">{{ session('success') }}</p>
-</div>
-@endif
 
 <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
     

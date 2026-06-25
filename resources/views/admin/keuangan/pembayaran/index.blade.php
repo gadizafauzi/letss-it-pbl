@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-5">
@@ -18,18 +18,6 @@
         </div>
 
         {{-- TOAST ALERTS --}}
-        @if (session('success'))
-            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
-                <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0"></i>
-                <p class="text-sm font-medium">{{ session('success') }}</p>
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400">
-                <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0"></i>
-                <p class="text-sm font-medium">{{ session('error') }}</p>
-            </div>
-        @endif
 
         {{-- FILTER --}}
         <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
@@ -151,7 +139,7 @@
                                             <form action="{{ route('admin.pembayaran.verify', $payment->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" onclick="return confirm('Konfirmasi verifikasi pembayaran ini?')"
+                                                <button type="submit" onclick="confirmAction(event, 'Verifikasi', 'Konfirmasi verifikasi pembayaran ini?', 'Ya, Verifikasi', 'bg-emerald-500 hover:bg-emerald-600')"
                                                     class="w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 transition-all inline-flex items-center justify-center cursor-pointer shadow-sm"
                                                     title="Verifikasi">
                                                     <i data-lucide="check" class="w-[14px] h-[14px]"></i>
@@ -160,7 +148,7 @@
                                             <form action="{{ route('admin.pembayaran.reject', $payment->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" onclick="return confirm('Tolak pembayaran ini?')"
+                                                <button type="submit" onclick="confirmAction(event, 'Tolak', 'Tolak pembayaran ini?', 'Ya, Tolak', 'bg-amber-500 hover:bg-amber-600')"
                                                     class="w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all inline-flex items-center justify-center cursor-pointer shadow-sm"
                                                     title="Tolak">
                                                     <i data-lucide="x" class="w-[14px] h-[14px]"></i>
@@ -182,7 +170,7 @@
                                         <form action="{{ route('admin.pembayaran.destroy', $payment->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" onclick="return confirm('Hapus data pembayaran ini secara permanen? Tagihan akan kembali menjadi Belum Lunas.')"
+                                            <button type="submit"
                                                 class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-red-50 dark:hover:bg-red-900/30 hover:border-red-200 dark:hover:border-red-800 text-red-500 dark:text-red-400 hover:text-red-600 transition-all inline-flex items-center justify-center shadow-sm cursor-pointer border-none"
                                                 title="Hapus Permanen">
                                                 <i data-lucide="trash-2" class="w-[14px] h-[14px]"></i>

@@ -35,7 +35,7 @@
                         <button type="button" onclick="editFasilitas({{ $item->id }}, '{{ $item->icon }}', '{{ addslashes($item->title) }}', {{ $item->order }}, {{ $item->is_active ? 1 : 0 }})" class="p-1.5 text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100">
                             <i data-lucide="edit" class="w-4 h-4"></i>
                         </button>
-                        <form action="{{ route('admin.unit-cms.fasilitas.destroy', ['id' => $unit->id, 'facilityId' => $item->id]) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus fasilitas ini?')">
+                        <form action="{{ route('admin.unit-cms.fasilitas.destroy', ['id' => $unit->id, 'facilityId' => $item->id]) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="p-1.5 text-red-600 bg-red-50 rounded-lg hover:bg-red-100">

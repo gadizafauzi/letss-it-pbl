@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-5">
@@ -18,18 +18,6 @@
         </div>
 
         {{-- TOAST ALERTS --}}
-        @if (session('success'))
-            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
-                <i data-lucide="check-circle" class="w-5 h-5 flex-shrink-0"></i>
-                <p class="text-sm font-medium">{{ session('success') }}</p>
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400">
-                <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0"></i>
-                <p class="text-sm font-medium">{{ session('error') }}</p>
-            </div>
-        @endif
 
         {{-- FILTER --}}
         <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
@@ -88,8 +76,7 @@
                                             title="Edit">
                                             <i data-lucide="square-pen" class="w-[14px] h-[14px]"></i>
                                         </a>
-                                        <form action="{{ route('admin.jabatan.destroy', $jabatan->id) }}" method="POST"
-                                            onsubmit="return confirm('Hapus jabatan ini?')" class="inline">
+                                        <form action="{{ route('admin.jabatan.destroy', $jabatan->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

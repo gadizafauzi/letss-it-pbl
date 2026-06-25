@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-5 max-w-4xl">
@@ -21,18 +21,6 @@
         </div>
 
         {{-- SUCCESS / ERROR --}}
-        @if (session('success'))
-            <div class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium bg-emerald-100 border border-emerald-200 text-emerald-700">
-                <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
-                {{ session('success') }}
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium bg-red-100 border border-red-200 text-red-700">
-                <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
-                {{ session('error') }}
-            </div>
-        @endif
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             {{-- INVOICE DETAILS --}}
@@ -130,7 +118,7 @@
                             <form action="{{ route('admin.pembayaran.destroy', $invoice->payment->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" onclick="return confirm('Hapus data pembayaran ini?')" class="text-xs font-semibold text-red-600 bg-red-50 border border-red-200 px-3 py-1.5 rounded-lg hover:bg-red-100 transition-colors border-none cursor-pointer">Hapus</button>
+                                <button type="submit" class="text-xs font-semibold text-red-600 bg-red-50 border border-red-200 px-3 py-1.5 rounded-lg hover:bg-red-100 transition-colors border-none cursor-pointer">Hapus</button>
                             </form>
                         </div>
                     </div>

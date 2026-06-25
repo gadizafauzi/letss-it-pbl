@@ -1,4 +1,4 @@
-<div id="tab-faq" class="tab-content hidden">
+﻿<div id="tab-faq" class="tab-content hidden">
     <div class="flex justify-between items-center mb-6">
         <div>
             <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">FAQ PPDB</h2>
@@ -44,8 +44,7 @@
                                 <i data-lucide="edit" class="w-4 h-4"></i>
                             </button>
                             <form action="{{ route('admin.ppdb.faq.destroy', $faq->id) }}" method="POST"
-                                class="contents"
-                                onsubmit="return confirm('Yakin ingin menghapus FAQ ini?')">
+                                class="contents">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Hapus">

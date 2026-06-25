@@ -1,9 +1,14 @@
 @if(isset($tujuanPendidikan) && !$tujuanPendidikan->isEmpty())
 {{-- WHY CHOOSE US (TUJUAN PENDIDIKAN) --}}
-    <section class="public-section bg-gradient-to-r from-[#002244]/95 via-[#002244]/80 to-transparent backdrop-blur-sm relative overflow-hidden">
+    <section class="py-12 md:py-16 bg-gradient-to-r from-[#002244]/95 via-[#002244]/80 to-transparent backdrop-blur-sm relative overflow-hidden">
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-            <div class="text-center mb-12 md:mb-20 flex flex-col items-center relative">
-                <h2 class="section-title light reveal reveal-zoom mb-3" style="transition-delay: 150ms;">Tujuan Pendidikan</h2>
+            <div class="text-center mb-8 md:mb-12 flex flex-col items-center relative">
+                <div class="inline-block relative mb-4">
+                    <h2 class="section-title light reveal reveal-zoom after:hidden" style="transition-delay: 150ms;">Tujuan Pendidikan</h2>
+                    <svg class="absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
                 <p class="text-slate-300 max-w-2xl mx-auto reveal reveal-up text-sm md:text-base" style="transition-delay: 300ms;">Membentuk generasi unggul dengan memadukan keislaman dan akademik secara komprehensif menuju tercapainya visi sekolah.</p>
             </div>
             

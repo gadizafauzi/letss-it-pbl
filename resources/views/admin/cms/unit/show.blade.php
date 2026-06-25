@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'Kelola Konten Unit: ' . $unit->unit_name)
 
@@ -63,19 +63,6 @@
         {{-- Content Area --}}
         <div class="w-full space-y-6">
             {{-- Alert --}}
-            @if(session('success'))
-            <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center gap-3">
-                <i data-lucide="check-circle" class="w-5 h-5"></i>
-                <p class="font-medium">{{ session('success') }}</p>
-            </div>
-            @endif
-
-            @if(session('error'))
-            <div class="p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 flex items-center gap-3">
-                <i data-lucide="alert-circle" class="w-5 h-5"></i>
-                <p class="font-medium">{{ session('error') }}</p>
-            </div>
-            @endif
 
             @if($errors->any())
             <div class="p-4 rounded-xl bg-red-50 border border-red-200 text-red-600">

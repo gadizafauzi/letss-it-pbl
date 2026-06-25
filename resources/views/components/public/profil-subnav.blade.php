@@ -18,9 +18,29 @@
 </div>
 
 <style>
+    .profil-nav-link {
+        position: relative;
+    }
+    
+    .profil-nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background-color: #f59e0b; /* amber-500 */
+        border-radius: 999px;
+        transition: width 0.3s ease;
+    }
+
     .profil-nav-link.active {
-        background-color: #f8fafc; /* slate-50 */
-        color: #1e293b; /* slate-800 */
+        color: #002244; /* darker blue */
+    }
+    
+    .profil-nav-link.active::after {
+        width: 80%;
     }
 </style>
 

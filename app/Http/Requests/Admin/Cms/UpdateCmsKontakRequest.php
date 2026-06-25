@@ -28,6 +28,9 @@ class UpdateCmsKontakRequest extends FormRequest
             'email'              => 'nullable|email|max:100',
             'operational_hours'  => 'nullable|string',
             'maps_embed'         => 'nullable|string',
+            'facebook'           => 'nullable|url|max:255',
+            'instagram'          => 'nullable|url|max:255',
+            'youtube'            => 'nullable|url|max:255',
         ];
     }
 }

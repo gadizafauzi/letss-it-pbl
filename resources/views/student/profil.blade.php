@@ -227,6 +227,9 @@
                         <i data-lucide="eye" id="iconOldPassword" class="w-5 h-5"></i>
                     </button>
                 </div>
+                @error('password_lama')
+                    <p class="text-xs text-red-500 font-bold mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
@@ -242,6 +245,9 @@
                     </button>
                 </div>
                 <p class="text-xs text-[var(--text-secondary)] mt-2">Password minimal 8 karakter dan sebaiknya mengandung huruf besar, huruf kecil, serta angka.</p>
+                @error('password_baru')
+                    <p class="text-xs text-red-500 font-bold mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
@@ -256,6 +262,9 @@
                         <i data-lucide="eye" id="iconConfirmPassword" class="w-5 h-5"></i>
                     </button>
                 </div>
+                @error('konfirmasi_password')
+                    <p class="text-xs text-red-500 font-bold mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="rounded-xl bg-yellow-50 border border-yellow-100 px-4 py-3 text-sm text-yellow-700">

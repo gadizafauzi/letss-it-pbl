@@ -48,8 +48,14 @@ class PublicHomeController extends Controller
         $jenjang_image = \App\Models\CmsSetting::where('key', 'jenjang_pendidikan_image')->first();
         $statistic_bg_image = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
 
-        return view('public.home.index', compact(
+        // Ambil daftar unik ekstrakurikuler yang aktif untuk ditampilkan di homepage
+        $ekskuls = \App\Models\CmsUnitEkskul::where('is_active', true)
+            ->select('title', 'icon')
+            ->get()
+            ->unique('title')
+            ->values();
 
+        return view('public.home.index', compact(
             'hero',
             'statistics',
             'welcomeMessage',
@@ -58,7 +64,8 @@ class PublicHomeController extends Controller
             'testimonials',
             'faqs',
             'jenjang_image',
-            'statistic_bg_image'
+            'statistic_bg_image',
+            'ekskuls'
         ));
     }
 }

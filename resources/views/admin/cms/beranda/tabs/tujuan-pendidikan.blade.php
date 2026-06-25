@@ -1,4 +1,4 @@
-<div id="tab-tujuan-pendidikan" class="tab-content hidden">
+﻿<div id="tab-tujuan-pendidikan" class="tab-content hidden">
     <div class="flex justify-between items-center mb-6">
         <div>
             <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">Tujuan Pendidikan</h2>
@@ -37,7 +37,7 @@
                         <button type="button" onclick="editTujuanPendidikan({{ json_encode($tujuanPendidikan) }})" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                             <i data-lucide="edit" class="w-4 h-4"></i>
                         </button>
-                        <form action="{{ route('admin.beranda.tujuan_pendidikan.destroy', $tujuanPendidikan->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus tujuan pendidikan ini?')">
+                        <form action="{{ route('admin.beranda.tujuan_pendidikan.destroy', $tujuanPendidikan->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors">

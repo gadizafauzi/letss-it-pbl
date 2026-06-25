@@ -1,4 +1,4 @@
-        <div id="tab-statistik" class="tab-content hidden">
+﻿        <div id="tab-statistik" class="tab-content hidden">
             <div class="flex justify-between items-center mb-6">
                 <div>
                     <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">Statistik</h2>
@@ -60,7 +60,7 @@
                                 <button type="button" onclick="editStatistic({{ json_encode($stat) }})" class="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                                     <i data-lucide="edit" class="w-4 h-4"></i>
                                 </button>
-                                <form action="{{ route('admin.beranda.statistic.destroy', $stat->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus statistik ini?')">
+                                <form action="{{ route('admin.beranda.statistic.destroy', $stat->id) }}" method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors">

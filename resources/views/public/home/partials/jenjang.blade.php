@@ -3,7 +3,12 @@
     <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
         
         <div class="text-center mb-16">
-            <h2 class="section-title reveal reveal-zoom mb-2" style="transition-delay: 150ms;">Jenjang Pendidikan Kami</h2>
+            <div class="inline-block relative mb-4">
+                <h2 class="section-title reveal reveal-zoom after:hidden" style="transition-delay: 150ms;">Jenjang Pendidikan Kami</h2>
+                <svg class="absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+                    <path d="M5 15Q50 5 100 10T195 15" />
+                </svg>
+            </div>
             <p class="text-slate-500 max-w-2xl mx-auto reveal reveal-up" style="transition-delay: 300ms;">Menyediakan pendidikan berkelanjutan dengan kurikulum Islami yang komprehensif.</p>
         </div>
 
@@ -40,7 +45,7 @@
 
             <!-- Right Column: 3 Vertical List Items -->
             <div class="w-[60%] md:w-7/12 flex flex-col justify-center">
-                <div class="flex flex-col gap-3 lg:gap-5">
+                <div class="flex flex-col gap-2 lg:gap-3">
                     @php
                         $units = [
                             [
@@ -65,20 +70,20 @@
                     @endphp
 
                     @foreach($units as $unit)
-                        <a href="{{ route($unit['route']) }}" class="bg-white rounded-xl md:rounded-2xl p-2.5 sm:p-4 lg:p-6 shadow-md md:shadow-lg shadow-slate-200/40 flex items-center border border-slate-100 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(0,34,68,0.08)] transition-all duration-300 reveal reveal-up group" style="transition-delay: {{ $unit['delay'] }};">
+                        <a href="{{ route($unit['route']) }}" class="bg-white rounded-xl md:rounded-xl p-2 sm:p-3 lg:p-4 shadow-sm md:shadow-md shadow-slate-200/40 flex items-center border border-slate-100 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(0,34,68,0.08)] transition-all duration-300 reveal reveal-up group" style="transition-delay: {{ $unit['delay'] }};">
                             <!-- Icon -->
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-xl md:rounded-2xl bg-[#002244]/5 flex items-center justify-center mr-3 lg:mr-5 text-[#002244] group-hover:scale-105 group-hover:bg-[#002244] group-hover:text-white transition-all duration-300 flex-shrink-0">
-                                <i data-lucide="{{ $unit['icon'] }}" class="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8"></i>
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-lg md:rounded-xl bg-[#002244]/5 flex items-center justify-center mr-3 lg:mr-4 text-[#002244] group-hover:scale-105 group-hover:bg-[#002244] group-hover:text-white transition-all duration-300 flex-shrink-0">
+                                <i data-lucide="{{ $unit['icon'] }}" class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6"></i>
                             </div>
                             
                             <!-- Title -->
                             <div class="flex-grow text-left">
-                                <h3 class="text-[13px] sm:text-base lg:text-xl font-bold text-[#002244] leading-tight">{{ $unit['title'] }}</h3>
+                                <h3 class="text-[13px] sm:text-sm lg:text-lg font-bold text-[#002244] leading-tight">{{ $unit['title'] }}</h3>
                             </div>
                             
                             <!-- Arrow -->
-                            <div class="hidden sm:flex w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-slate-50 items-center justify-center text-slate-400 group-hover:bg-amber-400 group-hover:text-[#002244] transition-all duration-300 flex-shrink-0">
-                                <i data-lucide="arrow-right" class="w-4 h-4 lg:w-5 lg:h-5"></i>
+                            <div class="hidden sm:flex w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-slate-50 items-center justify-center text-slate-400 group-hover:bg-amber-400 group-hover:text-[#002244] transition-all duration-300 flex-shrink-0">
+                                <i data-lucide="arrow-right" class="w-3 h-3 lg:w-4 lg:h-4"></i>
                             </div>
                         </a>
                     @endforeach

@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-6">
@@ -16,18 +16,6 @@
         </div>
 
         {{-- SUCCESS --}}
-        @if (session('success'))
-            <div class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium bg-emerald-100 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
-                <i data-lucide="check-circle" class="w-4 h-4 flex-shrink-0"></i>
-                {{ session('success') }}
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="flex items-center gap-2.5 px-4 py-3.5 rounded-xl text-sm font-medium bg-red-100 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400">
-                <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
-                {{ session('error') }}
-            </div>
-        @endif
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {{-- PROFIL CARD --}}
