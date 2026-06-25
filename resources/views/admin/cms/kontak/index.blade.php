@@ -87,6 +87,40 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                <h3 class="font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2 text-lg">
+                    <i data-lucide="share-2" class="w-5 h-5 text-indigo-500"></i>
+                    Media Sosial Sekolah
+                </h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Link Facebook</label>
+                        <input type="text" name="facebook" value="{{ old('facebook', $settings['facebook'] ?? '') }}" placeholder="https://facebook.com/username"
+                            class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2.5 focus:ring-blue-500 focus:border-blue-500">
+                        @error('facebook')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Link Instagram</label>
+                        <input type="text" name="instagram" value="{{ old('instagram', $settings['instagram'] ?? '') }}" placeholder="https://instagram.com/username"
+                            class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2.5 focus:ring-blue-500 focus:border-blue-500">
+                        @error('instagram')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Link YouTube</label>
+                        <input type="text" name="youtube" value="{{ old('youtube', $settings['youtube'] ?? '') }}" placeholder="https://youtube.com/channel"
+                            class="w-full rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white px-4 py-2.5 focus:ring-blue-500 focus:border-blue-500">
+                        @error('youtube')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

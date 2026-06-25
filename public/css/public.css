@@ -2,10 +2,19 @@
    PUBLIC PAGES — SIT Mutiara Qur'an
    ======================================== */
 
-/* ========= NAVBAR ========= */
+/* ========= NAVBAR & HEADER ========= */
+.public-header {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+    .public-header.scrolled {
+        transform: translateY(-40px);
+    }
+}
+
 .public-navbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
+    position: relative;
     z-index: 100;
     height: 72px;
     display: flex;
@@ -130,10 +139,12 @@
 /* Mobile menu */
 .nav-mobile-menu {
     display: none;
-    position: fixed;
-    top: 72px; left: 0; right: 0; bottom: 0;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    height: calc(100vh - 100%);
     background: rgba(255,255,255,0.98);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 99;
     padding: 24px;
     flex-direction: column;
@@ -227,13 +238,15 @@
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -8px;
     left: 50%;
     transform: translateX(-50%);
-    width: 64px;
-    height: 4px;
-    border-radius: 9999px;
-    background: linear-gradient(to right, #ffc629, #ffaa00);
+    width: 140px;
+    height: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 12' preserveAspectRatio='none'%3E%3Cpath d='M 3,8 C 35,3 75,3 147,7 C 110,10 60,9 3,8 Z' fill='%23ffc629'/%3E%3C/svg%3E") !important;
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    background-color: transparent !important;
 }
 
 .section-title.light {

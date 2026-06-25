@@ -64,12 +64,8 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== TIMELINE PENDAFTARAN (DIPINDAH KE SINI) ===== --}}
-    <section id="timeline" class="public-section py-16 relative bg-slate-50 overflow-hidden scroll-mt-32">
-        {{-- Decorative background --}}
-        <div class="absolute top-1/4 left-0 -ml-32 w-96 h-96 bg-emerald-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-0 -mr-32 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
-
-        <div class="max-w-5xl mx-auto relative z-10">
+    <section id="timeline" class="public-section py-16 bg-white scroll-mt-32">
+        <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16 reveal reveal-up relative z-10">
                 <div class="inline-block relative">
                     <h2 class="section-title mx-auto relative z-10 text-[#002244] after:hidden">Timeline Pendaftaran</h2>
@@ -118,29 +114,19 @@
 
                     {{-- Sisi Card --}}
                     <div class="timeline-content">
-                        {{-- Header Card --}}
-                        <div class="bg-[#264585] text-white px-5 py-3 border-b border-[#1e3a8a]">
-                            <span class="text-[13px] font-bold tracking-wider uppercase">{{ $j['tanggal'] }}</span>
-                        </div>
-                        {{-- Body Card --}}
-                        <div class="p-5 bg-white">
-                            {{-- Di desktop, judul muncul di teks floating. Tapi kita tetap tampilkan judul di card sesuai referensi desain --}}
-                            <h3 class="text-base md:text-lg font-bold text-[#002244] mb-2">{{ $j['card_title'] }}</h3>
-                            
-                            {{-- Deskripsi hanya muncul di card saat mobile, karena di desktop sudah ada di sisi teks floating --}}
-                            <p class="text-sm text-slate-500 mb-4 md:hidden">{{ $j['desc'] }}</p>
-                            
-                            <div>
-                                @if(strtolower($j['status']) === 'dibuka')
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-600 border border-emerald-200">🟢 {{ $j['status'] }}</span>
-                                @elseif(strtolower($j['status']) === 'selesai')
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500 border border-slate-200">✓ {{ $j['status'] }}</span>
-                                @elseif(strtolower($j['status']) === 'segera')
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-600 border border-amber-200">⏳ {{ $j['status'] }}</span>
-                                @else
-                                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#003f88] border border-blue-200">🔵 {{ $j['status'] }}</span>
-                                @endif
-                            </div>
+                        <span class="inline-block px-3 py-1 mb-3 rounded-full text-xs font-bold bg-slate-50 text-[#003f88] border border-slate-100">{{ strtoupper($j['tanggal']) }}</span>
+                        <h3 class="text-lg font-bold text-[#003f88] mb-2">{{ $j['judul'] }}</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $j['desc'] }}</p>
+                        <div>
+                            @if(strtolower($j['status']) === 'dibuka')
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🟢 {{ $j['status'] }}</span>
+                            @elseif(strtolower($j['status']) === 'selesai')
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">✓ {{ $j['status'] }}</span>
+                            @elseif(strtolower($j['status']) === 'segera')
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">⏳ {{ $j['status'] }}</span>
+                            @else
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🔵 {{ $j['status'] }}</span>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -155,15 +141,13 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== ALUR PENDAFTARAN ===== --}}
-    <section id="alur" class="public-section py-20 bg-transparent relative overflow-hidden scroll-mt-32">
-        {{-- Dark Parallax Overlay --}}
-        <div class="absolute inset-0 bg-[#002244]/85 backdrop-blur-[2px] z-0"></div>
+    <section id="alur" class="public-section py-20 bg-slate-50 relative overflow-hidden scroll-mt-32">
         {{-- Decorative background --}}
         <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-400 rounded-full blur-3xl opacity-20 pointer-events-none z-0"></div>
         <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-400 rounded-full blur-3xl opacity-20 pointer-events-none z-0"></div>
 
         <div class="max-w-4xl mx-auto relative z-10">
-            <div class="text-center mb-16 reveal reveal-up relative z-10">
+            <div class="text-center mb-10 reveal reveal-up relative z-10">
                 <div class="inline-block relative">
                     <h2 class="section-title light mx-auto relative z-10 after:hidden">Langkah Mudah Mendaftar</h2>
                     {{-- Decorative Underline --}}
@@ -191,19 +175,19 @@
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal reveal-repeat reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
                     
                     {{-- Icon Badge --}}
-                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-black/20 text-[#003f88] font-black text-xl shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 group-hover:bg-[#003f88] group-hover:text-white transition-all duration-300 z-10">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 text-[#003f88] font-black text-xl shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 group-hover:bg-[#003f88] group-hover:text-white transition-all duration-300 z-10">
                         {{ $step['no'] }}
                     </div>
                     
                     {{-- Card --}}
-                    <div class="w-[calc(100%-5.5rem)] md:w-[calc(50%-3rem)] bg-white p-6 rounded-3xl shadow-lg shadow-black/10 border border-slate-100 group-hover:-translate-y-1 group-hover:shadow-xl group-hover:shadow-black/20 transition-all duration-300">
+                    <div class="w-[calc(100%-5.5rem)] md:w-[calc(50%-3rem)] bg-white p-6 rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-100 group-hover:-translate-y-1 group-hover:shadow-xl transition-all duration-300">
                         <div class="flex items-center gap-3 mb-2">
                             <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
                                 <i data-lucide="{{ $step['icon'] }}" class="w-4 h-4"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-[#003f88]">{{ $step['judul'] }}</h3>
+                            <h3 class="text-base font-bold text-[#003f88]">{{ $step['judul'] }}</h3>
                         </div>
-                        <p class="text-sm text-slate-500 leading-relaxed pl-11">{{ $step['desc'] }}</p>
+                        <p class="text-xs text-slate-500 leading-relaxed pl-9">{{ $step['desc'] }}</p>
                     </div>
                 </div>
                 @endforeach

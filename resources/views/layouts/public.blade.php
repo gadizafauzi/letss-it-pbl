@@ -34,11 +34,14 @@
         <div class="absolute inset-0 opacity-100" style="background-image: url('{{ asset('/images/bg.png') }}'); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
     </div>
 
-    {{-- NAVBAR --}}
-    @include('components.public.navbar')
+    {{-- HEADER (TOPBAR + NAVBAR) --}}
+    <header class="public-header fixed top-0 left-0 right-0 z-[100] transition-all duration-300">
+        @include('components.public.topbar')
+        @include('components.public.navbar')
+    </header>
 
     {{-- CONTENT --}}
-    <main>
+    <main class="pt-0 md:pt-10">
         @yield('content')
     </main>
 

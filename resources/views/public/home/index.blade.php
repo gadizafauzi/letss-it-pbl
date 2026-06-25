@@ -11,6 +11,7 @@
     
     @include('public.home.partials.program')
     @include('public.home.partials.tujuan-pendidikan')
+    @include('public.home.partials.ekstrakurikuler')
     @include('public.home.partials.jenjang')
     
     {{-- Parallax Window Gap (Small) --}}
