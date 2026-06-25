@@ -56,8 +56,8 @@
 
 .premium-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.15), 0 10px 20px -5px rgba(251, 191, 36, 0.1);
-    border-color: #a7f3d0; /* emerald-200 */
+    box-shadow: 0 20px 40px -10px rgba(0, 63, 136, 0.12), 0 10px 20px -5px rgba(251, 191, 36, 0.1);
+    border-color: #bfdbfe; /* blue-200 */
 }
 
 /* Efek Kilau Tipis (Shine) saat Hover */
@@ -135,7 +135,7 @@
     width: 4px;
     left: 20px;
     border-radius: 2px;
-    background: linear-gradient(to bottom, #10b981, #f59e0b); /* emerald to amber */
+    background: linear-gradient(to bottom, #003f88, #f59e0b); /* blue to amber */
     height: var(--timeline-progress, 0%);
     transition: height 0.1s ease-out; /* Smooth progress bar */
 }
@@ -172,8 +172,8 @@
 
 /* Ketika active (masuk viewport) */
 .timeline-item-container.is-visible .timeline-node {
-    background-color: #10b981; /* emerald-500 */
-    box-shadow: 0 0 0 4px #d1fae5, 0 0 15px rgba(16,185,129,0.5); /* Glow hijau */
+    background-color: #003f88; /* blue */
+    box-shadow: 0 0 0 4px #dbeafe, 0 0 15px rgba(0,63,136,0.4); /* Glow biru */
     transform: scale(1.3);
 }
 
@@ -181,8 +181,8 @@
 .timeline-content {
     width: 100%; /* Penuh sisa ruang di mobile */
     background: white;
-    border-radius: 20px;
-    padding: 1.5rem;
+    border-radius: 16px;
+    padding: 1rem;
     border: 1px solid #f1f5f9;
     box-shadow: 0 10px 25px -5px rgba(0,0,0,0.03);
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -190,8 +190,8 @@
 
 .timeline-content:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 30px -10px rgba(16, 185, 129, 0.15);
-    border-color: #a7f3d0;
+    box-shadow: 0 20px 30px -10px rgba(0, 63, 136, 0.12);
+    border-color: #bfdbfe;
 }
 
 /* --- MEDIA QUERY DESKTOP (Kiri - Kanan) --- */

@@ -4,9 +4,12 @@
         <div class="glow-amber bottom-10 right-10"></div>
         <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
             <div class="text-center mb-16 flex flex-col items-center">
-                <h2 class="section-title reveal reveal-zoom mb-2" style="transition-delay: 150ms;">Program Khusus Keislaman & Akademik</h2>
-
-
+                <div class="inline-block relative mb-4">
+                    <h2 class="section-title reveal reveal-zoom after:hidden" style="transition-delay: 150ms;">Program Khusus Keislaman & Akademik</h2>
+                    <svg class="absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+                        <path d="M5 15Q50 5 100 10T195 15" />
+                    </svg>
+                </div>
             </div>
 
             {{-- Program Filter Tabs --}}
@@ -32,7 +35,7 @@
                     $animClasses = ['reveal-bottom-left', 'reveal-top', 'reveal-bottom-right', 'reveal-left', 'reveal-zoom', 'reveal-right'];
                 @endphp
                 @foreach($displayPrograms as $idx => $p)
-                    <div tabindex="0" class="bg-white rounded-2xl p-3 sm:p-6 min-h-[180px] md:min-h-[340px] h-full flex-col border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(0, 63, 136,0.25)] hover:scale-[1.03] hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group reveal reveal-program program-item {{ $animClasses[$idx % 6] }} focus:outline-none {{ $idx >= 4 ? 'hidden lg:flex' : 'flex' }}" data-category="{{ $p['category'] }}" style="transition-delay: {{ 120 + ($idx * 150) }}ms;">
+                    <div tabindex="0" class="bg-white rounded-2xl p-4 sm:p-6 min-h-[160px] md:min-h-[240px] h-full flex-col border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(0, 63, 136,0.25)] hover:scale-[1.03] hover:-translate-y-2 transition-all duration-500 relative overflow-hidden group reveal reveal-program program-item {{ $animClasses[$idx % 6] }} focus:outline-none {{ $idx >= 4 ? 'hidden lg:flex' : 'flex' }}" data-category="{{ $p['category'] }}" style="transition-delay: {{ 120 + ($idx * 150) }}ms;">
                         
                         <!-- Top Accent Bar -->
                         <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#005fc0] to-amber-400"></div>
@@ -64,7 +67,7 @@
                         </div>
 
                         <!-- Overlay Detail View -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#002244] to-[#003f88]/95 p-4 sm:p-6 md:p-8 flex flex-col justify-center overflow-y-auto translate-y-full group-hover:translate-y-0 focus:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] z-20 opacity-0 group-hover:opacity-100 focus:opacity-100 custom-scrollbar">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#002244] to-[#003f88]/95 p-4 sm:p-6 flex flex-col justify-center overflow-y-auto translate-y-full group-hover:translate-y-0 focus:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] z-20 opacity-0 group-hover:opacity-100 focus:opacity-100 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
                             
                             <!-- Staggered Entry Elements -->
                             <div class="text-amber-400 mb-2 md:mb-4 transform translate-y-8 group-hover:translate-y-0 focus:translate-y-0 transition-transform duration-500 delay-100 flex-shrink-0">

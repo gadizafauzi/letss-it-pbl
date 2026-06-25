@@ -64,9 +64,9 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== TIMELINE PENDAFTARAN (DIPINDAH KE SINI) ===== --}}
-    <section id="timeline" class="public-section py-16 bg-white scroll-mt-32">
+    <section id="timeline" class="public-section py-10 bg-white scroll-mt-32">
         <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16 reveal reveal-up relative z-10">
+            <div class="text-center mb-10 reveal reveal-up relative z-10">
                 <div class="inline-block relative">
                     <h2 class="section-title mx-auto relative z-10 text-[#002244] after:hidden">Timeline Pendaftaran</h2>
                     {{-- Decorative Underline --}}
@@ -105,9 +105,9 @@
                 <div class="timeline-item-container reveal reveal-repeat {{ $revealClass }} {{ $delay }}">
                     <div class="timeline-node"></div>
                     <div class="timeline-content">
-                        <span class="inline-block px-3 py-1 mb-3 rounded-full text-xs font-bold bg-slate-50 text-[#003f88] border border-slate-100">{{ strtoupper($j['tanggal']) }}</span>
-                        <h3 class="text-lg font-bold text-[#003f88] mb-2">{{ $j['judul'] }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed mb-4">{{ $j['desc'] }}</p>
+                        <span class="inline-block px-2 py-0.5 mb-2 rounded-full text-xs font-bold bg-slate-50 text-[#003f88] border border-slate-100">{{ strtoupper($j['tanggal']) }}</span>
+                        <h3 class="text-base font-bold text-[#003f88] mb-1.5">{{ $j['judul'] }}</h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-3">{{ $j['desc'] }}</p>
                         <div>
                             @if(strtolower($j['status']) === 'dibuka')
                                 <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-[#003f88]">🟢 {{ $j['status'] }}</span>
@@ -132,13 +132,13 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== ALUR PENDAFTARAN ===== --}}
-    <section id="alur" class="public-section py-20 bg-slate-50 relative overflow-hidden scroll-mt-32">
+    <section id="alur" class="public-section py-12 bg-slate-50 relative overflow-hidden scroll-mt-32">
         {{-- Decorative background --}}
         <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
         <div class="max-w-4xl mx-auto relative z-10">
-            <div class="text-center mb-16 reveal reveal-up relative z-10">
+            <div class="text-center mb-10 reveal reveal-up relative z-10">
                 <div class="inline-block relative">
                     <h2 class="section-title mx-auto relative z-10 text-[#002244] after:hidden">Langkah Mudah Mendaftar</h2>
                     {{-- Decorative Underline --}}
@@ -167,19 +167,19 @@
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group reveal reveal-repeat reveal-up delay-{{ ($i % 5 + 1) * 100 }}">
                     
                     {{-- Icon Badge --}}
-                    <div class="flex items-center justify-center w-16 h-16 rounded-2xl bg-white border border-slate-200 shadow-xl shadow-slate-200/50 text-[#003f88] font-black text-xl shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 group-hover:bg-[#003f88] group-hover:text-white transition-all duration-300 z-10">
+                    <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-white border border-slate-200 shadow-lg shadow-slate-200/50 text-[#003f88] font-black text-lg shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 group-hover:scale-110 group-hover:bg-[#003f88] group-hover:text-white transition-all duration-300 z-10">
                         {{ $step['no'] }}
                     </div>
                     
                     {{-- Card --}}
-                    <div class="w-[calc(100%-5.5rem)] md:w-[calc(50%-3rem)] bg-white p-6 rounded-3xl shadow-lg shadow-slate-200/40 border border-slate-100 group-hover:-translate-y-1 group-hover:shadow-xl transition-all duration-300">
-                        <div class="flex items-center gap-3 mb-2">
-                            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-                                <i data-lucide="{{ $step['icon'] }}" class="w-4 h-4"></i>
+                    <div class="w-[calc(100%-4.5rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded-2xl shadow-md shadow-slate-200/40 border border-slate-100 group-hover:-translate-y-1 group-hover:shadow-lg transition-all duration-300">
+                        <div class="flex items-center gap-2 mb-1.5">
+                            <div class="w-7 h-7 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+                                <i data-lucide="{{ $step['icon'] }}" class="w-3.5 h-3.5"></i>
                             </div>
-                            <h3 class="text-lg font-bold text-[#003f88]">{{ $step['judul'] }}</h3>
+                            <h3 class="text-base font-bold text-[#003f88]">{{ $step['judul'] }}</h3>
                         </div>
-                        <p class="text-sm text-slate-500 leading-relaxed pl-11">{{ $step['desc'] }}</p>
+                        <p class="text-xs text-slate-500 leading-relaxed pl-9">{{ $step['desc'] }}</p>
                     </div>
                 </div>
                 @endforeach
