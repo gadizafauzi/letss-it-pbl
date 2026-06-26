@@ -177,6 +177,8 @@ class TagihanController extends Controller
             
             $responseData = $response->json();
             if ($response->successful() && isset($responseData['status']) && $responseData['status'] === true) {
+                $invoice->increment('wa_sent_count');
+                $invoice->update(['wa_last_sent_at' => now()]);
                 return back()->with('success', 'Tagihan berhasil dikirim ke WA!');
             }
             $errorDetail = isset($responseData['reason']) ? $responseData['reason'] : (isset($responseData['detail']) ? $responseData['detail'] : $response->body());
@@ -207,9 +209,10 @@ class TagihanController extends Controller
         // Memproses pengiriman pesan secara asinkron (concurrent) dalam kelompok-kelompok kecil (25 sekaligus)
         // Ini akan mempercepat waktu proses secara eksponensial dan mencegah bottleneck API Fonnte
         foreach ($invoices->chunk(25) as $chunk) {
-            $responses = Http::withoutVerifying()->pool(function (\Illuminate\Http\Client\Pool $pool) use ($chunk) {
+            $chunkInvoices = $chunk->values();
+            $responses = Http::withoutVerifying()->pool(function (\Illuminate\Http\Client\Pool $pool) use ($chunkInvoices) {
                 $requests = [];
-                foreach ($chunk as $invoice) {
+                foreach ($chunkInvoices as $invoice) {
                     $pesan = $this->formatPesanWa($invoice);
                     $requests[] = $pool->withHeaders([
                         'Authorization' => env('FONNTE_API_TOKEN')
@@ -222,11 +225,15 @@ class TagihanController extends Controller
                 return $requests;
             });
             
-            foreach ($responses as $response) {
+            foreach ($responses as $index => $response) {
                 if ($response instanceof \Exception || !$response->successful()) {
                     $gagal++;
                 } else {
                     $berhasil++;
+                    if (isset($chunkInvoices[$index])) {
+                        $chunkInvoices[$index]->increment('wa_sent_count');
+                        $chunkInvoices[$index]->update(['wa_last_sent_at' => now()]);
+                    }
                 }
             }
         }
