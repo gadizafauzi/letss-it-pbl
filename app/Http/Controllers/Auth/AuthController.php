@@ -18,9 +18,21 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(LoginRequest $request)
+    public function login(Request $request)
     {
-        $request->authenticate();
+        // ── Validasi CAPTCHA terlebih dahulu ──
+        $request->validate(
+            ['captcha' => 'required|captcha'],
+            ['captcha.required' => 'Captcha wajib diisi.',
+             'captcha.captcha'  => 'Captcha yang dimasukkan salah.']
+        );
+
+        // ── Validasi & autentikasi via LoginRequest ──
+        $loginRequest = LoginRequest::createFrom($request);
+        $loginRequest->setContainer(app())->setRedirector(app('redirect'));
+        $loginRequest->validateResolved();
+        $loginRequest->authenticate();
+
         $user = Auth::user();
 
         // Cek status aktif
@@ -43,6 +55,16 @@ class AuthController extends Controller
     }
 
     // ==============================
+    // REFRESH CAPTCHA (AJAX)
+    // ==============================
+    public function refreshCaptcha()
+    {
+        return response()->json([
+            'captcha' => preg_replace('/src="https?:\/\/[^\/]+/', 'src="', captcha_img('math')),
+        ]);
+    }
+
+    // ==============================
     // LOGIN ADMIN (route terpisah)
     // ==============================
     public function showAdminLogin()
@@ -50,9 +72,21 @@ class AuthController extends Controller
         return view('auth.admin-login');
     }
 
-    public function adminLogin(LoginRequest $request)
+    public function adminLogin(Request $request)
     {
-        $request->authenticate();
+        // ── Validasi CAPTCHA terlebih dahulu ──
+        $request->validate(
+            ['captcha' => 'required|captcha'],
+            ['captcha.required' => 'Captcha wajib diisi.',
+             'captcha.captcha'  => 'Captcha yang dimasukkan salah.']
+        );
+
+        // ── Validasi & autentikasi via LoginRequest ──
+        $loginRequest = LoginRequest::createFrom($request);
+        $loginRequest->setContainer(app())->setRedirector(app('redirect'));
+        $loginRequest->validateResolved();
+        $loginRequest->authenticate();
+
         $user = Auth::user();
 
         // Cek status aktif
@@ -114,3 +148,4 @@ class AuthController extends Controller
         return redirect('/login')->with('success', 'Password berhasil diperbarui. Silakan login kembali.');
     }
 }
+
