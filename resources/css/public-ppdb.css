@@ -266,3 +266,9 @@
         background-position: 400px 400px;
     }
 }
+
+@media (max-width: 768px) {
+    .reveal-left, .reveal-right {
+        transform: translateY(20px);
+    }
+}
