@@ -56,4 +56,45 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // ================= CAPTCHA REFRESH =================
+    const refreshBtn = document.getElementById("btn-refresh-captcha");
+    const captchaImgContainer = document.getElementById("captcha-img-container");
+
+    if (refreshBtn && captchaImgContainer) {
+        refreshBtn.addEventListener("click", () => {
+            refreshCaptcha();
+        });
+    }
+
+    function refreshCaptcha() {
+        if (!refreshBtn || !captchaImgContainer) return;
+
+        refreshBtn.classList.add("spinning");
+        refreshBtn.disabled = true;
+
+        // Fetch new captcha with cache buster
+        fetch(`/refresh-captcha?t=${Date.now()}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Gagal refresh captcha");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.captcha) {
+                    captchaImgContainer.innerHTML = data.captcha;
+                }
+            })
+            .catch(error => {
+                console.error("Error refreshing captcha:", error);
+            })
+            .finally(() => {
+                // Short timeout to guarantee visual feedback of spinner
+                setTimeout(() => {
+                    refreshBtn.classList.remove("spinning");
+                    refreshBtn.disabled = false;
+                }, 400);
+            });
+    }
+
 });
