@@ -115,5 +115,35 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
+    /* ======= SECTION ACCENT LINE ANIMATION (Yellow wave underline) =======
+     * Targets every SVG with class .section-accent-line that sits under
+     * a section title. Animation: opacity 0→1, translateY 10→0, scaleX 0→1
+     * from-left origin. Duration 800ms ease-out, delay 150ms, fires once.
+     * ====================================================================== */
+    const accentLines = document.querySelectorAll('.section-accent-line');
+
+    if (accentLines.length > 0) {
+        // Apply initial hidden state via inline style (no FOUC)
+        accentLines.forEach(function (line) {
+            line.style.opacity      = '0';
+            line.style.transform    = 'translateY(10px) scaleX(0)';
+            line.style.transformOrigin = 'left center';
+            line.style.transition   = 'opacity 800ms ease-out 150ms, transform 800ms ease-out 150ms';
+        });
+
+        var accentObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity   = '1';
+                    entry.target.style.transform = 'translateY(0) scaleX(1)';
+                    accentObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        accentLines.forEach(function (line) { accentObserver.observe(line); });
+    }
+
 });
 

@@ -5,7 +5,7 @@
             <div class="text-center mb-12 flex flex-col items-center">
                 <div class="inline-block relative mb-4">
                     <h2 class="section-title reveal reveal-zoom after:hidden" style="transition-delay: 150ms;">Apa Kata Orang Tua Wali Murid?</h2>
-                    <svg class="absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+                    <svg class="section-accent-line absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
                         <path d="M5 15Q50 5 100 10T195 15" />
                     </svg>
                 </div>
