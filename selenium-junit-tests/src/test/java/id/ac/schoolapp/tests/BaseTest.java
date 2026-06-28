@@ -27,10 +27,6 @@ public abstract class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.addArguments("--disable-notifications");
-        // Enable headless mode when system property "headless" is true
-        if (Boolean.getBoolean("headless")) {
-            options.addArguments("--headless=new");
-        }
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
@@ -40,8 +36,6 @@ public abstract class BaseTest {
         if (driver != null) {
             driver.quit();
         }
-        // Placeholder for test data cleanup (e.g., delete created records via API)
-        // Implement actual cleanup logic as needed.
     }
 
     protected void open(String path) {
@@ -65,23 +59,5 @@ public abstract class BaseTest {
         driver.findElement(By.id("admin_password")).sendKeys(ADMIN_PASSWORD);
         driver.findElement(By.id("adminBtn")).click();
         wait.until(ExpectedConditions.urlContains("/admin/dashboard"));
-    }
-
-    protected void loginAsStudent(String nis, String password) {
-        open("/login");
-        waitVisible(By.id("tab-student")).click();
-        waitVisible(By.id("login")).sendKeys(nis);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("loginBtn")).click();
-        wait.until(ExpectedConditions.urlContains("/student/"));
-    }
-
-    protected void loginAsTeacher(String nip, String password) {
-        open("/login");
-        waitVisible(By.id("tab-teacher")).click();
-        waitVisible(By.id("login")).sendKeys(nip);
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("loginBtn")).click();
-        wait.until(ExpectedConditions.urlContains("/teacher/"));
     }
 }
