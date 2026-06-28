@@ -12,7 +12,12 @@ class Invoice extends Model
 
     protected $fillable = [
         'student_id','payment_type','period',
-        'amount','due_date','status'
+        'amount','due_date','status',
+        'wa_sent_count','wa_last_sent_at'
+    ];
+
+    protected $casts = [
+        'wa_last_sent_at' => 'datetime',
     ];
 
     public function student()

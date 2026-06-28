@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin\Keuangan;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\PaymentType;
-use App\Models\Student;
 use App\Models\SchoolClass;
-use App\Jobs\SendWhatsAppJob;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Http\Requests\Admin\Keuangan\SearchTagihanRequest;
@@ -211,10 +210,31 @@ class TagihanController extends Controller
         // Ini akan mempercepat waktu proses secara eksponensial dan mencegah bottleneck API Fonnte
         foreach ($invoices->chunk(25) as $chunk) {
             $chunkInvoices = $chunk->values();
-            foreach ($chunkInvoices as $invoice) {
-                // Dispatch job to send WhatsApp message
-                SendWhatsAppJob::dispatch($invoice->id);
-                $berhasil++;
+            $responses = Http::withoutVerifying()->pool(function (\Illuminate\Http\Client\Pool $pool) use ($chunkInvoices) {
+                $requests = [];
+                foreach ($chunkInvoices as $invoice) {
+                    $pesan = $this->formatPesanWa($invoice);
+                    $requests[] = $pool->withHeaders([
+                        'Authorization' => env('FONNTE_API_TOKEN')
+                    ])->timeout(15)->post('https://api.fonnte.com/send', [
+                        'target' => $invoice->student->parent_phone,
+                        'message' => $pesan,
+                        'countryCode' => '62',
+                    ]);
+                }
+                return $requests;
+            });
+            
+            foreach ($responses as $index => $response) {
+                if ($response instanceof \Exception || !$response->successful()) {
+                    $gagal++;
+                } else {
+                    $berhasil++;
+                    if (isset($chunkInvoices[$index])) {
+                        $chunkInvoices[$index]->increment('wa_sent_count');
+                        $chunkInvoices[$index]->update(['wa_last_sent_at' => now()]);
+                    }
+                }
             }
         }
         

@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-6">
@@ -78,7 +78,7 @@
                         <table class="w-full min-w-[700px] border-collapse">
                             <thead>
                                 <tr class="bg-white dark:bg-slate-800 border-b-[1.5px] border-slate-100 dark:border-slate-700">
-                                    @foreach (['Jenis Tagihan', 'Periode', 'Jatuh Tempo', 'Nominal', 'Status', 'Aksi'] as $h)
+                                    @foreach (['Jenis Tagihan', 'Periode', 'Jatuh Tempo', 'Nominal', 'Status', 'WA', 'Aksi'] as $h)
                                         <th class="px-5 py-4 text-left text-[11px] font-extrabold uppercase tracking-[.08em] text-slate-400 dark:text-slate-500 whitespace-nowrap">
                                             {{ $h }}
                                         </th>
@@ -107,6 +107,24 @@
                                                 <span class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold bg-red-100 dark:bg-red-500/10 text-red-700 dark:text-red-400">Belum Lunas</span>
                                             @endif
                                         </td>
+                                        {{-- Kolom WA Tracking --}}
+                                        <td class="px-5 py-4">
+                                            @if ($invoice->wa_sent_count > 0)
+                                                <div class="flex flex-col gap-0.5">
+                                                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold bg-green-100 dark:bg-green-500/10 text-green-700 dark:text-green-400 w-fit">
+                                                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.019-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.72-1.323A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.239 0-4.308-.724-5.993-1.953a.5.5 0 00-.404-.078l-3.384.948 1.063-3.196a.5.5 0 00-.064-.427A9.948 9.948 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                                                        {{ $invoice->wa_sent_count }}x
+                                                    </span>
+                                                    <span class="text-[10px] text-slate-400 dark:text-slate-500 font-medium pl-0.5">
+                                                        {{ $invoice->wa_last_sent_at->diffForHumans() }}
+                                                    </span>
+                                                </div>
+                                            @else
+                                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-bold bg-slate-100 dark:bg-slate-700 text-slate-400 dark:text-slate-500 w-fit">
+                                                    &mdash; Belum dikirim
+                                                </span>
+                                            @endif
+                                        </td>
                                         <td class="px-5 py-4">
                                             <div class="flex items-center gap-2">
                                                 <a href="{{ route('admin.tagihan.show', $invoice->id) }}"
@@ -133,7 +151,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6">
+                                        <td colspan="7">
                                             <div class="flex flex-col items-center justify-center py-20 text-center">
                                                 <div class="w-16 h-16 bg-slate-50 dark:bg-slate-700/50 rounded-full inline-flex items-center justify-center mb-4 text-slate-300 dark:text-slate-500">
                                                     <i data-lucide="receipt" class="w-8 h-8"></i>

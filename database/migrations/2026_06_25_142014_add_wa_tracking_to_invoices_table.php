@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('invoices', function (Blueprint $table) {
-            //
+            $table->unsignedSmallInteger('wa_sent_count')->default(0);
+            $table->timestamp('wa_last_sent_at')->nullable();
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('invoices', function (Blueprint $table) {
-            //
+            $table->dropColumn(['wa_sent_count', 'wa_last_sent_at']);
         });
     }
 };
