@@ -92,21 +92,19 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/unit/bulk-destroy', [UnitController::class, 'bulkDestroy'])
         ->name('admin.unit.bulk-destroy');
 
-    Route::resource('/admin/unit', UnitController::class)->names('admin.unit');
+    // Duplicate route definitions removed (unit, mapel, mengajar, tahun-ajaran, set-active, jabatan bulk-destroy, jabatan)
+    // KELUARGA
+    Route::post('/admin/orang-tua/bulk-destroy', [OrangTuaController::class, 'bulkDestroy'])
+        ->name('admin.orang-tua.bulk-destroy');
 
-    Route::resource('/admin/mapel', MapelController::class)->names('admin.mapel');
-    Route::resource('/admin/mengajar', MengajarController::class)->names('admin.mengajar');
-    Route::resource('/admin/tahun-ajaran', TahunAjaranController::class)->names('admin.tahun-ajaran');
+    Route::resource('/admin/orang-tua', OrangTuaController::class)->names('admin.orang-tua');
+    // TAMBAHAN UNTUK MENYIMPAN KONFIGURASI EMAIL DAN FONNTE
+    Route::get('/admin/konfigurasi', [\App\Http\Controllers\Admin\KonfigurasiController::class, 'index'])
+        ->name('admin.konfigurasi.index');
+    
+    Route::put('/admin/konfigurasi', [\App\Http\Controllers\Admin\KonfigurasiController::class, 'update'])
+        ->name('admin.konfigurasi.update');
 
-    Route::patch(
-        '/admin/tahun-ajaran/{id}/set-active',
-        [TahunAjaranController::class, 'setActive']
-    )->name('admin.tahun-ajaran.set-active');
-
-    Route::post('/admin/jabatan/bulk-destroy', [JabatanController::class, 'bulkDestroy'])
-        ->name('admin.jabatan.bulk-destroy');
-
-    Route::resource('/admin/jabatan', JabatanController::class)->names('admin.jabatan');
 
     // KEUANGAN
     Route::resource('/admin/rekening-sekolah', \App\Http\Controllers\Admin\Keuangan\RekeningSekolahController::class)
@@ -148,6 +146,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         ->parameters(['pembayaran' => 'payment'])
         ->names('admin.pembayaran');
     Route::get('/admin/laporan-keuangan', [\App\Http\Controllers\Admin\Keuangan\LaporanKeuanganController::class, 'index'])->name('admin.laporan-keuangan.index');
+    Route::get('/admin/laporan-keuangan/export-excel', [\App\Http\Controllers\Admin\Keuangan\LaporanKeuanganController::class, 'exportExcel'])->name('admin.laporan-keuangan.export-excel');
     
 
     // CMS Beranda
@@ -287,5 +286,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
     Route::put('/admin/profile', [ProfileController::class, 'update'])->name('admin.profile.update');
     Route::put('/admin/profile/password', [ProfileController::class, 'updatePassword'])->name('admin.profile.password');
+    // System Settings routes (Fonnte token)
+    Route::get('/admin/system/settings', [\App\Http\Controllers\Admin\System\SettingController::class, 'edit'])->name('admin.system.settings.edit');
+    Route::post('/admin/system/settings', [\App\Http\Controllers\Admin\System\SettingController::class, 'update'])->name('admin.system.settings.update');
 });
 

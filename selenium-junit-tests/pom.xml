@@ -9,8 +9,8 @@
     <version>1.0.0</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.jupiter.version>5.10.3</junit.jupiter.version>
         <selenium.version>4.23.1</selenium.version>
@@ -29,7 +29,12 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
+                <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v127</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+</dependencies>
 
     <build>
         <plugins>

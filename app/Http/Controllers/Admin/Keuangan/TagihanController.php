@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin\Keuangan;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\PaymentType;
-use App\Models\SchoolClass;
 use App\Models\Student;
+use App\Models\SchoolClass;
+use App\Jobs\SendWhatsAppJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Http\Requests\Admin\Keuangan\SearchTagihanRequest;
@@ -177,6 +178,8 @@ class TagihanController extends Controller
             
             $responseData = $response->json();
             if ($response->successful() && isset($responseData['status']) && $responseData['status'] === true) {
+                $invoice->increment('wa_sent_count');
+                $invoice->update(['wa_last_sent_at' => now()]);
                 return back()->with('success', 'Tagihan berhasil dikirim ke WA!');
             }
             $errorDetail = isset($responseData['reason']) ? $responseData['reason'] : (isset($responseData['detail']) ? $responseData['detail'] : $response->body());
@@ -207,27 +210,11 @@ class TagihanController extends Controller
         // Memproses pengiriman pesan secara asinkron (concurrent) dalam kelompok-kelompok kecil (25 sekaligus)
         // Ini akan mempercepat waktu proses secara eksponensial dan mencegah bottleneck API Fonnte
         foreach ($invoices->chunk(25) as $chunk) {
-            $responses = Http::withoutVerifying()->pool(function (\Illuminate\Http\Client\Pool $pool) use ($chunk) {
-                $requests = [];
-                foreach ($chunk as $invoice) {
-                    $pesan = $this->formatPesanWa($invoice);
-                    $requests[] = $pool->withHeaders([
-                        'Authorization' => env('FONNTE_API_TOKEN')
-                    ])->timeout(15)->post('https://api.fonnte.com/send', [
-                        'target' => $invoice->student->parent_phone,
-                        'message' => $pesan,
-                        'countryCode' => '62',
-                    ]);
-                }
-                return $requests;
-            });
-            
-            foreach ($responses as $response) {
-                if ($response instanceof \Exception || !$response->successful()) {
-                    $gagal++;
-                } else {
-                    $berhasil++;
-                }
+            $chunkInvoices = $chunk->values();
+            foreach ($chunkInvoices as $invoice) {
+                // Dispatch job to send WhatsApp message
+                SendWhatsAppJob::dispatch($invoice->id);
+                $berhasil++;
             }
         }
         
