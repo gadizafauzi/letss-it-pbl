@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
 use App\Http\Controllers\Student\SD\DashboardController as SDDashboard;
 use App\Http\Controllers\Student\SMP\DashboardController as SMPDashboard;
-use App\Http\Controllers\Student\TagihanController; use App\Http\Controllers\Student\RaporController;
+use App\Http\Controllers\Student\TagihanController;
 use App\Http\Controllers\Student\NilaiController;
 use App\Http\Controllers\Student\ProfileController as StudentProfile;
 
@@ -35,6 +35,6 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::match(['put', 'post'], '/student/profil', [StudentProfile::class, 'update'])
         ->name('student.profil.update');
 
-    Route::get('/student/rapor/{id}/pdf', [RaporController::class, 'downloadPdf'])
-        ->name('student.rapor.pdf');
+    Route::get('/student/cetak-ktm', [StudentProfile::class, 'cetakKtm'])
+        ->name('student.cetak-ktm');
 });
