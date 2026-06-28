@@ -209,12 +209,26 @@
         .tl-line.visible {
             transform: scaleY(1);
         }
+
+        @keyframes waveTranslateX {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-25%); }
+        }
+        .anim-wave-front {
+            animation: waveTranslateX 8s ease-in-out infinite alternate;
+        }
+        .anim-wave-mid {
+            animation: waveTranslateX 6s ease-in-out infinite alternate;
+        }
+        .anim-wave-back {
+            animation: waveTranslateX 14s ease-in-out infinite alternate;
+        }
     </style>
 
     {{-- ════════════════════════════════════════════
          HERO SECTION
          ════════════════════════════════════════════ --}}
-    <section id="home" class="relative min-h-screen flex items-center overflow-hidden"
+    <section id="home" class="relative min-h-[75vh] lg:min-h-[80vh] flex items-center overflow-hidden"
         style="background: linear-gradient(135deg, #3b0764 0%, #581c87 60%, #7e22ce 100%);">
 
         <div class="absolute inset-0 opacity-20"
@@ -276,6 +290,89 @@
 
             </div>
         </div>
+
+    </section>
+
+    {{-- ════════════════════════════════════════════
+         STATISTICS SECTION
+         ════════════════════════════════════════════ --}}
+    @php
+        $studentCount = $unit->students()->count();
+        $teacherCount = $unit->teachers()->count();
+        $classCount = $unit->schoolClasses()->count();
+
+        // Fallback to mock data if actual DB counts are 0
+        if ($studentCount === 0) {
+            $studentCount = 120;
+            $teacherCount = 10;
+            $classCount = 6;
+        }
+
+        $statisticBg = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
+        $bgImageUrl = ($statisticBg && $statisticBg->value) ? (str_starts_with($statisticBg->value, 'http') ? $statisticBg->value : Storage::url($statisticBg->value)) : 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';
+    @endphp
+    <section class="relative py-16 md:py-20 z-20 bg-gradient-to-b from-[#581c87] via-purple-50/10 to-white border-b border-slate-100 overflow-hidden">
+        @if($bgImageUrl)
+        <div class="absolute inset-0 bg-cover bg-center bg-fixed opacity-[0.10] mix-blend-multiply" style="background-image: url('{{ $bgImageUrl }}');"></div>
+        @endif
+
+        <!-- Top Fade Overlay (Blends Hero dark color into statistics) -->
+        <div class="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#581c87] to-transparent pointer-events-none z-10"></div>
+
+        <!-- Bottom Fade Overlay -->
+        <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 max-w-6xl mx-auto">
+                {{-- Siswa Aktif --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-purple-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-purple-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="users" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $studentCount }}" data-suffix="+">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Siswa Aktif</p>
+                </div>
+
+                {{-- Tenaga Pendidik --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 100ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-purple-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-purple-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="graduation-cap" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $teacherCount }}" data-suffix="+">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Tenaga Pendidik</p>
+                </div>
+
+                {{-- Rombel Kelas --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 200ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-purple-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-purple-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="door-closed" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $classCount }}" data-suffix="">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Rombel Kelas</p>
+                </div>
+
+                {{-- Tahun Berdiri --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 300ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-purple-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-purple-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="building" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="15" data-suffix=" Tahun">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Tahun Berdiri</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     {{-- ════════════════════════════════════════════
@@ -313,8 +410,15 @@
     {{-- ════════════════════════════════════════════
          GURU SECTION
          ════════════════════════════════════════════ --}}
-    <section id="guru" class="py-20" style="background: #f8fafc;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    @php
+        $statisticBg = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
+        $bgImageUrl = ($statisticBg && $statisticBg->value) ? (str_starts_with($statisticBg->value, 'http') ? $statisticBg->value : Storage::url($statisticBg->value)) : 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';
+    @endphp
+    <section id="guru" class="relative py-20 overflow-hidden bg-cover bg-center bg-fixed bg-no-repeat" style="background-image: linear-gradient(to bottom, rgba(243, 232, 255, 0.88), rgba(243, 232, 255, 0.88)){{ $bgImageUrl ? ", url('" . $bgImageUrl . "')" : "" }};">
+        <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent pointer-events-none z-0"></div>
+        <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 reveal">
                 <h2 class="section-title">GURU & TENAGA PENDIDIK</h2>
 
@@ -360,7 +464,7 @@
                 <h2 class="section-title">EKSTRAKURIKULER</h2>
 
             </div>
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="w-full">
                 @php
                     $displayEkskuls = [];
                     if (isset($ekskuls) && !$ekskuls->isEmpty()) {
@@ -368,32 +472,99 @@
                             $displayEkskuls[] = [
                                 'icon' => $ekskul->icon ? $ekskul->icon : 'activity',
                                 'title' => $ekskul->title,
-                                'img' => $ekskul->image ? (Str::startsWith($ekskul->image, 'http') ? $ekskul->image : asset('storage/' . $ekskul->image)) : 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80',
+                                'img' => $ekskul->image ? (Str::startsWith($ekskul->image, 'http') ? $ekskul->image : asset('storage/' . $ekskul->image)) : 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80',
                                 'desc' => $ekskul->description,
                             ];
                         }
                     }
+
+                    // Partitioning into rows
+                    $rowsCount = 2;
+                    if (count($displayEkskuls) >= 9) {
+                        $rowsCount = 3;
+                    }
+
+                    $rows = array_fill(0, $rowsCount, []);
+                    foreach ($displayEkskuls as $idx => $e) {
+                        $rows[$idx % $rowsCount][] = $e;
+                    }
+
+                    // Repeat rows for smooth scrolling
+                    $repeatedRows = [];
+                    foreach ($rows as $rIdx => $rowItems) {
+                        if (empty($rowItems)) continue;
+                        $baseRow = $rowItems;
+                        while (count($baseRow) < 8) {
+                            $baseRow = array_merge($baseRow, $rowItems);
+                        }
+                        $repeatedRows[$rIdx] = array_merge($baseRow, $baseRow);
+                    }
                 @endphp
-                @if(!empty($displayEkskuls))
-                @foreach ($displayEkskuls as $idx => $e)
-                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal"
-                        style="transition-delay: {{ ($idx % 3) * 90 }}ms; aspect-ratio: 4/3;">
-                        <img src="{{ $e['img'] }}" alt="{{ $e['title'] }}"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 transition-opacity duration-300"
-                            style="background: linear-gradient(to top, rgba(2,44,34,0.92) 0%, rgba(2,44,34,0.28) 55%, transparent 100%);">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-4">
-                            <div class="w-8 h-8 rounded-lg mb-2 flex items-center justify-center"
-                                style="background: rgba(147, 51, 234,0.18); color:#6ee7b7; border:1px solid rgba(147, 51, 234,0.3);">
-                                <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5"></i>
+
+                @if(!empty($repeatedRows))
+                <style>
+                    .marquee-wrapper {
+                        mask-image: linear-gradient(to right, transparent, white 80px, white calc(100% - 80px), transparent);
+                        -webkit-mask-image: linear-gradient(to right, transparent, white 80px, white calc(100% - 80px), transparent);
+                    }
+                    
+                    @keyframes marquee-to-left {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    
+                    @keyframes marquee-to-right {
+                        0% { transform: translateX(-50%); }
+                        100% { transform: translateX(0); }
+                    }
+                    
+                    .animate-marquee-to-left {
+                        animation: marquee-to-left 40s linear infinite;
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
+                        width: max-content !important;
+                        flex-shrink: 0 !important;
+                    }
+                    
+                    .animate-marquee-to-right {
+                        animation: marquee-to-right 40s linear infinite;
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
+                        width: max-content !important;
+                        flex-shrink: 0 !important;
+                    }
+                    
+                    .ekskul-marquee-row:hover .animate-marquee-to-left,
+                    .ekskul-marquee-row:hover .animate-marquee-to-right {
+                        animation-play-state: paused;
+                    }
+                </style>
+
+                <div class="w-full flex flex-col gap-6 relative z-10 marquee-wrapper overflow-hidden py-6">
+                    @foreach($repeatedRows as $rIdx => $rowItems)
+                        <div class="ekskul-marquee-row w-full overflow-hidden select-none">
+                            <div class="flex flex-nowrap gap-6 {{ $rIdx % 2 == 0 ? 'animate-marquee-to-left' : 'animate-marquee-to-right' }}">
+                                @foreach($rowItems as $e)
+                                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 w-[260px] sm:w-[300px] h-[180px] sm:h-[210px] flex-shrink-0 hover:scale-105 cursor-pointer">
+                                        <img src="{{ $e['img'] }}" alt="{{ $e['title'] }}"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                        <div class="absolute inset-0 transition-opacity duration-300"
+                                            style="background: linear-gradient(to top, rgba(2,44,34,0.92) 0%, rgba(2,44,34,0.28) 55%, transparent 100%);">
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
+                                            <div class="w-8 h-8 rounded-lg mb-2 flex items-center justify-center bg-[#a855f7]/20 text-[#d8b4fe] border border-[#a855f7]/30">
+                                                <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5"></i>
+                                            </div>
+                                            <h3 class="font-bold text-white text-sm sm:text-base mb-1">{{ $e['title'] }}</h3>
+                                            <p class="text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-500">
+                                                {{ $e['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <h3 class="font-semibold text-white text-sm mb-1">{{ $e['title'] }}</h3>
-                            <p class="text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-500">
-                                {{ $e['desc'] }}</p>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
                 @endif
             </div>
         </div>
@@ -402,62 +573,52 @@
     {{-- ════════════════════════════════════════════
          FASILITAS SECTION
          ════════════════════════════════════════════ --}}
-    <section id="fasilitas" class="py-20" style="background: linear-gradient(135deg, #3b0764 0%, #581c87 100%);">
+    <section id="fasilitas" class="py-20 bg-slate-50 border-t border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 reveal">
-                <h2 class="section-title light">FASILITAS</h2>
-
+            <div class="text-center mb-16 reveal">
+                <h2 class="section-title">FASILITAS</h2>
+                <p class="unit-section-desc">Fasilitas penunjang kegiatan belajar mengajar yang lengkap dan memadai untuk mendukung tumbuh kembang siswa.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-7 mb-8">
-                <div class="grid grid-cols-2 gap-3 reveal reveal-left">
-                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=400&q=80"
-                        class="rounded-xl object-cover w-full" style="height:180px;" alt="Ruang Kelas">
-                    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=80"
-                        class="rounded-xl object-cover w-full" style="height:180px;" alt="Perpustakaan">
-                    <img src="https://images.unsplash.com/photo-1629752187687-3d3c7ea3a21b?auto=format&fit=crop&w=400&q=80"
-                        class="rounded-xl object-cover w-full col-span-2" style="height:180px;" alt="Laboratorium">
-                </div>
-                <div class="reveal reveal-right">
-                    <div class="grid grid-cols-2 gap-3">
-                        @php
-                            $displayFacilities = [];
-                            if (isset($facilities) && !$facilities->isEmpty()) {
-                                foreach ($facilities as $fac) {
-                                    $displayFacilities[] = [
-                                        'icon' => $fac->icon ? $fac->icon : 'check',
-                                        'title' => $fac->title,
-                                    ];
-                                }
-                            }
-                            if (empty($displayFacilities)) {
-                                $displayFacilities = [
-                                    ['monitor',     'Ruang Kelas Nyaman'],
-                                    ['laptop',      'Lab Komputer'],
-                                    ['library',     'Perpustakaan'],
-                                    ['moon',        'Musholla Luas'],
-                                    ['activity',    'Lapangan Olahraga'],
-                                    ['stethoscope', 'Klinik / UKS'],
-                                    ['coffee',      'Kantin Sehat'],
-                                    ['cctv',        'Keamanan CCTV'],
-                                ];
-                            }
-                        @endphp
-                        @if(!empty($displayFacilities))
-                        @foreach ($displayFacilities as $f)
-                            <div class="flex items-center gap-2.5 p-3 rounded-xl transition-colors duration-300 hover:bg-white/5"
-                                style="border: 1px solid rgba(255,255,255,0.06);">
-                                <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                                    style="background: rgba(147, 51, 234,0.12); color: #a855f7;">
-                                    <i data-lucide="{{ $f['icon'] ?? $f[0] }}" class="w-3.5 h-3.5"></i>
-                                </div>
-                                <span class="text-xs font-semibold text-slate-300">{{ $f['title'] ?? $f[1] }}</span>
-                            </div>
-                        @endforeach
-                        @endif
+            @php
+                $displayFacilities = [];
+                if (isset($facilities) && !$facilities->isEmpty()) {
+                    foreach ($facilities as $fac) {
+                        $displayFacilities[] = [
+                            'icon' => $fac->icon ? $fac->icon : 'check',
+                            'title' => $fac->title,
+                        ];
+                    }
+                }
+                if (empty($displayFacilities)) {
+                    $displayFacilities = [
+                        ['icon' => 'monitor',     'title' => 'Ruang Kelas Nyaman'],
+                        ['icon' => 'laptop',      'title' => 'Lab Komputer'],
+                        ['icon' => 'library',     'title' => 'Perpustakaan'],
+                        ['icon' => 'moon',        'title' => 'Musholla Luas'],
+                        ['icon' => 'activity',    'title' => 'Lapangan Olahraga'],
+                        ['icon' => 'stethoscope', 'title' => 'Klinik / UKS'],
+                        ['icon' => 'coffee',      'title' => 'Kantin Sehat'],
+                        ['icon' => 'shield-check', 'title' => 'Keamanan CCTV'],
+                    ];
+                }
+            @endphp
+            @if(!empty($displayFacilities))
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto reveal reveal-up">
+                @foreach ($displayFacilities as $idx => $f)
+                    @php
+                        $iconName = is_array($f) ? $f['icon'] : $f[0];
+                        $titleText = is_array($f) ? $f['title'] : $f[1];
+                    @endphp
+                    <div class="group flex items-center gap-4 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-full p-2.5 pr-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-purple-200" style="transition-delay: {{ $idx * 50 }}ms;">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-purple-600 flex items-center justify-center text-purple-600 shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                            <i data-lucide="{{ $iconName }}" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-sm font-bold uppercase tracking-wider text-slate-700">{{ $titleText }}</span>
                     </div>
-                </div>
+                @endforeach
             </div>
+            @endif
         </div>
     </section>
 
