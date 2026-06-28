@@ -607,11 +607,87 @@
             </div>
         </div>
 
-        {{-- Custom SVG Wave Divider --}}
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20" style="transform: translateY(1px);">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" style="display: block; width: calc(100% + 1.3px); height: 75px;">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.2,192.39,101.44Z" fill="#ffffff"></path>
-            </svg>
+    </section>
+
+    {{-- ════════════════════════════════════════════
+         STATISTICS SECTION
+         ════════════════════════════════════════════ --}}
+    @php
+        $studentCount = $unit->students()->count();
+        $teacherCount = $unit->teachers()->count();
+        $classCount = $unit->schoolClasses()->count();
+
+        // Fallback to mock data if actual DB counts are 0
+        if ($studentCount === 0) {
+            $studentCount = 75;
+            $teacherCount = 12;
+            $classCount = 4;
+        }
+
+        $statisticBg = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
+        $bgImageUrl = ($statisticBg && $statisticBg->value) ? (str_starts_with($statisticBg->value, 'http') ? $statisticBg->value : Storage::url($statisticBg->value)) : 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';
+    @endphp
+    <section class="relative py-16 md:py-20 z-20 bg-gradient-to-b from-[#fde8cd] via-orange-50/10 to-white border-b border-slate-100 overflow-hidden">
+        @if($bgImageUrl)
+        <div class="absolute inset-0 bg-cover bg-center bg-fixed opacity-[0.10] mix-blend-multiply" style="background-image: url('{{ $bgImageUrl }}');"></div>
+        @endif
+
+        <!-- Top Fade Overlay (Blends Hero light color into statistics) -->
+        <div class="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#fde8cd] to-transparent pointer-events-none z-10"></div>
+
+        <!-- Bottom Fade Overlay -->
+        <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 max-w-6xl mx-auto">
+                {{-- Siswa Aktif --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-orange-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-orange-500 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="users" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $studentCount }}" data-suffix="+">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Siswa Aktif</p>
+                </div>
+
+                {{-- Tenaga Pendidik --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 100ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-orange-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-orange-500 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="graduation-cap" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $teacherCount }}" data-suffix="+">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Tenaga Pendidik</p>
+                </div>
+
+                {{-- Rombel Kelas --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 200ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-orange-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-orange-500 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="door-closed" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $classCount }}" data-suffix="">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Rombel Kelas</p>
+                </div>
+
+                {{-- Tahun Berdiri --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 300ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-orange-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-orange-500 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="building" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="10" data-suffix=" Tahun">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Tahun Berdiri</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -739,7 +815,7 @@
                 <h2 class="section-title">EKSTRAKURIKULER</h2>
 
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-5">
+            <div class="w-full">
                 @php
                     $displayEkskuls = [];
                     if (isset($ekskuls) && !$ekskuls->isEmpty()) {
@@ -752,27 +828,95 @@
                             ];
                         }
                     }
+
+                    // Partitioning into rows
+                    $rowsCount = 2;
+                    if (count($displayEkskuls) >= 9) {
+                        $rowsCount = 3;
+                    }
+
+                    $rows = array_fill(0, $rowsCount, []);
+                    foreach ($displayEkskuls as $idx => $e) {
+                        $rows[$idx % $rowsCount][] = $e;
+                    }
+
+                    // Repeat rows for smooth scrolling
+                    $repeatedRows = [];
+                    foreach ($rows as $rIdx => $rowItems) {
+                        if (empty($rowItems)) continue;
+                        $baseRow = $rowItems;
+                        while (count($baseRow) < 8) {
+                            $baseRow = array_merge($baseRow, $rowItems);
+                        }
+                        $repeatedRows[$rIdx] = array_merge($baseRow, $baseRow);
+                    }
                 @endphp
-                @if(!empty($displayEkskuls))
-                @foreach ($displayEkskuls as $idx => $e)
-                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal"
-                        style="transition-delay: {{ ($idx % 5) * 80 }}ms; aspect-ratio: 1/1;">
-                        <img src="{{ $e['img'] }}" alt="{{ $e['title'] }}"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 transition-opacity duration-300"
-                            style="background: linear-gradient(to top, rgba(2,44,34,0.92) 0%, rgba(2,44,34,0.2) 60%, transparent 100%);">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-lg mb-1.5 md:mb-2 flex items-center justify-center"
-                                style="background: rgba(234, 88, 12,0.18); color:#6ee7b7; border:1px solid rgba(234, 88, 12,0.3);">
-                                <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
+
+                @if(!empty($repeatedRows))
+                <style>
+                    .marquee-wrapper {
+                        mask-image: linear-gradient(to right, transparent, white 80px, white calc(100% - 80px), transparent);
+                        -webkit-mask-image: linear-gradient(to right, transparent, white 80px, white calc(100% - 80px), transparent);
+                    }
+                    
+                    @keyframes marquee-to-left {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    
+                    @keyframes marquee-to-right {
+                        0% { transform: translateX(-50%); }
+                        100% { transform: translateX(0); }
+                    }
+                    
+                    .animate-marquee-to-left {
+                        animation: marquee-to-left 40s linear infinite;
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
+                        width: max-content !important;
+                        flex-shrink: 0 !important;
+                    }
+                    
+                    .animate-marquee-to-right {
+                        animation: marquee-to-right 40s linear infinite;
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
+                        width: max-content !important;
+                        flex-shrink: 0 !important;
+                    }
+                    
+                    .ekskul-marquee-row:hover .animate-marquee-to-left,
+                    .ekskul-marquee-row:hover .animate-marquee-to-right {
+                        animation-play-state: paused;
+                    }
+                </style>
+
+                <div class="w-full flex flex-col gap-6 relative z-10 marquee-wrapper overflow-hidden py-6">
+                    @foreach($repeatedRows as $rIdx => $rowItems)
+                        <div class="ekskul-marquee-row w-full overflow-hidden select-none">
+                            <div class="flex flex-nowrap gap-6 {{ $rIdx % 2 == 0 ? 'animate-marquee-to-left' : 'animate-marquee-to-right' }}">
+                                @foreach($rowItems as $e)
+                                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 w-[260px] sm:w-[300px] h-[180px] sm:h-[210px] flex-shrink-0 hover:scale-105 cursor-pointer">
+                                        <img src="{{ $e['img'] }}" alt="{{ $e['title'] }}"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                        <div class="absolute inset-0 transition-opacity duration-300"
+                                            style="background: linear-gradient(to top, rgba(2,44,34,0.92) 0%, rgba(2,44,34,0.28) 55%, transparent 100%);">
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
+                                            <div class="w-8 h-8 rounded-lg mb-2 flex items-center justify-center bg-[#ea580c]/20 text-[#6ee7b7] border border-[#ea580c]/30">
+                                                <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5"></i>
+                                            </div>
+                                            <h3 class="font-bold text-white text-sm sm:text-base mb-1">{{ $e['title'] }}</h3>
+                                            <p class="text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-500">
+                                                {{ $e['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <h3 class="font-bold text-white text-xs md:text-sm mb-0.5 line-clamp-1">{{ $e['title'] }}</h3>
-                            <p class="text-[10px] md:text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-20 overflow-hidden transition-all duration-500 line-clamp-3">
-                                {{ $e['desc'] }}</p>
                         </div>
-                    </div>
-                @endforeach
+                        </div>
+                    @endforeach
+                </div>
                 @endif
             </div>
         </div>
@@ -781,6 +925,13 @@
     {{-- ════════════════════════════════════════════
          FASILITAS SECTION
          ════════════════════════════════════════════ --}}
+<<<<<<< ours
+    <section id="fasilitas" class="py-20 bg-slate-50 border-t border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="section-title">FASILITAS</h2>
+                <p class="unit-section-desc">Fasilitas penunjang kegiatan belajar mengajar yang lengkap dan memadai untuk mendukung tumbuh kembang siswa.</p>
+=======
     <section id="fasilitas" class="py-24 relative bg-fixed bg-center bg-cover overflow-hidden"
         style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1920&q=80');">
         
@@ -795,6 +946,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-14 reveal">
                 <h2 class="section-title">FASILITAS</h2>
+>>>>>>> theirs
             </div>
 
             @php
@@ -802,11 +954,26 @@
                 if (isset($facilities) && !$facilities->isEmpty()) {
                     foreach ($facilities as $fac) {
                         $displayFacilities[] = [
+<<<<<<< ours
+                            'icon' => $fac->icon ? $fac->icon : 'check',
+=======
                             'icon'  => $fac->icon ? $fac->icon : 'check-circle',
+>>>>>>> theirs
                             'title' => $fac->title,
                         ];
                     }
                 }
+<<<<<<< ours
+            @endphp
+            @if(!empty($displayFacilities))
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto reveal reveal-up">
+                @foreach ($displayFacilities as $idx => $f)
+                    <div class="group flex items-center gap-4 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-full p-2.5 pr-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-orange-200" style="transition-delay: {{ $idx * 50 }}ms;">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-orange-500 flex items-center justify-center text-orange-500 shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                            <i data-lucide="{{ $f['icon'] }}" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-sm font-bold uppercase tracking-wider text-slate-700">{{ $f['title'] }}</span>
+=======
                 
                 $colors = [
                     ['bg' => '#fefce8', 'icon' => '#eab308', 'border' => '#fef08a'], // Yellow
@@ -833,6 +1000,7 @@
                             
                             <h3 class="font-extrabold text-slate-700 text-sm md:text-[15px] leading-tight">{{ $f['title'] }}</h3>
                         </div>
+>>>>>>> theirs
                     </div>
                 @endforeach
             </div>

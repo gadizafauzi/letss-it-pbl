@@ -70,7 +70,7 @@
                 <div class="inline-block relative">
                     <h2 class="section-title mx-auto text-[#002244] relative z-10 after:hidden">Profil Singkat Sekolah</h2>
                     {{-- Hand-drawn style underline --}}
-                    <svg class="absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+                    <svg class="section-accent-line absolute w-full h-4 -bottom-2 left-0 text-amber-400 z-0" viewBox="0 0 200 20" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
                         <path d="M5 15Q50 5 100 10T195 15" />
                     </svg>
                 </div>
@@ -328,7 +328,7 @@
                     <div class="ppdb-timeline-item reveal reveal-repeat {{ $revealClass }} {{ $delay }}">
                         <div class="ppdb-timeline-dot-wrapper">
                             <div class="ppdb-timeline-dot">
-                                <i data-lucide="check" class="w-5 h-5 text-slate-600"></i>
+                                <i data-lucide="check" class="w-4 h-4 text-white"></i>
                             </div>
                         </div>
                         <div class="ppdb-timeline-content">

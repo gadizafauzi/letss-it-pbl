@@ -46,6 +46,7 @@
     </button>
 
     {{-- JS --}}
+    <script src="{{ asset('js/public.js') }}"></script>
     <script>
         // Init Lucide
         lucide.createIcons();

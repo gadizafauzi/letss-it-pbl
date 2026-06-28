@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
 <div class="space-y-5">
@@ -24,6 +24,104 @@
     </div>
 
     {{-- TOAST --}}
+    @if(session('success'))
+        <div id="toast-success"
+            class="fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl shadow-green-500/20
+                  bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 transition-all duration-500">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-400 flex-shrink-0">
+                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+            </div>
+            <div class="mr-4">
+                <h4 class="text-sm font-bold text-slate-800 dark:text-slate-100">Berhasil!</h4>
+                <p class="text-[13px] text-slate-600 dark:text-slate-400 mt-0.5">{{ session('success') }}</p>
+            </div>
+            <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                <i data-lucide="x" class="w-[18px] h-[18px]"></i>
+            </button>
+        </div>
+        <script>setTimeout(() => { const t = document.getElementById('toast-success'); if(t) t.remove(); }, 4000);</script>
+    @endif
+
+    {{-- FILTER --}}
+    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
+        <form id="filterForm" action="{{ route('admin.berita.posts.index') }}" method="GET"
+            class="flex flex-wrap items-center gap-2.5">
+            {{-- Search --}}
+            <div class="relative flex-1 min-w-[200px]">
+                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                <input id="searchInput" type="text" name="search" value="{{ request('search') }}"
+                    placeholder="Cari judul berita..."
+                    class="w-full h-[42px] pl-9 pr-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
+                           bg-sky-50 dark:bg-slate-700 text-[13px] text-slate-700 dark:text-slate-200 outline-none
+                           focus:border-sky-400 focus:bg-white dark:focus:bg-slate-600 focus:ring-2 focus:ring-sky-100 transition-all">
+            </div>
+            {{-- Kategori --}}
+            <select name="category" onchange="this.form.submit()"
+                class="h-[42px] px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
+                       bg-sky-50 dark:bg-slate-700 text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-[160px]
+                       focus:border-sky-400 focus:bg-white dark:focus:bg-slate-600 transition-all">
+                <option value="">Semua Kategori</option>
+                @foreach($categories as $cat)
+                <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
+                    {{ $cat->name }}
+                </option>
+                @endforeach
+            </select>
+            {{-- Status --}}
+            <select name="status" onchange="this.form.submit()"
+                class="h-[42px] px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
+                       bg-sky-50 dark:bg-slate-700 text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-[140px]
+                       focus:border-sky-400 focus:bg-white dark:focus:bg-slate-600 transition-all">
+                <option value="">Semua Status</option>
+                <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
+                <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
+            </select>
+            @if(request()->hasAny(['search','category','status']))
+            <a href="{{ route('admin.berita.posts.index') }}"
+                class="h-[42px] px-4 rounded-[10px] text-[13px] font-semibold text-slate-500 dark:text-slate-400
+                       bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all inline-flex items-center gap-1.5 no-underline">
+                <i data-lucide="x" class="w-3.5 h-3.5"></i>Reset
+            </a>
+            @endif
+        </form>
+    </div>
+
+    {{-- TABLE --}}
+    <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[900px] border-collapse">
+                <thead>
+                    <tr class="bg-sky-50/50 dark:bg-slate-800/50 border-b-[1.5px] border-sky-100 dark:border-slate-700/50">
+                        <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 w-[70px]">Cover</th>
+                        <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400">Judul</th>
+                        <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 min-w-[110px]">Kategori</th>
+                        <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 min-w-[90px]">Penulis</th>
+                        <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 min-w-[90px]">Status</th>
+                        <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 min-w-[100px]">Publish Date</th>
+                        <th class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400">Views</th>
+                        <th class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($posts as $post)
+                    @php
+                        $isPublished = $post->status === 'published';
+                        $isActive    = $post->is_active;
+                        $catColor    = $post->category->color ?? 'slate';
+                    @endphp
+                    <tr class="border-b border-slate-100 dark:border-slate-700/50 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+                        {{-- Cover --}}
+                        <td class="px-4 py-3">
+                            @if($post->featured_image)
+                            <div class="w-[60px] h-[42px] rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-700 flex-shrink-0">
+                                <img src="{{ Str::startsWith($post->featured_image,'http') ? $post->featured_image : asset('storage/'.$post->featured_image) }}"
+                                    alt="{{ $post->title }}" class="w-full h-full object-cover">
+                            </div>
+                            @else
+                            <div class="w-[60px] h-[42px] rounded-lg bg-slate-100 dark:bg-slate-700 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="image" class="w-5 h-5 text-slate-300 dark:text-slate-600"></i>
+                            </div>
+                            @endif
                         </td>
                         {{-- Judul --}}
                         <td class="px-4 py-3 max-w-[260px]">
@@ -96,7 +194,8 @@
                                     <i data-lucide="square-pen" class="w-[14px] h-[14px]"></i>
                                 </a>
                                 {{-- Hapus --}}
-                                <form action="{{ route('admin.berita.posts.destroy', $post->id) }}" method="POST" class="inline">
+                                <form action="{{ route('admin.berita.posts.destroy', $post->id) }}" method="POST" class="inline"
+                                    onsubmit="return confirm('Hapus berita \'{{ addslashes($post->title) }}\'?')">
                                     @csrf @method('DELETE')
                                     <button type="submit"
                                         class="w-8 h-8 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700

@@ -1,7 +1,7 @@
 @extends('layouts.unit')
 
 @section('navbar')
-    <x-public.unit-navbar unitLogo="images/smp.jpeg" unitName="SMP Islam Terpadu" textTheme="dark" />
+    <x-public.unit-navbar unitLogo="images/smp.jpeg" unitName="SMP Islam Terpadu" />
 @endsection
 
 @section('footer')
@@ -233,380 +233,169 @@
                 box-shadow: 0 0 0 5px rgba(37, 99, 235, .15), 0 0 18px rgba(37, 99, 235, .40);
             }
         }
+
+        @keyframes waveTranslateX {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-25%); }
+        }
+        .anim-wave-front {
+            animation: waveTranslateX 8s ease-in-out infinite alternate;
+        }
+        .anim-wave-mid {
+            animation: waveTranslateX 6s ease-in-out infinite alternate;
+        }
+        .anim-wave-back {
+            animation: waveTranslateX 14s ease-in-out infinite alternate;
+        }
     </style>
 
     {{-- ════════════════════════════════════════════
          HERO SECTION
          ════════════════════════════════════════════ --}}
-    <style>
-        /* ── Hero light theme ─────────────────────── */
-        .smp-hero {
-            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 40%, #e0f2fe 70%, #dbeafe 100%);
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
+    <section id="home" class="relative min-h-[75vh] lg:min-h-[80vh] flex items-center overflow-hidden"
+        style="background: linear-gradient(135deg, #172554 0%, #1e3a8a 60%, #1d4ed8 100%);">
 
-        /* Decorative blobs */
-        .smp-hero-blob-1 {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            background: rgba(59, 130, 246, 0.06);
-            top: -120px;
-            right: -100px;
-            animation: blobMorph 12s ease-in-out infinite;
-        }
-        .smp-hero-blob-2 {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            background: rgba(59, 130, 246, 0.04);
-            bottom: -80px;
-            left: -60px;
-            animation: blobMorph 15s ease-in-out infinite reverse;
-        }
-        @keyframes blobMorph {
-            0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-        }
+        <div class="absolute inset-0 opacity-20"
+            style="background-image: radial-gradient(rgba(37, 99, 235,0.6) 1px, transparent 1px); background-size: 32px 32px;">
+        </div>
 
-        /* Image wrapper */
-        .smp-hero-img-wrap {
-            position: relative;
-            width: 100%;
-            max-width: 560px;
-            margin-left: auto;
-            padding: 50px 60px 60px 20px;
-        }
-
-        /* Large organic blob behind — bottom-right accent */
-        .smp-hero-img-blob {
-            position: absolute;
-            width: 78%;
-            height: 85%;
-            bottom: 8px;
-            right: 8px;
-            z-index: 0;
-            background: #bfdbfe;
-            border-radius: 62% 38% 54% 46% / 44% 56% 44% 56%;
-            animation: blobFloat 16s ease-in-out infinite;
-        }
-        /* Extra small accent blob — top left */
-        .smp-hero-img-blob2 {
-            position: absolute;
-            width: 140px;
-            height: 140px;
-            top: 10px;
-            left: -10px;
-            z-index: 0;
-            background: #93c5fd;
-            border-radius: 62% 38% 46% 54% / 56% 44% 56% 44%;
-            animation: blobFloat 12s ease-in-out infinite reverse;
-        }
-        @keyframes blobFloat {
-            0%   { border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%; }
-            33%  { border-radius: 48% 52% 58% 42% / 42% 58% 42% 58%; }
-            66%  { border-radius: 54% 46% 38% 62% / 56% 40% 60% 44%; }
-            100% { border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%; }
-        }
-
-        /* Photo frame — organic blob clip */
-        .smp-hero-img-frame {
-            position: relative;
-            z-index: 2;
-            border-radius: 52% 48% 42% 58% / 48% 56% 44% 52%;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.13);
-            animation: frameMorph 14s ease-in-out infinite;
-        }
-        @keyframes frameMorph {
-            0%   { border-radius: 52% 48% 42% 58% / 48% 56% 44% 52%; }
-            33%  { border-radius: 44% 56% 56% 44% / 52% 44% 56% 48%; }
-            66%  { border-radius: 56% 44% 48% 52% / 44% 52% 48% 56%; }
-            100% { border-radius: 52% 48% 42% 58% / 48% 56% 44% 52%; }
-        }
-        .smp-hero-img-frame img {
-            width: 100%;
-            display: block;
-            aspect-ratio: 4/3;
-            object-fit: cover;
-        }
-
-        /* Leaf group - top left of image */
-        .smp-hero-leaves {
-            position: absolute;
-            top: -10px;
-            left: -5px;
-            z-index: 5;
-            pointer-events: none;
-        }
-        .smp-hero-leaves .leaf {
-            display: block;
-        }
-        .smp-hero-leaves .leaf-1 {
-            width: 52px;
-            height: auto;
-            transform: rotate(-45deg) translateX(4px);
-            margin-bottom: -14px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-        }
-        .smp-hero-leaves .leaf-2 {
-            width: 42px;
-            height: auto;
-            transform: rotate(-5deg) translateX(22px);
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
-        }
-
-        /* Badge - bottom right circular stamp */
-        .smp-hero-badge {
-            position: absolute;
-            right: 14px;
-            bottom: 20px;
-            width: 130px;
-            height: 130px;
-            z-index: 10;
-        }
-        @media (max-width: 1024px) {
-            .smp-hero-badge { display: none; }
-        }
-        .smp-hero-badge-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: #eff6ff;
-            box-shadow: 0 8px 28px rgba(0,0,0,0.10), 0 0 0 4px rgba(59,130,246,0.08);
-            border: 2px solid rgba(59, 130, 246, 0.18);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .smp-hero-badge-inner .badge-flower {
-            font-size: 1.5rem;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-        }
-        .smp-hero-badge-inner svg.badge-text-svg {
-            position: absolute;
-            inset: 6px;
-            width: calc(100% - 12px);
-            height: calc(100% - 12px);
-        }
-        .smp-hero-badge-inner svg.badge-text-svg text {
-            fill: #2563eb;
-            font-size: 12px;
-            font-weight: 700;
-            font-style: italic;
-            letter-spacing: 1px;
-        }
-
-        /* Breadcrumb for light bg */
-        .smp-hero-breadcrumb a {
-            color: #9ca3af;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .smp-hero-breadcrumb a:hover {
-            color: #3b82f6;
-        }
-        .smp-hero-breadcrumb .separator {
-            color: #d1d5db;
-        }
-        .smp-hero-breadcrumb .current {
-            color: #3b82f6;
-            font-weight: 600;
-        }
-
-        /* Title */
-        .smp-hero-title {
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
-            font-weight: 900;
-            color: #1e293b;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            margin-bottom: 1.25rem;
-        }
-
-        /* Subtitle */
-        .smp-hero-subtitle {
-            font-size: 0.95rem;
-            color: #64748b;
-            line-height: 1.75;
-            max-width: 460px;
-            margin-bottom: 2rem;
-        }
-
-        /* Buttons */
-        .smp-hero-btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            color: white;
-            font-weight: 700;
-            font-size: 0.85rem;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        .smp-hero-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
-        }
-        .smp-hero-btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 12px;
-            background: transparent;
-            color: #2563eb;
-            font-weight: 700;
-            font-size: 0.85rem;
-            border: 2px solid #60a5fa;
-            transition: all 0.3s;
-            text-decoration: none;
-        }
-        .smp-hero-btn-secondary:hover {
-            background: rgba(59, 130, 246, 0.06);
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-        }
-
-        /* Tagline */
-        .smp-hero-tagline {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 2.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(59, 130, 246, 0.12);
-        }
-        .smp-hero-tagline-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: rgba(59, 130, 246, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            color: #3b82f6;
-        }
-        .smp-hero-tagline-text {
-            font-size: 0.78rem;
-            color: #64748b;
-            line-height: 1.5;
-            font-weight: 500;
-        }
-    </style>
-
-    <section id="home" class="smp-hero">
-        {{-- Background decorations --}}
-        <div class="smp-hero-blob-1"></div>
-        <div class="smp-hero-blob-2"></div>
+        <div class="absolute top-1/4 left-0 w-72 h-72 rounded-full opacity-20"
+            style="background: radial-gradient(circle, #3b82f6, transparent 70%); filter: blur(40px);"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-10"
+            style="background: radial-gradient(circle, #60a5fa, transparent 70%); filter: blur(60px);"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-20 w-full">
             {{-- Breadcrumb --}}
-            <div class="smp-hero-breadcrumb flex items-center gap-3 mb-6 md:mb-10 text-[0.95rem] reveal reveal-left">
-                <a href="{{ route('public.home') }}">Beranda</a>
-                <span class="separator">/</span>
-                <span class="current">SMP Islam Terpadu</span>
+            <div class="flex items-center gap-3 mb-6 md:mb-10 text-[0.95rem] reveal reveal-left">
+                <a href="{{ route('public.home') }}" class="text-blue-100/80 hover:text-white font-medium transition-colors duration-300">Beranda</a>
+                <span class="text-blue-100/40">/</span>
+                <span class="text-blue-300 font-semibold tracking-wide drop-shadow-md">SMP Islam Terpadu</span>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                 {{-- Left text --}}
                 <div class="reveal reveal-left">
-                    <h1 class="smp-hero-title">
+                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tighter mt-2 mb-6">
                         @if($hero && $hero->title)
                             {{ $hero->title }}
                         @else
-                            SMP ISLAM<br>TERPADU
+                            SMP ISLAM<br>
+                            <span style="background: linear-gradient(90deg, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TERPADU</span>
                         @endif
                     </h1>
-                    
-                    <p class="smp-hero-subtitle">
+
+                    <p class="text-base text-slate-400 leading-relaxed mb-8 max-w-md">
                         {{ $hero && $hero->subtitle ? $hero->subtitle : 'Membangun generasi remaja yang unggul secara akademik, berkarakter islami kuat, dan siap menghadapi tantangan era global.' }}
                     </p>
 
                     <div class="flex flex-wrap gap-3">
-                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil' }}" class="smp-hero-btn-primary">
+                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil' }}" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white;"
+                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm shadow-lg hover:-translate-y-1 hover:shadow-blue-500/30 transition-all duration-300">
                             <i data-lucide="info" class="w-4 h-4"></i>
                             {{ $hero && $hero->button_text ? $hero->button_text : 'Deskripsi Umum' }}
                         </a>
-                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#prestasi' }}" class="smp-hero-btn-secondary">
-                            <i data-lucide="star" class="w-4 h-4"></i>
+                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#prestasi' }}"
+                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white transition-all duration-300 hover:-translate-y-1"
+                            style="border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);">
+                            <i data-lucide="play-circle" class="w-4 h-4"></i>
                             {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Lihat Prestasi' }}
                         </a>
                     </div>
                 </div>
 
-                {{-- Right image --}}
                 <div class="relative hidden lg:block reveal reveal-right">
-                    <div class="smp-hero-img-wrap">
-                        {{-- Small accent blob top-left --}}
-                        <div class="smp-hero-img-blob2"></div>
-
-                        {{-- Large organic blob bottom-right --}}
-                        <div class="smp-hero-img-blob"></div>
-
-                        {{-- Leaves top-left --}}
-                        <div class="smp-hero-leaves">
-                            <svg class="leaf leaf-1" viewBox="0 0 40 60" fill="#6aaa4e"><path d="M20 2C20 2 2 16 2 34c0 10 8 16 18 16s18-6 18-16C38 16 20 2 20 2zm0 42c-1.5 0-3-1-3-2.5 0-5 3-13 3-13s3 8 3 13c0 1.5-1.5 2.5-3 2.5z"/></svg>
-                            <svg class="leaf leaf-2" viewBox="0 0 40 60" fill="#8dc26e"><path d="M20 2C20 2 2 16 2 34c0 10 8 16 18 16s18-6 18-16C38 16 20 2 20 2zm0 42c-1.5 0-3-1-3-2.5 0-5 3-13 3-13s3 8 3 13c0 1.5-1.5 2.5-3 2.5z"/></svg>
-                        </div>
-
-                        {{-- Main image --}}
-                        <div class="smp-hero-img-frame">
-                            <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : asset('images/smp_dummy.png') }}"
-                                alt="SMP Islam Terpadu SIT Mutiara Qur'an">
-                        </div>
-
-                        {{-- Badge bottom-right --}}
-                        <div class="smp-hero-badge">
-                            <div class="smp-hero-badge-inner">
-                                <span class="badge-flower">🎓</span>
-                                <svg class="badge-text-svg" viewBox="0 0 120 120">
-                                    <defs>
-                                        <path id="topArc" d="M 16,60 A 44,44 0 0,1 104,60" />
-                                        <path id="bottomArc" d="M 104,68 A 44,44 0 0,1 16,68" />
-                                    </defs>
-                                    <text>
-                                        <textPath href="#topArc" startOffset="50%" text-anchor="middle">
-                                            Pendidikan Islami
-                                        </textPath>
-                                    </text>
-                                    <text>
-                                        <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">
-                                            Karakter Kuat
-                                        </textPath>
-                                    </text>
-                                </svg>
-                            </div>
-                        </div>
+                    <div class="relative w-full h-[400px] lg:h-[480px] animate-floating">
+                        <div class="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                        <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : asset('images/smp_dummy.png') }}" alt="SMP Islam Terpadu SIT Mutiara Qur'an"
+                            class="relative w-full h-full object-contain mix-blend-screen drop-shadow-2xl">
                     </div>
                 </div>
 
             </div>
         </div>
 
-        {{-- Custom SVG Wave Divider --}}
-        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20" style="transform: translateY(1px);">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" style="display: block; width: calc(100% + 1.3px); height: 75px;">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.2,192.39,101.44Z" fill="#ffffff"></path>
-            </svg>
+    </section>
+
+    {{-- ════════════════════════════════════════════
+         STATISTICS SECTION
+         ════════════════════════════════════════════ --}}
+    @php
+        $studentCount = $unit->students()->count();
+        $teacherCount = $unit->teachers()->count();
+        $classCount = $unit->schoolClasses()->count();
+
+        // Fallback to mock data if actual DB counts are 0
+        if ($studentCount === 0) {
+            $studentCount = 55;
+            $teacherCount = 7;
+            $classCount = 3;
+        }
+
+        $statisticBg = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
+        $bgImageUrl = ($statisticBg && $statisticBg->value) ? (str_starts_with($statisticBg->value, 'http') ? $statisticBg->value : Storage::url($statisticBg->value)) : 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';
+    @endphp
+    <section class="relative py-16 md:py-20 z-20 bg-gradient-to-b from-[#1e3a8a] via-blue-50/10 to-white border-b border-slate-100 overflow-hidden">
+        @if($bgImageUrl)
+        <div class="absolute inset-0 bg-cover bg-center bg-fixed opacity-[0.10] mix-blend-multiply" style="background-image: url('{{ $bgImageUrl }}');"></div>
+        @endif
+
+        <!-- Top Fade Overlay (Blends Hero dark color into statistics) -->
+        <div class="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#1e3a8a] to-transparent pointer-events-none z-10"></div>
+
+        <!-- Bottom Fade Overlay -->
+        <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 max-w-6xl mx-auto">
+                {{-- Siswa Aktif --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-blue-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="users" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $studentCount }}" data-suffix="+">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Siswa Aktif</p>
+                </div>
+
+                {{-- Tenaga Pendidik --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 100ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-blue-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="graduation-cap" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $teacherCount }}" data-suffix="+">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Tenaga Pendidik</p>
+                </div>
+
+                {{-- Rombel Kelas --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 200ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-blue-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="door-closed" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="{{ $classCount }}" data-suffix="">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Rombel Kelas</p>
+                </div>
+
+                {{-- Tahun Berdiri --}}
+                <div class="flex flex-col items-center text-center reveal reveal-stat" style="transition-delay: 300ms;">
+                    <div class="relative mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 border-2 border-blue-200 rounded-[40%_60%_70%_30%/40%_50%_60%_50%] transform -rotate-12 scale-110"></div>
+                        <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-600 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] flex items-center justify-center text-white shadow-lg relative z-10 transform transition-transform duration-500 hover:rotate-12 hover:rounded-[50%]">
+                            <i data-lucide="building" class="w-6 h-6 md:w-7 md:h-7 stroke-[1.5]"></i>
+                        </div>
+                    </div>
+                    <p class="text-2xl md:text-4xl font-black text-[#002244] mb-1 tracking-tight stat-number" data-count="8" data-suffix=" Tahun">0</p>
+                    <p class="text-slate-600 font-bold tracking-wide text-xs sm:text-sm md:text-base">+ Tahun Berdiri</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -645,53 +434,46 @@
     {{-- ════════════════════════════════════════════
          GURU SECTION
          ════════════════════════════════════════════ --}}
-    <section id="guru" class="py-20 bg-white">
+    @php
+        $statisticBg = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
+        $bgImageUrl = ($statisticBg && $statisticBg->value) ? (str_starts_with($statisticBg->value, 'http') ? $statisticBg->value : Storage::url($statisticBg->value)) : 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';
+    @endphp
+    <section id="guru" class="relative py-20 overflow-hidden bg-cover bg-center bg-fixed bg-no-repeat" style="background-image: linear-gradient(to bottom, rgba(224, 242, 254, 0.88), rgba(224, 242, 254, 0.88)){{ $bgImageUrl ? ", url('" . $bgImageUrl . "')" : "" }};">
+        <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent pointer-events-none z-0"></div>
+        <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none z-0"></div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 reveal">
                 <h2 class="section-title">GURU & TENAGA PENDIDIK</h2>
+
             </div>
 
-            {{-- Carousel wrapper --}}
-            <div class="relative overflow-hidden" id="guruCarouselWrapper">
-                <div id="guruCarouselTrack" class="flex gap-4 transition-transform duration-700 ease-in-out">
-                    @php
-                        $displayTeachers = [];
-                        if (isset($teachers) && !$teachers->isEmpty()) {
-                            foreach ($teachers as $item) {
-                                if ($item->teacher) {
-                                    $displayTeachers[] = [
-                                        'name'  => $item->teacher->full_name,
-                                        'photo' => $item->teacher->photo ? (Str::startsWith($item->teacher->photo, 'http') ? $item->teacher->photo : asset('storage/' . $item->teacher->photo)) : 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80',
-                                    ];
-                                }
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                @php
+                    $displayTeachers = [];
+                    if (isset($teachers) && !$teachers->isEmpty()) {
+                        foreach ($teachers as $item) {
+                            if ($item->teacher) {
+                                $displayTeachers[] = [
+                                    'name' => $item->teacher->full_name,
+                                    'photo' => $item->teacher->photo ? (Str::startsWith($item->teacher->photo, 'http') ? $item->teacher->photo : asset('storage/' . $item->teacher->photo)) : 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80',
+                                ];
                             }
                         }
-                    @endphp
-                    @if(!empty($displayTeachers))
-                        @foreach ($displayTeachers as $idx => $g)
-                        <div class="guru-card flex-shrink-0" style="width: calc(20% - 12.8px); min-width: 150px;">
-                            <div class="rounded-2xl overflow-hidden shadow-md bg-white transition-all duration-300 hover:-translate-y-2 hover:shadow-xl" style="border:1px solid rgba(59,130,246,0.12);">
-                                {{-- Photo --}}
-                                <div style="aspect-ratio:3/4; overflow:hidden; position:relative;">
-                                    <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}"
-                                        style="width:100%; height:100%; object-fit:cover; transition: transform 0.5s ease;">
-                                    {{-- Gradient overlay bottom --}}
-                                    <div style="position:absolute; inset:0; background: linear-gradient(to top, rgba(37,99,235,0.85) 0%, transparent 55%);"></div>
-                                    {{-- Name on photo --}}
-                                    <div style="position:absolute; bottom:0; left:0; right:0; padding:0.6rem 0.75rem;">
-                                        <p style="font-size:0.7rem; font-weight:800; color:white; line-height:1.2; text-shadow: 0 1px 3px rgba(0,0,0,0.4);">{{ $g['name'] }}</p>
-                                    </div>
-                                </div>
-                                {{-- Bottom bar --}}
-                                <div style="padding:0.5rem 0.75rem; display:flex; align-items:center; gap:0.4rem; background:white;">
-                                    <div style="width:6px; height:6px; border-radius:50%; background:#3b82f6; flex-shrink:0;"></div>
-                                    <span style="font-size:0.65rem; color:#64748b; font-weight:600;">Tenaga Pendidik</span>
-                                </div>
-                            </div>
+                    }
+                @endphp
+                @if(!empty($displayTeachers))
+                @foreach ($displayTeachers as $idx => $g)
+                    <div class="unit-teacher-card reveal" style="transition-delay: {{ $idx * 70 }}ms">
+                        <div class="unit-teacher-photo">
+                            <img src="{{ $g['photo'] }}" alt="{{ $g['name'] }}">
                         </div>
-                        @endforeach
-                    @endif
-                </div>
+                        <div class="unit-teacher-info">
+                            <h3>{{ $g['name'] }}</h3>
+                        </div>
+                    </div>
+                @endforeach
+                @endif
             </div>
         </div>
     </section>
@@ -699,17 +481,13 @@
     {{-- ════════════════════════════════════════════
          EKSTRAKURIKULER
          ════════════════════════════════════════════ --}}
-    <section id="ekstrakurikuler" class="py-24 relative bg-fixed bg-center bg-cover overflow-hidden"
-        style="background-image: url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?auto=format&fit=crop&w=1920&q=80');">
-        
-        {{-- Light overlay --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white/80 z-0"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="ekstrakurikuler" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 reveal">
                 <h2 class="section-title">EKSTRAKURIKULER</h2>
+
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-5">
+            <div class="w-full">
                 @php
                     $displayEkskuls = [];
                     if (isset($ekskuls) && !$ekskuls->isEmpty()) {
@@ -722,27 +500,94 @@
                             ];
                         }
                     }
+
+                    // Partitioning into rows
+                    $rowsCount = 2;
+                    if (count($displayEkskuls) >= 9) {
+                        $rowsCount = 3;
+                    }
+
+                    $rows = array_fill(0, $rowsCount, []);
+                    foreach ($displayEkskuls as $idx => $e) {
+                        $rows[$idx % $rowsCount][] = $e;
+                    }
+
+                    // Repeat rows for smooth scrolling
+                    $repeatedRows = [];
+                    foreach ($rows as $rIdx => $rowItems) {
+                        if (empty($rowItems)) continue;
+                        $baseRow = $rowItems;
+                        while (count($baseRow) < 8) {
+                            $baseRow = array_merge($baseRow, $rowItems);
+                        }
+                        $repeatedRows[$rIdx] = array_merge($baseRow, $baseRow);
+                    }
                 @endphp
-                @if(!empty($displayEkskuls))
-                @foreach ($displayEkskuls as $idx => $e)
-                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 reveal"
-                        style="transition-delay: {{ ($idx % 5) * 80 }}ms; aspect-ratio: 1/1;">
-                        <img src="{{ $e['img'] }}" alt="{{ $e['title'] }}"
-                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 transition-opacity duration-300"
-                            style="background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.2) 60%, transparent 100%);">
-                        </div>
-                        <div class="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-                            <div class="w-7 h-7 md:w-8 md:h-8 rounded-lg mb-1.5 md:mb-2 flex items-center justify-center"
-                                style="background: rgba(59,130,246,0.18); color:#93c5fd; border:1px solid rgba(59,130,246,0.3);">
-                                <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
+
+                @if(!empty($repeatedRows))
+                <style>
+                    .marquee-wrapper {
+                        mask-image: linear-gradient(to right, transparent, white 80px, white calc(100% - 80px), transparent);
+                        -webkit-mask-image: linear-gradient(to right, transparent, white 80px, white calc(100% - 80px), transparent);
+                    }
+                    
+                    @keyframes marquee-to-left {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    
+                    @keyframes marquee-to-right {
+                        0% { transform: translateX(-50%); }
+                        100% { transform: translateX(0); }
+                    }
+                    
+                    .animate-marquee-to-left {
+                        animation: marquee-to-left 40s linear infinite;
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
+                        width: max-content !important;
+                        flex-shrink: 0 !important;
+                    }
+                    
+                    .animate-marquee-to-right {
+                        animation: marquee-to-right 40s linear infinite;
+                        display: flex !important;
+                        flex-wrap: nowrap !important;
+                        width: max-content !important;
+                        flex-shrink: 0 !important;
+                    }
+                    
+                    .ekskul-marquee-row:hover .animate-marquee-to-left,
+                    .ekskul-marquee-row:hover .animate-marquee-to-right {
+                        animation-play-state: paused;
+                    }
+                </style>
+
+                <div class="w-full flex flex-col gap-6 relative z-10 marquee-wrapper overflow-hidden py-6">
+                    @foreach($repeatedRows as $rIdx => $rowItems)
+                        <div class="ekskul-marquee-row w-full overflow-hidden select-none">
+                            <div class="flex flex-nowrap gap-6 {{ $rIdx % 2 == 0 ? 'animate-marquee-to-left' : 'animate-marquee-to-right' }}">
+                                @foreach($rowItems as $e)
+                                    <div class="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 w-[260px] sm:w-[300px] h-[180px] sm:h-[210px] flex-shrink-0 hover:scale-105 cursor-pointer">
+                                        <img src="{{ $e['img'] }}" alt="{{ $e['title'] }}"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                        <div class="absolute inset-0 transition-opacity duration-300"
+                                            style="background: linear-gradient(to top, rgba(2,44,34,0.92) 0%, rgba(2,44,34,0.28) 55%, transparent 100%);">
+                                        </div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4 z-10">
+                                            <div class="w-8 h-8 rounded-lg mb-2 flex items-center justify-center bg-[#ea580c]/20 text-[#6ee7b7] border border-[#ea580c]/30">
+                                                <i data-lucide="{{ $e['icon'] }}" class="w-3.5 h-3.5"></i>
+                                            </div>
+                                            <h3 class="font-bold text-white text-sm sm:text-base mb-1">{{ $e['title'] }}</h3>
+                                            <p class="text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-16 overflow-hidden transition-all duration-500">
+                                                {{ $e['desc'] }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <h3 class="font-bold text-white text-xs md:text-sm mb-0.5 line-clamp-1">{{ $e['title'] }}</h3>
-                            <p class="text-[10px] md:text-xs text-slate-300 leading-snug max-h-0 group-hover:max-h-20 overflow-hidden transition-all duration-500 line-clamp-3">
-                                {{ $e['desc'] }}</p>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
                 @endif
             </div>
         </div>
@@ -751,15 +596,11 @@
     {{-- ════════════════════════════════════════════
          FASILITAS SECTION
          ════════════════════════════════════════════ --}}
-    <section id="fasilitas" class="py-24 relative bg-fixed bg-center bg-cover overflow-hidden"
-        style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1920&q=80');">
-        
-        {{-- Blue overlay --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-[#eff6ff] via-[#eff6ff]/50 to-[#eff6ff] z-0"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-14 reveal">
+    <section id="fasilitas" class="py-20 bg-slate-50 border-t border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
                 <h2 class="section-title">FASILITAS</h2>
+                <p class="unit-section-desc">Fasilitas penunjang kegiatan belajar mengajar yang lengkap dan memadai untuk mendukung tumbuh kembang siswa.</p>
             </div>
 
             @php
@@ -767,37 +608,36 @@
                 if (isset($facilities) && !$facilities->isEmpty()) {
                     foreach ($facilities as $fac) {
                         $displayFacilities[] = [
-                            'icon'  => $fac->icon ? $fac->icon : 'check-circle',
+                            'icon' => $fac->icon ? $fac->icon : 'check',
                             'title' => $fac->title,
                         ];
                     }
                 }
-                
-                $colors = [
-                    ['bg' => '#fefce8', 'icon' => '#eab308', 'border' => '#fef08a'], // Yellow
-                    ['bg' => '#f0fdf4', 'icon' => '#22c55e', 'border' => '#bbf7d0'], // Green
-                    ['bg' => '#eff6ff', 'icon' => '#3b82f6', 'border' => '#bfdbfe'], // Blue
-                    ['bg' => '#fdf2f8', 'icon' => '#ec4899', 'border' => '#fbcfe8'], // Pink
-                    ['bg' => '#faf5ff', 'icon' => '#a855f7', 'border' => '#e9d5ff'], // Purple
-                    ['bg' => '#fff7ed', 'icon' => '#f97316', 'border' => '#fed7aa'], // Orange
-                ];
+                if (empty($displayFacilities)) {
+                    $displayFacilities = [
+                        ['icon' => 'monitor',     'title' => 'Ruang Kelas Nyaman'],
+                        ['icon' => 'laptop',      'title' => 'Laboratorium Komputer'],
+                        ['icon' => 'library',     'title' => 'Perpustakaan'],
+                        ['icon' => 'moon',        'title' => 'Musholla Luas'],
+                        ['icon' => 'activity',    'title' => 'Lapangan Olahraga'],
+                        ['icon' => 'stethoscope', 'title' => 'Klinik / UKS'],
+                        ['icon' => 'coffee',      'title' => 'Kantin Sehat'],
+                        ['icon' => 'shield-check', 'title' => 'Keamanan CCTV'],
+                    ];
+                }
             @endphp
-            
             @if(!empty($displayFacilities))
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto reveal reveal-up">
                 @foreach ($displayFacilities as $idx => $f)
-                    @php $c = $colors[$idx % count($colors)]; @endphp
-                    <div class="reveal group" style="transition-delay: {{ ($idx % 5) * 70 }}ms;">
-                        <div class="rounded-3xl p-5 md:p-6 text-center transition-all duration-400 ease-out transform group-hover:-translate-y-2 group-hover:shadow-xl bg-white h-full flex flex-col justify-center items-center"
-                             style="border: 2px solid {{ $c['border'] }}; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                            
-                            <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center mb-4 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6"
-                                 style="background: {{ $c['bg'] }}; color: {{ $c['icon'] }}; box-shadow: inset 0 -3px 0 rgba(0,0,0,0.05);">
-                                <i data-lucide="{{ $f['icon'] }}" class="w-8 h-8 md:w-10 md:h-10"></i>
-                            </div>
-                            
-                            <h3 class="font-extrabold text-slate-700 text-sm md:text-[15px] leading-tight">{{ $f['title'] }}</h3>
+                    @php
+                        $iconName = is_array($f) ? $f['icon'] : $f[0];
+                        $titleText = is_array($f) ? $f['title'] : $f[1];
+                    @endphp
+                    <div class="group flex items-center gap-4 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-full p-2.5 pr-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-blue-200" style="transition-delay: {{ $idx * 50 }}ms;">
+                        <div class="w-12 h-12 rounded-full bg-white border-2 border-blue-600 flex items-center justify-center text-blue-600 shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                            <i data-lucide="{{ $iconName }}" class="w-5 h-5"></i>
                         </div>
+                        <span class="text-sm font-bold uppercase tracking-wider text-slate-700">{{ $titleText }}</span>
                     </div>
                 @endforeach
             </div>
@@ -806,126 +646,109 @@
     </section>
 
     {{-- ════════════════════════════════════════════
-         PRESTASI SECTION — Photo cards
+         PRESTASI SECTION — satu section, timeline modern
          ════════════════════════════════════════════ --}}
-    <section id="prestasi" class="py-20 relative bg-fixed bg-center bg-cover overflow-hidden"
-        style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1920&q=80');">
-        
-        {{-- Light overlay --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-white via-white/50 to-white z-0"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="prestasi" class="py-20 bg-white overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <div class="text-center mb-14 reveal">
                 <h2 class="section-title">PRESTASI</h2>
+
             </div>
 
-            @php
-                $displayAchievements = [];
-                if (isset($achievements) && !$achievements->isEmpty()) {
-                    foreach ($achievements as $ach) {
-                        $studentPhoto = null;
-                        $studentName  = null;
-                        if ($ach->student) {
-                            $studentName  = $ach->student->full_name;
-                            $studentPhoto = $ach->student->photo
-                                ? (Str::startsWith($ach->student->photo, 'http') ? $ach->student->photo : asset('storage/' . $ach->student->photo))
-                                : null;
-                        }
-                        $displayAchievements[] = [
-                            'year'         => $ach->year,
-                            'title'        => $ach->title,
-                            'desc'         => $ach->description,
-                            'level'        => $ach->level,
-                            'studentName'  => $studentName,
-                            'studentPhoto' => $studentPhoto,
-                        ];
-                    }
-                }
+            <div class="relative tl-container">
 
-                $lvlColor = [
-                    'Internasional' => ['bg'=>'#fee2e2', 'text'=>'#dc2626'],
-                    'Nasional'      => ['bg'=>'#ffedd5', 'text'=>'#ea580c'],
-                    'Provinsi'      => ['bg'=>'#dbeafe', 'text'=>'#2563eb'],
-                    'Kabupaten'     => ['bg'=>'#eff6ff', 'text'=>'#2563eb'], // Blue for kabupaten (SMP theme color)
-                    'Kecamatan'     => ['bg'=>'#f1f5f9', 'text'=>'#475569'],
-                ];
-            @endphp
+                {{-- Vertical line --}}
+                <div class="tl-line absolute top-0 bottom-0 w-px left-[10px] md:left-1/2 md:-translate-x-px"></div>
 
-            @if(!empty($displayAchievements))
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @foreach ($displayAchievements as $idx => $p)
                 @php
-                    $lc = $lvlColor[$p['level']] ?? $lvlColor['Kecamatan'];
+                    $displayAchievements = [];
+                    if (isset($achievements) && !$achievements->isEmpty()) {
+                        foreach ($achievements as $ach) {
+                            $displayAchievements[] = [
+                                'year' => $ach->year,
+                                'title' => $ach->title,
+                                'desc' => $ach->description,
+                                'level' => $ach->level,
+                                'side' => $ach->side ? $ach->side : 'left',
+                            ];
+                        }
+                    }
+
+                    $lvlStyle = [
+                        'Internasional' => 'background:rgba(220,38,38,.10);  color:#dc2626;',
+                        'Nasional'      => 'background:rgba(249,115,22,.10); color:#ea580c;',
+                        'Provinsi'      => 'background:rgba(59,130,246,.10); color:#2563eb;',
+                        'Kabupaten'     => 'background:rgba(37, 99, 235,.10); color:#2563eb;',
+                        'Kecamatan'     => 'background:rgba(100,116,139,.10);color:#475569;',
+                    ];
                 @endphp
-                <div class="reveal group" style="transition-delay: {{ ($idx % 4) * 80 }}ms;">
-                    <div class="rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-400 hover:-translate-y-2"
-                        style="border:1px solid rgba(59,130,246,0.10);">
+                @if(!empty($displayAchievements))
 
-                        {{-- Photo area --}}
-                        <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:#eff6ff;">
-                            @if($p['studentPhoto'])
-                                <img src="{{ $p['studentPhoto'] }}" alt="{{ $p['studentName'] }}"
-                                    style="width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.5s;">
-                                <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);"></div>
-                            @else
-                                {{-- Placeholder bila tidak ada foto --}}
-                                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:0.5rem;">
-                                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(59,130,246,0.15); display:flex; align-items:center; justify-content:center;">
-                                        <i data-lucide="trophy" style="width:32px; height:32px; color:#3b82f6;"></i>
+                @foreach ($displayAchievements as $idx => $p)
+                    @php
+                        $isLeft = $p['side'] === 'left';
+                        $delay  = $idx * 120;
+                        $ls     = $lvlStyle[$p['level']] ?? $lvlStyle['Kecamatan'];
+                    @endphp
+
+                    <div class="relative flex items-start mb-9 last:mb-0 reveal reveal-repeat pl-8 md:pl-0 md:{{ $isLeft ? 'flex-row' : 'flex-row-reverse' }}"
+                        style="transition-delay: {{ $delay }}ms;">
+
+                        {{-- Card --}}
+                        <div class="w-full md:w-[calc(50%-28px)] {{ $isLeft ? 'md:pr-8' : 'md:pl-8' }}">
+                            <div class="tl-card group bg-white border border-slate-100 rounded-[20px] p-5
+                                        shadow-sm transition-all duration-300 ease-out
+                                        hover:-translate-y-1 hover:shadow-lg hover:border-blue-300">
+
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="inline-block px-2.5 py-0.5 text-xs font-bold rounded-full"
+                                        style="background:rgba(37, 99, 235,.10); color:#2563eb;">
+                                        {{ $p['year'] }}
+                                    </span>
+                                    <span class="inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full"
+                                        style="{{ $ls }}">
+                                        {{ $p['level'] }}
+                                    </span>
+                                </div>
+
+                                <div class="flex items-start gap-3 mb-2">
+                                    <div class="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center mt-0.5"
+                                        style="background: linear-gradient(135deg,#3b82f6,#2563eb);">
+                                        <i data-lucide="trophy" class="w-4 h-4 text-white"></i>
                                     </div>
+                                    <h3 class="text-sm font-bold text-slate-800 leading-snug">{{ $p['title'] }}</h3>
                                 </div>
-                            @endif
 
-                            {{-- Level badge top-left --}}
-                            <span style="position:absolute; top:0.6rem; left:0.6rem; font-size:0.6rem; font-weight:800; padding:0.2rem 0.6rem; border-radius:999px;
-                                background:{{ $lc['bg'] }}; color:{{ $lc['text'] }}; letter-spacing:0.05em; text-transform:uppercase;">
-                                {{ $p['level'] }}
-                            </span>
-
-                            {{-- Year badge top-right --}}
-                            <span style="position:absolute; top:0.6rem; right:0.6rem; font-size:0.6rem; font-weight:700; padding:0.2rem 0.55rem; border-radius:999px;
-                                background:rgba(255,255,255,0.9); color:#3b82f6; border:1px solid rgba(59,130,246,0.2);">
-                                {{ $p['year'] }}
-                            </span>
-
-                            {{-- Student name on photo bottom --}}
-                            @if($p['studentName'])
-                            <div style="position:absolute; bottom:0; left:0; right:0; padding:0.5rem 0.75rem;">
-                                <p style="font-size:0.72rem; font-weight:700; color:white; text-shadow:0 1px 3px rgba(0,0,0,0.5); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                                    {{ $p['studentName'] }}
-                                </p>
-                            </div>
-                            @endif
-                        </div>
-
-                        {{-- Info area --}}
-                        <div style="padding:0.85rem 1rem;">
-                            <div style="display:flex; align-items:flex-start; gap:0.5rem;">
-                                <div style="width:28px; height:28px; border-radius:8px; flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:2px;
-                                    background:linear-gradient(135deg,#3b82f6,#2563eb);">
-                                    <i data-lucide="trophy" style="width:13px; height:13px; color:white;"></i>
-                                </div>
-                                <div>
-                                    <h3 style="font-size:0.78rem; font-weight:700; color:#1e293b; line-height:1.35; margin-bottom:0.35rem;">{{ $p['title'] }}</h3>
-                                    @if($p['desc'])
-                                    <p style="font-size:0.68rem; color:#64748b; line-height:1.55;">{{ Str::limit($p['desc'], 80) }}</p>
-                                    @endif
-                                </div>
+                                <p class="text-xs text-slate-500 leading-relaxed pl-11">{{ $p['desc'] }}</p>
                             </div>
                         </div>
+
+                        {{-- Dot --}}
+                        <div class="tl-dot-wrap absolute left-[10px] md:left-1/2 -translate-x-1/2 flex items-center justify-center z-10"
+                            style="top: 1.1rem;">
+                            <span
+                                class="tl-dot-glow absolute w-7 h-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                                style="background:rgba(37, 99, 235,.15);"></span>
+                            <span class="tl-dot relative w-[14px] h-[14px] rounded-full border-[2.5px] border-white"
+                                style="background: linear-gradient(135deg,#60a5fa,#2563eb);
+                                       box-shadow: 0 0 0 3px rgba(37, 99, 235,.28), 0 0 10px rgba(37, 99, 235,.25);">
+                            </span>
+                        </div>
+
+                        {{-- Spacer --}}
+                        <div class="hidden md:block md:w-[calc(50%-28px)]"></div>
                     </div>
-                </div>
                 @endforeach
-            </div>
-            @endif
+                @endif
 
+            </div>
         </div>
     </section>
 
     @push('scripts')
         <script>
-            /* ── Reveal observer ── */
+            /* ── Reveal: masuk saat scroll turun, KELUAR saat scroll naik ── */
             const revealObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -934,72 +757,26 @@
                         entry.target.classList.remove('visible');
                     }
                 });
-            }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+            }, {
+                threshold: 0.12,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
             document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-            /* ── Guru Carousel ── */
-            (function() {
-                const track = document.getElementById('guruCarouselTrack');
-                if (!track) return;
-
-                let cards = track.querySelectorAll('.guru-card');
-                if (cards.length === 0) return;
-
-                const originalCount = cards.length;
-                
-                // Clone cards to create an infinite loop effect
-                for(let i=0; i < 2; i++) {
-                    cards.forEach(card => {
-                        let clone = card.cloneNode(true);
-                        track.appendChild(clone);
-                    });
-                }
-
-                let current = 0;
-                let autoTimer = null;
-                let isTransitioning = false;
-
-                function getCardW() {
-                    const card = track.querySelector('.guru-card');
-                    return card ? card.offsetWidth + 16 : 0; // 16px is gap-4
-                }
-
-                function next() {
-                    if (isTransitioning) return;
-                    isTransitioning = true;
-                    
-                    const cardW = getCardW();
-                    current++;
-                    
-                    track.style.transition = 'transform 0.7s ease-in-out';
-                    track.style.transform = `translateX(-${current * cardW}px)`;
-
-                    setTimeout(() => {
-                        if (current === originalCount) {
-                            track.style.transition = 'none';
-                            current = 0;
-                            track.style.transform = `translateX(0px)`;
-                            void track.offsetWidth;
-                        }
-                        isTransitioning = false;
-                    }, 700);
-                }
-
-                function startAuto() {
-                    stopAuto();
-                    autoTimer = setInterval(next, 2000);
-                }
-                function stopAuto()  { clearInterval(autoTimer); }
-
-                const wrapper = document.getElementById('guruCarouselWrapper');
-                if (wrapper) {
-                    wrapper.addEventListener('mouseenter', stopAuto);
-                    wrapper.addEventListener('mouseleave', startAuto);
-                }
-
-                startAuto();
-                if(typeof lucide !== 'undefined') lucide.createIcons();
-            })();
+            /* ── Timeline line grow/shrink ── */
+            const tlLine = document.querySelector('.tl-line');
+            if (tlLine) {
+                new IntersectionObserver(([e]) => {
+                    if (e.isIntersecting) {
+                        tlLine.classList.add('visible');
+                    } else {
+                        tlLine.classList.remove('visible');
+                    }
+                }, {
+                    threshold: 0.05
+                }).observe(tlLine);
+            }
         </script>
     @endpush
 </div>

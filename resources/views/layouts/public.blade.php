@@ -21,6 +21,7 @@
 
     {{-- CSS --}}
     <link rel="stylesheet" href="{{ asset('css/public.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/public-berita.css') }}">
 
     <style>
         body { font-family: 'Inter', sans-serif; }
