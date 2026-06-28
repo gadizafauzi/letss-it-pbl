@@ -138,9 +138,9 @@
             </thead>
 
             <tbody class="divide-y divide-[var(--border-color)]">
-                @forelse($assignments as $index => $assignment)
+                @forelse($assignments as $assignment)
                     <tr>
-                        <td class="px-6 py-4">{{ $index + 1 }}</td>
+                        <td class="px-6 py-4">{{ $loop->iteration }}</td>
                         <td class="px-6 py-4 font-bold text-[var(--text-main)]">
                             {{ $assignment->schoolClass->class_name ?? 'N/A' }}
 
