@@ -70,7 +70,7 @@ Workflow ini mencakup langkah-langkah berikut:
    - Mengambil source code dari repository GitHub.
 
 2. Setup environment
-   - Menyiapkan PHP versi 8.3.
+   - Menyiapkan PHP versi 8.4.
    - Menyiapkan Node.js untuk build frontend.
 
 3. Install dependency
