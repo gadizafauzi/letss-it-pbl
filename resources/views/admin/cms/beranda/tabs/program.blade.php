@@ -1,4 +1,4 @@
-﻿<div id="tab-program" class="tab-content hidden">
+<div id="tab-program" class="tab-content hidden">
     <div class="flex justify-between items-center mb-6">
         <div>
             <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">Program Khusus</h2>
@@ -104,8 +104,30 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Ikon (Lucide icon name)</label>
-                    <input type="text" name="icon" value="book" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Ikon (Pilih dari daftar)</label>
+                    <select name="icon" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="book-open">📖 book-open (Buku Terbuka / Pembelajaran)</option>
+                        <option value="graduation-cap">🎓 graduation-cap (Kelulusan / Akademik)</option>
+                        <option value="users">👥 users (Siswa / Guru / Rombel)</option>
+                        <option value="heart">❤️ heart (Hati / Karakter / Kepribadian)</option>
+                        <option value="trophy">🏆 trophy (Piala / Prestasi / Olahraga)</option>
+                        <option value="award">🏅 award (Medali / Penghargaan)</option>
+                        <option value="activity">⚡ activity (Aktivitas / Kegiatan / Fisik)</option>
+                        <option value="compass">🧭 compass (Kompas / Visi Misi / Arah)</option>
+                        <option value="globe">🌐 globe (Dunia / Internasional / Bahasa)</option>
+                        <option value="languages">🗣️ languages (Bahasa / Komunikasi)</option>
+                        <option value="code">💻 code (Coding / Teknologi / Digital)</option>
+                        <option value="building">🏢 building (Gedung / Infrastruktur)</option>
+                        <option value="calendar">📅 calendar (Kalender / Agenda / Acara)</option>
+                        <option value="megaphone">📢 megaphone (Megafon / Pengumuman)</option>
+                        <option value="shield">🛡️ shield (Perisai / Keamanan / Asrama)</option>
+                        <option value="tent">⛺ tent (Tenda / Pramuka / Outbound)</option>
+                        <option value="crosshair">🎯 crosshair (Sasaran / Panahan / Fokus)</option>
+                        <option value="flask-conical">🧪 flask-conical (Tabung Kimia / Sains / Lab)</option>
+                        <option value="palette">🎨 palette (Palet Lukis / Seni / Kaligrafi)</option>
+                        <option value="mic">🎤 mic (Mikrofon / Pidato / Public Speaking)</option>
+                        <option value="coins">🪙 coins (Koin / Bisnis / Market Day)</option>
+                    </select>
                 </div>
                 <div class="flex items-center gap-2 mt-2">
                     <input type="checkbox" name="is_active" id="program_active_add" value="1" checked class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border border-slate-300">
@@ -160,8 +182,30 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Ikon (Lucide icon name)</label>
-                    <input type="text" name="icon" id="edit_prog_icon" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Ikon (Pilih dari daftar)</label>
+                    <select name="icon" id="edit_prog_icon" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="book-open">📖 book-open (Buku Terbuka / Pembelajaran)</option>
+                        <option value="graduation-cap">🎓 graduation-cap (Kelulusan / Akademik)</option>
+                        <option value="users">👥 users (Siswa / Guru / Rombel)</option>
+                        <option value="heart">❤️ heart (Hati / Karakter / Kepribadian)</option>
+                        <option value="trophy">🏆 trophy (Piala / Prestasi / Olahraga)</option>
+                        <option value="award">🏅 award (Medali / Penghargaan)</option>
+                        <option value="activity">⚡ activity (Aktivitas / Kegiatan / Fisik)</option>
+                        <option value="compass">🧭 compass (Kompas / Visi Misi / Arah)</option>
+                        <option value="globe">🌐 globe (Dunia / Internasional / Bahasa)</option>
+                        <option value="languages">🗣️ languages (Bahasa / Komunikasi)</option>
+                        <option value="code">💻 code (Coding / Teknologi / Digital)</option>
+                        <option value="building">🏢 building (Gedung / Infrastruktur)</option>
+                        <option value="calendar">📅 calendar (Kalender / Agenda / Acara)</option>
+                        <option value="megaphone">📢 megaphone (Megafon / Pengumuman)</option>
+                        <option value="shield">🛡️ shield (Perisai / Keamanan / Asrama)</option>
+                        <option value="tent">⛺ tent (Tenda / Pramuka / Outbound)</option>
+                        <option value="crosshair">🎯 crosshair (Sasaran / Panahan / Fokus)</option>
+                        <option value="flask-conical">🧪 flask-conical (Tabung Kimia / Sains / Lab)</option>
+                        <option value="palette">🎨 palette (Palet Lukis / Seni / Kaligrafi)</option>
+                        <option value="mic">🎤 mic (Mikrofon / Pidato / Public Speaking)</option>
+                        <option value="coins">🪙 coins (Koin / Bisnis / Market Day)</option>
+                    </select>
                 </div>
                 <div class="flex items-center gap-2 mt-2">
                     <input type="checkbox" name="is_active" id="edit_prog_active" value="1" class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border border-slate-300">

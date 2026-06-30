@@ -1,4 +1,4 @@
-﻿        <div id="tab-statistik" class="tab-content hidden">
+        <div id="tab-statistik" class="tab-content hidden">
             <div class="flex justify-between items-center mb-6">
                 <div>
                     <h2 class="text-lg font-bold text-slate-800 dark:text-slate-100">Statistik</h2>
@@ -9,27 +9,7 @@
                 </button>
             </div>
 
-            <!-- Upload Background Latar Statistik -->
-            <div class="mb-8 p-5 bg-white border border-slate-200 rounded-xl shadow-sm">
-                <h3 class="text-base font-semibold text-slate-800 mb-3">Latar Belakang Bagian Statistik</h3>
-                <form action="{{ route('admin.beranda.statistic_bg.update') }}" method="POST" enctype="multipart/form-data" class="flex flex-col md:flex-row items-start md:items-center gap-4">
-                    @csrf
-                    @method('PUT')
-                    <div class="flex-grow">
-                        @if(isset($statistic_bg_image) && $statistic_bg_image->value)
-                            <div class="mb-3">
-                                <img src="{{ str_starts_with($statistic_bg_image->value, 'http') ? $statistic_bg_image->value : Storage::url($statistic_bg_image->value) }}" alt="Background Statistik" class="h-24 w-auto rounded-lg object-cover border border-slate-200">
-                            </div>
-                        @endif
-                        <input type="file" name="image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        <p class="text-xs text-slate-500 mt-1">Disarankan gambar landscape (misal: rasio 16:9), format: JPG/PNG/WebP, maksimal 2MB.</p>
-                    </div>
-                    <button type="submit" class="px-4 py-2 bg-slate-800 text-white rounded-xl text-sm font-medium hover:bg-slate-900 shrink-0">
-                        Upload & Simpan
-                    </button>
-                </form>
-            </div>
-            
+
             <div class="overflow-x-auto">
                 <table class="w-full text-sm text-left">
                     <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
@@ -100,9 +80,30 @@
                     <input type="text" name="label" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Ikon (Lucide icon name)</label>
-                    <input type="text" name="icon" value="users" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
-                    <p class="text-xs text-slate-500 mt-1">Cari ikon di <a href="https://lucide.dev" target="_blank" class="text-blue-500">lucide.dev</a></p>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Ikon (Pilih dari daftar)</label>
+                    <select name="icon" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="book-open">📖 book-open (Buku Terbuka / Pembelajaran)</option>
+                        <option value="graduation-cap">🎓 graduation-cap (Kelulusan / Akademik)</option>
+                        <option value="users" selected>👥 users (Siswa / Guru / Rombel)</option>
+                        <option value="heart">❤️ heart (Hati / Karakter / Kepribadian)</option>
+                        <option value="trophy">🏆 trophy (Piala / Prestasi / Olahraga)</option>
+                        <option value="award">🏅 award (Medali / Penghargaan)</option>
+                        <option value="activity">⚡ activity (Aktivitas / Kegiatan / Fisik)</option>
+                        <option value="compass">🧭 compass (Kompas / Visi Misi / Arah)</option>
+                        <option value="globe">🌐 globe (Dunia / Internasional / Bahasa)</option>
+                        <option value="languages">🗣️ languages (Bahasa / Komunikasi)</option>
+                        <option value="code">💻 code (Coding / Teknologi / Digital)</option>
+                        <option value="building">🏢 building (Gedung / Infrastruktur)</option>
+                        <option value="calendar">📅 calendar (Kalender / Agenda / Acara)</option>
+                        <option value="megaphone">📢 megaphone (Megafon / Pengumuman)</option>
+                        <option value="shield">🛡️ shield (Perisai / Keamanan / Asrama)</option>
+                        <option value="tent">⛺ tent (Tenda / Pramuka / Outbound)</option>
+                        <option value="crosshair">🎯 crosshair (Sasaran / Panahan / Fokus)</option>
+                        <option value="flask-conical">🧪 flask-conical (Tabung Kimia / Sains / Lab)</option>
+                        <option value="palette">🎨 palette (Palet Lukis / Seni / Kaligrafi)</option>
+                        <option value="mic">🎤 mic (Mikrofon / Pidato / Public Speaking)</option>
+                        <option value="coins">🪙 coins (Koin / Bisnis / Market Day)</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Urutan</label>
@@ -143,8 +144,30 @@
                     <input type="text" name="label" id="edit_stat_label" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">Ikon (Lucide icon name)</label>
-                    <input type="text" name="icon" id="edit_stat_icon" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Ikon (Pilih dari daftar)</label>
+                    <select name="icon" id="edit_stat_icon" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="book-open">📖 book-open (Buku Terbuka / Pembelajaran)</option>
+                        <option value="graduation-cap">🎓 graduation-cap (Kelulusan / Akademik)</option>
+                        <option value="users">👥 users (Siswa / Guru / Rombel)</option>
+                        <option value="heart">❤️ heart (Hati / Karakter / Kepribadian)</option>
+                        <option value="trophy">🏆 trophy (Piala / Prestasi / Olahraga)</option>
+                        <option value="award">🏅 award (Medali / Penghargaan)</option>
+                        <option value="activity">⚡ activity (Aktivitas / Kegiatan / Fisik)</option>
+                        <option value="compass">🧭 compass (Kompas / Visi Misi / Arah)</option>
+                        <option value="globe">🌐 globe (Dunia / Internasional / Bahasa)</option>
+                        <option value="languages">🗣️ languages (Bahasa / Komunikasi)</option>
+                        <option value="code">💻 code (Coding / Teknologi / Digital)</option>
+                        <option value="building">🏢 building (Gedung / Infrastruktur)</option>
+                        <option value="calendar">📅 calendar (Kalender / Agenda / Acara)</option>
+                        <option value="megaphone">📢 megaphone (Megafon / Pengumuman)</option>
+                        <option value="shield">🛡️ shield (Perisai / Keamanan / Asrama)</option>
+                        <option value="tent">⛺ tent (Tenda / Pramuka / Outbound)</option>
+                        <option value="crosshair">🎯 crosshair (Sasaran / Panahan / Fokus)</option>
+                        <option value="flask-conical">🧪 flask-conical (Tabung Kimia / Sains / Lab)</option>
+                        <option value="palette">🎨 palette (Palet Lukis / Seni / Kaligrafi)</option>
+                        <option value="mic">🎤 mic (Mikrofon / Pidato / Public Speaking)</option>
+                        <option value="coins">🪙 coins (Koin / Bisnis / Market Day)</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Urutan</label>

@@ -1,7 +1,7 @@
 <div class="p-6">
     <div class="mb-6">
-        <h2 class="text-lg font-bold text-slate-800 dark:text-white">Detail Unit</h2>
-        <p class="text-sm text-slate-500">Atur deskripsi, logo, usia target, dan informasi kuota untuk unit pendidikan ini.</p>
+        <h2 class="text-lg font-bold text-slate-800 dark:text-white">Deskripsi Unit</h2>
+        <p class="text-sm text-slate-500">Kelola informasi deskripsi, visi, misi, dan logo deskripsi unit.</p>
     </div>
 
     <form action="{{ route('admin.unit-cms.detail.update', $unit->id) }}" method="POST" enctype="multipart/form-data">
@@ -9,12 +9,12 @@
         @method('PUT')
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {{-- Logo Unit --}}
+            {{-- Logo Deskripsi Unit --}}
             <div class="md:col-span-2">
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Logo Unit Sekolah (Opsional)</label>
+                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Logo Deskripsi Unit (Biarkan kosong jika tidak diubah)</label>
                 @if($detail && $detail->description_logo)
-                    <div class="mb-4 bg-slate-50 dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 w-32 h-32 flex items-center justify-center">
-                        <img src="{{ str_starts_with($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo) }}" alt="Logo" class="max-w-full max-h-full object-contain">
+                    <div class="mb-3">
+                        <img src="{{ str_starts_with($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo) }}" alt="Logo Deskripsi" class="h-20 w-auto rounded-lg object-contain border border-slate-200 dark:border-slate-700">
                     </div>
                 @endif
                 <input type="file" name="description_logo" accept="image/*" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all">
@@ -30,18 +30,6 @@
             <div class="md:col-span-2">
                 <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Isi Deskripsi</label>
                 <textarea name="description_body" rows="5" placeholder="Tuliskan profil singkat tentang unit pendidikan ini..." class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">{{ old('description_body', $detail->description_body ?? '') }}</textarea>
-            </div>
-
-            {{-- Target Usia --}}
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Target Usia Siswa</label>
-                <input type="text" name="target_age" value="{{ old('target_age', $detail->target_age ?? '') }}" placeholder="Contoh: 6 - 12 Tahun" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
-            </div>
-
-            {{-- Kuota Penerimaan --}}
-            <div>
-                <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Kuota Penerimaan</label>
-                <input type="text" name="quota" value="{{ old('quota', $detail->quota ?? '') }}" placeholder="Contoh: 60 Siswa / Tahun" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
             </div>
         </div>
 
