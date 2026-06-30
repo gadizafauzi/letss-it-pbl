@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-5">
@@ -50,6 +50,8 @@
                             <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Nama Unit</th>
                             <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Jumlah Siswa</th>
                             <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Jumlah Guru</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Jumlah Kelas</th>
+                            <th class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Jumlah Mapel</th>
                             <th class="px-4 py-3.5 text-center text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">Aksi</th>
                         </tr>
                     </thead>
@@ -73,6 +75,16 @@
                                 <td class="px-4 py-3.5">
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold border bg-purple-100 text-purple-700 dark:bg-purple-500/20 dark:text-purple-400 border-purple-200 dark:border-purple-500/30">
                                         {{ $unit->teachers_count }} Guru
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3.5">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold border bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/30">
+                                        {{ $unit->school_classes_count }} Kelas
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3.5">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold border bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-400 border-orange-200 dark:border-orange-500/30">
+                                        {{ $unit->subjects_count }} Mapel
                                     </span>
                                 </td>
                                 <td class="px-4 py-3.5">

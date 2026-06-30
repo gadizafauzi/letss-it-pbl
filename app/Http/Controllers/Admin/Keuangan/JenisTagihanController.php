@@ -47,6 +47,10 @@ class JenisTagihanController extends Controller
 
     public function destroy(PaymentType $jenisTagihan)
     {
+        if (\App\Models\Invoice::where('payment_type', $jenisTagihan->name)->exists()) {
+            return back()->with('error', 'Jenis tagihan tidak dapat dihapus karena sudah digunakan dalam data tagihan siswa.');
+        }
+
         $jenisTagihan->delete();
 
         return redirect()
@@ -57,13 +61,25 @@ class JenisTagihanController extends Controller
     public function bulkDestroy(BulkDestroyJenisTagihanRequest $request)
     {
         $jenisTagihans = PaymentType::whereIn('id', $request->ids)->get();
+        $deleted = 0;
+        $failed = 0;
 
         foreach ($jenisTagihans as $jenisTagihan) {
-            $jenisTagihan->delete();
+            if (\App\Models\Invoice::where('payment_type', $jenisTagihan->name)->exists()) {
+                $failed++;
+            } else {
+                $jenisTagihan->delete();
+                $deleted++;
+            }
+        }
+
+        $message = "Berhasil menghapus $deleted data jenis tagihan.";
+        if ($failed > 0) {
+            $message .= " Gagal menghapus $failed jenis tagihan karena sudah digunakan dalam data tagihan siswa.";
         }
 
         return redirect()
             ->route('admin.jenis-tagihan.index')
-            ->with('success', count($jenisTagihans) . ' data jenis tagihan berhasil dihapus');
+            ->with($failed > 0 && $deleted == 0 ? 'error' : 'success', $message);
     }
 }

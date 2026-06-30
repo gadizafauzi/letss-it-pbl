@@ -47,6 +47,10 @@ class RekeningSekolahController extends Controller
 
     public function destroy(SchoolAccount $rekening_sekolah)
     {
+        if (\App\Models\Payment::where('school_account_id', $rekening_sekolah->id)->exists()) {
+            return back()->with('error', 'Rekening tidak dapat dihapus karena sudah memiliki riwayat pembayaran.');
+        }
+
         $rekening_sekolah->delete();
         return redirect()->route('admin.rekening-sekolah.index')->with('success', 'Rekening berhasil dihapus.');
     }

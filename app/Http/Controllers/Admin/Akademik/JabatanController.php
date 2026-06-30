@@ -55,6 +55,10 @@ class JabatanController extends Controller
 
     public function destroy(Position $jabatan)
     {
+        if ($jabatan->teachers()->exists()) {
+            return back()->with('error', 'Jabatan tidak dapat dihapus karena masih digunakan oleh data Guru.');
+        }
+
         $jabatan->delete();
 
         return redirect()
@@ -65,13 +69,25 @@ class JabatanController extends Controller
     public function bulkDestroy(BulkDestroyJabatanRequest $request)
     {
         $jabatans = Position::whereIn('id', $request->ids)->get();
+        $deleted = 0;
+        $failed = 0;
 
         foreach ($jabatans as $jabatan) {
-            $jabatan->delete();
+            if ($jabatan->teachers()->exists()) {
+                $failed++;
+            } else {
+                $jabatan->delete();
+                $deleted++;
+            }
+        }
+
+        $message = "Berhasil menghapus $deleted data jabatan.";
+        if ($failed > 0) {
+            $message .= " Gagal menghapus $failed jabatan karena masih digunakan oleh data Guru.";
         }
 
         return redirect()
             ->route('admin.jabatan.index')
-            ->with('success', count($jabatans) . ' data jabatan berhasil dihapus');
+            ->with($failed > 0 && $deleted == 0 ? 'error' : 'success', $message);
     }
 }

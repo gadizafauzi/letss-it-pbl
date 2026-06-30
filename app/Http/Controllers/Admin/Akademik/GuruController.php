@@ -118,6 +118,11 @@ class GuruController extends Controller
      */
     public function destroy(Teacher $guru)
     {
+        if (\App\Models\SchoolClass::where('homeroom_teacher_id', $guru->id)->exists() || 
+            \App\Models\TeachingAssignment::where('teacher_id', $guru->id)->exists()) {
+            return back()->with('error', 'Guru tidak dapat dihapus karena masih bertugas sebagai Wali Kelas atau memiliki Jadwal Mengajar.');
+        }
+
         $this->guruService->deleteTeacher($guru);
 
         return redirect()
@@ -131,14 +136,27 @@ class GuruController extends Controller
     public function bulkDestroy(BulkDestroyGuruRequest $request)
     {
         $teachers = Teacher::whereIn('id', $request->ids)->get();
+        $deleted = 0;
+        $failed = 0;
 
         foreach ($teachers as $teacher) {
-            $this->guruService->deleteTeacher($teacher);
+            if (\App\Models\SchoolClass::where('homeroom_teacher_id', $teacher->id)->exists() || 
+                \App\Models\TeachingAssignment::where('teacher_id', $teacher->id)->exists()) {
+                $failed++;
+            } else {
+                $this->guruService->deleteTeacher($teacher);
+                $deleted++;
+            }
+        }
+
+        $message = "Berhasil menghapus $deleted data guru.";
+        if ($failed > 0) {
+            $message .= " Gagal menghapus $failed guru karena masih bertugas sebagai Wali Kelas atau memiliki Jadwal Mengajar.";
         }
 
         return redirect()
             ->route('admin.guru.index')
-            ->with('success', count($teachers) . ' data guru berhasil dihapus');
+            ->with($failed > 0 && $deleted == 0 ? 'error' : 'success', $message);
     }
 
     /**

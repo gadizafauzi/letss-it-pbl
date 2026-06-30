@@ -119,6 +119,10 @@ class MapelController extends Controller
      */
     public function destroy(Subject $mapel)
     {
+        if (\App\Models\TeachingAssignment::where('subject_id', $mapel->id)->exists()) {
+            return back()->with('error', 'Mata pelajaran tidak dapat dihapus karena sudah memiliki jadwal mengajar.');
+        }
+
         $mapel->delete();
 
         return redirect()
@@ -132,13 +136,25 @@ class MapelController extends Controller
     public function bulkDestroy(BulkDestroyMapelRequest $request)
     {
         $subjects = Subject::whereIn('id', $request->ids)->get();
+        $deleted = 0;
+        $failed = 0;
 
         foreach ($subjects as $subject) {
-            $subject->delete();
+            if (\App\Models\TeachingAssignment::where('subject_id', $subject->id)->exists()) {
+                $failed++;
+            } else {
+                $subject->delete();
+                $deleted++;
+            }
+        }
+
+        $message = "Berhasil menghapus $deleted data mata pelajaran.";
+        if ($failed > 0) {
+            $message .= " Gagal menghapus $failed mata pelajaran karena sudah memiliki jadwal mengajar.";
         }
 
         return redirect()
             ->route('admin.mapel.index')
-            ->with('success', count($subjects) . ' data mata pelajaran berhasil dihapus');
+            ->with($failed > 0 && $deleted == 0 ? 'error' : 'success', $message);
     }
 }

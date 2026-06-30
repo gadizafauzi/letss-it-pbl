@@ -151,6 +151,10 @@ class TahunAjaranController extends Controller
     {
         $academicYear = AcademicYear::findOrFail($id);
 
+        if ($academicYear->studentClasses()->exists()) {
+            return back()->with('error', 'Tahun ajaran tidak dapat dihapus karena masih digunakan dalam riwayat kelas siswa.');
+        }
+
         $academicYear->delete();
 
         return redirect()
@@ -167,14 +171,26 @@ class TahunAjaranController extends Controller
     public function bulkDestroy(BulkDestroyTahunAjaranRequest $request)
     {
         $academicYears = AcademicYear::whereIn('id', $request->ids)->get();
+        $deleted = 0;
+        $failed = 0;
 
         foreach ($academicYears as $academicYear) {
-            $academicYear->delete();
+            if ($academicYear->studentClasses()->exists()) {
+                $failed++;
+            } else {
+                $academicYear->delete();
+                $deleted++;
+            }
+        }
+
+        $message = "Berhasil menghapus $deleted tahun ajaran.";
+        if ($failed > 0) {
+            $message .= " Gagal menghapus $failed tahun ajaran karena masih digunakan dalam riwayat kelas siswa.";
         }
 
         return redirect()
             ->route('admin.tahun-ajaran.index')
-            ->with('success', count($academicYears) . ' data tahun ajaran berhasil dihapus');
+            ->with($failed > 0 && $deleted == 0 ? 'error' : 'success', $message);
     }
 
     /*
