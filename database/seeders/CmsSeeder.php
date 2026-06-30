@@ -499,9 +499,8 @@ class CmsSeeder extends Seeder
                 'title' => 'Design Grafis',
                 'image' => 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80',
                 'description' => 'Mempelajari kreativitas digital, pengeditan gambar, dan dasar desain setiap hari Selasa pukul 14.45 - 16.30 WIB. Dibina oleh Desri Wahyuni.'
-            ],
-            [
-                'icon' => 'dribbble',
+            ],            [
+                'icon' => 'trophy',
                 'title' => 'Futsal (Grub A)',
                 'image' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80',
                 'description' => 'Bimbingan olahraga futsal untuk Grup A yang diadakan setiap hari Selasa pukul 14.45 - 16.30 WIB. Dibina oleh Ihdal Husnayain, S.Pd.'
@@ -513,7 +512,7 @@ class CmsSeeder extends Seeder
                 'description' => 'Pelatihan fisik, teknik beladiri Karate, dan ketahanan mental setiap hari Rabu pukul 14.45 - 16.30 WIB. Dibina oleh Andri, S.Pd.'
             ],
             [
-                'icon' => 'dribbble',
+                'icon' => 'trophy',
                 'title' => 'Futsal (Grub B)',
                 'image' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80',
                 'description' => 'Bimbingan olahraga futsal untuk Grup B yang diadakan setiap hari Rabu pukul 14.45 - 16.30 WIB. Dibina oleh Tata Elwatra A, S.Or.'
@@ -546,7 +545,7 @@ class CmsSeeder extends Seeder
             ['icon' => 'book-open', 'title' => 'Tahfidz Club', 'image' => 'https://images.unsplash.com/photo-1585995604802-17c3fe6b53aa?auto=format&fit=crop&w=600&q=80', 'description' => 'Program pengayaan hafalan Al-Qur\'an secara intensif dan terstruktur.'],
             ['icon' => 'crosshair', 'title' => 'Panahan', 'image' => 'https://images.unsplash.com/photo-1567699532083-f34b686df3af?auto=format&fit=crop&w=600&q=80', 'description' => 'Melatih fokus, ketenangan, dan menjalankan sunnah Rasulullah SAW.'],
             ['icon' => 'flask-conical', 'title' => 'Olimpiade Sains', 'image' => 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80', 'description' => 'Bimbingan khusus bagi siswa berprestasi di bidang sains dan matematika.'],
-            ['icon' => 'dribbble', 'title' => 'Futsal', 'image' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80', 'description' => 'Membangun kebugaran fisik, sportivitas, dan kerjasama tim.'],
+            ['icon' => 'trophy', 'title' => 'Futsal', 'image' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80', 'description' => 'Membangun kebugaran fisik, sportivitas, dan kerjasama tim.'],
             ['icon' => 'palette', 'title' => 'Seni & Kaligrafi', 'image' => 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80', 'description' => 'Mengembangkan kreativitas melalui seni rupa dan kaligrafi Islam.'],
         ];
         foreach ($ekskulSmp as $index => $e) {

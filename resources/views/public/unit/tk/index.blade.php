@@ -259,7 +259,7 @@
         }
         @media (min-width: 1024px) {
             .tk-hero {
-                min-height: 100vh;
+                min-height: 80vh;
             }
         }
 
@@ -294,9 +294,9 @@
         .tk-hero-img-wrap {
             position: relative;
             width: 100%;
-            max-width: 560px;
+            max-width: 450px;
             margin-left: auto;
-            padding: 50px 60px 60px 20px;
+            padding: 20px 30px 30px 10px;
         }
 
         /* Large organic blob behind — bottom-right cream accent */
@@ -380,10 +380,10 @@
         /* Badge - bottom right circular stamp */
         .tk-hero-badge {
             position: absolute;
-            right: 14px;
-            bottom: 20px;
-            width: 130px;
-            height: 130px;
+            right: 10px;
+            bottom: 10px;
+            width: 110px;
+            height: 110px;
             z-index: 10;
         }
         @media (max-width: 1024px) {
@@ -442,12 +442,12 @@
 
         /* Title */
         .tk-hero-title {
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
             font-weight: 900;
             color: #1e293b;
             line-height: 1.05;
             letter-spacing: -0.03em;
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.85rem;
         }
 
         /* Subtitle */
@@ -456,7 +456,7 @@
             color: #64748b;
             line-height: 1.75;
             max-width: 460px;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         /* Buttons */
@@ -531,9 +531,9 @@
         <div class="tk-hero-blob-1"></div>
         <div class="tk-hero-blob-2"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-20 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 pb-10 lg:pt-24 lg:pb-12 xl:pt-28 xl:pb-16 w-full">
             {{-- Breadcrumb --}}
-            <div class="tk-hero-breadcrumb flex items-center gap-3 mb-6 md:mb-10 text-[0.95rem] reveal reveal-left">
+            <div class="tk-hero-breadcrumb flex items-center gap-3 mb-4 lg:mb-6 text-[0.95rem] reveal reveal-left">
                 <a href="{{ route('public.home') }}">Beranda</a>
                 <span class="separator">/</span>
                 <span class="current">TK Islam Terpadu</span>

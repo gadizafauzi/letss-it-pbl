@@ -28,6 +28,16 @@
             }
         }
     </style>
+    <script>
+        // Auto-print if loaded inside an iframe
+        if (window.self !== window.top) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    window.print();
+                }, 500);
+            });
+        }
+    </script>
 </head>
 <body class="bg-slate-100 flex flex-col items-center justify-center min-h-screen p-6">
 

@@ -1185,8 +1185,6 @@ select.appearance-none::-ms-expand {
 }
 
 .testi-quote {
-    font-size: inherit;
-    color: inherit;
     line-height: 1.7;
     font-style: italic;
     margin-bottom: 24px;

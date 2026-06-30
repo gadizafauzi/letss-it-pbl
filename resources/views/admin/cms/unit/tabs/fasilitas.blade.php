@@ -66,9 +66,23 @@
                     <input type="text" name="title" required placeholder="Contoh: Lab Komputer" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Ikon (Lucide)</label>
-                    <input type="text" name="icon" required placeholder="monitor" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
-                    <p class="text-xs text-slate-500 mt-1">Cari ikon di <a href="https://lucide.dev/icons" target="_blank" class="text-blue-500 hover:underline">lucide.dev</a></p>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Ikon (Pilih dari daftar)</label>
+                    <select name="icon" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                        <option value="book-open">📖 book-open (Perpustakaan / Buku)</option>
+                        <option value="monitor" selected>🖥️ monitor (Lab Komputer / Multimedia)</option>
+                        <option value="utensils">🍴 utensils (Kantin / Makanan)</option>
+                        <option value="activity">⚡ activity (Lapangan / UKS / Olahraga)</option>
+                        <option value="trophy">🏆 trophy (Lapangan Olahraga / Prestasi)</option>
+                        <option value="home">🏫 home (Masjid / Musholla / Aula)</option>
+                        <option value="air-vent">❄️ air-vent (Air Conditioner / AC)</option>
+                        <option value="puzzle">🧩 puzzle (Area Bermain / Ruang Kreatif)</option>
+                        <option value="trees">🌳 trees (Taman / Playground)</option>
+                        <option value="wifi">📶 wifi (Internet / Wifi Area)</option>
+                        <option value="shield">🛡️ shield (Keamanan / Pos Satpam)</option>
+                        <option value="bus">🚌 bus (Transportasi / Antar Jemput)</option>
+                        <option value="palette">🎨 palette (Sanggar Seni / Kerajinan)</option>
+                        <option value="flask-conical">🧪 flask-conical (Laboratorium IPA)</option>
+                    </select>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
@@ -107,8 +121,23 @@
                     <input type="text" name="title" id="edit_f_title" required class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Ikon (Lucide)</label>
-                    <input type="text" name="icon" id="edit_f_icon" required class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Ikon (Pilih dari daftar)</label>
+                    <select name="icon" id="edit_f_icon" required class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                        <option value="book-open">📖 book-open (Perpustakaan / Buku)</option>
+                        <option value="monitor">🖥️ monitor (Lab Komputer / Multimedia)</option>
+                        <option value="utensils">🍴 utensils (Kantin / Makanan)</option>
+                        <option value="activity">⚡ activity (Lapangan / UKS / Olahraga)</option>
+                        <option value="trophy">🏆 trophy (Lapangan Olahraga / Prestasi)</option>
+                        <option value="home">🏫 home (Masjid / Musholla / Aula)</option>
+                        <option value="air-vent">❄️ air-vent (Air Conditioner / AC)</option>
+                        <option value="puzzle">🧩 puzzle (Area Bermain / Ruang Kreatif)</option>
+                        <option value="trees">🌳 trees (Taman / Playground)</option>
+                        <option value="wifi">📶 wifi (Internet / Wifi Area)</option>
+                        <option value="shield">🛡️ shield (Keamanan / Pos Satpam)</option>
+                        <option value="bus">🚌 bus (Transportasi / Antar Jemput)</option>
+                        <option value="palette">🎨 palette (Sanggar Seni / Kerajinan)</option>
+                        <option value="flask-conical">🧪 flask-conical (Laboratorium IPA)</option>
+                    </select>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>

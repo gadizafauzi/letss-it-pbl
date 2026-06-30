@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
 <div class="space-y-5">
@@ -153,9 +153,27 @@
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">Icon (Lucide)</label>
-                        <input type="text" name="icon" placeholder="cth: book-marked"
-                            class="w-full h-11 px-3.5 border-[1.5px] border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800 text-[13px] text-slate-700 dark:text-slate-200 outline-none focus:border-sky-400 focus:bg-white dark:focus:bg-slate-700 focus:ring-2 focus:ring-sky-100 transition-all">
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">Icon (Pilih dari daftar)</label>
+                        <select name="icon"
+                            class="w-full h-11 px-3.5 border-[1.5px] border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800 text-[13px] text-slate-700 dark:text-slate-200 outline-none focus:border-sky-400 focus:bg-white dark:focus:bg-slate-700 transition-all">
+                            <option value="book-open">📖 book-open (Perpustakaan / Belajar)</option>
+                            <option value="graduation-cap">🎓 graduation-cap (Kelulusan / Akademik)</option>
+                            <option value="users">👥 users (Siswa / Guru)</option>
+                            <option value="heart">❤️ heart (Hati / Sosial)</option>
+                            <option value="trophy">🏆 trophy (Piala / Prestasi)</option>
+                            <option value="award">🏅 award (Medali / Penghargaan)</option>
+                            <option value="activity">⚡ activity (Aktivitas / Kegiatan)</option>
+                            <option value="compass">🧭 compass (Visi Misi)</option>
+                            <option value="globe">🌐 globe (Dunia / Bahasa)</option>
+                            <option value="languages">🗣️ languages (Bahasa / Komunikasi)</option>
+                            <option value="code">💻 code (Teknologi / Digital)</option>
+                            <option value="calendar">📅 calendar (Kegiatan / Agenda)</option>
+                            <option value="megaphone" selected>📢 megaphone (Megafon / Pengumuman)</option>
+                            <option value="shield">🛡️ shield (Keamanan)</option>
+                            <option value="tent">⛺ tent (Pramuka / Outbound)</option>
+                            <option value="palette">🎨 palette (Seni / Kaligrafi)</option>
+                            <option value="mic">🎤 mic (Public Speaking)</option>
+                        </select>
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">Warna (Tailwind)</label>
@@ -208,9 +226,27 @@
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">Icon (Lucide)</label>
-                        <input type="text" name="icon" id="edit_icon" placeholder="cth: book-marked"
-                            class="w-full h-11 px-3.5 border-[1.5px] border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800 text-[13px] text-slate-700 dark:text-slate-200 outline-none focus:border-sky-400 focus:bg-white dark:focus:bg-slate-700 focus:ring-2 focus:ring-sky-100 transition-all">
+                        <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">Icon (Pilih dari daftar)</label>
+                        <select name="icon" id="edit_icon"
+                            class="w-full h-11 px-3.5 border-[1.5px] border-slate-200 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800 text-[13px] text-slate-700 dark:text-slate-200 outline-none focus:border-sky-400 focus:bg-white dark:focus:bg-slate-700 transition-all">
+                            <option value="book-open">📖 book-open (Perpustakaan / Belajar)</option>
+                            <option value="graduation-cap">🎓 graduation-cap (Kelulusan / Akademik)</option>
+                            <option value="users">👥 users (Siswa / Guru)</option>
+                            <option value="heart">❤️ heart (Hati / Sosial)</option>
+                            <option value="trophy">🏆 trophy (Piala / Prestasi)</option>
+                            <option value="award">🏅 award (Medali / Penghargaan)</option>
+                            <option value="activity">⚡ activity (Aktivitas / Kegiatan)</option>
+                            <option value="compass">🧭 compass (Visi Misi)</option>
+                            <option value="globe">🌐 globe (Dunia / Bahasa)</option>
+                            <option value="languages">🗣️ languages (Bahasa / Komunikasi)</option>
+                            <option value="code">💻 code (Teknologi / Digital)</option>
+                            <option value="calendar">📅 calendar (Kegiatan / Agenda)</option>
+                            <option value="megaphone">📢 megaphone (Megafon / Pengumuman)</option>
+                            <option value="shield">🛡️ shield (Keamanan)</option>
+                            <option value="tent">⛺ tent (Pramuka / Outbound)</option>
+                            <option value="palette">🎨 palette (Seni / Kaligrafi)</option>
+                            <option value="mic">🎤 mic (Public Speaking)</option>
+                        </select>
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold text-slate-500 uppercase tracking-[.04em] mb-1.5">Warna</label>

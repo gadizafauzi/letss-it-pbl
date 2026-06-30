@@ -91,8 +91,23 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Ikon (Lucide)</label>
-                        <input type="text" name="icon" placeholder="activity" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Ikon (Pilih dari daftar)</label>
+                        <select name="icon" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                            <option value="book-open">📖 book-open (Tahfidz / Club / Akademik)</option>
+                            <option value="trophy" selected>🏆 trophy (Futsal / Olahraga / Kompetisi)</option>
+                            <option value="award">🏅 award (Karate / Beladiri / Penghargaan)</option>
+                            <option value="activity">⚡ activity (Olahraga / Aktivitas Fisik)</option>
+                            <option value="tent">⛺ tent (Pramuka / Pecinta Alam)</option>
+                            <option value="crosshair">🎯 crosshair (Panahan / Fokus)</option>
+                            <option value="flask-conical">🧪 flask-conical (Olimpiade Sains / Lab)</option>
+                            <option value="palette">🎨 palette (Seni / Lukis / Kaligrafi)</option>
+                            <option value="mic">🎤 mic (Public Speaking / Pidato / Debat)</option>
+                            <option value="languages">🗣️ languages (Klub Bahasa / Debat)</option>
+                            <option value="code">💻 code (Coding / Robotik / Komputer)</option>
+                            <option value="music">🎵 music (Paduan Suara / Seni Musik)</option>
+                            <option value="globe">🌐 globe (Klub Geografi / Astronomi)</option>
+                            <option value="heart">❤️ heart (PMR / Kemanusiaan / Karakter)</option>
+                        </select>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Urutan</label>
@@ -139,8 +154,23 @@
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Ikon (Lucide)</label>
-                        <input type="text" name="icon" id="edit_e_icon" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                        <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Ikon (Pilih dari daftar)</label>
+                        <select name="icon" id="edit_e_icon" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                            <option value="book-open">📖 book-open (Tahfidz / Club / Akademik)</option>
+                            <option value="trophy">🏆 trophy (Futsal / Olahraga / Kompetisi)</option>
+                            <option value="award">🏅 award (Karate / Beladiri / Penghargaan)</option>
+                            <option value="activity">⚡ activity (Olahraga / Aktivitas Fisik)</option>
+                            <option value="tent">⛺ tent (Pramuka / Pecinta Alam)</option>
+                            <option value="crosshair">🎯 crosshair (Panahan / Fokus)</option>
+                            <option value="flask-conical">🧪 flask-conical (Olimpiade Sains / Lab)</option>
+                            <option value="palette">🎨 palette (Seni / Lukis / Kaligrafi)</option>
+                            <option value="mic">🎤 mic (Public Speaking / Pidato / Debat)</option>
+                            <option value="languages">🗣️ languages (Klub Bahasa / Debat)</option>
+                            <option value="code">💻 code (Coding / Robotik / Komputer)</option>
+                            <option value="music">🎵 music (Paduan Suara / Seni Musik)</option>
+                            <option value="globe">🌐 globe (Klub Geografi / Astronomi)</option>
+                            <option value="heart">❤️ heart (PMR / Kemanusiaan / Karakter)</option>
+                        </select>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Urutan</label>

@@ -272,9 +272,9 @@
         .sd-hero-img-wrap {
             position: relative;
             width: 100%;
-            max-width: 560px;
+            max-width: 450px;
             margin-left: auto;
-            padding: 50px 60px 60px 20px;
+            padding: 20px 30px 30px 10px;
         }
 
         /* Large organic blob behind */
@@ -356,10 +356,10 @@
         /* Badge stamp */
         .sd-hero-badge {
             position: absolute;
-            right: 14px;
-            bottom: 20px;
-            width: 130px;
-            height: 130px;
+            right: 10px;
+            bottom: 10px;
+            width: 110px;
+            height: 110px;
             z-index: 10;
         }
         @media (max-width: 1024px) {
@@ -420,19 +420,19 @@
 
         /* Title & Subtitle */
         .sd-hero-title {
-            font-size: clamp(2.5rem, 5.5vw, 4rem);
+            font-size: clamp(2.2rem, 4.5vw, 3.5rem);
             font-weight: 900;
             color: #002244;
             line-height: 1.1;
             letter-spacing: -0.02em;
-            margin-bottom: 1.25rem;
+            margin-bottom: 0.85rem;
         }
         .sd-hero-subtitle {
             font-size: 0.95rem;
             color: #475569;
             line-height: 1.75;
             max-width: 480px;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         /* Buttons */
@@ -480,9 +480,9 @@
         <div class="sd-hero-blob-1"></div>
         <div class="sd-hero-blob-2"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-20 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 pb-10 lg:pt-24 lg:pb-12 xl:pt-28 xl:pb-16 w-full">
             {{-- Breadcrumb --}}
-            <div class="sd-hero-breadcrumb flex items-center gap-3 mb-6 md:mb-10 text-[0.95rem] reveal reveal-left">
+            <div class="sd-hero-breadcrumb flex items-center gap-3 mb-4 lg:mb-6 text-[0.95rem] reveal reveal-left">
                 <a href="{{ route('public.home') }}">Beranda</a>
                 <span class="separator">/</span>
                 <span class="current">SD Islam Terpadu</span>
@@ -941,7 +941,7 @@
                         $ls     = $lvlStyle[$p['level']] ?? $lvlStyle['Kecamatan'];
                     @endphp
 
-                    <div class="relative flex items-start mb-9 last:mb-0 reveal reveal-repeat pl-8 md:pl-0 md:{{ $isLeft ? 'flex-row' : 'flex-row-reverse' }}"
+                    <div class="relative flex items-start mb-9 last:mb-0 reveal reveal-repeat pl-8 md:pl-0 {{ $isLeft ? 'md:flex-row' : 'md:flex-row-reverse' }}"
                         style="transition-delay: {{ $delay }}ms;">
 
                         {{-- Card --}}
