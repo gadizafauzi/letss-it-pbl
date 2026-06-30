@@ -161,6 +161,10 @@ class SiswaController extends Controller
      */
     public function destroy(Student $siswa)
     {
+        if ($siswa->invoices()->where('status', 'paid')->exists()) {
+            return back()->with('error', 'Data siswa tidak dapat dihapus karena memiliki riwayat pembayaran tagihan (Lunas).');
+        }
+
         $this->siswaService->deleteStudent($siswa);
 
         return redirect()
@@ -174,14 +178,26 @@ class SiswaController extends Controller
     public function bulkDestroy(BulkDestroySiswaRequest $request)
     {
         $students = Student::whereIn('id', $request->ids)->get();
+        $deleted = 0;
+        $failed = 0;
 
         foreach ($students as $student) {
-            $this->siswaService->deleteStudent($student);
+            if ($student->invoices()->where('status', 'paid')->exists()) {
+                $failed++;
+            } else {
+                $this->siswaService->deleteStudent($student);
+                $deleted++;
+            }
+        }
+
+        $message = "Berhasil menghapus $deleted data siswa.";
+        if ($failed > 0) {
+            $message .= " Gagal menghapus $failed siswa karena memiliki riwayat pembayaran tagihan (Lunas).";
         }
 
         return redirect()
             ->route('admin.siswa.index')
-            ->with('success', count($students) . ' data siswa berhasil dihapus');
+            ->with($failed > 0 && $deleted == 0 ? 'error' : 'success', $message);
     }
 
     /**

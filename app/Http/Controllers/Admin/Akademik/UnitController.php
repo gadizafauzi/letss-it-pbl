@@ -13,7 +13,7 @@ class UnitController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Unit::withCount(['students', 'teachers']);
+        $query = Unit::withCount(['students', 'teachers', 'schoolClasses', 'subjects']);
 
         if ($request->filled('search')) {
             $query->where('unit_name', 'like', '%' . $request->search . '%');
@@ -55,6 +55,10 @@ class UnitController extends Controller
 
     public function destroy(Unit $unit)
     {
+        if ($unit->students()->exists() || $unit->schoolClasses()->exists() || $unit->teachers()->exists() || $unit->subjects()->exists()) {
+            return back()->with('error', 'Unit tidak dapat dihapus karena masih digunakan oleh data Siswa, Kelas, Guru, atau Mapel.');
+        }
+
         $unit->delete();
 
         return redirect()
@@ -65,13 +69,25 @@ class UnitController extends Controller
     public function bulkDestroy(BulkDestroyUnitRequest $request)
     {
         $units = Unit::whereIn('id', $request->ids)->get();
+        $deleted = 0;
+        $failed = 0;
 
         foreach ($units as $unit) {
-            $unit->delete();
+            if ($unit->students()->exists() || $unit->schoolClasses()->exists() || $unit->teachers()->exists() || $unit->subjects()->exists()) {
+                $failed++;
+            } else {
+                $unit->delete();
+                $deleted++;
+            }
+        }
+
+        $message = "Berhasil menghapus $deleted unit pendidikan.";
+        if ($failed > 0) {
+            $message .= " Gagal menghapus $failed unit karena masih digunakan oleh data terkait.";
         }
 
         return redirect()
             ->route('admin.unit.index')
-            ->with('success', count($units) . ' unit pendidikan berhasil dihapus');
+            ->with($failed > 0 && $deleted == 0 ? 'error' : 'success', $message);
     }
 }
