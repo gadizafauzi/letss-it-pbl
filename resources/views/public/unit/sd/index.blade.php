@@ -1,7 +1,7 @@
 @extends('layouts.unit')
 
 @section('navbar')
-    <x-public.unit-navbar unitLogo="images/sd.jpeg" unitName="SD Islam Terpadu" />
+    <x-public.unit-navbar unitLogo="images/sd.jpeg" unitName="SD Islam Terpadu" textTheme="dark" />
 @endsection
 
 @section('footer')
