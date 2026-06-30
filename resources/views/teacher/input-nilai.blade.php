@@ -71,15 +71,15 @@
             </div>
 
             @if($selectedAssignment && $students->isNotEmpty())
-                <div class="flex gap-2">
+                <div class="flex gap-2 items-center">
                     <button type="submit" name="submit_action" value="draft" form="formNilai"
-                        class="h-10 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 text-sm font-bold inline-flex items-center gap-2 transition-all border border-slate-200 dark:border-slate-700">
-                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        class="h-10 px-3 md:px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 text-xs md:text-sm font-bold inline-flex items-center justify-center gap-1.5 md:gap-2 transition-all border border-slate-200 dark:border-slate-700 whitespace-nowrap shrink-0">
+                        <i data-lucide="file-text" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
                         Simpan Draft
                     </button>
                     <button type="submit" name="submit_action" value="final" form="formNilai"
-                        class="h-10 px-4 rounded-xl bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white text-sm font-bold inline-flex items-center gap-2 transition-all shadow-sm hover:shadow-md">
-                        <i data-lucide="send" class="w-4 h-4"></i>
+                        class="h-10 px-3 md:px-4 rounded-xl bg-[var(--theme-primary)] hover:bg-[var(--theme-primary-hover)] text-white text-xs md:text-sm font-bold inline-flex items-center justify-center gap-1.5 md:gap-2 transition-all shadow-sm hover:shadow-md whitespace-nowrap shrink-0">
+                        <i data-lucide="send" class="w-3.5 h-3.5 md:w-4 md:h-4"></i>
                         Kirim ke Wali Kelas
                     </button>
                 </div>
