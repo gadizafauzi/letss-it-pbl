@@ -8,8 +8,8 @@
     <title>{{ $title ?? 'SIT Mutiara Quran' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Sekolah Islam Terpadu Mutiara Quran - Mendidik Generasi Qurani yang Berakhlak Mulia' }}">
 
-    {{-- TAILWIND CDN --}}
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- TAILWIND VIA VITE --}}
+    @vite(['resources/css/app.css'])
 
     {{-- FONT --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,9 +31,13 @@
 <body class="bg-transparent text-slate-800 antialiased relative">
     
     {{-- GLOBAL PARALLAX BACKGROUND --}}
+    @if(request()->routeIs('public.home') || request()->routeIs('public.profil.index'))
     <div class="fixed inset-0 z-[-1] pointer-events-none bg-slate-100">
         <div class="absolute inset-0 opacity-100" style="background-image: url('{{ asset('/images/bg.png') }}'); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
     </div>
+    @else
+    <div class="fixed inset-0 z-[-1] pointer-events-none bg-white"></div>
+    @endif
 
     {{-- HEADER (TOPBAR + NAVBAR) --}}
     <header class="public-header fixed top-0 left-0 right-0 z-[100] transition-all duration-300">
@@ -64,6 +68,7 @@
 
     {{-- JS --}}
     <script src="{{ asset('js/public.js') }}"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </body>

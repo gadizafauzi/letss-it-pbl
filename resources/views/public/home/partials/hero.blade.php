@@ -24,7 +24,7 @@
                     <div class="flex flex-wrap justify-center gap-3 lg:gap-4 mt-4 lg:mt-6 reveal reveal-up">
                         @if ($hero->button_text)
                         <a href="{{ $hero->button_link ?? '#' }}"
-                            class="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-xs lg:text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
+                            class="inline-flex items-center gap-2 px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-extrabold text-xs lg:text-sm shadow-lg shadow-orange-500/30 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                             <i data-lucide="file-text" class="w-4 h-4 lg:w-5 lg:h-5"></i>
                             {{ $hero->button_text }}
                         </a>

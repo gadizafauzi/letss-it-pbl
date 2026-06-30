@@ -44,13 +44,13 @@
                 {{-- Kanan: Gambar --}}
                 @if($hero && !empty($hero->image))
                 <div class="hidden lg:block relative reveal reveal-right delay-200" id="hero-image-container">
-                    <div class="w-full aspect-[16/9] rounded-[24px] overflow-hidden border-4 border-white/10 shadow-2xl relative group">
+                    <div class="w-full aspect-[16/9] rounded-[24px] overflow-hidden border-4 border-white/10 shadow-2xl relative group bg-slate-900/40 flex items-center justify-center">
                         
                         {{-- Inner Glow on Hover --}}
                         <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
 
                         <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}"
-                            alt="Hero Image" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            alt="Hero Image" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-700"
                             onerror="document.getElementById('hero-image-container').style.display='none';">
                         
                         <div class="absolute inset-0 bg-[#002244]/20 pointer-events-none z-10 transition-opacity duration-500 group-hover:opacity-50"></div>
@@ -123,7 +123,7 @@
                     </div>
                     
                     {{-- Name Tag (Directly on white) --}}
-                    <div class="mt-10 relative text-center w-full max-w-[280px] sm:max-w-[320px] z-20">
+                    <div class="mt-10 relative text-center w-full max-w-md mx-auto z-20">
                         <p class="text-xs font-bold text-amber-500 mb-1 tracking-wider uppercase">{{ $welcomeMessage && $welcomeMessage->kepsek_title ? $welcomeMessage->kepsek_title : 'Kepala Sekolah SIT Mutiara Qur\'an' }}</p>
                         <h4 class="text-lg sm:text-xl font-black text-[#002244]">{{ $welcomeMessage && $welcomeMessage->kepsek_name ? $welcomeMessage->kepsek_name : 'Ustadz Ahmad Fauzi, S.Pd.I, M.Pd' }}</h4>
                     </div>
@@ -139,9 +139,14 @@
                             <div class="inline-block bg-amber-100 text-amber-600 font-extrabold text-xs tracking-widest uppercase px-4 py-1.5 rounded-full mb-4">
                                 Sambutan Hangat
                             </div>
-                            <h3 class="font-black text-[#002244] text-3xl sm:text-4xl mb-8 leading-tight">Bismillahirrahmanirrahim,</h3>
+                            <h3 class="font-black text-[#002244] text-2xl sm:text-3xl mb-6 leading-tight">
+                                {{ $welcomeMessage && $welcomeMessage->title ? $welcomeMessage->title : 'Bismillahirrahmanirrahim,' }}
+                            </h3>
                         
                             <div class="space-y-5 text-slate-600 leading-relaxed text-sm sm:text-base text-justify">
+                                <p class="font-bold text-amber-500 text-base sm:text-lg mb-4">
+                                    {{ $welcomeMessage && $welcomeMessage->greeting ? $welcomeMessage->greeting : 'Assalamu\'alaikum Warahmatullahi Wabarakatuh,' }}
+                                </p>
                                 @if ($welcomeMessage && $welcomeMessage->paragraphs)
                                     @php
                                         $paragraphs = is_array($welcomeMessage->paragraphs) ? $welcomeMessage->paragraphs : json_decode($welcomeMessage->paragraphs, true);

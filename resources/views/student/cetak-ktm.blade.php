@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Cetak Kartu Pelajar - {{ $student->full_name }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css'])
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body {

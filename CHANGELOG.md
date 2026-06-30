@@ -35,6 +35,7 @@
 - [ ] Pengujian pengiriman WhatsApp menggunakan Fonnte API
 - [ ] Dokumentasi penggunaan fitur
 - [ ] Merge branch `feature/whatsapp-billing-notification`
+
 ## [v0.7.0] - 2026-06-08
 
 ### Added

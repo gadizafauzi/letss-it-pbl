@@ -57,21 +57,22 @@
             <div class="footer-col">
                 <h4>Kontak & Lokasi</h4>
                 <p class="text-sm text-slate-400 leading-relaxed mb-4">
-                    <i data-lucide="map-pin" class="w-4 h-4 text-slate-700 inline mr-2"></i>Karasak, Jorong Pasar Baru,<br>
-                    Nagari Cupak, Kec. Gunung Talang,<br>
-                    Kabupaten Solok, Sumatera Barat
+                    <i data-lucide="map-pin" class="w-4 h-4 text-slate-700 inline mr-2"></i>{!! nl2br(e($settings['address'] ?? "Karasak, Jorong Pasar Baru,\nNagari Cupak, Kec. Gunung Talang,\nKabupaten Solok, Sumatera Barat")) !!}
                 </p>
                 <p class="text-sm text-slate-400 leading-relaxed mb-2">
-                    <i data-lucide="phone" class="w-4 h-4 text-slate-700 inline mr-2"></i>+62 822-8620-4878
+                    <a href="tel:{{ str_replace(' ', '', $settings['phone'] ?? '+6282286204878') }}" class="hover:text-amber-400 smooth-transition">
+                        <i data-lucide="phone" class="w-4 h-4 text-slate-700 inline mr-2"></i>{{ $settings['phone'] ?? '+62 822-8620-4878' }}
+                    </a>
                 </p>
                 <p class="text-sm text-slate-400 leading-relaxed">
-                    <i data-lucide="mail" class="w-4 h-4 text-slate-700 inline mr-2"></i>info@sitmutiaraquran.sch.id
+                    <a href="mailto:{{ $settings['email'] ?? 'info@sitmutiaraquran.sch.id' }}" class="hover:text-amber-400 smooth-transition">
+                        <i data-lucide="mail" class="w-4 h-4 text-slate-700 inline mr-2"></i>{{ $settings['email'] ?? 'info@sitmutiaraquran.sch.id' }}
+                    </a>
                 </p>
                 
                 <h5 class="text-xs font-bold text-white uppercase mt-4 mb-2 tracking-wider">Jam Operasional</h5>
                 <p class="text-xs text-slate-500 leading-relaxed">
-                    Senin - Jum'at: 07.15 - 15.30 WIB<br>
-                    Sabtu - Minggu: Libur
+                    {!! nl2br(e($settings['operational_hours'] ?? "Senin - Jum'at: 07.15 - 15.30 WIB\nSabtu - Minggu: Libur")) !!}
                 </p>
             </div>
 

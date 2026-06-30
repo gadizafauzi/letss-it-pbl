@@ -104,8 +104,8 @@
             <div class="bg-white rounded-3xl p-6 shadow-sm border border-[#E5E7EB] mb-12">
                 <div class="flex flex-col gap-6">
                     
-                    {{-- Row 1: Search on Left, Sort Dropdown on Right (Balanced & Elegant) --}}
-                    <div class="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-center">
+                    {{-- Row 1: Search and Sort side-by-side on mobile, balanced on desktop --}}
+                    <div class="flex flex-row gap-2 md:gap-4 justify-between items-center w-full">
                         {{-- Search Input Form --}}
                         <form method="GET" action="{{ route('public.berita.index') }}" class="flex-grow max-w-xl">
                             @if(request('category'))
@@ -119,13 +119,13 @@
                                        name="q" 
                                        value="{{ request('q') }}" 
                                        placeholder="Cari berita..." 
-                                       class="w-full pl-11 pr-4 py-3 rounded-full border border-[#E5E7EB] bg-[#F8FAFC] text-[#143D75] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:border-transparent smooth-transition text-sm" />
-                                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4.5 h-4.5"></i>
+                                       class="w-full pl-9 pr-3 py-3 rounded-full border border-[#E5E7EB] bg-[#F8FAFC] text-[#143D75] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:border-transparent smooth-transition text-xs sm:text-sm" />
+                                <i data-lucide="search" class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4"></i>
                             </div>
                         </form>
 
                         {{-- Sort Dropdown --}}
-                        <form method="GET" action="{{ route('public.berita.index') }}" class="w-full md:w-64">
+                        <form method="GET" action="{{ route('public.berita.index') }}" class="w-[125px] sm:w-64 flex-shrink-0">
                             @if(request('category'))
                                 <input type="hidden" name="category" value="{{ request('category') }}">
                             @endif
@@ -135,13 +135,13 @@
                             <div class="relative w-full">
                                 <select name="sort" 
                                         onchange="this.form.submit()" 
-                                        class="w-full pl-4 pr-10 py-3 rounded-full border border-[#E5E7EB] bg-[#F8FAFC] text-[#143D75] font-bold focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:border-transparent smooth-transition text-sm appearance-none cursor-pointer">
+                                        class="w-full pl-3 pr-8 py-3 rounded-full border border-[#E5E7EB] bg-[#F8FAFC] text-[#143D75] font-bold focus:outline-none focus:ring-2 focus:ring-[#FFC107] focus:border-transparent smooth-transition text-xs sm:text-sm appearance-none cursor-pointer">
                                     <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Terbaru</option>
                                     <option value="oldest" {{ request('sort') == 'oldest' ? 'selected' : '' }}>Terlama</option>
                                     <option value="most_viewed" {{ request('sort') == 'most_viewed' ? 'selected' : '' }}>Paling Banyak Dilihat</option>
                                     <option value="newest_added" {{ request('sort') == 'newest_added' ? 'selected' : '' }}>Paling Baru Ditambahkan</option>
                                 </select>
-                                <i data-lucide="chevron-down" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 w-4.5 h-4.5 pointer-events-none"></i>
+                                <i data-lucide="chevron-down" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 w-4 h-4 pointer-events-none"></i>
                             </div>
                         </form>
                     </div>

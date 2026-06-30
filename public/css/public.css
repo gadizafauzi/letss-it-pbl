@@ -281,6 +281,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
 .theme-tk .section-title::after {
     background: linear-gradient(to right, #ea580c, #fbbf24);
 }
@@ -291,6 +292,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
 .theme-sd .section-title::after {
     background: linear-gradient(to right, #7e22ce, #f472b6);
 }
@@ -301,6 +303,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
 .theme-smp .section-title::after {
     background: linear-gradient(to right, #1d4ed8, #38bdf8);
 }
@@ -352,7 +355,7 @@
 .stat-number {
     font-size: clamp(36px, 5vw, 56px);
     font-weight: 800;
-    color: #fff;
+    color: inherit;
     line-height: 1;
     letter-spacing: -0.03em;
 }
@@ -364,16 +367,28 @@
     font-weight: 600;
 }
 
+/* Hide default select arrow for appearance-none */
+select.appearance-none {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+select.appearance-none::-ms-expand {
+    display: none !important;
+}
+
 /* ========= LINE CLAMP ========= */
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -964,10 +979,6 @@
         grid-template-columns: 1fr 1fr;
         gap: 32px;
     }
-
-    .hero-section {
-        min-height: 85vh;
-    }
 }
 
 @media (max-width: 576px) {
@@ -1174,8 +1185,8 @@
 }
 
 .testi-quote {
-    font-size: 15px;
-    color: #003f88;
+    font-size: inherit;
+    color: inherit;
     line-height: 1.7;
     font-style: italic;
     margin-bottom: 24px;
