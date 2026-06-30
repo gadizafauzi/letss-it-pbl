@@ -8,8 +8,8 @@
     <title>{{ $title ?? 'SIT Mutiara Quran' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Sekolah Islam Terpadu Mutiara Quran - Mendidik Generasi Qurani yang Berakhlak Mulia' }}">
 
-    {{-- TAILWIND CDN --}}
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- TAILWIND VIA VITE --}}
+    @vite(['resources/css/app.css'])
 
     {{-- FONT --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

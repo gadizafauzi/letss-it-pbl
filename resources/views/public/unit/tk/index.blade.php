@@ -253,9 +253,14 @@
             background: linear-gradient(135deg, #fef7ed 0%, #fff7ed 40%, #fef3e2 70%, #fde8cd 100%);
             position: relative;
             overflow: hidden;
-            min-height: 100vh;
+            min-height: auto;
             display: flex;
             align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .tk-hero {
+                min-height: 100vh;
+            }
         }
 
         /* Decorative blobs */
@@ -546,6 +551,10 @@
                         @endif
                     </h1>
 
+                    <p class="tk-hero-subtitle">
+                        {{ $hero && $hero->subtitle ? $hero->subtitle : 'Membentuk karakter islami sejak usia dini dengan pendekatan belajar, bermain, dan berkarya yang menyenangkan.' }}
+                    </p>
+
                     <div class="flex flex-wrap gap-3">
                         <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil' }}" class="tk-hero-btn-primary">
                             <i data-lucide="info" class="w-4 h-4"></i>
@@ -694,11 +703,7 @@
     {{-- ════════════════════════════════════════════
          PROFIL SECTION
          ════════════════════════════════════════════ --}}
-    <section id="profil" class="py-20 relative bg-fixed bg-center bg-cover overflow-hidden" 
-        style="background-image: url('https://images.unsplash.com/photo-1537655780520-1e392ead34f1?auto=format&fit=crop&w=1920&q=80');">
-        
-        {{-- Light overlay to blend with hero wave and keep text readable --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-white via-white/50 to-white z-0"></div>
+    <section id="profil" class="py-20 bg-white">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 reveal">
@@ -710,7 +715,7 @@
                     <div class="relative group">
                         <div class="absolute inset-0 bg-gradient-to-br from-orange-100 to-orange-50 rounded-2xl transform -rotate-3 transition-transform group-hover:rotate-0 duration-500"></div>
                         <div class="relative bg-white rounded-2xl shadow-lg p-8 border border-slate-100 flex items-center justify-center min-h-[300px]">
-                            <img src="{{ $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/logomq.jpg') }}" alt="Logo SIT"
+                            <img src="{{ $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : (file_exists(public_path('storage/' . $detail->description_logo)) ? asset('storage/' . $detail->description_logo) : asset($detail->description_logo))) : asset('images/logomq.jpg') }}" alt="Logo SIT"
                                 class="w-40 h-40 object-contain animate-floating">
                         </div>
                     </div>
@@ -733,11 +738,8 @@
     {{-- ════════════════════════════════════════════
          GURU SECTION — Auto-scroll carousel
          ════════════════════════════════════════════ --}}
-    <section id="guru" class="py-24 relative bg-fixed bg-center bg-cover overflow-hidden"
-        style="background-image: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1920&q=80');">
-        
-        {{-- Orange overlay --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-[#ffedd5] via-[#ffedd5]/50 to-[#ffedd5] z-0"></div>
+    <section id="guru" class="relative py-24 overflow-hidden bg-cover bg-center bg-fixed bg-no-repeat"
+        style="background-image: linear-gradient(to bottom, rgba(255, 237, 213, 0.88), rgba(255, 237, 213, 0.88)){{ $bgImageUrl ? ", url('" . $bgImageUrl . "')" : "" }};">
 
         {{-- Decorative Elements --}}
         <div class="absolute top-20 left-10 text-4xl opacity-30 animate-floating" style="animation-delay: 0s;">🌟</div>
@@ -759,6 +761,7 @@
                                 if ($item->teacher) {
                                     $displayTeachers[] = [
                                         'name'  => $item->teacher->full_name,
+                                        'position' => $item->teacher->position ? $item->teacher->position->name : 'Tenaga Pendidik',
                                         'photo' => $item->teacher->photo ? (Str::startsWith($item->teacher->photo, 'http') ? $item->teacher->photo : asset('storage/' . $item->teacher->photo)) : 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80',
                                     ];
                                 }
@@ -783,7 +786,7 @@
                                 {{-- Bottom bar --}}
                                 <div style="padding:0.5rem 0.75rem; display:flex; align-items:center; gap:0.4rem; background:white;">
                                     <div style="width:6px; height:6px; border-radius:50%; background:#f97316; flex-shrink:0;"></div>
-                                    <span style="font-size:0.65rem; color:#64748b; font-weight:600;">Tenaga Pendidik</span>
+                                    <span style="font-size:0.65rem; color:#64748b; font-weight:600;">{{ $g['position'] }}</span>
                                 </div>
                             </div>
                         </div>
@@ -798,11 +801,7 @@
     {{-- ════════════════════════════════════════════
          EKSTRAKURIKULER
          ════════════════════════════════════════════ --}}
-    <section id="ekstrakurikuler" class="py-24 relative bg-fixed bg-center bg-cover overflow-hidden"
-        style="background-image: url('https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?auto=format&fit=crop&w=1920&q=80');">
-        
-        {{-- Light overlay --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white/80 z-0"></div>
+    <section id="ekstrakurikuler" class="py-24 relative bg-white overflow-hidden">
 
 
 
@@ -925,20 +924,7 @@
     {{-- ════════════════════════════════════════════
          FASILITAS SECTION
          ════════════════════════════════════════════ --}}
-<<<<<<< ours
-    <section id="fasilitas" class="py-20 bg-slate-50 border-t border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 reveal">
-                <h2 class="section-title">FASILITAS</h2>
-                <p class="unit-section-desc">Fasilitas penunjang kegiatan belajar mengajar yang lengkap dan memadai untuk mendukung tumbuh kembang siswa.</p>
-=======
-    <section id="fasilitas" class="py-24 relative bg-fixed bg-center bg-cover overflow-hidden"
-        style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1920&q=80');">
-        
-        {{-- Orange overlay --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-[#ffedd5] via-[#ffedd5]/50 to-[#ffedd5] z-0"></div>
-
-
+    <section id="fasilitas" class="py-24 relative bg-slate-50 overflow-hidden">
 
         {{-- Decorative Elements --}}
         <div class="absolute top-20 right-10 text-5xl opacity-30 animate-floating" style="animation-delay: 1s;">🧩</div>
@@ -946,7 +932,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-14 reveal">
                 <h2 class="section-title">FASILITAS</h2>
->>>>>>> theirs
             </div>
 
             @php
@@ -954,26 +939,11 @@
                 if (isset($facilities) && !$facilities->isEmpty()) {
                     foreach ($facilities as $fac) {
                         $displayFacilities[] = [
-<<<<<<< ours
-                            'icon' => $fac->icon ? $fac->icon : 'check',
-=======
                             'icon'  => $fac->icon ? $fac->icon : 'check-circle',
->>>>>>> theirs
                             'title' => $fac->title,
                         ];
                     }
                 }
-<<<<<<< ours
-            @endphp
-            @if(!empty($displayFacilities))
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto reveal reveal-up">
-                @foreach ($displayFacilities as $idx => $f)
-                    <div class="group flex items-center gap-4 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-full p-2.5 pr-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:border-orange-200" style="transition-delay: {{ $idx * 50 }}ms;">
-                        <div class="w-12 h-12 rounded-full bg-white border-2 border-orange-500 flex items-center justify-center text-orange-500 shrink-0 shadow-sm transition-transform duration-300 group-hover:scale-105">
-                            <i data-lucide="{{ $f['icon'] }}" class="w-5 h-5"></i>
-                        </div>
-                        <span class="text-sm font-bold uppercase tracking-wider text-slate-700">{{ $f['title'] }}</span>
-=======
                 
                 $colors = [
                     ['bg' => '#fefce8', 'icon' => '#eab308', 'border' => '#fef08a'], // Yellow
@@ -1000,7 +970,6 @@
                             
                             <h3 class="font-extrabold text-slate-700 text-sm md:text-[15px] leading-tight">{{ $f['title'] }}</h3>
                         </div>
->>>>>>> theirs
                     </div>
                 @endforeach
             </div>
@@ -1011,11 +980,7 @@
     {{-- ════════════════════════════════════════════
          PRESTASI SECTION — Photo cards
          ════════════════════════════════════════════ --}}
-    <section id="prestasi" class="py-20 relative bg-fixed bg-center bg-cover overflow-hidden"
-        style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1920&q=80');">
-        
-        {{-- Light overlay --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-white via-white/50 to-white z-0"></div>
+    <section id="prestasi" class="py-20 relative bg-white overflow-hidden">
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 

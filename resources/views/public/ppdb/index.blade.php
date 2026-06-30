@@ -2,6 +2,8 @@
 @section('content')
     @vite(['resources/css/public-ppdb.css', 'resources/js/public-ppdb.js'])
 
+    <div x-data="{ showPreview: false, previewUrl: '', previewTitle: '', isImage: false }" class="relative w-full">
+
     <section class="page-hero relative overflow-hidden flex items-center min-h-[320px] bg-[#001a33]">
         
         {{-- Background Image with Overlays --}}
@@ -42,12 +44,12 @@
                 {{-- Kanan: Gambar --}}
                 @if($hero && !empty($hero->image))
                 <div class="hidden lg:block relative reveal reveal-right delay-200" id="hero-image-container">
-                    <div class="w-full aspect-[16/9] rounded-[24px] overflow-hidden border-4 border-white/10 shadow-2xl relative group">
+                    <div class="w-full aspect-[16/9] rounded-[24px] overflow-hidden border-4 border-white/10 shadow-2xl relative group bg-slate-900/40 flex items-center justify-center">
                         
                         <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
 
                         <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}" 
-                             alt="Kegiatan Belajar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                             alt="Kegiatan Belajar" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-700"
                              onerror="document.getElementById('hero-image-container').style.display='none';">
                         
                         <div class="absolute inset-0 bg-[#002244]/20 pointer-events-none z-10 transition-opacity duration-500 group-hover:opacity-50"></div>
@@ -218,16 +220,19 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap justify-start gap-6">
+            <div class="flex flex-wrap justify-start gap-3 sm:gap-6">
                 @php
                     $displayBrosurs = [];
                     if (isset($brochures) && !$brochures->isEmpty()) {
                         foreach ($brochures as $i => $brochure) {
                             $reveals = ['reveal-left', 'reveal-up', 'reveal-zoom', 'reveal-right'];
+                            $fileUrl = Str::startsWith($brochure->file_path, 'http') ? $brochure->file_path : asset('storage/' . $brochure->file_path);
+                            $ext = strtolower(pathinfo($brochure->file_path, PATHINFO_EXTENSION));
                             $displayBrosurs[] = [
                                 'title' => $brochure->title,
                                 'desc' => $brochure->description,
-                                'file' => Str::startsWith($brochure->file_path, 'http') ? $brochure->file_path : asset('storage/' . $brochure->file_path),
+                                'file' => $fileUrl,
+                                'is_image' => in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg']),
                                 'delay' => 'delay-' . (($i % 4) + 1) * 100,
                                 'reveal' => $reveals[$i % 4],
                             ];
@@ -236,7 +241,7 @@
                 @endphp
                 @if(!empty($displayBrosurs))
                 @foreach($displayBrosurs as $brosur)
-                <div class="w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] relative bg-white rounded-[24px] p-6 sm:p-8 shadow-xl shadow-slate-200/40 border border-slate-100 hover:shadow-2xl hover:shadow-slate-300/60 hover:-translate-y-3 transition-all duration-500 flex flex-col h-full group premium-card reveal {{ $brosur['reveal'] }} {{ $brosur['delay'] }} overflow-hidden">
+                <div class="w-[calc(50%-6px)] sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] relative bg-white rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 md:p-8 shadow-xl shadow-slate-200/40 border border-slate-100 hover:shadow-2xl hover:shadow-slate-300/60 hover:-translate-y-3 transition-all duration-500 flex flex-col h-full group premium-card reveal {{ $brosur['reveal'] }} {{ $brosur['delay'] }} overflow-hidden">
                     {{-- Decorative Background Elements --}}
                     <div class="absolute -right-8 -top-8 w-32 h-32 bg-gradient-to-br from-amber-100/50 to-transparent rounded-full blur-2xl group-hover:bg-amber-200/50 transition-colors duration-500 z-0"></div>
                     <div class="absolute -left-8 -bottom-8 w-32 h-32 bg-gradient-to-tr from-blue-100/50 to-transparent rounded-full blur-2xl group-hover:bg-blue-200/50 transition-colors duration-500 z-0"></div>
@@ -245,19 +250,21 @@
                     <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#003f88] via-emerald-400 to-amber-400 opacity-80 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
 
                     <div class="relative z-10 flex-grow flex flex-col">
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 text-amber-600 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-amber-200/50 transition-all duration-500 border border-amber-100 shrink-0">
-                            <i data-lucide="file-text" class="w-7 h-7"></i>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 text-amber-600 flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-amber-200/50 transition-all duration-500 border border-amber-100 shrink-0">
+                            <i data-lucide="file-text" class="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7"></i>
                         </div>
                         
-                        <h3 class="text-xl font-extrabold text-[#002244] mb-3 group-hover:text-[#003f88] transition-colors duration-300">{{ $brosur['title'] }}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed mb-8 flex-grow group-hover:text-slate-600 transition-colors duration-300">{{ $brosur['desc'] }}</p>
+                        <h3 class="text-base sm:text-lg md:text-xl font-extrabold text-[#002244] mb-2 group-hover:text-[#003f88] transition-colors duration-300">{{ $brosur['title'] }}</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed mb-6 flex-grow group-hover:text-slate-600 transition-colors duration-300">{{ $brosur['desc'] }}</p>
                         
-                        <div class="flex flex-col gap-3 mt-auto">
-                            <a href="{{ $brosur['file'] }}" download class="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-[#003f88] to-[#002244] text-white font-bold text-sm shadow-md shadow-[#003f88]/20 hover:shadow-lg hover:shadow-[#003f88]/40 hover:-translate-y-0.5 transition-all duration-300">
-                                <i data-lucide="download" class="w-4 h-4"></i> Unduh File
+                        <div class="flex flex-col sm:flex-row gap-2 mt-auto">
+                            <a href="{{ $brosur['file'] }}" download class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-gradient-to-r from-[#003f88] to-[#002244] text-white font-bold text-xs sm:text-sm shadow-md shadow-[#003f88]/20 hover:shadow-lg hover:shadow-[#003f88]/40 hover:-translate-y-0.5 transition-all duration-300">
+                                <i data-lucide="download" class="w-4 h-4 shrink-0"></i> Unduh
                             </a>
-                            <a href="{{ $brosur['file'] }}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-[#003f88] font-bold text-sm hover:bg-white hover:border-[#003f88]/30 hover:shadow-sm hover:text-[#002244] transition-all duration-300">
-                                <i data-lucide="eye" class="w-4 h-4"></i> Pratinjau
+                            <a href="#" 
+                               @click.prevent="previewUrl = '{{ $brosur['file'] }}'; previewTitle = '{{ addslashes($brosur['title']) }}'; isImage = {{ $brosur['is_image'] ? 'true' : 'false' }}; showPreview = true; $nextTick(() => { if(typeof lucide !== 'undefined') lucide.createIcons(); })" 
+                               class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-[#003f88] font-bold text-xs sm:text-sm hover:bg-white hover:border-[#003f88]/30 hover:shadow-sm hover:text-[#002244] transition-all duration-300">
+                                <i data-lucide="eye" class="w-4 h-4 shrink-0"></i> Pratinjau
                             </a>
                         </div>
                     </div>
@@ -594,6 +601,53 @@
         </div>
     </section>
 
+    {{-- PDF Preview Modal --}}
+    <div x-show="showPreview" 
+         class="fixed inset-0 z-[999] flex items-center justify-center p-4"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         style="display: none;">
+        
+        <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" @click="showPreview = false"></div>
+        
+        <div class="bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-100 w-full max-w-4xl h-[70vh] md:h-[85vh] relative z-10 flex flex-col transform transition-all duration-300"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="scale-95 translate-y-4"
+             x-transition:enter-end="scale-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="scale-100 translate-y-0"
+             x-transition:leave-end="scale-95 translate-y-4">
+            
+            <div class="px-4 py-3.5 md:px-6 md:py-4 bg-[#F8FAFC] border-b border-slate-100 flex justify-between items-center shrink-0">
+                <h4 class="font-extrabold text-[#002244] text-base md:text-lg line-clamp-1" x-text="previewTitle">Pratinjau Dokumen</h4>
+                <button @click="showPreview = false" class="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-red-500 hover:border-red-100 hover:bg-red-50 smooth-transition shadow-sm">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            
+            <div class="flex-grow bg-slate-50 p-2 md:p-4 flex items-center justify-center relative overflow-hidden">
+                <template x-if="isImage">
+                    <img :src="previewUrl" class="max-h-full max-w-full object-contain rounded-2xl border border-slate-200 shadow-sm bg-white" />
+                </template>
+                <template x-if="!isImage">
+                    <iframe :src="previewUrl" class="w-full h-full rounded-2xl border border-slate-200 shadow-inner bg-white" frameborder="0"></iframe>
+                </template>
+            </div>
+            
+            <div class="px-4 py-3 md:px-6 md:py-4 bg-[#F8FAFC] border-t border-slate-100 flex justify-end gap-2.5 shrink-0">
+                <a :href="previewUrl" download class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#003f88] to-[#002244] text-white font-bold text-sm shadow-md hover:shadow-lg smooth-transition">
+                    <i data-lucide="download" class="w-4 h-4"></i> Unduh
+                </a>
+                <button @click="showPreview = false" class="px-5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 font-bold text-sm hover:bg-slate-50 smooth-transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
 
-
+</div>
 @endsection

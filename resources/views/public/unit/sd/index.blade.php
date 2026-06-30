@@ -225,72 +225,345 @@
         }
     </style>
 
-    {{-- ════════════════════════════════════════════
-         HERO SECTION
-         ════════════════════════════════════════════ --}}
-    <section id="home" class="relative min-h-[75vh] lg:min-h-[80vh] flex items-center overflow-hidden"
-        style="background: linear-gradient(135deg, #3b0764 0%, #581c87 60%, #7e22ce 100%);">
+    {{-- Custom Styles for SD Hero (aligned with TK) --}}
+    <style>
+        .sd-hero {
+            background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 40%, #f3e8ff 70%, #ebd5ff 100%);
+            position: relative;
+            overflow: hidden;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .sd-hero {
+                min-height: 80vh;
+            }
+        }
 
-        <div class="absolute inset-0 opacity-20"
-            style="background-image: radial-gradient(rgba(147, 51, 234,0.6) 1px, transparent 1px); background-size: 32px 32px;">
-        </div>
+        /* Decorative blobs */
+        .sd-hero-blob-1 {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            background: rgba(168, 85, 247, 0.05);
+            top: -120px;
+            right: -100px;
+            animation: sdBlobMorph 12s ease-in-out infinite;
+        }
+        .sd-hero-blob-2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            background: rgba(168, 85, 247, 0.03);
+            bottom: -80px;
+            left: -60px;
+            animation: sdBlobMorph 15s ease-in-out infinite reverse;
+        }
+        @keyframes sdBlobMorph {
+            0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
 
-        <div class="absolute top-1/4 left-0 w-72 h-72 rounded-full opacity-20"
-            style="background: radial-gradient(circle, #a855f7, transparent 70%); filter: blur(40px);"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full opacity-10"
-            style="background: radial-gradient(circle, #c084fc, transparent 70%); filter: blur(60px);"></div>
+        /* Image wrapper */
+        .sd-hero-img-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            margin-left: auto;
+            padding: 50px 60px 60px 20px;
+        }
+
+        /* Large organic blob behind */
+        .sd-hero-img-blob {
+            position: absolute;
+            width: 78%;
+            height: 85%;
+            bottom: 8px;
+            right: 8px;
+            z-index: 0;
+            background: #ebd5ff;
+            border-radius: 62% 38% 54% 46% / 44% 56% 44% 56%;
+            animation: sdBlobFloat 16s ease-in-out infinite;
+        }
+        /* Extra small accent blob */
+        .sd-hero-img-blob2 {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            top: 10px;
+            left: -10px;
+            z-index: 0;
+            background: #f3e8ff;
+            border-radius: 62% 38% 46% 54% / 56% 44% 56% 44%;
+            animation: sdBlobFloat 12s ease-in-out infinite reverse;
+        }
+        @keyframes sdBlobFloat {
+            0%   { border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%; }
+            33%  { border-radius: 48% 52% 58% 42% / 42% 58% 42% 58%; }
+            66%  { border-radius: 54% 46% 38% 62% / 56% 40% 60% 44%; }
+            100% { border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%; }
+        }
+
+        /* Photo frame */
+        .sd-hero-img-frame {
+            position: relative;
+            z-index: 2;
+            border-radius: 52% 48% 42% 58% / 48% 56% 44% 52%;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            animation: sdFrameMorph 14s ease-in-out infinite;
+            background: rgba(255, 255, 255, 0.4);
+        }
+        @keyframes sdFrameMorph {
+            0%   { border-radius: 52% 48% 42% 58% / 48% 56% 44% 52%; }
+            33%  { border-radius: 44% 56% 56% 44% / 52% 44% 56% 48%; }
+            66%  { border-radius: 56% 44% 48% 52% / 44% 52% 48% 56%; }
+            100% { border-radius: 52% 48% 42% 58% / 48% 56% 44% 52%; }
+        }
+        .sd-hero-img-frame img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 4/3;
+            object-fit: contain;
+        }
+
+        /* Leaves decoration */
+        .sd-hero-leaves {
+            position: absolute;
+            top: -10px;
+            left: -5px;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .sd-hero-leaves .leaf-1 {
+            width: 52px;
+            height: auto;
+            transform: rotate(-45deg) translateX(4px);
+            margin-bottom: -14px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        .sd-hero-leaves .leaf-2 {
+            width: 42px;
+            height: auto;
+            transform: rotate(-5deg) translateX(22px);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+        }
+
+        /* Badge stamp */
+        .sd-hero-badge {
+            position: absolute;
+            right: 14px;
+            bottom: 20px;
+            width: 130px;
+            height: 130px;
+            z-index: 10;
+        }
+        @media (max-width: 1024px) {
+            .sd-hero-badge { display: none; }
+        }
+        .sd-hero-badge-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #fffcfd;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08), 0 0 0 4px rgba(168,85,247,0.06);
+            border: 2px solid rgba(168, 85, 247, 0.18);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sd-hero-badge-inner .badge-icon {
+            font-size: 1.5rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        .sd-hero-badge-inner svg.badge-text-svg {
+            position: absolute;
+            inset: 6px;
+            width: calc(100% - 12px);
+            height: calc(100% - 12px);
+        }
+        .sd-hero-badge-inner svg.badge-text-svg text {
+            fill: #7e22ce;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* Breadcrumb style */
+        .sd-hero-breadcrumb a {
+            color: #7e22ce;
+            opacity: 0.8;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .sd-hero-breadcrumb a:hover {
+            color: #6b21a8;
+            opacity: 1;
+        }
+        .sd-hero-breadcrumb .separator {
+            color: #cbd5e1;
+        }
+        .sd-hero-breadcrumb .current {
+            color: #7e22ce;
+            font-weight: 700;
+        }
+
+        /* Title & Subtitle */
+        .sd-hero-title {
+            font-size: clamp(2.5rem, 5.5vw, 4rem);
+            font-weight: 900;
+            color: #002244;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.25rem;
+        }
+        .sd-hero-subtitle {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.75;
+            max-width: 480px;
+            margin-bottom: 2rem;
+        }
+
+        /* Buttons */
+        .sd-hero-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.25);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .sd-hero-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.35);
+        }
+        .sd-hero-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            background: transparent;
+            color: #7e22ce;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 2px solid #d8b4fe;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .sd-hero-btn-secondary:hover {
+            background: rgba(168, 85, 247, 0.05);
+            border-color: #a855f7;
+            transform: translateY(-2px);
+        }
+    </style>
+
+    <section id="home" class="sd-hero">
+        {{-- Background decorations --}}
+        <div class="sd-hero-blob-1"></div>
+        <div class="sd-hero-blob-2"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-20 w-full">
             {{-- Breadcrumb --}}
-            <div class="flex items-center gap-3 mb-6 md:mb-10 text-[0.95rem] reveal reveal-left">
-                <a href="{{ route('public.home') }}" class="text-purple-100/80 hover:text-white font-medium transition-colors duration-300">Beranda</a>
-                <span class="text-purple-100/40">/</span>
-                <span class="text-purple-300 font-semibold tracking-wide drop-shadow-md">SD Islam Terpadu</span>
+            <div class="sd-hero-breadcrumb flex items-center gap-3 mb-6 md:mb-10 text-[0.95rem] reveal reveal-left">
+                <a href="{{ route('public.home') }}">Beranda</a>
+                <span class="separator">/</span>
+                <span class="current">SD Islam Terpadu</span>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
                 {{-- Left text --}}
                 <div class="reveal reveal-left">
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none tracking-tighter mt-2 mb-6">
+                    <h1 class="sd-hero-title">
                         @if($hero && $hero->title)
                             {{ $hero->title }}
                         @else
-                            SD ISLAM<br>
-                            <span style="background: linear-gradient(90deg, #a855f7, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">TERPADU</span>
+                            SD Islam<br>Terpadu
                         @endif
                     </h1>
 
-                    <p class="text-base text-slate-400 leading-relaxed mb-8 max-w-md">
+                    <p class="sd-hero-subtitle">
                         {{ $hero && $hero->subtitle ? $hero->subtitle : 'Membangun generasi cerdas, mandiri, dan berakhlak mulia dengan memadukan kurikulum nasional dan nilai-nilai keislaman secara komprehensif.' }}
                     </p>
 
                     <div class="flex flex-wrap gap-3">
-                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil' }}" style="background: linear-gradient(135deg, #a855f7, #9333ea); color: white;"
-                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm shadow-lg hover:-translate-y-1 hover:shadow-purple-500/30 transition-all duration-300">
+                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil' }}" class="sd-hero-btn-primary">
                             <i data-lucide="info" class="w-4 h-4"></i>
                             {{ $hero && $hero->button_text ? $hero->button_text : 'Deskripsi Umum' }}
                         </a>
-                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#prestasi' }}"
-                            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white transition-all duration-300 hover:-translate-y-1"
-                            style="border: 2px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05);">
-                            <i data-lucide="play-circle" class="w-4 h-4"></i>
+                        <a href="{{ $hero && $hero->button_secondary_link ? $hero->button_secondary_link : '#prestasi' }}" class="sd-hero-btn-secondary">
+                            <i data-lucide="star" class="w-4 h-4"></i>
                             {{ $hero && $hero->button_secondary_text ? $hero->button_secondary_text : 'Lihat Prestasi' }}
                         </a>
                     </div>
                 </div>
 
+                {{-- Right image --}}
                 <div class="relative hidden lg:block reveal reveal-right">
-                    <div class="relative w-full h-[400px] lg:h-[480px] animate-floating">
-                        <div class="absolute inset-0 bg-purple-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                        <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : asset('images/sd_dummy.png') }}" alt="SD Islam Terpadu SIT Mutiara Qur'an"
-                            class="relative w-full h-full object-contain mix-blend-screen drop-shadow-2xl">
+                    <div class="sd-hero-img-wrap">
+                        {{-- Small accent blob top-left --}}
+                        <div class="sd-hero-img-blob2"></div>
+
+                        {{-- Large organic blob bottom-right --}}
+                        <div class="sd-hero-img-blob"></div>
+
+                        {{-- Leaves top-left --}}
+                        <div class="sd-hero-leaves">
+                            <svg class="leaf leaf-1" viewBox="0 0 40 60" fill="#a855f7" opacity="0.8"><path d="M20 2C20 2 2 16 2 34c0 10 8 16 18 16s18-6 18-16C38 16 20 2 20 2zm0 42c-1.5 0-3-1-3-2.5 0-5 3-13 3-13s3 8 3 13c0 1.5-1.5 2.5-3 2.5z"/></svg>
+                            <svg class="leaf leaf-2" viewBox="0 0 40 60" fill="#c084fc" opacity="0.6"><path d="M20 2C20 2 2 16 2 34c0 10 8 16 18 16s18-6 18-16C38 16 20 2 20 2zm0 42c-1.5 0-3-1-3-2.5 0-5 3-13 3-13s3 8 3 13c0 1.5-1.5 2.5-3 2.5z"/></svg>
+                        </div>
+
+                        {{-- Main image --}}
+                        <div class="sd-hero-img-frame">
+                            <img src="{{ $hero && $hero->image ? (Str::startsWith($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) : asset('images/sd_dummy.png') }}"
+                                alt="SD Islam Terpadu SIT Mutiara Qur'an">
+                        </div>
+
+                        {{-- Badge bottom-right --}}
+                        <div class="sd-hero-badge">
+                            <div class="sd-hero-badge-inner">
+                                <span class="badge-icon">✏️</span>
+                                <svg class="badge-text-svg" viewBox="0 0 120 120">
+                                    <defs>
+                                        <path id="sdTopArc" d="M 16,60 A 44,44 0 0,1 104,60" />
+                                        <path id="sdBottomArc" d="M 104,68 A 44,44 0 0,1 16,68" />
+                                    </defs>
+                                    <text>
+                                        <textPath href="#sdTopArc" startOffset="50%" text-anchor="middle">
+                                            Cerdas &amp; Mandiri
+                                        </textPath>
+                                    </text>
+                                    <text>
+                                        <textPath href="#sdBottomArc" startOffset="50%" text-anchor="middle">
+                                            Berakhlak Mulia
+                                        </textPath>
+                                    </text>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
-
     </section>
 
     {{-- ════════════════════════════════════════════
@@ -389,7 +662,7 @@
                     <div class="relative group">
                         <div class="absolute inset-0 bg-gradient-to-br from-purple-100 to-purple-50 rounded-2xl transform -rotate-3 transition-transform group-hover:rotate-0 duration-500"></div>
                         <div class="relative bg-white rounded-2xl shadow-lg p-8 border border-slate-100 flex items-center justify-center min-h-[300px]">
-                            <img src="{{ $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : asset('storage/' . $detail->description_logo)) : asset('images/logomq.jpg') }}" alt="Logo SIT"
+                            <img src="{{ $detail && $detail->description_logo ? (Str::startsWith($detail->description_logo, 'http') ? $detail->description_logo : (file_exists(public_path('storage/' . $detail->description_logo)) ? asset('storage/' . $detail->description_logo) : asset($detail->description_logo))) : asset('images/logomq.jpg') }}" alt="Logo SIT"
                                 class="w-40 h-40 object-contain animate-floating">
                         </div>
                     </div>
@@ -432,6 +705,7 @@
                             if ($item->teacher) {
                                 $displayTeachers[] = [
                                     'name' => $item->teacher->full_name,
+                                    'position' => $item->teacher->position ? $item->teacher->position->name : 'Guru/Staf',
                                     'photo' => $item->teacher->photo ? (Str::startsWith($item->teacher->photo, 'http') ? $item->teacher->photo : asset('storage/' . $item->teacher->photo)) : 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80',
                                 ];
                             }
@@ -446,6 +720,7 @@
                         </div>
                         <div class="unit-teacher-info">
                             <h3>{{ $g['name'] }}</h3>
+                            <p class="text-[10px] text-slate-500 font-bold mt-1 uppercase tracking-wider">{{ $g['position'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -480,9 +755,6 @@
 
                     // Partitioning into rows
                     $rowsCount = 2;
-                    if (count($displayEkskuls) >= 9) {
-                        $rowsCount = 3;
-                    }
 
                     $rows = array_fill(0, $rowsCount, []);
                     foreach ($displayEkskuls as $idx => $e) {

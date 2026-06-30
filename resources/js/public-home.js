@@ -89,14 +89,15 @@
         };
 
         /* TESTIMONIAL SLIDER CONTROLLER */
-        let currentSlide = 0;
-        const totalSlides = 3;
         const track = document.getElementById('testiSliderTrack');
         const dots = document.querySelectorAll('.slider-dot');
+        const totalSlides = dots.length || 3;
+        let currentSlide = 0;
 
         function updateSlider() {
             if (track) {
-                track.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+                const percentage = 100 / totalSlides;
+                track.style.transform = `translateX(-${currentSlide * percentage}%)`;
                 dots.forEach((dot, idx) => {
                     if (idx === currentSlide) {
                         dot.classList.remove('bg-slate-300');

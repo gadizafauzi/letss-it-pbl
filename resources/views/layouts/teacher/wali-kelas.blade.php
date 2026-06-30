@@ -7,12 +7,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        }
-    </script>
+    @vite(['resources/css/app.css'])
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>

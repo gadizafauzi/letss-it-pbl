@@ -39,9 +39,9 @@ class CmsSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         // Get units
-        $unitTk = Unit::where('unit_name', 'like', '%TK%')->first() ?? Unit::create(['unit_name' => 'TK Islam Terpadu']);
-        $unitSd = Unit::where('unit_name', 'like', '%SD%')->first() ?? Unit::create(['unit_name' => 'SD Islam Terpadu']);
-        $unitSmp = Unit::where('unit_name', 'like', '%SMP%')->first() ?? Unit::create(['unit_name' => 'SMP Islam Terpadu']);
+        $unitTk = Unit::where('unit_name', 'like', '%TK%')->first() ?? Unit::create(['unit_name' => 'TK']);
+        $unitSd = Unit::where('unit_name', 'like', '%SD%')->first() ?? Unit::create(['unit_name' => 'SD']);
+        $unitSmp = Unit::where('unit_name', 'like', '%SMP%')->first() ?? Unit::create(['unit_name' => 'SMP']);
 
         // 1. Seed cms_settings
         $settings = [
@@ -49,7 +49,7 @@ class CmsSeeder extends Seeder
             ['key' => 'logo_path', 'value' => 'images/logo_jsit.png', 'type' => 'image'],
             ['key' => 'favicon_path', 'value' => 'favicon.ico', 'type' => 'image'],
             ['key' => 'address', 'value' => 'Karasak, Jorong Pasar Baru, Nagari Cupak, Kec. Gunung Talang, Kabupaten Solok, Sumatera Barat', 'type' => 'textarea'],
-            ['key' => 'email', 'value' => 'info@sitmutiaraquran.sch.id', 'type' => 'text'],
+            ['key' => 'email', 'value' => 'sitmutiaraquran@gmail.com', 'type' => 'text'],
             ['key' => 'phone', 'value' => '+62 822-8620-4878', 'type' => 'text'],
             ['key' => 'whatsapp_number', 'value' => '6282286204878', 'type' => 'text'],
             ['key' => 'instagram', 'value' => 'https://www.instagram.com/sit_mutiara_quran?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==', 'type' => 'text'],
@@ -69,16 +69,14 @@ class CmsSeeder extends Seeder
                 'page' => 'home',
                 'title' => 'Mendidik Generasi Qur\'an yang Berakhlak Mulia & Berprestasi',
                 'subtitle' => 'SIT Mutiara Qur\'an hadir di Nagari Cupak untuk membentuk generasi robbani yang mandiri, berkarakter mulia, cerdas akademis, serta mencintai Al-Qur\'an.',
-                'image' => 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=800',
-                'button_text' => 'Daftar PPDB Online',
+                'button_text' => 'Informasi PPDB',
                 'button_link' => '/ppdb',
                 'button_secondary_text' => 'Profil Sekolah',
                 'button_secondary_link' => '/profil',
-                'badge_text' => 'Terakreditasi A - BAN-PDM PROVINSI SUMATERA BARAT',
             ],
             [
                 'page' => 'profil',
-                'title' => 'Profil SIT Mutiara Qur\'an',
+                'title' => 'Profil Yayasan Wakaf Mutiara Qur\'an',
                 'subtitle' => 'Membangun generasi Qur\'ani yang berkarakter, berprestasi, dan berwawasan global.',
                 'image' => 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=800',
                 'button_text' => 'Jelajahi Profil',
@@ -96,7 +94,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'page' => 'unit_tk',
-                'title' => 'TK ISLAM TERPADU',
+                'title' => 'TK IT MUTIARA QURAN',
                 'subtitle' => 'Membentuk karakter islami sejak usia dini dengan pendekatan belajar, bermain, dan berkarya yang menyenangkan.',
                 'image' => 'images/tk_dummy.png',
                 'button_text' => 'Deskripsi Umum',
@@ -106,7 +104,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'page' => 'unit_sd',
-                'title' => 'SD ISLAM TERPADU',
+                'title' => 'SD IT MUTIARA QURAN',
                 'subtitle' => 'Membangun generasi cerdas, mandiri, dan berakhlak mulia dengan memadukan kurikulum nasional dan nilai-nilai keislaman secara komprehensif.',
                 'image' => 'images/sd_dummy.png',
                 'button_text' => 'Deskripsi Umum',
@@ -116,7 +114,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'page' => 'unit_smp',
-                'title' => 'SMP ISLAM TERPADU',
+                'title' => 'SMP IT MUTIARA QURAN',
                 'subtitle' => 'Membangun generasi remaja yang unggul secara akademik, berkarakter islami kuat, dan siap menghadapi tantangan era global.',
                 'image' => 'images/smp_dummy.png',
                 'button_text' => 'Deskripsi Umum',
@@ -132,17 +130,17 @@ class CmsSeeder extends Seeder
 
         // 3. Seed cms_welcome_messages
         CmsWelcomeMessage::updateOrCreate(
-            ['title' => 'Membentuk Generasi Rabbanî yang Unggul & Berkarakter'],
+
             [
                 'title' => 'Membentuk Generasi Rabbanî yang Unggul & Berkarakter',
                 'greeting' => 'Assalamu\'alaikum Warahmatullahi Wabarakatuh,',
                 'paragraphs' => [
-                    'Segala puji bagi Allah SWT, Shalawat dan Salam senantiasa tercurah kepada Baginda Nabi Muhammad SAW. Selamat datang di portal resmi SIT Mutiara Qur\'an Nagari Cupak.',
-                    'Sebagai lembaga pendidikan Islam terpadu, kami berkomitmen untuk melahirkan generasi Qur\'an yang seimbang secara spiritual, intelektual, dan moral. Kami meyakini bahwa setiap anak memiliki potensi terbaiknya, dan tugas kamilah di sekolah untuk menuntun serta mengasah potensi tersebut dengan berlandaskan nilai-nilai Al-Qur\'an dan Sunnah.',
-                    'Dengan dukungan asatidzah yang berkompeten, fasilitas yang kondusif, serta lingkungan yang islami, kami siap berkolaborasi erat dengan para orang tua untuk mendampingi tumbuh kembang putra-putri tercinta menjadi calon pemimpin umat masa depan yang berakhlak mulia.'
+                    'Selamat datang di portal resmi SIT Mutiara Qur\'an Nagari Cupak.',
+                    'Sebagai lembaga pendidikan Islam terpadu, kami berkomitmen untuk melahirkan generasi Qur\'an yang seimbang secara spiritual,dan berakhlak mulia.',
+                    'Dengan dukungan guru yang berkompeten, fasilitas yang memadai, serta lingkungan yang islami, kami siap berkolaborasi erat dengan para orang tua untuk mendampingi tumbuh kembang putra-putri tercinta menjadi calon pemimpin umat masa depan yang berakhlak mulia.'
                 ],
-                'kepsek_name' => 'Ustadz Ahmad Fauzi, S.Pd.I, M.Pd',
-                'kepsek_title' => 'Pimpinan & Kepala Sekolah SIT Mutiara Qur\'an',
+                'kepsek_name' => 'Ustadz Sandrio Ivanus, S.Hut M.Si',
+                'kepsek_title' => 'Ketua Yayasan Wakaf Mutiara Qur\'an',
                 'kepsek_photo' => 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600',
                 'is_active' => true
             ]
@@ -152,19 +150,21 @@ class CmsSeeder extends Seeder
         CmsVisi::updateOrCreate(
             ['id' => 1],
             [
-                'text' => 'Menjadi lembaga pendidikan Islam terpadu yang unggul dalam membentuk generasi Qur\'ani, berakhlak mulia, cerdas, dan berdaya saing global.',
+                'text' => 'Terwujudnya Insan yang Cerdas, Mandiri dan Berakhlak Qurani',
                 'is_active' => true
             ]
         );
 
         // 5. Seed cms_misi_items
         $misiItems = [
-            'Menyelenggarakan pendidikan yang mengintegrasikan kurikulum nasional dan keislaman.',
-            'Menumbuhkan kecintaan terhadap Al-Quran melalui program tahfidz.',
-            'Membina akhlak mulia dan karakter islami pada seluruh peserta didik.',
-            'Mengembangkan potensi akademik, minat, dan bakat siswa secara optimal.',
-            'Menciptakan lingkungan belajar yang aman, nyaman, dan kondusif.',
-            'Membangun kerjasama yang baik antara sekolah, orang tua, dan masyarakat.',
+            'Menyelenggarakan pendidikan dan pengajaran yang menumbuhkan rasa cinta kepada Allah dan Rasul.',
+            'Pembelajaran yang berdasarkan nilai-nilai Islam.',
+            'Menciptakan peserta didik yang berkarakter dan berakhlak islam.',
+            'Menyelenggarakan pendidikan  dan pengajaran sesuai dengan fitrah peserta didik.',
+            'Menanamkan kecintaan terhadap ilmu pengetahuan.',
+            'Menyelenggarakan pendidikan terbaik berbasis teknologi',
+            'Mengembangkan kegiatan untuk melatih kedisiplinan peserta didik.',
+            'Mengembangkan kurikulum sekolah berdasarkan kemandirian.'
         ];
 
         CmsMisiItem::truncate();
@@ -176,30 +176,13 @@ class CmsSeeder extends Seeder
             ]);
         }
 
-        // 6. Seed cms_marquee_items
-        $marqueeItems = [
-            '📢 Penerimaan Peserta Didik Baru (PPDB) SIT Mutiara Qur\'an TA ' . date('Y') . '/' . (date('Y') + 1) . ' Resmi Dibuka! Gelombang 1 Dapatkan Diskon Dana Pembangunan.',
-            '🏆 Alhamdulillah, Siswa SMP IT Mutiara Qur\'an Meraih Medali Emas & Perak pada Olimpiade Sains Nasional Tingkat Kabupaten Solok!',
-            '🕌 Wisuda Tahfidz Qur\'an Angkatan ke-8 Sukses Diselenggarakan, Melahirkan 45 Hafizh Cilik yang Siap Berbakti.'
-        ];
-
-        CmsMarqueeItem::truncate();
-        foreach ($marqueeItems as $index => $item) {
-            CmsMarqueeItem::create([
-                'text' => $item,
-                'is_active' => true,
-                'order' => $index,
-            ]);
-        }
-
         // 7. Seed cms_statistics
         $statistics = [
-            ['icon' => 'users', 'number' => '500', 'suffix' => '+', 'label' => 'Siswa Aktif', 'is_dynamic' => false, 'dynamic_source' => 'students_count', 'order' => 0],
-            ['icon' => 'graduation-cap', 'number' => '35', 'suffix' => '+', 'label' => 'Tenaga Pendidik', 'is_dynamic' => false, 'dynamic_source' => 'teachers_count', 'order' => 1],
-            ['icon' => 'book-open', 'number' => '18', 'suffix' => '', 'label' => 'Rombel Kelas', 'is_dynamic' => false, 'dynamic_source' => 'classes_count', 'order' => 2],
-            ['icon' => 'building', 'number' => '15', 'suffix' => ' Tahun', 'label' => 'Tahun Berdiri', 'is_dynamic' => false, 'dynamic_source' => null, 'order' => 3],
+            ['icon' => 'users', 'number' => '441', 'suffix' => '+', 'label' => 'Siswa Aktif', 'is_dynamic' => false, 'dynamic_source' => 'students_count', 'order' => 0],
+            ['icon' => 'graduation-cap', 'number' => '59', 'suffix' => '+', 'label' => 'Tenaga Pendidik', 'is_dynamic' => false, 'dynamic_source' => 'teachers_count', 'order' => 1],
+            ['icon' => 'book-open', 'number' => '17', 'suffix' => '', 'label' => 'Rombel Kelas', 'is_dynamic' => false, 'dynamic_source' => 'classes_count', 'order' => 2],
+            ['icon' => 'building', 'number' => '16', 'suffix' => ' Tahun', 'label' => 'Tahun Berdiri', 'is_dynamic' => false, 'dynamic_source' => null, 'order' => 3],
         ];
-
         CmsStatistic::truncate();
         foreach ($statistics as $stat) {
             CmsStatistic::create($stat);
@@ -209,26 +192,26 @@ class CmsSeeder extends Seeder
         $programs = [
             [
                 'icon' => 'book-open',
-                'title' => 'Tahfidz Qur\'an Mutqin',
-                'description' => 'Program menghafal Al-Qur\'an terstruktur dengan metode talaqqi dan murojaah intensif untuk menjaga kualitas hafalan siswa (target mutqin).',
-                'detail' => 'Target: TK Juz 30, SD 5 Juz, SMP 10 Juz',
+                'title' => 'Pembinaan Islam',
+                'description' => 'Program Pembinaan Keagamaan (Islam) bagi seluruh peserta didik yang terintegrasi dalam kurikulum sekolah.',
+                'detail' => 'Hafalan, Shalat, Sikap.',
                 'category' => 'keislaman',
                 'order' => 0
             ],
             [
                 'icon' => 'heart',
-                'title' => 'Pembiasaan Akhlakul Karimah',
-                'description' => 'Internalisasi adab islami harian melalui Sholat Dhuha, Mabit (Malam Bina Iman dan Taqwa), Dzikir Pagi-Petang, serta pengawasan ibadah mandiri.',
-                'detail' => 'Karakter islami terintegrasi dalam keseharian',
-                'category' => 'keislaman',
+                'title' => 'Life Skill',
+                'description' => 'Penguasaan life skill sangat penting untuk kemandirian dan kesuksesan, baik dalam kehidupan bermasyarakat maupun di dunia profesional. ',
+                'detail' => 'Penguasaan life',
+                'category' => 'karakter',
                 'order' => 1
             ],
             [
                 'icon' => 'languages',
-                'title' => 'Bilingual Environment',
-                'description' => 'Peningkatan kapasitas bahasa asing (Arab & Inggris) yang digunakan dalam komunikasi harian ringan, doa, dan materi ajar tertentu.',
-                'detail' => 'Daily Arabic & English Conversation',
-                'category' => 'akademik',
+                'title' => 'MBQIWR',
+                'description' => 'Metodologi Belajar Al-Quran Ilman Wa Ruuhan',
+                'detail' => 'Mempelajar Al-Quran',
+                'category' => 'keislaman',
                 'order' => 2
             ],
             [
@@ -240,20 +223,52 @@ class CmsSeeder extends Seeder
                 'order' => 3
             ],
             [
-                'icon' => 'users',
-                'title' => 'Mentoring & Halaqah',
-                'description' => 'Kelompok bimbingan rohani khusus (liqo/mentoring) dengan rasio asatidzah kecil untuk memantau perkembangan emosional dan spiritual siswa.',
+                'icon' => 'target',
+                'title' => 'Estrakulikuler',
+                'description' => 'Bergabai macam eskul yang dapat diikuti',
                 'detail' => 'Konseling terpadu yang penuh perhatian',
                 'category' => 'karakter',
                 'order' => 4
             ],
             [
                 'icon' => 'compass',
-                'title' => 'Leadership & Outbound',
+                'title' => 'Pramuka',
                 'description' => 'Pelatihan kepemimpinan dasar, pramuka IT, kemah ukhuwah, dan kegiatan outbound untuk melatih kemandirian, keberanian, dan kerjasama tim.',
                 'detail' => 'Mencetak calon pemimpin umat masa depan',
                 'category' => 'karakter',
                 'order' => 5
+            ],
+             [
+                'icon' => 'User',
+                'title' => 'Kunjungan Edukatif',
+                'description' => 'kegiatan belajar di luar kelas (field trip) yang menggabungkan rekreasi dengan proses pendidikan.',
+                'detail' => 'Memperluas wawasan, melatih kemandirian, dan memberikan pengalaman langsung kepada siswa',
+                'category' => 'akademik',
+                'order' => 6
+            ],
+            [
+                'icon' => 'coins',
+                'title' => 'Market Day',
+                'description' => 'kegiatan belajar berbisnis sejak dini.',
+                'detail' => 'Memperluas wawasan, melatih jiwa wirausaha',
+                'category' => 'karakter',
+                'order' => 7
+            ],
+            [
+                'icon' => 'languages',
+                'title' => 'Four Linguar',
+                'description' => 'Mempelajari 4 bahasa',
+                'detail' => 'Menambah Wawasan dan pengetahuan ',
+                'category' => 'akademik',
+                'order' => 8
+            ],
+            [
+                'icon' => 'Home',
+                'title' => 'Sekolah Orang Tua',
+                'description' => 'wadah kolaborasi antara sekolah dan wali murid untuk menyelaraskan pola asuh di rumah dengan pendidikan di sekolah',
+                'detail' => 'mengoptimalkan tumbuh kembang, karakter positif, dan prestasi anak',
+                'category' => 'karakter',
+                'order' => 9
             ]
         ];
 
@@ -264,12 +279,12 @@ class CmsSeeder extends Seeder
 
         // 9. Seed cms_tujuan_pendidikan
         $tujuanPendidikan = [
-            ['icon' => 'book-marked', 'bg_color' => 'amber', 'title' => 'Kurikulum Merdeka + JSIT', 'description' => 'Mengintegrasikan kurikulum nasional Kurikulum Merdeka dengan kurikulum kekhasan JSIT.', 'order' => 0],
-            ['icon' => 'monitor', 'bg_color' => 'emerald', 'title' => 'Laboratorium Komputer', 'description' => 'Fasilitas komputer modern penunjang praktikum TIK dan pemrograman dasar sejak dini.', 'order' => 1],
-            ['icon' => 'users-2', 'bg_color' => 'blue', 'title' => 'Tenaga Pendidik Berdedikasi', 'description' => 'Asatidzah lulusan perguruan tinggi terkemuka, bersertifikat pendidik, dan hafizh.', 'order' => 2],
-            ['icon' => 'home', 'bg_color' => 'violet', 'title' => 'Fasilitas Kelas Kondusif', 'description' => 'Ruang kelas ber-AC, proyektor LCD, serta lingkungan asri yang jauh dari kebisingan.', 'order' => 3],
-            ['icon' => 'shield-check', 'bg_color' => 'rose', 'title' => 'Lingkungan Aman & Ramah', 'description' => 'Keamanan terpadu 24 jam dengan sistem sekolah bebas bullying dan hangat.', 'order' => 4],
-            ['icon' => 'activity', 'bg_color' => 'cyan', 'title' => 'Ekstrakurikuler Variatif', 'description' => 'Panahan, berkuda, karate, robotik, seni kaligrafi, tilawah, sepak bola, dan pramuka.', 'order' => 5],
+            ['icon' => 'book-marked', 'bg_color' => 'amber', 'title' => 'Membentuk Peserta Didik yang Mencintai Ilmu', 'description' => 'Membentuk Peserta Didik yang Mencintai Ilmu', 'order' => 0],
+            ['icon' => 'monitor', 'bg_color' => 'emerald', 'title' => 'Menanamkan Gemar Membaca Buku', 'description' => 'Menanamkan Gemar Membaca Buku', 'order' => 1],
+            ['icon' => 'users-2', 'bg_color' => 'blue', 'title' => 'Menghasilkan Perserta didik yang Melek dengan Teknologi', 'description' => 'Menghasilkan Perserta didik yang Melek dengan Teknologi', 'order' => 2],
+            ['icon' => 'home', 'bg_color' => 'violet', 'title' => 'Membentuk Peserta Didik yang Mandiri', 'description' => 'Membentuk Peserta Didik yang Mandiri', 'order' => 3],
+            ['icon' => 'shield-check', 'bg_color' => 'rose', 'title' => 'Menghasilkan Peserta Didik yang Mencintai Allah dan Rasul', 'description' => 'Menghasilkan Peserta Didik yang Mencintai Allah dan Rasul', 'order' => 4],
+            ['icon' => 'activity', 'bg_color' => 'cyan', 'title' => 'Menghasilkan Peserta Didik yang cinta Tanah Air', 'description' => 'Menghasilkan Peserta Didik yang cinta Tanah Air', 'order' => 5],
         ];
 
         CmsTujuanPendidikan::truncate();
@@ -281,25 +296,40 @@ class CmsSeeder extends Seeder
         $testimonials = [
             [
                 'quote' => 'Alhamdulillah, semenjak bersekolah di SD IT Mutiara Qur\'an, anak saya menjadi sangat rajin sholat tepat waktu bahkan sering berinisiatif Sholat Dhuha sendiri. Hafalannya juga berkembang pesat. Guru-gurunya sangat sabar dan komunikatif.',
-                'name' => 'dr. H. Hendra Syahputra, Sp.A',
+                'name' => 'Ibu Gadiza Fauzi',
                 'role' => 'Wali Murid Kelas 4 SD IT / Dokter Anak',
                 'avatar' => 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=200',
                 'order' => 0
             ],
             [
                 'quote' => 'Perpaduan materi akademis umum dan pendidikan akhlak di SMP IT Mutiara Qur\'an sangat berimbang. Anak saya tidak hanya mahir secara akademis, tapi juga memiliki pemahaman agama yang mendalam dan adab yang sopan dalam keluarga.',
-                'name' => 'Prof. Dr. Ir. Hj. Mulyani, M.T',
+                'name' => 'Bapak Ramadhan Al-Fitra',
                 'role' => 'Wali Murid Kelas 8 SMP IT / Dosen Perguruan Tinggi',
                 'avatar' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200',
                 'order' => 1
             ],
             [
-                'quote' => 'Metode pembelajaran di TK IT Mutiara Qur\'an sangat menyenangkan. Anak kami pulang dengan wajah ceria setiap hari, dan luar biasa di usia 5 tahun sudah lancar melafalkan doa harian serta hafal surah-surah pendek Juz 30. Terima kasih asatidzah!',
-                'name' => 'Ronaldi, S.E',
+                'quote' => 'Metode pembelajaran di TK IT Mutiara Qur\'an sangat menyenangkan. Anak kami pulang dengan wajah ceria setiap hari, dan luar biasa di usia 5 tahun sudah lancar melafalkan doa harian serta hafal surah-surah pendek Juz 30',
+                'name' => 'Bapak M.Ilham Fadli',
                 'role' => 'Wali Murid TK IT / Wiraswasta',
                 'avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
                 'order' => 2
+            ],
+            [
+                'quote' => 'Materi yang disampaikan sekolah dipahami dengan mudah oleh anak-anak',
+                'name' => 'Ibu Zulfa Sahida',
+                'role' => 'Wali Murid SD IT / Guru Sekolah ',
+                'avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
+                'order' => 3
+            ],
+            [
+                'quote' => 'Anak saya tidak hanya pandai di kelas, tapi juga menjadi pribadi yang sopan, mandiri, dan gemar membantu sesama. Sekolah benar-benar membentuk karakternya menjadi lebih baik.',
+                'name' => 'Bapak Rezky Andikhe Wahyudi',
+                'role' => 'Wali Murid Kelas 9 SMP IT',
+                'avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
+                'order' => 4
             ]
+
         ];
 
         CmsTestimonial::truncate();
@@ -310,17 +340,17 @@ class CmsSeeder extends Seeder
         // 11. Seed cms_faqs
         $faqs = [
             // Home Page FAQs
-            ['question' => 'Kapan pendaftaran PPDB SIT Mutiara Qur\'an dibuka?', 'answer' => 'Penerimaan Peserta Didik Baru (PPDB) SIT Mutiara Qur\'an dibuka mulai tanggal 15 Oktober hingga kuota terpenuhi untuk setiap gelombang. Kami menyarankan untuk melakukan pendaftaran lebih awal dikarenakan keterbatasan kuota kelas (rombel) demi menjaga kenyamanan belajar mengajar.', 'page' => 'home', 'order' => 0],
-            ['question' => 'Bagaimana sistem kurikulum yang diterapkan di sekolah?', 'answer' => 'SIT Mutiara Qur\'an mengintegrasikan Kurikulum Nasional (Kurikulum Merdeka) dengan Kurikulum JSIT (Jaringan Sekolah Islam Terpadu) yang menitikberatkan pada pembiasaan ibadah islami, pembelajaran Al-Qur\'an metode khusus, serta penguatan adab dan karakter mulia sehari-hari.', 'page' => 'home', 'order' => 1],
-            ['question' => 'Apakah ada fasilitas antar-jemput dan katering untuk siswa?', 'answer' => 'Ya, kami menyediakan layanan antar-jemput berjadwal dengan armada yang aman bagi siswa di area sekitar Kabupaten Solok, serta katering makan siang sehat bersertifikasi halal khusus untuk siswa jenjang SD dan SMP yang mengikuti program full-day school.', 'page' => 'home', 'order' => 2],
-            ['question' => 'Berapa target hafalan Al-Qur\'an untuk masing-masing jenjang?', 'answer' => 'Target hafalan mutqin kami adalah: Jenjang TK (Juz 30), Jenjang SD IT (Minimal 5 Juz), dan Jenjang SMP IT (Minimal 10 Juz) selama masa studi penuh, didukung dengan program karantina tahfidz tahunan khusus.', 'page' => 'home', 'order' => 3],
+            ['question' => 'Kapan pendaftaran PPDB SIT Mutiara Qur\'an dibuka?', 'answer' => 'Penerimaan Peserta Didik Baru (PPDB) SIT Mutiara Qur\'an dibuka mulai tanggal 15 Maret hingga kuota terpenuhi untuk setiap gelombang. Kami menyarankan untuk melakukan pendaftaran lebih awal dikarenakan keterbatasan kuota kelas (rombel) demi menjaga kenyamanan belajar mengajar.', 'page' => 'home', 'order' => 0],
+            ['question' => 'Bagaimana sistem kurikulum yang diterapkan di sekolah?', 'answer' => 'SIT Mutiara Qur\'an mengintegrasikan Kurikulum Nasional (Kurikulum Merdeka)  yang menitikberatkan pada pembiasaan ibadah islami, pembelajaran Al-Qur\'an metode khusus, serta penguatan adab dan karakter mulia sehari-hari.', 'page' => 'home', 'order' => 1],
+            ['question' => 'Apakah ada fasilitas antar-jemput dan katering untuk siswa?', 'answer' => 'Ya, kami menyediakan layanan antar-jemput berjadwal dengan armada yang aman bagi siswa di area sekitar Kabupaten Solok.', 'page' => 'home', 'order' => 2],
+            ['question' => 'Berapa target hafalan Al-Qur\'an untuk masing-masing jenjang?', 'answer' => 'Target hafalan mutqin kami adalah: Jenjang TK (Ayat Pendek), Jenjang SD IT (Juz 30), dan Jenjang SMP IT (Minimal 3 Juz) selama masa studi penuh, didukung dengan program karantina tahfidz tahunan khusus.', 'page' => 'home', 'order' => 3],
             // PPDB Page FAQs
             ['question' => 'Kapan pendaftaran PPDB dibuka?', 'answer' => 'Pendaftaran PPDB dibuka mulai bulan Maret hingga Juni setiap tahunnya. Untuk informasi terbaru, silakan cek halaman Jadwal & Timeline.', 'page' => 'ppdb', 'order' => 0],
-            ['question' => 'Apakah ada tes masuk untuk calon siswa?', 'answer' => 'Ya, calon siswa akan mengikuti tes seleksi yang meliputi tes baca tulis, wawancara, dan tes kemampuan Al-Quran sesuai jenjang.', 'page' => 'ppdb', 'order' => 1],
-            ['question' => 'Berapa biaya pendaftaran?', 'answer' => 'Biaya formulir pendaftaran sebesar Rp 150.000. Informasi biaya pendidikan lengkap akan disampaikan saat daftar ulang.', 'page' => 'ppdb', 'order' => 2],
+            ['question' => 'Apakah ada tes masuk untuk calon siswa?', 'answer' => ' Tidak, untuk proses penerimaan calon siswa hanya dengan wawancara di sekolah', 'page' => 'ppdb', 'order' => 1],
+            ['question' => 'Berapa biaya pendaftaran?', 'answer' => 'Biaya pendaftaran Gratis. Informasi biaya pendidikan lengkap akan disampaikan saat daftar ulang.', 'page' => 'ppdb', 'order' => 2],
             ['question' => 'Apakah tersedia program beasiswa?', 'answer' => 'Ya, kami menyediakan program beasiswa untuk siswa berprestasi dan siswa dari keluarga kurang mampu. Hubungi kami untuk informasi lebih lanjut.', 'page' => 'ppdb', 'order' => 3],
-            ['question' => 'Bagaimana sistem pembelajaran di SIT Mutiara Quran?', 'answer' => 'Kami menggunakan Kurikulum Merdeka yang diintegrasikan dengan kurikulum keislaman. Pembelajaran berlangsung dari pukul 07.00 hingga 15.30 WIB (fullday school).', 'page' => 'ppdb', 'order' => 4],
-            ['question' => 'Apakah ada program tahfidz?', 'answer' => 'Ya, program tahfidz merupakan program unggulan kami. Target hafalan: TK (Juz 30), SD (5 Juz), SMP (10 Juz).', 'page' => 'ppdb', 'order' => 5],
+            ['question' => 'Bagaimana sistem pembelajaran di SIT Mutiara Quran?', 'answer' => 'Kami menggunakan Kurikulum Merdeka yang diintegrasikan dengan kurikulum keislaman. Pembelajaran berlangsung dari pukul 07.00 hingga 15.00 WIB (fullday school).', 'page' => 'ppdb', 'order' => 4],
+            ['question' => 'Apakah ada program tahfidz?', 'answer' => 'Ya, program tahfidz merupakan program unggulan kami. Target hafalan: TK (Ayat pendek), SD (Juz 30), SMP (3 Juz).', 'page' => 'ppdb', 'order' => 5],
             ['question' => 'Bagaimana cara mendaftar?', 'answer' => 'Anda bisa mendaftar secara online melalui website atau datang langsung ke sekolah. Lihat bagian Alur Pendaftaran di atas untuk detail langkah-langkahnya.', 'page' => 'ppdb', 'order' => 6],
         ];
 
@@ -331,12 +361,12 @@ class CmsSeeder extends Seeder
 
         // 12. Seed cms_sejarah_items
         $sejarah = [
-            ['year' => '2010', 'title' => 'Pendirian Sekolah', 'description' => 'SIT Mutiara Quran didirikan oleh yayasan dengan 2 kelas pertama dan 30 siswa. Visi awal adalah menciptakan pendidikan Islam yang memadukan ilmu dunia dan akhirat.', 'order' => 0],
-            ['year' => '2012', 'title' => 'Pembukaan PAUD/TK', 'description' => 'Membuka jenjang PAUD/TK Islam Terpadu untuk memulai pendidikan Qur\'ani sejak usia dini.', 'order' => 1],
-            ['year' => '2014', 'title' => 'Akreditasi A', 'description' => 'Meraih akreditasi A dari BAN-S/M untuk jenjang SD Islam Terpadu, membuktikan kualitas pendidikan yang unggul.', 'order' => 2],
-            ['year' => '2016', 'title' => 'Wisuda Tahfidz Pertama', 'description' => 'Angkatan pertama program tahfidz berhasil menyelesaikan target hafalan, menandai keberhasilan program unggulan.', 'order' => 3],
-            ['year' => '2018', 'title' => 'Pembukaan SMP IT', 'description' => 'Membuka jenjang SMP Islam Terpadu untuk melanjutkan misi pendidikan ke tingkat yang lebih tinggi.', 'order' => 4],
-            ['year' => '2023', 'title' => 'Kampus Baru', 'description' => 'Pindah ke kampus baru dengan fasilitas modern termasuk laboratorium, perpustakaan digital, dan area bermain yang luas.', 'order' => 5],
+            ['year' => '2010', 'title' => 'Pendirian Sekolah', 'description' => 'SIT Mutiara Quran didirikan oleh yayasan  wakaf mutiara quran pada tahun 2010 dengan unit SD . Visi awal adalah menciptakan pendidikan Islam yang memadukan ilmu dunia dan akhirat.', 'order' => 0],
+            ['year' => '2014', 'title' => 'Akreditasi A', 'description' => 'Meraih akreditasi A dari BAN-S/M untuk jenjang SD Islam Terpadu, membuktikan kualitas pendidikan yang unggul.', 'order' => 1],
+            ['year' => '2016', 'title' => 'Wisuda Tahfidz Pertama', 'description' => 'Angkatan pertama program tahfidz berhasil menyelesaikan target hafalan, menandai keberhasilan program unggulan.', 'order' => 2],
+            ['year' => '2021', 'title' => 'Pembukaan SMP IT', 'description' => 'Membuka jenjang SMP Islam Terpadu untuk melanjutkan misi pendidikan ke tingkat yang lebih tinggi.', 'order' => 3],
+            ['year' => '2024', 'title' => 'Pembukaan PAUD/TK', 'description' => 'Membuka jenjang PAUD/TK Islam Terpadu untuk memulai pendidikan Qur\'ani sejak usia dini.', 'order' => 4],
+            ['year' => '2026', 'title' => 'Pengembangan web sekolah', 'description' => 'Pengembangan web sekolah untuk memudahkan akses informasi bagi orang tua dan siswa.', 'order' => 5],
         ];
 
         CmsSejarahItem::truncate();
@@ -350,7 +380,7 @@ class CmsSeeder extends Seeder
             [
                 'description_title' => 'Pondasi Kuat untuk Generasi Qur\'ani',
                 'description_body' => "TK IT Mutiara Qur'an hadir untuk memfasilitasi masa keemasan anak (golden age) dengan penanaman aqidah, akhlak, dan kecintaan pada Al-Qur'an sejak dini. Kami berkomitmen untuk menciptakan lingkungan pendidikan yang mendukung tumbuh kembang anak secara optimal.\n\nMelalui pendekatan Islami yang menyenangkan, kami menerapkan metode belajar, bermain, dan berkarya. Hal ini bertujuan agar anak-anak tidak hanya cerdas secara kognitif, tetapi juga memiliki karakter islami yang kuat, mandiri, dan berakhlak mulia.\n\nDengan fasilitas yang lengkap, aman, dan nyaman, serta tenaga pendidik yang kompeten dan penuh kasih sayang, TK IT Mutiara Qur'an siap menjadi partner terbaik orang tua dalam mendidik generasi penerus yang cerdas dan berkarakter Qur'ani.",
-                'description_logo' => 'images/logomq.jpg',
+                'description_logo' => 'images/tk.jpeg',
                 'target_age' => 'Usia 4-6 tahun',
                 'quota' => '60 siswa'
             ]
@@ -361,7 +391,7 @@ class CmsSeeder extends Seeder
             [
                 'description_title' => 'Pendidikan Dasar Berbasis Karakter Islami',
                 'description_body' => "SD Islam Terpadu SIT Mutiara Qur'an memadukan kurikulum nasional dengan nilai-nilai keislaman secara komprehensif, menciptakan lingkungan yang kondusif bagi perkembangan intelektual, spiritual, dan emosional siswa.\n\nKami fokus pada pembentukan karakter mandiri, kejujuran, serta kecintaan terhadap Al-Qur'an dan ilmu pengetahuan, agar siswa siap menghadapi tantangan masa depan dengan akhlak yang tangguh.\n\nProgram unggulan kami meliputi tahfidz Al-Qur'an terstruktur dengan target 5 juz mutqin, pembiasaan ibadah harian seperti shalat dhuha dan shalat berjamaah, serta pembelajaran yang interaktif dan berpusat pada siswa.",
-                'description_logo' => 'images/logomq.jpg',
+                'description_logo' => 'images/sd.jpeg',
                 'target_age' => 'Usia 6-7 tahun',
                 'quota' => '90 siswa'
             ]
@@ -372,7 +402,7 @@ class CmsSeeder extends Seeder
             [
                 'description_title' => 'Pendidikan Menengah Berkualitas & Berkarakter',
                 'description_body' => "SMP Islam Terpadu SIT Mutiara Qur'an hadir sebagai solusi pendidikan menengah yang memadukan keunggulan akademik, teknologi, dan pendalaman ilmu agama (Diniyah) untuk mencetak lulusan yang siap bersaing di era global.\n\nDengan program bina pribadi islami (BPI), bahasa asing, dan sains, kami membimbing remaja untuk menemukan potensi terbaik mereka, melatih kepemimpinan, dan memperkuat identitas sebagai muslim sejati.\n\nSiswa juga difasilitasi dengan berbagai kegiatan kokurikuler dan ekstrakurikuler yang sejalan dengan minat dan bakat mereka, mendorong tercapainya prestasi maksimal diimbangi pemahaman akhlak dan akidah.",
-                'description_logo' => 'images/logomq.jpg',
+                'description_logo' => 'images/smp.jpeg',
                 'target_age' => 'Lulusan SD/MI',
                 'quota' => '60 siswa'
             ]
@@ -380,20 +410,55 @@ class CmsSeeder extends Seeder
 
         // 14. Seed cms_unit_teachers (Pivot)
         CmsUnitTeacher::truncate();
-        $allTeachers = Teacher::all();
-        if ($allTeachers->count() > 0) {
-            foreach ([$unitTk, $unitSd, $unitSmp] as $u) {
-                // Link up to 5 teachers to each unit public page
-                $teachersForUnit = $allTeachers->take(5);
-                foreach ($teachersForUnit as $index => $t) {
-                    CmsUnitTeacher::create([
-                        'unit_id' => $u->id,
-                        'teacher_id' => $t->id,
-                        'is_active' => true,
-                        'order' => $index
-                    ]);
-                }
+
+        // --- Seed TK Teachers ---
+        $tkTeachers = Teacher::where('unit_id', $unitTk->id)->get();
+        $tkTeachersSorted = $tkTeachers->sortBy(function ($t) {
+            return $t->position && $t->position->name === 'Kepala Sekolah' ? 0 : 1;
+        });
+        foreach ($tkTeachersSorted->values() as $index => $t) {
+            CmsUnitTeacher::create([
+                'unit_id' => $unitTk->id,
+                'teacher_id' => $t->id,
+                'is_active' => true,
+                'order' => $index
+            ]);
+        }
+
+        // --- Seed SD Teachers ---
+        $sdTeachers = Teacher::where('unit_id', $unitSd->id)->get();
+        $sdTeachersSorted = $sdTeachers->sortBy(function ($t) {
+            if ($t->position) {
+                if ($t->position->name === 'Kepala Sekolah') return 0;
+                if ($t->position->name === 'Wakil Kepala Sekolah') return 1;
             }
+            return 2;
+        });
+        foreach ($sdTeachersSorted->values()->take(6) as $index => $t) {
+            CmsUnitTeacher::create([
+                'unit_id' => $unitSd->id,
+                'teacher_id' => $t->id,
+                'is_active' => true,
+                'order' => $index
+            ]);
+        }
+
+        // --- Seed SMP Teachers ---
+        $smpTeachers = Teacher::where('unit_id', $unitSmp->id)->get();
+        $smpTeachersSorted = $smpTeachers->sortBy(function ($t) {
+            if ($t->position) {
+                if ($t->position->name === 'Kepala Sekolah') return 0;
+                if ($t->position->name === 'Wakil Kepala Sekolah') return 1;
+            }
+            return 2;
+        });
+        foreach ($smpTeachersSorted->values()->take(6) as $index => $t) {
+            CmsUnitTeacher::create([
+                'unit_id' => $unitSmp->id,
+                'teacher_id' => $t->id,
+                'is_active' => true,
+                'order' => $index
+            ]);
         }
 
         // 15. Seed cms_unit_ekskul
@@ -411,12 +476,66 @@ class CmsSeeder extends Seeder
         }
 
         $ekskulSd = [
-            ['icon' => 'tent', 'title' => 'Pramuka SIT', 'image' => 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80', 'description' => 'Melatih kemandirian, kedisiplinan, dan jiwa kepemimpinan dasar.'],
-            ['icon' => 'book-open', 'title' => 'Tahfidz Club', 'image' => 'https://images.unsplash.com/photo-1585995604802-17c3fe6b53aa?auto=format&fit=crop&w=600&q=80', 'description' => 'Program pengayaan hafalan Al-Qur\'an secara intensif.'],
-            ['icon' => 'dribbble', 'title' => 'Futsal', 'image' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80', 'description' => 'Membangun kebugaran fisik dan sportivitas tim.'],
-            ['icon' => 'crosshair', 'title' => 'Panahan', 'image' => 'https://images.unsplash.com/photo-1567699532083-f34b686df3af?auto=format&fit=crop&w=600&q=80', 'description' => 'Melatih fokus, ketenangan, dan menjalankan sunnah Rasul.'],
-            ['icon' => 'flask-conical', 'title' => 'Olimpiade Sains', 'image' => 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80', 'description' => 'Bimbingan khusus bagi siswa berprestasi akademik.'],
-            ['icon' => 'palette', 'title' => 'Seni & Kaligrafi', 'image' => 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80', 'description' => 'Mengembangkan kreativitas melalui seni rupa dan kaligrafi Islam.'],
+            [
+                'icon' => 'music',
+                'title' => 'Marching Band',
+                'image' => 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Latihan Marching Band dilaksanakan setiap hari Senin pukul 14.45 - 16.30 WIB. Dibina oleh Zaharakal Ridwan, A.Md & Furqanul Fajri.'
+            ],
+            [
+                'icon' => 'palette',
+                'title' => 'Melukis',
+                'image' => 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Mengembangkan bakat seni rupa anak yang diadakan setiap hari Selasa pukul 14.45 - 16.30 WIB. Dibina oleh Nova Eftinia, S.Pd.'
+            ],
+            [
+                'icon' => 'shield',
+                'title' => 'Taekwondo',
+                'image' => 'https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Melatih bela diri, kekuatan fisik, dan disiplin diri setiap hari Selasa pukul 14.45 - 16.30 WIB. Dibina oleh Ridho Harry Putra, M.Pd.'
+            ],
+            [
+                'icon' => 'monitor',
+                'title' => 'Design Grafis',
+                'image' => 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Mempelajari kreativitas digital, pengeditan gambar, dan dasar desain setiap hari Selasa pukul 14.45 - 16.30 WIB. Dibina oleh Desri Wahyuni.'
+            ],
+            [
+                'icon' => 'dribbble',
+                'title' => 'Futsal (Grub A)',
+                'image' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Bimbingan olahraga futsal untuk Grup A yang diadakan setiap hari Selasa pukul 14.45 - 16.30 WIB. Dibina oleh Ihdal Husnayain, S.Pd.'
+            ],
+            [
+                'icon' => 'award',
+                'title' => 'Karate',
+                'image' => 'https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Pelatihan fisik, teknik beladiri Karate, dan ketahanan mental setiap hari Rabu pukul 14.45 - 16.30 WIB. Dibina oleh Andri, S.Pd.'
+            ],
+            [
+                'icon' => 'dribbble',
+                'title' => 'Futsal (Grub B)',
+                'image' => 'https://images.unsplash.com/photo-1529474944862-1acebdcbab31?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Bimbingan olahraga futsal untuk Grup B yang diadakan setiap hari Rabu pukul 14.45 - 16.30 WIB. Dibina oleh Tata Elwatra A, S.Or.'
+            ],
+            [
+                'icon' => 'mic',
+                'title' => 'Public Speaking',
+                'image' => 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Melatih rasa percaya diri, cara berbicara di depan umum, dan komunikasi efektif setiap hari Kamis pukul 14.45 - 16.30 WIB. Dibina oleh Lidya Sofyani, S.Pd.'
+            ],
+            [
+                'icon' => 'book-open',
+                'title' => 'Nagham Al-Quran',
+                'image' => 'https://images.unsplash.com/photo-1585995604802-17c3fe6b53aa?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Mempelajari seni membaca Al-Qur\'an dengan lantunan irama yang indah setiap hari Kamis pukul 14.45 - 16.30 WIB. Dibina oleh Sandy Febriwan, S.Pd.'
+            ],
+            [
+                'icon' => 'tent',
+                'title' => 'Pramuka',
+                'image' => 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80',
+                'description' => 'Kegiatan kepanduan wajib untuk melatih kedisiplinan dan kemandirian setiap hari Jumat. Dibina oleh Maidona Nursa Lestari, S.Pt & Ihdal Husnayain, S.Pd.'
+            ],
         ];
         foreach ($ekskulSd as $index => $e) {
             CmsUnitEkskul::create(array_merge($e, ['unit_id' => $unitSd->id, 'order' => $index, 'is_active' => true]));
@@ -653,6 +772,27 @@ class CmsSeeder extends Seeder
         CmsPpdbBrochure::truncate();
         foreach ($brochures as $b) {
             CmsPpdbBrochure::create(array_merge($b, ['is_active' => true]));
+            
+            // Auto copy brochure from public/images to storage/app/public
+            $srcPath = public_path('images/' . $b['file_path']);
+            if (file_exists($srcPath)) {
+                if (!file_exists(storage_path('app/public'))) {
+                    mkdir(storage_path('app/public'), 0755, true);
+                }
+                copy($srcPath, storage_path('app/public/' . $b['file_path']));
+            }
+        }
+
+        // Auto copy default logos to storage/app/public/images
+        $logosToCopy = ['logomq.jpg', 'tk.jpeg', 'sd.jpeg', 'smp.jpeg'];
+        foreach ($logosToCopy as $logo) {
+            $logoSrc = public_path('images/' . $logo);
+            if (file_exists($logoSrc)) {
+                if (!file_exists(storage_path('app/public/images'))) {
+                    mkdir(storage_path('app/public/images'), 0755, true);
+                }
+                copy($logoSrc, storage_path('app/public/images/' . $logo));
+            }
         }
 
         // 23. Seed cms_ppdb_steps

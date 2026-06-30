@@ -1,0 +1,47 @@
+/* public-berita.css */
+
+/* Custom Keyframe Animations */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-fade-in-left {
+    animation: fadeInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom transitions and interactive elements */
+.smooth-transition {
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scrollbar hiding utilities */
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Premium News Card Styling */
+.premium-card {
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px rgba(20, 61, 117, 0.08);
+    border-color: rgba(255, 193, 7, 0.4);
+}
