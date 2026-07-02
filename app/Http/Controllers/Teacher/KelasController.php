@@ -96,15 +96,28 @@ class KelasController extends Controller
             $uas = $scores['uas'] !== '' ? $scores['uas'] : null;
             $tugas = $scores['tugas'] !== '' ? $scores['tugas'] : null;
 
-            // Hitung rata-rata
+            // Hitung Nilai Akhir sesuai kebijakan SDIT MQ:
+            // Nilai Akhir/Rapor = (70% x Nilai Akhir Sumatif) + (30% x Nilai SAS)
+            // Nilai Akhir Sumatif = Rata-rata Tugas & UTS (STS)
+            // Nilai SAS = UAS (SAS)
             $finalScore = null;
-            if ($uts !== null || $uas !== null || $tugas !== null) {
-                $count = 0;
-                $sum = 0;
-                if ($uts !== null) { $sum += $uts; $count++; }
-                if ($uas !== null) { $sum += $uas; $count++; }
-                if ($tugas !== null) { $sum += $tugas; $count++; }
-                $finalScore = $count > 0 ? round($sum / $count, 2) : null;
+            
+            $sumativeScores = [];
+            if ($tugas !== null) $sumativeScores[] = $tugas;
+            if ($uts !== null) $sumativeScores[] = $uts;
+            
+            $nilaiAkhirSumatif = count($sumativeScores) > 0 ? (array_sum($sumativeScores) / count($sumativeScores)) : null;
+            
+            if ($uas !== null) {
+                if ($nilaiAkhirSumatif !== null) {
+                    $finalScore = round((0.7 * $nilaiAkhirSumatif) + (0.3 * $uas), 2);
+                } else {
+                    $finalScore = round($uas, 2);
+                }
+            } else {
+                if ($nilaiAkhirSumatif !== null) {
+                    $finalScore = round($nilaiAkhirSumatif, 2);
+                }
             }
 
             // Tentukan grade letter sederhana
