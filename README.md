@@ -222,6 +222,12 @@ Sistem menyediakan fitur administrasi keuangan sekolah secara digital.
 
 ---
 
+## Halaman Public
+
+![Halaman Public](public/images/home.png)
+
+---
+
 # Instalasi Project
 
 ## Clone Repository
