@@ -45,10 +45,10 @@ class PublicHomeController extends Controller
         }
         $statistics = CmsStatistic::hydrate($statisticsData);
         
-        // Optimasi: Ambil data secara global (tidak berulang di dalam loop) dan dicache
-        $studentCount = Cache::remember('home_student_count', $cacheTime, fn() => Student::where('status', 'active')->count());
-        $teacherCount = Cache::remember('home_teacher_count', $cacheTime, fn() => Teacher::where('status', 'active')->count());
-        $classCount = Cache::remember('home_class_count', $cacheTime, fn() => SchoolClass::count());
+        // Tetap menggunakan query N+1 fix (karena sangat menguntungkan performa), tapi TANPA cache
+        $studentCount = Student::where('status', 'active')->count();
+        $teacherCount = Teacher::where('status', 'active')->count();
+        $classCount = SchoolClass::count();
 
         foreach ($statistics as $stat) {
             if ($stat->is_dynamic) {
@@ -111,6 +111,7 @@ class PublicHomeController extends Controller
                 ->all();
         });
         $ekskuls = \App\Models\CmsUnitEkskul::hydrate($ekskulsData);
+
 
         return view('public.home.index', compact(
             'hero',
