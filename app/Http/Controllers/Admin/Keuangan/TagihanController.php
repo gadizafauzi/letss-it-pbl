@@ -168,7 +168,7 @@ class TagihanController extends Controller
         
         try {
             $response = Http::withoutVerifying()->timeout(15)->withHeaders([
-                'Authorization' => env('FONNTE_API_TOKEN')
+                'Authorization' => config('services.fonnte.token')
             ])->post('https://api.fonnte.com/send', [
                 'target' => $nomorWa,
                 'message' => $pesan,
@@ -215,7 +215,7 @@ class TagihanController extends Controller
                 foreach ($chunkInvoices as $invoice) {
                     $pesan = $this->formatPesanWa($invoice);
                     $requests[] = $pool->withHeaders([
-                        'Authorization' => env('FONNTE_API_TOKEN')
+                        'Authorization' => config('services.fonnte.token')
                     ])->timeout(15)->post('https://api.fonnte.com/send', [
                         'target' => $invoice->student->parent_phone,
                         'message' => $pesan,

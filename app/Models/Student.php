@@ -3,11 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\StudentClass;
-use App\Models\Unit;
-use App\Models\User;
-
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Student extends Model

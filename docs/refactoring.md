@@ -1,191 +1,234 @@
-# Dokumentasi Refactoring Sistem SIAKAD
+# Dokumentasi Refactoring Project LETSS IT PBL
 
-Dokumen ini menjelaskan perubahan struktur proyek yang dilakukan untuk meningkatkan modularitas, keterbacaan kode, kemudahan pemeliharaan, dan mempermudah pengembangan fitur di masa mendatang.
-
-Refactoring ini mengubah aplikasi yang sebelumnya kompleks dan memiliki banyak perulangan kode (_Fat Controller_) menjadi struktur yang jauh lebih rapi, terpusat, dan terukur (_Thin Controller_).
+Dokumen ini mencatat seluruh aktivitas refactoring yang telah dilakukan pada source code project, baik refactoring berskala besar maupun kecil, guna meningkatkan kualitas, skalabilitas, dan keamanan kode.
 
 ---
 
-## 1. Refactoring Dashboard (Siswa & Guru)
+## 1. Pemecahan Controller Utama (Berdasarkan Modul)
 
-### Masalah
-Logika dan tampilan bercampur dalam satu file. Dashboard siswa harus mengecek kondisi SD/SMP, dan dashboard guru mencampur tugas mengajar umum dengan tugas spesifik wali kelas.
+**Sebelum:**
+Controller pada panel Admin menumpuk di dalam direktori `app/Http/Controllers/Admin` tanpa pengelompokan. Satu controller sering kali menangani banyak urusan yang tidak terkait langsung.
 
-### Perubahan
-- Memisahkan _view_, _layout_, komponen _sidebar_, CSS, dan _controller_ siswa berdasarkan unit (SD & SMP).
-- Memisahkan dashboard guru berdasarkan peran (Guru Reguler & Wali Kelas).
-- Mempertahankan _route_ lama (seperti `/student/dashboard`) hanya sebagai _dispatcher_ yang mengarahkan otomatis sesuai unit/peran.
+**Masalah:**
+Direktori Controller menjadi sangat penuh (*bloated*) dan sulit untuk dinavigasi. Sulit mencari file spesifik saat terjadi *bug* pada modul tertentu, melanggar *Single Responsibility Principle* (SRP).
 
-### Dampak
-Antarmuka lebih spesifik, kode UI tidak saling tumpang tindih, dan pengembangan fitur baru per jenjang/peran bisa dilakukan secara independen.
+**Perubahan:**
+Struktur folder Controller dipecah berdasarkan domain modul, seperti:
+- `app/Http/Controllers/Admin/Akademik` (Siswa, Guru, Mapel, dll.)
+- `app/Http/Controllers/Admin/Keuangan` (Tagihan, Pembayaran, dll.)
+- `app/Http/Controllers/Admin/Cms` (Beranda, Profil, Unit, dll.)
+- `app/Http/Controllers/Admin/System` (Dashboard, User, Profil Admin)
 
-## 2. Pemecahan Controller Utama (Prinsip SRP)
+**Alasan:**
+Memudahkan pengelompokan logika bisnis berdasarkan *domain-driven design* yang lebih terstruktur.
 
-### Masalah
-Banyak _controller_ (seperti `GuruController` dan `SiswaController` lama) yang menangani berbagai domain tugas secara bersamaan (mulai dari CRUD profil, data perwalian, nilai, hingga manajemen kelas).
-
-### Perubahan
-Memecah _controller_ besar menjadi beberapa _controller_ spesifik:
-- `Teacher\ProfileController` (khusus update profil & foto guru)
-- `Teacher\WaliKelas\SiswaController` & `Teacher\WaliKelas\NilaiController` (khusus manajemen data perwalian)
-- `Teacher\KelasController` (khusus jadwal mengajar & input nilai harian)
-
-### Dampak
-Penerapan _Single Responsibility Principle (SRP)_ membuat _controller_ fokus hanya pada satu tugas utamanya sehingga lebih ringkas dan terarah.
-
-## 3. Penerapan Service Pattern & Form Request
-
-### Masalah
-Terjadi _Fat Controller_ (terutama di modul Admin untuk Guru, Siswa, dan Dashboard) karena alur request HTTP, proses validasi input, hingga logika kalkulasi data semuanya dikerjakan di satu tempat.
-
-### Perubahan
-- Service Layer: Memindahkan logika berat (_business logic_) ke `Admin\GuruService`, `Admin\SiswaService`, dan `Admin\DashboardService`.
-- Form Request: Memindahkan aturan validasi panjang ke class khusus di dalam `Http\Requests\Admin\` (seperti `StoreGuruRequest`, `UpdateSiswaRequest`, `ImportExcelRequest`).
-
-### Dampak
-Menghasilkan _Thin Controller_ (controller yang sangat tipis dan bersih). _Controller_ kini hanya bertugas menerima HTTP request, memanggil service, dan mengembalikan _view/response_.
-
-## 4. Pembuatan Shared Services
-
-### Masalah
-Proses _Import_ Excel, _Export_ Excel, dan unggah file gambar/dokumen sering ditulis berulang di berbagai fungsi, rawan menimbulkan inkonsistensi format.
-
-### Perubahan
-Dibuatkan kumpulan layanan terpusat di folder `Services/Shared/`:
-- `ExcelImportService.php`
-- `ExcelExportService.php`
-- `FileUploadService.php`
-
-### Dampak
-Mengurangi duplikasi kode (_DRY - Don't Repeat Yourself_), membuat format pembacaan/penulisan file menjadi standar di seluruh aplikasi, serta memudahkan jika ingin berpindah sistem _storage_ (misal ke AWS S3) karena hanya perlu diubah di satu file.
-
-## 5. Refactoring Halaman Publik & Integrasi CMS
-
-### Masalah
-File _view_ halaman depan sebelumnya kurang terstruktur, dan pengelolaan data unit pendidikan (seperti TK, SD, SMP) masih bercampur secara statis atau sulit dikelola.
-
-### Perubahan
-- Memisahkan struktur tampilan ke folder `resources/views/public/`.
-- Menggunakan _Controller_ khusus publik (seperti `PublicHomeController`, `PublicUnitController`, `PublicNewsController`) untuk memisahkan urusan pengunjung dengan admin/guru.
-- Halaman unit (TK, SD, SMP) kini mengambil data secara dinamis dari tabel-tabel CMS (seperti `CmsHeroSection`, `CmsUnitDetail`, `CmsUnitTeacher`, dll).
-- Memecah blok kode HTML panjang menjadi komponen kecil (_partial blade_).
-
-### Dampak
-Struktur folder publik sangat rapi. Halaman-halaman publik tidak lagi statis/kaku, melainkan menjadi dinamis dan bisa dikelola langsung oleh admin melalui fitur CMS.
+**Dampak:**
+Navigasi source code jauh lebih mudah. Pengembang baru dapat langsung menemukan *controller* berdasarkan fungsi bisnisnya.
 
 ---
 
-## Struktur Baru Hasil Refactoring
+## 2. Ekstraksi Validasi ke Form Request
 
-```text
-app/
-├── Http/
-│   ├── Controllers/
-│   │   ├── Admin/
-│   │   │   ├── DashboardController.php
-│   │   │   ├── GuruController.php
-│   │   │   └── SiswaController.php
-│   │   ├── PublicHomeController.php
-│   │   ├── PublicUnitController.php
-│   │   ├── Student/
-│   │   │   ├── SD/DashboardController.php
-│   │   │   └── SMP/DashboardController.php
-│   │   └── Teacher/
-│   │       ├── KelasController.php
-│   │       ├── ProfileController.php
-│   │       └── WaliKelas/
-│   │           ├── DashboardController.php
-│   │           ├── NilaiController.php
-│   │           └── SiswaController.php
-│   └── Requests/
-│       └── Admin/
-│           ├── ImportExcelRequest.php
-│           ├── StoreGuruRequest.php
-│           ├── StoreKelasRequest.php
-│           ├── StoreSiswaRequest.php
-│           ├── UpdateGuruRequest.php
-│           ├── UpdateKelasRequest.php
-│           └── UpdateSiswaRequest.php
-│
-└── Services/
-    ├── Admin/
-    │   ├── DashboardService.php
-    │   ├── GuruService.php
-    │   └── SiswaService.php
-    └── Shared/
-        ├── ExcelExportService.php
-        ├── ExcelImportService.php
-        └── FileUploadService.php
+**Sebelum:**
+Logika validasi input diletakkan langsung di dalam method Controller (seperti `store` dan `update`) menggunakan `$request->validate()`.
 
-public/
-└── css/
-    ├── student/
-    │   ├── sd-theme.css
-    │   └── smp-theme.css
-    └── teacher/
-        ├── regular-theme.css
-        └── wali-kelas-theme.css
+**Masalah:**
+Method Controller menjadi sangat panjang dan sulit dibaca. Terjadi duplikasi kode validasi antara proses penambahan (create) dan pembaruan (update) data.
 
-resources/
-└── views/
-    ├── components/
-    │   ├── student/
-    │   └── teacher/
-    ├── layouts/
-    │   ├── public.blade.php
-    │   ├── student/
-    │   └── teacher/
-    ├── public/
-    │   ├── berita/
-    │   ├── home/
-    │   ├── ppdb/
-    │   └── unit/
-    ├── student/
-    │   ├── sd/
-    │   └── smp/
-    └── teacher/
-        ├── dashboard/
-        └── wali-kelas/
-```
+**Perubahan:**
+Semua aturan validasi dipindahkan ke class khusus di dalam `app/Http/Requests`, dengan pengelompokan yang sama dengan struktur Controller (misalnya: `Requests/Admin/Akademik/StoreSiswaRequest`).
 
-## Kesimpulan
+**Alasan:**
+Pemisahan tanggung jawab (*Separation of Concerns*). Controller seharusnya hanya bertugas mengontrol alur, bukan mengurus detail aturan input.
 
-Refactoring tahap ini berhasil menyelesaikan masalah kompleksitas pada area kritis aplikasi. Pemisahan tugas melalui _Service Layer_, _Shared Services_, dan isolasi berdasarkan peran/unit menjadikan _codebase_ SIAKAD jauh lebih bersih (_Clean Code_). Sistem kini sudah dalam kondisi solid dan sangat siap untuk menerima penambahan fitur baru dengan cepat dan aman.
+**Dampak:**
+Kode Controller menjadi sangat tipis dan bersih (*thin controller*). Validasi menjadi lebih *reusable* dan mudah dilakukan *unit testing*.
 
 ---
 
-## 6. Penyelesaian & Refactoring Fitur Hapus Massal (Bulk Delete)
+## 3. Service Extraction (Ekstraksi Business Logic)
 
-### Masalah
-Banyak _checkbox_ hapus massal yang antarmuka (_Front-End_)-nya sudah ada namun logika _Back-End_-nya belum terhubung, atau terjadi _error_ (seperti kesalahan nama tabel) saat diakses.
+**Sebelum:**
+Proses bisnis yang kompleks (seperti logika *import/export* Excel, proses penambahan data beserta upload file, dan logika transaksi keuangan) bercampur di dalam Controller.
 
-### Perubahan
-Mengimplementasikan _refactoring_ menyeluruh dengan menambahkan validasi `BulkDestroyRequest` dan mengaktifkan hapus massal untuk:
-- Data Kelas (Memperbaiki _error_ tabel tidak ditemukan)
-- Mata Pelajaran
-- Data Mengajar (Menyelesaikan _bug_ paginasi baris yang tidak sinkron)
-- Tahun Ajaran (Memperbaiki _error View not found_)
-- Data Jabatan
-- Unit Pendidikan
-- Tagihan Keuangan (Logika diubah agar **hanya menghapus tagihan yang berstatus Belum Lunas**)
-- Jenis Tagihan
+**Masalah:**
+Terjadi duplikasi logika jika proses yang sama harus dipanggil dari tempat lain (misalnya API atau CLI). Sulit melakukan pemeliharaan jika struktur file excel atau cara *upload* berubah.
 
-### Dampak
-Fitur hapus massal dapat berfungsi penuh di hampir semua lini modul dengan tingkat keamanaan tinggi karena difilter melalui fungsi Form Request dan aturan bisnis spesifik.
+**Perubahan:**
+Dibuat class layanan mandiri (Service Pattern) di dalam `app/Services`, seperti:
+- `GuruService.php` dan `SiswaService.php` untuk memproses logika data kompleks.
+- `Shared/ExcelExportService.php`, `ExcelImportService.php`, dan `FileUploadService.php` untuk logika yang dipakai berulang di berbagai modul.
+
+**Alasan:**
+Menghindari perulangan kode (Prinsip DRY - *Don't Repeat Yourself*) dan mengisolasi logika pemrosesan yang kompleks.
+
+**Dampak:**
+Perubahan cara kerja (seperti integrasi dengan *cloud storage* untuk upload file) cukup dilakukan di satu tempat (Service).
 
 ---
 
-## 7. Pemisahan Logika Dashboard Siswa & Guru (Service Pattern Lanjutan)
+## 4. Pemisahan Routing (Route Cleanup)
 
-### Masalah
-Ditemukan _Code Duplication_ (kode yang berulang persis sama) secara masif pada Controller:
-- `Student\SD\DashboardController` & `Student\SMP\DashboardController` memiliki kueri pencarian tagihan dan nilai akhir yang 100% sama.
-- `Teacher\DashboardController` & `Teacher\WaliKelas\DashboardController` memiliki perhitungan rumit terkait tugas penugasan yang tumpang tindih.
+**Sebelum:**
+Semua *route* dideklarasikan dalam satu file `routes/web.php` yang memanjang hingga ribuan baris.
 
-### Perubahan
-1. **Service Layer Baru**: Membuat `app/Services/Student/DashboardService.php` dan `app/Services/Teacher/DashboardService.php` untuk menampung semua kueri perhitungan spesifik peran tersebut.
-2. **Penerapan Caching**: Menggunakan `Cache::remember()` dengan rentang waktu 10 menit di dalam masing-masing Service tersebut.
-3. **Optimasi Grafik Admin**: Mengubah referensi penghasilan (_revenue chart_) dari `updated_at` menjadi `payment_date` agar grafik keuangan akurat sesuai bulan pembayaran.
+**Masalah:**
+Terjadi konflik *route*, sangat lambat saat melakukan pencarian *endpoint*, dan mempersulit kolaborasi antar pengembang pada sistem kontrol versi (Git *merge conflicts*).
 
-### Dampak
-_Controller_ terbebas dari query panjang sehingga strukturnya menjadi sangat "bersih" (_Thin Controller_). Adanya lapisan **Caching** membuat _dashboard_ merespon secara instan bagi para siswa dan guru meskipun aplikasi sedang diakses secara masal di jam-jam sibuk.
+**Perubahan:**
+File `routes/web.php` diubah menjadi sekadar *dispatcher* yang memanggil file rute terpisah menggunakan `require`:
+- `routes/admin.php`
+- `routes/teacher.php`
+- `routes/student.php`
+
+**Alasan:**
+Membagi fokus file routing berdasarkan peran akses (*Role/Actor*).
+
+**Dampak:**
+Sistem routing menjadi sangat modular, rapi, dan mudah dibaca. Risiko konflik saat *pull/merge* jauh berkurang.
+
+---
+
+## 5. Pencegahan Cascading Delete (Refactoring Bulk Delete & Validasi Relasi)
+
+**Sebelum:**
+Penghapusan data master (seperti Tahun Ajaran, Unit, Jabatan) dan operasional (Siswa, Guru) mengandalkan *Cascade On Delete* dari *database schema*.
+
+**Masalah:**
+Penghapusan data level atas (seperti Unit) akan menghapus data turunannya (Siswa, Tagihan, Pembayaran) secara otomatis tanpa peringatan, menyebabkan hilangnya riwayat keuangan (*orphan records*) dan cacatnya laporan audit tutup tahun.
+
+**Perubahan:**
+Menambahkan pagaran logika `exists()` (seperti pengecekan *TeachingAssignment*, pengecekan status lunas *Invoice*, atau pengecekan *SchoolClass*) pada metode `destroy` dan `bulkDestroy` di Controller (misalnya: `SiswaController`, `GuruController`, `TahunAjaranController`).
+
+**Alasan:**
+Melindungi integritas relasi data dan mencegah kelalaian operasional (faktor *human error*).
+
+**Dampak:**
+Data transaksional tidak bisa terhapus sembarangan. Sistem menolak perintah *delete* dan memberikan peringatan eksplisit (misal: "Siswa dengan tagihan lunas tidak bisa dihapus").
+
+---
+
+## 6. Pemisahan Blade Layout & Component
+
+**Sebelum:**
+Banyak pengulangan kode HTML/UI pada halaman *frontend* (Public) dan *backend* (Admin/Teacher/Student), seperti *navbar*, *sidebar*, dan *footer*.
+
+**Masalah:**
+Perubahan desain pada satu bagian (contoh: mengubah *link* di navbar) mengharuskan pengembang untuk mengedit puluhan file berbeda. 
+
+**Perubahan:**
+Menerapkan pendekatan *Blade Component* dan *Layouting*. 
+- Pembuatan layout spesifik seperti `layouts/admin.blade.php`, `layouts/student.blade.php`, dan `layouts/unit.blade.php`.
+- Pembuatan komponen yang dapat dipanggil berulang, seperti `<x-public.unit-navbar>`.
+
+**Alasan:**
+Modularitas antarmuka (*UI Modularity*) dan pemeliharaan kode berbasis komponen.
+
+**Dampak:**
+Desain *frontend* menjadi seragam (*consistent*), perbaikan *bug visual* sangat cepat karena hanya perlu menyunting satu file komponen.
+
+---
+
+## 7. Refactoring Modul CMS (Content Management System)
+
+**Sebelum:**
+Seluruh manajemen konten situs (seperti Beranda, Profil, Sejarah, Visi Misi) dikelola secara sporadis dalam satu alur yang campur aduk.
+
+**Masalah:**
+Menyulitkan Admin saat mengunggah teks dan aset gambar karena *logic update* tidak tersentralisasi berdasarkan halaman (*landing page*).
+
+**Perubahan:**
+Ekstraksi fungsionalitas CMS menjadi beberapa *controller* mandiri di bawah `app/Http/Controllers/Admin/Cms/`, yaitu:
+- `CmsBerandaController`
+- `CmsProfilController`
+- `CmsUnitController`
+- `CmsPpdbController`
+- `CmsPostController` (untuk Berita)
+
+**Alasan:**
+Setiap segmen halaman *public* memerlukan penanganan data yang spesifik (seperti konfigurasi bagian *Hero*, *Timeline*, dll.).
+
+**Dampak:**
+Backend CMS lebih teratur dan fleksibel jika sekolah ingin menambah struktur atau bagian (*section*) baru pada halaman publik mereka di masa mendatang.
+
+---
+
+## 8. Refactoring Middleware / Policy (Role-Based Access)
+
+**Sebelum:**
+Pengecekan hak akses (apakah _user_ adalah admin, guru, atau siswa) mungkin tersebar di dalam _controller_ menggunakan `if (auth()->user()->role !== 'admin')`.
+
+**Masalah:**
+Logika keamanan (*security logic*) bercampur aduk dengan proses bisnis. Rentan terjadi kelupaan pengecekan di beberapa URL.
+
+**Perubahan:**
+Memusatkan pengecekan pada file `app/Http/Middleware/RoleMiddleware.php`. Seluruh _route_ spesifik kemudian dibungkus dengan metode grup _middleware_ (misalnya `->middleware(['auth', 'role:admin'])`).
+
+**Alasan:**
+Keamanan rute wajib bersifat preventif sebelum menyentuh Controller.
+
+**Dampak:**
+Sistem hak akses menjadi sangat ketat dan tidak ada URL yang "bocor" ke publik atau diakses oleh pengguna dengan level wewenang berbeda.
+
+---
+
+## 9. Refactoring Pemisahan Aset CSS/JS
+
+**Sebelum:**
+Gaya tampilan antarmuka disematkan (*inline*) langsung pada file Blade atau diletakkan dalam satu file besar yang membengkak.
+
+**Masalah:**
+Halaman memuat gaya (*styles*) yang tidak diperlukan, memperlambat _render_ (*render-blocking*), dan menyulitkan kustomisasi per *role*.
+
+**Perubahan:**
+File aset dipecah berdasarkan target pengguna di direktori `public/css/`:
+- `admin.css`
+- `teacher.css`
+- `student.css`
+- `public.css`
+
+**Alasan:**
+Optimalisasi kecepatan dan menjaga kemurnian cakupan gaya (*scope isolation*).
+
+**Dampak:**
+Dashboard Siswa dan Dashboard Guru tidak saling bertabrakan (_conflict_) secara visual karena tidak berbagi CSS yang sama.
+
+---
+
+## 10. Refactoring Import/Export Excel
+
+**Sebelum:**
+Logika pembacaan baris Excel dan penyusunan kolom CSV diletakkan langsung di fungsi `import` dan `export` dalam Controller.
+
+**Masalah:**
+Tingkat kerumitan metode menjadi di luar kendali. Susah menambah kolom jika format berubah.
+
+**Perubahan:**
+Fungsionalitas ditarik ke dalam `app/Services/Shared/ExcelImportService.php` dan `ExcelExportService.php` sebagai komponen mandiri (*Shared Service*).
+
+**Alasan:**
+File/library eksternal (*third-party*) lebih baik dibungkus dalam abstraksi (*Wrapper*).
+
+**Dampak:**
+Saat ada format data baru yang perlu diimpor, pengembang hanya perlu meneruskan array ke `ExcelImportService` tanpa menulis ulang logika ekstraksi file `.xlsx`.
+
+---
+
+## 11. Refactoring Dashboard (Role-Based Views)
+
+**Sebelum:**
+Dashboard diakses melalui satu _controller_ dan merender tampilan yang dicampur dengan klausa-klausa `if/else` besar bergantung pada peran *user* saat ini.
+
+**Masalah:**
+Tampilan bercampur dalam satu file. Logika dashboard siswa harus mengecek kondisi tingkat satuan pendidikannya, sementara guru harus dipilah tugas mengajarnya.
+
+**Perubahan:**
+Memisahkan dashboard siswa dan guru secara drastis berdasarkan *namespace* dan foldernya:
+- `app/Http/Controllers/Student/...`
+- `app/Http/Controllers/Teacher/...`
+
+**Alasan:**
+Pengembangan fitur antar aktor (guru/siswa) tidak saling memblokir (*non-blocking development*).
+
+**Dampak:**
+Dashboard sekarang sepenuhnya independen, bersih dari `if/else` logika silang, serta UI dapat dikustomisasi secara maksimal per jenjang.

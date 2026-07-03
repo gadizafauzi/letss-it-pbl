@@ -94,19 +94,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('/admin/unit', UnitController::class)->names('admin.unit');
 
-    Route::resource('/admin/mapel', MapelController::class)->names('admin.mapel');
-    Route::resource('/admin/mengajar', MengajarController::class)->names('admin.mengajar');
-    Route::resource('/admin/tahun-ajaran', TahunAjaranController::class)->names('admin.tahun-ajaran');
 
-    Route::patch(
-        '/admin/tahun-ajaran/{id}/set-active',
-        [TahunAjaranController::class, 'setActive']
-    )->name('admin.tahun-ajaran.set-active');
-
-    Route::post('/admin/jabatan/bulk-destroy', [JabatanController::class, 'bulkDestroy'])
-        ->name('admin.jabatan.bulk-destroy');
-
-    Route::resource('/admin/jabatan', JabatanController::class)->names('admin.jabatan');
 
     // KEUANGAN
     Route::resource('/admin/rekening-sekolah', \App\Http\Controllers\Admin\Keuangan\RekeningSekolahController::class)
