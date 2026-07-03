@@ -21,16 +21,14 @@ class PublicHomeController extends Controller
 {
     public function index()
     {
-        $cacheTime = 60 * 60 * 24; // 24 jam
-
-        $hero = Cache::remember('home_hero_v2', $cacheTime, fn() => CmsHeroSection::where('page', 'home')->where('is_active', true)->first());
+        $hero = CmsHeroSection::where('page', 'home')->where('is_active', true)->first();
         
-        $statistics = Cache::remember('home_statistics_v2', $cacheTime, fn() => CmsStatistic::where('is_active', true)->orderBy('order')->get());
+        $statistics = CmsStatistic::where('is_active', true)->orderBy('order')->get();
         
-        // Optimasi: Ambil data secara global (tidak berulang di dalam loop) dan dicache
-        $studentCount = Cache::remember('home_student_count_v2', $cacheTime, fn() => Student::where('status', 'active')->count());
-        $teacherCount = Cache::remember('home_teacher_count_v2', $cacheTime, fn() => Teacher::where('status', 'active')->count());
-        $classCount = Cache::remember('home_class_count_v2', $cacheTime, fn() => SchoolClass::count());
+        // Tetap menggunakan query N+1 fix (karena sangat menguntungkan performa), tapi TANPA cache
+        $studentCount = Student::where('status', 'active')->count();
+        $teacherCount = Teacher::where('status', 'active')->count();
+        $classCount = SchoolClass::count();
 
         foreach ($statistics as $stat) {
             if ($stat->is_dynamic) {
@@ -44,25 +42,21 @@ class PublicHomeController extends Controller
             }
         }
         
-        $welcomeMessage = Cache::remember('home_welcome_message_v2', $cacheTime, fn() => CmsWelcomeMessage::where('is_active', true)->first());
-        
-        $programs = Cache::remember('home_programs_v2', $cacheTime, fn() => CmsProgram::where('is_active', true)->orderBy('order')->get());
-        
-        $tujuanPendidikan = Cache::remember('home_tujuan_pendidikan_v2', $cacheTime, fn() => CmsTujuanPendidikan::where('is_active', true)->orderBy('order')->get());
-        
-        $testimonials = Cache::remember('home_testimonials_v2', $cacheTime, fn() => CmsTestimonial::where('is_active', true)->orderBy('order')->get());
-        
-        $faqs = Cache::remember('home_faqs_v2', $cacheTime, fn() => CmsFaq::where('page', 'home')->where('is_active', true)->orderBy('order')->get());
+        $welcomeMessage = CmsWelcomeMessage::where('is_active', true)->first();
+        $programs = CmsProgram::where('is_active', true)->orderBy('order')->get();
+        $tujuanPendidikan = CmsTujuanPendidikan::where('is_active', true)->orderBy('order')->get();
+        $testimonials = CmsTestimonial::where('is_active', true)->orderBy('order')->get();
+        $faqs = CmsFaq::where('page', 'home')->where('is_active', true)->orderBy('order')->get();
 
-        $jenjang_image = Cache::remember('home_jenjang_image_v2', $cacheTime, fn() => \App\Models\CmsSetting::where('key', 'jenjang_pendidikan_image')->first());
-        $statistic_bg_image = Cache::remember('home_statistic_bg_image_v2', $cacheTime, fn() => \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first());
+        $jenjang_image = \App\Models\CmsSetting::where('key', 'jenjang_pendidikan_image')->first();
+        $statistic_bg_image = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
 
         // Ambil daftar unik ekstrakurikuler yang aktif untuk ditampilkan di homepage
-        $ekskuls = Cache::remember('home_ekskuls_v2', $cacheTime, fn() => \App\Models\CmsUnitEkskul::where('is_active', true)
+        $ekskuls = \App\Models\CmsUnitEkskul::where('is_active', true)
             ->select('title', 'icon')
             ->get()
             ->unique('title')
-            ->values());
+            ->values();
 
         return view('public.home.index', compact(
             'hero',
