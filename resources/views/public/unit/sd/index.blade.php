@@ -584,13 +584,13 @@
         $statisticBg = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
         $bgImageUrl = ($statisticBg && $statisticBg->value) ? (str_starts_with($statisticBg->value, 'http') ? $statisticBg->value : Storage::url($statisticBg->value)) : 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';
     @endphp
-    <section class="relative py-16 md:py-20 z-20 bg-gradient-to-b from-[#581c87] via-purple-50/10 to-white border-b border-slate-100 overflow-hidden">
+    <section class="relative py-16 md:py-20 z-20 bg-gradient-to-b from-[#ebd5ff] via-purple-50/10 to-white border-b border-slate-100 overflow-hidden">
         @if($bgImageUrl)
         <div class="absolute inset-0 bg-cover bg-center bg-fixed opacity-[0.10] mix-blend-multiply" style="background-image: url('{{ $bgImageUrl }}');"></div>
         @endif
 
-        <!-- Top Fade Overlay (Blends Hero dark color into statistics) -->
-        <div class="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#581c87] to-transparent pointer-events-none z-10"></div>
+        <!-- Top Fade Overlay (Blends Hero light color into statistics) -->
+        <div class="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#ebd5ff] to-transparent pointer-events-none z-10"></div>
 
         <!-- Bottom Fade Overlay -->
         <div class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none z-10"></div>
