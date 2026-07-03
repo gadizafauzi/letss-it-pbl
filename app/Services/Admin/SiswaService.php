@@ -71,6 +71,7 @@ class SiswaService
                 $siswa->user->update([
                     'name'     => $data['full_name'],
                     'username' => $data['nis'],
+                    'status'   => $data['status'],
                 ]);
             }
 
