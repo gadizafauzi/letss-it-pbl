@@ -288,11 +288,11 @@
     <div class="w-full h-px bg-slate-100"></div>
 
     {{-- ===== FAQ ===== --}}
-    <section id="faq" class="public-section py-20 relative overflow-hidden scroll-mt-32 bg-white">
-        {{-- Section-specific Pattern Parallax Background --}}
-        <div class="absolute inset-0 bg-fixed bg-center bg-repeat z-0 opacity-100" style="background-image: url('{{ asset('images/faq-pattern.svg') }}'); background-size: 200px;"></div>
-        {{-- Light Parallax Overlay --}}
-        <div class="absolute inset-0 bg-white/75 z-0"></div>
+    <section id="faq" class="public-section py-20 relative overflow-hidden scroll-mt-32 bg-gradient-to-br from-amber-50 via-yellow-50/50 to-amber-100/80">
+        {{-- Dot Pattern Overlay --}}
+        <div class="absolute inset-0 z-0" style="background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 24px 24px;"></div>
+        {{-- Subtle site-wide bg pattern blend --}}
+        <div class="absolute inset-0 bg-fixed bg-center bg-no-repeat bg-cover z-0 opacity-5 mix-blend-multiply" style="background-image: url('{{ asset('/images/bg.png') }}');"></div>
         {{-- Dekorasi background --}}
         <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-40 pointer-events-none z-0"></div>
         <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-amber-100 rounded-full blur-3xl opacity-40 pointer-events-none z-0"></div>
