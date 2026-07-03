@@ -20,25 +20,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::defaultView('pagination.custom');
 
-        $cmsModels = [
-            \App\Models\CmsHeroSection::class,
-            \App\Models\CmsStatistic::class,
-            \App\Models\CmsWelcomeMessage::class,
-            \App\Models\CmsProgram::class,
-            \App\Models\CmsTujuanPendidikan::class,
-            \App\Models\CmsTestimonial::class,
-            \App\Models\CmsFaq::class,
-            \App\Models\CmsSetting::class,
-            \App\Models\CmsUnitEkskul::class,
-            \App\Models\Student::class,
-            \App\Models\Teacher::class,
-            \App\Models\SchoolClass::class,
-        ];
-        
-        foreach ($cmsModels as $model) {
-            $model::observe(\App\Observers\CmsCacheObserver::class);
-        }
-
         View::composer(['layouts.public', 'layouts.unit', 'components.public.navbar', 'components.public.footer'], function ($view) {
             $settings = \App\Models\CmsSetting::pluck('value', 'key')->all();
             $view->with('settings', $settings);
