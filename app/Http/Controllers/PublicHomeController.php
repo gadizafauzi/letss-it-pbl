@@ -15,45 +15,54 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\SchoolClass;
 
+use Illuminate\Support\Facades\Cache;
+
 class PublicHomeController extends Controller
 {
     public function index()
     {
+        $cacheTime = 60 * 60 * 24; // 24 jam
 
-        $hero = CmsHeroSection::where('page', 'home')->where('is_active', true)->first();
+        $hero = Cache::remember('home_hero', $cacheTime, fn() => CmsHeroSection::where('page', 'home')->where('is_active', true)->first());
         
-        $statistics = CmsStatistic::where('is_active', true)->orderBy('order')->get();
+        $statistics = Cache::remember('home_statistics', $cacheTime, fn() => CmsStatistic::where('is_active', true)->orderBy('order')->get());
+        
+        // Optimasi: Ambil data secara global (tidak berulang di dalam loop) dan dicache
+        $studentCount = Cache::remember('home_student_count', $cacheTime, fn() => Student::where('status', 'active')->count());
+        $teacherCount = Cache::remember('home_teacher_count', $cacheTime, fn() => Teacher::where('status', 'active')->count());
+        $classCount = Cache::remember('home_class_count', $cacheTime, fn() => SchoolClass::count());
+
         foreach ($statistics as $stat) {
             if ($stat->is_dynamic) {
                 if ($stat->dynamic_source === 'students_count') {
-                    $stat->number = Student::where('status', 'active')->count();
+                    $stat->number = $studentCount;
                 } elseif ($stat->dynamic_source === 'teachers_count') {
-                    $stat->number = Teacher::where('status', 'active')->count();
+                    $stat->number = $teacherCount;
                 } elseif ($stat->dynamic_source === 'classes_count') {
-                    $stat->number = SchoolClass::count();
+                    $stat->number = $classCount;
                 }
             }
         }
         
-        $welcomeMessage = CmsWelcomeMessage::where('is_active', true)->first();
+        $welcomeMessage = Cache::remember('home_welcome_message', $cacheTime, fn() => CmsWelcomeMessage::where('is_active', true)->first());
         
-        $programs = CmsProgram::where('is_active', true)->orderBy('order')->get();
+        $programs = Cache::remember('home_programs', $cacheTime, fn() => CmsProgram::where('is_active', true)->orderBy('order')->get());
         
-        $tujuanPendidikan = CmsTujuanPendidikan::where('is_active', true)->orderBy('order')->get();
+        $tujuanPendidikan = Cache::remember('home_tujuan_pendidikan', $cacheTime, fn() => CmsTujuanPendidikan::where('is_active', true)->orderBy('order')->get());
         
-        $testimonials = CmsTestimonial::where('is_active', true)->orderBy('order')->get();
+        $testimonials = Cache::remember('home_testimonials', $cacheTime, fn() => CmsTestimonial::where('is_active', true)->orderBy('order')->get());
         
-        $faqs = CmsFaq::where('page', 'home')->where('is_active', true)->orderBy('order')->get();
+        $faqs = Cache::remember('home_faqs', $cacheTime, fn() => CmsFaq::where('page', 'home')->where('is_active', true)->orderBy('order')->get());
 
-        $jenjang_image = \App\Models\CmsSetting::where('key', 'jenjang_pendidikan_image')->first();
-        $statistic_bg_image = \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first();
+        $jenjang_image = Cache::remember('home_jenjang_image', $cacheTime, fn() => \App\Models\CmsSetting::where('key', 'jenjang_pendidikan_image')->first());
+        $statistic_bg_image = Cache::remember('home_statistic_bg_image', $cacheTime, fn() => \App\Models\CmsSetting::where('key', 'statistic_bg_image')->first());
 
         // Ambil daftar unik ekstrakurikuler yang aktif untuk ditampilkan di homepage
-        $ekskuls = \App\Models\CmsUnitEkskul::where('is_active', true)
+        $ekskuls = Cache::remember('home_ekskuls', $cacheTime, fn() => \App\Models\CmsUnitEkskul::where('is_active', true)
             ->select('title', 'icon')
             ->get()
             ->unique('title')
-            ->values();
+            ->values());
 
         return view('public.home.index', compact(
             'hero',

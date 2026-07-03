@@ -84,30 +84,15 @@ Route::get('/profil', [PublicProfileController::class, 'index'])
 
 /*
 |--------------------------------------------------------------------------
-| UNIT TK
+| UNIT PENDIDIKAN
 |--------------------------------------------------------------------------
 */
 
-Route::get('/unit/tk', [PublicUnitController::class, 'tk'])
-    ->name('public.unit.tk.index');
-
-/*
-|--------------------------------------------------------------------------
-| UNIT SD
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/unit/sd', [PublicUnitController::class, 'sd'])
-    ->name('public.unit.sd.index');
-
-/*
-|--------------------------------------------------------------------------
-| UNIT SMP
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/unit/smp', [PublicUnitController::class, 'smp'])
-    ->name('public.unit.smp.index');
+Route::controller(PublicUnitController::class)->group(function () {
+    Route::get('/unit/tk', 'tk')->name('public.unit.tk.index');
+    Route::get('/unit/sd', 'sd')->name('public.unit.sd.index');
+    Route::get('/unit/smp', 'smp')->name('public.unit.smp.index');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -115,20 +100,13 @@ Route::get('/unit/smp', [PublicUnitController::class, 'smp'])
 |--------------------------------------------------------------------------
 */
 
-Route::get('/berita', [PublicNewsController::class, 'index'])
-    ->name('public.berita.index');
-
-Route::get('/berita/kategori', [PublicNewsController::class, 'categories'])
-    ->name('public.berita.kategori');
-
-Route::get('/berita/kategori/{slug}', [PublicNewsController::class, 'category'])
-    ->name('public.berita.category');
-
-Route::get('/berita/search', [PublicNewsController::class, 'search'])
-    ->name('public.berita.search');
-
-Route::get('/berita/{slug}', [PublicNewsController::class, 'show'])
-    ->name('public.berita.detail');
+Route::controller(PublicNewsController::class)->group(function () {
+    Route::get('/berita', 'index')->name('public.berita.index');
+    Route::get('/berita/kategori', 'categories')->name('public.berita.kategori');
+    Route::get('/berita/kategori/{slug}', 'category')->name('public.berita.category');
+    Route::get('/berita/search', 'search')->name('public.berita.search');
+    Route::get('/berita/{slug}', 'show')->name('public.berita.detail');
+});
 
 /*
 |--------------------------------------------------------------------------
