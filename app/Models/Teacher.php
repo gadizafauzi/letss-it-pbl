@@ -3,14 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-use App\Models\User;
-use App\Models\Unit;
-use App\Models\Position;
-use App\Models\TeachingAssignment;
-use App\Models\SchoolClass;
-
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Teacher extends Model
