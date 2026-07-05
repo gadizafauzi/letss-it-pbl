@@ -31,7 +31,7 @@
 <body class="bg-transparent text-slate-800 antialiased relative">
     
     {{-- GLOBAL PARALLAX BACKGROUND --}}
-    @if(request()->routeIs('public.home') || request()->routeIs('public.profil.index'))
+    @if(request()->routeIs('public.home') || request()->routeIs('public.profil.index') || request()->routeIs('public.ppdb.index'))
     <div class="fixed inset-0 z-[-1] pointer-events-none bg-slate-100">
         <div class="absolute inset-0 opacity-100" style="background-image: url('{{ asset('/images/bg.png') }}'); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
     </div>
