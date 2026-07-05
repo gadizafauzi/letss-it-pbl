@@ -8,8 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Admin - Tahun Ajaran Module Tests")
@@ -43,9 +41,8 @@ public class AdminTahunAjaranTest extends BaseTest {
 
         assertTrue(
                 driver.getPageSource().contains("2026/2027")
-                || driver.getPageSource().toLowerCase().contains("berhasil"),
-                "Admin gagal menambahkan tahun ajaran baru."
-        );
+                        || driver.getPageSource().toLowerCase().contains("berhasil"),
+                "Admin gagal menambahkan tahun ajaran baru.");
     }
 
     @Test
@@ -64,7 +61,8 @@ public class AdminTahunAjaranTest extends BaseTest {
 
             wait.until(ExpectedConditions.urlContains("/admin/tahun-ajaran"));
             assertPageDoesNotShowServerError();
-            assertTrue(driver.getPageSource().contains("2026/2027 Ganjil") || driver.getPageSource().toLowerCase().contains("berhasil"));
+            assertTrue(driver.getPageSource().contains("2026/2027 Ganjil")
+                    || driver.getPageSource().toLowerCase().contains("berhasil"));
         } catch (Exception e) {
             System.out.println("Data tahun ajaran belum tersedia.");
             assertTrue(driver.getCurrentUrl().contains("/admin/tahun-ajaran"));
@@ -79,7 +77,7 @@ public class AdminTahunAjaranTest extends BaseTest {
 
         try {
             driver.findElement(By.cssSelector("form[action*='tahun-ajaran'] button, .btn-danger")).click();
-            
+
             wait.until(ExpectedConditions.alertIsPresent());
             driver.switchTo().alert().accept();
 
