@@ -1,7 +1,8 @@
 package id.ac.schoolapp.tests;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,7 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public abstract class BaseTest {
     protected static final String BASE_URL = System.getProperty("baseUrl", "http://127.0.0.1:8000");
     protected static final String ADMIN_USERNAME = System.getProperty("adminUser", "admin");
@@ -22,7 +24,7 @@ public abstract class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    @BeforeEach
+    @BeforeAll
     void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
@@ -35,7 +37,7 @@ public abstract class BaseTest {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    @AfterEach
+    @AfterAll
     void tearDown() {
         if (driver != null) {
             driver.quit();
