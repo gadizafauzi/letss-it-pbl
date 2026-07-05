@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
 
@@ -48,6 +49,7 @@ public abstract class BaseTest {
 
     protected void open(String path) {
         driver.get(BASE_URL + path);
+        System.out.println("Opened " + path + ", Current URL: " + driver.getCurrentUrl());
     }
 
     protected WebElement waitVisible(By locator) {
@@ -61,29 +63,64 @@ public abstract class BaseTest {
         assertFalse(source.contains("server error"), "Halaman menampilkan server error.");
     }
 
+    protected void jsClick(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+    }
+
+    protected void scrollToAndClick(By locator) {
+        WebElement element = waitVisible(locator);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+        try {
+            Thread.sleep(500); // Wait for smooth scroll
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        jsClick(element);
+    }
+
     protected void loginAsAdmin() {
         open("/admin/login");
         waitVisible(By.id("admin_login")).sendKeys(ADMIN_USERNAME);
         driver.findElement(By.id("admin_password")).sendKeys(ADMIN_PASSWORD);
-        driver.findElement(By.id("adminBtn")).click();
-        wait.until(ExpectedConditions.urlContains("/admin/dashboard"));
+        
+        try {
+            driver.findElement(By.id("captcha")).sendKeys("1234");
+        } catch (Exception e) {}
+
+        jsClick(driver.findElement(By.id("adminBtn")));
+        try {
+            wait.until(ExpectedConditions.urlContains("/admin/dashboard"));
+        } catch (Exception e) {
+            System.err.println("Login admin failed or timed out. Please check database seeder.");
+            throw e;
+        }
     }
 
     protected void loginAsStudent(String nis, String password) {
         open("/login");
-        waitVisible(By.id("tab-student")).click();
+        jsClick(waitVisible(By.id("tab-student")));
         waitVisible(By.id("login")).sendKeys(nis);
         driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("loginBtn")).click();
+        
+        try {
+            driver.findElement(By.id("captcha")).sendKeys("1234");
+        } catch (Exception e) {}
+
+        jsClick(driver.findElement(By.id("loginBtn")));
         wait.until(ExpectedConditions.urlContains("/student/"));
     }
 
     protected void loginAsTeacher(String nip, String password) {
         open("/login");
-        waitVisible(By.id("tab-teacher")).click();
+        jsClick(waitVisible(By.id("tab-teacher")));
         waitVisible(By.id("login")).sendKeys(nip);
         driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("loginBtn")).click();
+        
+        try {
+            driver.findElement(By.id("captcha")).sendKeys("1234");
+        } catch (Exception e) {}
+
+        jsClick(driver.findElement(By.id("loginBtn")));
         wait.until(ExpectedConditions.urlContains("/teacher/"));
     }
 }

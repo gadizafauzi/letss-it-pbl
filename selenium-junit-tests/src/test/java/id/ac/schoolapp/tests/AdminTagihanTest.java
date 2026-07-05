@@ -33,10 +33,15 @@ public class AdminTagihanTest extends BaseTest {
             open("/admin/tagihan/create");
         }
 
-        waitVisible(By.name("nama_tagihan")).sendKeys("SPP Juli 2026");
-        driver.findElement(By.name("nominal")).sendKeys("500000");
+        try {
+            org.openqa.selenium.support.ui.Select paymentType = new org.openqa.selenium.support.ui.Select(waitVisible(By.name("payment_type_id")));
+            paymentType.selectByIndex(1);
+        } catch (Exception e) {}
 
-        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        waitVisible(By.name("period")).clear();
+        driver.findElement(By.name("period")).sendKeys("SPP Juli 2026");
+
+        jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
 
         wait.until(ExpectedConditions.urlContains("/admin/tagihan"));
         assertPageDoesNotShowServerError();

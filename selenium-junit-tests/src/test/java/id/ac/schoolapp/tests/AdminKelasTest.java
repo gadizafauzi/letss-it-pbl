@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,16 +24,10 @@ public class AdminKelasTest extends BaseTest {
     @Test
     @Order(1)
     @DisplayName("Admin can create new classroom")
-    void adminCanCreateNewClassRoom() {
-        open("/admin/kelas");
+    void adminCanAddKelasSuccessfully() {
+        open("/admin/kelas/create");
 
-        try {
-            driver.findElement(By.partialLinkText("Tambah")).click();
-        } catch (Exception e) {
-            open("/admin/kelas/create");
-        }
-
-        waitVisible(By.name("nama_kelas")).sendKeys("Kelas X-A Otomasi");
+        waitVisible(By.name("class_name")).sendKeys("Kelas X-A Otomasi");
         
         try {
             driver.findElement(By.name("kuota")).sendKeys("36");
@@ -40,7 +35,11 @@ public class AdminKelasTest extends BaseTest {
             // Abaikan
         }
 
-        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        try {
+            new Select(driver.findElement(By.name("unit_id"))).selectByIndex(1);
+        } catch (Exception e) {}
+
+        jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
 
         wait.until(ExpectedConditions.urlContains("/admin/kelas"));
         assertPageDoesNotShowServerError();
@@ -61,10 +60,10 @@ public class AdminKelasTest extends BaseTest {
         try {
             driver.findElement(By.cssSelector(".btn-warning, a[href*='edit']")).click();
             
-            waitVisible(By.name("nama_kelas")).clear();
-            driver.findElement(By.name("nama_kelas")).sendKeys("Kelas Unggulan IT-1");
+            waitVisible(By.name("class_name")).clear();
+            driver.findElement(By.name("class_name")).sendKeys("Kelas Unggulan IT-1");
 
-            driver.findElement(By.cssSelector("button[type='submit']")).click();
+            jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
 
             wait.until(ExpectedConditions.urlContains("/admin/kelas"));
             assertPageDoesNotShowServerError();

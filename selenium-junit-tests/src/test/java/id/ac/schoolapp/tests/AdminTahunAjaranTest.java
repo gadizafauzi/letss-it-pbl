@@ -33,16 +33,10 @@ public class AdminTahunAjaranTest extends BaseTest {
             open("/admin/tahun-ajaran/create");
         }
 
-        waitVisible(By.name("tahun_ajaran")).sendKeys("2026/2027");
-        
-        try {
-            Select status = new Select(driver.findElement(By.name("status")));
-            status.selectByValue("Aktif");
-        } catch (Exception e) {
-            System.out.println("Dropdown status tidak ditemukan, sesuaikan jika perlu.");
-        }
+        waitVisible(By.name("year")).clear();
+        driver.findElement(By.name("year")).sendKeys("2026/2027");
 
-        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
 
         wait.until(ExpectedConditions.urlContains("/admin/tahun-ajaran"));
         assertPageDoesNotShowServerError();
@@ -66,7 +60,7 @@ public class AdminTahunAjaranTest extends BaseTest {
             waitVisible(By.name("tahun_ajaran")).clear();
             driver.findElement(By.name("tahun_ajaran")).sendKeys("2026/2027 Ganjil");
 
-            driver.findElement(By.cssSelector("button[type='submit']")).click();
+            jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
 
             wait.until(ExpectedConditions.urlContains("/admin/tahun-ajaran"));
             assertPageDoesNotShowServerError();

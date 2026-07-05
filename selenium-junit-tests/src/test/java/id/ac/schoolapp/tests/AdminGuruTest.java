@@ -73,7 +73,7 @@ public class AdminGuruTest extends BaseTest {
             }
         }
 
-        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")).click();
 
         wait.until(ExpectedConditions.urlContains("/admin/guru"));
         assertPageDoesNotShowServerError();
@@ -125,7 +125,7 @@ public class AdminGuruTest extends BaseTest {
             }
         }
 
-        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")).click();
 
         wait.until(ExpectedConditions.urlContains("/admin/guru"));
         assertPageDoesNotShowServerError();

@@ -39,16 +39,14 @@ public class AdminSiswaTest extends BaseTest {
     @Order(2)
     @DisplayName("Admin can add new siswa")
     void adminCanAddSiswaSuccessfully() {
-        open("/admin/siswa");
+        open("/admin/siswa/create");
 
-        try {
-            driver.findElement(By.partialLinkText("Tambah")).click();
-        } catch (Exception e) {
-            open("/admin/siswa/create");
-        }
-
+        waitVisible(By.name("full_name")).sendKeys("Ahmad Fauzi Selenium");
+        
+        driver.findElement(By.xpath("//button[@data-tab-target='tab-data-sekolah']")).click();
+        
         waitVisible(By.name("nis")).sendKeys("20260001");
-        driver.findElement(By.name("full_name")).sendKeys("Ahmad Fauzi Selenium");
+        driver.findElement(By.name("nisn")).sendKeys("202600010001");
         
         try {
             Select statusSelect = new Select(driver.findElement(By.name("status")));
@@ -61,7 +59,7 @@ public class AdminSiswaTest extends BaseTest {
             }
         }
 
-        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
 
         wait.until(ExpectedConditions.urlContains("/admin/siswa"));
         assertPageDoesNotShowServerError();
@@ -94,7 +92,7 @@ public class AdminSiswaTest extends BaseTest {
             driver.findElement(By.name("nama")).sendKeys("Siswa Diperbarui Oleh Selenium");
         }
 
-        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
 
         wait.until(ExpectedConditions.urlContains("/admin/siswa"));
         assertPageDoesNotShowServerError();

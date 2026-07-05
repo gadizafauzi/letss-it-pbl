@@ -17,7 +17,7 @@ public class StudentAppTest extends BaseTest {
 
     @BeforeAll
     void setupStudent() {
-        loginAsStudent("1234567890", "12345678");
+        loginAsStudent("20260001", "12345678");
     }
 
     @Test
@@ -25,10 +25,13 @@ public class StudentAppTest extends BaseTest {
     @DisplayName("Student cannot login with invalid credentials")
     void testStudentLoginInvalid() {
         open("/login");
-        waitVisible(By.id("tab-student")).click();
+        jsClick(waitVisible(By.id("tab-student")));
         waitVisible(By.id("login")).sendKeys("0000000000"); // Invalid NIS
         driver.findElement(By.id("password")).sendKeys("wrongpassword");
-        driver.findElement(By.id("loginBtn")).click();
+        try {
+            driver.findElement(By.id("captcha")).sendKeys("1234");
+        } catch (Exception e) {}
+        jsClick(driver.findElement(By.id("loginBtn")));
 
         try {
             waitVisible(By.cssSelector(".alert-error"));

@@ -36,17 +36,17 @@ public class PublicWebTest extends BaseTest {
     @DisplayName("Guest can navigate to school units from home")
     void userCanNavigateToAllSchoolUnitsFromHome() {
         open("/");
-        driver.findElement(By.partialLinkText("TK")).click();
+        jsClick(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/unit/tk']"))));
         wait.until(ExpectedConditions.urlContains("/unit/tk"));
         assertPageDoesNotShowServerError();
 
         open("/");
-        driver.findElement(By.partialLinkText("SD")).click();
+        jsClick(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/unit/sd']"))));
         wait.until(ExpectedConditions.urlContains("/unit/sd"));
         assertPageDoesNotShowServerError();
 
         open("/");
-        driver.findElement(By.partialLinkText("SMP")).click();
+        jsClick(wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("a[href*='/unit/smp']"))));
         wait.until(ExpectedConditions.urlContains("/unit/smp"));
         assertPageDoesNotShowServerError();
     }
@@ -71,7 +71,7 @@ public class PublicWebTest extends BaseTest {
             driver.findElement(By.name("full_name")).sendKeys("Selenium User");
             driver.findElement(By.name("email")).sendKeys("ortu.siswa@example.com");
             driver.findElement(By.name("pesan")).sendKeys("Apakah pendaftaran gelombang kedua PPDB masih dibuka?");
-            driver.findElement(By.cssSelector("button[type='submit']")).click();
+            jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
 
             wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
             assertPageDoesNotShowServerError();
