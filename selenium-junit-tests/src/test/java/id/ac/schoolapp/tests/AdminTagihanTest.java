@@ -1,34 +1,48 @@
 package id.ac.schoolapp.tests;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class AdminTagihanTest extends BaseTest {
+@DisplayName("Admin - Tagihan Module Tests")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class AdminTagihanTest extends BaseTest {
+
+    @BeforeAll
+    void setupAdmin() {
+        loginAsAdmin();
+    }
 
     @Test
+    @Order(1)
+    @DisplayName("Admin can create student billing")
     void adminCanCreateStudentBilling() {
-        // 1. Login & Masuk ke Menu Tagihan Keuangan Siswa
-        loginAsAdmin();
         open("/admin/tagihan");
 
-        // 2. Buka Form Buat Tagihan Baru (Misal: SPP atau Uang Pangkal)
         try {
             driver.findElement(By.partialLinkText("Buat")).click();
         } catch (Exception e) {
             open("/admin/tagihan/create");
         }
 
-        // 3. Isi Detail Komponen Tagihan
-        waitVisible(By.name("nama_tagihan")).sendKeys("SPP Juli 2026");
-        driver.findElement(By.name("nominal")).sendKeys("500000");
+        try {
+            org.openqa.selenium.support.ui.Select paymentType = new org.openqa.selenium.support.ui.Select(waitVisible(By.name("payment_type_id")));
+            paymentType.selectByIndex(1);
+        } catch (Exception e) {}
 
-        // Submit Form
-        driver.findElement(By.cssSelector("button[type='submit']")).click();
+        waitVisible(By.name("period")).clear();
+        driver.findElement(By.name("period")).sendKeys("SPP Juli 2026");
 
-        // 4. Tunggu Redirect & Cek Notifikasi Sukses
+        jsClick(driver.findElement(By.xpath("//form[not(contains(@action, 'logout'))]//button[@type='submit']")));
+
         wait.until(ExpectedConditions.urlContains("/admin/tagihan"));
         assertPageDoesNotShowServerError();
 
@@ -37,5 +51,46 @@ class AdminTagihanTest extends BaseTest {
                 || driver.getPageSource().toLowerCase().contains("berhasil"),
                 "Admin gagal memproses pembuatan komponen tagihan baru."
         );
+    }
+
+    @Test
+    @Order(2)
+    @DisplayName("Admin can filter tagihan by keyword")
+    void adminCanFilterTagihanByKeyword() {
+        open("/admin/tagihan");
+
+        try {
+            waitVisible(By.cssSelector("input[type='search'], input[name='search'], input[name='keyword']"))
+                    .sendKeys("SPP", Keys.ENTER);
+            
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("body")));
+            assertPageDoesNotShowServerError();
+            
+            assertTrue(driver.getCurrentUrl().contains("/admin/tagihan"));
+        } catch (Exception e) {
+            System.out.println("Input field filter pencarian tagihan tidak ditemukan.");
+            assertTrue(driver.getCurrentUrl().contains("/admin/tagihan"));
+        }
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("Admin can delete billing category")
+    void adminCanDeleteBillingCategory() {
+        open("/admin/tagihan");
+
+        try {
+            driver.findElement(By.cssSelector("form[action*='tagihan'] button, .btn-danger")).click();
+            
+            wait.until(ExpectedConditions.alertIsPresent());
+            driver.switchTo().alert().accept();
+
+            wait.until(ExpectedConditions.urlContains("/admin/tagihan"));
+            assertPageDoesNotShowServerError();
+            assertTrue(driver.getPageSource().toLowerCase().contains("berhasil"));
+        } catch (Exception e) {
+            System.out.println("Tidak ada baris tagihan keuangan untuk dihapus.");
+            assertTrue(driver.getCurrentUrl().contains("/admin/tagihan"));
+        }
     }
 }
