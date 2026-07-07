@@ -144,7 +144,7 @@
                         <td class="px-6 py-4 font-bold text-[var(--text-main)]">
                             {{ $assignment->schoolClass->class_name ?? 'N/A' }}
 
-                            @if($homeroomClass && $homeroomClass->id == $assignment->class_id)
+                            @if($homeroomClass && optional($assignment)->class_id == $homeroomClass->id)
                                 <span class="ml-2 text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded-full font-normal">
                                     Wali Kelas
                                 </span>

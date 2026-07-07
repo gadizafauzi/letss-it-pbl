@@ -21,7 +21,7 @@
                 <i data-lucide="calendar" class="w-3.5 h-3.5 text-[var(--text-secondary)] mr-2 shrink-0"></i>
                 <span class="text-xs font-bold text-[var(--text-secondary)] mr-2 shrink-0">Tahun Ajaran:</span>
                 <select
-                    class="bg-transparent text-sm font-bold text-[var(--text-main)] focus:outline-none cursor-pointer w-full max-w-full truncate min-w-0 lg:whitespace-normal lg:overflow-visible lg:truncate-none"
+                    class="bg-transparent text-xs font-semibold text-[var(--text-main)] focus:outline-none cursor-pointer w-full max-w-full truncate whitespace-nowrap min-w-0"
                     onchange="window.location.href='{{ route('student.nilai') }}?year_id='+this.value+'&semester={{ $semester }}'">
                     @foreach($academicYears as $year)
                         @php $kelasLabel = $classPerYear[$year->id] ?? null; @endphp
