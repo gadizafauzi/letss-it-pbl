@@ -5,7 +5,7 @@
 ---
 
 ## 1. Login sebagai Wali Kelas
-*   **Aksi:** Buka halaman `domain-kalian.com/login`. Masukkan email dan password akun Guru yang menjabat sebagai Wali Kelas.
+*   **Aksi:** Buka halaman `domain-kalian.com/login`. Masukkan **NIP** dan password akun Guru yang menjabat sebagai Wali Kelas.
 *   **Penjelasan (Sambil Demo):** *"Selanjutnya, kita akan login sebagai Wali Kelas. Sistem akan langsung mengarahkan kita ke Dashboard Guru / Wali Kelas."*
 
 ## 2. Sampaikan Info Penting (Akses Ganda)
@@ -34,5 +34,27 @@
 
 ### 💡 Tips Persiapan Sebelum Demo (Wajib Dibaca Orang Ke-4):
 *   **Siapkan Data Dummy:** Sebelum demo maju ke depan, **pastikan kalian sudah menyiapkan 1 akun Guru (Wali Kelas) dan 1 akun Siswa** yang datanya saling terhubung (Siswa tersebut terdaftar di kelas yang diampu oleh Guru/Wali Kelas tersebut). 
-*   Catat email dan password kedua akun tersebut di Notepad/kertas kecil agar tidak *blank* atau panik saat *live demo*.
+*   Catat **NIP Guru, NIS/NISN Siswa**, dan password kedua akun tersebut di Notepad/kertas kecil agar tidak *blank* atau panik saat *live demo*.
 *   Mengingat aplikasi kalian memisahkan rute (`/teacher/...` dan `/student/...`), pastikan saat melakukan login tidak salah memasukkan peran atau *role* akunnya.
+
+---
+
+## 👨‍💻 Penjelasan Teknis (Untuk Menjawab Pertanyaan Dosen/Penguji)
+
+Jika dosen atau penguji bertanya tentang **"Bagaimana kodenya bekerja di balik layar?"**, ini adalah contekan jawaban teknisnya:
+
+### 1. Relasi Database (Model)
+*   **Wali Kelas & Kelas:** Di file `app/Models/SchoolClass.php`, terdapat relasi `homeroomTeacher()` yang mengarah ke model `Teacher` menggunakan *foreign key* `homeroom_teacher_id`. Ini yang membuat satu kelas tahu siapa wali kelasnya.
+*   **Siswa & Kelas:** Relasinya menggunakan tabel perantara/pivot melalui model `StudentClass` (Siswa bisa pindah/naik kelas tiap tahun ajaran).
+*   **Data Nilai:** Tersimpan di model `Grade`. Ada kolom khusus bernama `status` yang nilainya bisa `'final'` (baru diinput guru mapel) atau `'published'` (sudah disahkan Wali Kelas).
+
+### 2. Controller & Route (Logika Bisnis)
+*   **Sisi Wali Kelas:** Menggunakan `WaliKelas\NilaiController` (berada di folder `Teacher/WaliKelas`). Saat tombol *Publish* ditekan, rute memanggil method `publish()` yang menjalankan *query* UPDATE ke tabel grades: mengubah `status` dari `'final'` menjadi `'published'`.
+*   **Sisi Siswa:** Menggunakan `Student\NilaiController`. Di method `index()`, *query builder*-nya dengan tegas memfilter data nilai dengan kode: `->where('status', 'published')`. Itulah alasan teknis mengapa siswa tidak bisa melihat nilai sebelum di-publish wali kelas.
+
+### 3. View & Perbedaan Warna Tema (SD vs SMP)
+*   Jika penguji sadar bahwa tampilan dashboard siswa SD dan SMP warnanya berbeda, jelaskan bahwa **sistem ini menggunakan View dan Route yang terpisah berdasarkan jenjang unitnya**.
+*   **Penjelasan Kodenya:** Di file `routes/student.php`, terdapat pemisahan rute untuk dashboard:
+    *   `/student/sd/dashboard` diarahkan ke `SDDashboard::class`
+    *   `/student/smp/dashboard` diarahkan ke `SMPDashboard::class`
+*   Di bagian **Views** (folder `resources/views/student/`), terdapat *blade template* yang berbeda untuk folder `sd/` dan `smp/`. Hal ini memungkinkan penyematan *class* warna Tailwind CSS yang berbeda secara dinamis sesuai jenjang pendidikan siswa yang sedang *login*. Sistem jadi terasa lebih personal!

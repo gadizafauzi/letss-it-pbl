@@ -64,7 +64,7 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
         </div>
-        <form action="{{ route('admin.unit-cms.guru.store', $unit->id) }}" method="POST" class="p-6">
+        <form action="{{ route('admin.unit-cms.guru.store', $unit->id) }}" method="POST" enctype="multipart/form-data" class="p-6">
             @csrf
             <div class="space-y-4">
                 <div>
@@ -81,7 +81,14 @@
                         <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Urutan Tampil</label>
                         <input type="number" name="order" value="0" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
                     </div>
-                    <div class="flex items-center gap-2 mt-8">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Upload Foto (Opsional)</label>
+                    <input type="file" name="photo" accept="image/*" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                    <p class="text-xs text-slate-500 mt-1">Mengupload foto di sini akan otomatis memperbarui foto pada Master Data Guru tersebut.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-2 mt-2">
                         <input type="checkbox" name="is_active" id="guru_active_add" value="1" checked class="w-4 h-4 text-blue-500 border-slate-300 rounded focus:ring-blue-500">
                         <label for="guru_active_add" class="text-sm font-medium text-slate-700 cursor-pointer">Tampilkan</label>
                     </div>
@@ -104,7 +111,7 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
         </div>
-        <form id="form-edit-guru" method="POST" class="p-6">
+        <form id="form-edit-guru" method="POST" enctype="multipart/form-data" class="p-6">
             @csrf
             @method('PUT')
             <div class="space-y-4">
@@ -121,7 +128,14 @@
                         <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Urutan Tampil</label>
                         <input type="number" name="order" id="edit_g_order" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
                     </div>
-                    <div class="flex items-center gap-2 mt-8">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Upload Foto Baru (Opsional)</label>
+                    <input type="file" name="photo" accept="image/*" class="w-full px-4 py-2 border border-slate-300 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 text-sm">
+                    <p class="text-xs text-slate-500 mt-1">Mengupload foto di sini akan menimpa foto lama pada Master Data Guru tersebut.</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-2 mt-2">
                         <input type="checkbox" name="is_active" id="edit_g_active" value="1" class="w-4 h-4 text-blue-500 border-slate-300 rounded focus:ring-blue-500">
                         <label for="edit_g_active" class="text-sm font-medium text-slate-700 cursor-pointer">Tampilkan</label>
                     </div>
