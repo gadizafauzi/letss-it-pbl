@@ -24,6 +24,7 @@ class StoreUnitGuruRequest extends FormRequest
         return [
             'teacher_id' => 'required|exists:teachers,id',
             'order' => 'nullable|integer',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
 }
