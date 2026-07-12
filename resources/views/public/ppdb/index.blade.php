@@ -108,13 +108,8 @@
                 <div class="timeline-item-container reveal reveal-repeat {{ $revealClass }} {{ $delay }}">
                     <div class="timeline-node"></div>
                     
-                    {{-- Sisi Teks Floating (Desktop) --}}
-                    <div class="timeline-opposite hidden md:flex flex-col justify-center">
-                        <h3 class="text-lg md:text-xl font-bold text-[#002244] mb-1">{{ $j['judul'] }}</h3>
-                        @if(!empty($j['desc']))
-                        <p class="text-sm text-slate-500">{{ $j['desc'] }}</p>
-                        @endif
-                    </div>
+                    {{-- Spacer untuk menjaga layout selang-seling --}}
+                    <div class="timeline-opposite hidden md:block"></div>
 
                     {{-- Sisi Card --}}
                     <div class="timeline-content !p-0 overflow-hidden shadow-sm border border-slate-200 flex flex-col">
@@ -124,6 +119,10 @@
                         <div class="p-5 bg-white flex-grow">
                             <h3 class="text-base md:text-lg font-bold text-slate-800">{{ $j['card_title'] ?? $j['judul'] }}</h3>
                             
+                            @if(!empty($j['desc']))
+                            <p class="text-sm text-slate-500 mt-2">{{ $j['desc'] }}</p>
+                            @endif
+
                             @if(!empty($j['status']))
                             <div class="mt-4">
                                 @if(strtolower($j['status']) === 'dibuka')
