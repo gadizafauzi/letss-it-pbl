@@ -992,21 +992,28 @@
                 $displayAchievements = [];
                 if (isset($achievements) && !$achievements->isEmpty()) {
                     foreach ($achievements as $ach) {
-                        $studentPhoto = null;
-                        $studentName  = null;
+                        $personPhoto = null;
+                        $personName  = null;
+                        
                         if ($ach->student) {
-                            $studentName  = $ach->student->full_name;
-                            $studentPhoto = $ach->student->photo
+                            $personName  = $ach->student->full_name;
+                            $personPhoto = $ach->student->photo
                                 ? (Str::startsWith($ach->student->photo, 'http') ? $ach->student->photo : asset('storage/' . $ach->student->photo))
                                 : null;
+                        } elseif ($ach->teacher) {
+                            $personName  = $ach->teacher->full_name;
+                            $personPhoto = $ach->teacher->photo
+                                ? (Str::startsWith($ach->teacher->photo, 'http') ? $ach->teacher->photo : asset('storage/' . $ach->teacher->photo))
+                                : null;
                         }
+
                         $displayAchievements[] = [
                             'year'         => $ach->year,
                             'title'        => $ach->title,
                             'desc'         => $ach->description,
                             'level'        => $ach->level,
-                            'studentName'  => $studentName,
-                            'studentPhoto' => $studentPhoto,
+                            'studentName'  => $personName,
+                            'studentPhoto' => $personPhoto,
                         ];
                     }
                 }

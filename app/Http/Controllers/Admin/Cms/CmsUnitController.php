@@ -232,6 +232,18 @@ class CmsUnitController extends Controller
             return redirect()->back()->with('error', 'Guru tersebut sudah ditambahkan!');
         }
 
+        // Handle photo upload shortcut for Teacher master data
+        if ($request->hasFile('photo')) {
+            $teacher = \App\Models\Teacher::find($request->teacher_id);
+            if ($teacher) {
+                if ($teacher->photo && \Illuminate\Support\Facades\Storage::disk('public')->exists($teacher->photo)) {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($teacher->photo);
+                }
+                $path = $request->file('photo')->store('teachers', 'public');
+                $teacher->update(['photo' => $path]);
+            }
+        }
+
         CmsUnitTeacher::create([
             'unit_id' => $id,
             'teacher_id' => $request->teacher_id,
@@ -252,6 +264,18 @@ class CmsUnitController extends Controller
         // check if changing to another existing
         if ($request->teacher_id != $guru->teacher_id && CmsUnitTeacher::where('unit_id', $id)->where('teacher_id', $request->teacher_id)->exists()) {
             return redirect()->back()->with('error', 'Guru tersebut sudah ada di daftar!');
+        }
+
+        // Handle photo upload shortcut for Teacher master data
+        if ($request->hasFile('photo')) {
+            $teacher = \App\Models\Teacher::find($request->teacher_id);
+            if ($teacher) {
+                if ($teacher->photo && \Illuminate\Support\Facades\Storage::disk('public')->exists($teacher->photo)) {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($teacher->photo);
+                }
+                $path = $request->file('photo')->store('teachers', 'public');
+                $teacher->update(['photo' => $path]);
+            }
         }
 
         $guru->update([
