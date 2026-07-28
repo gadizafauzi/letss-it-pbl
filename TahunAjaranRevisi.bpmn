@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" 
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" 
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" 
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI" 
+                  id="Definitions_1" 
+                  targetNamespace="http://bpmn.io/schema/bpmn" 
+                  exporter="Camunda Modeler" exporterVersion="4.0.0">
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Participant_WebsiteSekolah" name="Website Sekolah" processRef="Process_WebsiteSekolah" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_WebsiteSekolah" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_1">
+      <bpmn:lane id="Lane_Admin" name="Admin">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_MembukaMenu</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_MenampilkanDaftar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_MenampilkanPesan</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Gabung</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Sistem" name="Sistem">
+        <bpmn:flowNodeRef>Task_MengambilData</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Tersedia</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    
+    <bpmn:userTask id="Task_MembukaMenu" name="Membuka Menu Tahun Ajaran">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:serviceTask id="Task_MengambilData" name="Mengambil Data Tahun Ajaran">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    
+    <bpmn:exclusiveGateway id="Gateway_Tersedia" name="Data Tersedia?">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_Ya</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Tidak</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:userTask id="Task_MenampilkanDaftar" name="Menampilkan Daftar Tahun Ajaran">
+      <bpmn:incoming>Flow_Ya</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:userTask id="Task_MenampilkanPesan" name="Menampilkan Pesan Data Tidak Tersedia">
+      <bpmn:incoming>Flow_Tidak</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:userTask>
+    
+    <bpmn:exclusiveGateway id="Gateway_Gabung" name="Gabung Lagi">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    
+    <bpmn:endEvent id="EndEvent_1" name="End">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+    </bpmn:endEvent>
+    
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_MembukaMenu" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Task_MembukaMenu" targetRef="Task_MengambilData" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Task_MengambilData" targetRef="Gateway_Tersedia" />
+    <bpmn:sequenceFlow id="Flow_Ya" name="Ya" sourceRef="Gateway_Tersedia" targetRef="Task_MenampilkanDaftar" />
+    <bpmn:sequenceFlow id="Flow_Tidak" name="Tidak" sourceRef="Gateway_Tersedia" targetRef="Task_MenampilkanPesan" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Task_MenampilkanDaftar" targetRef="Gateway_Gabung" />
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Task_MenampilkanPesan" targetRef="Gateway_Gabung" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Gateway_Gabung" targetRef="EndEvent_1" />
+    
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="Participant_Shape" bpmnElement="Participant_WebsiteSekolah" isHorizontal="true">
+        <dc:Bounds x="100" y="100" width="700" height="500" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Admin_Shape" bpmnElement="Lane_Admin" isHorizontal="true">
+        <dc:Bounds x="130" y="100" width="670" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Sistem_Shape" bpmnElement="Lane_Sistem" isHorizontal="true">
+        <dc:Bounds x="130" y="350" width="670" height="250" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="StartEvent_1_Shape" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="210" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_MembukaMenu_Shape" bpmnElement="Task_MembukaMenu">
+        <dc:Bounds x="220" y="190" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_MengambilData_Shape" bpmnElement="Task_MengambilData">
+        <dc:Bounds x="220" y="400" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_Tersedia_Shape" bpmnElement="Gateway_Tersedia" isMarkerVisible="true">
+        <dc:Bounds x="370" y="415" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_MenampilkanDaftar_Shape" bpmnElement="Task_MenampilkanDaftar">
+        <dc:Bounds x="450" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Task_MenampilkanPesan_Shape" bpmnElement="Task_MenampilkanPesan">
+        <dc:Bounds x="450" y="250" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="Gateway_Gabung_Shape" bpmnElement="Gateway_Gabung" isMarkerVisible="true">
+        <dc:Bounds x="600" y="190" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      
+      <bpmndi:BPMNShape id="EndEvent_1_Shape" bpmnElement="EndEvent_1">
+        <dc:Bounds x="700" y="197" width="36" height="36" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNEdge id="Flow_1_Edge" bpmnElement="Flow_1">
+        <di:waypoint x="186" y="228" />
+        <di:waypoint x="220" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_Edge" bpmnElement="Flow_2">
+        <di:waypoint x="270" y="270" />
+        <di:waypoint x="270" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_Edge" bpmnElement="Flow_3">
+        <di:waypoint x="320" y="440" />
+        <di:waypoint x="370" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Ya_Edge" bpmnElement="Flow_Ya">
+        <di:waypoint x="395" y="415" />
+        <di:waypoint x="395" y="160" />
+        <di:waypoint x="450" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Tidak_Edge" bpmnElement="Flow_Tidak">
+        <di:waypoint x="420" y="440" />
+        <di:waypoint x="430" y="440" />
+        <di:waypoint x="430" y="290" />
+        <di:waypoint x="450" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_Edge" bpmnElement="Flow_4">
+        <di:waypoint x="550" y="160" />
+        <di:waypoint x="575" y="160" />
+        <di:waypoint x="575" y="215" />
+        <di:waypoint x="600" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_Edge" bpmnElement="Flow_5">
+        <di:waypoint x="550" y="290" />
+        <di:waypoint x="575" y="290" />
+        <di:waypoint x="575" y="215" />
+        <di:waypoint x="600" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_Edge" bpmnElement="Flow_6">
+        <di:waypoint x="650" y="215" />
+        <di:waypoint x="700" y="215" />
+      </bpmndi:BPMNEdge>
+
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

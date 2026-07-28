@@ -114,7 +114,7 @@
                             <th class="px-4 py-3.5 text-center w-10">
                                 <input type="checkbox" id="checkAll" class="rounded border-slate-300 text-blue-600 focus:ring-blue-500 bg-white dark:bg-slate-900/50 dark:border-slate-600 dark:checked:bg-blue-500 cursor-pointer w-4 h-4 transition-all">
                             </th>
-                            @foreach (['No', 'NIP', 'Nama Guru', 'Unit', 'Jabatan', 'Status Kepegawaian', 'No. Telepon', 'Alamat', 'Status'] as $h)
+                            @foreach (['No', 'NIP', 'Nama Guru', 'Unit', 'Kelas Mengajar', 'Wali Kelas', 'Jabatan', 'Status Kepegawaian', 'No. Telepon', 'Alamat', 'Status'] as $h)
                                 <th
                                     class="px-4 py-3.5 text-left text-[10px] font-bold uppercase tracking-[.06em] text-slate-500 dark:text-slate-400 whitespace-nowrap">
                                     {{ $h }}
@@ -150,6 +150,43 @@
                                 </td>
                                 <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $teacher->unit->unit_name ?? '-' }}
+                                </td>
+                                {{-- KELAS MENGAJAR --}}
+                                <td class="px-4 py-3.5">
+                                    @php
+                                        $kelasNames = $teacher->teachingAssignments
+                                            ->map(fn($ta) => $ta->schoolClass?->class_name)
+                                            ->filter()
+                                            ->unique()
+                                            ->sort()
+                                            ->values();
+                                    @endphp
+                                    @if ($kelasNames->isNotEmpty())
+                                        <div class="flex flex-wrap gap-1">
+                                            @foreach ($kelasNames as $nama)
+                                                <span class="inline-block px-2 py-0.5 rounded-md text-[11px] font-semibold bg-indigo-50 text-indigo-600 dark:bg-indigo-500/20 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-500/30">
+                                                    {{ $nama }}
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <span class="text-[13px] text-slate-400 dark:text-slate-500">-</span>
+                                    @endif
+                                </td>
+                                {{-- WALI KELAS --}}
+                                <td class="px-4 py-3.5">
+                                    @if ($teacher->homeroomClasses->isNotEmpty())
+                                        <div class="flex flex-wrap gap-1">
+                                            @foreach ($teacher->homeroomClasses as $kelas)
+                                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-100 dark:border-emerald-500/30">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0"></span>
+                                                    {{ $kelas->class_name }}
+                                                </span>
+                                            @endforeach
+                                        </div>
+                                    @else
+                                        <span class="text-[13px] text-slate-400 dark:text-slate-500">-</span>
+                                    @endif
                                 </td>
                                 <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $teacher->position->name ?? '-' }}
@@ -205,7 +242,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="11">
+                                <td colspan="13">
                                     <div class="flex flex-col items-center justify-center py-20 text-center">
                                         <div class="mb-6 relative">
                                             <div class="absolute inset-0 bg-sky-200 dark:bg-sky-900 blur-[32px] opacity-30 rounded-full"></div>

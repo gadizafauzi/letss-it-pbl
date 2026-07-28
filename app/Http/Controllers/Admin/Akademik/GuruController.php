@@ -28,7 +28,7 @@ class GuruController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Teacher::with(['unit', 'position', 'user']);
+        $query = Teacher::with(['unit', 'position', 'user', 'homeroomClasses', 'teachingAssignments.schoolClass']);
 
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
