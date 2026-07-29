@@ -1,0 +1,43 @@
+[phases.setup]
+nixPkgs = [
+    "php83",
+    "php83Extensions.gd",
+    "php83Extensions.mbstring",
+    "php83Extensions.pdo",
+    "php83Extensions.pdo_mysql",
+    "php83Extensions.tokenizer",
+    "php83Extensions.xml",
+    "php83Extensions.curl",
+    "php83Extensions.zip",
+    "php83Extensions.bcmath",
+    "php83Extensions.fileinfo",
+    "php83Extensions.intl",
+    "php83Extensions.ctype",
+    "php83Extensions.openssl",
+    "php83Extensions.dom",
+    "php83Extensions.session",
+    "nodejs_20",
+    "nodePackages.npm",
+    "libgd",
+    "libjpeg",
+    "libpng",
+    "freetype"
+]
+
+[phases.install]
+cmds = [
+    "composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-req=ext-gd",
+    "npm ci",
+    "npm run build"
+]
+
+[phases.build]
+cmds = [
+    "php artisan config:cache",
+    "php artisan route:cache",
+    "php artisan view:cache",
+    "php artisan storage:link || true"
+]
+
+[start]
+cmd = "php artisan serve --host=0.0.0.0 --port=$PORT"
