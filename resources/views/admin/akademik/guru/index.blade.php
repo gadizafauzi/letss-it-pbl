@@ -146,7 +146,7 @@
                                 </td>
                                 <td class="px-4 py-3.5">
                                     <div class="text-[13px] font-bold text-slate-800 dark:text-slate-200">{{ $teacher->full_name }}</div>
-                                    <div class="text-[11px] text-slate-400 dark:text-slate-500">{{ $teacher->email ?? '' }}</div>
+                                    <div class="text-[11px] text-slate-400 dark:text-slate-500">{{ $teacher->user->email ?? '' }}</div>
                                 </td>
                                 <td class="px-4 py-3.5 text-[13px] text-slate-500 dark:text-slate-400">
                                     {{ $teacher->unit->unit_name ?? '-' }}
