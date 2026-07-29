@@ -37,9 +37,15 @@ RUN docker-php-ext-configure gd \
         --with-webp \
     && docker-php-ext-install gd
 
-# Enable Apache mod_rewrite & ensure only mpm_prefork is loaded (avoiding overlayfs MPM bug)
-RUN a2dismod mpm_event mpm_worker || true \
-    && a2enmod mpm_prefork \
+# Forcefully ensure ONLY mpm_prefork is enabled to avoid overlayfs MPM conflict bugs
+RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
+           /etc/apache2/mods-enabled/mpm_event.conf \
+           /etc/apache2/mods-enabled/mpm_worker.load \
+           /etc/apache2/mods-enabled/mpm_worker.conf \
+           /etc/apache2/mods-enabled/mpm_itk.load \
+           /etc/apache2/mods-enabled/mpm_itk.conf || true \
+    && ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load \
+    && ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf \
     && a2enmod rewrite
 
 # Install Node.js 20
