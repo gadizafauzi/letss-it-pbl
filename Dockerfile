@@ -4,6 +4,7 @@ FROM php:8.3-apache
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     libicu-dev \
+    libonig-dev \
     git \
     curl \
     zip \
