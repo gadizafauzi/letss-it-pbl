@@ -103,4 +103,4 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' \
 
 EXPOSE 80
 
-CMD bash -c "php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan route:cache && php artisan view:cache && apache2-foreground"
+CMD bash -c "php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan route:cache && php artisan view:cache && ls -la /etc/apache2/mods-enabled/ && apache2-foreground"
