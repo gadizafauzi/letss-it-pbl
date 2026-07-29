@@ -59,11 +59,17 @@ RUN npm ci
 # Copy semua file aplikasi
 COPY . .
 
+# Buat .env dari .env.example supaya artisan tidak crash saat build
+RUN cp .env.example .env
+
 # Build assets (Vite)
 RUN npm run build
 
-# Jalankan post-autoload dump
+# Jalankan post-autoload dump (butuh .env agar artisan bisa bootstrap)
 RUN COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --optimize
+
+# Generate APP_KEY sementara untuk build phase (akan di-override oleh Railway env vars)
+RUN php artisan key:generate --force
 
 # Buat direktori yang dibutuhkan & set permission
 RUN mkdir -p storage/framework/sessions \
@@ -79,5 +85,5 @@ RUN php artisan storage:link || true
 
 EXPOSE 8080
 
-# Start: cache config lalu jalankan server
-CMD bash -c "php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+# Start: clear cache dulu (supaya env vars Railway dipakai), lalu cache ulang & jalankan server
+CMD bash -c "php artisan config:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
