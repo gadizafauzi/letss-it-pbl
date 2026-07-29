@@ -46,7 +46,8 @@ RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
            /etc/apache2/mods-enabled/mpm_itk.conf || true \
     && ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load \
     && ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf \
-    && a2enmod rewrite
+    && a2enmod rewrite \
+    && ls -la /etc/apache2/mods-enabled/
 
 # Install Node.js 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
