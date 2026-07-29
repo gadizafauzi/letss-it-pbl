@@ -1,6 +1,6 @@
-FROM php:8.3-cli-bookworm
+FROM php:8.3-apache
 
-# Install system dependencies termasuk GD libraries
+# Install system dependencies + GD libraries
 RUN apt-get update && apt-get install -y \
     libgd-dev \
     libfreetype6-dev \
@@ -30,6 +30,9 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Enable Apache mod_rewrite (wajib untuk Laravel)
+RUN a2enmod rewrite
+
 # Install Node.js 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
@@ -38,7 +41,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-WORKDIR /app
+WORKDIR /var/www/html
 
 # Copy composer files dulu (cache layer)
 COPY composer.json composer.lock ./
@@ -53,23 +56,14 @@ RUN COMPOSER_ALLOW_SUPERUSER=1 composer install \
 # Copy package files
 COPY package.json package-lock.json ./
 
-# Install npm dependencies
+# Install npm dependencies & build assets
 RUN npm ci
-
-# Copy semua file aplikasi
 COPY . .
-
-# Buat .env dari .env.example supaya artisan tidak crash saat build
-RUN cp .env.example .env
-
-# Build assets (Vite)
 RUN npm run build
 
-# Jalankan post-autoload dump (butuh .env agar artisan bisa bootstrap)
-RUN COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --optimize
-
-# Generate APP_KEY sementara untuk build phase (akan di-override oleh Railway env vars)
-RUN php artisan key:generate --force
+# Buat .env dari .env.example agar artisan tidak crash saat build
+RUN cp .env.example .env \
+    && php artisan key:generate --force
 
 # Buat direktori yang dibutuhkan & set permission
 RUN mkdir -p storage/framework/sessions \
@@ -78,12 +72,24 @@ RUN mkdir -p storage/framework/sessions \
               storage/framework/testing \
               storage/logs \
               bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
+    && chmod -R 775 storage bootstrap/cache \
+    && chown -R www-data:www-data storage bootstrap/cache
 
 # Buat storage symlink
 RUN php artisan storage:link || true
 
-EXPOSE 8080
+# Konfigurasi Apache: arahkan DocumentRoot ke /public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
+    && echo '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>' >> /etc/apache2/sites-available/000-default.conf
 
-# Start: clear cache dulu (supaya env vars Railway dipakai), lalu cache ulang & jalankan server
-CMD bash -c "php artisan config:clear && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+# Set PORT default ke 80 (Apache default)
+EXPOSE 80
+
+# Start: jalankan migrate dulu, baru Apache
+CMD bash -c "\
+    php artisan config:clear && \
+    php artisan config:cache && \
+    php artisan migrate --force && \
+    php artisan route:cache && \
+    php artisan view:cache && \
+    apache2-foreground"
