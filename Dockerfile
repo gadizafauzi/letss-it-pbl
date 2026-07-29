@@ -37,8 +37,10 @@ RUN docker-php-ext-configure gd \
         --with-webp \
     && docker-php-ext-install gd
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Enable Apache mod_rewrite & ensure only mpm_prefork is loaded (avoiding overlayfs MPM bug)
+RUN a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork \
+    && a2enmod rewrite
 
 # Install Node.js 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
