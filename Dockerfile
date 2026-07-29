@@ -1,41 +1,47 @@
 FROM php:8.3-apache
 
-# Install system dependencies + GD libraries
-RUN apt-get update && apt-get install -y \
-    libgd-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libpng-dev \
-    libwebp-dev \
+# Install dependencies dasar
+RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     libicu-dev \
     git \
     curl \
     zip \
     unzip \
-    && docker-php-ext-configure gd \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install PHP extensions tanpa GD dulu
+RUN docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    mbstring \
+    bcmath \
+    zip \
+    intl \
+    pcntl \
+    exif
+
+# Install GD dependencies terpisah
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libwebp-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install GD extension terpisah
+RUN docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \
         --with-webp \
-    && docker-php-ext-install \
-        gd \
-        pdo \
-        pdo_mysql \
-        mbstring \
-        exif \
-        pcntl \
-        bcmath \
-        zip \
-        intl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-install gd
 
-# Enable Apache mod_rewrite (wajib untuk Laravel)
+# Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
 # Install Node.js 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs \
+    && apt-get install -y --no-install-recommends nodejs \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Composer
@@ -43,7 +49,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy composer files dulu (cache layer)
+# Copy composer files (cache layer)
 COPY composer.json composer.lock ./
 
 # Install PHP dependencies
@@ -53,43 +59,38 @@ RUN COMPOSER_ALLOW_SUPERUSER=1 composer install \
     --no-scripts \
     --no-interaction
 
-# Copy package files
+# Copy package files & install npm
 COPY package.json package-lock.json ./
-
-# Install npm dependencies & build assets
 RUN npm ci
+
+# Copy semua file
 COPY . .
+
+# Build Vite assets
 RUN npm run build
 
-# Buat .env dari .env.example agar artisan tidak crash saat build
+# Setup .env & key
 RUN cp .env.example .env \
     && php artisan key:generate --force
 
-# Buat direktori yang dibutuhkan & set permission
+# Setup storage & permissions
 RUN mkdir -p storage/framework/sessions \
               storage/framework/views \
               storage/framework/cache \
-              storage/framework/testing \
               storage/logs \
               bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache \
     && chown -R www-data:www-data storage bootstrap/cache
 
-# Buat storage symlink
+# Storage symlink
 RUN php artisan storage:link || true
 
-# Konfigurasi Apache: arahkan DocumentRoot ke /public
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
-    && echo '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>' >> /etc/apache2/sites-available/000-default.conf
+# Apache: arahkan ke /public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' \
+        /etc/apache2/sites-available/000-default.conf \
+    && echo '<Directory /var/www/html/public>\n    AllowOverride All\n    Require all granted\n</Directory>' \
+        >> /etc/apache2/sites-available/000-default.conf
 
-# Set PORT default ke 80 (Apache default)
 EXPOSE 80
 
-# Start: jalankan migrate dulu, baru Apache
-CMD bash -c "\
-    php artisan config:clear && \
-    php artisan config:cache && \
-    php artisan migrate --force && \
-    php artisan route:cache && \
-    php artisan view:cache && \
-    apache2-foreground"
+CMD bash -c "php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan route:cache && php artisan view:cache && apache2-foreground"
