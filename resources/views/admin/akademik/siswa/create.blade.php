@@ -25,20 +25,20 @@
 
                         {{-- TAB HEADER --}}
                         <div class="border-b border-slate-200 dark:border-slate-700/50 px-6 pt-5">
-                            <div class="flex flex-wrap gap-2">
+                            <div class="flex overflow-x-auto whitespace-nowrap scrollbar-none pb-px gap-2" style="-webkit-overflow-scrolling: touch;">
 
                                 <button type="button" data-tab-target="tab-data-pribadi"
-                                    class="tab-btn h-11 px-5 rounded-t-2xl border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 text-sm font-bold transition-all">
+                                    class="tab-btn shrink-0 h-11 px-5 rounded-t-2xl border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 text-sm font-bold transition-all">
                                     Data Pribadi
                                 </button>
 
                                 <button type="button" data-tab-target="tab-data-sekolah"
-                                    class="tab-btn h-11 px-5 rounded-t-2xl text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-sm font-semibold transition-all">
+                                    class="tab-btn shrink-0 h-11 px-5 rounded-t-2xl text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-sm font-semibold transition-all">
                                     Data Sekolah
                                 </button>
 
                                 <button type="button" data-tab-target="tab-data-keluarga"
-                                    class="tab-btn h-11 px-5 rounded-t-2xl text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-sm font-semibold transition-all">
+                                    class="tab-btn shrink-0 h-11 px-5 rounded-t-2xl text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 text-sm font-semibold transition-all">
                                     Data Keluarga
                                 </button>
 

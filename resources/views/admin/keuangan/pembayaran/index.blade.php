@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-5">
@@ -24,27 +24,27 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 
                 {{-- Status Tabs --}}
-                <div class="flex items-center gap-2 flex-wrap">
+                <div class="flex items-center gap-2 overflow-x-auto whitespace-nowrap scrollbar-none pb-1 w-full md:w-auto" style="-webkit-overflow-scrolling: touch;">
                     <a href="{{ route('admin.pembayaran.index') }}"
-                        class="h-9 px-4 rounded-full text-[13px] font-bold transition-all no-underline {{ !request('status') ? 'bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] text-white shadow-md shadow-[#4D7EEB]/30' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600' }} inline-flex items-center">
+                        class="shrink-0 h-9 px-4 rounded-full text-[13px] font-bold transition-all no-underline {{ !request('status') ? 'bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] text-white shadow-md shadow-[#4D7EEB]/30' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600' }} inline-flex items-center">
                         Semua
                     </a>
                     <a href="{{ route('admin.pembayaran.index', ['status' => 'pending']) }}"
-                        class="h-9 px-4 rounded-full text-[13px] font-bold transition-all no-underline {{ request('status') == 'pending' ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600' }} inline-flex items-center">
+                        class="shrink-0 h-9 px-4 rounded-full text-[13px] font-bold transition-all no-underline {{ request('status') == 'pending' ? 'bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600' }} inline-flex items-center">
                         Menunggu Verifikasi
                     </a>
                     <a href="{{ route('admin.pembayaran.index', ['status' => 'verified']) }}"
-                        class="h-9 px-4 rounded-full text-[13px] font-bold transition-all no-underline {{ request('status') == 'verified' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600' }} inline-flex items-center">
+                        class="shrink-0 h-9 px-4 rounded-full text-[13px] font-bold transition-all no-underline {{ request('status') == 'verified' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600' }} inline-flex items-center">
                         Terverifikasi
                     </a>
                 </div>
 
                 {{-- Search --}}
-                <form action="{{ route('admin.pembayaran.index') }}" method="GET" class="flex items-center gap-2">
+                <form action="{{ route('admin.pembayaran.index') }}" method="GET" class="w-full md:w-auto flex items-center gap-2">
                     @if(request('status'))
                         <input type="hidden" name="status" value="{{ request('status') }}">
                     @endif
-                    <div class="relative min-w-[250px]">
+                    <div class="relative w-full md:w-auto min-w-0 md:min-w-[250px]">
                         <i data-lucide="search"
                             class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
                         <input type="text" name="search" value="{{ request('search') }}"

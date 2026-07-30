@@ -1,16 +1,15 @@
 @if ($paginator->hasPages())
 <div style="
-    padding: 16px 24px;
-    border-top: 1px solid #f1f5f9;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
+    width: 100%;
 ">
 
     {{-- INFO --}}
-    <p style="font-size:13px;color:#64748b;margin:0;">
+    <p class="hidden sm:block" style="font-size:13px;color:#64748b;margin:0;">
         Menampilkan
         <strong style="color:#1e293b;font-weight:700;">{{ $paginator->firstItem() }}</strong>–<strong style="color:#1e293b;font-weight:700;">{{ $paginator->lastItem() }}</strong>
         dari

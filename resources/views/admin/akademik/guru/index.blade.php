@@ -62,7 +62,7 @@
         {{-- FILTER --}}
         <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
             <form id="filterForm" action="{{ route('admin.guru.index') }}" method="GET"
-                class="flex flex-wrap items-center gap-2.5">
+                class="flex flex-col sm:flex-row sm:items-center gap-2.5">
 
                 {{-- Search --}}
                 <div class="relative flex-1 min-w-[200px]">
@@ -71,36 +71,39 @@
                     <input id="searchInput" type="text" name="search" value="{{ request('search') }}"
                         placeholder="Cari nama guru atau NIP..."
                         class="w-full h-[42px] pl-9 pr-3 border-[1.5px] border-sky-100 rounded-[10px]
-                              bg-sky-50 text-[13px] text-slate-700 outline-none
-                              focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
+                               bg-sky-50 text-[13px] text-slate-700 outline-none
+                               focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
                 </div>
 
-                {{-- Unit --}}
-                <select name="unit" onchange="this.form.submit()"
-                    class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
-                           bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
-                           focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
-                    <option value="">Semua Unit</option>
-                    @foreach ($units as $unit)
-                        <option value="{{ $unit->id }}" {{ request('unit') == $unit->id ? 'selected' : '' }}>
-                            {{ $unit->unit_name }}
-                        </option>
-                    @endforeach
-                </select>
+                {{-- Group Unit & Jabatan Side-by-Side on Mobile --}}
+                <div class="flex flex-1 gap-2 w-full sm:w-auto sm:flex-initial">
+                    {{-- Unit --}}
+                    <select name="unit" onchange="this.form.submit()"
+                        class="flex-1 sm:flex-initial h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                               bg-sky-50 text-[11px] sm:text-[13px] text-slate-700 outline-none min-w-0 sm:min-w-[140px]
+                               focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
+                        <option value="">Unit</option>
+                        @foreach ($units as $unit)
+                            <option value="{{ $unit->id }}" {{ request('unit') == $unit->id ? 'selected' : '' }}>
+                                {{ $unit->unit_name }}
+                            </option>
+                        @endforeach
+                    </select>
 
-                {{-- Jabatan --}}
-                <select name="position" onchange="this.form.submit()"
-                    class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
-                           bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
-                           focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
-                    <option value="">Semua Jabatan</option>
-                    @foreach ($positions as $position)
-                        <option value="{{ $position->id }}"
-                            {{ request('position') == $position->id ? 'selected' : '' }}>
-                            {{ $position->name }}
-                        </option>
-                    @endforeach
-                </select>
+                    {{-- Jabatan --}}
+                    <select name="position" onchange="this.form.submit()"
+                        class="flex-1 sm:flex-initial h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                               bg-sky-50 text-[11px] sm:text-[13px] text-slate-700 outline-none min-w-0 sm:min-w-[140px]
+                               focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
+                        <option value="">Jabatan</option>
+                        @foreach ($positions as $position)
+                            <option value="{{ $position->id }}"
+                                {{ request('position') == $position->id ? 'selected' : '' }}>
+                                {{ $position->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
             </form>
         </div>

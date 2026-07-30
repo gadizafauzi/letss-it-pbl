@@ -33,10 +33,10 @@
         {{-- FILTER --}}
         <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
             <form id="filterForm" action="{{ route('admin.siswa.index') }}" method="GET"
-                class="flex flex-wrap items-center gap-2.5">
+                class="flex flex-col sm:flex-row sm:items-center gap-2.5">
 
                 {{-- Search --}}
-                <div class="relative flex-1 min-w-[200px]">
+                <div class="relative flex-1 min-w-[200px] w-full">
                     <i data-lucide="search"
                         class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
                     <input id="searchInput" type="text" name="search" value="{{ request('search') }}"
@@ -46,44 +46,47 @@
                               focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-sky-100 dark:focus:ring-blue-900/30 transition-all">
                 </div>
 
-                {{-- Unit --}}
-                <select id="unitFilter" name="unit_id"
-                    class="h-[42px] px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
-                           bg-sky-50 dark:bg-slate-900/50 text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-[140px]
-                           focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-sky-100 dark:focus:ring-blue-900/30 transition-all">
-                    <option value="">Semua Unit</option>
-                    @foreach ($units as $unit)
-                        <option value="{{ $unit->id }}" {{ request('unit_id') == $unit->id ? 'selected' : '' }}>
-                            {{ $unit->unit_name }}
-                        </option>
-                    @endforeach
-                </select>
+                {{-- Group dropdowns side-by-side on mobile --}}
+                <div class="grid grid-cols-3 gap-2 w-full sm:flex sm:items-center sm:gap-2.5 sm:w-auto sm:flex-initial">
+                    {{-- Unit --}}
+                    <select id="unitFilter" name="unit_id"
+                        class="h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
+                               bg-sky-50 dark:bg-slate-900/50 text-[11px] sm:text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-0 sm:min-w-[140px]
+                               focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-sky-100 dark:focus:ring-blue-900/30 transition-all cursor-pointer">
+                        <option value="">Unit</option>
+                        @foreach ($units as $unit)
+                            <option value="{{ $unit->id }}" {{ request('unit_id') == $unit->id ? 'selected' : '' }}>
+                                {{ $unit->unit_name }}
+                            </option>
+                        @endforeach
+                    </select>
 
-                {{-- Kelas --}}
-                <select id="classFilter" name="class_id"
-                    class="h-[42px] px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
-                           bg-sky-50 dark:bg-slate-900/50 text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-[130px]
-                           focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-sky-100 dark:focus:ring-blue-900/30 transition-all">
-                    <option value="">Semua Kelas</option>
-                    @foreach ($classes as $class)
-                        <option value="{{ $class->id }}" {{ request('class_id') == $class->id ? 'selected' : '' }}>
-                            {{ $class->class_name }}
-                        </option>
-                    @endforeach
-                </select>
+                    {{-- Kelas --}}
+                    <select id="classFilter" name="class_id"
+                        class="h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
+                               bg-sky-50 dark:bg-slate-900/50 text-[11px] sm:text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-0 sm:min-w-[130px]
+                               focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-sky-100 dark:focus:ring-blue-900/30 transition-all cursor-pointer">
+                        <option value="">Kelas</option>
+                        @foreach ($classes as $class)
+                            <option value="{{ $class->id }}" {{ request('class_id') == $class->id ? 'selected' : '' }}>
+                                {{ $class->class_name }}
+                            </option>
+                        @endforeach
+                    </select>
 
-                {{-- Status --}}
-                <select name="status"
-                    class="h-[42px] px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
-                           bg-sky-50 dark:bg-slate-900/50 text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-[130px]
-                           focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-sky-100 dark:focus:ring-blue-900/30 transition-all">
-                    <option value="">Semua Status</option>
-                    <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
-                    <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
-                    <option value="graduated" {{ request('status') == 'graduated' ? 'selected' : '' }}>Tamat</option>
-                    <option value="transfer" {{ request('status') == 'transfer' ? 'selected' : '' }}>Pindah</option>
-                    <option value="dropout" {{ request('status') == 'dropout' ? 'selected' : '' }}>DO</option>
-                </select>
+                    {{-- Status --}}
+                    <select name="status"
+                        class="h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
+                               bg-sky-50 dark:bg-slate-900/50 text-[11px] sm:text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-0 sm:min-w-[130px]
+                               focus:border-sky-400 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-slate-800 focus:ring-2 focus:ring-sky-100 dark:focus:ring-blue-900/30 transition-all cursor-pointer">
+                        <option value="">Status</option>
+                        <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
+                        <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>
+                        <option value="graduated" {{ request('status') == 'graduated' ? 'selected' : '' }}>Tamat</option>
+                        <option value="transfer" {{ request('status') == 'transfer' ? 'selected' : '' }}>Pindah</option>
+                        <option value="dropout" {{ request('status') == 'dropout' ? 'selected' : '' }}>DO</option>
+                    </select>
+                </div>
 
             </form>
         </div>
@@ -553,7 +556,8 @@
                 unitFilter.addEventListener('change', function() {
                     const unitId = this.value;
                     if (classFilter) {
-                        classFilter.innerHTML = '<option value="">Semua Kelas</option>';
+                        const placeholder = window.innerWidth < 640 ? 'Kelas' : 'Semua Kelas';
+                        classFilter.innerHTML = `<option value="">${placeholder}</option>`;
                     }
 
                     if (unitId && classFilter) {

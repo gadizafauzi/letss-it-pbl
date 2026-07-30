@@ -27,25 +27,16 @@
 
                         {{-- TAB HEADER --}}
                         <div class="border-b border-slate-200 px-6 pt-5">
-
-                            <div class="flex flex-wrap gap-2">
-
+                            <div class="flex overflow-x-auto whitespace-nowrap scrollbar-none pb-px gap-2" style="-webkit-overflow-scrolling: touch;">
                                 <button type="button" data-tab-target="tab-data-pribadi"
-                                    class="tab-button h-11 px-5 rounded-t-2xl border-b-2 border-blue-500 text-blue-600 bg-blue-50 text-sm font-bold transition-all">
-
+                                    class="tab-button shrink-0 h-11 px-5 rounded-t-2xl border-b-2 border-blue-500 text-blue-600 bg-blue-50 text-sm font-bold transition-all">
                                     Data Pribadi
-
                                 </button>
-
                                 <button type="button" data-tab-target="tab-data-kepegawaian"
-                                    class="tab-button h-11 px-5 rounded-t-2xl text-slate-500 hover:text-blue-600 hover:bg-blue-50 text-sm font-semibold transition-all">
-
+                                    class="tab-button shrink-0 h-11 px-5 rounded-t-2xl text-slate-500 hover:text-blue-600 hover:bg-blue-50 text-sm font-semibold transition-all">
                                     Data Kepegawaian
-
                                 </button>
-
                             </div>
-
                         </div>
 
                         {{-- FORM CONTENT --}}

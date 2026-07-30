@@ -29,13 +29,13 @@
                             @enderror
                         </div>
 
-                        <div class="flex gap-3 pt-2">
+                        <div class="flex flex-col sm:flex-row gap-3 pt-2">
                             <button type="submit"
-                                class="h-12 px-8 rounded-2xl bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white font-bold shadow-md shadow-[#4D7EEB]/30 transition-all border-none cursor-pointer">
+                                class="w-full sm:w-auto h-12 px-8 rounded-2xl bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 text-white font-bold shadow-md shadow-[#4D7EEB]/30 transition-all border-none cursor-pointer">
                                 Simpan
                             </button>
                             <a href="{{ route('admin.unit.index') }}"
-                                class="h-12 px-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold inline-flex items-center justify-center transition-all no-underline">
+                                class="w-full sm:w-auto h-12 px-8 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold inline-flex items-center justify-center transition-all no-underline">
                                 Batal
                             </a>
                         </div>
