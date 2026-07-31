@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-5">
@@ -23,10 +23,10 @@
 
         {{-- FILTER & SEARCH --}}
         <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
-            <form id="filterForm" action="{{ route('admin.kelas.index') }}" method="GET" class="flex flex-wrap items-center gap-2.5">
+            <form id="filterForm" action="{{ route('admin.kelas.index') }}" method="GET" class="flex flex-col sm:flex-row sm:items-center gap-2.5">
 
                 {{-- Search --}}
-                <div class="relative flex-1 min-w-[200px]">
+                <div class="relative flex-1 min-w-[200px] w-full">
                     <i data-lucide="search"
                         class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
                     <input id="searchInput" type="text" name="search" value="{{ request('search') }}"
@@ -38,10 +38,10 @@
 
                 {{-- Unit --}}
                 <select name="unit_id" onchange="this.form.submit()"
-                    class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
-                           bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
+                    class="h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                           bg-sky-50 text-[11px] sm:text-[13px] text-slate-700 outline-none w-full sm:w-auto sm:min-w-[140px]
                            focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
-                    <option value="">Semua Unit</option>
+                    <option value="">Unit</option>
                     @foreach ($units as $unit)
                         <option value="{{ $unit->id }}" {{ request('unit_id') == $unit->id ? 'selected' : '' }}>
                             {{ $unit->unit_name }}

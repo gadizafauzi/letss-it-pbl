@@ -10,14 +10,14 @@
 
         {{-- FILTER --}}
         <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
-            <form action="{{ route('admin.laporan-keuangan.index') }}" method="GET" class="flex flex-wrap items-center gap-4">
+            <form action="{{ route('admin.laporan-keuangan.index') }}" method="GET" class="flex flex-row items-center gap-3">
                 
                 {{-- Bulan --}}
                 <div class="flex items-center gap-2">
                     <label class="text-[13px] font-bold text-slate-700 dark:text-slate-300">Bulan:</label>
                     <select name="month" onchange="this.form.submit()"
-                        class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
-                               bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
+                        class="h-[42px] px-2 border-[1.5px] border-sky-100 rounded-[10px]
+                               bg-sky-50 text-[11px] sm:text-[13px] text-slate-700 outline-none
                                focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
                         @for($i = 1; $i <= 12; $i++)
                             <option value="{{ sprintf('%02d', $i) }}" {{ $month == sprintf('%02d', $i) ? 'selected' : '' }}>
@@ -31,8 +31,8 @@
                 <div class="flex items-center gap-2">
                     <label class="text-[13px] font-bold text-slate-700 dark:text-slate-300">Tahun:</label>
                     <select name="year" onchange="this.form.submit()"
-                        class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
-                               bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[120px]
+                        class="h-[42px] px-2 border-[1.5px] border-sky-100 rounded-[10px]
+                               bg-sky-50 text-[11px] sm:text-[13px] text-slate-700 outline-none
                                focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
                         @for($y = 2024; $y <= date('Y') + 1; $y++)
                             <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>{{ $y }}</option>

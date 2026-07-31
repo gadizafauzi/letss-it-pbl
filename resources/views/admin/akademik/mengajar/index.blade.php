@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
     <div class="space-y-5">
@@ -21,7 +21,7 @@
 
         {{-- FILTER --}}
         <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
-            <form id="filterForm" action="{{ route('admin.mengajar.index') }}" method="GET" class="flex flex-wrap items-center gap-2.5">
+            <form id="filterForm" action="{{ route('admin.mengajar.index') }}" method="GET" class="flex flex-col sm:flex-row sm:items-center gap-2.5">
                 
                 {{-- Search --}}
                 <div class="relative flex-1 min-w-[200px]">
@@ -30,36 +30,39 @@
                     <input id="searchInput" type="text" name="search" value="{{ request('search') }}"
                         placeholder="Cari guru, mapel, atau kelas..."
                         class="w-full h-[42px] pl-9 pr-3 border-[1.5px] border-sky-100 rounded-[10px]
-                              bg-sky-50 text-[13px] text-slate-700 outline-none
-                              focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
+                               bg-sky-50 text-[13px] text-slate-700 outline-none
+                               focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all">
                 </div>
 
-                {{-- Tahun Ajaran --}}
-                <select name="academic_year_id" onchange="this.form.submit()"
-                    class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
-                           bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
-                           focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
-                    <option value="">Semua Tahun Ajaran</option>
-                    @foreach ($academicYears as $year)
-                        <option value="{{ $year->id }}" {{ request('academic_year_id') == $year->id ? 'selected' : '' }}>
-                            {{ $year->year }}
-                        </option>
-                    @endforeach
-                </select>
+                {{-- Group Side-by-Side on Mobile --}}
+                <div class="flex flex-1 gap-2 w-full sm:w-auto sm:flex-initial">
+                    {{-- Tahun Ajaran --}}
+                    <select name="academic_year_id" onchange="this.form.submit()"
+                        class="flex-1 sm:flex-initial h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                               bg-sky-50 text-[11px] sm:text-[13px] text-slate-700 outline-none min-w-0 sm:min-w-[140px]
+                               focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
+                        <option value="">Tahun Ajaran</option>
+                        @foreach ($academicYears as $year)
+                            <option value="{{ $year->id }}" {{ request('academic_year_id') == $year->id ? 'selected' : '' }}>
+                                {{ $year->year }}
+                            </option>
+                        @endforeach
+                    </select>
 
-                {{-- Kelas --}}
-                <select name="class_id" onchange="this.form.submit()"
-                    class="h-[42px] px-3 border-[1.5px] border-sky-100 rounded-[10px]
-                           bg-sky-50 text-[13px] text-slate-700 outline-none min-w-[140px]
-                           focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
-                    <option value="">Semua Kelas</option>
-                    @foreach ($classes as $class)
-                        <option value="{{ $class->id }}" {{ request('class_id') == $class->id ? 'selected' : '' }}>
-                            {{ $class->class_name }}
-                        </option>
-                    @endforeach
-                </select>
-
+                    {{-- Kelas --}}
+                    <select name="class_id" onchange="this.form.submit()"
+                        class="flex-1 sm:flex-initial h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 rounded-[10px]
+                               bg-sky-50 text-[11px] sm:text-[13px] text-slate-700 outline-none min-w-0 sm:min-w-[140px]
+                               focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-100 transition-all cursor-pointer">
+                        <option value="">Kelas</option>
+                        @foreach ($classes as $class)
+                            <option value="{{ $class->id }}" {{ request('class_id') == $class->id ? 'selected' : '' }}>
+                                {{ $class->class_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                
             </form>
         </div>
 

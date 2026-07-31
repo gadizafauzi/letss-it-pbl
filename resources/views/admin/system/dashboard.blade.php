@@ -10,7 +10,7 @@
     </div>
 
     {{-- STATS SECTION --}}
-    <div class="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-10">
         <x-admin.stats-card title="Total Siswa" value="{{ $stats['totalSiswa'] }}" icon="graduation-cap" color="text-blue-500 dark:text-blue-400"
             bg="bg-blue-50 dark:bg-blue-900/40" />
 

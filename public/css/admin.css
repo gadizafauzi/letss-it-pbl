@@ -509,81 +509,64 @@ nav::-webkit-scrollbar {
 
 @media (max-width: 1023px) {
 
-    /* SIDEBAR MINI */
+    /* SIDEBAR MINI ON MOBILE (ALWAYS VISIBLE ICONS) */
     .sidebar {
-        width: 72px;
-        min-width: 72px;
+        width: 72px !important;
+        min-width: 72px !important;
 
-        background: linear-gradient(to bottom right, #3b82f6, #38bdf8);
-        /* Match body background for mobile */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        z-index: 50 !important;
 
-        overflow: hidden;
-
-        transition: all 0.3s ease;
+        overflow: hidden !important;
+        transition: width 0.3s ease-in-out;
     }
 
-    /* HIDE TEXT MINI */
-    .sidebar .logo-text,
-    .sidebar .sidebar-title,
-    .sidebar .sidebar-text,
-    .sidebar .logout-text {
-        opacity: 0;
-        visibility: hidden;
-        width: 0;
-        height: 0;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        display: none;
+    /* HIDE TEXT LABELS BY DEFAULT ON MOBILE */
+    .sidebar:not(.expand) .logo-text,
+    .sidebar:not(.expand) .sidebar-title,
+    .sidebar:not(.expand) .sidebar-text,
+    .sidebar:not(.expand) .logout-text {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        width: 0 !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        display: none !important;
     }
 
     /* LOGO MOBILE MINI */
-    .sidebar>.h-20 {
+    .sidebar:not(.expand)>.h-20 {
         padding-left: 0 !important;
         padding-right: 0 !important;
         justify-content: center !important;
     }
 
-    .sidebar .logo-wrapper {
+    .sidebar:not(.expand) .logo-wrapper {
         gap: 0 !important;
         justify-content: center !important;
         width: 100% !important;
     }
 
-    /* CENTER ICON */
-    .sidebar .sidebar-link {
+    /* CENTER ICONS IN MINI SIDEBAR */
+    .sidebar:not(.expand) .sidebar-link {
         width: 50px !important;
         height: 50px !important;
         margin: 0 auto !important;
-
         justify-content: center !important;
         padding: 0 !important;
         gap: 0 !important;
     }
 
-    .sidebar .sidebar-link:hover {
-        transform: none;
-    }
-
-    .sidebar .sidebar-icon {
+    .sidebar:not(.expand) .sidebar-icon {
         margin: 0 !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-    }
-
-    .sidebar .logout-btn {
-        width: 50px !important;
-        height: 50px !important;
-        margin: 0 auto !important;
-
-        justify-content: center !important;
-        padding: 0 !important;
-        gap: 0 !important;
-    }
-
-    .sidebar .logout-btn:hover {
-        transform: none;
     }
 
     .sidebar nav {
@@ -591,29 +574,27 @@ nav::-webkit-scrollbar {
         padding-right: 0 !important;
     }
 
-    /* CONTENT SHIFT */
+    /* CONTENT SHIFTED AND FITS SCREEN EXACTLY (NO OVERFLOW) */
     #mainContent {
-        margin-left: 72px;
+        margin-left: 72px !important;
+        flex: none !important;
+        width: calc(100% - 72px) !important;
+        max-width: calc(100% - 72px) !important;
         transition: all 0.3s ease;
     }
 
     /* ========================================
-       SIDEBAR FULL
+       EXPANDED SIDEBAR (WHEN HAMBURGER IS ACTIVE)
     ======================================== */
-
     .sidebar.expand {
         width: 260px !important;
-
         min-width: 260px !important;
-
-        z-index: 60;
-
-        overflow-y: auto;
-
+        z-index: 60 !important;
+        overflow-y: auto !important;
         box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
     }
 
-    /* SHOW TEXT */
+    /* SHOW TEXT IN EXPANDED SIDEBAR */
     .sidebar.expand .logo-text,
     .sidebar.expand .sidebar-title,
     .sidebar.expand .sidebar-text,
@@ -626,7 +607,7 @@ nav::-webkit-scrollbar {
     }
 
     /* LOGO EXPAND */
-    .sidebar.expand > .h-20 {
+    .sidebar.expand>.h-20 {
         padding-left: 1rem !important;
         padding-right: 1.5rem !important;
         justify-content: space-between !important;
@@ -638,7 +619,7 @@ nav::-webkit-scrollbar {
         width: auto !important;
     }
 
-    /* NORMAL MENU */
+    /* NORMAL MENU EXPANDED */
     .sidebar.expand .sidebar-link {
         width: 100% !important;
         height: 50px !important;
@@ -648,17 +629,9 @@ nav::-webkit-scrollbar {
         gap: 14px !important;
     }
 
-    .sidebar.expand .logout-btn {
-        width: 100% !important;
-        height: 50px !important;
-        margin: 0 !important;
-        justify-content: center !important;
-        padding: 0 16px !important;
-    }
-
     /* OVERLAY */
     #sidebarOverlay {
-        z-index: 50;
+        z-index: 55;
     }
 }
 
@@ -833,4 +806,92 @@ html.dark input[readonly] {
 
 .tab-panel:not(.hidden) {
     animation: fadeInTab 0.35s ease-out forwards;
+}
+
+/* ========================================
+   SCROLLBAR UTILITIES
+======================================== */
+.scrollbar-none::-webkit-scrollbar {
+    display: none !important;
+}
+.scrollbar-none {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+/* ========================================
+   GLOBAL MOBILE FORM ACTIONS BUTTONS
+======================================== */
+@media (max-width: 639px) {
+    form div.flex.pt-2,
+    form div.flex.pt-3,
+    form div.flex.pt-4,
+    form div.flex.pt-5 {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 12px !important;
+    }
+    
+    form div.flex.pt-2 > button,
+    form div.flex.pt-2 > a,
+    form div.flex.pt-3 > button,
+    form div.flex.pt-3 > a,
+    form div.flex.pt-4 > button,
+    form div.flex.pt-4 > a,
+    form div.flex.pt-5 > button,
+    form div.flex.pt-5 > a {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        flex-shrink: 0 !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+    }
+}
+
+/* ========================================
+   GLOBAL MOBILE CMS & TABLE HEADERS
+======================================== */
+@media (max-width: 639px) {
+    .tab-content .flex.justify-between.items-center,
+    .tab-panel .flex.justify-between.items-center,
+    main .flex.justify-between.items-center {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+    
+    .tab-content .flex.justify-between.items-center > button,
+    .tab-content .flex.justify-between.items-center > a,
+    .tab-panel .flex.justify-between.items-center > button,
+    .tab-panel .flex.justify-between.items-center > a,
+    main .flex.justify-between.items-center > button,
+    main .flex.justify-between.items-center > a {
+        width: 100% !important;
+        justify-content: center !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* ========================================
+   GLOBAL MOBILE MODAL FIXES (PREVENT OVERFLOW)
+======================================== */
+@media (max-width: 639px) {
+    .fixed.inset-0.items-center.justify-center > div,
+    .fixed.inset-0.flex.items-center.justify-center > div,
+    div[id^="modal-"] > div {
+        width: calc(100% - 2rem) !important;
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+        max-width: 100% !important;
+    }
+}
+
+/* ========================================
+   STACKING CONTEXT FIX FOR FULL-SCREEN MODALS
+======================================== */
+body:has(.fixed.inset-0:not(.hidden)) #mainContent {
+    z-index: 60 !important;
 }

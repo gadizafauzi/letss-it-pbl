@@ -1,9 +1,10 @@
-FROM php:8.3-apache
+FROM php:8.4-apache
 
 # Install dependencies dasar
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libzip-dev \
     libicu-dev \
+    libonig-dev \
     git \
     curl \
     zip \
@@ -36,8 +37,17 @@ RUN docker-php-ext-configure gd \
         --with-webp \
     && docker-php-ext-install gd
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Forcefully ensure ONLY mpm_prefork is enabled to avoid overlayfs MPM conflict bugs
+RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
+           /etc/apache2/mods-enabled/mpm_event.conf \
+           /etc/apache2/mods-enabled/mpm_worker.load \
+           /etc/apache2/mods-enabled/mpm_worker.conf \
+           /etc/apache2/mods-enabled/mpm_itk.load \
+           /etc/apache2/mods-enabled/mpm_itk.conf || true \
+    && ln -sf /etc/apache2/mods-available/mpm_prefork.load /etc/apache2/mods-enabled/mpm_prefork.load \
+    && ln -sf /etc/apache2/mods-available/mpm_prefork.conf /etc/apache2/mods-enabled/mpm_prefork.conf \
+    && a2enmod rewrite \
+    && ls -la /etc/apache2/mods-enabled/
 
 # Install Node.js 20
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -93,4 +103,4 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' \
 
 EXPOSE 80
 
-CMD bash -c "php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan route:cache && php artisan view:cache && apache2-foreground"
+CMD bash -c "sed -i \"s/Listen 80/Listen \${PORT:-80}/g\" /etc/apache2/ports.conf && rm -f /etc/apache2/mods-enabled/mpm_event.load /etc/apache2/mods-enabled/mpm_event.conf /etc/apache2/mods-enabled/mpm_worker.load /etc/apache2/mods-enabled/mpm_worker.conf /etc/apache2/mods-enabled/mpm_itk.load /etc/apache2/mods-enabled/mpm_itk.conf || true && php artisan config:clear && php artisan config:cache && php artisan migrate --force && php artisan db:seed --force && php artisan route:cache && php artisan view:cache && apache2-foreground"

@@ -9,15 +9,15 @@
             <h1 class="text-[24px] font-bold text-slate-800 dark:text-slate-100 mb-1">Berita & Kegiatan</h1>
             <p class="text-sm text-slate-400 dark:text-slate-500">Kelola artikel berita dan kegiatan sekolah.</p>
         </div>
-        <div class="flex flex-wrap items-center gap-2.5">
+        <div class="flex flex-row items-center gap-2.5 w-full md:w-auto">
             <a href="{{ route('admin.berita.kategori.index') }}"
-                class="inline-flex items-center gap-2 h-[42px] px-4 rounded-xl text-[13px] font-semibold text-slate-600 dark:text-slate-300
-                       bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm no-underline">
+                class="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-[42px] px-4 rounded-xl text-[13px] font-semibold text-slate-600 dark:text-slate-300
+                       bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all shadow-sm no-underline whitespace-nowrap">
                 <i data-lucide="tag" class="w-4 h-4 text-slate-400"></i>Kategori
             </a>
             <a href="{{ route('admin.berita.posts.create') }}"
-                class="inline-flex items-center gap-2 h-[42px] px-5 rounded-xl text-[13px] font-bold text-white
-                       bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 shadow-md shadow-[#4D7EEB]/30 transition-all no-underline">
+                class="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 h-[42px] px-5 rounded-xl text-[13px] font-bold text-white
+                       bg-gradient-to-br from-[#8DAEF5] to-[#4D7EEB] hover:opacity-90 shadow-md shadow-[#4D7EEB]/30 transition-all no-underline whitespace-nowrap">
                 <i data-lucide="plus" class="w-4 h-4"></i>Tambah Berita
             </a>
         </div>
@@ -26,8 +26,8 @@
     {{-- TOAST --}}
     @if(session('success'))
         <div id="toast-success"
-            class="fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl shadow-green-500/20
-                  bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 transition-all duration-500">
+             class="fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl shadow-green-500/20
+                   bg-white/90 dark:bg-slate-800/90 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 transition-all duration-500">
             <div class="flex items-center justify-center w-10 h-10 rounded-full bg-green-100 dark:bg-green-500/20 text-green-600 dark:text-green-400 flex-shrink-0">
                 <i data-lucide="check-circle-2" class="w-5 h-5"></i>
             </div>
@@ -45,9 +45,9 @@
     {{-- FILTER --}}
     <div class="bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl border border-white/80 dark:border-slate-700/60 rounded-2xl px-5 py-4 shadow-sm">
         <form id="filterForm" action="{{ route('admin.berita.posts.index') }}" method="GET"
-            class="flex flex-wrap items-center gap-2.5">
+            class="flex flex-col sm:flex-row sm:items-center gap-2.5">
             {{-- Search --}}
-            <div class="relative flex-1 min-w-[200px]">
+            <div class="relative flex-1 min-w-[200px] w-full">
                 <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"></i>
                 <input id="searchInput" type="text" name="search" value="{{ request('search') }}"
                     placeholder="Cari judul berita..."
@@ -55,31 +55,37 @@
                            bg-sky-50 dark:bg-slate-700 text-[13px] text-slate-700 dark:text-slate-200 outline-none
                            focus:border-sky-400 focus:bg-white dark:focus:bg-slate-600 focus:ring-2 focus:ring-sky-100 transition-all">
             </div>
-            {{-- Kategori --}}
-            <select name="category" onchange="this.form.submit()"
-                class="h-[42px] px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
-                       bg-sky-50 dark:bg-slate-700 text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-[160px]
-                       focus:border-sky-400 focus:bg-white dark:focus:bg-slate-600 transition-all">
-                <option value="">Semua Kategori</option>
-                @foreach($categories as $cat)
-                <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
-                    {{ $cat->name }}
-                </option>
-                @endforeach
-            </select>
-            {{-- Status --}}
-            <select name="status" onchange="this.form.submit()"
-                class="h-[42px] px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
-                       bg-sky-50 dark:bg-slate-700 text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-[140px]
-                       focus:border-sky-400 focus:bg-white dark:focus:bg-slate-600 transition-all">
-                <option value="">Semua Status</option>
-                <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
-                <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
-            </select>
+            
+            {{-- Group Side-by-Side on Mobile --}}
+            <div class="flex flex-1 gap-2 w-full sm:w-auto sm:flex-initial">
+                {{-- Kategori --}}
+                <select name="category" onchange="this.form.submit()"
+                    class="flex-1 sm:flex-initial h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
+                           bg-sky-50 dark:bg-slate-700 text-[11px] sm:text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-0 sm:min-w-[160px]
+                           focus:border-sky-400 focus:bg-white dark:focus:bg-slate-600 transition-all cursor-pointer">
+                    <option value="">Kategori</option>
+                    @foreach($categories as $cat)
+                    <option value="{{ $cat->id }}" {{ request('category') == $cat->id ? 'selected' : '' }}>
+                        {{ $cat->name }}
+                    </option>
+                    @endforeach
+                </select>
+
+                {{-- Status --}}
+                <select name="status" onchange="this.form.submit()"
+                    class="flex-1 sm:flex-initial h-[42px] px-2 sm:px-3 border-[1.5px] border-sky-100 dark:border-slate-600 rounded-[10px]
+                           bg-sky-50 dark:bg-slate-700 text-[11px] sm:text-[13px] text-slate-700 dark:text-slate-200 outline-none min-w-0 sm:min-w-[140px]
+                           focus:border-sky-400 focus:bg-white dark:focus:bg-slate-600 transition-all cursor-pointer">
+                    <option value="">Status</option>
+                    <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Dipublikasikan</option>
+                    <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
+                </select>
+            </div>
+            
             @if(request()->hasAny(['search','category','status']))
             <a href="{{ route('admin.berita.posts.index') }}"
                 class="h-[42px] px-4 rounded-[10px] text-[13px] font-semibold text-slate-500 dark:text-slate-400
-                       bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all inline-flex items-center gap-1.5 no-underline">
+                       bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 transition-all inline-flex items-center justify-center gap-1.5 no-underline w-full sm:w-auto">
                 <i data-lucide="x" class="w-3.5 h-3.5"></i>Reset
             </a>
             @endif

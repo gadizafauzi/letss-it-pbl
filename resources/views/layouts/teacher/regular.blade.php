@@ -18,7 +18,7 @@
         }
     </script>
 
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.1">
     <link rel="stylesheet" href="{{ asset('css/teacher.css') }}">
     <!-- Load Regular Teacher Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/teacher/regular-theme.css') }}">

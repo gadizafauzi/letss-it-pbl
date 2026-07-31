@@ -13,6 +13,8 @@ use App\Http\Requests\Admin\Keuangan\SearchTagihanRequest;
 use App\Http\Requests\Admin\Keuangan\StoreTagihanRequest;
 use App\Http\Requests\Admin\Keuangan\BulkDestroyTagihanRequest;
 
+use App\Models\Unit;
+
 class TagihanController extends Controller
 {
     public function index(Request $request)
@@ -35,6 +37,10 @@ class TagihanController extends Controller
             });
         }
 
+        if ($request->has('unit_id') && $request->unit_id != '') {
+            $query->where('unit_id', $request->unit_id);
+        }
+
         if ($request->has('status') && $request->status != '') {
             if ($request->status == 'unpaid') {
                 $query->whereHas('invoices', function($q) {
@@ -48,8 +54,9 @@ class TagihanController extends Controller
         }
 
         $students = $query->paginate(20);
+        $units = Unit::all();
 
-        return view('admin.keuangan.tagihan.index', compact('students'));
+        return view('admin.keuangan.tagihan.index', compact('students', 'units'));
     }
 
     public function student(Student $student)

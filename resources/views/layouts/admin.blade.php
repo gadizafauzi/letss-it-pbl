@@ -38,7 +38,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.6">
 
     <style>
         body {
@@ -90,7 +90,7 @@
     @include('components.admin.toast')
 
     {{-- JS --}}
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/admin_v3.js') }}"></script>
 
     <script>
         lucide.createIcons();
@@ -214,9 +214,16 @@
         // UNSAVED CHANGES TRACKER
         let hasUnsavedChanges = false;
         let formIsSubmitting = false;
+        let isPageLoaded = false;
+
+        // Bypasses browser password manager auto-fills on load
+        setTimeout(() => {
+            isPageLoaded = true;
+        }, 1000);
 
         document.addEventListener('DOMContentLoaded', function() {
             const trackChanges = (e) => {
+                if (!isPageLoaded) return;
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
                     const form = e.target.closest('form');
                     // Hanya lacak form POST (form data), abaikan GET (form pencarian/filter)
