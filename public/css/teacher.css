@@ -465,29 +465,24 @@
 
     /* Main Content Offset transition */
     #mainContent {
+        margin-left: 64px !important;
+        width: calc(100% - 64px) !important;
         transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                    max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
-    #sidebar.sidebar-mobile-open ~ #sidebarOverlay {
-        left: 290px !important;
+    #sidebar.sidebar-mobile-open ~ #mainContent {
+        margin-left: 290px !important;
+        width: calc(100% - 290px) !important;
+        min-width: 480px;
     }
 }
 
 /* =============================================
-   OVERLAY MOBILE — menutupi konten (bukan sidebar)
+   OVERLAY MOBILE — Sembunyikan (karena user ingin tampilan terang tanpa blur)
    ============================================= */
 #sidebarOverlay {
-    left: 0 !important;
-}
-
-@media (min-width: 1025px) {
-    /* Desktop: reset overlay agar full width (untuk potensi penggunaan lain) */
-    #sidebarOverlay {
-        left: 0 !important;
-        display: none !important;
-    }
+    display: none !important;
 }
 
 /* FIX LAYOUT HEADER */

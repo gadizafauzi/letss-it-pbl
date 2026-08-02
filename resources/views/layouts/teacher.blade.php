@@ -19,7 +19,7 @@
     </script>
 
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.8">
-    <link rel="stylesheet" href="{{ asset('css/teacher.css') }}?v=1.0.3">
+    <link rel="stylesheet" href="{{ asset('css/teacher.css') }}?v=2.0.0">
 
     <style>
         @php
@@ -102,7 +102,7 @@
 
 <x-shared.logout-modal id="teacherLogoutModal" cancelId="teacherCancelLogout" action="{{ route('logout') }}" />
 
-<script src="{{ asset('js/teacher.js') }}?v=1.0.1"></script>
+<script src="{{ asset('js/teacher.js') }}?v=2.0.0"></script>
 <script>
     lucide.createIcons();
 

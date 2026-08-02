@@ -585,8 +585,14 @@ nav::-webkit-scrollbar {
                     max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .sidebar.expand ~ #sidebarOverlay {
-        left: 260px !important;
+    .sidebar.expand ~ #mainContent {
+        margin-left: 260px !important;
+        width: calc(100% - 260px) !important;
+        min-width: 480px;
+    }
+
+    #sidebarOverlay {
+        display: none !important;
     }
 
     /* ========================================

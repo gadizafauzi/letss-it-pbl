@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.8">
-    <link rel="stylesheet" href="{{ asset('css/student.css') }}?v=1.0.3">
+    <link rel="stylesheet" href="{{ asset('css/student.css') }}?v=2.0.0">
     <!-- Load SD Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/student/sd-theme.css') }}">
 
@@ -48,7 +48,7 @@
 
 <x-shared.logout-modal id="studentLogoutModal" cancelId="studentCancelLogout" action="{{ route('logout') }}" />
 
-<script src="{{ asset('js/students.js') }}?v=1.0.1"></script>
+<script src="{{ asset('js/students.js') }}?v=2.0.0"></script>
 
 </body>
 </html>
