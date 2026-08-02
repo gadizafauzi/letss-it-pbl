@@ -462,14 +462,26 @@
     #sidebar.sidebar-mobile-open .active-sidebar .sidebar-text {
         color: #1e3a6e !important;
     }
+
+    /* Main Content Offset transition */
+    #mainContent {
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #sidebar.sidebar-mobile-open ~ #mainContent {
+        margin-left: 290px !important;
+        width: calc(100% - 290px) !important;
+        max-width: calc(100% - 290px) !important;
+    }
 }
 
 /* =============================================
    OVERLAY MOBILE — menutupi konten (bukan sidebar)
-   Offset kiri 64px agar icon strip tetap terlihat
    ============================================= */
 #sidebarOverlay {
-    left: 64px !important;    /* Mulai dari tepi kanan icon strip */
+    left: 0 !important;
 }
 
 @media (min-width: 1025px) {

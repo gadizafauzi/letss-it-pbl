@@ -18,8 +18,8 @@
         }
     </script>
 
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.7">
-    <link rel="stylesheet" href="{{ asset('css/teacher.css') }}?v=1.0.2">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.8">
+    <link rel="stylesheet" href="{{ asset('css/teacher.css') }}?v=1.0.3">
     <!-- Load Regular Teacher Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/teacher/regular-theme.css') }}">
 
@@ -30,9 +30,9 @@
 
 <body class="bg-[var(--theme-bg-workspace)] text-[var(--text-main)] overflow-hidden transition-colors duration-300">
 
-<div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
-
 <div class="flex h-screen overflow-hidden">
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
     @include('components.teacher.regular-sidebar')
 

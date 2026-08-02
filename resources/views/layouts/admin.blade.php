@@ -38,7 +38,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.7">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.8">
 
     <style>
         body {

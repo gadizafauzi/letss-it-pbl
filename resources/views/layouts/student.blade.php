@@ -12,8 +12,8 @@
     <!-- Chart.js for GPA line chart -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.7">
-    <link rel="stylesheet" href="{{ asset('css/student.css') }}?v=1.0.2">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.8">
+    <link rel="stylesheet" href="{{ asset('css/student.css') }}?v=1.0.3">
 
     <script>
         // Prevent FOUC
@@ -212,9 +212,9 @@
 
 <body class="bg-[var(--theme-bg-workspace)] text-[var(--text-main)] overflow-hidden transition-colors duration-300">
 
-<div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
-
 <div class="flex h-[100dvh] w-full overflow-hidden max-w-full">
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
     @include('components.student.sidebar')
 
