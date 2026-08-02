@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.1">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.7">
     <link rel="stylesheet" href="{{ asset('css/student.css') }}">
     <!-- Load SD Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/student/sd-theme.css') }}">

@@ -892,6 +892,6 @@ html.dark input[readonly] {
 /* ========================================
    STACKING CONTEXT FIX FOR FULL-SCREEN MODALS
 ======================================== */
-body:has(.fixed.inset-0:not(.hidden)) #mainContent {
+body:has(.fixed.inset-0:not(.hidden):not(#sidebarOverlay)) #mainContent {
     z-index: 60 !important;
 }
