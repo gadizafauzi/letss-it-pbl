@@ -214,9 +214,9 @@
 
 <div class="flex h-[100dvh] w-full overflow-hidden max-w-full">
 
-    <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
-
     @include('components.student.sidebar')
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
     {{-- Konten utama: pada mobile diberi margin-left 64px agar icon strip tidak menutupi konten --}}
     <div id="mainContent" class="flex-1 flex flex-col overflow-hidden">

@@ -32,9 +32,9 @@
 
 <div class="flex h-[100dvh] w-full overflow-hidden max-w-full">
 
-    <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
-
     @include('components.student.sd.sidebar')
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
     <div id="mainContent" class="flex-1 flex flex-col overflow-hidden">
         @include('components.shared.header-student')

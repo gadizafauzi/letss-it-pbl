@@ -847,4 +847,8 @@ header {
         width: calc(100% - 290px) !important;
         max-width: calc(100% - 290px) !important;
     }
+
+    #sidebar.sidebar-mobile-open ~ #sidebarOverlay {
+        left: 290px !important;
+    }
 }

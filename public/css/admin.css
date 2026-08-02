@@ -591,6 +591,10 @@ nav::-webkit-scrollbar {
         max-width: calc(100% - 260px) !important;
     }
 
+    .sidebar.expand ~ #sidebarOverlay {
+        left: 260px !important;
+    }
+
     /* ========================================
        EXPANDED SIDEBAR (WHEN HAMBURGER IS ACTIVE)
     ======================================== */
