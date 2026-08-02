@@ -11,8 +11,8 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.1">
-    <link rel="stylesheet" href="{{ asset('css/student.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.8">
+    <link rel="stylesheet" href="{{ asset('css/student.css') }}?v=2.0.0">
     <!-- Load SMP Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/student/smp-theme.css') }}">
 
@@ -30,11 +30,11 @@
 
 <body class="bg-[var(--theme-bg-workspace)] text-[var(--text-main)] overflow-hidden transition-colors duration-300">
 
-<div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
-
 <div class="flex h-[100dvh] w-full overflow-hidden max-w-full">
 
     @include('components.student.smp.sidebar')
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
     <div id="mainContent" class="flex-1 flex flex-col overflow-hidden">
         @include('components.shared.header-student')
@@ -48,7 +48,7 @@
 
 <x-shared.logout-modal id="studentLogoutModal" cancelId="studentCancelLogout" action="{{ route('logout') }}" />
 
-<script src="{{ asset('js/students.js') }}"></script>
+<script src="{{ asset('js/students.js') }}?v=2.0.0"></script>
 
 </body>
 </html>

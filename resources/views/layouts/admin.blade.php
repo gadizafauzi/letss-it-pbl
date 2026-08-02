@@ -38,7 +38,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- CSS --}}
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.6">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=2.0.0">
 
     <style>
         body {
@@ -50,14 +50,14 @@
 
 <body class="bg-[#F0F4FA] dark:bg-slate-900 text-slate-800 dark:text-slate-100 overflow-hidden transition-colors duration-300">
 
-    {{-- OVERLAY --}}
-    <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden z-40">
-    </div>
-
     <div class="flex h-screen overflow-hidden">
 
         {{-- SIDEBAR --}}
         @include('components.admin.sidebar')
+
+        {{-- OVERLAY --}}
+        <div id="sidebarOverlay" class="hidden fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden z-40">
+        </div>
 
         {{-- MAIN --}}
         <div id="mainContent" class="flex-1 flex flex-col overflow-hidden transition-all duration-300 relative z-10">
@@ -90,7 +90,7 @@
     @include('components.admin.toast')
 
     {{-- JS --}}
-    <script src="{{ asset('js/admin_v3.js') }}"></script>
+    <script src="{{ asset('js/admin_v3.js') }}?v=2.0.0"></script>
 
     <script>
         lucide.createIcons();

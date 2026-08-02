@@ -98,6 +98,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    const mobileCloseBtn = document.querySelector('.mobile-close-btn');
+    if (mobileCloseBtn) {
+        mobileCloseBtn.addEventListener('click', function () {
+            closeMobileSidebar();
+        });
+    }
+
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && window.innerWidth <= 1024) {
             closeMobileSidebar();

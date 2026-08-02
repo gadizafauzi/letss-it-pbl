@@ -18,8 +18,8 @@
         }
     </script>
 
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.1">
-    <link rel="stylesheet" href="{{ asset('css/teacher.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.8">
+    <link rel="stylesheet" href="{{ asset('css/teacher.css') }}?v=2.0.0">
 
     <style>
         @php
@@ -82,11 +82,11 @@
 
 <body class="bg-[var(--theme-bg-workspace)] text-[var(--text-main)] overflow-hidden transition-colors duration-300">
 
-<div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
-
 <div class="flex h-screen overflow-hidden">
 
     @include('components.teacher.sidebar')
+
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 hidden lg:hidden"></div>
 
     <div id="mainContent" class="flex-1 flex flex-col overflow-hidden">
 
@@ -102,7 +102,7 @@
 
 <x-shared.logout-modal id="teacherLogoutModal" cancelId="teacherCancelLogout" action="{{ route('logout') }}" />
 
-<script src="{{ asset('js/teacher.js') }}"></script>
+<script src="{{ asset('js/teacher.js') }}?v=2.0.0"></script>
 <script>
     lucide.createIcons();
 

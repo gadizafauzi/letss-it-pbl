@@ -580,7 +580,19 @@ nav::-webkit-scrollbar {
         flex: none !important;
         width: calc(100% - 72px) !important;
         max-width: calc(100% - 72px) !important;
-        transition: all 0.3s ease;
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar.expand ~ #mainContent {
+        margin-left: 260px !important;
+        width: calc(100% - 260px) !important;
+        min-width: 480px;
+    }
+
+    #sidebarOverlay {
+        display: none !important;
     }
 
     /* ========================================
@@ -892,6 +904,6 @@ html.dark input[readonly] {
 /* ========================================
    STACKING CONTEXT FIX FOR FULL-SCREEN MODALS
 ======================================== */
-body:has(.fixed.inset-0:not(.hidden)) #mainContent {
+body:has(.fixed.inset-0:not(.hidden):not(#sidebarOverlay)) #mainContent {
     z-index: 60 !important;
 }

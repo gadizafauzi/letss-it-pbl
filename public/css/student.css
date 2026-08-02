@@ -672,11 +672,11 @@ header {
 
 
 /* =============================================
-   MOBILE STATE (Max Width 1024px)
+   MOBILE STATE (Max Width 1023px)
    Default: hanya icon strip biru muda (64px) yang terlihat.
    Panel biru tua + teks tersembunyi sampai hamburger ditekan.
    ============================================= */
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
 
     /* Sidebar container: fixed, full height, hanya lebar icon strip */
     #sidebar {
@@ -688,6 +688,9 @@ header {
         left: 0 !important;
         top: 0 !important;
         bottom: 0 !important;
+        height: 100dvh !important;
+        min-height: 100dvh !important;
+        max-height: 100dvh !important;
         z-index: 50 !important;
         transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
                     background-color 0.3s ease !important;
@@ -814,25 +817,24 @@ header {
 }
 
 /* =============================================
-   OVERLAY MOBILE — menutupi konten (bukan sidebar)
-   Offset kiri 64px agar icon strip tetap terlihat
+   OVERLAY MOBILE — Sembunyikan (karena user ingin tampilan terang tanpa blur)
    ============================================= */
 #sidebarOverlay {
-    left: 64px !important;    /* Mulai dari tepi kanan icon strip */
+    display: none !important;
 }
 
-@media (min-width: 1025px) {
-    /* Desktop: reset overlay agar full width (untuk potensi penggunaan lain) */
-    #sidebarOverlay {
-        left: 0 !important;
-        display: none !important;
-    }
-}
 /* Main Content Offset */
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
     #mainContent {
-        margin-left: 64px;
-        width: calc(100% - 64px);
-        max-width: calc(100% - 64px);
+        margin-left: 64px !important;
+        width: calc(100% - 64px) !important;
+        transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    width 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    #sidebar.sidebar-mobile-open ~ #mainContent {
+        margin-left: 290px !important;
+        width: calc(100% - 290px) !important;
+        min-width: 480px;
     }
 }
