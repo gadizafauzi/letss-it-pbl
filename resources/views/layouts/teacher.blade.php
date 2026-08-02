@@ -19,7 +19,7 @@
     </script>
 
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.7">
-    <link rel="stylesheet" href="{{ asset('css/teacher.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/teacher.css') }}?v=1.0.2">
 
     <style>
         @php

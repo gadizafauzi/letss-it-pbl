@@ -109,7 +109,7 @@
     </nav>
 
     {{-- LOGOUT --}}
-    <div class="mt-auto shrink-0 mb-4 border-t border-slate-100/10 pt-5">
+    <div class="mt-auto shrink-0 mb-2 lg:mb-4 border-t border-slate-100/10 pt-3 lg:pt-5">
 
         <button type="button" id="studentLogoutBtn"
             class="sidebar-link w-full group !mb-0 !bg-transparent !shadow-none">

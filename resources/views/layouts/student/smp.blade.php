@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}?v=1.0.7">
-    <link rel="stylesheet" href="{{ asset('css/student.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/student.css') }}?v=1.0.2">
     <!-- Load SMP Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/student/smp-theme.css') }}">
 
