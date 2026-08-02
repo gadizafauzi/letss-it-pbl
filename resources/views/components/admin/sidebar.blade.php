@@ -5,18 +5,23 @@
     {{-- LOGO --}}
     <div class="h-20 border-b border-white/[0.06] dark:border-slate-700/50 flex items-center justify-between px-4 lg:px-6">
 
-        <div class="flex items-center gap-3 logo-wrapper">
+        <div class="flex items-center justify-between w-full">
+            <div class="flex items-center gap-3 logo-wrapper">
+                <div class="w-9 h-9 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl overflow-hidden shadow-lg shadow-black/5 dark:shadow-slate-900/50 border border-white/20 shrink-0">
+                    <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo MQ" class="w-full h-full object-cover">
+                </div>
 
-            <div class="w-9 h-9 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl overflow-hidden shadow-lg shadow-black/5 dark:shadow-slate-900/50 border border-white/20 shrink-0">
-                <img src="{{ asset('images/logo_jsit.png') }}" alt="Logo MQ" class="w-full h-full object-cover">
+                <div class="logo-text">
+                    <h1 class="text-sm font-extrabold tracking-tight text-white dark:text-slate-100">
+                        SIT Mutiara Qur'an
+                    </h1>
+                </div>
             </div>
 
-            <div class="logo-text">
-                <h1 class="text-sm font-extrabold tracking-tight text-white dark:text-slate-100">
-                    SIT Mutiara Qur'an
-                </h1>
-            </div>
-
+            <!-- Close Button for Mobile -->
+            <button type="button" class="mobile-close-btn lg:hidden text-white/70 hover:text-white transition-colors focus:outline-none shrink-0 pl-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
         </div>
 
     </div>

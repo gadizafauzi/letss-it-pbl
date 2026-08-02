@@ -48,7 +48,7 @@
 
 <x-shared.logout-modal id="teacherLogoutModal" cancelId="teacherCancelLogout" action="{{ route('logout') }}" />
 
-<script src="{{ asset('js/teacher.js') }}"></script>
+<script src="{{ asset('js/teacher.js') }}?v=1.0.1"></script>
 <script>
     lucide.createIcons();
 

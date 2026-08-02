@@ -128,6 +128,14 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
+        const mobileCloseBtn = document.querySelector('.mobile-close-btn');
+        if (mobileCloseBtn && sidebar && sidebarOverlay) {
+            mobileCloseBtn.addEventListener('click', function () {
+                sidebar.classList.remove('sidebar-mobile-open');
+                sidebarOverlay.classList.add('hidden');
+            });
+        }
+
         /* AUTO-SCROLL TO ACTIVE MENU */
         const activeMenu = document.querySelector('.sidebar-menu .active-sidebar');
         if (activeMenu) {

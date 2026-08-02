@@ -2,21 +2,26 @@
 
     {{-- LOGO --}}
     <div class="h-20 flex items-center px-6 shrink-0">
-        <div class="flex items-center gap-3 w-full">
+        <div class="flex items-center justify-between w-full">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg shrink-0 overflow-hidden" style="box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--theme-primary) 10%, transparent); box-shadow: 0 4px 6px -4px color-mix(in srgb, var(--theme-primary) 10%, transparent);">
+                    <img src="{{ asset('images/logomq.jpg') }}" alt="Logo" class="w-full h-full object-cover">
+                </div>
 
-            <div class="w-11 h-11 rounded-2xl bg-white flex items-center justify-center shadow-lg shrink-0 overflow-hidden" style="box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--theme-primary) 10%, transparent); box-shadow: 0 4px 6px -4px color-mix(in srgb, var(--theme-primary) 10%, transparent);">
-                <img src="{{ asset('images/logomq.jpg') }}" alt="Logo" class="w-full h-full object-cover">
+                <div class="logo-text flex-1 flex flex-col justify-center pr-4">
+                    <h1 class="text-sm font-extrabold tracking-tight">
+                        Wali Kelas Panel
+                    </h1>
+                    <p class="mt-0.5">
+                        Mutiara Qur'an
+                    </p>
+                </div>
             </div>
 
-            <div class="logo-text flex-1 flex flex-col justify-center pr-4">
-                <h1 class="text-sm font-extrabold tracking-tight">
-                    Wali Kelas Panel
-                </h1>
-                <p class="mt-0.5">
-                    Mutiara Qur'an
-                </p>
-            </div>
-
+            <!-- Close Button for Mobile -->
+            <button type="button" class="mobile-close-btn lg:hidden text-white/70 hover:text-white transition-colors focus:outline-none shrink-0 pl-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
         </div>
     </div>
 

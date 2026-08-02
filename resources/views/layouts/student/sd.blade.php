@@ -48,7 +48,7 @@
 
 <x-shared.logout-modal id="studentLogoutModal" cancelId="studentCancelLogout" action="{{ route('logout') }}" />
 
-<script src="{{ asset('js/students.js') }}"></script>
+<script src="{{ asset('js/students.js') }}?v=1.0.1"></script>
 
 </body>
 </html>

@@ -90,7 +90,7 @@
     @include('components.admin.toast')
 
     {{-- JS --}}
-    <script src="{{ asset('js/admin_v3.js') }}"></script>
+    <script src="{{ asset('js/admin_v3.js') }}?v=1.0.1"></script>
 
     <script>
         lucide.createIcons();

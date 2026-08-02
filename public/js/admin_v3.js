@@ -40,6 +40,14 @@ if (menuToggle) {
     });
 }
 
+const mobileCloseBtn = document.querySelector('.mobile-close-btn');
+if (mobileCloseBtn && sidebar && sidebarOverlay) {
+    mobileCloseBtn.addEventListener('click', () => {
+        sidebar.classList.remove('expand');
+        sidebarOverlay.classList.add('hidden');
+    });
+}
+
 /* ========================================
    DESKTOP TOGGLE
 ======================================== */

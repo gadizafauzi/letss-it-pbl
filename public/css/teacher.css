@@ -470,12 +470,6 @@
                     max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    #sidebar.sidebar-mobile-open ~ #mainContent {
-        margin-left: 290px !important;
-        width: calc(100% - 290px) !important;
-        max-width: calc(100% - 290px) !important;
-    }
-
     #sidebar.sidebar-mobile-open ~ #sidebarOverlay {
         left: 290px !important;
     }
