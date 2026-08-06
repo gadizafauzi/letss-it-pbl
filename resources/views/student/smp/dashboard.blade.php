@@ -2,6 +2,9 @@
 
 @php
     $unitName = strtolower($student->unit->unit_name ?? 'sd');
+    $unitKey = str_contains($unitName, 'smp') ? 'smp' : 'sd';
+    $settingKtm = \App\Models\CmsSetting::where('key', 'ktm_template_' . $unitKey)->first();
+    $ktmBgUrl = ($settingKtm && $settingKtm->value) ? asset('storage/' . $settingKtm->value) : asset('images/ktm' . $unitName . '.png');
 @endphp
 
 @section('content')
@@ -150,7 +153,7 @@
 
             <!-- Card Graphic component -->
             <div id="ktm-wrapper" class="w-full max-w-full overflow-hidden rounded-3xl mx-auto" style="aspect-ratio: 420/260; max-width: 420px;">
-                <div id="ktm-inner" class="w-[420px] h-[260px] text-slate-800 p-5 relative shadow-xl overflow-hidden border border-slate-200 origin-top-left" style="background-image: url('{{ asset('images/ktm' . $unitName . '.png') }}'); background-size: cover; background-position: center;">
+                <div id="ktm-inner" class="w-[420px] h-[260px] text-slate-800 p-5 relative shadow-xl overflow-hidden border border-slate-200 origin-top-left" style="background-image: url('{{ $ktmBgUrl }}'); background-size: cover; background-position: center;">
                 
                 <!-- Card Content -->
                 <div class="flex justify-between items-start mt-[70px] px-2">

@@ -48,11 +48,14 @@
     </div>
 
     @php
-        $unitName = strtolower($student->unit->unit_name ?? 'sd');
+        $unitKey = strtolower($student->unit->unit_name ?? 'sd');
+        $unitKey = str_contains($unitKey, 'smp') ? 'smp' : 'sd';
+        $settingKtm = \App\Models\CmsSetting::where('key', 'ktm_template_' . $unitKey)->first();
+        $ktmBgUrl = ($settingKtm && $settingKtm->value) ? asset('storage/' . $settingKtm->value) : asset('images/ktm' . $unitKey . '.png');
     @endphp
 
     <!-- Kartu Pelajar Card -->
-    <div class="print-card w-[480px] h-[300px] text-slate-800 rounded-3xl p-6 relative shadow-2xl overflow-hidden border border-slate-200" style="background-image: url('{{ asset('images/ktm' . ($unitName == 'smp' ? 'smp' : 'sd') . '.png') }}'); background-size: cover; background-position: center;">
+    <div class="print-card w-[480px] h-[300px] text-slate-800 rounded-3xl p-6 relative shadow-2xl overflow-hidden border border-slate-200" style="background-image: url('{{ $ktmBgUrl }}'); background-size: cover; background-position: center;">
         
         <!-- Card Body -->
         <div class="flex justify-between items-start mt-[80px] px-2">

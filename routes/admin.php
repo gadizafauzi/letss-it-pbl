@@ -196,6 +196,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         // Struktur Organisasi
         Route::put('/struktur-organisasi', [\App\Http\Controllers\Admin\Cms\CmsProfilController::class, 'updateStrukturOrganisasi'])->name('struktur.update');
     });
+    // CMS KTM Template
+    Route::prefix('admin/cms/ktm')->name('admin.cms.ktm.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\Cms\CmsKtmController::class, 'index'])->name('index');
+        Route::post('/', [\App\Http\Controllers\Admin\Cms\CmsKtmController::class, 'update'])->name('update');
+        Route::post('/reset', [\App\Http\Controllers\Admin\Cms\CmsKtmController::class, 'reset'])->name('reset');
+    });
+
     Route::prefix('admin/unit-cms')->name('admin.unit-cms.')->group(function () {
         Route::get('/', [\App\Http\Controllers\Admin\Cms\CmsUnitController::class, 'index'])->name('index');
         Route::get('/{id}', [\App\Http\Controllers\Admin\Cms\CmsUnitController::class, 'show'])->name('show');
