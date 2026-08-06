@@ -184,6 +184,13 @@
                     <span class="sidebar-text">Informasi PPDB</span>
                 </a>
 
+                {{-- TEMPLATE KTM --}}
+                <a href="{{ route('admin.cms.ktm.index') }}"
+                    class="sidebar-link {{ request()->routeIs('admin.cms.ktm.*') ? 'active-sidebar' : '' }}">
+                    <span class="sidebar-icon"><i data-lucide="id-card"></i></span>
+                    <span class="sidebar-text">Template KTM</span>
+                </a>
+
                 {{-- KONTAK --}}
                 <a href="{{ route('admin.kontak.index') }}"
                     class="sidebar-link {{ request()->routeIs('admin.kontak.*') ? 'active-sidebar' : '' }}">
