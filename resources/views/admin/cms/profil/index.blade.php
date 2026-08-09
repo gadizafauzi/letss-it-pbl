@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('content')
 <div class="mb-6">
@@ -29,6 +29,9 @@
         <button onclick="openTab('tab-hero')" id="btn-tab-hero" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-blue-500 text-blue-600 bg-white dark:bg-slate-800">
             Hero Section
         </button>
+        <button onclick="openTab('tab-profil-singkat')" id="btn-tab-profil-singkat" class="tab-btn whitespace-nowrap px-6 py-4 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
+            Profil Singkat & Sambutan
+        </button>
         <button onclick="openTab('tab-visi')" id="btn-tab-visi" class="tab-btn px-6 py-4 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
             Visi
         </button>
@@ -46,6 +49,9 @@
     <div class="p-6">
         {{-- TAB HERO --}}
         @include('admin.cms.profil.tabs.hero')
+
+        {{-- TAB PROFIL SINGKAT --}}
+        @include('admin.cms.profil.tabs.profil_singkat')
 
         {{-- TAB VISI --}}
         @include('admin.cms.profil.tabs.visi')

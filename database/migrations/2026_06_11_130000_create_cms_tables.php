@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('title');
             $table->text('subtitle')->nullable();
             $table->string('image')->nullable();
+            $table->string('image_2')->nullable();
+            $table->string('image_3')->nullable();
             $table->string('button_text')->nullable();
             $table->string('button_link')->nullable();
             $table->string('button_secondary_text')->nullable();
@@ -165,6 +167,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('unit_id')->constrained('units')->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained('teachers')->cascadeOnDelete();
+            $table->string('jabatan')->nullable();
+            $table->string('photo')->nullable();
             $table->boolean('is_active')->default(true);
             $table->integer('order')->default(0);
             $table->timestamps();

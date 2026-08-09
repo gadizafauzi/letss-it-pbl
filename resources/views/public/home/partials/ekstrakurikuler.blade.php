@@ -66,13 +66,13 @@
         .ekskul-mask {
             -webkit-mask-image: linear-gradient(to right,
                 transparent 0%,
-                black 80px,
-                black calc(100% - 80px),
+                black 16px,
+                black calc(100% - 16px),
                 transparent 100%);
             mask-image: linear-gradient(to right,
                 transparent 0%,
-                black 80px,
-                black calc(100% - 80px),
+                black 16px,
+                black calc(100% - 16px),
                 transparent 100%);
         }
 

@@ -13,11 +13,11 @@
             <div>
                 <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">Gambar Background Hero</label>
                 @if($hero && $hero->image)
-                    <div class="mb-4 relative w-full aspect-[21/9] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 shadow-inner group">
-                        <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}" alt="Hero Image Preview" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <span class="text-white text-[12px] font-medium bg-black/50 px-3 py-1.5 rounded-lg backdrop-blur-md">Preview Potongan Banner</span>
-                        </div>
+                    <div class="mb-4 relative w-full aspect-[21/9] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-900 shadow-sm">
+                        <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}" 
+                             alt="Hero Image Preview" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';">
                     </div>
                 @endif
                 <input type="file" name="image" accept="image/*" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-xl bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all">

@@ -11,6 +11,8 @@ class CmsUnitTeacher extends Model
     protected $fillable = [
         'unit_id',
         'teacher_id',
+        'jabatan',
+        'photo',
         'is_active',
         'order',
     ];

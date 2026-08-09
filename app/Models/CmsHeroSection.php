@@ -13,6 +13,8 @@ class CmsHeroSection extends Model
         'title',
         'subtitle',
         'image',
+        'image_2',
+        'image_3',
         'button_text',
         'button_link',
         'button_secondary_text',

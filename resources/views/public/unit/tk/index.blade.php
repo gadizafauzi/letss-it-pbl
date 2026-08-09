@@ -761,8 +761,12 @@
                                 if ($item->teacher) {
                                     $displayTeachers[] = [
                                         'name'  => $item->teacher->full_name,
-                                        'position' => $item->teacher->position ? $item->teacher->position->name : 'Tenaga Pendidik',
-                                        'photo' => $item->teacher->photo ? (Str::startsWith($item->teacher->photo, 'http') ? $item->teacher->photo : asset('storage/' . $item->teacher->photo)) : 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80',
+                                        'position' => $item->jabatan ?: ($item->teacher->position ? $item->teacher->position->name : 'Tenaga Pendidik'),
+                                        'photo' => $item->photo 
+                                            ? (Str::startsWith($item->photo, 'http') ? $item->photo : asset('storage/' . $item->photo)) 
+                                            : ($item->teacher->photo 
+                                                ? (Str::startsWith($item->teacher->photo, 'http') ? $item->teacher->photo : asset('storage/' . $item->teacher->photo)) 
+                                                : 'https://images.unsplash.com/photo-1546961342-ea5f62d7e57f?auto=format&fit=crop&w=400&q=80'),
                                     ];
                                 }
                             }
@@ -854,8 +858,8 @@
                 @if(!empty($repeatedRows))
                 <style>
                     .marquee-wrapper {
-                        mask-image: linear-gradient(to right, transparent, white 80px, white calc(100% - 80px), transparent);
-                        -webkit-mask-image: linear-gradient(to right, transparent, white 80px, white calc(100% - 80px), transparent);
+                        mask-image: linear-gradient(to right, transparent, white 16px, white calc(100% - 16px), transparent);
+                        -webkit-mask-image: linear-gradient(to right, transparent, white 16px, white calc(100% - 16px), transparent);
                     }
                     
                     @keyframes marquee-to-left {

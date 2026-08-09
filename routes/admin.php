@@ -180,6 +180,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         // Hero
         Route::put('/hero/{id}', [\App\Http\Controllers\Admin\Cms\CmsProfilController::class, 'updateHero'])->name('hero.update');
         
+        // Profil Singkat / Sambutan
+        Route::put('/profil-singkat', [\App\Http\Controllers\Admin\Cms\CmsProfilController::class, 'updateProfilSingkat'])->name('profil-singkat.update');
+        
         // Visi
         Route::put('/visi', [\App\Http\Controllers\Admin\Cms\CmsProfilController::class, 'updateVisi'])->name('visi.update');
         
