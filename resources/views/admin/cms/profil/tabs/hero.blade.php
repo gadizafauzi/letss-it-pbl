@@ -23,16 +23,54 @@
                 </div>
             </div>
 
-            <div class="space-y-4">
+            <div class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Gambar Background / Hero</label>
-                    @if($hero->image)
-                        <div class="mb-3">
-                            <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}" alt="Hero Image" class="w-full h-40 object-cover rounded-lg border border-slate-200">
-                        </div>
-                    @endif
-                    <input type="file" name="image" accept="image/*" class="w-full px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-blue-500">
-                    <p class="text-xs text-slate-500 mt-1">Kosongkan jika tidak ingin mengubah gambar.</p>
+                    <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 mb-3 flex items-center gap-2">
+                        <i data-lucide="images" class="w-4 h-4 text-blue-500"></i>
+                        Kelola 3 Foto Slider Background Hero
+                    </h3>
+
+                    {{-- Image 1 --}}
+                    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-3">
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Foto Slide 1 (Utama)</label>
+                        @if($hero->image)
+                            <div class="mb-2 h-24 rounded-lg overflow-hidden border border-slate-200">
+                                <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}" 
+                                     alt="Hero Slide 1" 
+                                     class="w-full h-full object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';">
+                            </div>
+                        @endif
+                        <input type="file" name="image" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    </div>
+
+                    {{-- Image 2 --}}
+                    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 mb-3">
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Foto Slide 2</label>
+                        @if($hero->image_2)
+                            <div class="mb-2 h-24 rounded-lg overflow-hidden border border-slate-200">
+                                <img src="{{ str_starts_with($hero->image_2, 'http') ? $hero->image_2 : asset('storage/' . $hero->image_2) }}" 
+                                     alt="Hero Slide 2" 
+                                     class="w-full h-full object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1920&q=80';">
+                            </div>
+                        @endif
+                        <input type="file" name="image_2" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    </div>
+
+                    {{-- Image 3 --}}
+                    <div class="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Foto Slide 3</label>
+                        @if($hero->image_3)
+                            <div class="mb-2 h-24 rounded-lg overflow-hidden border border-slate-200">
+                                <img src="{{ str_starts_with($hero->image_3, 'http') ? $hero->image_3 : asset('storage/' . $hero->image_3) }}" 
+                                     alt="Hero Slide 3" 
+                                     class="w-full h-full object-cover"
+                                     onerror="this.src='https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1920&q=80';">
+                            </div>
+                        @endif
+                        <input type="file" name="image_3" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                    </div>
                 </div>
 
                 <div class="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">

@@ -232,21 +232,25 @@ class CmsUnitController extends Controller
             return redirect()->back()->with('error', 'Guru tersebut sudah ditambahkan!');
         }
 
-        // Handle photo upload shortcut for Teacher master data
+        $photoPath = null;
         if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('teachers', 'public');
+            
+            // Also sync to master Teacher data if available
             $teacher = \App\Models\Teacher::find($request->teacher_id);
             if ($teacher) {
                 if ($teacher->photo && \Illuminate\Support\Facades\Storage::disk('public')->exists($teacher->photo)) {
                     \Illuminate\Support\Facades\Storage::disk('public')->delete($teacher->photo);
                 }
-                $path = $request->file('photo')->store('teachers', 'public');
-                $teacher->update(['photo' => $path]);
+                $teacher->update(['photo' => $photoPath]);
             }
         }
 
         CmsUnitTeacher::create([
             'unit_id' => $id,
             'teacher_id' => $request->teacher_id,
+            'jabatan' => $request->jabatan,
+            'photo' => $photoPath,
             'order' => $request->order ?? 0,
             'is_active' => $request->has('is_active'),
         ]);
@@ -266,23 +270,29 @@ class CmsUnitController extends Controller
             return redirect()->back()->with('error', 'Guru tersebut sudah ada di daftar!');
         }
 
-        // Handle photo upload shortcut for Teacher master data
+        $data = [
+            'teacher_id' => $request->teacher_id,
+            'jabatan' => $request->jabatan,
+            'order' => $request->order ?? 0,
+            'is_active' => $request->has('is_active'),
+        ];
+
         if ($request->hasFile('photo')) {
+            if ($guru->photo && \Illuminate\Support\Facades\Storage::disk('public')->exists($guru->photo)) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($guru->photo);
+            }
+
+            $path = $request->file('photo')->store('teachers', 'public');
+            $data['photo'] = $path;
+
+            // Also sync to master Teacher data if available
             $teacher = \App\Models\Teacher::find($request->teacher_id);
             if ($teacher) {
-                if ($teacher->photo && \Illuminate\Support\Facades\Storage::disk('public')->exists($teacher->photo)) {
-                    \Illuminate\Support\Facades\Storage::disk('public')->delete($teacher->photo);
-                }
-                $path = $request->file('photo')->store('teachers', 'public');
                 $teacher->update(['photo' => $path]);
             }
         }
 
-        $guru->update([
-            'teacher_id' => $request->teacher_id,
-            'order' => $request->order ?? 0,
-            'is_active' => $request->has('is_active'),
-        ]);
+        $guru->update($data);
 
         return redirect()->back()->with([
             'success' => 'Guru pengajar berhasil diperbarui!',

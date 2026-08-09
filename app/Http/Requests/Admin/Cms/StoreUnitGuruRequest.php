@@ -23,8 +23,9 @@ class StoreUnitGuruRequest extends FormRequest
     {
         return [
             'teacher_id' => 'required|exists:teachers,id',
+            'jabatan' => 'nullable|string|max:255',
             'order' => 'nullable|integer',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif|max:2048',
         ];
     }
 }

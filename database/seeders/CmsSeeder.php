@@ -420,6 +420,7 @@ class CmsSeeder extends Seeder
             CmsUnitTeacher::create([
                 'unit_id' => $unitTk->id,
                 'teacher_id' => $t->id,
+                'jabatan' => $t->position ? $t->position->name : ($index === 0 ? 'Kepala Sekolah TK' : 'Guru TK'),
                 'is_active' => true,
                 'order' => $index
             ]);
@@ -438,6 +439,7 @@ class CmsSeeder extends Seeder
             CmsUnitTeacher::create([
                 'unit_id' => $unitSd->id,
                 'teacher_id' => $t->id,
+                'jabatan' => $t->position ? $t->position->name : ($index === 0 ? 'Kepala Sekolah SD' : ($index === 1 ? 'Wakil Kepala Sekolah' : 'Guru Kelas')),
                 'is_active' => true,
                 'order' => $index
             ]);
@@ -456,6 +458,7 @@ class CmsSeeder extends Seeder
             CmsUnitTeacher::create([
                 'unit_id' => $unitSmp->id,
                 'teacher_id' => $t->id,
+                'jabatan' => $t->position ? $t->position->name : ($index === 0 ? 'Kepala Sekolah SMP' : ($index === 1 ? 'Wakil Kepala Sekolah' : 'Guru Mata Pelajaran')),
                 'is_active' => true,
                 'order' => $index
             ]);

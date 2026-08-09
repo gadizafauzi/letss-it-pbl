@@ -1,64 +1,139 @@
 @extends('layouts.public')
 
 @section('content')
-    {{-- HERO SECTION --}}
+    {{-- HERO SECTION (Desain Ringkas + 3 Background Photo Auto-Slide + Blue Tint Khas) --}}
     @vite(['resources/css/public-ppdb.css', 'resources/js/public-ppdb.js'])
-    <section class="page-hero relative overflow-hidden flex items-center min-h-[320px] bg-[#001a33]">
+    
+    @php
+        $defaultSlide1 = 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';
+        $defaultSlide2 = 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1920&q=80';
+        $defaultSlide3 = 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=1920';
+
+        $heroImage1 = ($hero && !empty($hero->image)) 
+            ? (str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image)) 
+            : $defaultSlide1;
         
-        {{-- Background Image with Overlays --}}
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1510531704581-5b28709e20eb?auto=format&fit=crop&q=80&w=1920" alt="Hero Background" class="w-full h-full object-cover opacity-30 mix-blend-overlay">
-            {{-- Dark gradient to ensure text readability --}}
-            <div class="absolute inset-0 bg-gradient-to-r from-[#002244] via-[#002244]/95 to-[#002244]/60"></div>
-            <div class="absolute inset-0 backdrop-blur-[2px]"></div>
+        $heroImage2 = ($hero && !empty($hero->image_2)) 
+            ? (str_starts_with($hero->image_2, 'http') ? $hero->image_2 : asset('storage/' . $hero->image_2)) 
+            : $defaultSlide2;
+
+        $heroImage3 = ($hero && !empty($hero->image_3)) 
+            ? (str_starts_with($hero->image_3, 'http') ? $hero->image_3 : asset('storage/' . $hero->image_3)) 
+            : $defaultSlide3;
+
+        $heroSlides = [
+            $heroImage1,
+            $heroImage2,
+            $heroImage3,
+        ];
+    @endphp
+
+    <section class="hero-section relative overflow-hidden flex items-center min-h-[260px] sm:min-h-[300px] md:min-h-[340px] lg:min-h-[360px] py-8 sm:py-12 md:py-14" id="hero-slider-wrapper">
+        
+        {{-- Full Background 3-Image Auto Slider (Presisi, Jernih & Selalu Terlihat) --}}
+        <div class="absolute inset-0 z-0 pointer-events-none" id="fullHeroSliderContainer">
+            @foreach($heroSlides as $idx => $slideImg)
+                <div class="full-hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out {{ $idx === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}" data-index="{{ $idx }}">
+                    <img src="{{ $slideImg }}" alt="Hero Background Slide {{ $idx + 1 }}" 
+                         class="w-full h-full object-cover filter brightness-95 contrast-105"
+                         style="object-position: center 35%;"
+                         onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1920&q=80';">
+                </div>
+            @endforeach
         </div>
 
-        {{-- Decorative Glows for Hero --}}
-        <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden mix-blend-color-dodge">
-            <div class="absolute -top-20 -left-20 w-96 h-96 bg-amber-500/20 rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-10 right-10 w-[30rem] h-[30rem] bg-emerald-500/20 rounded-full blur-[120px]"></div>
-        </div>
+        {{-- Soft Blue Overlay dengan Soft Backdrop Blur (Sesuai Screenshot) --}}
+        <div class="absolute inset-0 z-10 bg-[#002244]/75 backdrop-blur-[3px] pointer-events-none"></div>
+        <div class="hero-pattern z-10 opacity-40 pointer-events-none"></div>
 
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-10">
-            <div class="breadcrumb mb-6"><a href="{{ route('public.home') }}">Beranda</a><span>/</span><span
-                    class="current">Profil</span></div>
+        {{-- Content Area --}}
+        <div class="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 pt-8 pb-10">
+            {{-- Breadcrumb (Beranda / Profil) --}}
+            <div class="breadcrumb mb-2 text-xs text-slate-300/90 flex items-center gap-2 font-medium">
+                <a href="{{ route('public.home') }}" class="hover:text-white transition-colors">Beranda</a>
+                <span class="text-slate-400">/</span>
+                <span class="text-[#FFC107] font-bold">Profil</span>
+            </div>
+            
+            {{-- Title, Subtitle, Button --}}
+            <div class="max-w-2xl text-left">
+                <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black text-white leading-tight mb-2 tracking-tight drop-shadow-md">
+                    {{ $hero && $hero->title ? $hero->title : "Profil Yayasan Wakaf Mutiara Qur'an" }}
+                </h1>
+                
+                <p class="text-slate-200/90 text-xs sm:text-sm lg:text-base leading-relaxed mb-4 max-w-xl font-normal drop-shadow">
+                    {{ $hero && $hero->subtitle ? $hero->subtitle : "Membangun generasi Qur'ani yang berkarakter, berprestasi, dan berwawasan global." }}
+                </p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                {{-- Kiri: Teks --}}
-                <div class="text-left reveal reveal-left delay-100">
-                    <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-4">
-                        {{ $hero && $hero->title ? $hero->title : "Profil SIT Mutiara Qur'an" }}
-                    </h1>
-                    <p class="text-slate-100/80 text-base sm:text-lg mb-6 max-w-lg">
-                        {{ $hero && $hero->subtitle ? $hero->subtitle : "Membangun generasi Qur'ani yang berkarakter, berprestasi, dan berwawasan global." }}
-                    </p>
-
-                    <div class="flex flex-wrap gap-4">
-                        <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil-singkat' }}"
-                            class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-amber-400 text-slate-950 font-bold text-sm shadow-lg shadow-amber-500/20 hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-                            {{ $hero && $hero->button_text ? $hero->button_text : 'Jelajahi Profil' }}
-                        </a>
-                    </div>
+                <div>
+                    <a href="{{ $hero && $hero->button_link ? $hero->button_link : '#profil-singkat' }}"
+                        class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-[#FFC107] text-slate-950 font-bold text-xs sm:text-sm shadow-md shadow-amber-500/20 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
+                        {{ $hero && $hero->button_text ? $hero->button_text : 'Jelajahi Profil' }}
+                    </a>
                 </div>
-
-                {{-- Kanan: Gambar --}}
-                @if($hero && !empty($hero->image))
-                <div class="hidden lg:block relative reveal reveal-right delay-200" id="hero-image-container">
-                    <div class="w-full aspect-[16/9] rounded-[24px] overflow-hidden border-4 border-white/10 shadow-2xl relative group bg-slate-900/40 flex items-center justify-center">
-                        
-                        {{-- Inner Glow on Hover --}}
-                        <div class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none"></div>
-
-                        <img src="{{ str_starts_with($hero->image, 'http') ? $hero->image : asset('storage/' . $hero->image) }}"
-                            alt="Hero Image" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-700"
-                            onerror="document.getElementById('hero-image-container').style.display='none';">
-                        
-                        <div class="absolute inset-0 bg-[#002244]/20 pointer-events-none z-10 transition-opacity duration-500 group-hover:opacity-50"></div>
-                    </div>
-                </div>
-                @endif
             </div>
         </div>
+
+        {{-- Slider Indicators (Dots di pojok kanan bawah) --}}
+        <div class="absolute bottom-3 right-6 sm:right-12 z-20 flex items-center gap-1.5 bg-slate-900/40 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+            @foreach($heroSlides as $idx => $slideImg)
+                <button type="button" 
+                        onclick="switchHeroSlide({{ $idx }})" 
+                        id="hero-dot-{{ $idx }}" 
+                        aria-label="Slide {{ $idx + 1 }}"
+                        class="hero-dot-btn w-2 h-2 rounded-full transition-all duration-300 {{ $idx === 0 ? 'bg-[#FFC107] w-5' : 'bg-white/40 hover:bg-white/80' }}">
+                </button>
+            @endforeach
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                let currentSlideIndex = 0;
+                const slides = document.querySelectorAll('.full-hero-slide');
+                const dots = document.querySelectorAll('.hero-dot-btn');
+                const totalSlides = slides.length;
+                let slideInterval;
+
+                window.switchHeroSlide = function(index) {
+                    slides.forEach((slide, i) => {
+                        if (i === index) {
+                            slide.classList.remove('opacity-0', 'z-0');
+                            slide.classList.add('opacity-100', 'z-10');
+                        } else {
+                            slide.classList.remove('opacity-100', 'z-10');
+                            slide.classList.add('opacity-0', 'z-0');
+                        }
+                    });
+
+                    dots.forEach((dot, i) => {
+                        if (i === index) {
+                            dot.className = 'hero-dot-btn h-2 rounded-full transition-all duration-300 bg-[#FFC107] w-5';
+                        } else {
+                            dot.className = 'hero-dot-btn w-2 h-2 rounded-full transition-all duration-300 bg-white/40 hover:bg-white/80';
+                        }
+                    });
+
+                    currentSlideIndex = index;
+                };
+
+                function nextSlide() {
+                    let next = (currentSlideIndex + 1) % totalSlides;
+                    window.switchHeroSlide(next);
+                }
+
+                function startAutoSlide() {
+                    slideInterval = setInterval(nextSlide, 4000);
+                }
+
+                startAutoSlide();
+
+                const wrapper = document.getElementById('hero-slider-wrapper');
+                if (wrapper) {
+                    wrapper.addEventListener('mouseenter', () => clearInterval(slideInterval));
+                    wrapper.addEventListener('mouseleave', () => startAutoSlide());
+                }
+            });
+        </script>
     </section>
 
     @include('components.public.profil-subnav')

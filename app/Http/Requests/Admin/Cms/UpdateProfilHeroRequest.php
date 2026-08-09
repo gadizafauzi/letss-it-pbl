@@ -30,6 +30,8 @@ class UpdateProfilHeroRequest extends FormRequest
             'button_secondary_link' => 'nullable|string|max:255',
             'badge_text' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'image_2' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'image_3' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'is_active' => 'boolean'
         ];
     }
